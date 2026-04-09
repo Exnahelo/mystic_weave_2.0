@@ -90,10 +90,13 @@ uvicorn api.main:app --reload
 
 API at `http://localhost:8000`. Docs at `http://localhost:8000/docs`.
 
+Version metadata is available at `http://localhost:8000/version`.
+
 ### Smoke Tests
 
 ```bash
 curl http://localhost:8000/health
+curl http://localhost:8000/version
 curl http://localhost:8000/options
 curl -X POST http://localhost:8000/session/new \
   -H "Content-Type: application/json" \
@@ -119,3 +122,5 @@ uvicorn api.main:app --host 0.0.0.0 --port $PORT
 | Variable | Required | Notes |
 |---|---|---|
 | `DATABASE_URL` | Yes | Postgres connection string. Railway injects automatically. |
+| `RAILWAY_GIT_COMMIT_SHA` | No | Exposed by Railway; returned by `/version` when available. |
+| `GIT_SHA` | No | Optional fallback commit SHA for non-Railway deployments. |

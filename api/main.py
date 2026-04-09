@@ -6,6 +6,7 @@ Initialises the asyncpg connection pool on startup and registers all routers.
 
 from __future__ import annotations
 
+import os
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
@@ -13,6 +14,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.database import close_pool, create_pool
+from api.game_data import (
+    data_fingerprint,
+    list_backgrounds,
+    list_focus,
+    list_species,
+)
 from api.routes import character, location, options, roll, session, state
 
 
@@ -63,3 +70,21 @@ async def root() -> dict[str, str]:
 async def health_check() -> dict[str, str]:
     """Health check endpoint — used by Railway and uptime monitors."""
     return {"status": "ok", "service": "mystic-weave"}
+
+
+@app.get("/version", tags=["health"])
+async def version() -> dict[str, str | int]:
+    """Deployment/version metadata for sanity checks across environments."""
+    git_sha = os.getenv("RAILWAY_GIT_COMMIT_SHA") or os.getenv("GIT_SHA") or "unknown"
+    species_count = len(list_species())
+    focus_count = len(list_focus())
+    backgrounds_count = len(list_backgrounds())
+    return {
+        "service": "mystic-weave",
+        "api_version": app.version,
+        "git_sha": git_sha,
+        "data_fingerprint": data_fingerprint(),
+        "species_count": species_count,
+        "focus_count": focus_count,
+        "backgrounds_count": backgrounds_count,
+    }

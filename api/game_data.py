@@ -7,12 +7,14 @@ focus archetypes, backgrounds, knowledge skills, and application categories.
 
 from __future__ import annotations
 
+import hashlib
 import json
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
 _DATA_DIR = Path(__file__).parent.parent / "data"
+_DATA_FILES = ("species.json", "focus.json", "backgrounds.json")
 
 
 @lru_cache(maxsize=None)
@@ -105,6 +107,20 @@ def list_backgrounds() -> list[dict[str, Any]]:
         }
         for k, v in data.items()
     ]
+
+
+def data_fingerprint() -> str:
+    """
+    Stable SHA256 fingerprint of core game data files used by /options and seeding.
+
+    This can be exposed for deployment/version sanity checks.
+    """
+    hasher = hashlib.sha256()
+    for filename in _DATA_FILES:
+        path = _DATA_DIR / filename
+        with open(path, "rb") as f:
+            hasher.update(f.read())
+    return hasher.hexdigest()
 
 
 # ---------------------------------------------------------------------------

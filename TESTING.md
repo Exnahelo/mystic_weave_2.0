@@ -19,6 +19,7 @@
 ### Nightly
 - Unit + contract regression set
 - Full loop smoke against fresh Postgres service
+- Production contract/options/version verification (`scripts/verify_production_contract.py`)
 
 ## Local commands
 
