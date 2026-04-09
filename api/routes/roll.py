@@ -1,18 +1,18 @@
 """
 routes/roll.py — POST /roll
 
-Authoritative dice resolution. The GPT must call this endpoint for any
-contested action. It may not fudge, reinterpret, or override the result.
+Authoritative d100 roll-under resolution. The GPT must call this endpoint
+for any contested action. It may not fudge, reinterpret, or override the result.
 
-Modifier calculation (standard 5e):
-  ability modifier = floor((score - 10) / 2)
-  proficiency bonus at level 1 = +2
-  total modifier = ability modifier + proficiency bonus (if proficient)
+Resolution:
+  GPT assembles target = domain score + knowledge tier + application tier + difficulty modifier
+  Server rolls 1d100
+  Success if roll <= target
+  Roll 1 = critical success (always)
+  Roll 100 = critical failure (always)
 """
 
 from __future__ import annotations
-
-import math
 
 from fastapi import APIRouter
 
@@ -21,52 +21,54 @@ from core.dice_roller import roll as dice_roll
 
 router = APIRouter()
 
-_PROFICIENCY_BONUS_LEVEL_1 = 2
 
-
-def _ability_modifier(score: int) -> int:
-    return math.floor((score - 10) / 2)
+def _degree_of_success(raw_roll: int, target: int) -> str:
+    """Determine the degree of success band from roll and target."""
+    if raw_roll == 1:
+        return "critical_success"
+    if raw_roll == 100:
+        return "critical_failure"
+    if raw_roll <= target:
+        margin = target - raw_roll
+        if margin >= 20:
+            return "strong_success"
+        return "success"
+    else:
+        margin = raw_roll - target
+        if margin <= 10:
+            return "partial_failure"
+        return "failure"
 
 
 @router.post("/roll", response_model=RollResponse)
 async def roll_dice(body: RollRequest) -> RollResponse:
     """
-    Roll dice with 5e modifier math and return a pass/fail result.
+    Roll 1d100 against the target number and return the result with
+    degree of success.
 
     Critical rules (non-negotiable):
-    - A natural 1 is always a critical failure regardless of modifiers.
-    - A natural 20 is always a critical success regardless of DC.
+    - Roll 1 is always critical success regardless of target.
+    - Roll 100 is always critical failure regardless of target.
     """
-    # Roll the raw dice (uses core/dice_roller.py)
-    raw_roll = dice_roll(body.dice)
-
-    # Calculate modifier
-    mod = _ability_modifier(body.score)
-    if body.proficient:
-        mod += _PROFICIENCY_BONUS_LEVEL_1
-
-    total = raw_roll + mod
+    raw_roll = dice_roll("1d100")
 
     # Critical rules override everything
-    is_d20 = body.dice.strip().lower() in ("1d20", "d20")
-    critical_success = is_d20 and raw_roll == 20
-    critical_failure = is_d20 and raw_roll == 1
-
-    if critical_success:
+    if raw_roll == 1:
         success = True
-    elif critical_failure:
+    elif raw_roll == 100:
         success = False
     else:
-        success = total >= body.dc
+        success = raw_roll <= body.target
 
-    margin = total - body.dc
+    margin = body.target - raw_roll  # positive = succeeded by, negative = failed by
+    degree = _degree_of_success(raw_roll, body.target)
 
     return RollResponse(
         roll=raw_roll,
-        modifier=mod,
-        total=total,
+        target=body.target,
         success=success,
         margin=margin,
-        critical_success=critical_success,
-        critical_failure=critical_failure,
+        degree=degree,
+        critical_success=(raw_roll == 1),
+        critical_failure=(raw_roll == 100),
     )

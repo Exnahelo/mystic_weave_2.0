@@ -36,4 +36,4 @@ Mystic Weave respects your privacy. This Privacy Policy explains how we collect,
 - We may update this Privacy Policy from time to time. Changes will be posted in this repository.
 
 ---
-This project is open source. For more information, visit the [GitHub repository](https://github.com/Exnahelo/mystic_weave).
+This project is open source. For more information, visit the [GitHub repository](https://github.com/Exnahelo/mystic_weave_2.0).

@@ -1,0 +1,58 @@
+[
+  {
+    "index": "soldier",
+    "name": "Soldier",
+    "description": "Military service, structured discipline",
+    "knowledge_tags": {"intimidation": 1, "exertion": 1},
+    "application_tags": {"heavy_weapons": 1}
+  },
+  {
+    "index": "scholar",
+    "name": "Scholar",
+    "description": "Academic upbringing, libraries and labs",
+    "knowledge_tags": {"history": 1, "linguistics": 1},
+    "application_tags": {"herbalism_alchemy": 1}
+  },
+  {
+    "index": "criminal",
+    "name": "Criminal",
+    "description": "Street life, underground economy",
+    "knowledge_tags": {"sleight_of_hand": 1, "surveillance": 1},
+    "application_tags": {"lockpicking_traps": 1}
+  },
+  {
+    "index": "noble",
+    "name": "Noble",
+    "description": "Privilege, courts, political education",
+    "knowledge_tags": {"diplomacy": 1, "command": 1},
+    "application_tags": {"musical_instruments": 1}
+  },
+  {
+    "index": "outlander",
+    "name": "Outlander",
+    "description": "Wilderness upbringing, self-reliance",
+    "knowledge_tags": {"nature": 1, "survival": 1},
+    "application_tags": {"mounts_vehicles": 1}
+  },
+  {
+    "index": "artisan",
+    "name": "Artisan",
+    "description": "Trade skills, craftsmanship, practical knowledge",
+    "knowledge_tags": {"engineering": 1, "medicine": 1},
+    "application_tags": {"herbalism_alchemy": 1}
+  },
+  {
+    "index": "acolyte",
+    "name": "Acolyte",
+    "description": "Temple-raised, spiritual foundation",
+    "knowledge_tags": {"meditation": 1, "warding": 1},
+    "application_tags": {"sacred_rites": 1}
+  },
+  {
+    "index": "performer",
+    "name": "Performer",
+    "description": "Entertainer, traveler, social chameleon",
+    "knowledge_tags": {"performance": 1, "deception": 1},
+    "application_tags": {"disguise_forgery": 1}
+  }
+]

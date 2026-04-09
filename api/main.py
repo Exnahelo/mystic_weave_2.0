@@ -13,7 +13,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from api.database import close_pool, create_pool
-from api.routes import character, inventory, levelup, location, monsters, options, roll, session, spells, state
+from api.routes import character, location, options, roll, session, state
 
 
 @asynccontextmanager
@@ -28,9 +28,10 @@ app = FastAPI(
     title="Mystic Weave",
     description=(
         "Persistent game state backend for a text-based RPG powered by a custom GPT. "
-        "The GPT is the narrator; this API is the memory."
+        "The GPT is the narrator; this API is the memory. "
+        "d100 roll-under resolution with domain scores and competency tiers."
     ),
-    version="1.0.0",
+    version="3.0.0",
     lifespan=lifespan,
 )
 
@@ -47,14 +48,9 @@ app.add_middleware(
 app.include_router(state.router)
 app.include_router(session.router)
 app.include_router(character.router)
-app.include_router(levelup.router)
 app.include_router(roll.router)
 app.include_router(location.router)
 app.include_router(options.router)
-app.include_router(spells.router)
-
-# Register inventory router
-app.include_router(inventory.router)
 
 
 @app.get("/", tags=["health"])

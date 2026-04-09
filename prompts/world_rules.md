@@ -4,39 +4,36 @@ This document defines the internal logic of the Mystic Weave world. It is the so
 
 ---
 
-## Ability Scores
+## Domain Scores
 
-Characters have six standard D&D 5e ability scores: STR, DEX, CON, INT, WIS, CHA. Scores range from 1–30. At level 1, scores are set using the standard array (15, 14, 13, 12, 10, 8) assigned by the player, then modified by the chosen background (+2/+1/+1).
+Characters have seven domains scored 25–60:
 
-Ability scores inform narrative bias and determine dice modifiers. They do not run mechanical calculations during gameplay beyond what the `/roll` endpoint handles.
+| Domain | Governs |
+|---|---|
+| Power | Force, mass, leverage, brute physical output |
+| Agility | Coordination, balance, speed, fine motor precision |
+| Perception | Senses, awareness, reading environments and people |
+| Endurance | Stamina, resilience, recovery, physical and pain tolerance |
+| Intellect | Reasoning, memory, patterning, deduction, arcane knowledge |
+| Will | Discipline, self-regulation, mental resilience, concentration under pressure |
+| Presence | Social weight, confidence, expressiveness, influence over others |
+
+Domain scores are set by species at character creation, adjusted by a +5 player pool (max +3 per domain). Scores can advance by +1 through transformative narrative events, capped at 60.
 
 ---
 
 ## Hit Points
 
-HP represents the character's capacity to absorb damage and keep fighting.
+All characters start at 100 HP. Damage is dealt in whole numbers. 15 damage = 15% of max HP.
 
-- **Starting HP** = hit die maximum + CON modifier (standard 5e level 1 rule)
 - HP cannot go below 0
 - When `hp.current` reaches 0, the character is incapacitated
-
-### HP Loss
-
-HP is reduced when the character takes damage from a failed save, a successful enemy attack, or a hazard. The amount is determined narratively based on the threat level and roll margin.
 
 ### HP Recovery
 
 HP can be recovered through:
-- **Short rest** (1 hour in a low-threat location): spend hit dice to recover HP
+- **Short rest** (1 hour in a low-threat location): recover 10–25 HP depending on conditions
 - **Long rest** (full night in a safe location): recover all HP
-
----
-
-## Proficiency
-
-Characters are proficient in skills, weapons, and armor listed in their class and background. Proficiency adds the proficiency bonus (+2 at level 1) to relevant ability checks and saving throws.
-
-When calling `POST /roll`, set `proficient: true` if the character is proficient in the relevant skill or weapon.
 
 ---
 
@@ -44,24 +41,94 @@ When calling `POST /roll`, set `proficient: true` if the character is proficient
 
 All contested actions use `POST /roll`. The GPT never simulates dice internally.
 
-**Standard check:**
-- Roll 1d20 + ability modifier + proficiency bonus (if proficient)
-- Compare to DC (Difficulty Class)
-- `success: true` if total ≥ DC
+### Target Number Assembly
 
-**Critical results:**
-- Natural 1 = critical failure, regardless of modifiers
-- Natural 20 = critical success, regardless of DC
+```
+Target = Domain Score + Knowledge Tier + Application Tier + Difficulty Modifier
+```
 
-**Difficulty Classes:**
-| Difficulty | DC |
-| --- | --- |
-| Very Easy | 5 |
-| Easy | 10 |
-| Medium | 15 |
-| Hard | 20 |
-| Very Hard | 25 |
-| Nearly Impossible | 30 |
+The GPT makes two language judgments:
+1. Which domain applies to this action?
+2. Does a knowledge or application tag apply?
+
+Then sends the assembled target number to the roll endpoint.
+
+### Roll Mechanic
+
+- Roll 1d100
+- Success if roll ≤ target number
+- Roll 1 = critical success, always
+- Roll 100 = critical failure, always
+
+### Difficulty Modifiers
+
+| Difficulty | Modifier |
+|---|---|
+| Trivial | +20 |
+| Easy | +15 |
+| Standard | +10 |
+| Hard | +5 |
+| Severe | +0 |
+| Extreme | −10 |
+| Legendary | −20 |
+
+### Degree of Success Bands
+
+| Roll Result | Band | Narrative Meaning |
+|---|---|---|
+| 1 | Critical Success | Extraordinary outcome beyond what was attempted |
+| ≤ target by 20+ | Strong Success | Clean, decisive, best reasonable outcome |
+| ≤ target by 1–19 | Success | It works, straightforward completion |
+| > target by 1–10 | Partial Failure | Fell short but gained something minor |
+| > target by 11+ | Failure | Didn't work, consequences follow |
+| 100 | Critical Failure | Catastrophic, situation worsens |
+
+Use the `degree` field from the roll response to determine the outcome band. Use `margin` to calibrate narrative intensity within a band.
+
+---
+
+## Competency Tags
+
+### Knowledge Tags (understanding)
+
+Each of the seven domains has five knowledge skills. Tiers 1–5, each tier adds +1 to target number.
+
+**Power:** Athletics, Intimidation, Breaking, Lifting, Brawling
+**Agility:** Stealth, Acrobatics, Sleight of Hand, Evasion, Reflexes
+**Perception:** Tracking, Investigation, Insight, Surveillance, Nature
+**Endurance:** Survival, Fortitude, Recovery, Resistance, Exertion
+**Intellect:** Arcana, History, Medicine, Engineering, Linguistics
+**Will:** Discipline, Meditation, Courage, Resolve, Warding
+**Presence:** Persuasion, Deception, Performance, Command, Diplomacy
+
+### Application Tags (trained execution)
+
+Specific tools, weapons, or methods. Tiers 1–5, each tier adds +1 to target number.
+
+| Category | Primary Domain |
+|---|---|
+| Heavy Weapons | Power |
+| Unarmed Combat | Power |
+| Light Weapons | Agility |
+| Lockpicking & Traps | Agility |
+| Ranged Weapons | Perception |
+| Mounts & Vehicles | Perception |
+| Shields & Armor | Endurance |
+| Arcane Implements | Intellect |
+| Herbalism & Alchemy | Intellect |
+| Sacred Rites | Will |
+| Musical Instruments | Presence |
+| Disguise & Forgery | Presence |
+
+Maximum competency contribution: Knowledge 5 + Application 5 = +10.
+
+---
+
+## Advancement
+
+**Tag advancement:** When a character uses a tag in a meaningful, consequential action and the outcome creates lasting narrative impact, advance that tag by one tier. No tag advances more than once per session. Announce advancement as part of outcome narration. Rate: roughly one advancement every 3–5 sessions.
+
+**Domain advancement:** Only through transformative narrative events. +1 per event. Cap: 60. Rate: two or three times across an entire campaign.
 
 ---
 
@@ -71,7 +138,7 @@ All contested actions use `POST /roll`. The GPT never simulates dice internally.
 
 When `hp.current` reaches 0:
 - The character is incapacitated
-- Narrate the consequence clearly — the character cannot continue the expedition
+- Narrate the consequence clearly
 - Save state with `hp.current = 0`
 - The session ends or transitions to a recovery scenario
 
@@ -85,36 +152,7 @@ Character death is a valid outcome. It is not reversed. The world reacts to it.
 
 The world is a graph of connected location nodes. Movement is along defined edges only.
 
-- The player can only move to locations listed in the current location's `connections` array
-- New locations are discovered through explicit exploration actions
-- Discovered locations must be saved immediately via `POST /location`
-- The GPT cannot invent geography mid-session without saving it
-
----
-
-## Location Consistency
-
-Locations are stored in Postgres. The GPT reads location data before describing any place.
-
-- The GPT may add sensory flavor but may not contradict any field in the record
-- If a new detail is invented (NPC name, building), it must be saved back via `POST /location`
-- NPC names, descriptions, and relationships are persistent once saved
-
----
-
-## NPC Persistence
-
-NPCs are persistent once named. If the GPT names an NPC, it must:
-1. Add the NPC's identifier to the location's `known_npcs` array
-2. Save the updated location via `POST /location`
-
-NPCs do not change between sessions unless the world state changes.
-
----
-
-## Narrative Principles
-
-- **Failure moves the world forward.** Failed actions change the situation — they do not reset it.
-- **Consistency over creativity.** Logical consistency beats narrative immersion.
-- **No premature complexity.** No factions, inventories, spell slots, or combat subsystems until explicitly added.
-- **The dice are authoritative.** The GPT narrates results; it does not override them.
+- Before describing any location, call `GET /location/{id}`
+- Only present connections as movement options
+- New locations require discovery and immediate save via `POST /location`
+- NPCs are persistent — name one, save it to the location record

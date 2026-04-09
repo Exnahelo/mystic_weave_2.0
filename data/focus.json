@@ -1,0 +1,51 @@
+[
+  {
+    "index": "champion",
+    "name": "Champion",
+    "description": "Front-line fighter, direct combat",
+    "knowledge_tags": {"athletics": 2, "brawling": 1, "fortitude": 1},
+    "application_tags": {"heavy_weapons": 1, "unarmed_combat": 1}
+  },
+  {
+    "index": "sentinel",
+    "name": "Sentinel",
+    "description": "Protector, holds the line",
+    "knowledge_tags": {"courage": 2, "resistance": 1, "fortitude": 1},
+    "application_tags": {"shields_armor": 1, "heavy_weapons": 1}
+  },
+  {
+    "index": "stalker",
+    "name": "Stalker",
+    "description": "Ambush, infiltration, precision",
+    "knowledge_tags": {"stealth": 2, "evasion": 1, "investigation": 1},
+    "application_tags": {"light_weapons": 1, "lockpicking_traps": 1}
+  },
+  {
+    "index": "wayfinder",
+    "name": "Wayfinder",
+    "description": "Explorer, survivalist, tracker",
+    "knowledge_tags": {"survival": 2, "nature": 1, "tracking": 1},
+    "application_tags": {"ranged_weapons": 1, "mounts_vehicles": 1}
+  },
+  {
+    "index": "arcanist",
+    "name": "Arcanist",
+    "description": "Arcane scholar, magical power",
+    "knowledge_tags": {"arcana": 2, "history": 1, "engineering": 1},
+    "application_tags": {"arcane_implements": 1, "herbalism_alchemy": 1}
+  },
+  {
+    "index": "devoted",
+    "name": "Devoted",
+    "description": "Spiritual warrior, faith and authority",
+    "knowledge_tags": {"discipline": 2, "courage": 1, "command": 1},
+    "application_tags": {"sacred_rites": 1, "shields_armor": 1}
+  },
+  {
+    "index": "speaker",
+    "name": "Speaker",
+    "description": "Social operator, inspirer, manipulator",
+    "knowledge_tags": {"persuasion": 2, "deception": 1, "insight": 1},
+    "application_tags": {"musical_instruments": 1, "disguise_forgery": 1}
+  }
+]

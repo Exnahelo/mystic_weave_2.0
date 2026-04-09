@@ -1,0 +1,183 @@
+"""
+game_data.py — Load game system JSON data and expose helper functions.
+
+Replaces srd5e.py. Data lives in /data/ as JSON files for species,
+focus archetypes, backgrounds, knowledge skills, and application categories.
+"""
+
+from __future__ import annotations
+
+import json
+from functools import lru_cache
+from pathlib import Path
+from typing import Any
+
+_DATA_DIR = Path(__file__).parent.parent / "data"
+
+
+@lru_cache(maxsize=None)
+def _load_json(filename: str) -> dict[str, Any] | list[Any]:
+    """Load a JSON file from the data directory."""
+    path = _DATA_DIR / filename
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    # If it's a list of objects with 'index' keys, convert to dict
+    if isinstance(data, list) and data and "index" in data[0]:
+        return {item["index"]: item for item in data}
+    return data
+
+
+# ---------------------------------------------------------------------------
+# Species
+# ---------------------------------------------------------------------------
+
+def get_species(index: str) -> dict[str, Any]:
+    """Return species data for the given index (e.g. 'human', 'dragonborn')."""
+    data = _load_json("species.json")
+    if index not in data:
+        raise ValueError(f"Unknown species: {index!r}. Valid: {sorted(data.keys())}")
+    return data[index]
+
+
+def list_species() -> list[dict[str, Any]]:
+    """Return all species as a list of summary dicts."""
+    data = _load_json("species.json")
+    return [
+        {
+            "index": k,
+            "name": v["name"],
+            "primary_domain": v.get("primary_domain"),
+            "domains": v["domains"],
+        }
+        for k, v in data.items()
+    ]
+
+
+# ---------------------------------------------------------------------------
+# Focus Archetypes
+# ---------------------------------------------------------------------------
+
+def get_focus(index: str) -> dict[str, Any]:
+    """Return focus archetype data for the given index (e.g. 'devoted')."""
+    data = _load_json("focus.json")
+    if index not in data:
+        raise ValueError(f"Unknown focus: {index!r}. Valid: {sorted(data.keys())}")
+    return data[index]
+
+
+def list_focus() -> list[dict[str, Any]]:
+    """Return all focus archetypes as a list of summary dicts."""
+    data = _load_json("focus.json")
+    return [
+        {
+            "index": k,
+            "name": v["name"],
+            "description": v.get("description", ""),
+            "knowledge_tags": v.get("knowledge_tags", {}),
+            "application_tags": v.get("application_tags", {}),
+        }
+        for k, v in data.items()
+    ]
+
+
+# ---------------------------------------------------------------------------
+# Backgrounds
+# ---------------------------------------------------------------------------
+
+def get_background(index: str) -> dict[str, Any]:
+    """Return background data for the given index (e.g. 'soldier')."""
+    data = _load_json("backgrounds.json")
+    if index not in data:
+        raise ValueError(f"Unknown background: {index!r}. Valid: {sorted(data.keys())}")
+    return data[index]
+
+
+def list_backgrounds() -> list[dict[str, Any]]:
+    """Return all backgrounds as a list of summary dicts."""
+    data = _load_json("backgrounds.json")
+    return [
+        {
+            "index": k,
+            "name": v["name"],
+            "description": v.get("description", ""),
+            "knowledge_tags": v.get("knowledge_tags", {}),
+            "application_tags": v.get("application_tags", {}),
+        }
+        for k, v in data.items()
+    ]
+
+
+# ---------------------------------------------------------------------------
+# Character seeding
+# ---------------------------------------------------------------------------
+
+def seed_character(
+    name: str,
+    species_index: str,
+    focus_index: str,
+    background_index: str,
+    adjustment_points: dict[str, int] | None = None,
+) -> dict[str, Any]:
+    """
+    Build a complete character dict from species + focus + background.
+
+    Applies:
+    - Species base domain scores + player adjustment points
+    - Focus knowledge and application tags
+    - Background knowledge and application tags
+    - Tag stacking rule (duplicate tags advance to tier 2)
+
+    Returns the character dict ready for JSON storage.
+    """
+    species = get_species(species_index)
+    focus = get_focus(focus_index)
+    background = get_background(background_index)
+
+    # --- Domain scores ---
+    domains = dict(species["domains"])  # copy base scores
+    adj = adjustment_points or {}
+    total_adj = sum(adj.values())
+    if total_adj > 5:
+        raise ValueError(f"Adjustment pool is 5 points. Got {total_adj}.")
+    for domain, points in adj.items():
+        if domain not in domains:
+            raise ValueError(f"Invalid domain: {domain!r}")
+        if points > 3:
+            raise ValueError(f"Max +3 per domain. {domain} got +{points}.")
+        domains[domain] += points
+
+    # --- Competency tags ---
+    # Start with focus tags
+    knowledge: dict[str, int] = dict(focus.get("knowledge_tags", {}))
+    application: dict[str, int] = dict(focus.get("application_tags", {}))
+
+    # Merge background tags — stacking rule: duplicates advance to tier 2
+    for tag, tier in background.get("knowledge_tags", {}).items():
+        if tag in knowledge:
+            knowledge[tag] = max(knowledge[tag], tier) + 1  # stack to T2
+            if knowledge[tag] > 2:
+                knowledge[tag] = 2  # cap at T2 at creation
+        else:
+            knowledge[tag] = tier
+
+    for tag, tier in background.get("application_tags", {}).items():
+        if tag in application:
+            application[tag] = max(application[tag], tier) + 1
+            if application[tag] > 2:
+                application[tag] = 2
+        else:
+            application[tag] = tier
+
+    return {
+        "name": name,
+        "species": species_index,
+        "focus": focus_index,
+        "background": background_index,
+        "level": 1,
+        "hp": {"current": 100, "max": 100},
+        "domains": domains,
+        "knowledge": knowledge,
+        "application": application,
+        "status_effects": [],
+        "notes": "",
+    }

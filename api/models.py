@@ -1,17 +1,16 @@
 """
 models.py — Pydantic v2 models for all game entities.
 
-All models use Pydantic v2 syntax. Derived from BRIEFING.md game state spec.
-Updated for 2024 D&D rules: species replaces race, backgrounds added.
+All models use Pydantic v2 syntax. Designed for Mystic Weave 2.0:
+d100 roll-under, domain scores, knowledge/application competency tiers.
 """
 
 from __future__ import annotations
 
-import math
 from datetime import datetime
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 # ---------------------------------------------------------------------------
@@ -20,7 +19,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 
 class HP(BaseModel):
     current: int
-    max: int
+    max: int = 100
 
     @field_validator("current")
     @classmethod
@@ -37,52 +36,38 @@ class HP(BaseModel):
         return v
 
 
-class AbilityScores(BaseModel):
-    STR: int
-    DEX: int
-    CON: int
-    INT: int
-    WIS: int
-    CHA: int
+class DomainScores(BaseModel):
+    power: int
+    agility: int
+    perception: int
+    endurance: int
+    intellect: int
+    will: int
+    presence: int
 
-    @field_validator("STR", "DEX", "CON", "INT", "WIS", "CHA")
+    @field_validator("power", "agility", "perception", "endurance",
+                     "intellect", "will", "presence")
     @classmethod
     def score_in_range(cls, v: int) -> int:
-        if not (1 <= v <= 30):
-            raise ValueError("ability score must be between 1 and 30")
+        if not (1 <= v <= 60):
+            raise ValueError("domain score must be between 1 and 60")
         return v
 
 
 class CharacterModel(BaseModel):
-    model_config = ConfigDict(extra="forbid", populate_by_name=True)
+    model_config = ConfigDict(extra="forbid")
 
     name: str
-    class_: str = Field(alias="class")   # SRD index string e.g. "ranger"
-    species: str                          # SRD species index e.g. "human"
-    subspecies: str | None = None         # SRD subspecies index e.g. "elven-lineage-high-elf"
-    subclass: str | None = None           # SRD subclass index e.g. "hunter"
-    background: str | None = None         # SRD background index e.g. "soldier"
-    feat: str | None = None              # Starting feat from background e.g. "alert"
-    feat_choices: dict[str, Any] = {}    # Subchoices for feats that require them e.g. {"skilled": ["athletics", "arcana", "nature"]}
-    biography: dict[str, Any] = {}       # Character identity: origin, house, motivation, tensions
+    species: str                              # e.g. "human", "dragonborn"
+    focus: str                                # e.g. "devoted", "stalker"
+    background: str                           # e.g. "soldier", "acolyte"
     level: int = 1
     hp: HP
-    hit_die: str                          # e.g. "d10"
-    ability_scores: AbilityScores
-    proficiencies: list[str]
-    tool_proficiencies: list[str] = []    # e.g. ["calligraphers-supplies"]
-    skills: list[str]
-    languages: list[str] = []             # e.g. ["common", "elvish"]
-    alignment: str | None = None          # e.g. "lawful-good"
-    faith: str | None = None              # any deity, pantheon, or none
-    lifestyle: str | None = None          # e.g. "modest", "poor", "comfortable"
-    size: str = "Medium"                  # "Medium" or "Small" (player choice for some species)
-    equipment: list[str] = []             # starting equipment item indices
-    gold: int = 0                         # starting gold in GP
-    weapon_masteries: list[str] = []      # chosen weapon mastery properties e.g. ["cleave", "vex"]
-    known_spells: list[str] = []          # known spell indices e.g. ["fireball"]
-    prepared_spells: list[str] = []       # prepared spell indices (for prepared casters)
-    cantrips: list[str] = []              # known cantrip indices
+    domains: DomainScores
+    knowledge: dict[str, int] = {}            # tag name → tier (1–5)
+    application: dict[str, int] = {}          # tag name → tier (1–5)
+    status_effects: list[str] = []
+    notes: str = ""
 
     @field_validator("level")
     @classmethod
@@ -136,27 +121,34 @@ class GameStateResponse(BaseModel):
 # Session models
 # ---------------------------------------------------------------------------
 
-class NewSessionRequest(BaseModel):
-    """Body for POST /session/new — minimal seed data."""
-    model_config = ConfigDict(populate_by_name=True)
+class AdjustmentPoints(BaseModel):
+    """Player's +5 domain adjustment pool at creation. Max +3 per domain."""
+    power: int = 0
+    agility: int = 0
+    perception: int = 0
+    endurance: int = 0
+    intellect: int = 0
+    will: int = 0
+    presence: int = 0
 
+    @field_validator("power", "agility", "perception", "endurance",
+                     "intellect", "will", "presence")
+    @classmethod
+    def per_domain_cap(cls, v: int) -> int:
+        if v < 0:
+            raise ValueError("adjustment points cannot be negative")
+        if v > 3:
+            raise ValueError("max +3 adjustment per domain")
+        return v
+
+
+class NewSessionRequest(BaseModel):
+    """Body for POST /session/new"""
     character_name: str
-    class_: str = Field(alias="class")
     species: str
-    subspecies: str | None = None
-    subclass: str | None = None
-    background: str | None = None
-    ability_scores: AbilityScores
-    ability_score_method: str = "manual"  # "manual", "point-buy", or "standard-array"
-    skill_choices: list[str] = []
-    # Origin choices
-    primary_score: str | None = None      # Which of the 3 background scores gets +2. Requires secondary_score. If None, all three get +1.
-    secondary_score: str | None = None    # Which of the remaining 2 background scores gets +1 (when primary_score is set).
-    language_choices: list[str] = []      # Player-chosen languages (beyond species automatic languages)
-    species_choices: dict[str, Any] = {}  # Species-specific choices: spellcasting_ability, keen_senses, origin_feat, size, etc.
-    equipment_choice: str = "equipment"   # "equipment" or "gold" — which starting package to take
-    alignment: str | None = None          # e.g. "lawful-good"
-    faith: str | None = None              # any deity, pantheon, or none
+    focus: str
+    background: str
+    adjustment_points: AdjustmentPoints = AdjustmentPoints()
     starting_location: str = "unknown"
     goal: str = "survive"
     threat: str = "unknown"
@@ -173,33 +165,18 @@ class NewSessionResponse(BaseModel):
 # ---------------------------------------------------------------------------
 
 class CreateCharacterRequest(BaseModel):
-    """Body for POST /character/create — seeds character from local SRD data."""
-    model_config = ConfigDict(populate_by_name=True)
-
+    """Body for POST /character/create — seeds character from game system data."""
     session_id: str
     name: str
-    class_: str = Field(alias="class")
     species: str
-    subspecies: str | None = None
-    subclass: str | None = None
-    background: str | None = None
-    ability_scores: AbilityScores
-    ability_score_method: str = "manual"  # "manual", "point-buy", or "standard-array"
-    skill_choices: list[str] = []  # additional player-chosen skills beyond background
-    # Origin choices
-    primary_score: str | None = None      # Which of the 3 background scores gets +2. Requires secondary_score. If None, all three get +1.
-    secondary_score: str | None = None    # Which of the remaining 2 background scores gets +1 (when primary_score is set).
-    language_choices: list[str] = []      # Player-chosen languages (beyond species automatic languages)
-    species_choices: dict[str, Any] = {}  # Species-specific choices: spellcasting_ability, keen_senses, origin_feat, size, etc.
-    equipment_choice: str = "equipment"   # "equipment" or "gold" — which starting package to take
-    alignment: str | None = None          # e.g. "lawful-good"
-    faith: str | None = None              # any deity, pantheon, or none
+    focus: str
+    background: str
+    adjustment_points: AdjustmentPoints = AdjustmentPoints()
 
 
 class CreateCharacterResponse(BaseModel):
     session_id: str
     character: dict[str, Any]
-    skill_conflicts: list[str] = []  # Skills that duplicated background grants — GPT should prompt for replacements
 
 
 # ---------------------------------------------------------------------------
@@ -207,37 +184,27 @@ class CreateCharacterResponse(BaseModel):
 # ---------------------------------------------------------------------------
 
 class RollRequest(BaseModel):
-    """Body for POST /roll"""
-    dice: str = "1d20"
-    ability: str  # e.g. "DEX"
-    score: int    # the raw ability score value
-    proficient: bool = False
-    dc: int       # difficulty class to beat
+    """Body for POST /roll — d100 roll-under resolution."""
+    target: int  # assembled target number: domain + knowledge tier + application tier + difficulty modifier
 
-    @field_validator("ability")
+    @field_validator("target")
     @classmethod
-    def ability_valid(cls, v: str) -> str:
-        valid = {"STR", "DEX", "CON", "INT", "WIS", "CHA"}
-        if v.upper() not in valid:
-            raise ValueError(f"ability must be one of {valid}")
-        return v.upper()
-
-    @field_validator("score")
-    @classmethod
-    def score_in_range(cls, v: int) -> int:
-        if not (1 <= v <= 30):
-            raise ValueError("score must be between 1 and 30")
+    def target_in_range(cls, v: int) -> int:
+        if v < 1:
+            return 1   # floor at 1 — always at least a crit success chance
+        if v > 99:
+            return 99  # cap at 99 — always at least a crit failure chance
         return v
 
 
 class RollResponse(BaseModel):
-    roll: int
-    modifier: int
-    total: int
-    success: bool
-    margin: int   # total - dc (positive = beat by this much, negative = missed by this much)
-    critical_success: bool = False
-    critical_failure: bool = False
+    roll: int                              # raw d100 result (1–100)
+    target: int                            # the target number that was sent
+    success: bool                          # roll <= target
+    margin: int                            # target - roll (positive = succeeded by, negative = failed by)
+    degree: str                            # "critical_success", "strong_success", "success", "partial_failure", "failure", "critical_failure"
+    critical_success: bool = False         # roll == 1
+    critical_failure: bool = False         # roll == 100
 
 
 # ---------------------------------------------------------------------------
@@ -279,71 +246,31 @@ class ConnectionsResponse(BaseModel):
 # Options models
 # ---------------------------------------------------------------------------
 
-class SubclassRef(BaseModel):
-    """Lightweight subclass reference embedded in ClassOption."""
-    index: str
-    name: str
-
-
-class ClassOption(BaseModel):
-    index: str
-    name: str
-    hit_die: str  # e.g. "d10"
-    subclasses: list[SubclassRef] = []
-
-
-class SubclassOption(BaseModel):
-    index: str
-    name: str
-    class_index: str   # parent class index e.g. "ranger"
-    description: str   # short description / summary
-
-
-class SubspeciesRef(BaseModel):
-    """Lightweight subspecies reference embedded in SpeciesOption."""
-    index: str
-    name: str
-
-
 class SpeciesOption(BaseModel):
     index: str
     name: str
-    speed: str   # e.g. "30"
-    size: str    # e.g. "Medium"
-    subspecies: list[SubspeciesRef] = []
+    primary_domain: str | None = None      # e.g. "power" for Orc, None for Human
+    domains: dict[str, int]                # all 7 domain base scores
 
 
-class SubspeciesOption(BaseModel):
+class FocusOption(BaseModel):
     index: str
     name: str
-    species_index: str  # parent species index
+    description: str = ""
+    knowledge_tags: dict[str, int] = {}    # tag name → starting tier
+    application_tags: dict[str, int] = {}  # tag name → starting tier
 
 
 class BackgroundOption(BaseModel):
     index: str
     name: str
-    description: str = ""                   # background flavor text
-    lifestyle: str = "modest"               # base lifestyle tier e.g. "poor", "modest", "comfortable", "wealthy"
-    ability_scores: list[str]               # e.g. ["STR", "DEX", "CON"]
-    ability_score_bonuses: str = ""         # e.g. "(+2 and +1) or (+1/+1/+1) across STR, DEX, CON"
-    feat: str                               # starting feat index e.g. "alert"
-    skill_proficiencies: list[str]          # e.g. ["athletics", "intimidation"]
-    tool_proficiencies: list[str] = []      # fixed tool profs e.g. ["calligraphers-supplies"]
-    tool_proficiency_choices: list[str] = []  # choice descriptions e.g. ["Choose one kind of Gaming Set"]
-
-
-class LanguageOption(BaseModel):
-    index: str
-    name: str
-    is_rare: bool = False
-    note: str = ""
+    description: str = ""
+    knowledge_tags: dict[str, int] = {}    # tag name → starting tier
+    application_tags: dict[str, int] = {}  # tag name → starting tier
 
 
 class OptionsResponse(BaseModel):
-    """Response for GET /options — all supported classes, species, subspecies, backgrounds, subclasses, languages."""
-    classes: list[ClassOption]
+    """Response for GET /options — all supported species, focus archetypes, backgrounds."""
     species: list[SpeciesOption]
-    subspecies: list[SubspeciesOption]
+    focus: list[FocusOption]
     backgrounds: list[BackgroundOption]
-    subclasses: list[SubclassOption] = []
-    languages: list[LanguageOption] = []

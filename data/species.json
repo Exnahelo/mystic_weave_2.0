@@ -1,0 +1,114 @@
+[
+  {
+    "index": "human",
+    "name": "Human",
+    "primary_domain": null,
+    "domains": {
+      "power": 40,
+      "agility": 40,
+      "perception": 40,
+      "endurance": 40,
+      "intellect": 40,
+      "will": 40,
+      "presence": 40
+    }
+  },
+  {
+    "index": "orc",
+    "name": "Orc",
+    "primary_domain": "power",
+    "domains": {
+      "power": 55,
+      "agility": 35,
+      "perception": 30,
+      "endurance": 50,
+      "intellect": 30,
+      "will": 45,
+      "presence": 35
+    }
+  },
+  {
+    "index": "elf",
+    "name": "Elf",
+    "primary_domain": "agility",
+    "domains": {
+      "power": 30,
+      "agility": 55,
+      "perception": 45,
+      "endurance": 30,
+      "intellect": 40,
+      "will": 35,
+      "presence": 45
+    }
+  },
+  {
+    "index": "halfling",
+    "name": "Halfling",
+    "primary_domain": "perception",
+    "domains": {
+      "power": 30,
+      "agility": 45,
+      "perception": 55,
+      "endurance": 35,
+      "intellect": 35,
+      "will": 45,
+      "presence": 35
+    }
+  },
+  {
+    "index": "dwarf",
+    "name": "Dwarf",
+    "primary_domain": "endurance",
+    "domains": {
+      "power": 50,
+      "agility": 30,
+      "perception": 35,
+      "endurance": 55,
+      "intellect": 40,
+      "will": 40,
+      "presence": 30
+    }
+  },
+  {
+    "index": "gnome",
+    "name": "Gnome",
+    "primary_domain": "intellect",
+    "domains": {
+      "power": 30,
+      "agility": 40,
+      "perception": 45,
+      "endurance": 30,
+      "intellect": 55,
+      "will": 45,
+      "presence": 35
+    }
+  },
+  {
+    "index": "tiefling",
+    "name": "Tiefling",
+    "primary_domain": "will",
+    "domains": {
+      "power": 35,
+      "agility": 40,
+      "perception": 35,
+      "endurance": 35,
+      "intellect": 45,
+      "will": 55,
+      "presence": 35
+    }
+  },
+  {
+    "index": "dragonborn",
+    "name": "Dragonborn",
+    "primary_domain": "presence",
+    "domains": {
+      "power": 45,
+      "agility": 35,
+      "perception": 35,
+      "endurance": 40,
+      "intellect": 25,
+      "will": 45,
+      "presence": 55
+    }
+  }
+]
