@@ -1,0 +1,1406 @@
+openapi: 3.1.1
+info:
+  title: Mystic Weave
+  description: >
+    Persistent game state backend for a text-based RPG powered by a custom GPT.
+    The GPT is the narrator and game master. This API is the memory.
+    The GPT calls these endpoints to save and load game state, resolve dice rolls,
+    and manage the world location graph.
+  version: 2.2.0
+
+servers:
+  - url: https://mysticweave-production.up.railway.app
+    description: Production (Railway)
+
+paths:
+
+  /health:
+    get:
+      operationId: health
+      summary: Health check
+      description: Returns ok if the service is running.
+      tags:
+        - health
+      responses:
+        "200":
+          description: Service is running
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  service:
+                    type: string
+                    example: mystic-weave
+
+  /options:
+    get:
+      operationId: getOptions
+      summary: List supported classes, species, subspecies, backgrounds, and languages
+      description: >
+        Returns all supported classes, species, subspecies, backgrounds, and languages.
+        Call before presenting creation choices. Only present options returned here —
+        never enumerate from memory or training data.
+      tags:
+        - options
+      responses:
+        "200":
+          description: Supported classes, species, subspecies, backgrounds, and languages
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OptionsResponse"
+
+  /state/{session_id}:
+    get:
+      operationId: loadState
+      summary: Load game state
+      description: >
+        Load the full game state for a session. Call this at the start of every
+        session to restore character, world, and log history. Returns 404 if the
+        session does not exist.
+      tags:
+        - state
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The session identifier returned by POST /session/new
+      responses:
+        "200":
+          description: Full game state
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GameStateResponse"
+        "404":
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    post:
+      operationId: saveState
+      summary: Save game state
+      description: >
+        Save the full game state after each turn and append a one-sentence log entry.
+        Uses UPSERT — works for both first save and subsequent saves.
+        Call this at the end of every turn without exception.
+      tags:
+        - state
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The session identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveStateRequest"
+      responses:
+        "200":
+          description: Updated game state with log appended
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GameStateResponse"
+        "422":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /inventory/{session_id}:
+    get:
+      operationId: loadInventory
+      summary: Load party inventory
+      description: >
+        Load the full party inventory for a session. Call this at the start of
+        every session alongside GET /state/{session_id}. Returns an empty
+        inventory structure if none has been saved yet. Returns 404 if the
+        session does not exist.
+      tags:
+        - inventory
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The session identifier
+      responses:
+        "200":
+          description: Party inventory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InventoryResponse"
+        "404":
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    post:
+      operationId: saveInventory
+      summary: Save party inventory
+      description: >
+        Save the full party inventory. Full overwrite — send the complete
+        inventory object every time. Call this after any turn where inventory
+        changed: coin spent or received, items picked up or dropped,
+        consumables used, quest items acquired or resolved.
+        Only call when something changed, not every turn.
+      tags:
+        - inventory
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The session identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InventoryData"
+      responses:
+        "200":
+          description: Inventory saved
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InventoryResponse"
+        "404":
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /session/new:
+    post:
+      operationId: newSession
+      summary: Create a new game session
+      description: >
+        Create a new game session. Seeds the character from local SRD data using
+        the provided class, species, subspecies, and background. Returns a
+        session_id and the initial character and world state. Store the
+        session_id — it is required for all subsequent calls.
+      tags:
+        - session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewSessionRequest"
+      responses:
+        "201":
+          description: Session created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NewSessionResponse"
+        "422":
+          description: Invalid class, species, or ability scores
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /character/create:
+    post:
+      operationId: createCharacter
+      summary: Create or re-seed a character
+      description: >
+        Seeds a full character from local SRD data and saves it into an existing session.
+        The session must already exist. Use this if the character needs to be re-seeded
+        after session creation (e.g., player changed their mind about class or species).
+      tags:
+        - character
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCharacterRequest"
+      responses:
+        "200":
+          description: Character created and saved to session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateCharacterResponse"
+        "404":
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "422":
+          description: Invalid class, species, or ability scores
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /roll:
+    post:
+      operationId: rollDice
+      summary: Authoritative dice resolution
+      description: >
+        Roll dice with 5e modifier math and return a pass/fail result.
+        You MUST call this endpoint for any contested action before narrating the outcome.
+        You may not fudge, reinterpret, or override the result.
+        A natural 1 is always a critical failure. A natural 20 is always a critical success.
+      tags:
+        - roll
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RollRequest"
+      responses:
+        "200":
+          description: Dice result with modifier math and pass/fail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RollResponse"
+        "422":
+          description: Invalid ability or score
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /location/{location_id}:
+    get:
+      operationId: getLocation
+      summary: Load location data
+      description: >
+        Load location data from the database. You MUST call this before describing
+        any location. Use the returned description, tags, threat_level, and known_npcs
+        to ground your narration. You may add sensory flavor but may not contradict
+        any field in the record. Returns 404 if the location does not exist.
+      tags:
+        - location
+      parameters:
+        - name: location_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The location identifier (e.g. "thornvale", "ashwood-east")
+      responses:
+        "200":
+          description: Location data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocationResponse"
+        "404":
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /location/{location_id}/connections:
+    get:
+      operationId: getLocationConnections
+      summary: Get valid movement options
+      description: >
+        Return all valid movement options from the given location.
+        You may only move the player to locations listed here.
+        Movement to unlisted locations is not permitted.
+        Returns 404 if the location does not exist.
+      tags:
+        - location
+      parameters:
+        - name: location_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The current location identifier
+      responses:
+        "200":
+          description: List of connected locations
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConnectionsResponse"
+        "404":
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /location:
+    post:
+      operationId: upsertLocation
+      summary: Create or update a location
+      description: >
+        Create or update a location in the world graph. Use for new discoveries
+        or persistent details. Safe to call on existing locations. Also upserts connections.
+      tags:
+        - location
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LocationData"
+      responses:
+        "201":
+          description: Location created or updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocationResponse"
+        "422":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /spells:
+    get:
+      operationId: listSpells
+      summary: List spells (filterable by class, level, school)
+      description: >
+        List SRD spells. Use class_index to get spells for a specific class.
+        Use level=0 for cantrips. Filters are combined (AND logic).
+        Call this during character creation when a player needs to choose spells or cantrips.
+      tags:
+        - spells
+      parameters:
+        - name: class_index
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Filter by class index (e.g. "paladin", "wizard", "ranger")
+        - name: level
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 9
+          description: Filter by spell level (0 = cantrips only)
+        - name: school
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Filter by school index (e.g. "evocation", "conjuration")
+      responses:
+        "200":
+          description: List of matching spells
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SpellListResponse"
+
+  /spells/{spell_index}:
+    get:
+      operationId: getSpell
+      summary: Get full spell data
+      description: >
+        Return full spell data for the given index (e.g. "fireball", "hunters-mark").
+        Returns 404 if the spell does not exist.
+      tags:
+        - spells
+      parameters:
+        - name: spell_index
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The spell index (e.g. "bless", "divine-smite")
+      responses:
+        "200":
+          description: Full spell data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SpellSummary"
+        "404":
+          description: Spell not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+
+    # ---------------------------------------------------------------------------
+    # Inventory
+    # ---------------------------------------------------------------------------
+
+    CoinPurse:
+      type: object
+      properties:
+        pp:
+          type: integer
+          default: 0
+          description: Platinum pieces
+        gp:
+          type: integer
+          default: 0
+          description: Gold pieces
+        sp:
+          type: integer
+          default: 0
+          description: Silver pieces
+        cp:
+          type: integer
+          default: 0
+          description: Copper pieces
+
+    InventoryItem:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: Item name
+            quantity:
+              type: integer
+              default: 1
+            notes:
+              type:
+                - string
+                - "null"
+              description: Condition, status, or narrative notes
+            owner:
+              type:
+                - string
+                - "null"
+              description: Who carries this item. Null means shared pool.
+    
+    InventoryData:
+      type: object
+      properties:
+        coin:
+          $ref: "#/components/schemas/CoinPurse"
+        consumables:
+          type: array
+          items:
+            $ref: "#/components/schemas/InventoryItem"
+          description: Shared consumables — rations, torches, oil, rope, etc.
+        shared_items:
+          type: array
+          items:
+            $ref: "#/components/schemas/InventoryItem"
+          description: Shared gear and equipment available to the whole party
+        quest_items:
+          type: array
+          items:
+            $ref: "#/components/schemas/InventoryItem"
+          description: Items with narrative or quest significance
+        party_members:
+          type: object
+          properties:
+            X:
+              type: array
+              items:
+                $ref: "#/components/schemas/InventoryItem"
+            Sol:
+              type: array
+              items:
+                $ref: "#/components/schemas/InventoryItem"
+            Fry:
+              type: array
+              items:
+                $ref: "#/components/schemas/InventoryItem"
+            Mags:
+              type: array
+              items:
+                $ref: "#/components/schemas/InventoryItem"
+            Tric:
+              type: array
+              items:
+                $ref: "#/components/schemas/InventoryItem"
+          description: Personal gear for each party member.
+        notes:
+          type: array
+          items:
+            type: string
+          description: Freeform inventory notes — pending transactions, flagged items, etc.
+
+    InventoryResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+        inventory:
+          $ref: "#/components/schemas/InventoryData"
+
+    # ---------------------------------------------------------------------------
+    # Character
+    # ---------------------------------------------------------------------------
+
+    HP:
+      type: object
+      required:
+        - current
+        - max
+      properties:
+        current:
+          type: integer
+          minimum: 0
+          description: Current hit points
+        max:
+          type: integer
+          minimum: 1
+          description: Maximum hit points
+
+    AbilityScores:
+      type: object
+      required:
+        - STR
+        - DEX
+        - CON
+        - INT
+        - WIS
+        - CHA
+      properties:
+        STR:
+          type: integer
+          minimum: 1
+          maximum: 30
+        DEX:
+          type: integer
+          minimum: 1
+          maximum: 30
+        CON:
+          type: integer
+          minimum: 1
+          maximum: 30
+        INT:
+          type: integer
+          minimum: 1
+          maximum: 30
+        WIS:
+          type: integer
+          minimum: 1
+          maximum: 30
+        CHA:
+          type: integer
+          minimum: 1
+          maximum: 30
+
+    CharacterModel:
+      type: object
+      required:
+        - name
+        - class
+        - species
+        - level
+        - hp
+        - hit_die
+        - ability_scores
+        - proficiencies
+        - skills
+      properties:
+        name:
+          type: string
+          description: Character name
+        class:
+          type: string
+          description: SRD class index (e.g. "ranger", "wizard")
+        species:
+          type: string
+          description: SRD species index (e.g. "human", "elf")
+        subspecies:
+          type: string
+          nullable: true
+          description: SRD subspecies index (e.g. "elven-lineage-high-elf")
+        background:
+          type: string
+          nullable: true
+          description: SRD background index (e.g. "soldier", "acolyte")
+        feat:
+          type: string
+          nullable: true
+          description: Starting feat granted by background (e.g. "alert", "savage-attacker")
+        feat_choices:
+          type: object
+          additionalProperties: true
+          default: {}
+          description: >
+            Subchoices for feats that require them. Key is the feat index, value is an array of choices.
+            Example: {"skilled": ["athletics", "arcana", "nature"]}
+        biography:
+          type: object
+          additionalProperties: true
+          default: {}
+          description: >
+            Character identity fields. Suggested keys: origin, reason, tension.
+            Example: {"origin": "House Vindago of Drakenvale", "reason": "Seeking a place on the Council task", "tension": "Unresolved debt to a mentor"}
+        level:
+          type: integer
+          minimum: 1
+          default: 1
+        hp:
+          $ref: "#/components/schemas/HP"
+        hit_die:
+          type: string
+          description: Hit die expression (e.g. "d10")
+        ability_scores:
+          $ref: "#/components/schemas/AbilityScores"
+        proficiencies:
+          type: array
+          items:
+            type: string
+          description: List of SRD proficiency index strings
+        skills:
+          type: array
+          items:
+            type: string
+          description: List of SRD skill index strings
+
+    # ---------------------------------------------------------------------------
+    # World
+    # ---------------------------------------------------------------------------
+
+    WorldModel:
+      type: object
+      required:
+        - location
+        - threat
+        - goal
+        - turn
+      properties:
+        location:
+          type: string
+          description: Current location ID (matches a record in the locations table)
+        threat:
+          type: string
+          description: Plain-English description of the current primary threat
+        goal:
+          type: string
+          description: Plain-English description of the current objective
+        turn:
+          type: integer
+          minimum: 1
+          default: 1
+          description: Current turn number. Increments every turn.
+
+    # ---------------------------------------------------------------------------
+    # State
+    # ---------------------------------------------------------------------------
+
+    SaveStateRequest:
+      type: object
+      required:
+        - character
+        - world
+        - log_entry
+      properties:
+        character:
+          $ref: "#/components/schemas/CharacterModel"
+        world:
+          $ref: "#/components/schemas/WorldModel"
+        log_entry:
+          type: string
+          description: >
+            One in-world sentence capturing what materially changed this turn.
+            Factual and specific. Example: "Aldric slipped past the garrison unseen and reached the mill before dawn."
+
+    GameStateResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+        character:
+          type: object
+          description: Full character state as stored
+        world:
+          type: object
+          description: Full world state as stored
+        log:
+          type: array
+          items:
+            type: string
+          description: Array of turn summary sentences, oldest first
+        updated_at:
+          type: string
+          format: date-time
+          nullable: true
+
+    # ---------------------------------------------------------------------------
+    # Session
+    # ---------------------------------------------------------------------------
+
+    NewSessionRequest:
+      type: object
+      required:
+        - character_name
+        - class
+        - species
+        - ability_scores
+      properties:
+        character_name:
+          type: string
+        class:
+          type: string
+          description: SRD class index (e.g. "ranger")
+        species:
+          type: string
+          description: SRD species index (e.g. "human")
+        subspecies:
+          type: string
+          nullable: true
+          description: SRD subspecies index (e.g. "elven-lineage-high-elf")
+        subclass:
+          type: string
+          nullable: true
+          description: SRD subclass index (e.g. "oath-of-devotion"). Optional at creation.
+        fighting_style:
+          type: string
+          nullable: true
+          description: Chosen fighting style (e.g. "defense", "dueling"). Optional.
+        prepared_spells:
+          type: array
+          items:
+            type: string
+          default: []
+          description: List of prepared spell indexes (e.g. ["cure-wounds", "divine-favor"]). Optional.
+        background:
+          type: string
+          nullable: true
+          description: SRD background index (e.g. "soldier")
+        tool_proficiencies:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Tool proficiencies granted by background or choices (e.g. ["dragonchess"]). Optional.
+        ability_scores:
+          $ref: "#/components/schemas/AbilityScores"
+        ability_score_method:
+          type: string
+          enum: ["manual", "standard-array", "point-buy"]
+          default: manual
+          description: Method used to assign ability scores.
+        skill_choices:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Additional player-chosen skills beyond background proficiencies
+        primary_score:
+          type: string
+          nullable: true
+          description: >
+            Which of the background's three ability scores gets +2 (the +2/+1 option).
+            If null, all three background scores get +1 each.
+            Must be one of the background's three scores (e.g. "STR").
+        secondary_score:
+          type: string
+          nullable: true
+          description: >
+            Which of the remaining background scores gets +1 (when primary_score is set).
+            Must be different from primary_score and one of the background's three scores.
+        language_choices:
+          type: array
+          items:
+            type: string
+          default: []
+          description: >
+            Player-chosen languages beyond the species' automatic languages.
+            Count must match the species' language_choice_count.
+            Do not include automatic languages here — the backend adds those.
+        species_choices:
+          type: object
+          default: {}
+          description: "Species-specific choices (e.g. size: Medium for Tiefling/Aasimar/Human)"
+        equipment_choice:
+          type: string
+          enum: ["equipment", "gold"]
+          default: equipment
+          description: Whether to take the starting equipment package or starting gold.
+        equipment:
+          type: array
+          items:
+            type: string
+          default: []
+          description: List of starting equipment items (e.g. ["paladin starting equipment", "noble starting equipment"]). Optional.
+        alignment:
+          type: string
+          nullable: true
+          description: "Character alignment (e.g. lawful-good, chaotic-neutral)"
+        faith:
+          type: string
+          nullable: true
+          description: Deity, pantheon, or none
+        lifestyle:
+          type: string
+          nullable: true
+          description: Character lifestyle (e.g. "comfortable", "modest"). Optional.
+        starting_location:
+          type: string
+          default: unknown
+          description: Location ID where the session begins
+        goal:
+          type: string
+          default: survive
+          description: The character's initial objective
+        threat:
+          type: string
+          default: unknown
+          description: The initial threat facing the character
+
+    NewSessionResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+          description: Store this. Use it in every subsequent API call.
+        character:
+          type: object
+          description: Seeded character state
+        world:
+          type: object
+          description: Initial world state
+
+    CreateCharacterRequest:
+      type: object
+      required:
+        - session_id
+        - name
+        - class
+        - species
+        - ability_scores
+      properties:
+        session_id:
+          type: string
+        name:
+          type: string
+        class:
+          type: string
+          description: SRD class index
+        species:
+          type: string
+          description: SRD species index
+        subspecies:
+          type: string
+          nullable: true
+          description: SRD subspecies index
+        subclass:
+          type: string
+          nullable: true
+          description: SRD subclass index. Optional at creation.
+        fighting_style:
+          type: string
+          nullable: true
+          description: Chosen fighting style (e.g. "defense", "dueling"). Optional.
+        prepared_spells:
+          type: array
+          items:
+            type: string
+          default: []
+          description: List of prepared spell indexes (e.g. ["cure-wounds", "divine-favor"]). Optional.
+        background:
+          type: string
+          nullable: true
+          description: SRD background index
+        tool_proficiencies:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Tool proficiencies granted by background or choices (e.g. ["dragonchess"]). Optional.
+        ability_scores:
+          $ref: "#/components/schemas/AbilityScores"
+        ability_score_method:
+          type: string
+          enum: ["manual", "standard-array", "point-buy"]
+          default: manual
+          description: Method used to assign ability scores.
+        skill_choices:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Additional player-chosen skills beyond background proficiencies
+        primary_score:
+          type: string
+          nullable: true
+          description: Which background ability score gets +2. If null, all three get +1.
+        secondary_score:
+          type: string
+          nullable: true
+          description: Which of the remaining background scores gets +1 (when primary_score is set).
+        language_choices:
+          type: array
+          items:
+            type: string
+          default: []
+          description: >
+            Player-chosen languages beyond the species' automatic languages.
+            Count must match the species' language_choice_count.
+            Do not include automatic languages — the backend adds those.
+        species_choices:
+          type: object
+          default: {}
+          description: "Species-specific choices (e.g. size: Medium)"
+        equipment_choice:
+          type: string
+          enum: ["equipment", "gold"]
+          default: equipment
+          description: Starting equipment package or starting gold.
+        equipment:
+          type: array
+          items:
+            type: string
+          default: []
+          description: List of starting equipment items (e.g. ["paladin starting equipment", "noble starting equipment"]). Optional.
+        alignment:
+          type: string
+          nullable: true
+          description: Character alignment
+        faith:
+          type: string
+          nullable: true
+          description: Deity, pantheon, or none
+        lifestyle:
+          type: string
+          nullable: true
+          description: Character lifestyle (e.g. "comfortable", "modest"). Optional.
+
+    CreateCharacterResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+        character:
+          type: object
+          description: Seeded character state
+        skill_conflicts:
+          type: array
+          items:
+            type: string
+          default: []
+          description: >
+            Skills that were in skill_choices but already granted by the background.
+            If non-empty, inform the player and ask them to choose replacement skills.
+
+    # ---------------------------------------------------------------------------
+    # Dice
+    # ---------------------------------------------------------------------------
+
+    RollRequest:
+      type: object
+      required:
+        - ability
+        - score
+        - dc
+      properties:
+        dice:
+          type: string
+          default: 1d20
+          description: Dice expression (e.g. "1d20", "1d4")
+        ability:
+          type: string
+          enum:
+            - STR
+            - DEX
+            - CON
+            - INT
+            - WIS
+            - CHA
+          description: The ability score being tested
+        score:
+          type: integer
+          minimum: 1
+          maximum: 30
+          description: The raw ability score value from the character sheet
+        proficient:
+          type: boolean
+          default: false
+          description: Whether the character is proficient in this skill
+        dc:
+          type: integer
+          description: Difficulty class to beat
+
+    RollResponse:
+      type: object
+      properties:
+        roll:
+          type: integer
+          description: The raw die result
+        modifier:
+          type: integer
+          description: Calculated ability modifier + proficiency bonus (if proficient)
+        total:
+          type: integer
+          description: roll + modifier
+        success:
+          type: boolean
+          description: true if total >= dc (or natural 20), false if total < dc (or natural 1)
+        margin:
+          type: integer
+          description: total - dc. Positive means beat DC by this much. Negative means missed by this much.
+        critical_success:
+          type: boolean
+          description: true if the raw roll was 20 on a d20
+        critical_failure:
+          type: boolean
+          description: true if the raw roll was 1 on a d20
+
+    # ---------------------------------------------------------------------------
+    # Location
+    # ---------------------------------------------------------------------------
+
+    LocationData:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          description: Unique location identifier (e.g. "thornvale", "ashwood-east")
+        name:
+          type: string
+          description: Display name (e.g. "Thornvale", "Eastern Ashwood")
+        type:
+          type: string
+          default: unknown
+          description: Location type (e.g. "village", "forest", "dungeon", "road")
+        description:
+          type: string
+          default: ""
+          description: Plain-English description of the location
+        tags:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Descriptive tags (e.g. ["rural", "low-threat", "trade-road"])
+        connections:
+          type: array
+          items:
+            type: string
+          default: []
+          description: List of location IDs reachable from here
+        threat_level:
+          type: integer
+          minimum: 0
+          maximum: 5
+          default: 0
+          description: "0=safe, 1=low, 2=moderate, 3=high, 4=extreme, 5=lethal"
+        known_npcs:
+          type: array
+          items:
+            type: string
+          default: []
+          description: List of NPC identifiers or names known to be at this location
+        discovered:
+          type: boolean
+          default: true
+          description: Whether the player has visited this location
+
+    LocationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        data:
+          type: object
+          description: Full location data as stored (matches LocationData shape)
+        updated_at:
+          type: string
+          format: date-time
+          nullable: true
+
+    ConnectionInfo:
+      type: object
+      properties:
+        to_id:
+          type: string
+          description: The location ID of the connected location
+        traversal:
+          type: string
+          nullable: true
+          description: How the connection is traversed (e.g. "road", "trail", "river")
+        distance:
+          type: string
+          nullable: true
+          description: How long the journey takes (e.g. "half-day", "full-day")
+
+    ConnectionsResponse:
+      type: object
+      properties:
+        from_id:
+          type: string
+          description: The location ID the connections originate from
+        connections:
+          type: array
+          items:
+            $ref: "#/components/schemas/ConnectionInfo"
+          description: All valid movement options from this location
+
+    # ---------------------------------------------------------------------------
+    # Options
+    # ---------------------------------------------------------------------------
+
+    ClassOption:
+      type: object
+      required:
+        - index
+        - name
+        - hit_die
+      properties:
+        index:
+          type: string
+          description: SRD class index (e.g. "ranger")
+        name:
+          type: string
+          description: Display name (e.g. "Ranger")
+        hit_die:
+          type: string
+          description: Hit die expression (e.g. "d10")
+
+    SubspeciesRef:
+      type: object
+      required:
+        - index
+        - name
+      properties:
+        index:
+          type: string
+          description: 'SRD subspecies index (e.g. "elven-lineage-high-elf")'
+        name:
+          type: string
+          description: 'Display name (e.g. "Elven Lineage: High Elf")'
+
+    SpeciesOption:
+      type: object
+      required:
+        - index
+        - name
+        - speed
+        - size
+      properties:
+        index:
+          type: string
+          description: SRD species index (e.g. "elf")
+        name:
+          type: string
+          description: Display name (e.g. "Elf")
+        speed:
+          type: string
+          description: Base walking speed in feet (e.g. "30")
+        size:
+          type: string
+          description: Size category (e.g. "Medium", "Small")
+        subspecies:
+          type: array
+          items:
+            $ref: "#/components/schemas/SubspeciesRef"
+          description: Available subspecies for this species (may be empty)
+
+    SubspeciesOption:
+      type: object
+      required:
+        - index
+        - name
+        - species_index
+      properties:
+        index:
+          type: string
+          description: 'SRD subspecies index (e.g. "elven-lineage-high-elf")'
+        name:
+          type: string
+          description: 'Display name (e.g. "Elven Lineage: High Elf")'
+        species_index:
+          type: string
+          description: 'Parent species index (e.g. "elf")'
+
+    BackgroundOption:
+      type: object
+      required:
+        - index
+        - name
+        - ability_scores
+        - feat
+        - skill_proficiencies
+      properties:
+        index:
+          type: string
+          description: SRD background index (e.g. "soldier")
+        name:
+          type: string
+          description: Display name (e.g. "Soldier")
+        ability_scores:
+          type: array
+          items:
+            type: string
+          description: >
+            The three ability scores this background can boost (e.g. ["STR", "DEX", "CON"]).
+        ability_score_bonuses:
+          type: string
+          description: >
+            Human-readable description of the bonus options.
+            Example: "(+2 and +1) or (+1/+1/+1) across STR, DEX, CON".
+            Present this to the player and ask them to choose.
+        feat:
+          type: string
+          description: Starting feat granted by this background (e.g. "savage-attacker")
+        skill_proficiencies:
+          type: array
+          items:
+            type: string
+          description: Skill proficiencies granted by this background (e.g. ["athletics", "intimidation"])
+        tool_proficiencies:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Fixed tool proficiencies granted by this background
+        tool_proficiency_choices:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Tool proficiency choices the player must make
+
+    LanguageOption:
+      type: object
+      required:
+        - index
+        - name
+      properties:
+        index:
+          type: string
+          description: SRD language index (e.g. "elvish", "common")
+        name:
+          type: string
+          description: Display name (e.g. "Elvish", "Common")
+        is_rare:
+          type: boolean
+          default: false
+          description: Whether this is a rare language
+        note:
+          type: string
+          default: ""
+          description: Optional note about the language
+
+    OptionsResponse:
+      type: object
+      required:
+        - classes
+        - species
+        - subspecies
+        - backgrounds
+        - languages
+      properties:
+        classes:
+          type: array
+          items:
+            $ref: "#/components/schemas/ClassOption"
+        species:
+          type: array
+          items:
+            $ref: "#/components/schemas/SpeciesOption"
+        subspecies:
+          type: array
+          items:
+            $ref: "#/components/schemas/SubspeciesOption"
+        backgrounds:
+          type: array
+          items:
+            $ref: "#/components/schemas/BackgroundOption"
+        languages:
+          type: array
+          items:
+            $ref: "#/components/schemas/LanguageOption"
+
+    # ---------------------------------------------------------------------------
+    # Spells
+    # ---------------------------------------------------------------------------
+
+    SpellSummary:
+      type: object
+      properties:
+        index:
+          type: string
+          description: Spell index (e.g. "bless", "hunters-mark")
+        name:
+          type: string
+          description: Display name (e.g. "Bless")
+        level:
+          type: integer
+          description: Spell level (0 = cantrip)
+        school:
+          type: string
+          description: School of magic (e.g. "Enchantment")
+        casting_time:
+          type: string
+          description: Casting time (e.g. "1 Action", "1 Bonus Action")
+        range:
+          type: string
+          description: Spell range (e.g. "30 feet", "Self")
+        duration:
+          type: string
+          description: Duration (e.g. "1 minute", "Instantaneous")
+        concentration:
+          type: boolean
+          description: Whether the spell requires concentration
+        ritual:
+          type: boolean
+          description: Whether the spell can be cast as a ritual
+        classes:
+          type: array
+          items:
+            type: string
+          description: Class indexes that can use this spell
+
+    SpellListResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Total number of spells returned
+        spells:
+          type: array
+          items:
+            $ref: "#/components/schemas/SpellSummary"
+
+    # ---------------------------------------------------------------------------
+    # Errors
+    # ---------------------------------------------------------------------------
+
+    ErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Plain-English error message

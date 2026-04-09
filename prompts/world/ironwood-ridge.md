@@ -1,0 +1,11 @@
+---
+id: ironwood-ridge
+name: Ironwood Ridge
+type: wilderness
+description: A dense stand of frost-tolerant ironwood trees clinging to the mountain slope, their dark bark rimed with ice crystals. The canopy breaks the wind and muffles sound, creating pockets of eerie stillness. Frostwing Owls roost silently in the upper branches. Snowbound Yeti territory lies nearby — large tracks and claw marks on the trunks make that clear. Frostfire Lilies grow in clusters along the trail, their faint glow drawing the eye. Shelter is available among the root systems, but anything resting here is being watched.
+tags: [alpine, forest, shelter, yeti-territory]
+connections: [glacial-stream-crossing, wardline-threshold]
+threat_level: 2
+known_npcs: []
+discovered: true
+---

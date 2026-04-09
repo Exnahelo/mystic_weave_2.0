@@ -1,0 +1,180 @@
+# Drakenvale Design Notes
+
+> **For author reference only. Do not upload to GPT builder.**
+> This document tracks open questions, resolved decisions, authoring gaps, and narrative design thinking for the Drakenvale world. Updated as decisions are made.
+
+---
+
+## Tags
+
+`#design` `#drakenvale` `#internal`
+
+---
+
+## File Status
+
+| File | Status | GPT-Ready |
+| --- | --- | --- |
+| `drakenvale_world.md` | Complete | Yes |
+| `drakenvale_organizations.md` | Complete | Yes |
+| `drakenvale_characters.md` | Complete | Yes |
+| `drakenvale_biomes.md` | Complete | Yes |
+| `drakenvale_design_notes.md` | Living document | No |
+
+**Phase 4 (content layer) is locked until the 20-turn loop test passes.** These files are authored and ready, but do not upload to GPT builder until the test clears.
+
+---
+
+## Resolved Decisions
+
+These were open questions that have now been answered and committed to the world files.
+
+**Radiant Crystal** — Forged from the combined magic of the founding dragons at the time of Drakenvale's creation. Housed in the Draconic Hall, center of the room. Dual function: ambient power object AND Council tiebreaker through Bahamut's influence. Canon. In `drakenvale_world.md`.
+
+**Mortal/kobold political standing** — Advisory standing, petition rights, no vote. Mortals can hold enforcement roles (Acolytes of Justice). Kobolds are a protected class with welfare access. Neither group holds formal political representation. Canon. In `drakenvale_world.md`.
+
+**Wardens vs. Dragon Guard** — Two distinct organizations. The Wardens report to Eryndor in peacetime (sacred sites, internal security, investigation). They temporarily fall under Zarkeros when militarized (precision strikes, crisis response). The Dragon Guard is Zarkeros's exclusively for external defense. Canon. In both world and organizations files.
+
+**Trial of Wings** — Non-lethal ritualized duel, overseen by the Council, for disputes of honor or grievance. Rarely invoked, highly respected. Open to dragons and dragonborn; mortals typically use mediation instead. Canon. In `drakenvale_world.md`.
+
+**SSTC relationship** — Independent guild, not a state organ. All three Council members hold advisory or operational roles within it. Varethyn runs the Amethyst Veil through its trade routes. Canon. In both world and organizations files.
+
+**Draconic Conclave timing** — Approximately century-frequency, but convened by Council decree when needed. Not on a fixed schedule. Left malleable as a story hook. Canon.
+
+**Per-dragon elite guards** — Not a separate named unit per dragon. Maps to: Wardens (Eryndor/Zarkeros shared, split by context), Dragon Guard (Zarkeros exclusively), Amethyst Veil/Sapphire Sentinels (Varethyn covertly). Canon.
+
+---
+
+## Open Stub Organizations
+
+These organizations are named in source material but have no authored content. Reserved for future development. Do not invent content for them in GPT responses — treat them as existing but unknown.
+
+Also partially stubbed:
+
+- **Sapphire Sentinels** — Intelligence org tied to Varethyn/Amethyst Veil. Structure not yet authored.
+- **Silver Wing Envoys** — External diplomacy. Structure not yet authored.
+- **Circle of Artisans** — Infrastructure and arts. Structure not yet authored.
+- **Sapphire Choir** — Oral traditions and culture. Structure not yet authored.
+- **Order of the Platinum Flame** — External Bahamut knightly order. Authored at summary level but no full detail on headquarters, operations, or campaign integration.
+
+---
+
+## Continuity Gaps (From Original Analysis)
+
+These were identified in a prior gap analysis session. Status noted for each.
+
+### 1. Integration and Inclusion of Non-Draconic Residents
+
+**Status: Resolved in world file.** Mortal/kobold political standing is now explicit. Advisory roles, petition rights, no vote. Enforcement roles available. Welfare and education access confirmed.
+
+Still thin: Specific cultural traditions unique to mortals and kobolds are not yet authored. The biomes file captures their functional roles but their cultural identity within Drakenvale is underdeveloped.
+
+**Design note:** Consider adding a short cultural section to `drakenvale_world.md` or a standalone `drakenvale_culture.md` that addresses mortal and kobold artistic traditions, festivals, and spiritual life distinct from draconic practice.
+
+### 2. Coordination and Communication During Crises
+
+**Status: Partially resolved.** The Warden/Dragon Guard dual structure is now clear. The organizations file establishes that Sapphire Sentinels and Dragon Guard coordinate on multi-front threats.
+
+Still missing: A unified Crisis Management Protocol. No explicit chain of command when all three Council members are needed simultaneously in a crisis. No named backup communication systems.
+
+**Design note:** This can remain underdeveloped until a story demands it. If a Council crisis scene arises, the GPT should default to: Zarkeros commands military response, Eryndor oversees civilian protection and Warden deployment, Varethyn manages intelligence and magical countermeasures. That's enough for narrative coherence.
+
+### 3. Resource Allocation and Sustainability
+
+**Status: Partially resolved.** Economy section in world file establishes barter system, external trade limits, and SSTC as trade interface. Infernal Forge Guild notes mithral/adamantine scarcity as an active challenge.
+
+Still missing: Explicit resource prioritization framework (sacred sites vs. military vs. civilians during shortage). Contingency plans for rare material depletion.
+
+**Design note:** This is background worldbuilding, not player-facing. Leave it underdeveloped unless a story arc directly involves resource scarcity. The scarcity of mithral and adamantine is a ready-made trade/quest hook.
+
+### 4. Alignment and Philosophical Tensions
+
+**Status: Addressed in characters file.** Council dynamics section explicitly covers where the three dragons agree and fracture. The Wardens' dual-reporting structure is a structural embodiment of this tension.
+
+Still missing: Specific rituals or mediation practices designed around alignment difference. How metallic/chromatic/gem dragons navigate philosophical disagreement in daily life below the Council level.
+
+**Design note:** The Rite of Balance (equinox ceremony, Platinum Acolytes) exists as a unity ritual. That's sufficient scaffolding. Don't over-engineer this — alignment tension is a narrative engine, not a problem to solve.
+
+### 5. Threat Management and Countermeasures
+
+**Status: Partially resolved.** Wardens handle internal magical threats. Sapphire Sentinels handle external intelligence. Dragon Guard handles external military threats.
+
+Still missing: Countermeasures against forbidden magic specifically. No authored response to magical corruption seeping from the Temple to Tiamat. The Wardens' "Vigilance Rituals" are referenced but not detailed.
+
+**Design note:** The Shadowed Hollows biome entry captures what corruption looks like when it's already spreading. The gap is the *response* — what does a Warden actually do when they detect Tiamat's influence in someone or something? This is a good thing to author before Phase 4 since it's almost certainly a story arc.
+
+### 6. Knowledge and Artifact Oversight
+
+**Status: Partially resolved.** Arcane Conservatory and Infernal Forge Guild are authored. Restricted sections of the Library of Eternity are noted.
+
+Still missing: Artifact tracking system. No mechanism for reclaiming misused artifacts or disabling ones that leave Drakenvale.
+
+**Design note:** The Amethyst Veil likely handles this covertly. Artifacts traded externally through the SSTC probably have embedded tracking mechanisms — Varethyn would insist on it. This doesn't need to be fully authored, but it's worth a GM note in the organizations file when the SSTC is expanded.
+
+### 7. Inclusivity in Cultural and Spiritual Practices
+
+**Status: Flagged, not resolved.** The Platinum Acolytes' outreach to mortals and kobolds is mentioned but thin.
+
+**Design note:** Same as gap #1 — this is a cultural authoring gap, not a structural one. Low priority for GPT function but high priority for world texture. Flag for `drakenvale_culture.md`.
+
+### 8. Post-Crisis Recovery
+
+**Status: Not authored.** No formal post-crisis recovery framework exists.
+
+**Design note:** The Renewal Rites concept (referenced in Apple Notes) could fill this gap. A short entry in the organizations file under Platinum Acolytes would cover it adequately. Not needed for Phase 4 unless a story arc involves recovering from a crisis.
+
+---
+
+## Narrative Design Notes
+
+### The Temple to Tiamat
+
+The single highest-stakes location in Drakenvale. Its seal is the Platinum Warden's sacrifice made permanent. Three escalating states are possible:
+
+1. **Sealed (current)** — Vigilance Rituals ongoing. Shadowed Hollows slowly expanding. No active threat but ambient unease.
+2. **Partially unsealed** — A major story event. Corruption spreads faster. Alignment tensions spike. The Council fractures under pressure.
+3. **Unsealed** — Campaign-level event. Tiamat's influence is active. Existential threat to Drakenvale.
+
+The GPT should not move between these states without player-driven cause. State 1 is default. State 2 requires a significant story beat.
+
+### The Rift of Discord
+
+Not a dungeon — a wound. Its relationship to the Temple is proximity-based: the Rift and the Shadowed Hollows are in the same geographic corner, which is not coincidental. The chaos energy in the Rift and the necrotic energy in the Hollows interact and reinforce each other.
+
+If the Temple moves toward State 2, the Rift destabilizes first — use it as an early warning system narratively.
+
+### Varethyn and the Amethyst Veil
+
+The most asymmetric character on the Council. He knows things the other two don't and acts on that information without sharing it. He is not malevolent — he genuinely believes long-term stability is served by his approach. But his definition of "stable" and Eryndor's are not the same thing.
+
+Players who discover the Amethyst Veil face a genuine dilemma: it's illegal under the spirit of the Ptarian Code (unauthorized intelligence gathering, deception of Council peers), but it may also be the only thing that has prevented several catastrophes. Varethyn knows this. He's betting you'll reach the same conclusion.
+
+### Zarkeros and the Code
+
+Zarkeros upholds the Ptarian Code not from belief but because it is the framework within which his power operates most effectively. This means he is scrupulously compliant in observable behavior and genuinely dangerous in edge cases. He would subvert the Code if the gain were sufficient and the cost manageable. The key design constraint: what would make it worth it to him? Power isn't sufficient — he already has it. Loss of Drakenvale as a functioning power base would threaten him. An external threat that the Code's restrictions prevent him from addressing would be his breaking point.
+
+### The Draconic Conclave as Story Anchor
+
+The Conclave is called by Council decree when needed, not on a fixed schedule. Its last convening is unspecified. Possible story uses:
+
+- **Approaching Conclave** — Political maneuvering, factions lobbying for Code amendments, outsiders trying to influence the outcome
+- **Conclave in session** — Player characters caught in a politically charged moment; every dragon in Drakenvale is present and engaged
+- **Post-Conclave** — A controversial amendment was passed; factions are adjusting; something destabilizing was put into law
+
+---
+
+## Source Material Notes
+
+### Apple Notes — What to Keep vs. Discard
+
+Files to keep in Obsidian as reference but not GPT-upload:
+
+- `Continuity` (Apple Notes) — Full gap analysis; superseded by this design notes file
+- All Dec 9 policy notes (Apple Notes) — Superseded by this design notes file
+- Individual biome Apple Notes — Superseded by `drakenvale_biomes.md`; keep as species reference if needed
+
+### Ptarian Codex Note
+
+The `NEW_NEW_DRAKENVALE.docx` contains the most complete version of the Ptarian Codex as a formal charter document. If a full in-world legal text is ever needed (for roleplay, as a found document, etc.), that file is the source. It was intentionally not included in the GPT files because its length and legal prose format are not useful for the GPT's narrative function. The principles are captured in `drakenvale_world.md`.
+
+---
