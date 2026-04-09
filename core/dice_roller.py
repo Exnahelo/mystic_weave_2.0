@@ -9,6 +9,7 @@ This module only generates the random number.
 """
 
 import random
+import re
 
 
 def roll(dice_expression: str = "1d100", seed: int | None = None) -> int:
@@ -23,8 +24,6 @@ def roll(dice_expression: str = "1d100", seed: int | None = None) -> int:
     """
     if seed is not None:
         random.seed(seed)
-
-    import re
     match = re.fullmatch(r"(\d*)d(\d+)([+-]\d+)?", dice_expression.strip())
     if not match:
         raise ValueError(f"Invalid dice expression: {dice_expression}")

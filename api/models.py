@@ -10,7 +10,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 
 # ---------------------------------------------------------------------------
@@ -140,6 +140,14 @@ class AdjustmentPoints(BaseModel):
         if v > 3:
             raise ValueError("max +3 adjustment per domain")
         return v
+
+    @model_validator(mode="after")
+    def total_pool_cap(self) -> AdjustmentPoints:
+        total = (self.power + self.agility + self.perception +
+                 self.endurance + self.intellect + self.will + self.presence)
+        if total > 5:
+            raise ValueError(f"Adjustment pool is 5 points max. Got {total}.")
+        return self
 
 
 class NewSessionRequest(BaseModel):

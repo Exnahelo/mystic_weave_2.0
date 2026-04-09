@@ -20,7 +20,6 @@ CREATE TABLE IF NOT EXISTS game_states (
     character    JSONB NOT NULL,
     world        JSONB NOT NULL,
     log          JSONB NOT NULL DEFAULT '[]',
-    inventory    JSONB DEFAULT NULL,
     updated_at   TIMESTAMP DEFAULT now()
 );
 

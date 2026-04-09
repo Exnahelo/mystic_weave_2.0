@@ -61,8 +61,8 @@
 
 ## Known Tech Debt
 
-- No Python `__init__.py` files in `api/` directories
-- `api/routes/roll.py` uses a `sys.path` hack to import the dice roller (carried from 1.0)
+- *(resolved)* `__init__.py` files added to `api/`, `api/routes/`, `core/`
+- *(resolved)* `sys.path` hack removed — clean package imports throughout
 
 ---
 
