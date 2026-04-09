@@ -1,10 +1,21 @@
-Drakenvale Content License
-========================
+# Drakenvale Content License
 
-All Drakenvale content (including but not limited to files in the `prompts/` directory and any Drakenvale-specific data or narrative content) is © Daniel Howe.
+Copyright (c) 2026 Daniel Howe. All rights reserved.
 
-- Personal, non-commercial use is permitted.
-- Any commercial use, redistribution, publication, or adaptation of Drakenvale content requires explicit written permission from the copyright holder.
-- For inquiries regarding commercial use or licensing, contact Daniel Howe.
+All content related to "Drakenvale" (including but not limited to text, images, lore, characters, and world-building elements) is the exclusive intellectual property of Daniel Howe.
 
-This restriction does not apply to the open-source code or SRD (System Reference Document) content, which remain under their respective licenses as described in LICENSE and ATTRIBUTION.md.
+## Permitted Uses
+
+- You may use, share, and adapt the Drakenvale content for personal, educational, or research purposes.
+- You must provide clear attribution to Daniel Howe as the original creator.
+
+## Restrictions
+
+- You may not use, sell, license, or distribute the Drakenvale content for any commercial purpose without prior written permission from Daniel Howe.
+- You may not claim ownership of the Drakenvale content or represent it as your own.
+
+## Commercial Use
+
+If you wish to use the Drakenvale content in any commercial product, service, or publication, you must obtain a separate commercial license from Daniel Howe.
+
+For commercial licensing inquiries, please contact Daniel Howe.
