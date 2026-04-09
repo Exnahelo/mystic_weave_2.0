@@ -86,7 +86,9 @@ async def upsert_location(
 
         # Upsert world_graph edges for each connection listed in the data.
         # We only insert edges where the target location already exists,
-        # to avoid FK violations. The GPT must create target locations first.
+        # to avoid FK violations. If a target did not exist at the time a source
+        # location was saved, we backfill those edges when that target is later
+        # created (see query below).
         for target_id in body.connections:
             target_exists = await conn.fetchval(
                 "SELECT 1 FROM locations WHERE id = $1", target_id
@@ -101,6 +103,28 @@ async def upsert_location(
                     body.id,
                     target_id,
                 )
+
+        # Backfill inbound edges from previously saved locations that already
+        # referenced this location in their `data.connections` array.
+        inbound_rows = await conn.fetch(
+            """
+            SELECT id
+              FROM locations
+             WHERE id <> $1
+               AND (data->'connections') ? $1
+            """,
+            body.id,
+        )
+        for inbound in inbound_rows:
+            await conn.execute(
+                """
+                INSERT INTO world_graph (from_id, to_id)
+                VALUES ($1, $2)
+                ON CONFLICT DO NOTHING
+                """,
+                inbound["id"],
+                body.id,
+            )
 
     return LocationResponse(
         id=row["id"],
