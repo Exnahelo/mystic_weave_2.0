@@ -307,8 +307,8 @@ class SaveStateRequest(BaseModel):
 class GameStateResponse(BaseModel):
     """Response for GET /state/{session_id}"""
     session_id: str
-    character:  dict[str, Any]
-    world:      dict[str, Any]
+    character:  CharacterModel
+    world:      WorldModel
     log:        list[str]
     updated_at: datetime | None = None
 

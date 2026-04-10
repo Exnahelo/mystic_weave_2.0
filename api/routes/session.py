@@ -12,10 +12,11 @@ import uuid
 
 import asyncpg
 from fastapi import APIRouter, Depends, HTTPException
+from pydantic import ValidationError
 
 from api.database import get_pool
 from api.game_data import seed_character
-from api.models import NewSessionRequest, NewSessionResponse
+from api.models import CharacterModel, NewSessionRequest, NewSessionResponse, WorldModel
 
 router = APIRouter()
 
@@ -52,6 +53,11 @@ async def new_session(
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e))
 
+    try:
+        validated_character = CharacterModel.model_validate(character)
+    except ValidationError as e:
+        raise HTTPException(status_code=422, detail=e.errors())
+
     # Build initial world state
     world: dict = {
         "location":   body.starting_location,
@@ -70,6 +76,14 @@ async def new_session(
         },
     }
 
+    try:
+        validated_world = WorldModel.model_validate(world)
+    except ValidationError as e:
+        raise HTTPException(status_code=422, detail=e.errors())
+
+    character_json = validated_character.model_dump()
+    world_json = validated_world.model_dump()
+
     async with pool.acquire() as conn:
         await conn.execute(
             """
@@ -77,12 +91,12 @@ async def new_session(
             VALUES ($1, $2::jsonb, $3::jsonb, '[]'::jsonb, now())
             """,
             session_id,
-            json.dumps(character),
-            json.dumps(world),
+            json.dumps(character_json),
+            json.dumps(world_json),
         )
 
     return NewSessionResponse(
         session_id=session_id,
-        character=character,
-        world=world,
+        character=character_json,
+        world=world_json,
     )

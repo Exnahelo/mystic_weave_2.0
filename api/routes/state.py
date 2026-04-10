@@ -16,9 +16,10 @@ from typing import Any
 
 import asyncpg
 from fastapi import APIRouter, Depends, HTTPException
+from pydantic import ValidationError
 
 from api.database import get_pool
-from api.models import GameStateResponse, SaveStateRequest
+from api.models import CharacterModel, GameStateResponse, SaveStateRequest, WorldModel
 
 router = APIRouter()
 
@@ -66,10 +67,16 @@ async def load_state(
     if row is None:
         raise HTTPException(status_code=404, detail="session not found")
 
+    try:
+        character = CharacterModel.model_validate(json.loads(row["character"]))
+        world = WorldModel.model_validate(json.loads(row["world"]))
+    except ValidationError as e:
+        raise HTTPException(status_code=500, detail={"message": "stored game state is invalid", "errors": e.errors()})
+
     return GameStateResponse(
         session_id=row["session_id"],
-        character=json.loads(row["character"]),
-        world=json.loads(row["world"]),
+        character=character,
+        world=world,
         log=json.loads(row["log"]),
         updated_at=row["updated_at"],
     )
@@ -108,6 +115,15 @@ async def save_state(
         else:
             merged_character = incoming_character
 
+        try:
+            validated_character = CharacterModel.model_validate(merged_character)
+            validated_world = WorldModel.model_validate(world_json)
+        except ValidationError as e:
+            raise HTTPException(status_code=422, detail=e.errors())
+
+        merged_character_json = validated_character.model_dump(by_alias=True)
+        validated_world_json = validated_world.model_dump()
+
         row = await conn.fetchrow(
             """
             INSERT INTO game_states (session_id, character, world, log, updated_at)
@@ -120,16 +136,22 @@ async def save_state(
             RETURNING session_id, character, world, log, updated_at
             """,
             session_id,
-            json.dumps(merged_character),
-            json.dumps(world_json),
+            json.dumps(merged_character_json),
+            json.dumps(validated_world_json),
             json.dumps([body.log_entry]),   # initial log on INSERT
             log_entry_json,                 # appended entry on UPDATE
         )
 
+    try:
+        response_character = CharacterModel.model_validate(json.loads(row["character"]))
+        response_world = WorldModel.model_validate(json.loads(row["world"]))
+    except ValidationError as e:
+        raise HTTPException(status_code=500, detail={"message": "stored game state is invalid", "errors": e.errors()})
+
     return GameStateResponse(
         session_id=row["session_id"],
-        character=json.loads(row["character"]),
-        world=json.loads(row["world"]),
+        character=response_character,
+        world=response_world,
         log=json.loads(row["log"]),
         updated_at=row["updated_at"],
     )
