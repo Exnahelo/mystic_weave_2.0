@@ -28,6 +28,9 @@ jobs:
       - name: Lint
         run: ruff check api core tests
 
+      - name: OpenAPI drift check
+        run: python scripts/check_openapi_drift.py
+
       - name: Unit + contract tests
         run: pytest -q tests/unit tests/contract
 
