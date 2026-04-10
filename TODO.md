@@ -95,3 +95,13 @@ Added:
 
 - [x] Add short changelog note in `README.md` or `OPERATIONAL_RUNBOOK.md` for new world locations/lairs and access/discovery assumptions
 - [x] Create lightweight release checkpoint (tag or release note) for post-audit + world topology baseline
+
+## Gamplay upgrades from walkthrough
+
+- [ ] Hunger tracking
+- [ ] Hydration tracking
+- [ ] Fatigue tracking
+- [ ] Carrying Weight?
+- [ ] We need to better define/understand how Domain/Knowledge/Application grow. Also the point Domain point distributions and how many are available/how they grow.
+- [ ] Clarify how reputation grows.
+- [ ] Coin sytem is in bad shape
