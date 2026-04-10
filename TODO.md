@@ -1,6 +1,6 @@
 # Mystic Weave — TODO
 
-Updated after hardening passes pushed through commit `02d7fcb`.
+Updated after hardening + world/prompt alignment passes through commit `985b5ba`.
 
 ## ✅ Recently Completed
 
@@ -71,3 +71,26 @@ Updated after hardening passes pushed through commit `02d7fcb`.
 - [x] Upgrade response schemas in `schemas/openapi.yaml` to concrete `$ref` usage where needed
 - [x] Add `required` arrays for key response schemas used by GPT branching
 - [x] Normalize updated nullable fields to OpenAPI 3.1 style (`anyOf` with `null`)
+
+## Current Open Work (Next)
+
+### Priority 1 — Game System Reference Docs
+
+- [x] Design and write magic system reference (domain mappings, knowledge/application tags for magic, effect-scaling difficulty ladder)
+- [x] Write difficulty reference (tiered encounter/challenge list with default modifiers; target ~30–40 entries)
+- [x] Write notable items reference (canonical gear with roll tags + mechanical effects)
+
+Added:
+- [x] `prompts/magic_system_reference.md`
+- [x] `prompts/difficulty_reference.md`
+- [x] `prompts/notable_items_reference.md`
+
+### Priority 2 — World Navigation Consistency
+
+- [ ] Run explicit reciprocity audit on `prompts/world/*.md` connections and decide intentional one-way vs two-way links
+- [ ] Document any intentionally one-way connections in a short note for future content updates
+
+### Priority 3 — Documentation / Release Hygiene
+
+- [ ] Add short changelog note in `README.md` or `OPERATIONAL_RUNBOOK.md` for new world locations/lairs and access/discovery assumptions
+- [ ] Create lightweight release checkpoint (tag or release note) for post-audit + world topology baseline
