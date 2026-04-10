@@ -1,0 +1,11 @@
+---
+id: varethyns-lair
+name: Varethyn's Cavern
+type: lair
+description: "The deepest chamber of the Crystal Caverns, accessible only through passages that seem to rearrange themselves for those Varethyn does not wish to find him. The cavern is amethyst and quartz from floor to ceiling, glowing faintly with psionic energy that has no visible source. Pools of perfectly still water dot the floor, each reflecting the crystalline ceiling with mirror precision — no ripple, no distortion, regardless of what moves nearby. The air hums with latent psychic energy. Sound is amplified and distorted; a whisper carries to the far wall, a footstep sounds like a deliberate announcement. Varethyn is almost certainly already aware of anyone who reaches this chamber. Whether he makes that known immediately is his choice."
+tags: [drakenvale, varethyn, lair, amethyst-dragon, crystal, psionic, restricted]
+connections: [crystal-caverns]
+threat_level: 1
+known_npcs: [Varethyn of the Amethyst Gaze]
+discovered: false
+---
