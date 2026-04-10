@@ -19,10 +19,26 @@ ENGINE_REQUIRED_SECTIONS = [
     "## Canon Precedence (Conflict Resolution Order)",
 ]
 
+KNOWN_CONTRADICTION_WARNING_MARKERS = {
+    "economy_consistency": [
+        ("prompts/drakenvale_world.md", "barter in enchanted artifacts, knowledge, and services. Coin use exists but is secondary"),
+        ("prompts/drakenvale_factions.md", "Barter in enchanted artifacts, knowledge, and services is primary"),
+    ],
+    "arcane_conservatory_access_consistency": [
+        ("prompts/drakenvale_factions.md", "Open to all residents for standard materials"),
+        ("prompts/drakenvale_organizations.md", "Open to all residents. Restricted sections require Council approval"),
+    ],
+    "crisis_protocol_maturity_baseline": [
+        ("prompts/drakenvale_factions.md", "## Crisis Protocols (Baseline)"),
+        ("prompts/drakenvale_factions.md", "baseline operating norms, not a fully codified wartime charter"),
+    ],
+}
+
 
 def main() -> None:
     repo_root = Path(__file__).resolve().parents[1]
     failures: list[str] = []
+    warnings: list[str] = []
 
     for rel_path, required_markers in REQUIRED_PROMPTS.items():
         prompt_path = repo_root / rel_path
@@ -52,11 +68,31 @@ def main() -> None:
     if len(world_files) == 0:
         failures.append("prompts/world has no location markdown files")
 
+    # Soft checks: ensure known contradiction-pair markers remain present.
+    # These emit warnings (non-fatal) so maintainers can detect drift early
+    # without blocking unrelated prompt edits.
+    for check_name, markers in KNOWN_CONTRADICTION_WARNING_MARKERS.items():
+        for rel_path, marker in markers:
+            target = repo_root / rel_path
+            if not target.exists():
+                warnings.append(f"[{check_name}] missing file: {rel_path}")
+                continue
+            content = target.read_text(encoding="utf-8")
+            if marker not in content:
+                warnings.append(
+                    f"[{check_name}] missing marker in {rel_path}: {marker}"
+                )
+
     if failures:
         print("❌ Prompt validation failed")
         for failure in failures:
             print(f"- {failure}")
         sys.exit(1)
+
+    if warnings:
+        print("⚠️ Prompt validation warnings")
+        for warning in warnings:
+            print(f"- {warning}")
 
     print("✅ Prompt validation passed")
 

@@ -62,7 +62,7 @@ Updated after hardening passes pushed through commit `02d7fcb`.
 - [x] Extend `scripts/validate_prompts.py` checks for:
   - [x] presence of await/checkpoint sections in required runtime prompts
   - [x] presence of canon precedence marker
-  - [ ] warning markers for known contradiction pairs
+  - [x] warning markers for known contradiction pairs
 
 ## API/OpenAPI Follow-Up (from 2026-04-10 review)
 
