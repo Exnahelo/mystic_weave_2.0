@@ -31,8 +31,8 @@ Updated after hardening passes pushed through commit `02d7fcb`.
 
 ## 🔜 Next Priority Backlog
 
-- [ ] Add Alembic migrations for schema lifecycle (replace ad hoc/manual DB evolution)
-- [ ] Add CI guard for OpenAPI drift (`app.openapi()` vs `schemas/openapi.yaml`)
+- [x] Add Alembic migrations for schema lifecycle (replace ad hoc/manual DB evolution)
+- [x] Add CI guard for OpenAPI drift (`app.openapi()` vs `schemas/openapi.yaml`)
 - [ ] Add data/prompt validation gates:
   - [ ] schema checks for `data/*.json`
   - [ ] structural/lint checks for prompt files used in production

@@ -10,6 +10,7 @@
 
 ### Pull requests
 - Lint (`ruff`)
+- OpenAPI drift check (`python scripts/check_openapi_drift.py`)
 - Unit + contract tests (`pytest tests/unit tests/contract`)
 - Integration smoke (`python tests/loop_test.py`) against ephemeral Postgres
 
@@ -35,6 +36,12 @@ Run lint:
 ruff check api core tests
 ```
 
+Run OpenAPI drift check:
+
+```bash
+python scripts/check_openapi_drift.py
+```
+
 Run fast tests:
 
 ```bash
@@ -45,4 +52,10 @@ Run loop smoke against local API:
 
 ```bash
 python tests/loop_test.py
+```
+
+Ensure DB schema is current before starting the app:
+
+```bash
+alembic upgrade head
 ```

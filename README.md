@@ -106,10 +106,29 @@ tests/
 pip install -r requirements.txt
 cp .env.example .env
 # Set DATABASE_URL in .env
+# (optional) run migrations manually
+alembic upgrade head
 uvicorn api.main:app --reload
 ```
 
 API at `http://localhost:8000`. Docs at `http://localhost:8000/docs`. Version metadata at `http://localhost:8000/version`.
+
+### Database Migrations (Alembic)
+
+Schema lifecycle is now managed by Alembic instead of ad hoc `CREATE TABLE` on startup.
+
+```bash
+# Apply latest schema
+alembic upgrade head
+
+# Create a new migration after schema changes
+alembic revision -m "describe change"
+
+# Roll back one migration
+alembic downgrade -1
+```
+
+Note: app startup runs `alembic upgrade head` automatically using `DATABASE_URL`.
 
 ### Smoke Tests
 
