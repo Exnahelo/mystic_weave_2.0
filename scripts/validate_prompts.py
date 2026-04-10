@@ -13,6 +13,12 @@ REQUIRED_PROMPTS = {
     "prompts/world_rules.md": ["#", "##"],
 }
 
+ENGINE_REQUIRED_SECTIONS = [
+    "### Runtime Safety Checkpoint (Await + Validate)",
+    "### Irreversible Action Confirmation Gate",
+    "## Canon Precedence (Conflict Resolution Order)",
+]
+
 
 def main() -> None:
     repo_root = Path(__file__).resolve().parents[1]
@@ -35,6 +41,11 @@ def main() -> None:
         for marker in required_markers:
             if marker not in content:
                 failures.append(f"{rel_path} missing required marker: {marker}")
+
+        if rel_path == "prompts/engine.md":
+            for section in ENGINE_REQUIRED_SECTIONS:
+                if section not in content:
+                    failures.append(f"{rel_path} missing required runtime safety section: {section}")
 
     world_dir = repo_root / "prompts" / "world"
     world_files = sorted(world_dir.glob("*.md")) if world_dir.exists() else []

@@ -110,7 +110,7 @@ Operations: Investigate corruption, sabotage, alignment tensions, forbidden magi
 ### The Arcane Conservatory
 
 **Role:** Preserves and advances magical knowledge and education. Houses the Lore Vault.
-**Access:** Criteria not formally defined — open design question for content authoring.
+**Access:** Open to all residents for standard materials. Restricted collections and dangerous arcana require Council approval. Advanced training is merit-based.
 
 ### The Silver Wing Envoys
 
@@ -162,15 +162,17 @@ Amethyst dragon. Neutral. Mediator, guardian of arcane knowledge, protector of b
 
 ---
 
-## Crisis Protocols
+## Crisis Protocols (Baseline)
 
 **Level 1 — Minor:** Handled by Wardens and Reserve Forces.
 **Level 2 — Moderate:** Coordination across multiple divisions and guilds.
 **Level 3 — Severe:** Full mobilization under direct Draconic Council oversight.
 
+These are baseline operating norms, not a fully codified wartime charter. In edge-case crises where all three Council members are simultaneously required, the standing default is: Zarkeros directs military response, Eryndor directs civilian protection and Warden deployment, Varethyn directs intelligence and magical countermeasures.
+
 **Command hubs:** Primary — Draconic Hall. Secondary — temporary hubs near affected areas led by Warden and Dragon Guard captains.
 
-**Communication:**
+**Communication (baseline):**
 
 - Primary: draconic telepathy (dragons, instant); enchanted scrolls (documentation and directives)
 - Redundant: magical messengers/constructs; signal beacons (enchanted crystals with crisis-level signals); kobold courier division
@@ -181,7 +183,7 @@ Amethyst dragon. Neutral. Mediator, guardian of arcane knowledge, protector of b
 
 ## Economy
 
-**Internal:** Barter in enchanted artifacts, knowledge, and services. Knowledge Tomes certified by the Amethyst Vault serve as intellectual currency. Traditional platinum, gold, silver, copper coins for daily transactions. Platinum coins engraved with draconic symbols for high-value trades.
+**Internal:** Barter in enchanted artifacts, knowledge, and services is primary. Knowledge Tomes certified by the Amethyst Vault serve as intellectual currency. Traditional platinum, gold, silver, copper coins are used for practical daily transactions and accounting, but do not replace barter as the dominant system.
 
 **External:** Limited trade with trusted allies via Silver Wing Envoys. Rare materials only. Requires Council vetting. All agreements include secrecy clauses.
 

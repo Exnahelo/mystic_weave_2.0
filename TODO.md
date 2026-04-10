@@ -45,21 +45,29 @@ Updated after hardening passes pushed through commit `02d7fcb`.
 
 ## Prompt System Follow-Up (from 2026-04-10 audit)
 
-- [ ] Add explicit await/validate checkpoints in `prompts/engine.md`:
-  - [ ] Await endpoint response before narration
-  - [ ] Validate required payload fields before irreversible updates
-  - [ ] Define fallback behavior for incomplete API responses (retry/conservative narration)
-- [ ] Add explicit player-confirmation gates for irreversible outcomes in turn flow
-- [ ] Add canonical precedence block in runtime prompts (conflict-resolution order)
-- [ ] Resolve cross-file canon contradictions:
-  - [ ] Economy model consistency (`drakenvale_world.md` vs `drakenvale_factions.md`)
-  - [ ] Arcane Conservatory access consistency (`drakenvale_factions.md` vs `drakenvale_organizations.md`)
-  - [ ] Crisis protocol maturity/status consistency across canon docs
-- [ ] Add deterministic tie-break rules for ambiguous domain/tag adjudication
-- [ ] Add deterministic state-write order for complex multi-change turns
-- [ ] Add standardized handling for sparse/unknown faction reputation data
-- [ ] Add global stub-handling policy for unfinished organizations/lore
-- [ ] Extend `scripts/validate_prompts.py` checks for:
-  - [ ] presence of await/checkpoint sections in required runtime prompts
-  - [ ] presence of canon precedence marker
+- [x] Add explicit await/validate checkpoints in `prompts/engine.md`:
+  - [x] Await endpoint response before narration
+  - [x] Validate required payload fields before irreversible updates
+  - [x] Define fallback behavior for incomplete API responses (retry/conservative narration)
+- [x] Add explicit player-confirmation gates for irreversible outcomes in turn flow
+- [x] Add canonical precedence block in runtime prompts (conflict-resolution order)
+- [x] Resolve cross-file canon contradictions:
+  - [x] Economy model consistency (`drakenvale_world.md` vs `drakenvale_factions.md`)
+  - [x] Arcane Conservatory access consistency (`drakenvale_factions.md` vs `drakenvale_organizations.md`)
+  - [x] Crisis protocol maturity/status consistency across canon docs
+- [x] Add deterministic tie-break rules for ambiguous domain/tag adjudication
+- [x] Add deterministic state-write order for complex multi-change turns
+- [x] Add standardized handling for sparse/unknown faction reputation data
+- [x] Add global stub-handling policy for unfinished organizations/lore
+- [x] Extend `scripts/validate_prompts.py` checks for:
+  - [x] presence of await/checkpoint sections in required runtime prompts
+  - [x] presence of canon precedence marker
   - [ ] warning markers for known contradiction pairs
+
+## API/OpenAPI Follow-Up (from 2026-04-10 review)
+
+- [x] Add optional `reason` field to `RollRequest` for roll observability
+- [x] Make `LocationResponse.data` typed (`LocationData`) instead of opaque object
+- [x] Upgrade response schemas in `schemas/openapi.yaml` to concrete `$ref` usage where needed
+- [x] Add `required` arrays for key response schemas used by GPT branching
+- [x] Normalize updated nullable fields to OpenAPI 3.1 style (`anyOf` with `null`)

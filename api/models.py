@@ -14,8 +14,6 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
-from typing import Any
-
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 
@@ -396,6 +394,10 @@ class RollRequest(BaseModel):
     # Assembled target: domain score + knowledge tier + application tier + difficulty modifier.
     # Server clamps to 1–99.
     target: int
+    reason: str | None = Field(
+        default=None,
+        description="Optional short description of the attempted action for observability/debugging.",
+    )
 
     @field_validator("target")
     @classmethod
@@ -438,7 +440,7 @@ class LocationData(BaseModel):
 class LocationResponse(BaseModel):
     id:         str
     name:       str
-    data:       dict[str, Any]
+    data:       LocationData
     updated_at: datetime | None = None
 
 

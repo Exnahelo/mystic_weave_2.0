@@ -124,7 +124,7 @@ Led by **Eryndor the Radiant** in their standard capacity. Temporarily fall unde
 
 ## Economy
 
-- **Internal** — barter in enchanted artifacts, knowledge, and services; no currency
+- **Internal** — barter in enchanted artifacts, knowledge, and services. Coin use exists but is secondary and practical (small daily transactions and accounting), not the primary value system.
 - **External** — limited trade with trusted allies; rare materials only; requires Council vetting
 - **Key exports** — enchanted goods, magical expertise, rare crafted artifacts
 - **Key imports** — rare materials unavailable in the valley (mithral, adamantine, etc.)

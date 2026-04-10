@@ -765,21 +765,23 @@ components:
 
     GameStateResponse:
       type: object
+      required: [session_id, character, world, log]
       properties:
         session_id:
           type: string
         character:
-          type: object
+          $ref: "#/components/schemas/CharacterModel"
         world:
-          type: object
+          $ref: "#/components/schemas/WorldModel"
         log:
           type: array
           items:
             type: string
         updated_at:
-          type: string
-          format: date-time
-          nullable: true
+          anyOf:
+            - type: string
+              format: date-time
+            - type: "null"
 
     # ---------------------------------------------------------------------------
     # Session
@@ -861,13 +863,14 @@ components:
 
     NewSessionResponse:
       type: object
+      required: [session_id, character, world]
       properties:
         session_id:
           type: string
         character:
-          type: object
+          $ref: "#/components/schemas/CharacterModel"
         world:
-          type: object
+          $ref: "#/components/schemas/WorldModel"
 
     # ---------------------------------------------------------------------------
     # Character Creation
@@ -895,11 +898,12 @@ components:
 
     CreateCharacterResponse:
       type: object
+      required: [session_id, character]
       properties:
         session_id:
           type: string
         character:
-          type: object
+          $ref: "#/components/schemas/CharacterModel"
 
     # ---------------------------------------------------------------------------
     # Dice
@@ -914,9 +918,13 @@ components:
           description: >
             Assembled target number: domain score + knowledge tier + application tier + difficulty modifier.
             Clamped to 1–99 by the server.
+        reason:
+          type: string
+          description: Optional short description of the attempted action for observability/debugging.
 
     RollResponse:
       type: object
+      required: [roll, target, success, margin, degree, critical_success, critical_failure]
       properties:
         roll:
           type: integer
@@ -983,32 +991,38 @@ components:
 
     LocationResponse:
       type: object
+      required: [id, name, data]
       properties:
         id:
           type: string
         name:
           type: string
         data:
-          type: object
+          $ref: "#/components/schemas/LocationData"
         updated_at:
-          type: string
-          format: date-time
-          nullable: true
+          anyOf:
+            - type: string
+              format: date-time
+            - type: "null"
 
     ConnectionInfo:
       type: object
+      required: [to_id]
       properties:
         to_id:
           type: string
         traversal:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: "null"
         distance:
-          type: string
-          nullable: true
+          anyOf:
+            - type: string
+            - type: "null"
 
     ConnectionsResponse:
       type: object
+      required: [from_id, connections]
       properties:
         from_id:
           type: string
