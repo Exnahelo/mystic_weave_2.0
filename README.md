@@ -147,6 +147,11 @@ curl -X POST http://localhost:8000/roll \
 ### Run Tests
 
 ```bash
+# Static contract/data/prompt guards
+python scripts/check_openapi_drift.py
+python scripts/validate_data_files.py
+python scripts/validate_prompts.py
+
 # Fast tests (unit + contract)
 pytest tests/unit tests/contract
 

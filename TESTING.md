@@ -11,6 +11,8 @@
 ### Pull requests
 - Lint (`ruff`)
 - OpenAPI drift check (`python scripts/check_openapi_drift.py`)
+- Data validation (`python scripts/validate_data_files.py`)
+- Prompt validation (`python scripts/validate_prompts.py`)
 - Unit + contract tests (`pytest tests/unit tests/contract`)
 - Integration smoke (`python tests/loop_test.py`) against ephemeral Postgres
 
@@ -40,6 +42,13 @@ Run OpenAPI drift check:
 
 ```bash
 python scripts/check_openapi_drift.py
+```
+
+Run data + prompt validators:
+
+```bash
+python scripts/validate_data_files.py
+python scripts/validate_prompts.py
 ```
 
 Run fast tests:

@@ -33,9 +33,9 @@ Updated after hardening passes pushed through commit `02d7fcb`.
 
 - [x] Add Alembic migrations for schema lifecycle (replace ad hoc/manual DB evolution)
 - [x] Add CI guard for OpenAPI drift (`app.openapi()` vs `schemas/openapi.yaml`)
-- [ ] Add data/prompt validation gates:
-  - [ ] schema checks for `data/*.json`
-  - [ ] structural/lint checks for prompt files used in production
+- [x] Add data/prompt validation gates:
+  - [x] schema checks for `data/*.json`
+  - [x] structural/lint checks for prompt files used in production
 
 ## Later Enhancements
 
