@@ -90,7 +90,7 @@ def main() -> None:
         if version.status_code != 200:
             fail(f"GET /version -> {version.status_code}")
         v = version.json()
-        if v.get("api_version") != "3.0.0":
+        if v.get("api_version") != "3.1.0":
             fail(f"api_version mismatch in /version: {v.get('api_version')}")
         if v.get("species_count") != len(exp_species):
             fail(f"/version species_count mismatch: {v.get('species_count')}")

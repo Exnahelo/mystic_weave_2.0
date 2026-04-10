@@ -112,16 +112,16 @@ class EquipmentItem(BaseModel):
     id:          str
     name:        str
     description: str          = ""
-    tags:        list[EquipmentTag] = []
+    tags:        list[EquipmentTag] = Field(default_factory=list)
     # Optional link to application tag for roll context (e.g. "light_weapons")
     roll_tag:    str | None   = None
 
 
 class Equipment(BaseModel):
     """Three-slot equipment inventory."""
-    worn:    list[EquipmentItem] = []   # equipped on person right now
-    carried: list[EquipmentItem] = []   # in pack / accessible this scene
-    stashed: list[EquipmentItem] = []   # at a known location, not on person
+    worn:    list[EquipmentItem] = Field(default_factory=list)   # equipped on person right now
+    carried: list[EquipmentItem] = Field(default_factory=list)   # in pack / accessible this scene
+    stashed: list[EquipmentItem] = Field(default_factory=list)   # at a known location, not on person
 
 
 class Identity(BaseModel):
@@ -130,10 +130,10 @@ class Identity(BaseModel):
     All fields optional at creation — can be filled in as play reveals them.
     """
     origin:      str        = ""   # where they came from / formative history
-    motivations: list[str]  = []   # 1–3 driving goals
-    quirks:      list[str]  = []   # 1–3 behavioural traits or mannerisms
-    bonds:       list[str]  = []   # people, places, or things they're tied to
-    flaws:       list[str]  = []   # weaknesses, biases, or blind spots
+    motivations: list[str]  = Field(default_factory=list)   # 1–3 driving goals
+    quirks:      list[str]  = Field(default_factory=list)   # 1–3 behavioural traits or mannerisms
+    bonds:       list[str]  = Field(default_factory=list)   # people, places, or things they're tied to
+    flaws:       list[str]  = Field(default_factory=list)   # weaknesses, biases, or blind spots
     wound:       str        = ""   # notable formative scar or event
     alignment:   Alignment  = Field(default_factory=Alignment)
 
@@ -186,12 +186,12 @@ class CompanionModel(BaseModel):
     identity:    Identity         = Field(default_factory=Identity)
     hp:          HP               = Field(default_factory=lambda: HP(current=100, max=100))
     domains:     DomainScores | None = None  # omit for purely narrative companions
-    knowledge:   dict[str, int]   = {}
-    application: dict[str, int]   = {}
+    knowledge:   dict[str, int]   = Field(default_factory=dict)
+    application: dict[str, int]   = Field(default_factory=dict)
     status:      CompanionStatus  = CompanionStatus.active
     # Disposition toward the player character (-100 to +100)
     disposition: int              = 0
-    reputation:  list[ReputationEntry] = []
+    reputation:  list[ReputationEntry] = Field(default_factory=list)
 
     @field_validator("disposition")
     @classmethod
@@ -214,15 +214,15 @@ class CharacterModel(BaseModel):
     level:          int   = 1
     hp:             HP
     domains:        DomainScores
-    knowledge:      dict[str, int] = {}   # tag name → tier (1–5)
-    application:    dict[str, int] = {}   # tag name → tier (1–5)
-    status_effects: list[str]      = []
+    knowledge:      dict[str, int] = Field(default_factory=dict)   # tag name → tier (1–5)
+    application:    dict[str, int] = Field(default_factory=dict)   # tag name → tier (1–5)
+    status_effects: list[str]      = Field(default_factory=list)
     notes:          str            = ""
 
     # New in v3.1.0
     identity:       Identity       = Field(default_factory=Identity)
     equipment:      Equipment      = Field(default_factory=Equipment)
-    reputation:     list[ReputationEntry] = []
+    reputation:     list[ReputationEntry] = Field(default_factory=list)
 
     @field_validator("level")
     @classmethod
@@ -244,8 +244,8 @@ class Economy(BaseModel):
     """
     wealth_tier:  WealthTier        = WealthTier.modest
     coin:         int               = 0          # currency-economy regions only
-    trade_goods:  list[str]         = []         # named barter items not in equipment
-    obligations:  list[str]         = []         # debts, favors owed, sworn duties
+    trade_goods:  list[str]         = Field(default_factory=list)         # named barter items not in equipment
+    obligations:  list[str]         = Field(default_factory=list)         # debts, favors owed, sworn duties
 
     @field_validator("coin")
     @classmethod
@@ -260,11 +260,11 @@ class Politics(BaseModel):
     World-level relational and political state.
     Not a subsystem — a lightweight store for the GPT to track active context.
     """
-    faction_memberships:   list[str] = []   # factions the party formally belongs to
-    active_obligations:    list[str] = []   # current political duties or oaths
+    faction_memberships:   list[str] = Field(default_factory=list)   # factions the party formally belongs to
+    active_obligations:    list[str] = Field(default_factory=list)   # current political duties or oaths
     legal_standing:        str       = "unknown"   # e.g. "exile", "citizen", "wanted"
-    known_leverage:        list[str] = []   # secrets or leverage the party holds
-    active_tensions:       list[str] = []   # ongoing faction conflicts relevant to party
+    known_leverage:        list[str] = Field(default_factory=list)   # secrets or leverage the party holds
+    active_tensions:       list[str] = Field(default_factory=list)   # ongoing faction conflicts relevant to party
     conclave_status:       str       = "unknown"   # "pending" | "active" | "concluded" | "unknown"
 
 
@@ -281,7 +281,7 @@ class WorldModel(BaseModel):
     turn:       int = 1
 
     # New in v3.1.0
-    companions: list[CompanionModel] = []
+    companions: list[CompanionModel] = Field(default_factory=list)
     economy:    Economy              = Field(default_factory=Economy)
     politics:   Politics             = Field(default_factory=Politics)
 
@@ -352,7 +352,7 @@ class NewSessionRequest(BaseModel):
     species:          str
     focus:            str
     background:       str
-    adjustment_points: AdjustmentPoints = AdjustmentPoints()
+    adjustment_points: AdjustmentPoints = Field(default_factory=AdjustmentPoints)
     starting_location: str              = "unknown"
     goal:             str               = "survive"
     threat:           str               = "unknown"
@@ -378,7 +378,7 @@ class CreateCharacterRequest(BaseModel):
     species:           str
     focus:             str
     background:        str
-    adjustment_points: AdjustmentPoints = AdjustmentPoints()
+    adjustment_points: AdjustmentPoints = Field(default_factory=AdjustmentPoints)
     identity:          Identity         = Field(default_factory=Identity)
 
 
@@ -428,10 +428,10 @@ class LocationData(BaseModel):
     name:        str
     type:        str        = "unknown"
     description: str        = ""
-    tags:        list[str]  = []
-    connections: list[str]  = []
+    tags:        list[str]  = Field(default_factory=list)
+    connections: list[str]  = Field(default_factory=list)
     threat_level: int       = 0
-    known_npcs:  list[str]  = []
+    known_npcs:  list[str]  = Field(default_factory=list)
     discovered:  bool       = True
 
 
@@ -468,16 +468,16 @@ class FocusOption(BaseModel):
     index:            str
     name:             str
     description:      str             = ""
-    knowledge_tags:   dict[str, int]  = {}   # tag name → starting tier
-    application_tags: dict[str, int]  = {}   # tag name → starting tier
+    knowledge_tags:   dict[str, int]  = Field(default_factory=dict)   # tag name → starting tier
+    application_tags: dict[str, int]  = Field(default_factory=dict)   # tag name → starting tier
 
 
 class BackgroundOption(BaseModel):
     index:            str
     name:             str
     description:      str             = ""
-    knowledge_tags:   dict[str, int]  = {}   # tag name → starting tier
-    application_tags: dict[str, int]  = {}   # tag name → starting tier
+    knowledge_tags:   dict[str, int]  = Field(default_factory=dict)   # tag name → starting tier
+    application_tags: dict[str, int]  = Field(default_factory=dict)   # tag name → starting tier
 
 
 class OptionsResponse(BaseModel):

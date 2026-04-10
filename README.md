@@ -39,7 +39,7 @@ Python 3.13 · FastAPI · uvicorn · asyncpg · Pydantic v2 · Postgres on Railw
 - **Economy** — wealth tier (universal) + raw coin (currency regions); trade goods and obligations
 - **Politics** — faction memberships, active obligations, legal standing, leverage, tensions, Conclave status
 
-Full specification: `docs/mystic_weave_system_spec.md`
+System reference: `prompts/world_rules.md` and `prompts/character_creation.md`
 
 ## API Endpoints
 
@@ -78,8 +78,6 @@ data/
   species.json         # 8 species with domain scores
   focus.json           # 7 focus archetypes with tags
   backgrounds.json     # 8 backgrounds with tags
-docs/
-  mystic_weave_system_spec.md
 prompts/               # Obsidian vault — GPT knowledge files + world content
   engine.md            # GPT system prompt — paste into GPT builder Instructions (<8000 chars)
   character_creation.md

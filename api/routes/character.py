@@ -11,10 +11,11 @@ import json
 
 import asyncpg
 from fastapi import APIRouter, Depends, HTTPException
+from pydantic import ValidationError
 
 from api.database import get_pool
 from api.game_data import seed_character
-from api.models import CreateCharacterRequest, CreateCharacterResponse
+from api.models import CharacterModel, CreateCharacterRequest, CreateCharacterResponse
 
 router = APIRouter()
 
@@ -51,6 +52,13 @@ async def create_character(
         except ValueError as e:
             raise HTTPException(status_code=422, detail=str(e))
 
+        try:
+            validated_character = CharacterModel.model_validate(character)
+        except ValidationError as e:
+            raise HTTPException(status_code=422, detail=e.errors())
+
+        character_json = validated_character.model_dump(by_alias=True)
+
         # Update the character column in the existing session
         await conn.execute(
             """
@@ -59,11 +67,11 @@ async def create_character(
                    updated_at = now()
              WHERE session_id = $2
             """,
-            json.dumps(character),
+            json.dumps(character_json),
             body.session_id,
         )
 
     return CreateCharacterResponse(
         session_id=body.session_id,
-        character=character,
+        character=character_json,
     )
