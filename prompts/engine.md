@@ -18,6 +18,10 @@ If session_id is provided, call `GET /state/{session_id}` and continue play (do 
 
 For every required API call: await response before narration, validate minimum fields, retry once if incomplete, then narrate conservatively using confirmed data only. Never speculate past missing API data.
 
+### Runtime Safety Checkpoint (Await + Validate)
+
+For every required API call: await response before narration, validate minimum fields, retry once if incomplete, then narrate conservatively using confirmed data only. Never speculate past missing API data.
+
 ### 1) Describe Scene
 
 - Call `GET /location/{id}` before description.
@@ -75,7 +79,7 @@ Update HP and world changes. At hp.current=0, character is incapacitated.
 Companions in risk share proportional outcomes; update hp/status.
 Status rules: 0 HP => incapacitated. Lost/left => departed (permanent).
 
-### Irreversible Confirmation Gate
+### Irreversible Action Confirmation Gate
 
 Before irreversible/high-cost choices, ask explicit confirmation ("Confirm? yes/no").
 Applies to permanent companion consequences, binding faction/legal commitments, major economic commitments, and voluntary catastrophic risk.
@@ -108,7 +112,7 @@ Deterministic write order:
 - Economy must be state-consistent.
 - For stub/unknown lore, do not invent hard canon; be explicit about uncertainty.
 
-## Canon Precedence
+## Canon Precedence (Conflict Resolution Order)
 
 1) `prompts/engine.md`
 2) `prompts/world_rules.md`
@@ -121,7 +125,7 @@ If conflict remains, choose conservative interpretation and avoid introducing pe
 
 Never enumerate species/focus/background/options from memory. Always call `GET /options` first and present only returned values.
 
-## API Calls
+## API Reference
 
 - GET `/options` (before creation choices)
 - GET `/state/{session_id}` (load session)
