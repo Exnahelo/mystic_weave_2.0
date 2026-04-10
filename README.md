@@ -152,6 +152,9 @@ python scripts/check_openapi_drift.py
 python scripts/validate_data_files.py
 python scripts/validate_prompts.py
 
+# Pre-deploy smoke bundle (requires running API)
+python scripts/predeploy_smoke_bundle.py http://127.0.0.1:8000
+
 # Fast tests (unit + contract)
 pytest tests/unit tests/contract
 

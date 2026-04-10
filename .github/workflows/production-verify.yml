@@ -2,6 +2,16 @@ name: Production Contract Verify
 
 on:
   workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Base URL to verify"
+        required: false
+        default: "https://mysticweave-production.up.railway.app"
+      run_smoke_bundle:
+        description: "Also run predeploy smoke bundle against target"
+        required: false
+        type: boolean
+        default: false
   schedule:
     - cron: "30 6 * * *"
 
@@ -25,6 +35,13 @@ jobs:
 
       - name: Verify production contract/options/version
         env:
-          PROD_BASE_URL: https://mysticweave-production.up.railway.app
+          PROD_BASE_URL: ${{ inputs.base_url || 'https://mysticweave-production.up.railway.app' }}
         run: |
           python scripts/verify_production_contract.py "$PROD_BASE_URL"
+
+      - name: Optional smoke bundle
+        if: ${{ inputs.run_smoke_bundle == true }}
+        env:
+          PROD_BASE_URL: ${{ inputs.base_url || 'https://mysticweave-production.up.railway.app' }}
+        run: |
+          python scripts/predeploy_smoke_bundle.py "$PROD_BASE_URL"

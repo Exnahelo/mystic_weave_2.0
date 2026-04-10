@@ -15,6 +15,7 @@
 - Prompt validation (`python scripts/validate_prompts.py`)
 - Unit + contract tests (`pytest tests/unit tests/contract`)
 - Integration smoke (`python tests/loop_test.py`) against ephemeral Postgres
+- Pre-deploy bundle workflow (`.github/workflows/predeploy.yml`) for contract + smoke gating
 
 ### Push to `main`
 - Same as pull request
@@ -49,6 +50,12 @@ Run data + prompt validators:
 ```bash
 python scripts/validate_data_files.py
 python scripts/validate_prompts.py
+```
+
+Run pre-deploy smoke bundle (against running API):
+
+```bash
+python scripts/predeploy_smoke_bundle.py http://127.0.0.1:8000
 ```
 
 Run fast tests:

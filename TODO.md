@@ -39,6 +39,6 @@ Updated after hardening passes pushed through commit `02d7fcb`.
 
 ## Later Enhancements
 
-- [ ] Strengthen deployment pipeline checks (pre-deploy contract + smoke bundle)
+- [x] Strengthen deployment pipeline checks (pre-deploy contract + smoke bundle)
 - [ ] Expand end-to-end coverage for multi-turn narrative persistence edge cases
 - [ ] Add lightweight operational runbook for local/Railway troubleshooting
