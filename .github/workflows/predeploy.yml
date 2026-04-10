@@ -48,7 +48,7 @@ jobs:
           python scripts/validate_prompts.py
 
       - name: Unit/contract/regression tests
-        run: pytest -q tests/unit tests/contract tests/regression/test_endpoint_validation.py
+        run: pytest -q tests/unit tests/contract tests/regression/test_endpoint_validation.py tests/regression/test_multi_turn_persistence.py
 
       - name: Start API server
         run: |

@@ -14,6 +14,7 @@
 - Data validation (`python scripts/validate_data_files.py`)
 - Prompt validation (`python scripts/validate_prompts.py`)
 - Unit + contract tests (`pytest tests/unit tests/contract`)
+- Regression persistence tests (`tests/regression/test_endpoint_validation.py`, `tests/regression/test_multi_turn_persistence.py`)
 - Integration smoke (`python tests/loop_test.py`) against ephemeral Postgres
 - Pre-deploy bundle workflow (`.github/workflows/predeploy.yml`) for contract + smoke gating
 
@@ -62,6 +63,12 @@ Run fast tests:
 
 ```bash
 pytest tests/unit tests/contract
+```
+
+Run regression persistence tests:
+
+```bash
+pytest tests/regression/test_endpoint_validation.py tests/regression/test_multi_turn_persistence.py
 ```
 
 Run loop smoke against local API:
