@@ -41,6 +41,24 @@ Python 3.13 · FastAPI · uvicorn · asyncpg · Pydantic v2 · Postgres on Railw
 
 System reference: `prompts/world_rules.md` and `prompts/character_creation.md`
 
+## 2026-04-10 Content / World Topology Notes
+
+- Added canonical reference docs for magic, difficulty, and notable items:
+  - `prompts/magic_system_reference.md`
+  - `prompts/difficulty_reference.md`
+  - `prompts/notable_items_reference.md`
+- World topology audit completed for `prompts/world/*.md`.
+- Corrected one in-map reciprocity gap:
+  - `stronghold-of-drakenvale` ↔ `volcanic-highlands`
+- Retained intentional discovery-gated one-way access for Eryndor's hidden sanctum:
+  - `eryndors-lair` → `sacred-pools`
+  - `eryndors-lair` → `platinum-heart`
+- Retained off-map outward connections as placeholders until their destination files are authored:
+  - `dracelune` → `feywood-glade-border`
+  - `volcanic-highlands` → `draconic-grasslands`
+
+Reference: `WORLD_TOPOLOGY_BASELINE.md`
+
 ## API Endpoints
 
 | Method | Path | Purpose |

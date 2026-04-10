@@ -81,16 +81,17 @@ Updated after hardening + world/prompt alignment passes through commit `985b5ba`
 - [x] Write notable items reference (canonical gear with roll tags + mechanical effects)
 
 Added:
+
 - [x] `prompts/magic_system_reference.md`
 - [x] `prompts/difficulty_reference.md`
 - [x] `prompts/notable_items_reference.md`
 
 ### Priority 2 — World Navigation Consistency
 
-- [ ] Run explicit reciprocity audit on `prompts/world/*.md` connections and decide intentional one-way vs two-way links
-- [ ] Document any intentionally one-way connections in a short note for future content updates
+- [x] Run explicit reciprocity audit on `prompts/world/*.md` connections and decide intentional one-way vs two-way links
+- [x] Document any intentionally one-way connections in a short note for future content updates
 
 ### Priority 3 — Documentation / Release Hygiene
 
-- [ ] Add short changelog note in `README.md` or `OPERATIONAL_RUNBOOK.md` for new world locations/lairs and access/discovery assumptions
-- [ ] Create lightweight release checkpoint (tag or release note) for post-audit + world topology baseline
+- [x] Add short changelog note in `README.md` or `OPERATIONAL_RUNBOOK.md` for new world locations/lairs and access/discovery assumptions
+- [x] Create lightweight release checkpoint (tag or release note) for post-audit + world topology baseline
