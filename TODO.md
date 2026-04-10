@@ -42,3 +42,24 @@ Updated after hardening passes pushed through commit `02d7fcb`.
 - [x] Strengthen deployment pipeline checks (pre-deploy contract + smoke bundle)
 - [x] Expand end-to-end coverage for multi-turn narrative persistence edge cases
 - [x] Add lightweight operational runbook for local/Railway troubleshooting
+
+## Prompt System Follow-Up (from 2026-04-10 audit)
+
+- [ ] Add explicit await/validate checkpoints in `prompts/engine.md`:
+  - [ ] Await endpoint response before narration
+  - [ ] Validate required payload fields before irreversible updates
+  - [ ] Define fallback behavior for incomplete API responses (retry/conservative narration)
+- [ ] Add explicit player-confirmation gates for irreversible outcomes in turn flow
+- [ ] Add canonical precedence block in runtime prompts (conflict-resolution order)
+- [ ] Resolve cross-file canon contradictions:
+  - [ ] Economy model consistency (`drakenvale_world.md` vs `drakenvale_factions.md`)
+  - [ ] Arcane Conservatory access consistency (`drakenvale_factions.md` vs `drakenvale_organizations.md`)
+  - [ ] Crisis protocol maturity/status consistency across canon docs
+- [ ] Add deterministic tie-break rules for ambiguous domain/tag adjudication
+- [ ] Add deterministic state-write order for complex multi-change turns
+- [ ] Add standardized handling for sparse/unknown faction reputation data
+- [ ] Add global stub-handling policy for unfinished organizations/lore
+- [ ] Extend `scripts/validate_prompts.py` checks for:
+  - [ ] presence of await/checkpoint sections in required runtime prompts
+  - [ ] presence of canon precedence marker
+  - [ ] warning markers for known contradiction pairs
