@@ -47,16 +47,27 @@ async def new_session(
             focus_index=body.focus,
             background_index=body.background,
             adjustment_points=body.adjustment_points.model_dump(),
+            identity=body.identity.model_dump() if body.identity else None,
         )
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e))
 
     # Build initial world state
-    world = {
-        "location": body.starting_location,
-        "threat": body.threat,
-        "goal": body.goal,
-        "turn": 1,
+    world: dict = {
+        "location":   body.starting_location,
+        "threat":     body.threat,
+        "goal":       body.goal,
+        "turn":       1,
+        "companions": [],
+        "economy":    body.starting_economy.model_dump(),
+        "politics": {
+            "faction_memberships":  [],
+            "active_obligations":   [],
+            "legal_standing":       "unknown",
+            "known_leverage":       [],
+            "active_tensions":      [],
+            "conclave_status":      "unknown",
+        },
     }
 
     async with pool.acquire() as conn:

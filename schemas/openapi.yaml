@@ -6,7 +6,7 @@ info:
     The GPT is the narrator and game master. This API is the memory.
     Uses d100 roll-under resolution with domain scores, knowledge tiers,
     and application tiers.
-  version: 3.0.0
+  version: 3.1.0
 
 servers:
   - url: https://mysticweave-production.up.railway.app
@@ -189,10 +189,11 @@ paths:
       operationId: rollDice
       summary: Authoritative d100 dice resolution
       description: >
-        Roll 1d100 against the provided target number. The GPT assembles the target
-        from domain score + knowledge tier + application tier + difficulty modifier,
-        then sends it here. The server rolls. The GPT narrates. Returns the roll,
-        success/failure, margin, and degree of success band.
+        Roll 1d100 against the provided target number.
+        The GPT assembles the target from domain score + knowledge tier +
+        application tier + difficulty modifier, then sends it here.
+        The server rolls. The GPT narrates. Returns the roll, success/failure,
+        margin, and degree of success band.
       tags:
         - dice
       requestBody:
@@ -308,7 +309,7 @@ components:
           type: string
 
     # ---------------------------------------------------------------------------
-    # Character
+    # Shared primitives
     # ---------------------------------------------------------------------------
 
     HP:
@@ -355,6 +356,162 @@ components:
           type: integer
           minimum: 1
           maximum: 60
+
+    # ---------------------------------------------------------------------------
+    # Narrative / identity schemas (v3.1.0)
+    # ---------------------------------------------------------------------------
+
+    Alignment:
+      type: object
+      description: >
+        Two-axis alignment. order = lawful/neutral/chaotic.
+        intent = good/neutral/evil. ethos_note is freeform flavor text
+        the GPT uses to inform consistent character behaviour.
+      properties:
+        order:
+          type: string
+          enum: [lawful, neutral, chaotic]
+          default: neutral
+        intent:
+          type: string
+          enum: [good, neutral, evil]
+          default: neutral
+        ethos_note:
+          type: string
+          default: ""
+
+    Identity:
+      type: object
+      description: >
+        Narrative character block. All fields optional — fill in at creation
+        and refine through play. The GPT reads this every session to inform
+        consistent behaviour and narration texture.
+      properties:
+        origin:
+          type: string
+          default: ""
+          description: Where the character came from; formative history.
+        motivations:
+          type: array
+          items:
+            type: string
+          maxItems: 3
+          default: []
+          description: 1–3 driving goals.
+        quirks:
+          type: array
+          items:
+            type: string
+          maxItems: 3
+          default: []
+          description: 1–3 behavioural traits or mannerisms.
+        bonds:
+          type: array
+          items:
+            type: string
+          maxItems: 3
+          default: []
+          description: People, places, or things the character is tied to.
+        flaws:
+          type: array
+          items:
+            type: string
+          maxItems: 3
+          default: []
+          description: Weaknesses, biases, or blind spots.
+        wound:
+          type: string
+          default: ""
+          description: Notable formative scar or event.
+        alignment:
+          $ref: "#/components/schemas/Alignment"
+
+    ReputationEntry:
+      type: object
+      description: >
+        Standing with a single faction or community.
+        A missing entry means the faction has no opinion yet (unknown).
+        Range: -100 (despised) to +100 (revered).
+        Party reputation is computed by the GPT at resolution time:
+          known_avg = mean standing of party members who have an entry for the faction.
+          ratio     = known_count / total_party_size.
+          party_rep = known_avg × ratio.
+        Unknown members are excluded from the average, not treated as zero.
+      required: [faction]
+      properties:
+        faction:
+          type: string
+          description: >
+            Faction ID. Use snake_case. Known factions: draconic_council,
+            silver_scale_trading_company, order_of_the_platinum_flame,
+            amethyst_veil, dragon_guard, cult_of_tiamat.
+        standing:
+          type: integer
+          minimum: -100
+          maximum: 100
+          default: 0
+        note:
+          type: string
+          default: ""
+          description: Reason for current standing or context.
+        last_change:
+          type: string
+          default: ""
+          description: Brief description of the event that last moved standing.
+
+    # ---------------------------------------------------------------------------
+    # Equipment schemas (v3.1.0)
+    # ---------------------------------------------------------------------------
+
+    EquipmentItem:
+      type: object
+      required: [id, name]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+          default: ""
+        tags:
+          type: array
+          items:
+            type: string
+            enum: [utility, weapon, armor, consumable, arcane, sacred, trade_good, special]
+          default: []
+        roll_tag:
+          type: string
+          nullable: true
+          default: null
+          description: >
+            Optional link to an application tag (e.g. "light_weapons").
+            When present, the GPT may include this item as context
+            when assembling a target number for relevant rolls.
+
+    Equipment:
+      type: object
+      description: Three-slot inventory. worn = on person now. carried = in pack. stashed = at a known location.
+      properties:
+        worn:
+          type: array
+          items:
+            $ref: "#/components/schemas/EquipmentItem"
+          default: []
+        carried:
+          type: array
+          items:
+            $ref: "#/components/schemas/EquipmentItem"
+          default: []
+        stashed:
+          type: array
+          items:
+            $ref: "#/components/schemas/EquipmentItem"
+          default: []
+
+    # ---------------------------------------------------------------------------
+    # Character model (updated v3.1.0)
+    # ---------------------------------------------------------------------------
 
     CharacterModel:
       type: object
@@ -407,9 +564,157 @@ components:
         notes:
           type: string
           default: ""
+        # v3.1.0 additions
+        identity:
+          $ref: "#/components/schemas/Identity"
+        equipment:
+          $ref: "#/components/schemas/Equipment"
+        reputation:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReputationEntry"
+          default: []
+          description: >
+            Personal reputation entries keyed by faction ID.
+            Missing entry = faction has no opinion (unknown).
 
     # ---------------------------------------------------------------------------
-    # World
+    # Companion model (v3.1.0)
+    # ---------------------------------------------------------------------------
+
+    CompanionModel:
+      type: object
+      required: [id, name]
+      description: >
+        Lightweight companion schema. Domains and tags are optional —
+        include only if the companion participates in rolls.
+        Disposition: -100 (hostile) to +100 (devoted) toward the player character.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        species:
+          type: string
+          default: unknown
+        role:
+          type: string
+          default: ""
+          description: Narrative role, e.g. "scout", "healer", "guide".
+        identity:
+          $ref: "#/components/schemas/Identity"
+        hp:
+          $ref: "#/components/schemas/HP"
+        domains:
+          $ref: "#/components/schemas/DomainScores"
+          nullable: true
+          description: Omit for purely narrative companions.
+        knowledge:
+          type: object
+          additionalProperties:
+            type: integer
+          default: {}
+        application:
+          type: object
+          additionalProperties:
+            type: integer
+          default: {}
+        status:
+          type: string
+          enum: [active, incapacitated, departed]
+          default: active
+        disposition:
+          type: integer
+          minimum: -100
+          maximum: 100
+          default: 0
+          description: How the companion feels toward the player character.
+        reputation:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReputationEntry"
+          default: []
+
+    # ---------------------------------------------------------------------------
+    # Economy (v3.1.0)
+    # ---------------------------------------------------------------------------
+
+    Economy:
+      type: object
+      description: >
+        Economic state. wealth_tier is the universal abstraction covering both
+        Drakenvale's barter economy and currency economies outside it.
+        coin is a raw integer for hard-currency regions only (e.g. SSTC trade routes).
+      properties:
+        wealth_tier:
+          type: string
+          enum: [destitute, modest, comfortable, wealthy, affluent]
+          default: modest
+        coin:
+          type: integer
+          minimum: 0
+          default: 0
+          description: Raw coin count for currency-economy regions.
+        trade_goods:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Named barter items not tracked as equipment.
+        obligations:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Debts, favors owed, or sworn financial duties.
+
+    # ---------------------------------------------------------------------------
+    # Politics (v3.1.0)
+    # ---------------------------------------------------------------------------
+
+    Politics:
+      type: object
+      description: >
+        World-level relational and political state. Not a subsystem —
+        a lightweight store for the GPT to track active political context.
+        Update when faction obligations, legal standing, or active tensions change.
+      properties:
+        faction_memberships:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Factions the party formally belongs to.
+        active_obligations:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Current political duties or oaths.
+        legal_standing:
+          type: string
+          default: unknown
+          description: e.g. "exile", "citizen", "wanted", "unknown".
+        known_leverage:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Secrets or leverage the party holds over others.
+        active_tensions:
+          type: array
+          items:
+            type: string
+          default: []
+          description: Ongoing faction conflicts relevant to the party.
+        conclave_status:
+          type: string
+          enum: [pending, active, concluded, unknown]
+          default: unknown
+          description: Status of the Draconic Conclave — a major political anchor.
+
+    # ---------------------------------------------------------------------------
+    # World model (updated v3.1.0)
     # ---------------------------------------------------------------------------
 
     WorldModel:
@@ -429,6 +734,17 @@ components:
           type: integer
           minimum: 1
           default: 1
+        # v3.1.0 additions
+        companions:
+          type: array
+          items:
+            $ref: "#/components/schemas/CompanionModel"
+          default: []
+          description: Active companions traveling with or known to the party.
+        economy:
+          $ref: "#/components/schemas/Economy"
+        politics:
+          $ref: "#/components/schemas/Politics"
 
     # ---------------------------------------------------------------------------
     # State
@@ -472,7 +788,8 @@ components:
     AdjustmentPoints:
       type: object
       description: >
-        Player's +5 domain adjustment pool. Max +3 per domain. Total must not exceed 5.
+        Player's +5 domain adjustment pool. Max +3 per domain.
+        Total must not exceed 5.
       properties:
         power:
           type: integer
@@ -536,6 +853,11 @@ components:
         threat:
           type: string
           default: unknown
+        # v3.1.0 additions
+        identity:
+          $ref: "#/components/schemas/Identity"
+        starting_economy:
+          $ref: "#/components/schemas/Economy"
 
     NewSessionResponse:
       type: object
@@ -567,6 +889,9 @@ components:
           type: string
         adjustment_points:
           $ref: "#/components/schemas/AdjustmentPoints"
+        # v3.1.0 addition
+        identity:
+          $ref: "#/components/schemas/Identity"
 
     CreateCharacterResponse:
       type: object
@@ -598,10 +923,10 @@ components:
           description: Raw d100 result (1–100)
         target:
           type: integer
-          description: The target number that was sent
+          description: The clamped target number
         success:
           type: boolean
-          description: true if roll <= target (or roll == 1)
+          description: true if roll <= target
         margin:
           type: integer
           description: target - roll. Positive = succeeded by this much. Negative = failed by this much.

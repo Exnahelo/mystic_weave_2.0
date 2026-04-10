@@ -113,7 +113,7 @@ def data_fingerprint() -> str:
     """
     Stable SHA256 fingerprint of core game data files used by /options and seeding.
 
-    This can be exposed for deployment/version sanity checks.
+    Exposed by GET /version for deployment/contract sanity checks.
     """
     hasher = hashlib.sha256()
     for filename in _DATA_FILES:
@@ -133,6 +133,7 @@ def seed_character(
     focus_index: str,
     background_index: str,
     adjustment_points: dict[str, int] | None = None,
+    identity: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """
     Build a complete character dict from species + focus + background.
@@ -141,20 +142,23 @@ def seed_character(
     - Species base domain scores + player adjustment points
     - Focus knowledge and application tags
     - Background knowledge and application tags
-    - Tag stacking rule (duplicate tags advance to tier 2)
+    - Tag stacking rule (duplicate tags advance to tier 2, capped at 2)
 
-    Returns the character dict ready for JSON storage.
+    Optional identity dict is passed through verbatim — it is validated
+    upstream by the Identity Pydantic model before reaching here.
+
+    Returns the character dict ready for JSONB storage.
     """
-    species = get_species(species_index)
-    focus = get_focus(focus_index)
+    species    = get_species(species_index)
+    focus      = get_focus(focus_index)
     background = get_background(background_index)
 
     # --- Domain scores ---
-    domains = dict(species["domains"])  # copy base scores
-    adj = adjustment_points or {}
+    domains   = dict(species["domains"])  # copy base scores
+    adj       = adjustment_points or {}
     total_adj = sum(adj.values())
     if total_adj > 5:
-        raise ValueError(f"Adjustment pool is 5 points. Got {total_adj}.")
+        raise ValueError(f"Adjustment pool is 5 points max. Got {total_adj}.")
     for domain, points in adj.items():
         if domain not in domains:
             raise ValueError(f"Invalid domain: {domain!r}")
@@ -164,36 +168,78 @@ def seed_character(
 
     # --- Competency tags ---
     # Start with focus tags
-    knowledge: dict[str, int] = dict(focus.get("knowledge_tags", {}))
+    knowledge:   dict[str, int] = dict(focus.get("knowledge_tags", {}))
     application: dict[str, int] = dict(focus.get("application_tags", {}))
 
-    # Merge background tags — stacking rule: duplicates advance to tier 2
+    # Merge background tags — stacking rule: duplicates advance to Tier 2
     for tag, tier in background.get("knowledge_tags", {}).items():
         if tag in knowledge:
-            knowledge[tag] = max(knowledge[tag], tier) + 1  # stack to T2
-            if knowledge[tag] > 2:
-                knowledge[tag] = 2  # cap at T2 at creation
+            knowledge[tag] = min(knowledge[tag] + 1, 2)   # stack, cap at T2
         else:
             knowledge[tag] = tier
 
     for tag, tier in background.get("application_tags", {}).items():
         if tag in application:
-            application[tag] = max(application[tag], tier) + 1
-            if application[tag] > 2:
-                application[tag] = 2
+            application[tag] = min(application[tag] + 1, 2)
         else:
             application[tag] = tier
 
-    return {
-        "name": name,
-        "species": species_index,
-        "focus": focus_index,
-        "background": background_index,
-        "level": 1,
-        "hp": {"current": 100, "max": 100},
-        "domains": domains,
-        "knowledge": knowledge,
-        "application": application,
+    # --- Assemble character dict ---
+    character: dict[str, Any] = {
+        "name":           name,
+        "species":        species_index,
+        "focus":          focus_index,
+        "background":     background_index,
+        "level":          1,
+        "hp":             {"current": 100, "max": 100},
+        "domains":        domains,
+        "knowledge":      knowledge,
+        "application":    application,
         "status_effects": [],
-        "notes": "",
+        "notes":          "",
+        # v3.1.0 narrative and inventory blocks
+        "identity":       _default_identity(identity),
+        "equipment":      {"worn": [], "carried": [], "stashed": []},
+        "reputation":     [],
     }
+
+    return character
+
+
+# ---------------------------------------------------------------------------
+# Identity helpers
+# ---------------------------------------------------------------------------
+
+_IDENTITY_DEFAULTS: dict[str, Any] = {
+    "origin":      "",
+    "motivations": [],
+    "quirks":      [],
+    "bonds":       [],
+    "flaws":       [],
+    "wound":       "",
+    "alignment": {
+        "order":      "neutral",
+        "intent":     "neutral",
+        "ethos_note": "",
+    },
+}
+
+
+def _default_identity(identity: dict[str, Any] | None) -> dict[str, Any]:
+    """
+    Merge a caller-supplied identity dict onto the default identity shape.
+
+    Ensures the stored JSONB always has all keys present, even when the
+    player skips optional fields at character creation.
+    """
+    if not identity:
+        return dict(_IDENTITY_DEFAULTS)
+
+    merged = dict(_IDENTITY_DEFAULTS)
+    merged.update(identity)
+
+    # Ensure alignment sub-keys are always present
+    incoming_alignment = identity.get("alignment", {})
+    merged["alignment"] = {**_IDENTITY_DEFAULTS["alignment"], **incoming_alignment}
+
+    return merged

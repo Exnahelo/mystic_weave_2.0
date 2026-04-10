@@ -46,6 +46,7 @@ async def create_character(
                 focus_index=body.focus,
                 background_index=body.background,
                 adjustment_points=body.adjustment_points.model_dump(),
+                identity=body.identity.model_dump() if body.identity else None,
             )
         except ValueError as e:
             raise HTTPException(status_code=422, detail=str(e))
