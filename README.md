@@ -176,6 +176,8 @@ Start command (in `railway.toml`):
 uvicorn api.main:app --host 0.0.0.0 --port $PORT
 ```
 
+Operational troubleshooting guide: `OPERATIONAL_RUNBOOK.md`
+
 ### Production Verification
 
 ```bash

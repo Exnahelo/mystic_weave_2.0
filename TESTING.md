@@ -82,3 +82,6 @@ Ensure DB schema is current before starting the app:
 ```bash
 alembic upgrade head
 ```
+
+Operational troubleshooting reference:
+- `OPERATIONAL_RUNBOOK.md`
