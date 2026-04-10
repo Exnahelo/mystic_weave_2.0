@@ -363,8 +363,8 @@ class NewSessionRequest(BaseModel):
 
 class NewSessionResponse(BaseModel):
     session_id: str
-    character:  dict[str, Any]
-    world:      dict[str, Any]
+    character:  CharacterModel
+    world:      WorldModel
 
 
 # ---------------------------------------------------------------------------
@@ -384,7 +384,7 @@ class CreateCharacterRequest(BaseModel):
 
 class CreateCharacterResponse(BaseModel):
     session_id: str
-    character:  dict[str, Any]
+    character:  CharacterModel
 
 
 # ---------------------------------------------------------------------------

@@ -21,3 +21,29 @@ def test_openapi_contract_has_expected_core_shapes() -> None:
         "content"
     ]["application/json"]["schema"]
     assert options_schema["$ref"] == "#/components/schemas/OptionsResponse"
+
+    session_new_201 = spec["paths"]["/session/new"]["post"]["responses"]["201"][
+        "content"
+    ]["application/json"]["schema"]
+    assert session_new_201["$ref"] == "#/components/schemas/NewSessionResponse"
+
+    state_get_200 = spec["paths"]["/state/{session_id}"]["get"]["responses"]["200"][
+        "content"
+    ]["application/json"]["schema"]
+    assert state_get_200["$ref"] == "#/components/schemas/GameStateResponse"
+
+    create_character_200 = spec["paths"]["/character/create"]["post"]["responses"]["200"][
+        "content"
+    ]["application/json"]["schema"]
+    assert create_character_200["$ref"] == "#/components/schemas/CreateCharacterResponse"
+
+    location_post_responses = spec["paths"]["/location"]["post"]["responses"]
+    assert "201" in location_post_responses
+    assert "200" in location_post_responses
+
+    new_session_props = spec["components"]["schemas"]["NewSessionResponse"]["properties"]
+    assert "$ref" in new_session_props["character"]
+    assert "$ref" in new_session_props["world"]
+
+    create_character_props = spec["components"]["schemas"]["CreateCharacterResponse"]["properties"]
+    assert "$ref" in create_character_props["character"]

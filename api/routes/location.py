@@ -12,7 +12,7 @@ import json
 from typing import Any
 
 import asyncpg
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 
 from api.database import get_pool
 from api.models import (
@@ -51,9 +51,15 @@ async def get_location(
     )
 
 
-@router.post("/location", response_model=LocationResponse, status_code=201)
+@router.post(
+    "/location",
+    response_model=LocationResponse,
+    status_code=201,
+    responses={200: {"model": LocationResponse, "description": "Location updated"}},
+)
 async def upsert_location(
     body: LocationData,
+    response: Response,
     pool: asyncpg.Pool = Depends(get_pool),
 ) -> LocationResponse:
     """
@@ -69,6 +75,8 @@ async def upsert_location(
     data_dict = body.model_dump()
 
     async with pool.acquire() as conn:
+        existed = await conn.fetchval("SELECT 1 FROM locations WHERE id = $1", body.id)
+
         row = await conn.fetchrow(
             """
             INSERT INTO locations (id, name, data, updated_at)
@@ -125,6 +133,9 @@ async def upsert_location(
                 inbound["id"],
                 body.id,
             )
+
+    if existed:
+        response.status_code = status.HTTP_200_OK
 
     return LocationResponse(
         id=row["id"],
