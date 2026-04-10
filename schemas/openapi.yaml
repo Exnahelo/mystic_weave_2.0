@@ -6,7 +6,7 @@ info:
     The GPT is the narrator and game master. This API is the memory.
     Uses d100 roll-under resolution with domain scores, knowledge tiers,
     and application tiers.
-  version: 3.1.0
+  version: 3.2.0
 
 servers:
   - url: https://mysticweave-production.up.railway.app
@@ -745,6 +745,58 @@ components:
           $ref: "#/components/schemas/Economy"
         politics:
           $ref: "#/components/schemas/Politics"
+        time:
+          $ref: "#/components/schemas/TimeState"
+
+    TimeState:
+          type: object
+          description: >
+            In-world calendar, time of day, and weather state. Updated every turn
+            by the GPT before saving state. Never offer time-gated content that
+            contradicts current time_of_day. Derive Vaelthor moon phase from day
+            using the calendar knowledge file — do not store it.
+          properties:
+            day:
+              type: integer
+              minimum: 1
+              maximum: 30
+              default: 1
+              description: Day of the current month (1–30).
+            month:
+              type: string
+              default: Verdantrise
+              description: Current month name from the Ptarian Calendar.
+            year:
+              type: integer
+              minimum: 1
+              default: 847
+              description: Year of the Pact (YP).
+            time_of_day:
+              type: string
+              enum: [dawn, morning, midday, afternoon, dusk, night]
+              default: morning
+            season:
+              type: string
+              enum: [spring, summer, autumn, winter]
+              default: spring
+            festival:
+              type: string
+              nullable: true
+              default: null
+              description: >
+                Null on ordinary days. Holds the festival name on festival days.
+                Clear at dawn the following day.
+            weather:
+              type: string
+              enum: [clear, mist, storm, ash-haze, unnatural]
+              default: clear
+              description: >
+                Valley weather reflects dragon emotional state. Update only when
+                world events cause a change — not arbitrarily between turns.
+            weather_note:
+              type: string
+              default: ""
+              description: Optional context for current weather state.
 
     # ---------------------------------------------------------------------------
     # State

@@ -266,6 +266,49 @@ class Politics(BaseModel):
     conclave_status:       str       = "unknown"   # "pending" | "active" | "concluded" | "unknown"
 
 
+class TimeOfDay(str, Enum):
+    dawn      = "dawn"
+    morning   = "morning"
+    midday    = "midday"
+    afternoon = "afternoon"
+    dusk      = "dusk"
+    night     = "night"
+
+
+class WeatherState(str, Enum):
+    clear      = "clear"
+    mist       = "mist"
+    storm      = "storm"
+    ash_haze   = "ash-haze"
+    unnatural  = "unnatural"
+
+
+class TimeState(BaseModel):
+    """In-world time, calendar, and weather state."""
+    day:          int          = 1
+    month:        str          = "Verdantrise"
+    year:         int          = 847
+    time_of_day:  TimeOfDay    = TimeOfDay.morning
+    season:       str          = "spring"
+    festival:     str | None   = None
+    weather:      WeatherState = WeatherState.clear
+    weather_note: str          = ""
+
+    @field_validator("day")
+    @classmethod
+    def day_in_range(cls, v: int) -> int:
+        if not (1 <= v <= 30):
+            raise ValueError("day must be between 1 and 30")
+        return v
+
+    @field_validator("year")
+    @classmethod
+    def year_positive(cls, v: int) -> int:
+        if v < 1:
+            raise ValueError("year must be at least 1")
+        return v
+    
+
 # ---------------------------------------------------------------------------
 # World model
 # ---------------------------------------------------------------------------
@@ -282,6 +325,9 @@ class WorldModel(BaseModel):
     companions: list[CompanionModel] = Field(default_factory=list)
     economy:    Economy              = Field(default_factory=Economy)
     politics:   Politics             = Field(default_factory=Politics)
+
+    # New in v3.2.0
+    time:       TimeState            = Field(default_factory=TimeState)
 
     @field_validator("turn")
     @classmethod

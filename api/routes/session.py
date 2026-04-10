@@ -74,8 +74,18 @@ async def new_session(
             "active_tensions":      [],
             "conclave_status":      "unknown",
         },
+        "time": {
+            "day":          1,
+            "month":        "Verdantrise",
+            "year":         847,
+            "time_of_day":  "morning",
+            "season":       "spring",
+            "festival":     None,
+            "weather":      "clear",
+            "weather_note": "",
+        },
     }
-
+    
     try:
         validated_world = WorldModel.model_validate(world)
     except ValidationError as e:
