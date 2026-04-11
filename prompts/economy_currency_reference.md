@@ -39,18 +39,22 @@ All coin is denominated in Drakes. The gold Drake (GD) is the standard reference
 
 ### State Storage
 
-Coin is stored in `world.economy.coin` as GD value.
+Coin is stored in `world.economy.coin` as total **CD** (Copper Drakes) integer value.
+
+Conversion rules:
+- Save to state: `CD = GD × 100`
+- Display GD value: `GD = coin / 100`
 
 ```json
 "economy": {
-  "coin": 40,
+  "coin": 4000,
   "wealth_tier": "comfortable",
   "trade_goods": [],
   "obligations": []
 }
 ```
 
-Implementation note: API currently enforces `coin` as non-negative integer GD. If fractional GD is needed later, treat that as an explicit schema/version change.
+Implementation note: API enforces `coin` as non-negative integer CD, which avoids float rounding/drift while preserving exact denomination conversion.
 
 ### Narration Convention
 
@@ -64,13 +68,13 @@ Implementation note: API currently enforces `coin` as non-negative integer GD. I
 
 Starting coin is set at session creation based on the character's wealth tier.
 
-| Wealth Tier | Starting Coin (target fiction) | API-safe default (current) | What It Represents |
+| Wealth Tier | Starting Coin (target fiction) | CD stored (integer) | What It Represents |
 |---|---|---|---|
-| Destitute | 0.50 GD | 0 GD | A handful of coppers. No financial safety net. |
-| Modest | 5.00 GD | 5 GD | Working class. Can cover food and shelter short-term. |
-| Comfortable | 40.00 GD | 40 GD | Skilled professional or minor noble. Some savings. |
-| Wealthy | 150.00 GD | 150 GD | Minor merchant, landowner, or officer. Meaningful reserves. |
-| Affluent | 500.00 GD | 500 GD | Significant wealth. Rarely carries coin directly — uses credit, agents, or barter. |
+| Destitute | 0.50 GD | 50 CD | A handful of coppers. No financial safety net. |
+| Modest | 5.00 GD | 500 CD | Working class. Can cover food and shelter short-term. |
+| Comfortable | 40.00 GD | 4000 CD | Skilled professional or minor noble. Some savings. |
+| Wealthy | 150.00 GD | 15000 CD | Minor merchant, landowner, or officer. Meaningful reserves. |
+| Affluent | 500.00 GD | 50000 CD | Significant wealth. Rarely carries coin directly — uses credit, agents, or barter. |
 
 ---
 

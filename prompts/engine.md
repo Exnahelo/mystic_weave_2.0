@@ -104,9 +104,10 @@ Reputation write rule: when a faction-relevant consequence resolves, update repu
 
 - Canon source: `prompts/economy_currency_reference.md`.
 - Coin transactions update `world.economy.coin` (never below 0).
+- Convert GD to CD before save: `world.economy.coin = GD × 100`.
 - Barter updates `trade_goods`/`obligations`; only alter coin if coin is part of deal.
 - Change `wealth_tier` only for material long-term shifts.
-- Narrate denominations naturally; persist as API-safe GD integers.
+- Narrate denominations naturally; persist as API-safe CD integers.
 
 ### Progression Runtime Checkpoint
 

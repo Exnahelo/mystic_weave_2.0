@@ -808,6 +808,7 @@ components:
         coin:
           type: integer
           title: Coin
+          description: Total coin stored as Copper Drakes (CD). 100 CD = 1 GD; display GD as coin / 100.
           default: 0
         trade_goods:
           items:
@@ -824,9 +825,9 @@ components:
       description: 'Economic state. wealth_tier is the universal abstraction (works
         for barter
 
-        and currency economies alike). coin is a raw integer for regions that use
-
-        hard currency (e.g. outside Drakenvale via the SSTC).'
+        and currency economies alike). coin stores total Copper Drakes (CD) as an
+        integer for regions that use hard currency (e.g. outside Drakenvale via
+        the SSTC). 100 CD = 1 GD.'
     Equipment-Input:
       properties:
         worn:

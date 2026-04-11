@@ -47,7 +47,7 @@ def main() -> None:
         },
         "starting_economy": {
             "wealth_tier": "modest",
-            "coin": 5,
+            "coin": 500,
             "trade_goods": ["inspection-kit"],
             "obligations": [],
         },

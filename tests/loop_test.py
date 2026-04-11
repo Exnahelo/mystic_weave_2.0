@@ -79,7 +79,7 @@ TEST_CHARACTER = {
     },
     "starting_economy": {
         "wealth_tier": "modest",
-        "coin": 12,
+        "coin": 1200,
         "trade_goods": [],
         "obligations": ["Owes a debt to the caravan master who smuggled them out"],
     },
@@ -215,7 +215,7 @@ def test_part1(client: httpx.Client) -> str | None:
     check("1.3.ah", isinstance(world.get("companions"), list), f"companions list present")
     economy = world.get("economy", {})
     check("1.3.ai", economy.get("wealth_tier") == "modest", f"wealth_tier: {economy.get('wealth_tier')}")
-    check("1.3.aj", economy.get("coin") == 12, f"coin: {economy.get('coin')}")
+    check("1.3.aj", economy.get("coin") == 1200, f"coin: {economy.get('coin')}")
     check("1.3.ak", len(economy.get("obligations", [])) == 1,
           f"obligations: {len(economy.get('obligations', []))}")
     politics = world.get("politics", {})
@@ -355,7 +355,7 @@ def test_part2(client: httpx.Client, session_id: str) -> None:
             ],
             "economy": {
                 "wealth_tier": "modest",
-                "coin": 7,
+                "coin": 700,
                 "trade_goods": [],
                 "obligations": ["Owes a debt to the caravan master who smuggled them out"],
             },
@@ -419,7 +419,7 @@ def test_part2(client: httpx.Client, session_id: str) -> None:
 
         # v3.1.0 — economy round-trip
         economy = world.get("economy", {})
-        check("2.2.s", economy.get("coin") == 7, f"coin: {economy.get('coin')}")
+        check("2.2.s", economy.get("coin") == 700, f"coin: {economy.get('coin')}")
         check("2.2.t", economy.get("wealth_tier") == "modest", f"wealth_tier: {economy.get('wealth_tier')}")
 
         # v3.1.0 — politics round-trip

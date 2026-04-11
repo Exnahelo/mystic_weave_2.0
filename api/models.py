@@ -251,11 +251,12 @@ class CharacterModel(BaseModel):
 class Economy(BaseModel):
     """
     Economic state. wealth_tier is the universal abstraction (works for barter
-    and currency economies alike). coin is a raw integer for regions that use
-    hard currency (e.g. outside Drakenvale via the SSTC).
+    and currency economies alike). coin is stored as total Copper Drakes (CD)
+    as a raw integer for regions that use hard currency (e.g. outside
+    Drakenvale via the SSTC). 100 CD = 1 GD.
     """
     wealth_tier:  WealthTier        = WealthTier.modest
-    coin:         int               = 0          # currency-economy regions only
+    coin:         int               = 0          # total Copper Drakes (CD)
     trade_goods:  list[str]         = Field(default_factory=list)         # named barter items not in equipment
     obligations:  list[str]         = Field(default_factory=list)         # debts, favors owed, sworn duties
 

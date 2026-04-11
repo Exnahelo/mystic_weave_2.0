@@ -149,7 +149,7 @@ def _base_world() -> dict:
         ],
         "economy": {
             "wealth_tier": "modest",
-            "coin": 12,
+            "coin": 1200,
             "trade_goods": ["salt"],
             "obligations": ["caravan debt"],
         },
@@ -225,7 +225,7 @@ def test_multi_turn_companion_lifecycle_and_political_economy_progression() -> N
         world2["turn"] = 2
         world2["companions"][0]["hp"]["current"] = 0
         world2["companions"][0]["status"] = "incapacitated"
-        world2["economy"]["coin"] = 3
+        world2["economy"]["coin"] = 300
         world2["economy"]["obligations"].append("owes healer")
         world2["politics"]["legal_standing"] = "wanted"
         world2["politics"]["active_tensions"] = ["Guard patrol escalation"]
@@ -257,7 +257,7 @@ def test_multi_turn_companion_lifecycle_and_political_economy_progression() -> N
         comp = body["world"]["companions"][0]
         assert comp["status"] == "departed"
         assert comp["hp"]["current"] == 0
-        assert body["world"]["economy"]["coin"] == 3
+        assert body["world"]["economy"]["coin"] == 300
         assert body["world"]["economy"]["wealth_tier"] == "destitute"
         assert "owes healer" in body["world"]["economy"]["obligations"]
         assert body["world"]["politics"]["legal_standing"] == "wanted"
