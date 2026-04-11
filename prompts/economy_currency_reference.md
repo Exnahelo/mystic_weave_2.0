@@ -30,37 +30,12 @@ All coin is denominated in Drakes. The gold Drake (GD) is the standard reference
 | Gold Drake | GD | 1.00 GD | Standard reference unit |
 | Platinum Drake | PD | 10.00 GD | High-value transactions |
 
-### Conversion Examples
-
-- 5 SD = 0.50 GD
-- 3 CD = 0.03 GD
-- 2 PD = 20.00 GD
-- 150 PD = 1,500.00 GD
-
-### State Storage
-
-Coin is stored in `world.economy.coin` as total **CD** (Copper Drakes) integer value.
-
-Conversion rules:
-- Save to state: `CD = GD × 100`
-- Display GD value: `GD = coin / 100`
-
-```json
-"economy": {
-  "coin": 4000,
-  "wealth_tier": "comfortable",
-  "trade_goods": [],
-  "obligations": []
-}
-```
-
-Implementation note: API enforces `coin` as non-negative integer CD, which avoids float rounding/drift while preserving exact denomination conversion.
-
 ### Narration Convention
 
-- Amounts under 1 GD → narrate in CD or SD ("3 copper", "5 silver")
-- Amounts 1–99 GD → narrate in GD ("12 gold", "40 gold")
-- Amounts 100 GD+ → narrate in PD where clean ("15 platinum") or GD if not ("320 gold")
+- Amounts under 1 GD → CD or SD
+- Amounts 1–99 GD → GD
+- Amounts 100 GD+ → PD where the amount divides cleanly by 10, otherwise GD
+- Never express an amount as raw GD when a more natural denomination applies
 
 ---
 
@@ -171,27 +146,6 @@ Barter applies to magical goods, specialized knowledge, information, relics, and
 3. On agreement, update `world.economy.trade_goods` (add/remove goods) and `world.economy.obligations` (add/remove duties/favors).
 4. Do not mutate `coin` unless coin is explicitly part of the same deal.
 
-### Barter Tier Reference (Calibration Only)
-
-Approximate coin-equivalent ranges for GPT calibration only. Do **not** narrate these as literal prices to players.
-
-| Category | Coin Equivalent Range | Examples |
-|---|---|---|
-| Common magical service | 5–20 GD | Minor enchantment, basic ward, simple divination |
-| Uncommon magical service | 20–100 GD | Skilled healing, moderate enchantment, short-term binding |
-| Rare magical service | 100–500 GD | Major enchantment, complex ritual, long-term binding |
-| Common magical material | 10–50 GD | Enchanted herbs, minor reagents, basic alchemical components |
-| Uncommon magical material | 50–300 GD | Rare reagents, enchanted metals, quality alchemical components |
-| Rare magical material | 300–2,000 GD | Dragon-touched materials, ancient reagents, high-tier components |
-| Common information/knowledge | 5–30 GD | Local lore, faction gossip, basic maps |
-| Significant information | 30–200 GD | Intelligence on factions, rare history, tactical advantage |
-| Critical information | 200 GD+ | Secrets, classified knowledge, leverage |
-| Relic / unique item | No coin equivalent | Negotiated entirely on narrative terms |
-
-### Barter in Drakenvale
-
-Inside Drakenvale, barter is the default for anything above everyday goods. The Platinum Acolytes, Infernal Forge Guild, Arcane Conservatory, and Council all operate primarily on barter. Coin is accepted at SSTC outposts and by external-facing merchants, but offering coin for major magical services within the Stronghold is culturally inelegant.
-
 ---
 
 ## Economy Rules for the GPT (Non-Negotiable)
@@ -205,7 +159,7 @@ Inside Drakenvale, barter is the default for anything above everyday goods. The 
 
 3. **`coin` cannot go below 0.** If the player cannot afford something, narrate denial, alternatives, or barter paths.
 
-4. **Narrate coin naturally.** Prefer copper/silver/gold/platinum phrasing over raw machine-format values.
+4. **Narrate coin using denomination thresholds (mandatory).** Amounts under 1 GD → CD or SD. Amounts 1–99 GD → GD. Amounts 100 GD+ → PD where the amount divides cleanly by 10, otherwise GD. Never express an amount as raw GD when a more natural denomination applies.
 
 5. **Barter is narrative, not arithmetic.** Do not expose calibration ranges as shop quotes.
 
