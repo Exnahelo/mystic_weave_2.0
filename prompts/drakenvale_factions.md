@@ -185,6 +185,8 @@ These are baseline operating norms, not a fully codified wartime charter. In edg
 
 **Internal:** Barter in enchanted artifacts, knowledge, and services is primary. Knowledge Tomes certified by the Amethyst Vault serve as intellectual currency. Traditional platinum, gold, silver, copper coins are used for practical daily transactions and accounting, but do not replace barter as the dominant system.
 
+Operational pricing, denomination narration, and barter state-update mechanics are defined in `prompts/economy_currency_reference.md`.
+
 **External:** Limited trade with trusted allies via Silver Wing Envoys. Rare materials only. Requires Council vetting. All agreements include secrecy clauses.
 
 **Key exports:** Enchanted goods, magical expertise, rare crafted artifacts.

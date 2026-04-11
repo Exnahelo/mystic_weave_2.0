@@ -156,3 +156,16 @@ The world is a graph of connected location nodes. Movement is along defined edge
 - Only present connections as movement options
 - New locations require discovery and immediate save via `POST /location`
 - NPCs are persistent — name one, save it to the location record
+
+---
+
+## Economy Resolution Rules
+
+Use `prompts/economy_currency_reference.md` as the canonical economy/currency reference.
+
+- Everyday purchases use coin when appropriate to context.
+- High-value magical services, rare materials, relics, and sensitive information default to barter.
+- Update `world.economy.coin` for coin transactions.
+- Update `world.economy.trade_goods` and/or `world.economy.obligations` for barter outcomes.
+- `coin` cannot go below 0.
+- Keep `wealth_tier` stable across minor purchases; update only for material long-term status shifts.

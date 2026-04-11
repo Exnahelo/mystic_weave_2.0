@@ -88,9 +88,10 @@ Gather the following in natural conversation, not as a form. Let the player's an
 
 1. Ask: "How are they set up materially — do they have coin, useful gear, or are they scraping by?"
 2. Map the answer to `wealth_tier` (destitute / modest / comfortable / wealthy / affluent). Default: modest.
-3. If they mention specific items, add them to `equipment.worn` or `equipment.carried` as appropriate.
-4. If they mention debts or obligations, add them to `economy.obligations`.
-5. Do not prompt exhaustively for every item. Let the player volunteer what matters.
+3. Set starting `coin` in API-safe GD integer values using `prompts/economy_currency_reference.md` tier guidance.
+4. If they mention specific items, add them to `equipment.worn` or `equipment.carried` as appropriate.
+5. If they mention debts or obligations, add them to `economy.obligations`.
+6. Do not prompt exhaustively for every item. Let the player volunteer what matters.
 
 ### Stage 8 — Confirm and Create
 

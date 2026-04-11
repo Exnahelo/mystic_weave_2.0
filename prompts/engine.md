@@ -116,6 +116,14 @@ Send one `log_entry` describing material change.
 - Update `weather` only when world events justify change; narrate transitions gradually.
 - Before save, validate all `world.time` required keys are present and enum values are valid.
 
+### Economy Runtime Checkpoint
+
+- Use `prompts/economy_currency_reference.md` as canonical pricing + barter handling reference.
+- For coin transactions, update `world.economy.coin` and never let it go below 0.
+- For barter transactions, update `world.economy.trade_goods` and/or `world.economy.obligations`; only change coin if coin is explicitly included in the same deal.
+- Keep `world.economy.wealth_tier` stable for minor transactions; change it only after material shifts in long-term economic status.
+- Narrate money in natural denominations (copper/silver/gold/platinum) while maintaining state in API-safe GD integer values.
+
 Deterministic write order:
 
 1) survival (character hp, companion hp/status)

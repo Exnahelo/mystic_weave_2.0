@@ -129,6 +129,7 @@ Led by **Eryndor the Radiant** in their standard capacity. Temporarily fall unde
 - **Key exports** — enchanted goods, magical expertise, rare crafted artifacts
 - **Key imports** — rare materials unavailable in the valley (mithral, adamantine, etc.)
 - **External trade partner** — [[Silver Scale Trading Company]] (independent guild with deep Council ties; all three dragons hold advisory or operational roles within it)
+- **Runtime reference** — pricing, denomination narration, and barter-state update rules are defined in `prompts/economy_currency_reference.md`
 
 ---
 

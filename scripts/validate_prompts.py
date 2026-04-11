@@ -11,11 +11,13 @@ REQUIRED_PROMPTS = {
     "prompts/engine.md": ["# Mystic Weave", "## Turn Loop", "## API Reference"],
     "prompts/character_creation.md": ["# Mystic Weave", "## Character Creation Flow", "## API Fields for Character Creation"],
     "prompts/world_rules.md": ["#", "##"],
+    "prompts/economy_currency_reference.md": ["# Mystic Weave — Economy & Currency Reference", "## Currency — The Drake System", "## Economy Rules for the GPT (Non-Negotiable)"],
 }
 
 ENGINE_REQUIRED_SECTIONS = [
     "### Runtime Safety Checkpoint (Await + Validate)",
     "### Time/Weather/Moon Runtime Checkpoint",
+    "### Economy Runtime Checkpoint",
     "### Irreversible Action Confirmation Gate",
     "## Canon Precedence (Conflict Resolution Order)",
 ]
