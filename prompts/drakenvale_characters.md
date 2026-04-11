@@ -310,6 +310,38 @@ Small, quick, forgettable on purpose. Wears colors that blend. Has a habit of be
 
 ---
 
+## Serevane
+
+**Position:** Vigil Keeper, Platinum Oath Monastery | **Species:** Tiefling | **Alignment:** Lawful Neutral
+
+Quiet, disciplined, and difficult to read unless she wants to be read. Serevane leads by continuity rather than charisma: she keeps systems running, people trained, and vows intact. She is one of the oldest surviving Accord members and treats history as operational burden, not nostalgia.
+
+**Motivations:** Maintain Rift stability; preserve the Vigil's institutional memory; ensure the Platinum Warden's tomb protocols remain uncompromised; prepare for low-probability, high-impact seal failures without public panic.
+
+**With players:** Reserved at first. Cooperative with competent actors who demonstrate restraint around restricted areas. Useful source for Rift perimeter realities and monastery doctrine when trust is earned.
+
+**What she doesn't say:** She tracks multiple contingency thresholds for Rift degradation and has already pre-authorized responses the Council does not yet know she has staged.
+
+**Hook:** A routine perimeter anomaly is technically below Council escalation threshold, but Serevane believes it matches a pre-failure pattern and needs discreet confirmation.
+
+---
+
+## The Warden of Greymantle
+
+**Position:** Founder and de facto arbiter of Greymantle | **Species:** Dragonborn | **Alignment:** Neutral
+
+An aging veteran of the Discordant War known publicly only as "the Warden" — not an official title, but one the settlement enforces. He projects hard boundaries and practical order: no violence in town, no Council informants, no compulsory confessions about prior lives.
+
+**Motivations:** Keep Greymantle functional without becoming either a cult enclave or a Council outpost; preserve local autonomy at the edge of the Hollows; prevent outside actors from turning the settlement into a proxy battlefield.
+
+**With players:** Transactional until proven otherwise. Respects competence, reliability, and people who keep their word under pressure. Will expel destabilizing actors quickly.
+
+**What he doesn't say:** He still maintains old Warden-era contacts and uses them sparingly to prevent catastrophes he cannot handle alone.
+
+**Hook:** A missing-person case in Greymantle is being framed as routine drift into the Hollows, but the Warden suspects organized recruitment and wants deniable investigators.
+
+---
+
 # TIER 3 — Generative Roles
 
 *Positions defined by function and archetype. The GPT instantiates these fresh per session within the parameters below. If a player forms a significant relationship with one, note the name and key traits in session state for continuity across sessions.*

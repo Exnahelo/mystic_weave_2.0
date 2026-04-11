@@ -19,6 +19,7 @@
 | Platinum Acolytes | Religious order | Eryndor | Authored |
 | Infernal Forge Guild | Craft guild | Zarkeros (resources) | Authored |
 | Arcane Conservatory | Knowledge/education | Varethyn | Authored |
+| The Vigil | Monastic watch order / Accord remnant | Platinum Oath Monastery | Authored |
 | Sapphire Sentinels | Intelligence — external threats | Varethyn (covert) | Stub |
 | Silver Wing Envoys | Diplomacy/external relations | Council | Stub |
 | Circle of Artisans | Infrastructure/arts | Council | Stub |
@@ -164,6 +165,31 @@
 
 ---
 
+## The Vigil
+
+*The surviving operational remnant of the Platinum Accord, based at the Platinum Oath Monastery.*
+
+**Leader:** Serevane (tiefling monk; long-serving Accord survivor)
+
+**Base:** Platinum Oath Monastery (Rift perimeter)
+
+**Public posture:** Independent monastery order cooperating with the Wardens on Rift monitoring.
+
+**Internal reality:** The Vigil preserves Accord doctrine, watches Rift stability, protects the Platinum Warden's tomb complex, and trains select Warden candidates for high-risk perimeter operations.
+
+**Responsibilities:**
+
+- Continuous Rift-condition monitoring and anomaly escalation
+- Support and hardening for Temple/Tiamat-adjacent vigilance operations
+- Restricted tomb access governance and continuity rites tied to the Platinum Warden's legacy
+- Advanced perimeter training for vetted Warden candidates
+
+**Access policy:** Monastery grounds are controlled access. The tomb interior is restricted to Vigil members and specifically authorized Warden candidates.
+
+**GM Notes:** Treat the Vigil as distinct from modern Wardens and Platinum Acolytes: cooperative but not subordinate in day-to-day doctrine. They are a living remnant of the Accord, not a museum of it.
+
+---
+
 ## The Sapphire Sentinels
 
 *Intelligence organization focused on neutralizing external threats and maintaining Drakenvale's secrecy.*
@@ -243,6 +269,8 @@
 - Critics — viewed as exclusionary; strict draconic standards can alienate non-dragonborn traders
 
 **Conflict Hooks:** Rival guild sabotage (Zhentarim interference); internal ethical disputes over profitable-but-Code-violating opportunities; caravan attacks on high-value loads; political scrutiny from Waterdeep and Baldur's Gate.
+
+**Route reference:** See `prompts/sstc_operations.md` for current connected nodes, lane defaults, and supply-chain assumptions.
 
 ---
 

@@ -107,6 +107,16 @@ Sealed underground structure. The necrotic seepage creating the Shadowed Hollows
 | Stronghold | Shadowed Hollows | ~150km | 3.5–4 days |
 | Stronghold | Mystic Wetlands | ~180km | 4–5 days |
 | Stronghold | Alpine Peaks (nearest point) | ~200km | 4–5 days |
+| Stronghold | Zarkharath | ~110km | 2.5–3 days |
+| Stronghold | Deephollow (main access descent) | ~95km | 2–2.5 days |
+| Stronghold | Lastmark | ~170km | 4 days |
+| Stronghold | Mirefall | ~140km | 3–3.5 days |
+| Stronghold | Greymantle | ~165km | 4 days |
+| Dracélune | Thornveil (guided access) | variable | hours to 1 day |
+| Dracélune | Mirefall | ~55km | 1–1.5 days |
+| Zarkharath | Cinderpit | ~25km | half day |
+| Lastmark | Alpine Peaks Outer | ~20km | half day |
+| Deephollow | Deephollow Lower Tunnels | variable descent | hours |
 | Temperate Forest | Feywood Glade boundary | 30–60km within forest | 1–2 days |
 | Temperate Forest | Mystic Wetlands | ~40km (transition) | 1 day |
 | Mystic Wetlands | Shadowed Hollows | ~30km | less than 1 day |
@@ -126,6 +136,17 @@ Town on the edge of the Feywood, within the Temperate Forest biome, western vall
 | Platinum Heart | 3–4 days northeast |
 | Shadowed Hollows | 3–4 days southeast (through Mystic Wetlands) |
 | Alpine Peaks (nearest wall) | 2–3 days northwest |
+
+---
+
+## Settlement and Resource Node Snapshot
+
+The valley now has additional fixed settlements that should be treated as standard travel/economy anchors in narration:
+
+- **Major settlements:** Stronghold of Drakenvale, Dracélune, Zarkharath, Deephollow, Mirefall, Thornveil, Lastmark, Greymantle
+- **Primary resource villages (7):** Ashfield (grain/livestock), Silvercut (silverwood timber), Dewhollow (magical flora), Stonemark (stone/quarry), Cinderpit (ore extraction), Scalemere (fish/river transport), Brackenmoor (hunting/trapping/wetland guides)
+
+Use these nodes when grounding travel plans, supply availability, and route plausibility. Remote wilderness and dark-quadrant movement should still incur higher uncertainty and time variance.
 
 ---
 

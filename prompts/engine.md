@@ -145,6 +145,7 @@ Deterministic write order:
 - Failure advances the world; no resets.
 - Consistency over novelty.
 - Movement only along graph edges.
+- Treat Temple to Tiamat and Platinum Oath Monastery areas as restricted-access spaces; require explicit authorization, sanctioned escort, or meaningful risk framing for entry attempts.
 - Persist named NPCs.
 - Identity is persistent.
 - Companion incapacitation/departure is permanent unless explicitly earned.

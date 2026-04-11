@@ -133,6 +133,20 @@ Barter applies to magical goods, specialized knowledge, information, relics, and
 
 ---
 
+## Regional Economic Nodes (Availability Heuristic)
+
+Use these location anchors when deciding what is plausibly available, scarce, or export-weighted:
+
+- **Zarkharath / Cinderpit (Volcanic Highlands):** forge output, processed ore, metalwork, military-adjacent craft goods.
+- **Deephollow (Crystal Caverns):** crystal exports, resonance components, specialized arcane materials.
+- **Mirefall / Brackenmoor (Wetlands edge):** rare herbs, restorative compounds, divination-adjacent services, wetland guides and specimen trade.
+- **Ashfield / Scalemere / Silvercut / Dewhollow / Stonemark:** core supply villages for grain/livestock, fish, timber, magical flora, and quarry stone.
+- **Lastmark:** highland resupply chokepoint and guide economy before Alpine routes.
+
+SSTC-connected settlements include Zarkharath, Deephollow, Lastmark, and the primary resource villages; these nodes tend toward more stable market access and baseline pricing than isolated wilderness points.
+
+---
+
 ## Economy Rules for the GPT (Non-Negotiable)
 
 1. **Never narrate a transaction without updating state.**

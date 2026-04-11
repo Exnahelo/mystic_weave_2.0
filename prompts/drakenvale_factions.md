@@ -120,6 +120,16 @@ Operations: Investigate corruption, sabotage, alignment tensions, forbidden magi
 
 **Role:** Primary external trade partner. Deep Council ties — all three dragons hold advisory or operational roles within it. Varethyn's Amethyst Veil intelligence network runs through its trade routes.
 
+### The Vigil
+
+**Base:** Platinum Oath Monastery
+
+**Role:** Surviving operational remnant of the Platinum Accord. Monitors Rift stability, protects the Platinum Warden's tomb complex, and maintains restricted-response capability for seal-adjacent crises.
+
+**Status:** Active but low-visibility. Publicly treated as an independent monastery order with Warden cooperation.
+
+**Relationship to the Accord:** The Vigil preserves Accord mission continuity in present time; the Accord remains the historical founding structure and doctrine lineage.
+
 ---
 
 ## Advisory & Representative Roles
@@ -130,7 +140,7 @@ Operations: Investigate corruption, sabotage, alignment tensions, forbidden magi
 
 ---
 
-## The Platinum Accord (Historical / Possibly Active)
+## The Platinum Accord (Historical Foundation)
 
 A secretive order founded by the Platinum Warden. Overt purpose: peacekeeping and mediation. Covert purpose: guarding the Temple to Tiamat, the Rift of Discord, and the most dangerous draconic artifacts.
 
@@ -142,7 +152,7 @@ A secretive order founded by the Platinum Warden. Overt purpose: peacekeeping an
 
 **The Oath of Scales:** Sacred initiation performed before the Platinum Flame. Bonds the member's soul to Bahamut's ideals. Grants divine blessings; binds to strict adherence to the Ptarian Code.
 
-**Current status:** Officially faded. Some believe it still operates in shadow, members chosen by Bahamut directly, identities hidden even from the Council. Prophecy: the Platinum Warden's spirit will rise again in Drakenvale's greatest hour of need.
+**Current status:** Historical founding order. Its surviving operational remnant is the Vigil at Platinum Oath Monastery. Prophecy: the Platinum Warden's spirit will rise again in Drakenvale's greatest hour of need.
 
 ---
 

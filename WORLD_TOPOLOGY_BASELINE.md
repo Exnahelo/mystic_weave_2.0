@@ -1,31 +1,66 @@
-# World Topology Baseline — 2026-04-10
+# World Topology Baseline — 2026-04-11
 
-Post-audit baseline for `prompts/world/*.md` connection reciprocity.
+Post-audit baseline for `prompts/world/*.md` connection reciprocity after the expanded settlement/location pass.
 
 ## Scope
 
 Audit performed against all current world location files under `prompts/world/`.
 
+Current scan totals:
+- 46 location files with `id` + `connections`
+- 21 non-reciprocal in-map links
+- 7 off-map placeholder exits
+
 ## Reciprocity decision summary
 
-### Corrected to two-way
+### Corrected to two-way (historical reference)
 - `stronghold-of-drakenvale` ↔ `volcanic-highlands`
   - Reason: this is a navigable regional route within the current playable map and should be traversable in both directions for consistency.
 
-### Intentionally one-way
+### Intentionally one-way (current)
+
+#### Hidden / gated sanctums
 - `eryndors-lair` → `sacred-pools`
 - `eryndors-lair` → `platinum-heart`
+- `platinum-oath-monastery` → `rift-of-discord-edge`
+- `platinum-oath-monastery` → `greymantle`
 
 Reason:
-- Eryndor's sanctum is intentionally undiscovered (`discovered: false`) and should not become exposed as a normal movement option from public or semi-public sacred locations.
-- The outbound links preserve authorial logic for where the sanctum sits physically, while the missing inbound links preserve discovery gating and avoid accidental player-facing disclosure.
+- These preserve discovery/security gating for sensitive spaces (hidden lair and restricted monastery). Inbound links from public nodes are intentionally omitted.
+
+#### Directional logistics/spoke links (accepted for now)
+- `dewhollow` → `dracelune`
+- `brackenmoor` → `dracelune`
+- `mirefall` → `dracelune`
+- `silvercut` → `dracelune`
+- `thornveil` → `dracelune`
+- `scalemere` → `dracelune`
+- `ashfield` → `stronghold-of-drakenvale`
+- `ashfield-fields` → `stronghold-of-drakenvale`
+- `stonemark` → `stronghold-of-drakenvale`
+- `lastmark` → `stronghold-of-drakenvale`
+- `zarkharath` → `stronghold-of-drakenvale`
+- `deephollow` → `stronghold-of-drakenvale`
+- `deephollow` → `zarkharath`
+- `volcanic-highlands-trail` → `stronghold-of-drakenvale`
+- `rift-of-discord-edge` → `shadowed-hollows-approach`
+- `greymantle` → `mirefall`
+- `stonemark-deep-cuts` → `deephollow-lower-tunnels`
+
+Reason:
+- These currently model outbound trade/travel emphasis and hub routing. Keep as-authored unless design intent changes to fully bidirectional traversal everywhere.
 
 ## Off-map / placeholder exits retained
 
 These links currently point beyond the explicitly authored local map and are retained as intentional external stubs rather than reciprocity defects:
 
 - `dracelune` → `feywood-glade-border`
+- `dewhollow` → `feywood-glade-border`
+- `thornveil` → `feywood-glade-border`
 - `volcanic-highlands` → `draconic-grasslands`
+- `ashfield-fields` → `draconic-grasslands-edge`
+- `shadowed-hollows-approach` → `shadowed-hollows-proper`
+- `platinum-oath-monastery` → `platinum-oath-approach`
 
 Guidance:
 - Treat these as outward-facing world-edge exits until those destination files are authored.
@@ -41,7 +76,7 @@ When adding or revising `prompts/world/*.md`:
 
 ## Baseline result
 
-After the 2026-04-10 correction:
-- one normal in-map reciprocity defect was fixed
-- hidden-lair one-way links remain intentional
-- two off-map placeholder exits remain intentional until expanded world content is authored
+After the 2026-04-11 expanded-location audit:
+- hidden/gated one-way links remain intentional
+- directional hub/spoke one-way links are currently accepted design (documented above)
+- seven off-map placeholder exits remain intentional until destination files are authored
