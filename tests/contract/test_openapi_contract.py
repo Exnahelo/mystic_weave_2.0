@@ -7,7 +7,7 @@ from api.main import app
 def test_openapi_contract_has_expected_core_shapes() -> None:
     # Avoid startup/lifespan side effects (DB pool creation) for pure contract checks.
     spec = app.openapi()
-    assert spec["info"]["version"] == "3.1.0"
+    assert spec["info"]["version"] == "3.2.0"
 
     new_session_required = spec["components"]["schemas"]["NewSessionRequest"][
         "required"

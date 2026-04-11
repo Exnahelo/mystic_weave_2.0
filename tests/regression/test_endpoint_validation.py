@@ -106,6 +106,16 @@ def _build_valid_world() -> dict:
             "active_tensions": [],
             "conclave_status": "unknown",
         },
+        "time": {
+            "day": 1,
+            "month": "Verdantrise",
+            "year": 847,
+            "time_of_day": "morning",
+            "season": "spring",
+            "festival": None,
+            "weather": "clear",
+            "weather_note": "",
+        },
     }
 
 
@@ -195,6 +205,48 @@ def test_state_save_rejects_negative_coin_with_422() -> None:
                 "coin": -1,
                 "trade_goods": [],
                 "obligations": [],
+            },
+        },
+        "log_entry": "entry",
+    }
+
+    with TestClient(app) as client:
+        r = client.post("/state/abc12345", json=save_body)
+
+    assert r.status_code == 422
+
+
+@pytest.mark.regression
+def test_state_save_rejects_invalid_time_day_with_422() -> None:
+    app = _make_app_with_router(state.router, FakePool(FakeConn()))
+    save_body = {
+        "character": _build_valid_character(),
+        "world": {
+            **_build_valid_world(),
+            "time": {
+                **_build_valid_world()["time"],
+                "day": 31,
+            },
+        },
+        "log_entry": "entry",
+    }
+
+    with TestClient(app) as client:
+        r = client.post("/state/abc12345", json=save_body)
+
+    assert r.status_code == 422
+
+
+@pytest.mark.regression
+def test_state_save_rejects_invalid_time_weather_with_422() -> None:
+    app = _make_app_with_router(state.router, FakePool(FakeConn()))
+    save_body = {
+        "character": _build_valid_character(),
+        "world": {
+            **_build_valid_world(),
+            "time": {
+                **_build_valid_world()["time"],
+                "weather": "sandstorm",
             },
         },
         "log_entry": "entry",

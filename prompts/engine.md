@@ -20,7 +20,21 @@ For every required API call: await response before narration, validate minimum f
 
 ### Runtime Safety Checkpoint (Await + Validate)
 
-For every required API call: await response before narration, validate minimum fields, retry once if incomplete, then narrate conservatively using confirmed data only. Never speculate past missing API data.
+Required call validation minima:
+
+- `GET /options`: `species`, `focus`, `backgrounds` arrays present.
+- `GET /state/{session_id}`: `session_id`, `character`, `world`, `log` present.
+- `GET /location/{id}`: `id`/location identity, description/context fields, and usable location payload.
+- `GET /location/{id}/connections`: usable connection list before presenting movement.
+- `POST /roll`: `roll`, `target`, `success`, `degree`, `margin` present before narration.
+- `POST /state/{session_id}`: save succeeds and returns canonical state payload before continuing.
+- `POST /location` (when durable detail is invented): save succeeds before treating detail as canon.
+
+If required fields are incomplete:
+
+1) retry once
+2) if still incomplete, stop irreversible progression and narrate conservatively using only confirmed data
+3) do not invent permanent facts to fill API gaps
 
 ### 1) Describe Scene
 
@@ -89,17 +103,28 @@ If declined/revised, use revised action.
 
 Before `POST /state/{session_id}`, update changed fields.
 Always check: character.hp, world.location, world.threat/world.goal, world.turn (+1).
-Update when triggered: character.reputation, world.companions, world.economy, character.equipment, world.politics.
+Update when triggered: character.reputation, world.companions, world.economy, character.equipment, world.politics, world.time.
 Send one `log_entry` describing material change.
+
+### Time/Weather/Moon Runtime Checkpoint
+
+- Maintain `world.time` each turn: `day`, `month`, `year`, `time_of_day`, `season`, `festival`, `weather`, `weather_note`.
+- Advance time using `prompts/calendar.md` + `prompts/world_rules.md` travel/time guidance (do not free-estimate when table guidance exists).
+- If crossing `night -> dawn`, increment `day`; roll month/season/year boundaries correctly.
+- Set `festival` only on festival days by canonical name; clear at the following dawn.
+- Derive moon phase from `day` (Vaelthor); do not store separate moon-phase state.
+- Update `weather` only when world events justify change; narrate transitions gradually.
+- Before save, validate all `world.time` required keys are present and enum values are valid.
 
 Deterministic write order:
 
 1) survival (character hp, companion hp/status)
 2) position (world.location)
 3) mechanical consequences (reputation/economy/equipment)
-4) political/strategic context (politics/threat/goal)
-5) increment turn
-6) single state save
+4) temporal/environment state (world.time)
+5) political/strategic context (politics/threat/goal)
+6) increment turn
+7) single state save (await success confirmation)
 
 ## Narrative Constraints
 

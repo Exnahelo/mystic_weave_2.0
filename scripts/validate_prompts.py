@@ -15,8 +15,16 @@ REQUIRED_PROMPTS = {
 
 ENGINE_REQUIRED_SECTIONS = [
     "### Runtime Safety Checkpoint (Await + Validate)",
+    "### Time/Weather/Moon Runtime Checkpoint",
     "### Irreversible Action Confirmation Gate",
     "## Canon Precedence (Conflict Resolution Order)",
+]
+
+CALENDAR_REQUIRED_MARKERS = [
+    "# Mystic Weave — The Ptarian Calendar",
+    "## Weather",
+    "## Time of Day Progression",
+    "## GPT Time Rules (Non-Negotiable)",
 ]
 
 KNOWN_CONTRADICTION_WARNING_MARKERS = {
@@ -62,6 +70,15 @@ def main() -> None:
             for section in ENGINE_REQUIRED_SECTIONS:
                 if section not in content:
                     failures.append(f"{rel_path} missing required runtime safety section: {section}")
+
+    calendar_path = repo_root / "prompts" / "calendar.md"
+    if not calendar_path.exists():
+        failures.append("missing required prompt file: prompts/calendar.md")
+    else:
+        calendar_content = calendar_path.read_text(encoding="utf-8")
+        for marker in CALENDAR_REQUIRED_MARKERS:
+            if marker not in calendar_content:
+                failures.append(f"prompts/calendar.md missing required marker: {marker}")
 
     world_dir = repo_root / "prompts" / "world"
     world_files = sorted(world_dir.glob("*.md")) if world_dir.exists() else []
