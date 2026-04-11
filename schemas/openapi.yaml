@@ -5,6 +5,9 @@ info:
     GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution
     with domain scores and competency tiers.
   version: 3.2.0
+servers:
+- url: https://mysticweave-production.up.railway.app
+  description: Production (Railway)
 paths:
   /state/{session_id}:
     get:
@@ -33,19 +36,9 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       summary: Save State
-      description: 'Save full game state and append a log entry.
-
-
-        Character fields are deep-merged onto the stored record so that fields
-
-        the GPT omits (languages, spells, equipment, feat_choices, biography, etc.)
-
-        are preserved from the previous save rather than wiped.
-
-
-        World is replaced in full (it is small and always fully specified).
-
-        The log_entry is appended atomically in SQL.'
+      description: Save full game state and append one log entry. Character fields
+        are deep-merged so omitted fields are preserved; world is replaced in full;
+        log append is atomic.
       operationId: save_state_state__session_id__post
       parameters:
       - name: session_id
@@ -198,19 +191,9 @@ paths:
   /location:
     post:
       summary: Upsert Location
-      description: 'Create or update a location.
-
-
-        The GPT calls this when:
-
-        - A player discovers a new location via an exploration action
-
-        - The GPT invents a new detail (NPC name, building) that must persist
-
-
-        Uses UPSERT so the same endpoint handles both creation and updates.
-
-        Also upserts world_graph edges based on the connections array in the data.'
+      description: Create or update a location via UPSERT. Use when a location is
+        discovered or durable details are added. Connections in payload also upsert
+        world_graph edges.
       operationId: upsert_location_location_post
       requestBody:
         content:
@@ -301,9 +284,12 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties:
-                  type: string
                 type: object
+                properties:
+                  status:
+                    type: string
+                  service:
+                    type: string
                 title: Response Root  Get
   /health:
     get:
@@ -318,9 +304,12 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties:
-                  type: string
                 type: object
+                properties:
+                  status:
+                    type: string
+                  service:
+                    type: string
                 title: Response Health Check Health Get
   /version:
     get:
@@ -335,11 +324,16 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties:
-                  anyOf:
-                  - type: string
-                  - type: integer
                 type: object
+                properties:
+                  api_version:
+                    type: string
+                  data_fingerprint:
+                    type: string
+                  schema_version:
+                    anyOf:
+                    - type: string
+                    - type: integer
                 title: Response Version Version Get
 components:
   schemas:
