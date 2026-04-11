@@ -96,10 +96,10 @@ Added:
 - [x] Add short changelog note in `README.md` or `OPERATIONAL_RUNBOOK.md` for new world locations/lairs and access/discovery assumptions
 - [x] Create lightweight release checkpoint (tag or release note) for post-audit + world topology baseline
 
-## Gamplay upgrades from walkthrough
+## Gameplay upgrades from walkthrough
 
 - [ ] Hunger tracking
 - [ ] Hydration tracking
 - [ ] Fatigue tracking
-- [ ] Carrying Weight/Encumbrance/Demintions
+- [ ] Carrying Weight/Encumbrance/Dimensions
 - [ ] Add holy water logic

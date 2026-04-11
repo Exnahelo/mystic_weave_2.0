@@ -127,9 +127,9 @@ Reputation write rule: when a faction-relevant consequence resolves, update repu
   - domain score(s)
   - `points_available -= spent`
   - `points_spent += spent`
-- Tag advancement never uses AP; max one tier/tag/session; cap T5.
-- Maximum one tag advance per scene; choose the tag most central to the action (if tied, player chooses).
-- Tags can be introduced beyond character creation: after repeated meaningful use, propose a new Tier 1 tag and require player confirmation before writing to state.
+- Tag advancement never uses AP; cap T5; max one advance per tag per session and one total tag advance per scene.
+- For scene advancement, choose the tag most central to the action (if tied, player chooses).
+- Tags can be introduced beyond character creation: after repeated meaningful use, propose a new Tier 1 tag and require player confirmation before the next state save.
 
 Deterministic write order:
 1) survival (character + companion hp/status)
