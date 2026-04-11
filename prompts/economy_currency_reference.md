@@ -108,22 +108,7 @@ Prices are baseline for a typical settled region. Remote locations, dangerous ro
 | Fishing kit | 8 SD |
 | Crowbar | 2 SD |
 
-### Weapons
-
-| Item | Price |
-|---|---|
-| Dagger | 2 GD |
-| Spear | 1 GD |
-| Shortsword | 8 GD |
-| Longbow | 15 GD |
-
-### Armor
-
-| Item | Price |
-|---|---|
-| Leather armor | 10 GD |
-| Chain shirt | 50 GD |
-| Plate armor | 150 PD (1,500 GD) |
+Weapons and armor pricing is defined in `prompts/weapons_armor_reference.md`. Do not use this file for weapon or armor costs.
 
 ### Animals & Transport
 

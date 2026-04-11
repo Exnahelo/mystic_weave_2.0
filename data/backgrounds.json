@@ -4,7 +4,7 @@
     "name": "Soldier",
     "description": "Military service, structured discipline",
     "knowledge_tags": {"intimidation": 1, "exertion": 1},
-    "application_tags": {"heavy_weapons": 1}
+    "application_tags": {"melee": 1, "reach": 1}
   },
   {
     "index": "scholar",

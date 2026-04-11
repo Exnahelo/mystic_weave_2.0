@@ -4,28 +4,28 @@
     "name": "Champion",
     "description": "Front-line fighter, direct combat",
     "knowledge_tags": {"athletics": 2, "brawling": 1, "fortitude": 1},
-    "application_tags": {"heavy_weapons": 1, "unarmed_combat": 1}
+    "application_tags": {"melee": 1, "grappling": 1}
   },
   {
     "index": "sentinel",
     "name": "Sentinel",
     "description": "Protector, holds the line",
     "knowledge_tags": {"courage": 2, "resistance": 1, "fortitude": 1},
-    "application_tags": {"shields_armor": 1, "heavy_weapons": 1}
+    "application_tags": {"shields_armor": 1, "melee": 1, "reach": 1}
   },
   {
     "index": "stalker",
     "name": "Stalker",
     "description": "Ambush, infiltration, precision",
     "knowledge_tags": {"stealth": 2, "evasion": 1, "investigation": 1},
-    "application_tags": {"light_weapons": 1, "lockpicking_traps": 1}
+    "application_tags": {"grappling": 1, "lockpicking_traps": 1, "unconventional": 1}
   },
   {
     "index": "wayfinder",
     "name": "Wayfinder",
     "description": "Explorer, survivalist, tracker",
     "knowledge_tags": {"survival": 2, "nature": 1, "tracking": 1},
-    "application_tags": {"ranged_weapons": 1, "mounts_vehicles": 1}
+    "application_tags": {"ranged": 1, "mounts_vehicles": 1, "mechanical": 1}
   },
   {
     "index": "arcanist",

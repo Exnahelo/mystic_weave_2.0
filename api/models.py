@@ -124,7 +124,7 @@ class EquipmentItem(BaseModel):
     name:        str
     description: str          = ""
     tags:        list[EquipmentTag] = Field(default_factory=list)
-    # Optional link to application tag for roll context (e.g. "light_weapons")
+    # Optional link to application tag for roll context (e.g. "grappling")
     roll_tag:    str | None   = None
 
 

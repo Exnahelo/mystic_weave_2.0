@@ -184,7 +184,7 @@ def part1(client: httpx.Client) -> str | None:
     application = char.get("application", {})
     check("1.3.p", application.get("sacred_rites") == 1, f"sacred_rites A1: {application.get('sacred_rites')}")
     check("1.3.q", application.get("shields_armor") == 1, f"shields_armor A1: {application.get('shields_armor')}")
-    check("1.3.r", application.get("heavy_weapons") == 1, f"heavy_weapons A1: {application.get('heavy_weapons')}")
+    check("1.3.r", application.get("melee") == 1, f"melee A1: {application.get('melee')}")
 
     # v3.1.0 — identity block
     identity = char.get("identity", {})
@@ -276,7 +276,7 @@ def part2(client: httpx.Client, session_id: str) -> None:
                 "intimidation": 1, "exertion": 1,
             },
             "application": {
-                "sacred_rites": 1, "shields_armor": 1, "heavy_weapons": 1,
+                "sacred_rites": 1, "shields_armor": 1, "melee": 1,
             },
             "status_effects": [],
             "notes": "",

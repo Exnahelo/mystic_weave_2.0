@@ -109,12 +109,12 @@ Specific tools, weapons, or methods. Tiers 1–5, each tier adds +1 to target nu
 
 | Category | Primary Domain |
 |---|---|
-| Heavy Weapons | Power |
-| Unarmed Combat | Power |
-| Light Weapons | Agility |
-| Lockpicking & Traps | Agility |
-| Ranged Weapons | Perception |
-| Mounts & Vehicles | Perception |
+| Grappling | Agility |
+| Melee | Power |
+| Reach | Power |
+| Ranged | Perception |
+| Mechanical | Perception |
+| Unconventional | Varies — GPT judges per weapon |
 | Shields & Armor | Endurance |
 | Arcane Implements | Intellect |
 | Herbalism & Alchemy | Intellect |
