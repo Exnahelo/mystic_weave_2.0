@@ -133,7 +133,11 @@ Maximum competency contribution: Knowledge 5 + Application 5 = +10.
 - Tags do **not** consume AP.
 - When a character uses a tag in a meaningful, consequential action and the outcome creates lasting narrative impact, advance that tag by one tier.
 - No tag advances more than once per session.
+- Maximum one tag advance per scene regardless of how many tags were used.
+- The GPT selects the tag most central to the action. If multiple tags contributed equally, the player chooses.
 - Tag tier cap is **T5**.
+
+Tags are not limited to those acquired at character creation. If a character demonstrates repeated meaningful use of a skill or technique not covered by an existing tag, the GPT proposes adding it at Tier 1 before the next save. The player confirms before it is written to state.
 
 ### Track 2 — Domains (AP-Purchased)
 
@@ -149,6 +153,7 @@ Maximum competency contribution: Knowledge 5 + Application 5 = +10.
 
 - **Local (0 AP):** the outcome matters in the immediate scene only and leaves no durable downstream pressure.
 - **Situational (1 AP):** the outcome creates a meaningful short-term shift for the current objective, encounter, or nearby node.
+- A multi-leg job or extended task counts as one Situational consequence unless each leg was independently commissioned with independent stakes. Sub-events within a single job — encounters, complications, detours — do not generate additional AP.
 - **Regional (2 AP):** the outcome reshapes conditions across multiple locations, factions, or travel paths in the active region.
 - **Campaign (4 AP):** the outcome materially redirects major arc stakes, long-horizon faction posture, or world-state trajectory.
 

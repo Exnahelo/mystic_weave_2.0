@@ -101,4 +101,5 @@ Added:
 - [ ] Hunger tracking
 - [ ] Hydration tracking
 - [ ] Fatigue tracking
-- [ ] Carrying Weight?
+- [ ] Carrying Weight/Encumbrance/Demintions
+- [ ] Add holy water logic

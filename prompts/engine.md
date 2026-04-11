@@ -114,6 +114,7 @@ Reputation write rule: when a faction-relevant consequence resolves, update repu
 
 - Apply three-track progression from `prompts/world_rules.md`.
 - AP awards after consequence resolution only: Local +0, Situational +1, Regional +2, Campaign +4.
+- Treat a multi-leg job/extended task as one Situational consequence unless legs are independently commissioned with independent stakes; sub-events in one job do not grant extra AP.
 - On AP award:
   - `character.advancement.points_available += award`
   - `character.advancement.points_earned_total += award`
@@ -127,6 +128,8 @@ Reputation write rule: when a faction-relevant consequence resolves, update repu
   - `points_available -= spent`
   - `points_spent += spent`
 - Tag advancement never uses AP; max one tier/tag/session; cap T5.
+- Maximum one tag advance per scene; choose the tag most central to the action (if tied, player chooses).
+- Tags can be introduced beyond character creation: after repeated meaningful use, propose a new Tier 1 tag and require player confirmation before writing to state.
 
 Deterministic write order:
 1) survival (character + companion hp/status)
