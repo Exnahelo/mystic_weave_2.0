@@ -109,6 +109,11 @@ def _base_character() -> dict:
         "reputation": [
             {"faction": "draconic_council", "standing": -25, "note": "exiled", "last_change": "turn 0"}
         ],
+        "advancement": {
+            "points_available": 0,
+            "points_spent": 0,
+            "points_earned_total": 0,
+        },
     }
 
 

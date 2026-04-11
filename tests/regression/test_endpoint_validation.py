@@ -82,6 +82,11 @@ def _build_valid_character() -> dict:
         },
         "equipment": {"worn": [], "carried": [], "stashed": []},
         "reputation": [],
+        "advancement": {
+            "points_available": 0,
+            "points_spent": 0,
+            "points_earned_total": 0,
+        },
     }
 
 
@@ -249,6 +254,49 @@ def test_state_save_rejects_invalid_time_weather_with_422() -> None:
                 "weather": "sandstorm",
             },
         },
+        "log_entry": "entry",
+    }
+
+    with TestClient(app) as client:
+        r = client.post("/state/abc12345", json=save_body)
+
+    assert r.status_code == 422
+
+
+@pytest.mark.regression
+def test_state_save_rejects_domain_above_80_with_422() -> None:
+    app = _make_app_with_router(state.router, FakePool(FakeConn()))
+    save_body = {
+        "character": {
+            **_build_valid_character(),
+            "domains": {
+                **_build_valid_character()["domains"],
+                "will": 81,
+            },
+        },
+        "world": _build_valid_world(),
+        "log_entry": "entry",
+    }
+
+    with TestClient(app) as client:
+        r = client.post("/state/abc12345", json=save_body)
+
+    assert r.status_code == 422
+
+
+@pytest.mark.regression
+def test_state_save_rejects_negative_advancement_points_with_422() -> None:
+    app = _make_app_with_router(state.router, FakePool(FakeConn()))
+    save_body = {
+        "character": {
+            **_build_valid_character(),
+            "advancement": {
+                "points_available": -1,
+                "points_spent": 0,
+                "points_earned_total": 0,
+            },
+        },
+        "world": _build_valid_world(),
         "log_entry": "entry",
     }
 

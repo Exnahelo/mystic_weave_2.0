@@ -94,8 +94,21 @@ class DomainScores(BaseModel):
                      "intellect", "will", "presence")
     @classmethod
     def score_in_range(cls, v: int) -> int:
-        if not (1 <= v <= 60):
-            raise ValueError("domain score must be between 1 and 60")
+        if not (1 <= v <= 80):
+            raise ValueError("domain score must be between 1 and 80")
+        return v
+
+
+class AdvancementState(BaseModel):
+    points_available: int = 0
+    points_spent: int = 0
+    points_earned_total: int = 0
+
+    @field_validator("points_available", "points_spent", "points_earned_total")
+    @classmethod
+    def non_negative_points(cls, v: int) -> int:
+        if v < 0:
+            raise ValueError("advancement points cannot be negative")
         return v
 
 
@@ -221,6 +234,7 @@ class CharacterModel(BaseModel):
     identity:       Identity       = Field(default_factory=Identity)
     equipment:      Equipment      = Field(default_factory=Equipment)
     reputation:     list[ReputationEntry] = Field(default_factory=list)
+    advancement:    AdvancementState
 
     @field_validator("level")
     @classmethod

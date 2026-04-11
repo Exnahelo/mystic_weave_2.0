@@ -201,19 +201,26 @@ def test_part1(client: httpx.Client) -> str | None:
     reputation = char.get("reputation", [])
     check("1.3.aa", isinstance(reputation, list), f"reputation list present: {type(reputation)}")
 
+    # v3.2.0 — advancement block
+    advancement = char.get("advancement", {})
+    check("1.3.ab", isinstance(advancement, dict), f"advancement block present: {type(advancement)}")
+    check("1.3.ac", advancement.get("points_available") == 0, f"points_available: {advancement.get('points_available')}")
+    check("1.3.ad", advancement.get("points_spent") == 0, f"points_spent: {advancement.get('points_spent')}")
+    check("1.3.ae", advancement.get("points_earned_total") == 0, f"points_earned_total: {advancement.get('points_earned_total')}")
+
     # v3.1.0 — world blocks
     world = data["world"]
-    check("1.3.ab", world["location"] == "test-loc-alpha", f"location: {world['location']}")
-    check("1.3.ac", world["turn"] == 1, f"turn: {world['turn']}")
-    check("1.3.ad", isinstance(world.get("companions"), list), f"companions list present")
+    check("1.3.af", world["location"] == "test-loc-alpha", f"location: {world['location']}")
+    check("1.3.ag", world["turn"] == 1, f"turn: {world['turn']}")
+    check("1.3.ah", isinstance(world.get("companions"), list), f"companions list present")
     economy = world.get("economy", {})
-    check("1.3.ae", economy.get("wealth_tier") == "modest", f"wealth_tier: {economy.get('wealth_tier')}")
-    check("1.3.af", economy.get("coin") == 12, f"coin: {economy.get('coin')}")
-    check("1.3.ag", len(economy.get("obligations", [])) == 1,
+    check("1.3.ai", economy.get("wealth_tier") == "modest", f"wealth_tier: {economy.get('wealth_tier')}")
+    check("1.3.aj", economy.get("coin") == 12, f"coin: {economy.get('coin')}")
+    check("1.3.ak", len(economy.get("obligations", [])) == 1,
           f"obligations: {len(economy.get('obligations', []))}")
     politics = world.get("politics", {})
-    check("1.3.ah", isinstance(politics, dict), f"politics block present: {type(politics)}")
-    check("1.3.ai", politics.get("legal_standing") == "unknown",
+    check("1.3.al", isinstance(politics, dict), f"politics block present: {type(politics)}")
+    check("1.3.am", politics.get("legal_standing") == "unknown",
           f"legal_standing: {politics.get('legal_standing')}")
 
     return session_id
@@ -238,9 +245,10 @@ def test_part2(client: httpx.Client, session_id: str) -> None:
         check("2.1.e", isinstance(state["character"].get("identity"), dict), f"identity persisted")
         check("2.1.f", isinstance(state["character"].get("equipment"), dict), f"equipment persisted")
         check("2.1.g", isinstance(state["character"].get("reputation"), list), f"reputation persisted")
-        check("2.1.h", isinstance(state["world"].get("companions"), list), f"companions persisted")
-        check("2.1.i", isinstance(state["world"].get("economy"), dict), f"economy persisted")
-        check("2.1.j", isinstance(state["world"].get("politics"), dict), f"politics persisted")
+        check("2.1.h", isinstance(state["character"].get("advancement"), dict), f"advancement persisted")
+        check("2.1.i", isinstance(state["world"].get("companions"), list), f"companions persisted")
+        check("2.1.j", isinstance(state["world"].get("economy"), dict), f"economy persisted")
+        check("2.1.k", isinstance(state["world"].get("politics"), dict), f"politics persisted")
 
     subsection("Test 2.2 — POST /state/{session_id} (save + log)")
     save_body = {
@@ -305,6 +313,11 @@ def test_part2(client: httpx.Client, session_id: str) -> None:
                     "last_change": "Departed at exile",
                 },
             ],
+            "advancement": {
+                "points_available": 1,
+                "points_spent": 0,
+                "points_earned_total": 1,
+            },
         },
         "world": {
             "location": "test-loc-alpha",
@@ -387,24 +400,33 @@ def test_part2(client: httpx.Client, session_id: str) -> None:
         check("2.2.k", council_rep["standing"] == -40 if council_rep else False,
               f"council standing: {council_rep['standing'] if council_rep else 'missing'}")
 
+        # v3.2.0 — advancement round-trip
+        advancement = char.get("advancement", {})
+        check("2.2.l", advancement.get("points_available") == 1,
+              f"points_available: {advancement.get('points_available')}")
+        check("2.2.m", advancement.get("points_spent") == 0,
+              f"points_spent: {advancement.get('points_spent')}")
+        check("2.2.n", advancement.get("points_earned_total") == 1,
+              f"points_earned_total: {advancement.get('points_earned_total')}")
+
         # v3.1.0 — companions round-trip
         companions = world.get("companions", [])
-        check("2.2.l", len(companions) == 1, f"companion count: {len(companions)}")
+        check("2.2.o", len(companions) == 1, f"companion count: {len(companions)}")
         sorra = companions[0]
-        check("2.2.m", sorra["name"] == "Sorra", f"companion name: {sorra['name']}")
-        check("2.2.n", sorra["status"] == "active", f"companion status: {sorra['status']}")
-        check("2.2.o", sorra["disposition"] == 30, f"companion disposition: {sorra['disposition']}")
+        check("2.2.p", sorra["name"] == "Sorra", f"companion name: {sorra['name']}")
+        check("2.2.q", sorra["status"] == "active", f"companion status: {sorra['status']}")
+        check("2.2.r", sorra["disposition"] == 30, f"companion disposition: {sorra['disposition']}")
 
         # v3.1.0 — economy round-trip
         economy = world.get("economy", {})
-        check("2.2.p", economy.get("coin") == 7, f"coin: {economy.get('coin')}")
-        check("2.2.q", economy.get("wealth_tier") == "modest", f"wealth_tier: {economy.get('wealth_tier')}")
+        check("2.2.s", economy.get("coin") == 7, f"coin: {economy.get('coin')}")
+        check("2.2.t", economy.get("wealth_tier") == "modest", f"wealth_tier: {economy.get('wealth_tier')}")
 
         # v3.1.0 — politics round-trip
         politics = world.get("politics", {})
-        check("2.2.r", politics.get("legal_standing") == "exile",
+        check("2.2.u", politics.get("legal_standing") == "exile",
               f"legal_standing: {politics.get('legal_standing')}")
-        check("2.2.s", len(politics.get("active_tensions", [])) == 1,
+        check("2.2.v", len(politics.get("active_tensions", [])) == 1,
               f"active_tensions: {len(politics.get('active_tensions', []))}")
 
     subsection("Test 2.3 — 404 for invalid session")
@@ -542,6 +564,8 @@ def test_part5(client: httpx.Client, session_id: str) -> None:
               f"equipment empty on re-seed")
         check("5.1.j", char.get("reputation") == [],
               f"reputation empty on re-seed")
+        check("5.1.k", char.get("advancement") == {"points_available": 0, "points_spent": 0, "points_earned_total": 0},
+              f"advancement initialized on re-seed")
 
 
 # ---------------------------------------------------------------------------

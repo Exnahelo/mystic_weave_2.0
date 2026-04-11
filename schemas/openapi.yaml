@@ -1,1155 +1,1516 @@
-openapi: 3.1.1
+openapi: 3.1.0
 info:
   title: Mystic Weave
-  description: >
-    Persistent game state backend for a text-based RPG powered by a custom GPT.
-    The GPT is the narrator and game master. This API is the memory.
-    Uses d100 roll-under resolution with domain scores, knowledge tiers,
-    and application tiers.
+  description: Persistent game state backend for a text-based RPG powered by a custom
+    GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution
+    with domain scores and competency tiers.
   version: 3.2.0
-
-servers:
-  - url: https://mysticweave-production.up.railway.app
-    description: Production (Railway)
-
 paths:
-
-  /health:
-    get:
-      operationId: health
-      summary: Health check
-      description: Returns ok if the service is running.
-      tags:
-        - health
-      responses:
-        "200":
-          description: Service is running
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    example: ok
-                  service:
-                    type: string
-                    example: mystic-weave
-
-  /options:
-    get:
-      operationId: getOptions
-      summary: List supported species, focus archetypes, and backgrounds
-      description: >
-        Returns all supported species, focus archetypes, and backgrounds.
-        Call before presenting creation choices. Only present options returned here —
-        never enumerate from memory or training data.
-      tags:
-        - options
-      responses:
-        "200":
-          description: Supported species, focus archetypes, and backgrounds
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OptionsResponse"
-
   /state/{session_id}:
     get:
-      operationId: loadState
-      summary: Load game state
-      description: >
-        Load the full game state for a session. Call this at the start of every
-        session to restore character, world, and log history. Returns 404 if the
-        session does not exist.
-      tags:
-        - state
+      summary: Load State
+      description: Load the full game state for a session. Returns 404 if not found.
+      operationId: load_state_state__session_id__get
       parameters:
-        - name: session_id
-          in: path
-          required: true
-          schema:
-            type: string
-          description: The session identifier returned by POST /session/new
+      - name: session_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Session Id
       responses:
-        "200":
-          description: Full game state
+        '200':
+          description: Successful Response
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GameStateResponse"
-        "404":
-          description: Session not found
+                $ref: '#/components/schemas/GameStateResponse'
+        '422':
+          description: Validation Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
+                $ref: '#/components/schemas/HTTPValidationError'
     post:
-      operationId: saveState
-      summary: Save game state
-      description: >
-        Save the full game state after each turn and append a one-sentence log entry.
-        Uses UPSERT — works for both first save and subsequent saves.
-        Call this at the end of every turn without exception.
-      tags:
-        - state
+      summary: Save State
+      description: 'Save full game state and append a log entry.
+
+
+        Character fields are deep-merged onto the stored record so that fields
+
+        the GPT omits (languages, spells, equipment, feat_choices, biography, etc.)
+
+        are preserved from the previous save rather than wiped.
+
+
+        World is replaced in full (it is small and always fully specified).
+
+        The log_entry is appended atomically in SQL.'
+      operationId: save_state_state__session_id__post
       parameters:
-        - name: session_id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: session_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Session Id
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SaveStateRequest"
+              $ref: '#/components/schemas/SaveStateRequest'
       responses:
-        "200":
-          description: State saved successfully
+        '200':
+          description: Successful Response
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GameStateResponse"
-        "404":
-          description: Session not found
+                $ref: '#/components/schemas/GameStateResponse'
+        '422':
+          description: Validation Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
+                $ref: '#/components/schemas/HTTPValidationError'
   /session/new:
     post:
-      operationId: newSession
-      summary: Create a new game session
-      description: >
-        Creates a new session and seeds a character from the provided species,
-        focus archetype, and background. Returns the session_id and initial state.
-      tags:
-        - session
+      summary: New Session
+      description: 'Create a new game session.
+
+
+        Seeds the character from local game system data using the provided
+
+        species, focus, and background. Returns the session_id and initial
+
+        character + world state.'
+      operationId: new_session_session_new_post
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/NewSessionRequest"
+              $ref: '#/components/schemas/NewSessionRequest'
+        required: true
       responses:
-        "201":
-          description: Session created
+        '201':
+          description: Successful Response
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NewSessionResponse"
-        "422":
-          description: Invalid character options
+                $ref: '#/components/schemas/NewSessionResponse'
+        '422':
+          description: Validation Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
+                $ref: '#/components/schemas/HTTPValidationError'
   /character/create:
     post:
-      operationId: createCharacter
-      summary: Re-seed a character into an existing session
-      description: >
-        Replaces the character in an existing session with a newly seeded character.
-        The session must already exist.
-      tags:
-        - character
+      summary: Create Character
+      description: 'Seed a character from game system data and update the session''s
+        character record.
+
+
+        The session must already exist (created via POST /session/new).
+
+        Returns 404 if the session is not found.'
+      operationId: create_character_character_create_post
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateCharacterRequest"
+              $ref: '#/components/schemas/CreateCharacterRequest'
+        required: true
       responses:
-        "200":
-          description: Character created
+        '200':
+          description: Successful Response
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CreateCharacterResponse"
-        "404":
-          description: Session not found
+                $ref: '#/components/schemas/CreateCharacterResponse'
+        '422':
+          description: Validation Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-        "422":
-          description: Invalid character options
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
+                $ref: '#/components/schemas/HTTPValidationError'
   /roll:
     post:
-      operationId: rollDice
-      summary: Authoritative d100 dice resolution
-      description: >
-        Roll 1d100 against the provided target number.
-        The GPT assembles the target from domain score + knowledge tier +
-        application tier + difficulty modifier, then sends it here.
-        The server rolls. The GPT narrates. Returns the roll, success/failure,
-        margin, and degree of success band.
-      tags:
-        - dice
+      summary: Roll Dice
+      description: 'Roll 1d100 against the target number and return the result with
+
+        degree of success.
+
+
+        Critical rules (non-negotiable):
+
+        - Roll 1 is always critical success regardless of target.
+
+        - Roll 100 is always critical failure regardless of target.'
+      operationId: roll_dice_roll_post
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RollRequest"
+              $ref: '#/components/schemas/RollRequest'
+        required: true
       responses:
-        "200":
-          description: Roll result
+        '200':
+          description: Successful Response
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/RollResponse"
-
-  /location/{id}:
+                $ref: '#/components/schemas/RollResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /location/{location_id}:
     get:
-      operationId: getLocation
-      summary: Load location data
-      description: >
-        Load the full data for a location by ID. Call this before describing
-        any location to the player. You may add sensory flavor but you may not
-        contradict any field in the record.
-      tags:
-        - location
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Location data
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/LocationResponse"
-        "404":
-          description: Location not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ErrorResponse"
+      summary: Get Location
+      description: 'Load location data. The GPT must call this before describing any
+        place.
 
-  /location/{id}/connections:
-    get:
-      operationId: getLocationConnections
-      summary: Get valid movement options
-      description: >
-        Returns the list of locations connected to the given location.
-        Only present these as movement options — the player cannot move
-        to unconnected locations.
-      tags:
-        - location
+        Returns 404 if the location does not exist in the database.'
+      operationId: get_location_location__location_id__get
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: location_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Location Id
       responses:
-        "200":
-          description: Connected locations
+        '200':
+          description: Successful Response
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ConnectionsResponse"
-        "404":
-          description: Location not found
+                $ref: '#/components/schemas/LocationResponse'
+        '422':
+          description: Validation Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
-
+                $ref: '#/components/schemas/HTTPValidationError'
   /location:
     post:
-      operationId: upsertLocation
-      summary: Create or update a location
-      description: >
-        Create a new location or update an existing one. Use this when
-        discovering a new location or when updating details of a known location.
-      tags:
-        - location
+      summary: Upsert Location
+      description: 'Create or update a location.
+
+
+        The GPT calls this when:
+
+        - A player discovers a new location via an exploration action
+
+        - The GPT invents a new detail (NPC name, building) that must persist
+
+
+        Uses UPSERT so the same endpoint handles both creation and updates.
+
+        Also upserts world_graph edges based on the connections array in the data.'
+      operationId: upsert_location_location_post
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/LocationData"
+              $ref: '#/components/schemas/LocationData'
+        required: true
       responses:
-        "201":
-          description: Location created
+        '201':
+          description: Successful Response
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/LocationResponse"
-        "200":
+                $ref: '#/components/schemas/LocationResponse'
+        '200':
           description: Location updated
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/LocationResponse"
+                $ref: '#/components/schemas/LocationResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /location/{location_id}/connections:
+    get:
+      summary: Get Connections
+      description: 'Return all valid movement options from the given location.
 
+
+        The GPT may only move the player to locations listed here.
+
+        Movement to unlisted locations is not permitted.'
+      operationId: get_connections_location__location_id__connections_get
+      parameters:
+      - name: location_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Location Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /options:
+    get:
+      tags:
+      - options
+      summary: Get Options
+      description: 'Return all supported species, focus archetypes, and backgrounds.
+
+
+        Call this before asking the player to choose species, focus, or background.
+
+        Only present options returned by this endpoint — do not offer any options
+
+        not listed here. Never enumerate from memory.'
+      operationId: get_options_options_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionsResponse'
+  /:
+    get:
+      tags:
+      - health
+      summary: Root
+      description: Root — confirms the API is running.
+      operationId: root__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+                title: Response Root  Get
+  /health:
+    get:
+      tags:
+      - health
+      summary: Health Check
+      description: Health check endpoint — used by Railway and uptime monitors.
+      operationId: health_check_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  type: string
+                type: object
+                title: Response Health Check Health Get
+  /version:
+    get:
+      tags:
+      - health
+      summary: Version
+      description: Deployment/version metadata for sanity checks across environments.
+      operationId: version_version_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  anyOf:
+                  - type: string
+                  - type: integer
+                type: object
+                title: Response Version Version Get
 components:
   schemas:
-
-    ErrorResponse:
-      type: object
-      properties:
-        detail:
-          type: string
-
-    # ---------------------------------------------------------------------------
-    # Shared primitives
-    # ---------------------------------------------------------------------------
-
-    HP:
-      type: object
-      required: [current, max]
-      properties:
-        current:
-          type: integer
-          minimum: 0
-        max:
-          type: integer
-          minimum: 1
-          default: 100
-
-    DomainScores:
-      type: object
-      required: [power, agility, perception, endurance, intellect, will, presence]
+    AdjustmentPoints:
       properties:
         power:
           type: integer
-          minimum: 1
-          maximum: 60
+          title: Power
+          default: 0
         agility:
           type: integer
-          minimum: 1
-          maximum: 60
+          title: Agility
+          default: 0
         perception:
           type: integer
-          minimum: 1
-          maximum: 60
+          title: Perception
+          default: 0
         endurance:
           type: integer
-          minimum: 1
-          maximum: 60
+          title: Endurance
+          default: 0
         intellect:
           type: integer
-          minimum: 1
-          maximum: 60
+          title: Intellect
+          default: 0
         will:
           type: integer
-          minimum: 1
-          maximum: 60
+          title: Will
+          default: 0
         presence:
           type: integer
-          minimum: 1
-          maximum: 60
-
-    # ---------------------------------------------------------------------------
-    # Narrative / identity schemas (v3.1.0)
-    # ---------------------------------------------------------------------------
-
-    Alignment:
+          title: Presence
+          default: 0
       type: object
-      description: >
-        Two-axis alignment. order = lawful/neutral/chaotic.
-        intent = good/neutral/evil. ethos_note is freeform flavor text
-        the GPT uses to inform consistent character behaviour.
+      title: AdjustmentPoints
+      description: Player's +5 domain adjustment pool at creation. Max +3 per domain.
+    AdvancementState:
+      properties:
+        points_available:
+          type: integer
+          title: Points Available
+          default: 0
+        points_spent:
+          type: integer
+          title: Points Spent
+          default: 0
+        points_earned_total:
+          type: integer
+          title: Points Earned Total
+          default: 0
+      type: object
+      title: AdvancementState
+    Alignment:
       properties:
         order:
-          type: string
-          enum: [lawful, neutral, chaotic]
+          $ref: '#/components/schemas/AlignmentOrder'
           default: neutral
         intent:
-          type: string
-          enum: [good, neutral, evil]
+          $ref: '#/components/schemas/AlignmentIntent'
           default: neutral
         ethos_note:
           type: string
-          default: ""
-
-    Identity:
+          title: Ethos Note
+          default: ''
       type: object
-      description: >
-        Narrative character block. All fields optional — fill in at creation
-        and refine through play. The GPT reads this every session to inform
-        consistent behaviour and narration texture.
+      title: Alignment
+    AlignmentIntent:
+      type: string
+      enum:
+      - good
+      - neutral
+      - evil
+      title: AlignmentIntent
+    AlignmentOrder:
+      type: string
+      enum:
+      - lawful
+      - neutral
+      - chaotic
+      title: AlignmentOrder
+    BackgroundOption:
       properties:
-        origin:
+        index:
           type: string
-          default: ""
-          description: Where the character came from; formative history.
-        motivations:
-          type: array
-          items:
-            type: string
-          maxItems: 3
-          default: []
-          description: 1–3 driving goals.
-        quirks:
-          type: array
-          items:
-            type: string
-          maxItems: 3
-          default: []
-          description: 1–3 behavioural traits or mannerisms.
-        bonds:
-          type: array
-          items:
-            type: string
-          maxItems: 3
-          default: []
-          description: People, places, or things the character is tied to.
-        flaws:
-          type: array
-          items:
-            type: string
-          maxItems: 3
-          default: []
-          description: Weaknesses, biases, or blind spots.
-        wound:
-          type: string
-          default: ""
-          description: Notable formative scar or event.
-        alignment:
-          $ref: "#/components/schemas/Alignment"
-
-    ReputationEntry:
-      type: object
-      description: >
-        Standing with a single faction or community.
-        A missing entry means the faction has no opinion yet (unknown).
-        Range: -100 (despised) to +100 (revered).
-        Party reputation is computed by the GPT at resolution time:
-          known_avg = mean standing of party members who have an entry for the faction.
-          ratio     = known_count / total_party_size.
-          party_rep = known_avg × ratio.
-        Unknown members are excluded from the average, not treated as zero.
-      required: [faction]
-      properties:
-        faction:
-          type: string
-          description: >
-            Faction ID. Use snake_case. Known factions: draconic_council,
-            silver_scale_trading_company, order_of_the_platinum_flame,
-            amethyst_veil, dragon_guard, cult_of_tiamat.
-        standing:
-          type: integer
-          minimum: -100
-          maximum: 100
-          default: 0
-        note:
-          type: string
-          default: ""
-          description: Reason for current standing or context.
-        last_change:
-          type: string
-          default: ""
-          description: Brief description of the event that last moved standing.
-
-    # ---------------------------------------------------------------------------
-    # Equipment schemas (v3.1.0)
-    # ---------------------------------------------------------------------------
-
-    EquipmentItem:
-      type: object
-      required: [id, name]
-      properties:
-        id:
-          type: string
+          title: Index
         name:
           type: string
+          title: Name
         description:
           type: string
-          default: ""
-        tags:
-          type: array
-          items:
-            type: string
-            enum: [utility, weapon, armor, consumable, arcane, sacred, trade_good, special]
-          default: []
-        roll_tag:
-          type: string
-          nullable: true
-          default: null
-          description: >
-            Optional link to an application tag (e.g. "light_weapons").
-            When present, the GPT may include this item as context
-            when assembling a target number for relevant rolls.
-
-    Equipment:
+          title: Description
+          default: ''
+        knowledge_tags:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Knowledge Tags
+        application_tags:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Application Tags
       type: object
-      description: Three-slot inventory. worn = on person now. carried = in pack. stashed = at a known location.
-      properties:
-        worn:
-          type: array
-          items:
-            $ref: "#/components/schemas/EquipmentItem"
-          default: []
-        carried:
-          type: array
-          items:
-            $ref: "#/components/schemas/EquipmentItem"
-          default: []
-        stashed:
-          type: array
-          items:
-            $ref: "#/components/schemas/EquipmentItem"
-          default: []
-
-    # ---------------------------------------------------------------------------
-    # Character model (updated v3.1.0)
-    # ---------------------------------------------------------------------------
-
-    CharacterModel:
-      type: object
-      required: [name, species, focus, background, hp, domains]
+      required:
+      - index
+      - name
+      title: BackgroundOption
+    CharacterModel-Input:
       properties:
         name:
           type: string
+          title: Name
         species:
           type: string
-          description: Species index (e.g. "human", "dragonborn")
+          title: Species
         focus:
           type: string
-          description: Focus archetype index (e.g. "devoted", "stalker")
+          title: Focus
         background:
           type: string
-          description: Background index (e.g. "soldier", "acolyte")
+          title: Background
         level:
           type: integer
-          minimum: 1
+          title: Level
           default: 1
         hp:
-          $ref: "#/components/schemas/HP"
+          $ref: '#/components/schemas/HP'
         domains:
-          $ref: "#/components/schemas/DomainScores"
+          $ref: '#/components/schemas/DomainScores'
         knowledge:
-          type: object
           additionalProperties:
             type: integer
-            minimum: 1
-            maximum: 5
-          default: {}
-          description: >
-            Knowledge tags. Keys are tag names (e.g. "discipline", "arcana"),
-            values are tier numbers (1–5).
+          type: object
+          title: Knowledge
         application:
-          type: object
           additionalProperties:
             type: integer
-            minimum: 1
-            maximum: 5
-          default: {}
-          description: >
-            Application tags. Keys are category names (e.g. "sacred_rites", "heavy_weapons"),
-            values are tier numbers (1–5).
+          type: object
+          title: Application
         status_effects:
-          type: array
           items:
             type: string
-          default: []
+          type: array
+          title: Status Effects
         notes:
           type: string
-          default: ""
-        # v3.1.0 additions
+          title: Notes
+          default: ''
         identity:
-          $ref: "#/components/schemas/Identity"
+          $ref: '#/components/schemas/Identity-Input'
         equipment:
-          $ref: "#/components/schemas/Equipment"
+          $ref: '#/components/schemas/Equipment-Input'
         reputation:
-          type: array
           items:
-            $ref: "#/components/schemas/ReputationEntry"
-          default: []
-          description: >
-            Personal reputation entries keyed by faction ID.
-            Missing entry = faction has no opinion (unknown).
-
-    # ---------------------------------------------------------------------------
-    # Companion model (v3.1.0)
-    # ---------------------------------------------------------------------------
-
-    CompanionModel:
+            $ref: '#/components/schemas/ReputationEntry'
+          type: array
+          title: Reputation
+        advancement:
+          $ref: '#/components/schemas/AdvancementState'
+      additionalProperties: false
       type: object
-      required: [id, name]
-      description: >
-        Lightweight companion schema. Domains and tags are optional —
-        include only if the companion participates in rolls.
-        Disposition: -100 (hostile) to +100 (devoted) toward the player character.
+      required:
+      - name
+      - species
+      - focus
+      - background
+      - hp
+      - domains
+      - advancement
+      title: CharacterModel
+    CharacterModel-Output:
+      properties:
+        name:
+          type: string
+          title: Name
+        species:
+          type: string
+          title: Species
+        focus:
+          type: string
+          title: Focus
+        background:
+          type: string
+          title: Background
+        level:
+          type: integer
+          title: Level
+          default: 1
+        hp:
+          $ref: '#/components/schemas/HP'
+        domains:
+          $ref: '#/components/schemas/DomainScores'
+        knowledge:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Knowledge
+        application:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Application
+        status_effects:
+          items:
+            type: string
+          type: array
+          title: Status Effects
+        notes:
+          type: string
+          title: Notes
+          default: ''
+        identity:
+          $ref: '#/components/schemas/Identity-Output'
+        equipment:
+          $ref: '#/components/schemas/Equipment-Output'
+        reputation:
+          items:
+            $ref: '#/components/schemas/ReputationEntry'
+          type: array
+          title: Reputation
+        advancement:
+          $ref: '#/components/schemas/AdvancementState'
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - species
+      - focus
+      - background
+      - hp
+      - domains
+      - advancement
+      title: CharacterModel
+    CompanionModel-Input:
       properties:
         id:
           type: string
+          title: Id
         name:
           type: string
+          title: Name
         species:
           type: string
+          title: Species
           default: unknown
         role:
           type: string
-          default: ""
-          description: Narrative role, e.g. "scout", "healer", "guide".
+          title: Role
+          default: ''
         identity:
-          $ref: "#/components/schemas/Identity"
+          $ref: '#/components/schemas/Identity-Input'
         hp:
-          $ref: "#/components/schemas/HP"
+          $ref: '#/components/schemas/HP'
         domains:
-          $ref: "#/components/schemas/DomainScores"
-          nullable: true
-          description: Omit for purely narrative companions.
+          anyOf:
+          - $ref: '#/components/schemas/DomainScores'
+          - type: 'null'
         knowledge:
-          type: object
           additionalProperties:
             type: integer
-          default: {}
+          type: object
+          title: Knowledge
         application:
-          type: object
           additionalProperties:
             type: integer
-          default: {}
+          type: object
+          title: Application
         status:
-          type: string
-          enum: [active, incapacitated, departed]
+          $ref: '#/components/schemas/CompanionStatus'
           default: active
         disposition:
           type: integer
-          minimum: -100
-          maximum: 100
+          title: Disposition
           default: 0
-          description: How the companion feels toward the player character.
         reputation:
-          type: array
           items:
-            $ref: "#/components/schemas/ReputationEntry"
-          default: []
-
-    # ---------------------------------------------------------------------------
-    # Economy (v3.1.0)
-    # ---------------------------------------------------------------------------
-
-    Economy:
+            $ref: '#/components/schemas/ReputationEntry'
+          type: array
+          title: Reputation
+      additionalProperties: false
       type: object
-      description: >
-        Economic state. wealth_tier is the universal abstraction covering both
-        Drakenvale's barter economy and currency economies outside it.
-        coin is a raw integer for hard-currency regions only (e.g. SSTC trade routes).
+      required:
+      - id
+      - name
+      title: CompanionModel
+      description: "Lightweight companion schema. Not a full PC — no focus/background\
+        \ mechanics.\nDomains and tags are optional; include only if the companion\
+        \ participates\nin rolls. Status defaults to active.\n\nParty reputation formula\
+        \ (computed by GPT at resolution time, not stored):\n  known_avg  = mean(standing\
+        \ for members with an entry for the faction)\n  ratio      = known_count /\
+        \ total_party_size\n  party_rep  = known_avg × ratio"
+    CompanionModel-Output:
       properties:
-        wealth_tier:
+        id:
           type: string
-          enum: [destitute, modest, comfortable, wealthy, affluent]
-          default: modest
-        coin:
-          type: integer
-          minimum: 0
-          default: 0
-          description: Raw coin count for currency-economy regions.
-        trade_goods:
-          type: array
-          items:
-            type: string
-          default: []
-          description: Named barter items not tracked as equipment.
-        obligations:
-          type: array
-          items:
-            type: string
-          default: []
-          description: Debts, favors owed, or sworn financial duties.
-
-    # ---------------------------------------------------------------------------
-    # Politics (v3.1.0)
-    # ---------------------------------------------------------------------------
-
-    Politics:
-      type: object
-      description: >
-        World-level relational and political state. Not a subsystem —
-        a lightweight store for the GPT to track active political context.
-        Update when faction obligations, legal standing, or active tensions change.
-      properties:
-        faction_memberships:
-          type: array
-          items:
-            type: string
-          default: []
-          description: Factions the party formally belongs to.
-        active_obligations:
-          type: array
-          items:
-            type: string
-          default: []
-          description: Current political duties or oaths.
-        legal_standing:
+          title: Id
+        name:
           type: string
+          title: Name
+        species:
+          type: string
+          title: Species
           default: unknown
-          description: e.g. "exile", "citizen", "wanted", "unknown".
-        known_leverage:
-          type: array
-          items:
-            type: string
-          default: []
-          description: Secrets or leverage the party holds over others.
-        active_tensions:
-          type: array
-          items:
-            type: string
-          default: []
-          description: Ongoing faction conflicts relevant to the party.
-        conclave_status:
+        role:
           type: string
-          enum: [pending, active, concluded, unknown]
-          default: unknown
-          description: Status of the Draconic Conclave — a major political anchor.
-
-    # ---------------------------------------------------------------------------
-    # World model (updated v3.1.0)
-    # ---------------------------------------------------------------------------
-
-    WorldModel:
-      type: object
-      required: [location, threat, goal, turn]
-      properties:
-        location:
-          type: string
-          description: Current location ID
-        threat:
-          type: string
-          description: Current primary threat
-        goal:
-          type: string
-          description: Current objective
-        turn:
-          type: integer
-          minimum: 1
-          default: 1
-        # v3.1.0 additions
-        companions:
-          type: array
-          items:
-            $ref: "#/components/schemas/CompanionModel"
-          default: []
-          description: Active companions traveling with or known to the party.
-        economy:
-          $ref: "#/components/schemas/Economy"
-        politics:
-          $ref: "#/components/schemas/Politics"
-        time:
-          $ref: "#/components/schemas/TimeState"
-
-    TimeState:
+          title: Role
+          default: ''
+        identity:
+          $ref: '#/components/schemas/Identity-Output'
+        hp:
+          $ref: '#/components/schemas/HP'
+        domains:
+          anyOf:
+          - $ref: '#/components/schemas/DomainScores'
+          - type: 'null'
+        knowledge:
+          additionalProperties:
+            type: integer
           type: object
-          description: >
-            In-world calendar, time of day, and weather state. Updated every turn
-            by the GPT before saving state. Never offer time-gated content that
-            contradicts current time_of_day. Derive Vaelthor moon phase from day
-            using the calendar knowledge file — do not store it.
-          properties:
-            day:
-              type: integer
-              minimum: 1
-              maximum: 30
-              default: 1
-              description: Day of the current month (1–30).
-            month:
-              type: string
-              default: Verdantrise
-              description: Current month name from the Ptarian Calendar.
-            year:
-              type: integer
-              minimum: 1
-              default: 847
-              description: Year of the Pact (YP).
-            time_of_day:
-              type: string
-              enum: [dawn, morning, midday, afternoon, dusk, night]
-              default: morning
-            season:
-              type: string
-              enum: [spring, summer, autumn, winter]
-              default: spring
-            festival:
-              type: string
-              nullable: true
-              default: null
-              description: >
-                Null on ordinary days. Holds the festival name on festival days.
-                Clear at dawn the following day.
-            weather:
-              type: string
-              enum: [clear, mist, storm, ash-haze, unnatural]
-              default: clear
-              description: >
-                Valley weather reflects dragon emotional state. Update only when
-                world events cause a change — not arbitrarily between turns.
-            weather_note:
-              type: string
-              default: ""
-              description: Optional context for current weather state.
-
-    # ---------------------------------------------------------------------------
-    # State
-    # ---------------------------------------------------------------------------
-
-    SaveStateRequest:
-      type: object
-      required: [character, world, log_entry]
-      properties:
-        character:
-          $ref: "#/components/schemas/CharacterModel"
-        world:
-          $ref: "#/components/schemas/WorldModel"
-        log_entry:
-          type: string
-          description: >
-            One in-world sentence capturing what materially changed this turn.
-
-    GameStateResponse:
-      type: object
-      required: [session_id, character, world, log]
-      properties:
-        session_id:
-          type: string
-        character:
-          $ref: "#/components/schemas/CharacterModel"
-        world:
-          $ref: "#/components/schemas/WorldModel"
-        log:
-          type: array
+          title: Knowledge
+        application:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Application
+        status:
+          $ref: '#/components/schemas/CompanionStatus'
+          default: active
+        disposition:
+          type: integer
+          title: Disposition
+          default: 0
+        reputation:
           items:
-            type: string
-        updated_at:
-          anyOf:
-            - type: string
-              format: date-time
-            - type: "null"
-
-    # ---------------------------------------------------------------------------
-    # Session
-    # ---------------------------------------------------------------------------
-
-    AdjustmentPoints:
-      type: object
-      description: >
-        Player's +5 domain adjustment pool. Max +3 per domain.
-        Total must not exceed 5.
-      properties:
-        power:
-          type: integer
-          minimum: 0
-          maximum: 3
-          default: 0
-        agility:
-          type: integer
-          minimum: 0
-          maximum: 3
-          default: 0
-        perception:
-          type: integer
-          minimum: 0
-          maximum: 3
-          default: 0
-        endurance:
-          type: integer
-          minimum: 0
-          maximum: 3
-          default: 0
-        intellect:
-          type: integer
-          minimum: 0
-          maximum: 3
-          default: 0
-        will:
-          type: integer
-          minimum: 0
-          maximum: 3
-          default: 0
-        presence:
-          type: integer
-          minimum: 0
-          maximum: 3
-          default: 0
-
-    NewSessionRequest:
-      type: object
-      required: [character_name, species, focus, background]
-      properties:
-        character_name:
-          type: string
-        species:
-          type: string
-          description: Species index from GET /options
-        focus:
-          type: string
-          description: Focus archetype index from GET /options
-        background:
-          type: string
-          description: Background index from GET /options
-        adjustment_points:
-          $ref: "#/components/schemas/AdjustmentPoints"
-        starting_location:
-          type: string
-          default: unknown
-        goal:
-          type: string
-          default: survive
-        threat:
-          type: string
-          default: unknown
-        # v3.1.0 additions
-        identity:
-          $ref: "#/components/schemas/Identity"
-        starting_economy:
-          $ref: "#/components/schemas/Economy"
-
-    NewSessionResponse:
-      type: object
-      required: [session_id, character, world]
-      properties:
-        session_id:
-          type: string
-        character:
-          $ref: "#/components/schemas/CharacterModel"
-        world:
-          $ref: "#/components/schemas/WorldModel"
-
-    # ---------------------------------------------------------------------------
-    # Character Creation
-    # ---------------------------------------------------------------------------
-
-    CreateCharacterRequest:
-      type: object
-      required: [session_id, name, species, focus, background]
-      properties:
-        session_id:
-          type: string
-        name:
-          type: string
-        species:
-          type: string
-        focus:
-          type: string
-        background:
-          type: string
-        adjustment_points:
-          $ref: "#/components/schemas/AdjustmentPoints"
-        # v3.1.0 addition
-        identity:
-          $ref: "#/components/schemas/Identity"
-
-    CreateCharacterResponse:
-      type: object
-      required: [session_id, character]
-      properties:
-        session_id:
-          type: string
-        character:
-          $ref: "#/components/schemas/CharacterModel"
-
-    # ---------------------------------------------------------------------------
-    # Dice
-    # ---------------------------------------------------------------------------
-
-    RollRequest:
-      type: object
-      required: [target]
-      properties:
-        target:
-          type: integer
-          description: >
-            Assembled target number: domain score + knowledge tier + application tier + difficulty modifier.
-            Clamped to 1–99 by the server.
-        reason:
-          type: string
-          description: Optional short description of the attempted action for observability/debugging.
-
-    RollResponse:
-      type: object
-      required: [roll, target, success, margin, degree, critical_success, critical_failure]
-      properties:
-        roll:
-          type: integer
-          description: Raw d100 result (1–100)
-        target:
-          type: integer
-          description: The clamped target number
-        success:
-          type: boolean
-          description: true if roll <= target
-        margin:
-          type: integer
-          description: target - roll. Positive = succeeded by this much. Negative = failed by this much.
-        degree:
-          type: string
-          enum: [critical_success, strong_success, success, partial_failure, failure, critical_failure]
-          description: Degree of success band based on margin
-        critical_success:
-          type: boolean
-          description: true if roll == 1
-        critical_failure:
-          type: boolean
-          description: true if roll == 100
-
-    # ---------------------------------------------------------------------------
-    # Location
-    # ---------------------------------------------------------------------------
-
-    LocationData:
-      type: object
-      required: [id, name]
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-          default: unknown
-        description:
-          type: string
-          default: ""
-        tags:
+            $ref: '#/components/schemas/ReputationEntry'
           type: array
-          items:
-            type: string
-          default: []
-        connections:
-          type: array
-          items:
-            type: string
-          default: []
-        threat_level:
-          type: integer
-          default: 0
-        known_npcs:
-          type: array
-          items:
-            type: string
-          default: []
-        discovered:
-          type: boolean
-          default: true
-
-    LocationResponse:
+          title: Reputation
+      additionalProperties: false
       type: object
-      required: [id, name, data]
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        data:
-          $ref: "#/components/schemas/LocationData"
-        updated_at:
-          anyOf:
-            - type: string
-              format: date-time
-            - type: "null"
-
+      required:
+      - id
+      - name
+      title: CompanionModel
+      description: "Lightweight companion schema. Not a full PC — no focus/background\
+        \ mechanics.\nDomains and tags are optional; include only if the companion\
+        \ participates\nin rolls. Status defaults to active.\n\nParty reputation formula\
+        \ (computed by GPT at resolution time, not stored):\n  known_avg  = mean(standing\
+        \ for members with an entry for the faction)\n  ratio      = known_count /\
+        \ total_party_size\n  party_rep  = known_avg × ratio"
+    CompanionStatus:
+      type: string
+      enum:
+      - active
+      - incapacitated
+      - departed
+      title: CompanionStatus
     ConnectionInfo:
-      type: object
-      required: [to_id]
       properties:
         to_id:
           type: string
+          title: To Id
         traversal:
           anyOf:
-            - type: string
-            - type: "null"
+          - type: string
+          - type: 'null'
+          title: Traversal
         distance:
           anyOf:
-            - type: string
-            - type: "null"
-
-    ConnectionsResponse:
+          - type: string
+          - type: 'null'
+          title: Distance
       type: object
-      required: [from_id, connections]
+      required:
+      - to_id
+      title: ConnectionInfo
+    ConnectionsResponse:
       properties:
         from_id:
           type: string
+          title: From Id
         connections:
-          type: array
           items:
-            $ref: "#/components/schemas/ConnectionInfo"
-
-    # ---------------------------------------------------------------------------
-    # Options
-    # ---------------------------------------------------------------------------
-
-    SpeciesOption:
+            $ref: '#/components/schemas/ConnectionInfo'
+          type: array
+          title: Connections
       type: object
+      required:
+      - from_id
+      - connections
+      title: ConnectionsResponse
+    CreateCharacterRequest:
       properties:
-        index:
+        session_id:
           type: string
+          title: Session Id
         name:
           type: string
-        primary_domain:
+          title: Name
+        species:
           type: string
-          nullable: true
-        domains:
-          type: object
-          additionalProperties:
-            type: integer
+          title: Species
+        focus:
+          type: string
+          title: Focus
+        background:
+          type: string
+          title: Background
+        adjustment_points:
+          $ref: '#/components/schemas/AdjustmentPoints'
+        identity:
+          $ref: '#/components/schemas/Identity-Input'
+      type: object
+      required:
+      - session_id
+      - name
+      - species
+      - focus
+      - background
+      title: CreateCharacterRequest
+      description: Body for POST /character/create — seeds character from game system
+        data.
+    CreateCharacterResponse:
+      properties:
+        session_id:
+          type: string
+          title: Session Id
+        character:
+          $ref: '#/components/schemas/CharacterModel-Output'
+      type: object
+      required:
+      - session_id
+      - character
+      title: CreateCharacterResponse
+    DomainScores:
+      properties:
+        power:
+          type: integer
+          title: Power
+        agility:
+          type: integer
+          title: Agility
+        perception:
+          type: integer
+          title: Perception
+        endurance:
+          type: integer
+          title: Endurance
+        intellect:
+          type: integer
+          title: Intellect
+        will:
+          type: integer
+          title: Will
+        presence:
+          type: integer
+          title: Presence
+      type: object
+      required:
+      - power
+      - agility
+      - perception
+      - endurance
+      - intellect
+      - will
+      - presence
+      title: DomainScores
+    Economy:
+      properties:
+        wealth_tier:
+          $ref: '#/components/schemas/WealthTier'
+          default: modest
+        coin:
+          type: integer
+          title: Coin
+          default: 0
+        trade_goods:
+          items:
+            type: string
+          type: array
+          title: Trade Goods
+        obligations:
+          items:
+            type: string
+          type: array
+          title: Obligations
+      type: object
+      title: Economy
+      description: 'Economic state. wealth_tier is the universal abstraction (works
+        for barter
 
+        and currency economies alike). coin is a raw integer for regions that use
+
+        hard currency (e.g. outside Drakenvale via the SSTC).'
+    Equipment-Input:
+      properties:
+        worn:
+          items:
+            $ref: '#/components/schemas/EquipmentItem'
+          type: array
+          title: Worn
+        carried:
+          items:
+            $ref: '#/components/schemas/EquipmentItem'
+          type: array
+          title: Carried
+        stashed:
+          items:
+            $ref: '#/components/schemas/EquipmentItem'
+          type: array
+          title: Stashed
+      type: object
+      title: Equipment
+      description: Three-slot equipment inventory.
+    Equipment-Output:
+      properties:
+        worn:
+          items:
+            $ref: '#/components/schemas/EquipmentItem'
+          type: array
+          title: Worn
+        carried:
+          items:
+            $ref: '#/components/schemas/EquipmentItem'
+          type: array
+          title: Carried
+        stashed:
+          items:
+            $ref: '#/components/schemas/EquipmentItem'
+          type: array
+          title: Stashed
+      type: object
+      title: Equipment
+      description: Three-slot equipment inventory.
+    EquipmentItem:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+          default: ''
+        tags:
+          items:
+            $ref: '#/components/schemas/EquipmentTag'
+          type: array
+          title: Tags
+        roll_tag:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Roll Tag
+      type: object
+      required:
+      - id
+      - name
+      title: EquipmentItem
+      description: Single item in any equipment slot.
+    EquipmentTag:
+      type: string
+      enum:
+      - utility
+      - weapon
+      - armor
+      - consumable
+      - arcane
+      - sacred
+      - trade_good
+      - special
+      title: EquipmentTag
     FocusOption:
-      type: object
       properties:
         index:
           type: string
+          title: Index
         name:
           type: string
+          title: Name
         description:
           type: string
+          title: Description
+          default: ''
         knowledge_tags:
-          type: object
           additionalProperties:
             type: integer
+          type: object
+          title: Knowledge Tags
         application_tags:
-          type: object
           additionalProperties:
             type: integer
-
-    BackgroundOption:
+          type: object
+          title: Application Tags
       type: object
+      required:
+      - index
+      - name
+      title: FocusOption
+    GameStateResponse:
       properties:
-        index:
+        session_id:
           type: string
+          title: Session Id
+        character:
+          $ref: '#/components/schemas/CharacterModel-Output'
+        world:
+          $ref: '#/components/schemas/WorldModel-Output'
+        log:
+          items:
+            type: string
+          type: array
+          title: Log
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+      type: object
+      required:
+      - session_id
+      - character
+      - world
+      - log
+      title: GameStateResponse
+      description: Response for GET /state/{session_id}
+    HP:
+      properties:
+        current:
+          type: integer
+          title: Current
+        max:
+          type: integer
+          title: Max
+          default: 100
+      type: object
+      required:
+      - current
+      title: HP
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Identity-Input:
+      properties:
+        origin:
+          type: string
+          title: Origin
+          default: ''
+        motivations:
+          items:
+            type: string
+          type: array
+          title: Motivations
+        quirks:
+          items:
+            type: string
+          type: array
+          title: Quirks
+        bonds:
+          items:
+            type: string
+          type: array
+          title: Bonds
+        flaws:
+          items:
+            type: string
+          type: array
+          title: Flaws
+        wound:
+          type: string
+          title: Wound
+          default: ''
+        alignment:
+          $ref: '#/components/schemas/Alignment'
+      type: object
+      title: Identity
+      description: 'Narrative character block. Captured at creation, GPT-readable
+        every session.
+
+        All fields optional at creation — can be filled in as play reveals them.'
+    Identity-Output:
+      properties:
+        origin:
+          type: string
+          title: Origin
+          default: ''
+        motivations:
+          items:
+            type: string
+          type: array
+          title: Motivations
+        quirks:
+          items:
+            type: string
+          type: array
+          title: Quirks
+        bonds:
+          items:
+            type: string
+          type: array
+          title: Bonds
+        flaws:
+          items:
+            type: string
+          type: array
+          title: Flaws
+        wound:
+          type: string
+          title: Wound
+          default: ''
+        alignment:
+          $ref: '#/components/schemas/Alignment'
+      type: object
+      title: Identity
+      description: 'Narrative character block. Captured at creation, GPT-readable
+        every session.
+
+        All fields optional at creation — can be filled in as play reveals them.'
+    LocationData:
+      properties:
+        id:
+          type: string
+          title: Id
         name:
           type: string
+          title: Name
+        type:
+          type: string
+          title: Type
+          default: unknown
         description:
           type: string
-        knowledge_tags:
-          type: object
-          additionalProperties:
-            type: integer
-        application_tags:
-          type: object
-          additionalProperties:
-            type: integer
-
+          title: Description
+          default: ''
+        tags:
+          items:
+            type: string
+          type: array
+          title: Tags
+        connections:
+          items:
+            type: string
+          type: array
+          title: Connections
+        threat_level:
+          type: integer
+          title: Threat Level
+          default: 0
+        known_npcs:
+          items:
+            type: string
+          type: array
+          title: Known Npcs
+        discovered:
+          type: boolean
+          title: Discovered
+          default: true
+      type: object
+      required:
+      - id
+      - name
+      title: LocationData
+      description: Shape of the JSONB data column in the locations table.
+    LocationResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        data:
+          $ref: '#/components/schemas/LocationData'
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+      type: object
+      required:
+      - id
+      - name
+      - data
+      title: LocationResponse
+    NewSessionRequest:
+      properties:
+        character_name:
+          type: string
+          title: Character Name
+        species:
+          type: string
+          title: Species
+        focus:
+          type: string
+          title: Focus
+        background:
+          type: string
+          title: Background
+        adjustment_points:
+          $ref: '#/components/schemas/AdjustmentPoints'
+        starting_location:
+          type: string
+          title: Starting Location
+          default: unknown
+        goal:
+          type: string
+          title: Goal
+          default: survive
+        threat:
+          type: string
+          title: Threat
+          default: unknown
+        identity:
+          $ref: '#/components/schemas/Identity-Input'
+        starting_economy:
+          $ref: '#/components/schemas/Economy'
+      type: object
+      required:
+      - character_name
+      - species
+      - focus
+      - background
+      title: NewSessionRequest
+      description: Body for POST /session/new
+    NewSessionResponse:
+      properties:
+        session_id:
+          type: string
+          title: Session Id
+        character:
+          $ref: '#/components/schemas/CharacterModel-Output'
+        world:
+          $ref: '#/components/schemas/WorldModel-Output'
+      type: object
+      required:
+      - session_id
+      - character
+      - world
+      title: NewSessionResponse
     OptionsResponse:
-      type: object
       properties:
         species:
-          type: array
           items:
-            $ref: "#/components/schemas/SpeciesOption"
+            $ref: '#/components/schemas/SpeciesOption'
+          type: array
+          title: Species
         focus:
-          type: array
           items:
-            $ref: "#/components/schemas/FocusOption"
+            $ref: '#/components/schemas/FocusOption'
+          type: array
+          title: Focus
         backgrounds:
-          type: array
           items:
-            $ref: "#/components/schemas/BackgroundOption"
+            $ref: '#/components/schemas/BackgroundOption'
+          type: array
+          title: Backgrounds
+      type: object
+      required:
+      - species
+      - focus
+      - backgrounds
+      title: OptionsResponse
+      description: Response for GET /options — all supported species, focus archetypes,
+        backgrounds.
+    Politics:
+      properties:
+        faction_memberships:
+          items:
+            type: string
+          type: array
+          title: Faction Memberships
+        active_obligations:
+          items:
+            type: string
+          type: array
+          title: Active Obligations
+        legal_standing:
+          type: string
+          title: Legal Standing
+          default: unknown
+        known_leverage:
+          items:
+            type: string
+          type: array
+          title: Known Leverage
+        active_tensions:
+          items:
+            type: string
+          type: array
+          title: Active Tensions
+        conclave_status:
+          type: string
+          title: Conclave Status
+          default: unknown
+      type: object
+      title: Politics
+      description: 'World-level relational and political state.
+
+        Not a subsystem — a lightweight store for the GPT to track active context.'
+    ReputationEntry:
+      properties:
+        faction:
+          type: string
+          title: Faction
+        standing:
+          type: integer
+          title: Standing
+          default: 0
+        note:
+          type: string
+          title: Note
+          default: ''
+        last_change:
+          type: string
+          title: Last Change
+          default: ''
+      type: object
+      required:
+      - faction
+      title: ReputationEntry
+      description: 'Standing with a single faction or community.
+
+        Missing entry = unknown (faction has no opinion yet).
+
+        Range: -100 (despised) to +100 (revered).'
+    RollRequest:
+      properties:
+        target:
+          type: integer
+          title: Target
+        reason:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reason
+          description: Optional short description of the attempted action for observability/debugging.
+      type: object
+      required:
+      - target
+      title: RollRequest
+      description: Body for POST /roll — d100 roll-under resolution.
+    RollResponse:
+      properties:
+        roll:
+          type: integer
+          title: Roll
+        target:
+          type: integer
+          title: Target
+        success:
+          type: boolean
+          title: Success
+        margin:
+          type: integer
+          title: Margin
+        degree:
+          type: string
+          title: Degree
+        critical_success:
+          type: boolean
+          title: Critical Success
+          default: false
+        critical_failure:
+          type: boolean
+          title: Critical Failure
+          default: false
+      type: object
+      required:
+      - roll
+      - target
+      - success
+      - margin
+      - degree
+      title: RollResponse
+    SaveStateRequest:
+      properties:
+        character:
+          $ref: '#/components/schemas/CharacterModel-Input'
+        world:
+          $ref: '#/components/schemas/WorldModel-Input'
+        log_entry:
+          type: string
+          title: Log Entry
+      type: object
+      required:
+      - character
+      - world
+      - log_entry
+      title: SaveStateRequest
+      description: Body for POST /state/{session_id}
+    SpeciesOption:
+      properties:
+        index:
+          type: string
+          title: Index
+        name:
+          type: string
+          title: Name
+        primary_domain:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Primary Domain
+        domains:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Domains
+      type: object
+      required:
+      - index
+      - name
+      - domains
+      title: SpeciesOption
+    TimeOfDay:
+      type: string
+      enum:
+      - dawn
+      - morning
+      - midday
+      - afternoon
+      - dusk
+      - night
+      title: TimeOfDay
+    TimeState:
+      properties:
+        day:
+          type: integer
+          title: Day
+          default: 1
+        month:
+          type: string
+          title: Month
+          default: Verdantrise
+        year:
+          type: integer
+          title: Year
+          default: 847
+        time_of_day:
+          $ref: '#/components/schemas/TimeOfDay'
+          default: morning
+        season:
+          type: string
+          title: Season
+          default: spring
+        festival:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Festival
+        weather:
+          $ref: '#/components/schemas/WeatherState'
+          default: clear
+        weather_note:
+          type: string
+          title: Weather Note
+          default: ''
+      type: object
+      title: TimeState
+      description: In-world time, calendar, and weather state.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    WealthTier:
+      type: string
+      enum:
+      - destitute
+      - modest
+      - comfortable
+      - wealthy
+      - affluent
+      title: WealthTier
+    WeatherState:
+      type: string
+      enum:
+      - clear
+      - mist
+      - storm
+      - ash-haze
+      - unnatural
+      title: WeatherState
+    WorldModel-Input:
+      properties:
+        location:
+          type: string
+          title: Location
+        threat:
+          type: string
+          title: Threat
+        goal:
+          type: string
+          title: Goal
+        turn:
+          type: integer
+          title: Turn
+          default: 1
+        companions:
+          items:
+            $ref: '#/components/schemas/CompanionModel-Input'
+          type: array
+          title: Companions
+        economy:
+          $ref: '#/components/schemas/Economy'
+        politics:
+          $ref: '#/components/schemas/Politics'
+        time:
+          $ref: '#/components/schemas/TimeState'
+      additionalProperties: false
+      type: object
+      required:
+      - location
+      - threat
+      - goal
+      title: WorldModel
+    WorldModel-Output:
+      properties:
+        location:
+          type: string
+          title: Location
+        threat:
+          type: string
+          title: Threat
+        goal:
+          type: string
+          title: Goal
+        turn:
+          type: integer
+          title: Turn
+          default: 1
+        companions:
+          items:
+            $ref: '#/components/schemas/CompanionModel-Output'
+          type: array
+          title: Companions
+        economy:
+          $ref: '#/components/schemas/Economy'
+        politics:
+          $ref: '#/components/schemas/Politics'
+        time:
+          $ref: '#/components/schemas/TimeState'
+      additionalProperties: false
+      type: object
+      required:
+      - location
+      - threat
+      - goal
+      title: WorldModel

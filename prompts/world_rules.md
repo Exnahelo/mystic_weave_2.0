@@ -6,7 +6,7 @@ This document defines the internal logic of the Mystic Weave world. It is the so
 
 ## Domain Scores
 
-Characters have seven domains scored 25–60:
+Characters have seven domains scored 25–80:
 
 | Domain | Governs |
 |---|---|
@@ -18,7 +18,7 @@ Characters have seven domains scored 25–60:
 | Will | Discipline, self-regulation, mental resilience, concentration under pressure |
 | Presence | Social weight, confidence, expressiveness, influence over others |
 
-Domain scores are set by species at character creation, adjusted by a +5 player pool (max +3 per domain). Scores can advance by +1 through transformative narrative events, capped at 60.
+Domain scores are set by species at character creation, adjusted by a +5 player pool (max +3 per domain). Starting values are usually within species baselines (commonly 25–60), but campaign progression can raise domains to 80 through AP spend.
 
 ---
 
@@ -126,9 +126,69 @@ Maximum competency contribution: Knowledge 5 + Application 5 = +10.
 
 ## Advancement
 
-**Tag advancement:** When a character uses a tag in a meaningful, consequential action and the outcome creates lasting narrative impact, advance that tag by one tier. No tag advances more than once per session. Announce advancement as part of outcome narration. Rate: roughly one advancement every 3–5 sessions.
+### Track 1 — Tags (Narrative, Use-Based)
 
-**Domain advancement:** Only through transformative narrative events. +1 per event. Cap: 60. Rate: two or three times across an entire campaign.
+- Tags do **not** consume AP.
+- When a character uses a tag in a meaningful, consequential action and the outcome creates lasting narrative impact, advance that tag by one tier.
+- No tag advances more than once per session.
+- Tag tier cap is **T5**.
+
+### Track 2 — Domains (AP-Purchased)
+
+- Domain increases are purchased with AP and may be applied to any domain (no cross-domain restriction).
+- Domain score cap is **80**.
+- Cost by target-score bracket:
+  - Raising a domain to **25–60** costs **1 AP per point**.
+  - Raising a domain to **61–70** costs **2 AP per point**.
+  - Raising a domain to **71–80** costs **3 AP per point**.
+- For multi-point increases that cross brackets, calculate AP point-by-point using the bracket of each resulting score.
+
+### Track 3 — AP Earning (Consequence Scale)
+
+- **Local (0 AP):** the outcome matters in the immediate scene only and leaves no durable downstream pressure.
+- **Situational (1 AP):** the outcome creates a meaningful short-term shift for the current objective, encounter, or nearby node.
+- **Regional (2 AP):** the outcome reshapes conditions across multiple locations, factions, or travel paths in the active region.
+- **Campaign (4 AP):** the outcome materially redirects major arc stakes, long-horizon faction posture, or world-state trajectory.
+
+---
+
+## Reputation
+
+Reputation represents standing with a specific faction and ranges from **-100 to +100**.
+
+### What Triggers a Reputation Change
+
+- Direct interaction with a faction member that has a meaningful outcome.
+- Completing or failing an action that a faction has clear stake in.
+- A **Regional** or **Campaign** scale world consequence that involves the faction.
+- **Local** consequences do not change reputation.
+
+### Reputation Change by Action Scale
+
+| Action Scale | Standing Change |
+|---|---|
+| Situational | ±5 |
+| Regional | ±15 |
+| Campaign | ±30 |
+
+Use **positive** change when the outcome materially aligns with faction interests, and **negative** change when it materially undermines faction interests.
+
+### Standing Bands and Roll Modifiers
+
+| Band | Standing Range | Roll Modifier |
+|---|---|---|
+| Revered | 61 to 100 | +10 |
+| Respected | 21 to 60 | +5 |
+| Neutral | -20 to 20 | +0 |
+| Distrusted | -21 to -60 | -10 |
+| Despised | -61 to -100 | -20 |
+
+Always clamp standing to the valid range: **-100 to +100**.
+
+### Write Rules for `last_change` and `note`
+
+- Update `last_change` every time standing changes, using a one-sentence description of the triggering event.
+- Update `note` only when the faction's disposition toward the character has fundamentally shifted in nature.
 
 ---
 

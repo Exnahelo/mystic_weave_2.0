@@ -18,6 +18,7 @@ ENGINE_REQUIRED_SECTIONS = [
     "### Runtime Safety Checkpoint (Await + Validate)",
     "### Time/Weather/Moon Runtime Checkpoint",
     "### Economy Runtime Checkpoint",
+    "### Progression Runtime Checkpoint",
     "### Irreversible Action Confirmation Gate",
     "## Canon Precedence (Conflict Resolution Order)",
 ]

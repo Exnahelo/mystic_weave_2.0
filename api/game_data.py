@@ -201,6 +201,11 @@ def seed_character(
         "identity":       _default_identity(identity),
         "equipment":      {"worn": [], "carried": [], "stashed": []},
         "reputation":     [],
+        "advancement": {
+            "points_available": 0,
+            "points_spent": 0,
+            "points_earned_total": 0,
+        },
     }
 
     return character

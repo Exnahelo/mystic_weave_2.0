@@ -30,6 +30,7 @@ This document is the authoritative, step-by-step reference for character creatio
 1. The player has 5 points to distribute across domains, max +3 per domain.
 2. Show the base domain scores from their species and ask where to allocate.
 3. If the player skips this step, all adjustment points default to 0.
+4. Clarify progression expectation: starting domains come from species + adjustment points, then can be increased later through AP spend up to a hard cap of 80.
 
 ### Stage 5 — Identity and Narrative
 
@@ -104,6 +105,17 @@ Gather the following in natural conversation, not as a form. Let the player's an
    - Wealth tier and any notable gear
 2. Confirm the build.
 3. Call `POST /session/new` with the finalized data, including `identity` and `starting_economy`.
+
+### Progression Clarifier (Player-Facing)
+
+If the player asks how progression works after creation, explain briefly:
+
+- **Tags** are narrative/use-based and do not cost AP.
+- **Domains** are AP-purchased and can rise to a maximum of **80**.
+- Domain AP costs scale by resulting score bracket:
+  - 25–60: 1 AP per point
+  - 61–70: 2 AP per point
+  - 71–80: 3 AP per point
 
 ---
 

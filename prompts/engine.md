@@ -106,6 +106,8 @@ Always check: character.hp, world.location, world.threat/world.goal, world.turn 
 Update when triggered: character.reputation, world.companions, world.economy, character.equipment, world.politics, world.time.
 Send one `log_entry` describing material change.
 
+Reputation write rule: when a faction-relevant consequence resolves, update `character.reputation` using the trigger and increment rules in `prompts/world_rules.md` (Situational ±5, Regional ±15, Campaign ±30; Local does not change reputation). On each standing change, update `last_change`; update `note` only when faction disposition fundamentally shifts.
+
 ### Time/Weather/Moon Runtime Checkpoint
 
 - Maintain `world.time` each turn: `day`, `month`, `year`, `time_of_day`, `season`, `festival`, `weather`, `weather_note`.
@@ -123,6 +125,28 @@ Send one `log_entry` describing material change.
 - For barter transactions, update `world.economy.trade_goods` and/or `world.economy.obligations`; only change coin if coin is explicitly included in the same deal.
 - Keep `world.economy.wealth_tier` stable for minor transactions; change it only after material shifts in long-term economic status.
 - Narrate money in natural denominations (copper/silver/gold/platinum) while maintaining state in API-safe GD integer values.
+
+### Progression Runtime Checkpoint
+
+- Apply three-track progression from `prompts/world_rules.md` exactly: tags are use-based, domains are AP-purchased, AP is consequence-scale earned.
+- Award AP only after consequence resolution is clear; use this exact mapping:
+  - Local: +0 AP
+  - Situational: +1 AP
+  - Regional: +2 AP
+  - Campaign: +4 AP
+- When AP is awarded, update character advancement state on the same save:
+  - `character.advancement.points_available += award`
+  - `character.advancement.points_earned_total += award`
+- On player-requested domain advancement, price each point by resulting bracket and total the spend:
+  - 25–60: 1 AP per point
+  - 61–70: 2 AP per point
+  - 71–80: 3 AP per point
+- Validate before save: AP spend cannot exceed `points_available`; domain cannot exceed 80.
+- When spending AP, update all affected fields atomically in one save:
+  - domain score(s)
+  - `character.advancement.points_available -= spent`
+  - `character.advancement.points_spent += spent`
+- Tag advancement never consumes AP; max one tier per tag per session; tier cap T5.
 
 Deterministic write order:
 
