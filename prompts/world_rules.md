@@ -89,6 +89,8 @@ Use the `degree` field from the roll response to determine the outcome band. Use
 
 ## Competency Tags
 
+Item references remain contextual only: an item's `roll_tag` can justify fit for an action, but never grants an additional numeric modifier beyond normal domain/tag/difficulty assembly.
+
 ### Knowledge Tags (understanding)
 
 Each of the seven domains has five knowledge skills. Tiers 1–5, each tier adds +1 to target number.

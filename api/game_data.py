@@ -15,6 +15,7 @@ from typing import Any
 
 _DATA_DIR = Path(__file__).parent.parent / "data"
 _DATA_FILES = ("species.json", "focus.json", "backgrounds.json")
+_ITEM_DATA_FILES = ("mundane_items.json", "magical_items.json")
 
 
 @lru_cache(maxsize=None)
@@ -109,6 +110,31 @@ def list_backgrounds() -> list[dict[str, Any]]:
     ]
 
 
+# ---------------------------------------------------------------------------
+# Item catalogs
+# ---------------------------------------------------------------------------
+
+def list_mundane_items() -> list[dict[str, Any]]:
+    """Return all mundane catalog items."""
+    data = _load_json("mundane_items.json")
+    if not isinstance(data, list):
+        return []
+    return data
+
+
+def list_magical_items() -> list[dict[str, Any]]:
+    """Return all magical catalog items."""
+    data = _load_json("magical_items.json")
+    if not isinstance(data, list):
+        return []
+    return data
+
+
+def list_all_items() -> list[dict[str, Any]]:
+    """Return concatenated mundane + magical item catalogs."""
+    return list_mundane_items() + list_magical_items()
+
+
 def data_fingerprint() -> str:
     """
     Stable SHA256 fingerprint of core game data files used by /options and seeding.
@@ -116,7 +142,7 @@ def data_fingerprint() -> str:
     Exposed by GET /version for deployment/contract sanity checks.
     """
     hasher = hashlib.sha256()
-    for filename in _DATA_FILES:
+    for filename in (*_DATA_FILES, *_ITEM_DATA_FILES):
         path = _DATA_DIR / filename
         with open(path, "rb") as f:
             hasher.update(f.read())

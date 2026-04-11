@@ -2,6 +2,8 @@
 
 This reference defines reusable, canonical item patterns for runtime narration and state updates. Use these entries as templates for generated loot, rewards, and faction gear.
 
+Canonical seed catalogs now live in `data/mundane_items.json` and `data/magical_items.json` and should be treated as the primary source for enumerated item options. Blessed Water and Holy Water canonical sacred consumables are defined there.
+
 ## Item Authoring Rules
 
 - Every durable item should map to at most one `roll_tag`.

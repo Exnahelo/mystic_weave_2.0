@@ -114,7 +114,7 @@ TEST_LOC_BETA = {
 # Part 1 — Session Initialization
 # ---------------------------------------------------------------------------
 
-def test_part1(client: httpx.Client) -> str | None:
+def part1(client: httpx.Client) -> str | None:
     """Returns session_id on success, None on failure."""
     section("PART 1 — Session Initialization")
     session_id = None
@@ -127,6 +127,8 @@ def test_part1(client: httpx.Client) -> str | None:
         check("1.1.b", len(opts.get("species", [])) == 8, f"species count: {len(opts.get('species', []))}")
         check("1.1.c", len(opts.get("focus", [])) == 7, f"focus count: {len(opts.get('focus', []))}")
         check("1.1.d", len(opts.get("backgrounds", [])) == 8, f"backgrounds count: {len(opts.get('backgrounds', []))}")
+        check("1.1.da", isinstance(opts.get("mundane_items"), list), "mundane_items is a list")
+        check("1.1.db", isinstance(opts.get("magical_items"), list), "magical_items is a list")
         species_indices = [s["index"] for s in opts.get("species", [])]
         check("1.1.e", "dragonborn" in species_indices, f"'dragonborn' in species")
         check("1.1.f", "human" in species_indices, f"'human' in species")
@@ -134,6 +136,12 @@ def test_part1(client: httpx.Client) -> str | None:
         check("1.1.g", "devoted" in focus_indices, f"'devoted' in focus")
         bg_indices = [b["index"] for b in opts.get("backgrounds", [])]
         check("1.1.h", "soldier" in bg_indices, f"'soldier' in backgrounds")
+        magical_item_names = [item.get("name") for item in opts.get("magical_items", [])]
+        check(
+            "1.1.i",
+            ("Blessed Water" in magical_item_names) or ("Holy Water" in magical_item_names),
+            "Blessed Water or Holy Water present in magical_items",
+        )
 
     subsection("Test 1.2 — Seed test locations")
     r = client.post("/location", json=TEST_LOC_ALPHA)
@@ -230,7 +238,7 @@ def test_part1(client: httpx.Client) -> str | None:
 # Part 2 — State Persistence
 # ---------------------------------------------------------------------------
 
-def test_part2(client: httpx.Client, session_id: str) -> None:
+def part2(client: httpx.Client, session_id: str) -> None:
     section("PART 2 — State Persistence")
 
     subsection("Test 2.1 — GET /state/{session_id}")
@@ -438,7 +446,7 @@ def test_part2(client: httpx.Client, session_id: str) -> None:
 # Part 3 — Dice Resolution
 # ---------------------------------------------------------------------------
 
-def test_part3(client: httpx.Client) -> None:
+def part3(client: httpx.Client) -> None:
     section("PART 3 — Dice Resolution (d100 Roll-Under)")
 
     subsection("Test 3.1 — Basic d100 roll")
@@ -487,7 +495,7 @@ def test_part3(client: httpx.Client) -> None:
 # Part 4 — Location Graph
 # ---------------------------------------------------------------------------
 
-def test_part4(client: httpx.Client) -> None:
+def part4(client: httpx.Client) -> None:
     section("PART 4 — Location Graph")
 
     subsection("Test 4.1 — GET /location/{id}")
@@ -514,7 +522,7 @@ def test_part4(client: httpx.Client) -> None:
 # Part 5 — Character Re-seeding
 # ---------------------------------------------------------------------------
 
-def test_part5(client: httpx.Client, session_id: str) -> None:
+def part5(client: httpx.Client, session_id: str) -> None:
     section("PART 5 — Character Re-seeding")
 
     subsection("Test 5.1 — POST /character/create")
@@ -572,7 +580,7 @@ def test_part5(client: httpx.Client, session_id: str) -> None:
 # Part 6 — Edge Cases
 # ---------------------------------------------------------------------------
 
-def test_part6(client: httpx.Client) -> None:
+def part6(client: httpx.Client) -> None:
     section("PART 6 — Edge Cases")
 
     subsection("Test 6.1 — Invalid species")
@@ -649,14 +657,14 @@ def main() -> None:
             sys.exit(1)
         print(f"Health check: OK")
 
-        session_id = test_part1(client)
+        session_id = part1(client)
         if session_id:
-            test_part2(client, session_id)
-        test_part3(client)
-        test_part4(client)
+            part2(client, session_id)
+        part3(client)
+        part4(client)
         if session_id:
-            test_part5(client, session_id)
-        test_part6(client)
+            part5(client, session_id)
+        part6(client)
 
     print(f"\n{'='*60}")
     print(f"RESULTS: {_pass} passed, {_fail} failed, {_pass + _fail} total")

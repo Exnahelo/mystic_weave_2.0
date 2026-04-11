@@ -1,0 +1,77 @@
+[
+  {
+    "id": "item_magical_blessed_water_01",
+    "name": "Blessed Water",
+    "category": "sacred",
+    "description": "Water sanctified in a formal rite for warding and minor purification.",
+    "tags": ["sacred", "consumable"],
+    "roll_tag": "sacred_rites",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "uncommon",
+    "value_cd": 220,
+    "effects": [
+      "Supports consecration, ward tracing, or cleansing narration against minor corruption."
+    ]
+  },
+  {
+    "id": "item_magical_holy_water_01",
+    "name": "Holy Water",
+    "category": "sacred",
+    "description": "A potent consecrated vial reserved for grave rites and hostile profane entities.",
+    "tags": ["sacred", "consumable"],
+    "roll_tag": "sacred_rites",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "rare",
+    "value_cd": 480,
+    "effects": [
+      "Supports strong purification and banishment framing where sacred authority is recognized."
+    ]
+  },
+  {
+    "id": "item_magical_runefocus_rod_01",
+    "name": "Runefocus Rod",
+    "category": "arcane",
+    "description": "A crystal-inlaid channeling rod tuned to stabilize short arcane workings.",
+    "tags": ["arcane"],
+    "roll_tag": "arcane_implements",
+    "consumable": false,
+    "charges": null,
+    "rarity": "uncommon",
+    "value_cd": 900,
+    "effects": [
+      "Provides narrative grounding for controlled casting in unstable magical environments."
+    ]
+  },
+  {
+    "id": "item_magical_lumen_charm_01",
+    "name": "Lumen Charm",
+    "category": "utility",
+    "description": "A palm-sized charm that emits steady witchlight when invoked.",
+    "tags": ["utility", "arcane"],
+    "roll_tag": null,
+    "consumable": false,
+    "charges": 3,
+    "rarity": "common",
+    "value_cd": 320,
+    "effects": [
+      "Provides reliable light and supports exploration in darkness without open flame."
+    ]
+  },
+  {
+    "id": "item_magical_oathseal_ring_01",
+    "name": "Oathseal Ring",
+    "category": "special",
+    "description": "A signet that marks formal vows and is recognized by select civic orders.",
+    "tags": ["special", "sacred"],
+    "roll_tag": "sacred_rites",
+    "consumable": false,
+    "charges": null,
+    "rarity": "rare",
+    "value_cd": 1400,
+    "effects": [
+      "Supports binding-oath ceremony framing and social leverage where oath custom is honored."
+    ]
+  }
+]

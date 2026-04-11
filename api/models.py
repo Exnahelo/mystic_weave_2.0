@@ -543,8 +543,24 @@ class BackgroundOption(BaseModel):
     application_tags: dict[str, int]  = Field(default_factory=dict)   # tag name → starting tier
 
 
+class ItemOption(BaseModel):
+    id: str
+    name: str
+    category: str
+    description: str = ""
+    tags: list[str] = Field(default_factory=list)
+    roll_tag: str | None = None
+    consumable: bool = False
+    charges: int | None = None
+    rarity: str = "common"
+    value_cd: int = 0
+    effects: list[str] = Field(default_factory=list)
+
+
 class OptionsResponse(BaseModel):
     """Response for GET /options — all supported species, focus archetypes, backgrounds."""
     species:     list[SpeciesOption]
     focus:       list[FocusOption]
     backgrounds: list[BackgroundOption]
+    mundane_items: list[ItemOption] = Field(default_factory=list)
+    magical_items: list[ItemOption] = Field(default_factory=list)

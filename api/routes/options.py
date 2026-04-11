@@ -13,10 +13,17 @@ from __future__ import annotations
 
 from fastapi import APIRouter
 
-from api.game_data import list_backgrounds, list_focus, list_species
+from api.game_data import (
+    list_backgrounds,
+    list_focus,
+    list_magical_items,
+    list_mundane_items,
+    list_species,
+)
 from api.models import (
     BackgroundOption,
     FocusOption,
+    ItemOption,
     OptionsResponse,
     SpeciesOption,
 )
@@ -36,9 +43,13 @@ async def get_options() -> OptionsResponse:
     species = [SpeciesOption(**s) for s in list_species()]
     focus = [FocusOption(**f) for f in list_focus()]
     backgrounds = [BackgroundOption(**b) for b in list_backgrounds()]
+    mundane_items = [ItemOption(**item) for item in list_mundane_items()]
+    magical_items = [ItemOption(**item) for item in list_magical_items()]
 
     return OptionsResponse(
         species=species,
         focus=focus,
         backgrounds=backgrounds,
+        mundane_items=mundane_items,
+        magical_items=magical_items,
     )

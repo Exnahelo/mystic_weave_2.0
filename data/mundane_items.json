@@ -1,0 +1,77 @@
+[
+  {
+    "id": "item_mundane_longsword_01",
+    "name": "Iron Longsword",
+    "category": "weapon",
+    "description": "A reliable steel blade balanced for military drills and road defense.",
+    "tags": ["weapon"],
+    "roll_tag": "heavy_weapons",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 450,
+    "effects": [
+      "Provides plausible framing for close-quarters armed strikes and guard-breaking attempts."
+    ]
+  },
+  {
+    "id": "item_mundane_shortblade_01",
+    "name": "Shortblade",
+    "category": "weapon",
+    "description": "A compact sidearm favored by scouts, sailors, and city patrols.",
+    "tags": ["weapon"],
+    "roll_tag": "light_weapons",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 250,
+    "effects": [
+      "Supports discreet melee actions in tight spaces where larger weapons are awkward."
+    ]
+  },
+  {
+    "id": "item_mundane_leather_armor_01",
+    "name": "Reinforced Leather Armor",
+    "category": "armor",
+    "description": "Layered hide and boiled leather plates stitched over a padded vest.",
+    "tags": ["armor"],
+    "roll_tag": "shields_armor",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 500,
+    "effects": [
+      "Provides narrative justification for reduced harm in glancing or partially blocked hits."
+    ]
+  },
+  {
+    "id": "item_mundane_travel_pack_01",
+    "name": "Trailkeeper Pack",
+    "category": "utility",
+    "description": "A weatherproof bedroll-pack with rope, hooks, and field rations pouch.",
+    "tags": ["utility"],
+    "roll_tag": null,
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 180,
+    "effects": [
+      "Supports overland travel readiness and basic camp setup in uncertain terrain."
+    ]
+  },
+  {
+    "id": "item_mundane_healing_herbs_01",
+    "name": "Field Dressing Kit",
+    "category": "consumable",
+    "description": "Bandages, antiseptic tincture, and coarse pain-dulling herb wraps.",
+    "tags": ["consumable"],
+    "roll_tag": "herbalism_alchemy",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 120,
+    "effects": [
+      "Allows immediate first-aid narration where treatment conditions are plausible."
+    ]
+  }
+]

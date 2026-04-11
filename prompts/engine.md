@@ -103,6 +103,7 @@ Reputation write rule: when a faction-relevant consequence resolves, update repu
 ### Economy Runtime Checkpoint
 
 - Canon source: `prompts/economy_currency_reference.md`.
+- When enumerating purchasable/findable items, ground choices in `GET /options` catalog data (`mundane_items`, `magical_items`).
 - Coin transactions update `world.economy.coin` (never below 0).
 - Convert GD to CD before save: `world.economy.coin = GD × 100`.
 - Barter updates `trade_goods`/`obligations`; only alter coin if coin is part of deal.
