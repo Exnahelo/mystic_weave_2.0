@@ -205,22 +205,26 @@ Updated after world expansion, magic system, progression redesign, and item cata
 These are structural improvements identified from architecture review. None require a rebuild — all are addable to the current system.
 
 ### Scene Manager — High Priority
-- [ ] Design a scene context builder that assembles a focused object for the GPT instead of sending full world state every turn
-- [ ] Scene object should include: current location summary, visible entities, immediate stakes, relevant character state, recent log entries (last 5), active threats, available opportunities
-- [ ] Implement as a pre-processing step before GPT turn narration — either a new endpoint or a context assembly function
-- [ ] Update `prompts/engine.md` to describe what the GPT should expect in scene context vs full state
+
+- [x] Design a scene context builder that assembles a focused object for the GPT instead of sending full world state every turn
+- [x] Scene object should include: current location summary, visible entities, immediate stakes, relevant character state, recent log entries (last 5), active threats, available opportunities
+- [x] Implement as a pre-processing step before GPT turn narration — either a new endpoint or a context assembly function
+- [x] Update `prompts/engine.md` to describe what the GPT should expect in scene context vs full state
 
 ### Fail-Forward Rule — Low Effort, High Value
+
 - [ ] Move fail-forward from narration style note to explicit mechanical rule in `world_rules.md`
 - [ ] Add three examples covering physical, social, and magical failure contexts
 - [ ] Add to `prompts/engine.md` Step 4 Narrate Outcome as a mandatory consideration
 
 ### NPC Relationship Propagation Rules
+
 - [ ] Define threshold-based rules for faction standing changes — what becomes available or unavailable at each standing band
 - [ ] Add to `prompts/world_rules.md` Reputation section
 - [ ] GPT applies propagation at turn end when standing crosses a threshold
 
 ### Pacing Variables
+
 - [ ] Add `pacing` block to world state schema:
   - [ ] `tension` — integer 0–10
   - [ ] `last_consequence_weight` — local / situational / regional / campaign
@@ -231,6 +235,7 @@ These are structural improvements identified from architecture review. None requ
 - [ ] Update `schemas/openapi.yaml` and `api/models.py` for pacing block
 
 ### Extraction Step Separation
+
 - [ ] Split the current single GPT turn into two calls:
   - [ ] Call 1: Narration — GPT receives scene context, produces prose only
   - [ ] Call 2: Extraction — GPT receives narration output, produces structured state delta JSON only
@@ -239,6 +244,7 @@ These are structural improvements identified from architecture review. None requ
 - [ ] This is the highest reliability improvement available; implement after scene manager
 
 ### Episodic Memory Compression
+
 - [ ] Add session summary storage — compressed paragraph summaries of older log entries
 - [ ] Write `scripts/compress_session_log.py` — compresses log entries older than N turns into a durable summary, stores in a `session_summaries` table
 - [ ] Add summary retrieval to state load — GPT receives recent log entries plus compressed summaries for older sessions
@@ -251,25 +257,31 @@ These are structural improvements identified from architecture review. None requ
 These items are not buildable within the current architecture without significant rebuild. Documented here for future planning.
 
 ### Full Multi-Agent Orchestration
+
 **Barrier:** Mystic Weave uses a single custom GPT instance via the GPT builder. Running separate specialized model instances for Narrator, Referee, Planner, and Extractor roles requires an orchestration layer — either a custom backend that manages multiple API calls and coordinates outputs, or migrating away from the GPT builder entirely to a direct API implementation. Neither is a small change.
 **When to revisit:** When the GPT builder becomes the bottleneck and direct API control is needed for reliability or cost.
 
 ### Combat Subsystem
+
 **Barrier:** Explicitly deferred. A real combat system requires its own turn structure, initiative, action economy, and resolution model distinct from the current narrative roll system. Building it on top of the existing d100 roll-under framework is possible but requires new endpoints, new state schema (combat status, turn order, active effects), and significant GPT instruction changes. The current system handles combat narratively.
 **When to revisit:** When narrative combat resolution feels insufficient and players need tactical depth.
 
 ### NPC Simulation — Independent Goals and Schedules
+
 **Barrier:** Treating NPCs as autonomous agents with their own goals, schedules, and world-modifying actions requires a simulation layer that runs independently of player turns. This is architecturally separate from the current request-response game loop. NPCs currently have static attitude scores and narrative flavor — they react, they do not act.
 **When to revisit:** When the world needs to feel like it moves without the player.
 
 ### Procedural Content Generation
+
 **Barrier:** Encounter generation, dynamic loot tables, and procedural world events require a generation layer with its own rules and randomness model separate from the dice roller. The current world is entirely authored. Procedural content would need to integrate with the location graph, the faction system, and the economy without contradicting canon.
 **When to revisit:** When authored content cannot keep pace with player exploration.
 
 ### Vector Search Lore Retrieval
+
 **Barrier:** Currently all lore is in static knowledge files uploaded to the GPT builder. A semantic retrieval layer would allow the GPT to query specific lore on demand rather than having everything in context. Requires embedding infrastructure, a vector database, and a retrieval API — meaningful infrastructure that doesn't exist in the current stack.
 **When to revisit:** When the GPT knowledge file upload limit or context ceiling becomes a real constraint on world depth.
 
 ### Multi-Player Support
+
 **Barrier:** The entire architecture assumes one player per session. Session state, character state, and the turn loop are single-player constructs. Multi-player would require concurrent session management, shared world state with conflict resolution, and a turn coordination layer. Not a small addition.
 **When to revisit:** If the game ever needs to support shared campaigns.

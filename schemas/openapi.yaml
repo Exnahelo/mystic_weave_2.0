@@ -261,6 +261,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OptionsResponse'
+  /scene/{session_id}:
+    get:
+      summary: Get Scene Context
+      description: Build and return compact scene context from persisted state and
+        current location for narration input.
+      operationId: get_scene_context_scene__session_id__get
+      parameters:
+      - name: session_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Session Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SceneContext'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /:
     get:
       tags:
@@ -1431,6 +1457,100 @@ components:
       - log_entry
       title: SaveStateRequest
       description: Body for POST /state/{session_id}
+    SceneContext:
+      properties:
+        session_id:
+          type: string
+          title: Session Id
+        location_summary:
+          $ref: '#/components/schemas/SceneLocationSummary'
+        visible_entities:
+          items:
+            type: string
+          type: array
+          title: Visible Entities
+        immediate_stakes:
+          items:
+            type: string
+          type: array
+          title: Immediate Stakes
+        relevant_character_state:
+          $ref: '#/components/schemas/SceneRelevantCharacterState'
+        recent_log:
+          items:
+            type: string
+          type: array
+          title: Recent Log
+        active_threats:
+          items:
+            type: string
+          type: array
+          title: Active Threats
+        available_opportunities:
+          items:
+            type: string
+          type: array
+          title: Available Opportunities
+      type: object
+      required:
+      - session_id
+      - location_summary
+      - relevant_character_state
+      title: SceneContext
+      description: Derived GPT-facing scene payload assembled from full state + location
+        + log.
+    SceneLocationSummary:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        type:
+          type: string
+          title: Type
+          default: unknown
+        description:
+          type: string
+          title: Description
+          default: ''
+        tags:
+          items:
+            type: string
+          type: array
+          title: Tags
+      type: object
+      required:
+      - id
+      - name
+      title: SceneLocationSummary
+      description: Compact location payload for turn narration.
+    SceneRelevantCharacterState:
+      properties:
+        name:
+          type: string
+          title: Name
+        hp:
+          $ref: '#/components/schemas/HP'
+        status_effects:
+          items:
+            type: string
+          type: array
+          title: Status Effects
+        survival:
+          $ref: '#/components/schemas/SurvivalState'
+        active_companions:
+          items:
+            type: string
+          type: array
+          title: Active Companions
+      type: object
+      required:
+      - name
+      - hp
+      title: SceneRelevantCharacterState
+      description: Narration-relevant subset of character/world state.
     SpeciesOption:
       properties:
         index:

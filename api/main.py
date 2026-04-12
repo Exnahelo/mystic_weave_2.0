@@ -21,7 +21,7 @@ from api.game_data import (
     list_species,
 )
 from api.models import HealthResponse, VersionResponse
-from api.routes import character, location, options, roll, session, state
+from api.routes import character, location, options, roll, scene, session, state
 
 
 @asynccontextmanager
@@ -65,6 +65,7 @@ app.include_router(character.router)
 app.include_router(roll.router)
 app.include_router(location.router)
 app.include_router(options.router)
+app.include_router(scene.router)
 
 
 @app.get("/", tags=["health"], response_model=HealthResponse)

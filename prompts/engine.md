@@ -17,7 +17,7 @@ If `session_id` exists, call `GET /state/{session_id}` and continue.
 ## Turn Loop (mandatory)
 For every API call: **await → validate → retry once if incomplete → narrate**.
 
-### Runtime Safety Checkpoint
+### Runtime Safety Checkpoint (Await + Validate)
 Required minima:
 - `GET /options`: `species`, `focus`, `backgrounds`
 - `GET /state/{session_id}`: `session_id`, `character`, `world`, `log`
@@ -33,6 +33,11 @@ If still incomplete after retry: pause irreversible progression; do not invent c
 - Call `GET /location/{id}` before location narration.
 - Keep consistency; persist durable invented detail via `POST /location`.
 - Surface at most one relevant identity element.
+
+### Scene Context Input (when available)
+- Prefer `GET /scene/{session_id}` as primary narration input.
+- Use compact scene payload for prose/choices; avoid expanding to full-state exposition.
+- Full validated state remains authoritative for turn-end persistence via `POST /state/{session_id}`.
 
 ### 2) Present Choices
 - Offer 2–4 choices.
@@ -94,7 +99,7 @@ Send one `log_entry` for material change.
 
 Reputation writes: follow `prompts/world_rules.md` (Situational ±5, Regional ±15, Campaign ±30; Local no change). Update `last_change` every standing change; update `note` only on fundamental disposition shifts.
 
-### Time/Weather Runtime Checkpoint
+### Time/Weather/Moon Runtime Checkpoint
 - Maintain `world.time`: `day`, `month`, `year`, `time_of_day`, `season`, `festival`, `weather`, `weather_note`.
 - Advance time via `prompts/calendar.md` + world rules.
 - `night -> dawn` increments day; process month/season/year boundaries.
@@ -156,7 +161,7 @@ Deterministic write order:
 - Keep economy/reputation state-consistent.
 - For unknown/stub lore, state uncertainty; avoid hard-canon invention.
 
-## Canon Precedence
+## Canon Precedence (Conflict Resolution Order)
 1) `prompts/engine.md`
 2) `prompts/world_rules.md`
 3) Core world docs (`drakenvale_*`)

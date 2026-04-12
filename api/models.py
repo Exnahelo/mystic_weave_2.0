@@ -573,6 +573,40 @@ class ConnectionsResponse(BaseModel):
 
 
 # ---------------------------------------------------------------------------
+# Scene context models (derived, non-persistent)
+# ---------------------------------------------------------------------------
+
+class SceneLocationSummary(BaseModel):
+    """Compact location payload for turn narration."""
+    id: str
+    name: str
+    type: str = "unknown"
+    description: str = ""
+    tags: list[str] = Field(default_factory=list)
+
+
+class SceneRelevantCharacterState(BaseModel):
+    """Narration-relevant subset of character/world state."""
+    name: str
+    hp: HP
+    status_effects: list[str] = Field(default_factory=list)
+    survival: SurvivalState = Field(default_factory=SurvivalState)
+    active_companions: list[str] = Field(default_factory=list)
+
+
+class SceneContext(BaseModel):
+    """Derived GPT-facing scene payload assembled from full state + location + log."""
+    session_id: str
+    location_summary: SceneLocationSummary
+    visible_entities: list[str] = Field(default_factory=list)
+    immediate_stakes: list[str] = Field(default_factory=list)
+    relevant_character_state: SceneRelevantCharacterState
+    recent_log: list[str] = Field(default_factory=list)
+    active_threats: list[str] = Field(default_factory=list)
+    available_opportunities: list[str] = Field(default_factory=list)
+
+
+# ---------------------------------------------------------------------------
 # Options models
 # ---------------------------------------------------------------------------
 
