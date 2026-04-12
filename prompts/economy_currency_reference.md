@@ -77,11 +77,22 @@ Prices are baseline for a typical settled region. Remote locations, dangerous ro
 | Decent private room | 2 GD |
 | Stable fee (per night) | 5 CD |
 | Meal + decent room (together) | 2.08 GD |
+| Water refill (waterskin/flask) | 2 CD |
+| Public bathhouse access | 1 SD |
+| Laundry service (simple load) | 8 CD |
+| Ferriage (river crossing, person + light gear) | 2 SD |
+| Ferriage (mount or cart add-on) | 1 GD |
+| Hitching/posting fee (day use) | 2 CD |
+| Feed + watering (mount, per day) | 1 SD |
 | Wagon passage (long trip) | 5 GD |
 | Day laborer hire (1 day) | 5 SD |
 | Skilled guide (1 day) | 2 GD |
 | Blacksmith repair (simple tool) | 1 GD |
 | Healer visit (minor wound) | 2 GD |
+
+Service notes:
+- Use these as settled-region baselines; apply scarcity/danger/monopoly adjustments per region and current conditions.
+- Ferriage can scale up for hazardous weather, military checkpoints, or warded crossings.
 
 ### Basic Gear
 
@@ -142,6 +153,7 @@ Use these location anchors when deciding what is plausibly available, scarce, or
 - **Mirefall / Brackenmoor (Wetlands edge):** rare herbs, restorative compounds, divination-adjacent services, wetland guides and specimen trade.
 - **Ashfield / Scalemere / Silvercut / Dewhollow / Stonemark:** core supply villages for grain/livestock, fish, timber, magical flora, and quarry stone.
 - **Lastmark:** highland resupply chokepoint and guide economy before Alpine routes.
+- **Greymantle / Platinum Oath Approach corridor:** controlled, security-screened movement for monastery support traffic; low-trust but persistent exchange in food, repair goods, and specialized ward materials.
 
 SSTC-connected settlements include Zarkharath, Deephollow, Lastmark, and the primary resource villages; these nodes tend toward more stable market access and baseline pricing than isolated wilderness points.
 

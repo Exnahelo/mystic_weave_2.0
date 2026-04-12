@@ -899,6 +899,14 @@ components:
       - trade_good
       - special
       title: EquipmentTag
+    FatigueState:
+      type: string
+      enum:
+      - rested
+      - tired
+      - fatigued
+      - exhausted
+      title: FatigueState
     FocusOption:
       properties:
         index:
@@ -989,6 +997,20 @@ components:
       - status
       - service
       title: HealthResponse
+    HungerState:
+      type: string
+      enum:
+      - sated
+      - hungry
+      - starving
+      title: HungerState
+    HydrationState:
+      type: string
+      enum:
+      - hydrated
+      - thirsty
+      - dehydrated
+      title: HydrationState
     Identity-Input:
       properties:
         origin:
@@ -1118,6 +1140,14 @@ components:
       - name
       - category
       title: ItemOption
+    LoadState:
+      type: string
+      enum:
+      - light
+      - normal
+      - burdened
+      - overloaded
+      title: LoadState
     LocationData:
       properties:
         id:
@@ -1425,6 +1455,23 @@ components:
       - name
       - domains
       title: SpeciesOption
+    SurvivalState:
+      properties:
+        hunger:
+          $ref: '#/components/schemas/HungerState'
+          default: sated
+        hydration:
+          $ref: '#/components/schemas/HydrationState'
+          default: hydrated
+        fatigue:
+          $ref: '#/components/schemas/FatigueState'
+          default: rested
+        load:
+          $ref: '#/components/schemas/LoadState'
+          default: normal
+      type: object
+      title: SurvivalState
+      description: Lightweight survival/load tracking using coarse state bands.
     TimeOfDay:
       type: string
       enum:
@@ -1569,6 +1616,8 @@ components:
           $ref: '#/components/schemas/Politics'
         time:
           $ref: '#/components/schemas/TimeState'
+        survival:
+          $ref: '#/components/schemas/SurvivalState'
       additionalProperties: false
       type: object
       required:
@@ -1602,6 +1651,8 @@ components:
           $ref: '#/components/schemas/Politics'
         time:
           $ref: '#/components/schemas/TimeState'
+        survival:
+          $ref: '#/components/schemas/SurvivalState'
       additionalProperties: false
       type: object
       required:

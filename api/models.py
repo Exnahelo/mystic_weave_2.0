@@ -298,6 +298,32 @@ class WeatherState(str, Enum):
     unnatural  = "unnatural"
 
 
+class HungerState(str, Enum):
+    sated    = "sated"
+    hungry   = "hungry"
+    starving = "starving"
+
+
+class HydrationState(str, Enum):
+    hydrated   = "hydrated"
+    thirsty    = "thirsty"
+    dehydrated = "dehydrated"
+
+
+class FatigueState(str, Enum):
+    rested    = "rested"
+    tired     = "tired"
+    fatigued  = "fatigued"
+    exhausted = "exhausted"
+
+
+class LoadState(str, Enum):
+    light      = "light"
+    normal     = "normal"
+    burdened   = "burdened"
+    overloaded = "overloaded"
+
+
 class TimeState(BaseModel):
     """In-world time, calendar, and weather state."""
     day:          int          = 1
@@ -322,6 +348,14 @@ class TimeState(BaseModel):
         if v < 1:
             raise ValueError("year must be at least 1")
         return v
+
+
+class SurvivalState(BaseModel):
+    """Lightweight survival/load tracking using coarse state bands."""
+    hunger:    HungerState    = HungerState.sated
+    hydration: HydrationState = HydrationState.hydrated
+    fatigue:   FatigueState   = FatigueState.rested
+    load:      LoadState      = LoadState.normal
     
 
 # ---------------------------------------------------------------------------
@@ -343,6 +377,9 @@ class WorldModel(BaseModel):
 
     # New in v3.2.0
     time:       TimeState            = Field(default_factory=TimeState)
+
+    # New in v3.3.0
+    survival:   SurvivalState        = Field(default_factory=SurvivalState)
 
     @field_validator("turn")
     @classmethod

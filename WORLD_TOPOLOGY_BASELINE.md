@@ -1,4 +1,4 @@
-# World Topology Baseline — 2026-04-11
+# World Topology Baseline — 2026-04-12
 
 Post-audit baseline for `prompts/world/*.md` connection reciprocity after the expanded settlement/location pass.
 
@@ -7,23 +7,29 @@ Post-audit baseline for `prompts/world/*.md` connection reciprocity after the ex
 Audit performed against all current world location files under `prompts/world/`.
 
 Current scan totals:
-- 46 location files with `id` + `connections`
-- 21 non-reciprocal in-map links
-- 7 off-map placeholder exits
+- 48 location files with `id` + `connections`
+- 19 non-reciprocal in-map links
+- 4 off-map placeholder exits
 
 ## Reciprocity decision summary
 
-### Corrected to two-way (historical reference)
+### Corrected to two-way (historical + latest)
 - `stronghold-of-drakenvale` ↔ `volcanic-highlands`
   - Reason: this is a navigable regional route within the current playable map and should be traversable in both directions for consistency.
+- `platinum-oath-monastery` ↔ `platinum-oath-approach`
+- `greymantle` ↔ `platinum-oath-approach`
+- `rift-of-discord-edge` ↔ `platinum-oath-approach`
+- `ashfield-fields` ↔ `draconic-grasslands-edge`
+- `stronghold-of-drakenvale` ↔ `draconic-grasslands-edge`
+- `volcanic-highlands` ↔ `draconic-grasslands-edge`
+
+  - Reason: new authored corridor nodes replaced prior placeholders and now carry explicit reciprocal traversal links.
 
 ### Intentionally one-way (current)
 
 #### Hidden / gated sanctums
 - `eryndors-lair` → `sacred-pools`
 - `eryndors-lair` → `platinum-heart`
-- `platinum-oath-monastery` → `rift-of-discord-edge`
-- `platinum-oath-monastery` → `greymantle`
 
 Reason:
 - These preserve discovery/security gating for sensitive spaces (hidden lair and restricted monastery). Inbound links from public nodes are intentionally omitted.
@@ -57,10 +63,7 @@ These links currently point beyond the explicitly authored local map and are ret
 - `dracelune` → `feywood-glade-border`
 - `dewhollow` → `feywood-glade-border`
 - `thornveil` → `feywood-glade-border`
-- `volcanic-highlands` → `draconic-grasslands`
-- `ashfield-fields` → `draconic-grasslands-edge`
 - `shadowed-hollows-approach` → `shadowed-hollows-proper`
-- `platinum-oath-monastery` → `platinum-oath-approach`
 
 Guidance:
 - Treat these as outward-facing world-edge exits until those destination files are authored.
@@ -76,7 +79,8 @@ When adding or revising `prompts/world/*.md`:
 
 ## Baseline result
 
-After the 2026-04-11 expanded-location audit:
+After the 2026-04-12 expanded-location audit:
 - hidden/gated one-way links remain intentional
 - directional hub/spoke one-way links are currently accepted design (documented above)
-- seven off-map placeholder exits remain intentional until destination files are authored
+- the prior placeholders `draconic-grasslands` and `platinum-oath-approach` are now resolved with authored in-map nodes and reciprocal links
+- four off-map placeholder exits remain intentional until destination files are authored

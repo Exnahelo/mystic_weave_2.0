@@ -318,7 +318,7 @@ Quiet, disciplined, and difficult to read unless she wants to be read. Serevane 
 
 **Motivations:** Maintain Rift stability; preserve the Vigil's institutional memory; ensure the Platinum Warden's tomb protocols remain uncompromised; prepare for low-probability, high-impact seal failures without public panic.
 
-**With players:** Reserved at first. Cooperative with competent actors who demonstrate restraint around restricted areas. Useful source for Rift perimeter realities and monastery doctrine when trust is earned.
+**With players:** Reserved at first. Cooperative with competent actors who demonstrate restraint around restricted areas and controlled-corridor protocol. Useful source for Rift perimeter realities and monastery doctrine when trust is earned.
 
 **What she doesn't say:** She tracks multiple contingency thresholds for Rift degradation and has already pre-authorized responses the Council does not yet know she has staged.
 
@@ -334,7 +334,7 @@ An aging veteran of the Discordant War known publicly only as "the Warden" — n
 
 **Motivations:** Keep Greymantle functional without becoming either a cult enclave or a Council outpost; preserve local autonomy at the edge of the Hollows; prevent outside actors from turning the settlement into a proxy battlefield.
 
-**With players:** Transactional until proven otherwise. Respects competence, reliability, and people who keep their word under pressure. Will expel destabilizing actors quickly.
+**With players:** Transactional until proven otherwise. Respects competence, reliability, and people who keep their word under pressure. Understands Greymantle's corridor arrangement with the Vigil as practical necessity, not trust. Will expel destabilizing actors quickly.
 
 **What he doesn't say:** He still maintains old Warden-era contacts and uses them sparingly to prevent catastrophes he cannot handle alone.
 

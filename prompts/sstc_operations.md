@@ -18,6 +18,7 @@ The SSTC runs a hub-and-spoke network with **Stronghold logistics arbitration** 
 - **Zarkharath** — forge output export and heavy craft logistics
 - **Deephollow** — crystal export and specialist arcane material handling
 - **Lastmark** — alpine resupply chokepoint and guide contracting node
+- **Ashfield Fields / Draconic Grasslands Edge** — observed southern overland transit into Stronghold-facing redistribution routes
 
 ---
 
@@ -51,6 +52,9 @@ The seven primary resource villages are active SSTC suppliers and should be trea
 
 5. **Forest-Wetland Provisioning Lane**  
    `Ashfield / Silvercut / Dewhollow / Scalemere -> Stronghold (and regional redistribution)`
+
+6. **Southern Open-Corridor Lane**  
+   `Ashfield Fields <-> Draconic Grasslands Edge <-> Stronghold`
 
 ---
 

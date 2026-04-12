@@ -186,6 +186,10 @@
 
 **Access policy:** Monastery grounds are controlled access. The tomb interior is restricted to Vigil members and specifically authorized Warden candidates.
 
+**Corridor doctrine:** The Platinum Oath Approach is treated as a controlled access corridor. Greymantle-linked movement is tolerated as an agreement of convenience, not trust.
+
+**Deterrence posture:** Monastery-aligned traffic and assets are under hard-protection policy after a prior elite Warden retaliation established corridor deterrence.
+
 **GM Notes:** Treat the Vigil as distinct from modern Wardens and Platinum Acolytes: cooperative but not subordinate in day-to-day doctrine. They are a living remnant of the Accord, not a museum of it.
 
 ---

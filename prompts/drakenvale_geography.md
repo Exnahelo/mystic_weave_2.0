@@ -112,6 +112,9 @@ Sealed underground structure. The necrotic seepage creating the Shadowed Hollows
 | Stronghold | Lastmark | ~170km | 4 days |
 | Stronghold | Mirefall | ~140km | 3–3.5 days |
 | Stronghold | Greymantle | ~165km | 4 days |
+| Stronghold | Draconic Grasslands Edge | ~90km | 2–2.5 days |
+| Greymantle | Platinum Oath Approach | ~20km | half day |
+| Platinum Oath Approach | Platinum Oath Monastery | ~10km | hours |
 | Dracélune | Thornveil (guided access) | variable | hours to 1 day |
 | Dracélune | Mirefall | ~55km | 1–1.5 days |
 | Zarkharath | Cinderpit | ~25km | half day |
@@ -145,6 +148,7 @@ The valley now has additional fixed settlements that should be treated as standa
 
 - **Major settlements:** Stronghold of Drakenvale, Dracélune, Zarkharath, Deephollow, Mirefall, Thornveil, Lastmark, Greymantle
 - **Primary resource villages (7):** Ashfield (grain/livestock), Silvercut (silverwood timber), Dewhollow (magical flora), Stonemark (stone/quarry), Cinderpit (ore extraction), Scalemere (fish/river transport), Brackenmoor (hunting/trapping/wetland guides)
+- **Key controlled/open corridors:** Platinum Oath Approach (controlled monastery access lane under Vigil oversight), Draconic Grasslands Edge (open, exposed southern transit corridor between Ashfield Fields and Stronghold-facing routes)
 
 Use these nodes when grounding travel plans, supply availability, and route plausibility. Remote wilderness and dark-quadrant movement should still incur higher uncertainty and time variance.
 

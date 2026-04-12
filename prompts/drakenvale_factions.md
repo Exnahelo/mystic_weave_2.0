@@ -130,6 +130,10 @@ Operations: Investigate corruption, sabotage, alignment tensions, forbidden magi
 
 **Relationship to the Accord:** The Vigil preserves Accord mission continuity in present time; the Accord remains the historical founding structure and doctrine lineage.
 
+**Access/corridor policy:** The Platinum Oath Approach is a controlled monastery corridor under Vigil governance. Greymantle passage is tolerated operationally as an agreement of convenience, not political trust.
+
+**Deterrence baseline:** Monastery-bound traffic and assets are treated as protected movement after a prior elite Warden retaliation established a standing deterrent posture.
+
 ---
 
 ## Advisory & Representative Roles

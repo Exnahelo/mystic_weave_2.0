@@ -141,23 +141,62 @@ Updated after world expansion, magic system, progression redesign, and item cata
 
 ### World & Lore Updates
 
-- [ ] Update `prompts/drakenvale_geography.md` with new settlements and travel times
-- [ ] Add Vigil / Platinum Accord remnant to `prompts/drakenvale_organizations.md`
-- [ ] Add Serevane and The Warden of Greymantle to `prompts/drakenvale_characters.md`
-- [ ] Add Vigil faction entry to `prompts/drakenvale_factions.md`
-- [ ] Add regional economic nodes to `prompts/economy_currency_reference.md`
-- [ ] Update `prompts/sstc_operations.md` route network with new named locations
-- [ ] Update `WORLD_TOPOLOGY_BASELINE.md` for all new locations and reciprocity audit
-- [ ] Add `platinum-oath-approach` trail stub to `prompts/world/`
-- [ ] Add `draconic-grasslands-edge` stub to `prompts/world/`
+- [x] Update `prompts/drakenvale_geography.md` with new settlements and travel times
+- [x] Add Vigil / Platinum Accord remnant to `prompts/drakenvale_organizations.md`
+- [x] Add Serevane and The Warden of Greymantle to `prompts/drakenvale_characters.md`
+- [x] Add Vigil faction entry to `prompts/drakenvale_factions.md`
+- [x] Add regional economic nodes to `prompts/economy_currency_reference.md`
+- [x] Update `prompts/sstc_operations.md` route network with new named locations
+- [x] Update `WORLD_TOPOLOGY_BASELINE.md` for all new locations and reciprocity audit
+- [x] Add `platinum-oath-approach` trail stub to `prompts/world/`
+- [x] Add `draconic-grasslands-edge` stub to `prompts/world/`
 
 ### Gameplay Tracking
 
-- [ ] Hunger tracking — schema addition, engine rule, item reference update
-- [ ] Hydration tracking — schema addition, engine rule, item reference update
-- [ ] Fatigue tracking — schema addition, engine rule
-- [ ] Carrying weight / encumbrance / dimensions — schema addition, engine rule, item weight reference
-- [ ] Standardized pricing reference for services — inn stays, meals, healing, ferriage, stabling
+- [x] Add a lightweight survival state block to the schema in `api/models.py`
+  - [x] Add hunger state
+  - [x] Add hydration state
+  - [x] Add fatigue state
+  - [x] Add load state
+  - [x] Keep all four as coarse enums/bands, not numeric meters
+- [x] Update `schemas/openapi.yaml` to expose the new survival/load state fields
+  - [x] Keep schema aligned with runtime models
+  - [x] Preserve current response/request shapes outside the new added block
+- [x] Add canonical survival and load rules to `prompts/world_rules.md`
+  - [x] Hunger and hydration are low-frequency maintenance states, not per-action meters
+  - [x] Hunger/hydration primarily change at rest, deprivation, or meaningful travel checkpoints
+  - [x] Fatigue is the primary exertion economy
+  - [x] Load modifies fatigue gain and physical/travel difficulty
+  - [x] Avoid exact weight/dimension simulation unless explicitly requested later
+- [x] Update `prompts/engine.md` with a Survival Runtime Checkpoint
+  - [x] Validate and persist hunger, hydration, fatigue, and load when they change
+  - [x] Only update survival states at clear triggers: rest, extended travel, deprivation, major exertion, or heavy overextension
+  - [x] Keep bookkeeping sparse and deterministic
+  - [x] Ensure survival state is included in turn-end save logic when changed
+- [x] Implement hunger tracking as a simple state rule
+  - [x] Add canonical bands such as `sated`, `hungry`, `starving`
+  - [x] Tie changes to missed food / successful resupply / rest-cycle checkpoints
+  - [x] Update item references only where needed to support food access and recovery logic
+- [x] Implement hydration tracking as a simple state rule
+  - [x] Add canonical bands such as `hydrated`, `thirsty`, `dehydrated`
+  - [x] Tie changes to missed water / exposure / successful resupply / rest-cycle checkpoints
+  - [x] Update item references only where needed to support water access and recovery logic
+- [x] Implement fatigue tracking as the main active exertion state
+  - [x] Add canonical bands such as `rested`, `tired`, `fatigued`, `exhausted`
+  - [x] Increase fatigue on major exertion, forced travel, poor recovery, and similar clear triggers
+  - [x] Reduce fatigue through proper rest, moderated by hunger/hydration state
+- [x] Add lightweight load tracking instead of full encumbrance/dimensions simulation
+  - [x] Add canonical bands such as `light`, `normal`, `burdened`, `overloaded`
+  - [x] Use load as a modifier to fatigue gain, travel difficulty, and certain physical actions
+  - [x] Do not implement exact item weight, container volume, or dimensions in this pass
+- [x] Expand and normalize service pricing in `prompts/economy_currency_reference.md`
+  - [x] Preserve existing baseline service prices already present
+  - [x] Standardize missing services such as ferriage and any other commonly used travel/stable/lodging services
+  - [x] Clarify when local scarcity, danger, or regional economy should shift baseline pricing
+  - [x] Keep weapon/armor pricing out of this file
+- [x] Update item references only where survival/load rules need canonical support
+  - [x] Confirm food, water-carry, bedding, shelter, and load-bearing items support the new rules cleanly
+  - [x] Add item-weight data only if the lightweight load approach proves insufficient
 
 ---
 

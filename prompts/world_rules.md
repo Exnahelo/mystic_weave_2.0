@@ -37,6 +37,72 @@ HP can be recovered through:
 
 ---
 
+## Survival & Load (Lightweight State)
+
+Survival is tracked as coarse world-state bands in `world.survival`.
+Do not use per-action numeric meters.
+
+### Hunger Bands
+
+| Band | Meaning |
+|---|---|
+| `sated` | Recently fed; no hunger pressure |
+| `hungry` | Missed meaningful nourishment; discomfort and reduced recovery quality |
+| `starving` | Prolonged food deprivation; severe weakness risk |
+
+### Hydration Bands
+
+| Band | Meaning |
+|---|---|
+| `hydrated` | Water needs met |
+| `thirsty` | Noticeable dehydration pressure |
+| `dehydrated` | Severe water deficit; immediate performance risk |
+
+### Fatigue Bands (Primary Exertion Economy)
+
+| Band | Meaning |
+|---|---|
+| `rested` | Fully ready |
+| `tired` | Light wear |
+| `fatigued` | Sustained strain; meaningful action pressure |
+| `exhausted` | Critical overextension |
+
+### Load Bands (Abstract, not weight simulation)
+
+| Band | Meaning |
+|---|---|
+| `light` | Minimal carried burden |
+| `normal` | Standard adventuring load |
+| `burdened` | Heavy but manageable |
+| `overloaded` | Excessive burden; major movement/action pressure |
+
+No exact item weight, container volume, or dimensions are simulated in this pass.
+
+### Deterministic Update Triggers
+
+Update survival bands only at clear checkpoints:
+- end of meaningful travel leg
+- after major exertion/forced march/heavy climb/chase labor
+- after long rest / meaningful recovery stop
+- after explicit deprivation window (food or water missed)
+- after explicit resupply/consumption (food or water secured)
+
+Do not update hunger/hydration/fatigue on routine low-impact actions.
+
+### Canonical State Movement Guidance
+
+- Hunger/hydration usually move one band per deprivation checkpoint; move one band back on clear resupply/recovery.
+- Fatigue is the primary active tracker: exertion raises it; proper rest lowers it.
+- Poor hunger/hydration state can block full fatigue recovery.
+- Load modifies fatigue pressure and physical/travel difficulty:
+  - `light`: can ease travel/exertion difficulty where fitting.
+  - `normal`: baseline.
+  - `burdened`: increase fatigue gain pressure and harder physical/travel checks.
+  - `overloaded`: strong fatigue pressure; strenuous movement may be disallowed until load changes.
+- Keep changes sparse, explicit, and deterministic across turns.
+
+---
+
 ## Dice Resolution
 
 All contested actions use `POST /roll`. The GPT never simulates dice internally.

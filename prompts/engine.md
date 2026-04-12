@@ -87,7 +87,7 @@ Before irreversible/high-cost choices, ask explicit yes/no confirmation: permane
 
 Before `POST /state/{session_id}`, update changed fields.
 Always check: `character.hp`, `world.location`, `world.threat`, `world.goal`, `world.turn (+1)`.
-Update when triggered: `character.reputation`, `world.companions`, `world.economy`, `character.equipment`, `world.politics`, `world.time`.
+Update when triggered: `character.reputation`, `world.companions`, `world.economy`, `character.equipment`, `world.politics`, `world.time`, `world.survival`.
 Send one `log_entry` for material change.
 
 Reputation write rule: on faction-relevant consequences, update per `prompts/world_rules.md` (Situational ±5, Regional ±15, Campaign ±30; Local no change). Update `last_change` each standing change; `note` only for fundamental shifts.
@@ -112,6 +112,21 @@ Reputation write rule: on faction-relevant consequences, update per `prompts/wor
 - Barter updates `trade_goods`/`obligations`; alter coin only if coin is part of deal.
 - Change `wealth_tier` only for material long-term shifts.
 - Narrate denominations naturally; persist CD integers.
+
+### Survival Runtime Checkpoint
+
+- Maintain `world.survival`: `hunger`, `hydration`, `fatigue`, `load`.
+- Use sparse deterministic triggers only: meaningful travel leg, major exertion, explicit deprivation window, explicit resupply, long rest/recovery stop.
+- Do not tick survival on routine low-impact actions.
+- Treat fatigue as the primary active exertion tracker.
+- Hunger/hydration are low-frequency maintenance states; usually shift by one band at a clear checkpoint.
+- Load is lightweight abstraction (not item-weight math):
+  - `light` may ease travel/physical pressure,
+  - `normal` baseline,
+  - `burdened` increases fatigue/travel pressure,
+  - `overloaded` imposes strong movement/physical limits until load changes.
+- Poor hunger/hydration can limit fatigue recovery from rest.
+- Persist survival changes in the turn-end save whenever any survival band changes.
 
 ### Progression Runtime Checkpoint
 

@@ -14,7 +14,7 @@ The current leader of the Vigil is a tiefling monk of indeterminate age known as
 
 Trade and supply come up the approach road from Greymantle and the Rift of Discord Edge — an uncomfortable arrangement that the monastery tolerates because Greymantle is the closest settlement and the monks are pragmatic. Greymantle's residents have learned not to cause problems on the road. The Vigil has made this point once, clearly, and has not needed to make it again.
 tags: [rift-of-discord, platinum-accord, monastery, warden-training, drakenvale, lore-significant, bahamut, vigil]
-connections: [rift-of-discord-edge, greymantle, platinum-oath-approach]
+connections: [platinum-oath-approach]
 threat_level: 3
 known_npcs: [Serevane]
 discovered: false
