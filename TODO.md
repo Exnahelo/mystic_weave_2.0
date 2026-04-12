@@ -213,15 +213,57 @@ These are structural improvements identified from architecture review. None requ
 
 ### Fail-Forward Rule — Low Effort, High Value
 
-- [ ] Move fail-forward from narration style note to explicit mechanical rule in `world_rules.md`
-- [ ] Add three examples covering physical, social, and magical failure contexts
-- [ ] Add to `prompts/engine.md` Step 4 Narrate Outcome as a mandatory consideration
+- [x] Move fail-forward from narration style note to explicit mechanical rule in `world_rules.md`
+- [x] Add three examples covering physical, social, and magical failure contexts
+- [x] Add to `prompts/engine.md` Step 4 Narrate Outcome as a mandatory consideration
 
 ### NPC Relationship Propagation Rules
 
-- [ ] Define threshold-based rules for faction standing changes — what becomes available or unavailable at each standing band
-- [ ] Add to `prompts/world_rules.md` Reputation section
-- [ ] GPT applies propagation at turn end when standing crosses a threshold
+- [ ] Add explicit relationship propagation rules to the Reputation section in `prompts/world_rules.md`
+  - Define what changes when standing crosses into a new band
+  - Treat propagation as a gameplay consequence layer, not just flavor text
+  - Keep the rules lightweight and faction-agnostic unless a specific faction has authored exceptions
+- [ ] Define canonical standing-band effects in `prompts/world_rules.md`
+  - `Revered` (61 to 100)
+    - privileged access, proactive help, sensitive information, reduced scrutiny, stronger benefit of the doubt
+  - `Respected` (21 to 60)
+    - easier introductions, routine cooperation, standard services/opportunities opened, moderate institutional trust
+  - `Neutral` (-20 to 20)
+    - baseline access only, no special help, no automatic hostility
+  - `Distrusted` (-21 to -60)
+    - guarded interactions, reduced access, higher scrutiny, refusals on sensitive requests
+  - `Despised` (-61 to -100)
+    - denied access, active obstruction, possible reporting/hostility depending on faction and context
+- [ ] Clarify propagation scope in `prompts/world_rules.md`
+  - Propagation affects:
+    - service availability
+    - information access
+    - faction cooperation
+    - escort/sanction/authorization likelihood
+    - legal/social scrutiny
+    - which jobs, requests, or aid offers become available
+  - Propagation does not require separate subsystem math
+  - Propagation should be applied conservatively and according to the faction’s nature
+- [ ] Define threshold-crossing behavior in `prompts/world_rules.md`
+  - Apply propagation when standing crosses from one band into another
+  - Do not re-trigger the same unlock/lock consequence every turn if the standing remains in the same band
+  - On crossing a threshold, update access and posture for future scenes
+  - Use `last_change` for the triggering event; use `note` only when the faction’s overall disposition meaningfully changes
+- [ ] Add faction-agnostic examples to `prompts/world_rules.md`
+  - Crossing from Neutral -> Respected opens routine cooperation or trusted introductions
+  - Crossing from Respected -> Revered opens sensitive access or proactive support
+  - Crossing from Neutral -> Distrusted closes sensitive requests and increases scrutiny
+  - Crossing from Distrusted -> Despised causes denial, expulsion, reporting, or active interference depending on faction context
+- [ ] Update `prompts/engine.md` turn-end save behavior
+  - Require the GPT to check whether any faction standing crossed a band threshold during the turn
+  - If a threshold was crossed, apply the appropriate propagation before save
+  - Reflect the result in scene consequences, future availability, and reputation notes where applicable
+  - Keep this as a turn-end rule, not a separate mid-scene subsystem unless the crossing itself is the scene outcome
+- [ ] Keep propagation bounded and compatible with current architecture
+  - Do not add a new complex faction-simulation subsystem in this pass
+  - Do not create automatic cross-faction chain reactions unless explicitly authored later
+  - Keep propagation tied to the specific faction whose standing changed
+  - Preserve existing reputation math and standing bands
 
 ### Pacing Variables
 

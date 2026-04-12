@@ -403,6 +403,45 @@ Use **positive** change when the outcome materially aligns with faction interest
 
 Always clamp standing to the valid range: **-100 to +100**.
 
+### Relationship Propagation Rules (Band Crossings)
+
+Reputation propagation is a gameplay consequence layer, not flavor text. When standing crosses into a new band, faction posture and access should update for future scenes.
+
+Apply propagation conservatively and faction-agnostically unless a faction has authored exceptions. Keep effects tied to the specific faction whose standing changed.
+
+### Canonical Band Effects
+
+- **Revered (61 to 100):** privileged access, proactive help, sensitive information access, reduced scrutiny, strong benefit of the doubt.
+- **Respected (21 to 60):** easier introductions, routine cooperation, standard services/opportunities opened, moderate institutional trust.
+- **Neutral (-20 to 20):** baseline access only, no special help, no automatic hostility.
+- **Distrusted (-21 to -60):** guarded interactions, reduced access, higher scrutiny, refusals on sensitive requests.
+- **Despised (-61 to -100):** denied access, active obstruction, and possible reporting/hostility depending on faction and context.
+
+### Propagation Scope and Boundaries
+
+Propagation may affect:
+- service availability
+- information access
+- faction cooperation
+- escort/sanction/authorization likelihood
+- legal/social scrutiny
+- which jobs, requests, or aid offers are available
+
+Propagation does not require separate subsystem math. Do not create automatic cross-faction chain reactions unless explicitly authored.
+
+### Threshold-Crossing Behavior
+
+- Apply propagation when standing crosses from one band into another.
+- Do not re-trigger the same unlock/lock consequence every turn while standing remains in the same band.
+- On threshold crossing, update access and posture for future scenes.
+
+### Faction-Agnostic Threshold Examples
+
+- **Neutral -> Respected:** routine cooperation opens; trusted introductions become available.
+- **Respected -> Revered:** sensitive access and proactive support become available.
+- **Neutral -> Distrusted:** sensitive requests close; scrutiny and friction increase.
+- **Distrusted -> Despised:** denial, expulsion, reporting, or active interference becomes likely by faction context.
+
 ### Write Rules for `last_change` and `note`
 
 - Update `last_change` every time standing changes, using a one-sentence description of the triggering event.

@@ -73,9 +73,9 @@ Use roll exactly:
 - fail by 11+ = failure
 - 100 = critical failure
 
-On partial failure, failure, and critical failure, fail-forward is mandatory: advance scene state with degree-appropriate consequences (pressure, cost, worsened position, or new complication), never a stall.
+On partial/failure/critical failure, fail-forward is mandatory: advance scene state; never stall.
 
-Do not override dice authority: keep setbacks meaningful, do not soften catastrophic failure, and keep irreversible/high-cost outcomes behind the confirmation gate.
+Do not override dice: keep setbacks meaningful, never soften catastrophic failure, and keep irreversible/high-cost outcomes behind confirmation gate.
 
 Apply HP/world consequences precisely. At `hp.current = 0`, character is incapacitated. Companion 0 HP => incapacitated; permanent loss => departed.
 
@@ -102,6 +102,8 @@ Update when triggered:
 Send one `log_entry` for material change.
 
 Reputation writes: follow `prompts/world_rules.md` (Situational ±5, Regional ±15, Campaign ±30; Local no change). Update `last_change` every standing change; update `note` only on fundamental disposition shifts.
+
+At turn end, check for faction band crossing. If crossed, apply that faction's propagation before save and reflect it in consequences/notes. Turn-end only (no separate subsystem).
 
 ### Time/Weather/Moon Runtime Checkpoint
 - Maintain `world.time`: `day`, `month`, `year`, `time_of_day`, `season`, `festival`, `weather`, `weather_note`.
