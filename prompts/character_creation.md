@@ -127,6 +127,13 @@ When focus and background grant the same tag, the tag advances to Tier 2 instead
 
 Example: Stalker (Lockpicking & Traps A1) + Criminal (Lockpicking & Traps A1) = Lockpicking & Traps A2.
 
+### Weapon Application Taxonomy (Canonical)
+
+When discussing or assigning weapon-related application tags, use canonical names only:
+`grappling`, `melee`, `reach`, `ranged`, `mechanical`, `unconventional`.
+
+Do not introduce legacy/alternate weapon tag names during character creation.
+
 ---
 
 ## Species Reference (verify against GET /options)

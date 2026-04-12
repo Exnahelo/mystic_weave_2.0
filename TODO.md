@@ -86,20 +86,27 @@ Updated after world expansion, magic system, progression redesign, and item cata
 
 ### Schema & Model Cleanup
 
-- [ ] Decide deprecation timeline for legacy compatibility fields in `CharacterModel` (`level`, `magic_fields`, `draconic_traits` alias)
-- [ ] If/when removing legacy compatibility fields, add migration + contract rollout plan for existing sessions/clients
-- [ ] Add explicit guard test coverage for OpenAPI policy constraints:
-  - [ ] route description max-length enforcement
-  - [ ] required object `properties` presence for health/version/root response schemas
-  - [ ] top-level `servers` URL presence
+- [x] Decide deprecation timeline for legacy compatibility fields in `CharacterModel` (`level`, `magic_fields`, `draconic_traits` alias)
+  - [x] **v3.2.x (now):** retain compatibility fields; mark as deprecated in schema/docs.
+  - [x] **v3.3.0:** stop server-generated writes for `level`/`magic_fields`; continue read compatibility.
+  - [x] **v4.0.0:** remove `level`, `magic_fields`, and `species_traits` alias acceptance (keep canonical `draconic_traits`).
+- [x] If/when removing legacy compatibility fields, add migration + contract rollout plan for existing sessions/clients
+  - [x] Pre-v4 migration script: normalize stored `game_states.character` JSON (`species_traits` → `draconic_traits`, drop `level` + `magic_fields`).
+  - [x] Rollout gate: run migration in staging, then production, before deploying v4.0.0 schema.
+  - [x] Contract rollout: keep legacy acceptance assertions during v3.x; invert/remove those assertions at v4.0.0 cutover.
+  - [x] Client comms: publish deprecation in release notes for v3.2.x + v3.3.0 and include final removal notice in v4.0.0 notes.
+- [x] Add explicit guard test coverage for OpenAPI policy constraints:
+  - [x] route description max-length enforcement
+  - [x] required object `properties` presence for health/version/root response schemas
+  - [x] top-level `servers` URL presence
 
 ### Application Tag Updates
 
-- [ ] Update `data/backgrounds.json` — remap old weapon tags to new taxonomy
-- [ ] Update `data/focus.json` — remap old weapon tags to new taxonomy
-- [ ] Update `prompts/world_rules.md` application tag table with new weapon taxonomy
-- [ ] Update `prompts/character_creation.md` tag name references
-- [ ] Update `schemas/openapi.yaml` if weapon tags are enumerated
+- [x] Update `data/backgrounds.json` — remap old weapon tags to new taxonomy
+- [x] Update `data/focus.json` — remap old weapon tags to new taxonomy
+- [x] Update `prompts/world_rules.md` application tag table with new weapon taxonomy
+- [x] Update `prompts/character_creation.md` tag name references
+- [x] Update `schemas/openapi.yaml` if weapon tags are enumerated
 - [ ] Remap X's application tags in session `74a30d9f` via SQL
 
 ### Progression System Implementation

@@ -20,6 +20,7 @@ from api.game_data import (
     list_focus,
     list_species,
 )
+from api.models import HealthResponse, VersionResponse
 from api.routes import character, location, options, roll, session, state
 
 
@@ -39,6 +40,12 @@ app = FastAPI(
         "d100 roll-under resolution with domain scores and competency tiers."
     ),
     version="3.2.0",
+    servers=[
+        {
+            "url": "https://mysticweave-production.up.railway.app",
+            "description": "Production (Railway)",
+        }
+    ],
     lifespan=lifespan,
 )
 
@@ -60,20 +67,20 @@ app.include_router(location.router)
 app.include_router(options.router)
 
 
-@app.get("/", tags=["health"])
-async def root() -> dict[str, str]:
+@app.get("/", tags=["health"], response_model=HealthResponse)
+async def root() -> HealthResponse:
     """Root — confirms the API is running."""
     return {"status": "ok", "service": "mystic-weave"}
 
 
-@app.get("/health", tags=["health"])
-async def health_check() -> dict[str, str]:
+@app.get("/health", tags=["health"], response_model=HealthResponse)
+async def health_check() -> HealthResponse:
     """Health check endpoint — used by Railway and uptime monitors."""
     return {"status": "ok", "service": "mystic-weave"}
 
 
-@app.get("/version", tags=["health"])
-async def version() -> dict[str, str | int]:
+@app.get("/version", tags=["health"], response_model=VersionResponse)
+async def version() -> VersionResponse:
     """Deployment/version metadata for sanity checks across environments."""
     git_sha = os.getenv("RAILWAY_GIT_COMMIT_SHA") or os.getenv("GIT_SHA") or "unknown"
     species_count = len(list_species())

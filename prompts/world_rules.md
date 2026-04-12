@@ -127,6 +127,8 @@ Cross-domain note: some fields can roll in more than one domain depending on pri
 
 Specific tools, weapons, or methods. Tiers 1–5, each tier adds +1 to target number.
 
+Weapon application taxonomy is canonical across data and prompts: **grappling, melee, reach, ranged, mechanical, unconventional**.
+
 | Category | Primary Domain |
 |---|---|
 | Grappling | Agility |

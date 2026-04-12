@@ -55,6 +55,10 @@ async def get_location(
     "/location",
     response_model=LocationResponse,
     status_code=201,
+    description=(
+        "Create or update a location via UPSERT, and persist valid world-graph "
+        "connections from the payload."
+    ),
     responses={200: {"model": LocationResponse, "description": "Location updated"}},
 )
 async def upsert_location(

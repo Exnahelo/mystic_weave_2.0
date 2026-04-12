@@ -36,7 +36,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       summary: Save State
-      description: Save full game state, deep-merge character updates, replace world state, and append one log entry atomically.
+      description: Save game state, deep-merge character updates onto stored state,
+        replace world state, and append one log entry atomically.
       operationId: save_state_state__session_id__post
       parameters:
       - name: session_id
@@ -128,16 +129,8 @@ paths:
   /roll:
     post:
       summary: Roll Dice
-      description: 'Roll 1d100 against the target number and return the result with
-
-        degree of success.
-
-
-        Critical rules (non-negotiable):
-
-        - Roll 1 is always critical success regardless of target.
-
-        - Roll 100 is always critical failure regardless of target.'
+      description: Roll 1d100 against a target and return success state plus degree
+        band.
       operationId: roll_dice_roll_post
       requestBody:
         content:
@@ -189,7 +182,8 @@ paths:
   /location:
     post:
       summary: Upsert Location
-      description: Create or update a location via UPSERT and persist any provided world-graph connections.
+      description: Create or update a location via UPSERT, and persist valid world-graph
+        connections from the payload.
       operationId: upsert_location_location_post
       requestBody:
         content:
@@ -280,13 +274,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  service:
-                    type: string
-                title: Response Root  Get
+                $ref: '#/components/schemas/HealthResponse'
   /health:
     get:
       tags:
@@ -300,13 +288,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  service:
-                    type: string
-                title: Response Health Check Health Get
+                $ref: '#/components/schemas/HealthResponse'
   /version:
     get:
       tags:
@@ -320,23 +302,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  service:
-                    type: string
-                  api_version:
-                    type: string
-                  git_sha:
-                    type: string
-                  data_fingerprint:
-                    type: string
-                  species_count:
-                    type: integer
-                  focus_count:
-                    type: integer
-                  backgrounds_count:
-                    type: integer
-                title: Response Version Version Get
+                $ref: '#/components/schemas/VersionResponse'
 components:
   schemas:
     AdjustmentPoints:
@@ -1010,6 +976,19 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    HealthResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+        service:
+          type: string
+          title: Service
+      type: object
+      required:
+      - status
+      - service
+      title: HealthResponse
     Identity-Input:
       properties:
         origin:
@@ -1513,6 +1492,39 @@ components:
       - msg
       - type
       title: ValidationError
+    VersionResponse:
+      properties:
+        service:
+          type: string
+          title: Service
+        api_version:
+          type: string
+          title: Api Version
+        git_sha:
+          type: string
+          title: Git Sha
+        data_fingerprint:
+          type: string
+          title: Data Fingerprint
+        species_count:
+          type: integer
+          title: Species Count
+        focus_count:
+          type: integer
+          title: Focus Count
+        backgrounds_count:
+          type: integer
+          title: Backgrounds Count
+      type: object
+      required:
+      - service
+      - api_version
+      - git_sha
+      - data_fingerprint
+      - species_count
+      - focus_count
+      - backgrounds_count
+      title: VersionResponse
     WealthTier:
       type: string
       enum:

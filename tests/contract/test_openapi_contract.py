@@ -3,6 +3,26 @@ import pytest
 from api.main import app
 
 
+MAX_ROUTE_DESCRIPTION_LENGTH = 300
+HTTP_METHODS = {"get", "post", "put", "patch", "delete", "head", "options"}
+
+
+def _iter_operations(spec: dict):
+    for path, path_item in spec.get("paths", {}).items():
+        for method, operation in path_item.items():
+            if method.lower() in HTTP_METHODS:
+                yield path, method.lower(), operation
+
+
+def _resolve_schema(spec: dict, schema: dict) -> dict:
+    schema_ref = schema.get("$ref")
+    if not schema_ref:
+        return schema
+    assert schema_ref.startswith("#/components/schemas/")
+    schema_name = schema_ref.split("/")[-1]
+    return spec["components"]["schemas"][schema_name]
+
+
 @pytest.mark.contract
 def test_openapi_contract_has_expected_core_shapes() -> None:
     # Avoid startup/lifespan side effects (DB pool creation) for pure contract checks.
@@ -47,3 +67,36 @@ def test_openapi_contract_has_expected_core_shapes() -> None:
 
     create_character_props = spec["components"]["schemas"]["CreateCharacterResponse"]["properties"]
     assert "$ref" in create_character_props["character"]
+
+
+@pytest.mark.contract
+def test_openapi_policy_route_descriptions_respect_max_length() -> None:
+    spec = app.openapi()
+    for path, method, operation in _iter_operations(spec):
+        description = operation.get("description") or ""
+        assert len(description) <= MAX_ROUTE_DESCRIPTION_LENGTH, (
+            f"{method.upper()} {path} description length {len(description)} exceeds "
+            f"max {MAX_ROUTE_DESCRIPTION_LENGTH}"
+        )
+
+
+@pytest.mark.contract
+def test_openapi_policy_health_version_root_response_schemas_have_properties() -> None:
+    spec = app.openapi()
+    for path in ("/", "/health", "/version"):
+        schema = spec["paths"][path]["get"]["responses"]["200"]["content"][
+            "application/json"
+        ]["schema"]
+        resolved = _resolve_schema(spec, schema)
+        assert resolved.get("type") == "object"
+        assert "properties" in resolved
+        assert resolved["properties"]
+
+
+@pytest.mark.contract
+def test_openapi_policy_has_top_level_servers_url() -> None:
+    spec = app.openapi()
+    servers = spec.get("servers")
+    assert isinstance(servers, list)
+    assert servers
+    assert any(isinstance(server.get("url"), str) and server["url"].strip() for server in servers)

@@ -82,7 +82,14 @@ async def load_state(
     )
 
 
-@router.post("/state/{session_id}", response_model=GameStateResponse)
+@router.post(
+    "/state/{session_id}",
+    response_model=GameStateResponse,
+    description=(
+        "Save game state, deep-merge character updates onto stored state, replace world "
+        "state, and append one log entry atomically."
+    ),
+)
 async def save_state(
     session_id: str,
     body: SaveStateRequest,

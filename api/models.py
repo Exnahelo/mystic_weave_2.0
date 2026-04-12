@@ -447,6 +447,25 @@ class CreateCharacterResponse(BaseModel):
 
 
 # ---------------------------------------------------------------------------
+# Health / metadata response models
+# ---------------------------------------------------------------------------
+
+class HealthResponse(BaseModel):
+    status: str
+    service: str
+
+
+class VersionResponse(BaseModel):
+    service: str
+    api_version: str
+    git_sha: str
+    data_fingerprint: str
+    species_count: int
+    focus_count: int
+    backgrounds_count: int
+
+
+# ---------------------------------------------------------------------------
 # Dice roll models
 # ---------------------------------------------------------------------------
 

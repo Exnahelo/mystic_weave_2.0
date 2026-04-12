@@ -40,7 +40,11 @@ def _degree_of_success(raw_roll: int, target: int) -> str:
         return "failure"
 
 
-@router.post("/roll", response_model=RollResponse)
+@router.post(
+    "/roll",
+    response_model=RollResponse,
+    description="Roll 1d100 against a target and return success state plus degree band.",
+)
 async def roll_dice(body: RollRequest) -> RollResponse:
     """
     Roll 1d100 against the target number and return the result with
