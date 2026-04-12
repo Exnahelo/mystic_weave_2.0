@@ -18,7 +18,7 @@ If `session_id` exists, call `GET /state/{session_id}` and continue play (no re-
 
 ## Turn Loop (mandatory)
 
-For required API calls: **await response, validate minimum fields, retry once if incomplete, then narrate conservatively from confirmed data only**.
+For required API calls: **await, validate minima, retry once if incomplete, then narrate only from confirmed data**.
 
 ### Runtime Safety Checkpoint (Await + Validate)
 
@@ -42,9 +42,9 @@ If still incomplete after one retry: stop irreversible progression, avoid canon 
 
 ### 2) Present Choices
 
-- Offer 2–4 meaningful choices.
+- Offer 2-4 choices.
 - Include movement from `GET /location/{id}/connections` only.
-- Reflect tags, identity, companions, and current situation.
+- Reflect tags, identity, and companions.
 
 ### 3) Resolve Risk
 
@@ -54,7 +54,7 @@ For contested actions:
 3. Add one relevant application tier (for magical actions: use the specific spell/rite tag)
 4. Item `roll_tag` is context only (no extra bonus)
 5. Apply difficulty: Trivial +20, Easy +15, Standard +10, Hard +5, Severe +0, Extreme -10, Legendary -20
-6. If magical action, apply access-band adjustment from `prompts/world_rules.md` before roll (Safe: none; Risky: Hard step; Dangerous: Extreme/Legendary as appropriate)
+6. For magical actions, apply access-band adjustment from `prompts/world_rules.md` (Safe none; Risky Hard; Dangerous Extreme/Legendary)
 7. Never stack multiple knowledge tags or multiple application tags on one roll
 8. For known-faction social/political checks, apply reputation modifier: Revered +10, Respected +5, Neutral +0, Distrusted -10, Despised -20
 9. Call `POST /roll`
@@ -90,7 +90,7 @@ Always check: `character.hp`, `world.location`, `world.threat`, `world.goal`, `w
 Update when triggered: `character.reputation`, `world.companions`, `world.economy`, `character.equipment`, `world.politics`, `world.time`.
 Send one `log_entry` for material change.
 
-Reputation write rule: when a faction-relevant consequence resolves, update reputation using `prompts/world_rules.md` (Situational ±5, Regional ±15, Campaign ±30; Local no change). Update `last_change` on every standing change; update `note` only for fundamental disposition shifts.
+Reputation write rule: on faction-relevant consequences, update per `prompts/world_rules.md` (Situational ±5, Regional ±15, Campaign ±30; Local no change). Update `last_change` every standing change; update `note` only for fundamental disposition shifts.
 
 ### Time/Weather/Moon Runtime Checkpoint
 
@@ -116,7 +116,7 @@ Reputation write rule: when a faction-relevant consequence resolves, update repu
 
 - Apply three-track progression from `prompts/world_rules.md`.
 - AP awards after consequence resolution only: Local +0, Situational +1, Regional +2, Campaign +4.
-- Treat a multi-leg job/extended task as one Situational consequence unless legs are independently commissioned with independent stakes; sub-events in one job do not grant extra AP.
+- Treat a multi-leg job/extended task as one Situational consequence unless legs are independently commissioned; sub-events in one job grant no extra AP.
 - On AP award:
   - `character.advancement.points_available += award`
   - `character.advancement.points_earned_total += award`
@@ -131,7 +131,7 @@ Reputation write rule: when a faction-relevant consequence resolves, update repu
   - `points_spent += spent`
 - Tag advancement never uses AP; cap T5; max one advance per tag per session and one total tag advance per scene.
 - For scene advancement, choose the tag most central to the action (if tied, player chooses).
-- Tags can be introduced beyond character creation: after repeated meaningful use, propose a new Tier 1 tag and require player confirmation before the next state save.
+- Tags can be introduced beyond character creation: after repeated meaningful use, propose a new Tier 1 tag and require player confirmation before save.
 
 Deterministic write order:
 1) survival (character + companion hp/status)
@@ -147,7 +147,7 @@ Deterministic write order:
 - Failure advances the world; no resets.
 - Consistency over novelty.
 - Movement only along graph edges.
-- Treat Temple to Tiamat and Platinum Oath Monastery areas as restricted-access spaces; require explicit authorization, sanctioned escort, or meaningful risk framing for entry attempts.
+- Treat Temple to Tiamat and Platinum Oath Monastery as restricted-access; require authorization, sanctioned escort, or explicit risk framing for entry attempts.
 - Persist named NPCs.
 - Identity is persistent.
 - Companion incapacitation/departure is permanent unless explicitly earned.
