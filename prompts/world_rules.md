@@ -103,9 +103,10 @@ Each of the seven domains has five knowledge skills. Tiers 1–5, each tier adds
 **Will:** Discipline, Meditation, Courage, Resolve, Warding
 **Presence:** Persuasion, Deception, Performance, Command, Diplomacy
 
-### Magical Fields (knowledge track)
+### Magical Fields (knowledge tag table)
 
 Magical fields are knowledge tags and follow normal tier math (+1 per tier).
+Canonical full specification: `prompts/magic_system_reference.md`.
 
 | Field | Primary Domain | Governs |
 |---|---|---|

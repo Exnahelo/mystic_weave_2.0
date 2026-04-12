@@ -124,14 +124,14 @@ Updated after world expansion, magic system, progression redesign, and item cata
 
 ### Magic System Implementation
 
-- [ ] Update `prompts/world_rules.md` knowledge tag table with magical fields
-- [ ] Add Magic section to `world_rules.md` covering:
-  - [ ] Access bands (safe, risky, dangerous)
-  - [ ] Field tier access ceilings
-  - [ ] Failure model (minor miss, strain, backlash, catastrophic)
-- [ ] Update `prompts/magic_system_reference.md` with full specification
-- [ ] Update `prompts/character_creation.md` — add magical fields as valid knowledge tag choices, add dragonborn breath type establishment at creation
-- [ ] Add magic roll assembly to `prompts/engine.md` Step 3
+- [x] Update `prompts/world_rules.md` knowledge tag table with magical fields
+- [x] Add Magic section to `world_rules.md` covering:
+  - [x] Access bands (safe, risky, dangerous)
+  - [x] Field tier access ceilings
+  - [x] Failure model (minor miss, strain, backlash, catastrophic)
+- [x] Update `prompts/magic_system_reference.md` with full specification
+- [x] Update `prompts/character_creation.md` — add magical fields as valid knowledge tag choices, add dragonborn breath type establishment at creation
+- [x] Add magic roll assembly to `prompts/engine.md` Step 3
 
 ### Item & Economy Cleanup
 

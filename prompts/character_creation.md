@@ -20,7 +20,8 @@ This document is the authoritative, step-by-step reference for character creatio
 
 1. Present the focus archetype list from `GET /options` with descriptions and starting tags.
 2. Player chooses a focus. Any species can choose any focus.
-3. Magical fields are valid knowledge tags for progression and can be introduced in play via repeated consequential magical use (same as other tags).
+3. Magical fields are valid knowledge tag choices (same tier math/progression rules as other knowledge tags). Canonical fields: `Sacred`, `Warding`, `Binding`, `Elemental`, `Nature`, `Arcane Theory`, `Illusion`, `Runecraft`, `Necromancy`, `Alchemy`, `Invocation`.
+4. If species is dragonborn, confirm breath lineage type is established during creation (`radiant`, `fire`, `cold`, `lightning`, `acid`, `necrotic`) or explicitly marked as deferred to narrative discovery.
 
 ### Stage 3 — Background
 

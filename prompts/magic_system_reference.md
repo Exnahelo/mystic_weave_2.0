@@ -1,6 +1,8 @@
-# Mystic Weave — Magic System Reference
+# Mystic Weave — Magic System Reference (Full Specification)
 
 Magic extends existing competency mechanics. No separate infrastructure is introduced.
+This is the canonical full specification for magical fields, spell/rite handling,
+access bands, and magical failure outcomes.
 
 ---
 
@@ -46,6 +48,8 @@ Cross-domain note:
 
 ## Access Model
 
+Use this section in parity with `prompts/world_rules.md` Access Bands.
+
 ### Safe Use
 - Caster has the relevant field knowledge tag and the specific spell/rite application tag.
 - Roll normally.
@@ -77,6 +81,9 @@ Attempting above field tier is Dangerous Use even if spell tag tier is high.
 ---
 
 ## Failure Model
+
+Use these labels exactly in narration and adjudication: Minor Miss, Strain,
+Backlash, Catastrophic Failure.
 
 ### Minor Miss (Safe/Risky, partial failure or better)
 - Working weakens, fizzles, or partially resolves.
