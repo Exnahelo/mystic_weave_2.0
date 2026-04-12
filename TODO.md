@@ -267,14 +267,50 @@ These are structural improvements identified from architecture review. None requ
 
 ### Pacing Variables
 
-- [ ] Add `pacing` block to world state schema:
-  - [ ] `tension` — integer 0–10
-  - [ ] `last_consequence_weight` — local / situational / regional / campaign
-  - [ ] `turns_since_social_beat` — integer
-  - [ ] `turns_since_discovery` — integer
-  - [ ] `turn_count` — integer
-- [ ] Add pacing read rules to `prompts/engine.md` — GPT checks pacing block when selecting scene type and intensity
-- [ ] Update `schemas/openapi.yaml` and `api/models.py` for pacing block
+- [ ] Add a typed `pacing` block to world state in `api/models.py`
+  - Add a new `PacingState` model
+  - Add it to `WorldModel` as a lightweight control block
+  - Keep it small, deterministic, and GPT-readable
+- [ ] Define the canonical `pacing` fields in `api/models.py`
+  - `tension` — integer 0–10
+  - `last_consequence_weight` — `local` / `situational` / `regional` / `campaign`
+  - `turns_since_social_beat` — non-negative integer
+  - `turns_since_discovery` — non-negative integer
+  - `turn_count` — non-negative integer
+  - Add validation/clamping where appropriate
+- [ ] Resolve counter ownership before implementation
+  - Decide whether `pacing.turn_count` replaces `world.turn`, mirrors it, or is derived from it
+  - Prefer a single source of truth to avoid drift
+  - If both are kept for compatibility, document which one is authoritative and when the other is synchronized
+- [ ] Update `schemas/openapi.yaml` to include the new `pacing` block
+  - Keep schema aligned with `api/models.py`
+  - Preserve existing request/response structure outside the added block
+- [ ] Add canonical pacing rules to `prompts/world_rules.md`
+  - Define what each pacing field means in play
+  - Define how tension should rise, fall, or hold
+  - Define when `last_consequence_weight` changes
+  - Define when social beats and discovery beats reset their counters
+  - Keep pacing descriptive and directional, not a heavy subsystem
+- [ ] Add pacing read rules to `prompts/engine.md`
+  - Require the GPT to check pacing before selecting scene type, pressure, and intensity
+  - Use pacing to avoid repetitive scene selection
+  - Use pacing to modulate escalation rather than override current stakes or canon
+  - Keep prompt wording short and enforceable
+- [ ] Add pacing update rules to `prompts/engine.md`
+  - Update `tension` when scene outcomes materially escalate or release pressure
+  - Reset `turns_since_social_beat` when a meaningful social scene occurs; otherwise increment
+  - Reset `turns_since_discovery` when a meaningful discovery occurs; otherwise increment
+  - Update `last_consequence_weight` at scene resolution using the existing consequence scale
+  - Synchronize `turn_count` with the chosen authoritative turn counter at save time
+- [ ] Keep pacing bounded and compatible with current architecture
+  - Do not introduce a separate pacing engine or scheduler in this pass
+  - Do not let pacing override dice results, location logic, or faction logic
+  - Treat pacing as scene-selection guidance for the GPT, not a replacement for state consequences
+- [ ] Add tests for pacing model behavior
+  - Validate field bounds and enum values
+  - Validate default initialization
+  - Validate synchronization behavior for `turn_count`
+  - Validate that saves accept and return the new pacing block cleanly
 
 ### Extraction Step Separation
 

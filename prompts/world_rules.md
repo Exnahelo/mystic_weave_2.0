@@ -370,6 +370,32 @@ A multi-leg job or extended task counts as one Situational consequence unless ea
 
 ---
 
+## Pacing (Lightweight Guidance State)
+
+Pacing is descriptive scene-cadence guidance, not a separate subsystem. It does not override dice, location constraints, faction logic, or established consequences.
+
+### Pacing Fields
+
+- `tension` (0–10): current pressure level for scene intensity.
+- `last_consequence_weight` (`local|situational|regional|campaign`): scale of the most recently resolved consequence.
+- `turns_since_social_beat`: turns since a meaningful social interaction beat.
+- `turns_since_discovery`: turns since a meaningful discovery/lore/reveal beat.
+- `turn_count`: pacing-facing mirror of authoritative `world.turn`.
+
+### Canonical Update Guidance
+
+- Tension rises when outcomes escalate danger, urgency, or strategic pressure.
+- Tension falls when outcomes materially stabilize safety, leverage, or immediate risk.
+- Tension holds when pressure profile is broadly unchanged.
+- Update `last_consequence_weight` at scene resolution using the existing consequence scale.
+- Reset `turns_since_social_beat` to 0 when a meaningful social beat occurs; otherwise increment.
+- Reset `turns_since_discovery` to 0 when a meaningful discovery beat occurs; otherwise increment.
+- Synchronize `turn_count` with `world.turn` at save time.
+
+Use pacing conservatively to avoid repetitive scene selection and to modulate cadence, not to force outcomes.
+
+---
+
 ## Reputation
 
 Reputation represents standing with a specific faction and ranges from **-100 to +100**.

@@ -93,6 +93,13 @@ def _build_valid_world() -> dict:
     return {
         "location": "test-loc-alpha",
         "threat": "none",
+        "pacing": {
+            "tension": 3,
+            "last_consequence_weight": "local",
+            "turns_since_social_beat": 0,
+            "turns_since_discovery": 0,
+            "turn_count": 1,
+        },
         "goal": "survive",
         "turn": 1,
         "companions": [],

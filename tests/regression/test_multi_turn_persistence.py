@@ -122,6 +122,13 @@ def _base_world() -> dict:
         "threat": "low",
         "goal": "survive",
         "turn": 1,
+        "pacing": {
+            "tension": 3,
+            "last_consequence_weight": "local",
+            "turns_since_social_beat": 0,
+            "turns_since_discovery": 0,
+            "turn_count": 1,
+        },
         "companions": [
             {
                 "id": "comp_1",
@@ -207,6 +214,7 @@ def test_multi_turn_partial_updates_preserve_nested_identity_and_equipment() -> 
         assert body["character"]["status_effects"] == ["bleeding"]
         assert body["character"]["notes"] == "Ambushed at the ridge"
         assert body["world"]["turn"] == 3
+        assert body["world"]["pacing"]["turn_count"] == 3
         assert body["world"]["goal"] == "reach stronghold"
         assert body["log"] == ["Turn 2 applied.", "Turn 3 applied."]
 
@@ -258,6 +266,7 @@ def test_multi_turn_companion_lifecycle_and_political_economy_progression() -> N
         assert comp["hp"]["current"] == 0
         assert body["world"]["economy"]["coin"] == 300
         assert body["world"]["economy"]["wealth_tier"] == "destitute"
+        assert body["world"]["pacing"]["turn_count"] == 3
         assert "owes healer" in body["world"]["economy"]["obligations"]
         assert body["world"]["politics"]["legal_standing"] == "wanted"
         assert body["world"]["politics"]["known_leverage"] == ["captain bribery ledger"]

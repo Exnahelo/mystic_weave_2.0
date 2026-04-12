@@ -740,6 +740,14 @@ components:
       - from_id
       - connections
       title: ConnectionsResponse
+    ConsequenceWeight:
+      type: string
+      enum:
+      - local
+      - situational
+      - regional
+      - campaign
+      title: ConsequenceWeight
     CreateCharacterRequest:
       properties:
         session_id:
@@ -1331,6 +1339,30 @@ components:
       title: OptionsResponse
       description: Response for GET /options — all supported species, focus archetypes,
         backgrounds.
+    PacingState:
+      properties:
+        tension:
+          type: integer
+          title: Tension
+          default: 3
+        last_consequence_weight:
+          $ref: '#/components/schemas/ConsequenceWeight'
+          default: local
+        turns_since_social_beat:
+          type: integer
+          title: Turns Since Social Beat
+          default: 0
+        turns_since_discovery:
+          type: integer
+          title: Turns Since Discovery
+          default: 0
+        turn_count:
+          type: integer
+          title: Turn Count
+          default: 0
+      type: object
+      title: PacingState
+      description: Lightweight pacing guidance block for scene cadence and intensity.
     Politics:
       properties:
         faction_memberships:
@@ -1738,6 +1770,8 @@ components:
           $ref: '#/components/schemas/TimeState'
         survival:
           $ref: '#/components/schemas/SurvivalState'
+        pacing:
+          $ref: '#/components/schemas/PacingState'
       additionalProperties: false
       type: object
       required:
@@ -1773,6 +1807,8 @@ components:
           $ref: '#/components/schemas/TimeState'
         survival:
           $ref: '#/components/schemas/SurvivalState'
+        pacing:
+          $ref: '#/components/schemas/PacingState'
       additionalProperties: false
       type: object
       required:

@@ -137,6 +137,9 @@ async def save_state(
         except ValidationError as e:
             raise HTTPException(status_code=422, detail=e.errors())
 
+        # Authoritative turn counter is world.turn; pacing.turn_count mirrors it.
+        validated_world.pacing.turn_count = validated_world.turn
+
         merged_character_json = validated_character.model_dump(by_alias=True)
         validated_world_json = validated_world.model_dump()
 

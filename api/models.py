@@ -324,6 +324,13 @@ class LoadState(str, Enum):
     overloaded = "overloaded"
 
 
+class ConsequenceWeight(str, Enum):
+    local = "local"
+    situational = "situational"
+    regional = "regional"
+    campaign = "campaign"
+
+
 class TimeState(BaseModel):
     """In-world time, calendar, and weather state."""
     day:          int          = 1
@@ -356,6 +363,27 @@ class SurvivalState(BaseModel):
     hydration: HydrationState = HydrationState.hydrated
     fatigue:   FatigueState   = FatigueState.rested
     load:      LoadState      = LoadState.normal
+
+
+class PacingState(BaseModel):
+    """Lightweight pacing guidance block for scene cadence and intensity."""
+    tension: int = 3
+    last_consequence_weight: ConsequenceWeight = ConsequenceWeight.local
+    turns_since_social_beat: int = 0
+    turns_since_discovery: int = 0
+    turn_count: int = 0
+
+    @field_validator("tension")
+    @classmethod
+    def clamp_tension(cls, v: int) -> int:
+        return max(0, min(10, v))
+
+    @field_validator("turns_since_social_beat", "turns_since_discovery", "turn_count")
+    @classmethod
+    def non_negative_counter(cls, v: int) -> int:
+        if v < 0:
+            raise ValueError("pacing counters must be non-negative")
+        return v
     
 
 # ---------------------------------------------------------------------------
@@ -381,12 +409,21 @@ class WorldModel(BaseModel):
     # New in v3.3.0
     survival:   SurvivalState        = Field(default_factory=SurvivalState)
 
+    # New in v3.4.0
+    pacing:     PacingState          = Field(default_factory=PacingState)
+
     @field_validator("turn")
     @classmethod
     def turn_positive(cls, v: int) -> int:
         if v < 1:
             raise ValueError("turn must be at least 1")
         return v
+
+    @model_validator(mode="after")
+    def sync_pacing_turn_count(self) -> WorldModel:
+        """world.turn is authoritative; pacing.turn_count mirrors it for pacing guidance."""
+        self.pacing.turn_count = self.turn
+        return self
 
 
 # ---------------------------------------------------------------------------
