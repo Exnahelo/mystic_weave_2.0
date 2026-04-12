@@ -264,11 +264,16 @@ Tags are not limited to those acquired at character creation. If a character dem
 
 ### Track 3 — AP Earning (Consequence Scale)
 
-- **Local (0 AP):** the outcome matters in the immediate scene only and leaves no durable downstream pressure.
-- **Situational (1 AP):** the outcome creates a meaningful short-term shift for the current objective, encounter, or nearby node.
-- A multi-leg job or extended task counts as one Situational consequence unless each leg was independently commissioned with independent stakes. Sub-events within a single job — encounters, complications, detours — do not generate additional AP.
-- **Regional (2 AP):** the outcome reshapes conditions across multiple locations, factions, or travel paths in the active region.
-- **Campaign (4 AP):** the outcome materially redirects major arc stakes, long-horizon faction posture, or world-state trajectory.
+Award AP once per resolved scene, after consequences are finalized.
+
+| Consequence Scale | AP | One-sentence definition |
+|---|---:|---|
+| Local | 0 | The outcome affects only the immediate scene and creates no durable downstream pressure. |
+| Situational | 1 | The outcome creates a meaningful short-term shift for the current objective, encounter, or nearby node. |
+| Regional | 2 | The outcome reshapes conditions across multiple locations, factions, or travel paths in the active region. |
+| Campaign | 4 | The outcome materially redirects major-arc stakes, long-horizon faction posture, or world-state trajectory. |
+
+A multi-leg job or extended task counts as one Situational consequence unless each leg is independently commissioned with independent stakes. Sub-events within the same job (encounters, complications, detours) do not grant additional AP.
 
 ---
 

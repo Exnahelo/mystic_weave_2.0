@@ -115,7 +115,7 @@ Reputation write rule: on faction-relevant consequences, update per `prompts/wor
 ### Progression Runtime Checkpoint
 
 - Apply three-track progression from `prompts/world_rules.md`.
-- AP awards after consequence resolution only: Local +0, Situational +1, Regional +2, Campaign +4.
+- Award AP once per resolved scene, after consequence resolution only: Local +0, Situational +1, Regional +2, Campaign +4.
 - Treat a multi-leg job/extended task as one Situational consequence unless legs are independently commissioned; sub-events in one job grant no extra AP.
 - On AP award:
   - `character.advancement.points_available += award`
@@ -132,6 +132,12 @@ Reputation write rule: on faction-relevant consequences, update per `prompts/wor
 - Tag advancement never uses AP; cap T5; max one advance per tag per session and one total tag advance per scene.
 - For scene advancement, choose the tag most central to the action (if tied, player chooses).
 - Tags can be introduced beyond character creation: after repeated meaningful use, propose a new Tier 1 tag and require player confirmation before save.
+- Mandatory progression state persistence on each save where progression changes:
+  - `character.advancement.points_available`
+  - `character.advancement.points_spent`
+  - `character.advancement.points_earned_total`
+  - updated domain score(s) when AP is spent
+  - updated knowledge/application tag tiers when tag advancement occurs
 
 Deterministic write order:
 1) survival (character + companion hp/status)

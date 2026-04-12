@@ -111,16 +111,16 @@ Updated after world expansion, magic system, progression redesign, and item cata
 
 ### Progression System Implementation
 
-- [ ] Update `world_rules.md` Advancement section with final AP system:
-  - [ ] Consequence scale table with one-sentence definitions
-  - [ ] AP cost brackets (25–60: 1 AP, 61–70: 2 AP, 71–80: 3 AP)
-  - [ ] Tag advancement rules (use-based, one per scene max, new tag introduction rule)
-  - [ ] AP earning clarification (one award per resolved scene, multi-leg job counts as one Situational)
-- [ ] Add progression runtime section to `prompts/engine.md`:
-  - [ ] When and how to award AP
-  - [ ] Consequence scale definitions
-  - [ ] AP spend handling for domain raise requests
-  - [ ] Mandatory state updates on each save
+- [x] Update `world_rules.md` Advancement section with final AP system:
+  - [x] Consequence scale table with one-sentence definitions
+  - [x] AP cost brackets (25–60: 1 AP, 61–70: 2 AP, 71–80: 3 AP)
+  - [x] Tag advancement rules (use-based, one per scene max, new tag introduction rule)
+  - [x] AP earning clarification (one award per resolved scene, multi-leg job counts as one Situational)
+- [x] Add progression runtime section to `prompts/engine.md`:
+  - [x] When and how to award AP
+  - [x] Consequence scale definitions
+  - [x] AP spend handling for domain raise requests
+  - [x] Mandatory state updates on each save
 
 ### Magic System Implementation
 
