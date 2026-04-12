@@ -1,6 +1,6 @@
 # Mystic Weave — TODO
 
-Updated after hardening + world/prompt alignment passes through commit `985b5ba`.
+Updated after world expansion, magic system, progression redesign, and item catalog passes.
 
 ## ✅ Recently Completed
 
@@ -24,82 +24,206 @@ Updated after hardening + world/prompt alignment passes through commit `985b5ba`
   - [x] endpoint schema refs in OpenAPI contract tests
   - [x] validation regression tests for negative coin and invalid wealth tier
 - [x] Align version/docs consistency items:
-  - [x] `api/main.py` version set to `3.1.0`
-  - [x] `scripts/verify_production_contract.py` checks `3.1.0`
+  - [x] `api/main.py` version set to `3.2.0`
+  - [x] `scripts/verify_production_contract.py` checks `3.2.0`
   - [x] README cleanup and `.env.example` added
 - [x] Validation test run passing for hardened scope (`11 passed`)
-
-## 🔜 Next Priority Backlog
-
 - [x] Add Alembic migrations for schema lifecycle (replace ad hoc/manual DB evolution)
 - [x] Add CI guard for OpenAPI drift (`app.openapi()` vs `schemas/openapi.yaml`)
 - [x] Add data/prompt validation gates:
   - [x] schema checks for `data/*.json`
   - [x] structural/lint checks for prompt files used in production
-
-## Later Enhancements
-
 - [x] Strengthen deployment pipeline checks (pre-deploy contract + smoke bundle)
 - [x] Expand end-to-end coverage for multi-turn narrative persistence edge cases
 - [x] Add lightweight operational runbook for local/Railway troubleshooting
-
-## Prompt System Follow-Up (from 2026-04-10 audit)
-
-- [x] Add explicit await/validate checkpoints in `prompts/engine.md`:
-  - [x] Await endpoint response before narration
-  - [x] Validate required payload fields before irreversible updates
-  - [x] Define fallback behavior for incomplete API responses (retry/conservative narration)
+- [x] Add explicit await/validate checkpoints in `prompts/engine.md`
 - [x] Add explicit player-confirmation gates for irreversible outcomes in turn flow
-- [x] Add canonical precedence block in runtime prompts (conflict-resolution order)
-- [x] Resolve cross-file canon contradictions:
-  - [x] Economy model consistency (`drakenvale_world.md` vs `drakenvale_factions.md`)
-  - [x] Arcane Conservatory access consistency (`drakenvale_factions.md` vs `drakenvale_organizations.md`)
-  - [x] Crisis protocol maturity/status consistency across canon docs
+- [x] Add canonical precedence block in runtime prompts
+- [x] Resolve cross-file canon contradictions
 - [x] Add deterministic tie-break rules for ambiguous domain/tag adjudication
 - [x] Add deterministic state-write order for complex multi-change turns
 - [x] Add standardized handling for sparse/unknown faction reputation data
 - [x] Add global stub-handling policy for unfinished organizations/lore
-- [x] Extend `scripts/validate_prompts.py` checks for:
-  - [x] presence of await/checkpoint sections in required runtime prompts
-  - [x] presence of canon precedence marker
-  - [x] warning markers for known contradiction pairs
-
-## API/OpenAPI Follow-Up (from 2026-04-10 review)
-
+- [x] Extend `scripts/validate_prompts.py` checks
 - [x] Add optional `reason` field to `RollRequest` for roll observability
 - [x] Make `LocationResponse.data` typed (`LocationData`) instead of opaque object
-- [x] Upgrade response schemas in `schemas/openapi.yaml` to concrete `$ref` usage where needed
+- [x] Upgrade response schemas in `schemas/openapi.yaml` to concrete `$ref` usage
 - [x] Add `required` arrays for key response schemas used by GPT branching
 - [x] Normalize updated nullable fields to OpenAPI 3.1 style (`anyOf` with `null`)
+- [x] Design and write magic system reference
+- [x] Write difficulty reference
+- [x] Write notable items reference
+- [x] Run reciprocity audit on world connections
+- [x] Document intentionally one-way connections
+- [x] Add changelog note and release checkpoint for world topology baseline
+- [x] Redesign progression system — AP-purchased domain advancement, tiered brackets, use-based tags
+- [x] Add reputation growth rules to `world_rules.md` and `engine.md`
+- [x] Coin system redesigned — copper-as-base-unit, stored as integer CD
+- [x] Weapon application tags updated to new taxonomy (Grappling, Melee, Reach, Ranged, Mechanical, Unconventional)
+- [x] Created `prompts/mundane_items_reference.md`
+- [x] Created `prompts/weapons_armor_reference.md`
+- [x] Created `prompts/sstc_operations.md`
+- [x] Created `prompts/magical_items_reference.md`
+- [x] Holy water reclassified — removed from mundane catalog, added to `prompts/magical_items_reference.md`
+- [x] Blessed water added to mundane consumables as sacred preparation at `0 CD`
+- [x] World expanded — 13 new location stubs + 7 wilderness/trail stubs authored and seeded
+- [x] Magic system redesigned — fields as knowledge tags, spells as application tags, access bands, failure model
+- [x] Created `data/spells.json` baseline
+- [x] Added species traits block to dragonborn in `data/species.json`
+- [x] Add character payload compatibility support for legacy/expanded keys:
+  - [x] accept deprecated `level`
+  - [x] accept `magic_fields`
+  - [x] accept `species_traits` via alias to `draconic_traits`
+- [x] Re-sync `schemas/openapi.yaml` with runtime schema updates
+- [x] Restore OpenAPI `servers` entry in contract
+- [x] Bring OpenAPI route metadata into policy compliance:
+  - [x] shorten over-limit operation descriptions
+  - [x] restore explicit response `properties` for `/`, `/health`, `/version`
 
-## Current Open Work (Next)
+---
 
-### Priority 1 — Game System Reference Docs
+## 🔜 Active Work
 
-- [x] Design and write magic system reference (domain mappings, knowledge/application tags for magic, effect-scaling difficulty ladder)
-- [x] Write difficulty reference (tiered encounter/challenge list with default modifiers; target ~30–40 entries)
-- [x] Write notable items reference (canonical gear with roll tags + mechanical effects)
+### Schema & Model Cleanup
 
-Added:
+- [ ] Decide deprecation timeline for legacy compatibility fields in `CharacterModel` (`level`, `magic_fields`, `draconic_traits` alias)
+- [ ] If/when removing legacy compatibility fields, add migration + contract rollout plan for existing sessions/clients
+- [ ] Add explicit guard test coverage for OpenAPI policy constraints:
+  - [ ] route description max-length enforcement
+  - [ ] required object `properties` presence for health/version/root response schemas
+  - [ ] top-level `servers` URL presence
 
-- [x] `prompts/magic_system_reference.md`
-- [x] `prompts/difficulty_reference.md`
-- [x] `prompts/notable_items_reference.md`
+### Application Tag Updates
 
-### Priority 2 — World Navigation Consistency
+- [ ] Update `data/backgrounds.json` — remap old weapon tags to new taxonomy
+- [ ] Update `data/focus.json` — remap old weapon tags to new taxonomy
+- [ ] Update `prompts/world_rules.md` application tag table with new weapon taxonomy
+- [ ] Update `prompts/character_creation.md` tag name references
+- [ ] Update `schemas/openapi.yaml` if weapon tags are enumerated
+- [ ] Remap X's application tags in session `74a30d9f` via SQL
 
-- [x] Run explicit reciprocity audit on `prompts/world/*.md` connections and decide intentional one-way vs two-way links
-- [x] Document any intentionally one-way connections in a short note for future content updates
+### Progression System Implementation
 
-### Priority 3 — Documentation / Release Hygiene
+- [ ] Update `world_rules.md` Advancement section with final AP system:
+  - [ ] Consequence scale table with one-sentence definitions
+  - [ ] AP cost brackets (25–60: 1 AP, 61–70: 2 AP, 71–80: 3 AP)
+  - [ ] Tag advancement rules (use-based, one per scene max, new tag introduction rule)
+  - [ ] AP earning clarification (one award per resolved scene, multi-leg job counts as one Situational)
+- [ ] Add progression runtime section to `prompts/engine.md`:
+  - [ ] When and how to award AP
+  - [ ] Consequence scale definitions
+  - [ ] AP spend handling for domain raise requests
+  - [ ] Mandatory state updates on each save
 
-- [x] Add short changelog note in `README.md` or `OPERATIONAL_RUNBOOK.md` for new world locations/lairs and access/discovery assumptions
-- [x] Create lightweight release checkpoint (tag or release note) for post-audit + world topology baseline
+### Magic System Implementation
 
-## Gameplay upgrades from walkthrough
+- [ ] Update `prompts/world_rules.md` knowledge tag table with magical fields
+- [ ] Add Magic section to `world_rules.md` covering:
+  - [ ] Access bands (safe, risky, dangerous)
+  - [ ] Field tier access ceilings
+  - [ ] Failure model (minor miss, strain, backlash, catastrophic)
+- [ ] Update `prompts/magic_system_reference.md` with full specification
+- [ ] Update `prompts/character_creation.md` — add magical fields as valid knowledge tag choices, add dragonborn breath type establishment at creation
+- [ ] Add magic roll assembly to `prompts/engine.md` Step 3
 
-- [ ] Hunger tracking
-- [ ] Hydration tracking
-- [ ] Fatigue tracking
-- [ ] Carrying Weight/Encumbrance/Dimensions
-- [ ] Add holy water logic
+### Item & Economy Cleanup
+
+- [ ] Remove weapon and armor price entries from `prompts/economy_currency_reference.md` — now live in `weapons_armor_reference.md`
+- [ ] Add tool sufficiency rule to `prompts/engine.md` Economy Runtime Checkpoint
+- [ ] Update `prompts/character_creation.md` domain ceiling references to 80
+
+### World & Lore Updates
+
+- [ ] Update `prompts/drakenvale_geography.md` with new settlements and travel times
+- [ ] Add Vigil / Platinum Accord remnant to `prompts/drakenvale_organizations.md`
+- [ ] Add Serevane and The Warden of Greymantle to `prompts/drakenvale_characters.md`
+- [ ] Add Vigil faction entry to `prompts/drakenvale_factions.md`
+- [ ] Add regional economic nodes to `prompts/economy_currency_reference.md`
+- [ ] Update `prompts/sstc_operations.md` route network with new named locations
+- [ ] Update `WORLD_TOPOLOGY_BASELINE.md` for all new locations and reciprocity audit
+- [ ] Add `platinum-oath-approach` trail stub to `prompts/world/`
+- [ ] Add `draconic-grasslands-edge` stub to `prompts/world/`
+
+### Gameplay Tracking
+
+- [ ] Hunger tracking — schema addition, engine rule, item reference update
+- [ ] Hydration tracking — schema addition, engine rule, item reference update
+- [ ] Fatigue tracking — schema addition, engine rule
+- [ ] Carrying weight / encumbrance / dimensions — schema addition, engine rule, item weight reference
+- [ ] Standardized pricing reference for services — inn stays, meals, healing, ferriage, stabling
+
+---
+
+## 🔧 Architectural Improvements (Buildable)
+
+These are structural improvements identified from architecture review. None require a rebuild — all are addable to the current system.
+
+### Scene Manager — High Priority
+- [ ] Design a scene context builder that assembles a focused object for the GPT instead of sending full world state every turn
+- [ ] Scene object should include: current location summary, visible entities, immediate stakes, relevant character state, recent log entries (last 5), active threats, available opportunities
+- [ ] Implement as a pre-processing step before GPT turn narration — either a new endpoint or a context assembly function
+- [ ] Update `prompts/engine.md` to describe what the GPT should expect in scene context vs full state
+
+### Fail-Forward Rule — Low Effort, High Value
+- [ ] Move fail-forward from narration style note to explicit mechanical rule in `world_rules.md`
+- [ ] Add three examples covering physical, social, and magical failure contexts
+- [ ] Add to `prompts/engine.md` Step 4 Narrate Outcome as a mandatory consideration
+
+### NPC Relationship Propagation Rules
+- [ ] Define threshold-based rules for faction standing changes — what becomes available or unavailable at each standing band
+- [ ] Add to `prompts/world_rules.md` Reputation section
+- [ ] GPT applies propagation at turn end when standing crosses a threshold
+
+### Pacing Variables
+- [ ] Add `pacing` block to world state schema:
+  - [ ] `tension` — integer 0–10
+  - [ ] `last_consequence_weight` — local / situational / regional / campaign
+  - [ ] `turns_since_social_beat` — integer
+  - [ ] `turns_since_discovery` — integer
+  - [ ] `turn_count` — integer
+- [ ] Add pacing read rules to `prompts/engine.md` — GPT checks pacing block when selecting scene type and intensity
+- [ ] Update `schemas/openapi.yaml` and `api/models.py` for pacing block
+
+### Extraction Step Separation
+- [ ] Split the current single GPT turn into two calls:
+  - [ ] Call 1: Narration — GPT receives scene context, produces prose only
+  - [ ] Call 2: Extraction — GPT receives narration output, produces structured state delta JSON only
+- [ ] State delta passes schema validation before the save goes through
+- [ ] Failed validation returns to narration without committing — GPT retries extraction with correction prompt
+- [ ] This is the highest reliability improvement available; implement after scene manager
+
+### Episodic Memory Compression
+- [ ] Add session summary storage — compressed paragraph summaries of older log entries
+- [ ] Write `scripts/compress_session_log.py` — compresses log entries older than N turns into a durable summary, stores in a `session_summaries` table
+- [ ] Add summary retrieval to state load — GPT receives recent log entries plus compressed summaries for older sessions
+- [ ] Trigger: manual initially, automated after every 20 turns later
+
+---
+
+## 🚫 Restricted Future Builds
+
+These items are not buildable within the current architecture without significant rebuild. Documented here for future planning.
+
+### Full Multi-Agent Orchestration
+**Barrier:** Mystic Weave uses a single custom GPT instance via the GPT builder. Running separate specialized model instances for Narrator, Referee, Planner, and Extractor roles requires an orchestration layer — either a custom backend that manages multiple API calls and coordinates outputs, or migrating away from the GPT builder entirely to a direct API implementation. Neither is a small change.
+**When to revisit:** When the GPT builder becomes the bottleneck and direct API control is needed for reliability or cost.
+
+### Combat Subsystem
+**Barrier:** Explicitly deferred. A real combat system requires its own turn structure, initiative, action economy, and resolution model distinct from the current narrative roll system. Building it on top of the existing d100 roll-under framework is possible but requires new endpoints, new state schema (combat status, turn order, active effects), and significant GPT instruction changes. The current system handles combat narratively.
+**When to revisit:** When narrative combat resolution feels insufficient and players need tactical depth.
+
+### NPC Simulation — Independent Goals and Schedules
+**Barrier:** Treating NPCs as autonomous agents with their own goals, schedules, and world-modifying actions requires a simulation layer that runs independently of player turns. This is architecturally separate from the current request-response game loop. NPCs currently have static attitude scores and narrative flavor — they react, they do not act.
+**When to revisit:** When the world needs to feel like it moves without the player.
+
+### Procedural Content Generation
+**Barrier:** Encounter generation, dynamic loot tables, and procedural world events require a generation layer with its own rules and randomness model separate from the dice roller. The current world is entirely authored. Procedural content would need to integrate with the location graph, the faction system, and the economy without contradicting canon.
+**When to revisit:** When authored content cannot keep pace with player exploration.
+
+### Vector Search Lore Retrieval
+**Barrier:** Currently all lore is in static knowledge files uploaded to the GPT builder. A semantic retrieval layer would allow the GPT to query specific lore on demand rather than having everything in context. Requires embedding infrastructure, a vector database, and a retrieval API — meaningful infrastructure that doesn't exist in the current stack.
+**When to revisit:** When the GPT knowledge file upload limit or context ceiling becomes a real constraint on world depth.
+
+### Multi-Player Support
+**Barrier:** The entire architecture assumes one player per session. Session state, character state, and the turn loop are single-player constructs. Multi-player would require concurrent session management, shared world state with conflict resolution, and a turn coordination layer. Not a small addition.
+**When to revisit:** If the game ever needs to support shared campaigns.
