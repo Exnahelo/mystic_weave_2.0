@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import AliasChoices, BaseModel, ConfigDict, Field, field_validator, model_validator
 
 
 # ---------------------------------------------------------------------------
@@ -234,6 +234,14 @@ class CharacterModel(BaseModel):
     equipment:      Equipment      = Field(default_factory=Equipment)
     reputation:     list[ReputationEntry] = Field(default_factory=list)
     advancement:    AdvancementState = Field(default_factory=AdvancementState)
+
+    # Compatibility and extensibility fields
+    level:          int | None = Field(default=None, description="Deprecated legacy field.")
+    magic_fields:   list[str] = Field(default_factory=list)
+    draconic_traits: list[str] = Field(
+        default_factory=list,
+        validation_alias=AliasChoices("draconic_traits", "species_traits"),
+    )
 
 
 # ---------------------------------------------------------------------------

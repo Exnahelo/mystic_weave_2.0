@@ -340,3 +340,45 @@ def test_state_save_accepts_valid_advancement_block() -> None:
     assert payload["character"]["advancement"]["points_available"] == 2
     assert payload["character"]["advancement"]["points_spent"] == 1
     assert payload["character"]["advancement"]["points_earned_total"] == 3
+
+
+@pytest.mark.regression
+def test_state_save_accepts_legacy_level_and_magic_trait_fields() -> None:
+    valid_character = _build_valid_character()
+    valid_character["level"] = 2
+    valid_character["magic_fields"] = ["arcane", "sacred"]
+    valid_character["species_traits"] = ["draconic_resilience"]
+
+    stored_character = {
+        **_build_valid_character(),
+        "level": 2,
+        "magic_fields": ["arcane", "sacred"],
+        "draconic_traits": ["draconic_resilience"],
+    }
+
+    conn = FakeConn(
+        select_character=_build_valid_character(),
+        upsert_row={
+            "session_id": "abc12345",
+            "character": json.dumps(stored_character),
+            "world": json.dumps(_build_valid_world()),
+            "log": json.dumps(["legacy fields persisted"]),
+            "updated_at": datetime.now(),
+        },
+    )
+
+    app = _make_app_with_router(state.router, FakePool(conn))
+    save_body = {
+        "character": valid_character,
+        "world": _build_valid_world(),
+        "log_entry": "legacy fields persisted",
+    }
+
+    with TestClient(app) as client:
+        r = client.post("/state/abc12345", json=save_body)
+
+    assert r.status_code == 200
+    payload = r.json()
+    assert payload["character"]["level"] == 2
+    assert payload["character"]["magic_fields"] == ["arcane", "sacred"]
+    assert payload["character"]["draconic_traits"] == ["draconic_resilience"]

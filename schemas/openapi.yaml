@@ -5,9 +5,6 @@ info:
     GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution
     with domain scores and competency tiers.
   version: 3.2.0
-servers:
-- url: https://mysticweave-production.up.railway.app
-  description: Production (Railway)
 paths:
   /state/{session_id}:
     get:
@@ -36,9 +33,19 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       summary: Save State
-      description: Save full game state and append one log entry. Character fields
-        are deep-merged so omitted fields are preserved; world is replaced in full;
-        log append is atomic.
+      description: 'Save full game state and append a log entry.
+
+
+        Character fields are deep-merged onto the stored record so that fields
+
+        the GPT omits (languages, spells, equipment, feat_choices, biography, etc.)
+
+        are preserved from the previous save rather than wiped.
+
+
+        World is replaced in full (it is small and always fully specified).
+
+        The log_entry is appended atomically in SQL.'
       operationId: save_state_state__session_id__post
       parameters:
       - name: session_id
@@ -191,9 +198,19 @@ paths:
   /location:
     post:
       summary: Upsert Location
-      description: Create or update a location via UPSERT. Use when a location is
-        discovered or durable details are added. Connections in payload also upsert
-        world_graph edges.
+      description: 'Create or update a location.
+
+
+        The GPT calls this when:
+
+        - A player discovers a new location via an exploration action
+
+        - The GPT invents a new detail (NPC name, building) that must persist
+
+
+        Uses UPSERT so the same endpoint handles both creation and updates.
+
+        Also upserts world_graph edges based on the connections array in the data.'
       operationId: upsert_location_location_post
       requestBody:
         content:
@@ -284,12 +301,9 @@ paths:
           content:
             application/json:
               schema:
+                additionalProperties:
+                  type: string
                 type: object
-                properties:
-                  status:
-                    type: string
-                  service:
-                    type: string
                 title: Response Root  Get
   /health:
     get:
@@ -304,12 +318,9 @@ paths:
           content:
             application/json:
               schema:
+                additionalProperties:
+                  type: string
                 type: object
-                properties:
-                  status:
-                    type: string
-                  service:
-                    type: string
                 title: Response Health Check Health Get
   /version:
     get:
@@ -324,16 +335,11 @@ paths:
           content:
             application/json:
               schema:
+                additionalProperties:
+                  anyOf:
+                  - type: string
+                  - type: integer
                 type: object
-                properties:
-                  api_version:
-                    type: string
-                  data_fingerprint:
-                    type: string
-                  schema_version:
-                    anyOf:
-                    - type: string
-                    - type: integer
                 title: Response Version Version Get
 components:
   schemas:
@@ -455,10 +461,6 @@ components:
         background:
           type: string
           title: Background
-        level:
-          type: integer
-          title: Level
-          default: 1
         hp:
           $ref: '#/components/schemas/HP'
         domains:
@@ -493,6 +495,22 @@ components:
           title: Reputation
         advancement:
           $ref: '#/components/schemas/AdvancementState'
+        level:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Level
+          description: Deprecated legacy field.
+        magic_fields:
+          items:
+            type: string
+          type: array
+          title: Magic Fields
+        draconic_traits:
+          items:
+            type: string
+          type: array
+          title: Draconic Traits
       additionalProperties: false
       type: object
       required:
@@ -502,7 +520,6 @@ components:
       - background
       - hp
       - domains
-      - advancement
       title: CharacterModel
     CharacterModel-Output:
       properties:
@@ -518,10 +535,6 @@ components:
         background:
           type: string
           title: Background
-        level:
-          type: integer
-          title: Level
-          default: 1
         hp:
           $ref: '#/components/schemas/HP'
         domains:
@@ -556,6 +569,22 @@ components:
           title: Reputation
         advancement:
           $ref: '#/components/schemas/AdvancementState'
+        level:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Level
+          description: Deprecated legacy field.
+        magic_fields:
+          items:
+            type: string
+          type: array
+          title: Magic Fields
+        draconic_traits:
+          items:
+            type: string
+          type: array
+          title: Draconic Traits
       additionalProperties: false
       type: object
       required:
@@ -565,7 +594,6 @@ components:
       - background
       - hp
       - domains
-      - advancement
       title: CharacterModel
     CompanionModel-Input:
       properties:
@@ -808,7 +836,6 @@ components:
         coin:
           type: integer
           title: Coin
-          description: Total coin stored as Copper Drakes (CD). 100 CD = 1 GD; display GD as coin / 100.
           default: 0
         trade_goods:
           items:
@@ -825,9 +852,11 @@ components:
       description: 'Economic state. wealth_tier is the universal abstraction (works
         for barter
 
-        and currency economies alike). coin stores total Copper Drakes (CD) as an
-        integer for regions that use hard currency (e.g. outside Drakenvale via
-        the SSTC). 100 CD = 1 GD.'
+        and currency economies alike). coin is stored as total Copper Drakes (CD)
+
+        as a raw integer for regions that use hard currency (e.g. outside
+
+        Drakenvale via the SSTC). 100 CD = 1 GD.'
     Equipment-Input:
       properties:
         worn:
@@ -1061,6 +1090,59 @@ components:
         every session.
 
         All fields optional at creation — can be filled in as play reveals them.'
+    ItemOption:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        category:
+          type: string
+          title: Category
+        description:
+          type: string
+          title: Description
+          default: ''
+        tags:
+          items:
+            type: string
+          type: array
+          title: Tags
+        roll_tag:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Roll Tag
+        consumable:
+          type: boolean
+          title: Consumable
+          default: false
+        charges:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Charges
+        rarity:
+          type: string
+          title: Rarity
+          default: common
+        value_cd:
+          type: integer
+          title: Value Cd
+          default: 0
+        effects:
+          items:
+            type: string
+          type: array
+          title: Effects
+      type: object
+      required:
+      - id
+      - name
+      - category
+      title: ItemOption
     LocationData:
       properties:
         id:
@@ -1200,6 +1282,16 @@ components:
             $ref: '#/components/schemas/BackgroundOption'
           type: array
           title: Backgrounds
+        mundane_items:
+          items:
+            $ref: '#/components/schemas/ItemOption'
+          type: array
+          title: Mundane Items
+        magical_items:
+          items:
+            $ref: '#/components/schemas/ItemOption'
+          type: array
+          title: Magical Items
       type: object
       required:
       - species
