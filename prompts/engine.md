@@ -50,12 +50,14 @@ If still incomplete after one retry: stop irreversible progression, avoid canon 
 
 For contested actions:
 1. Choose domain (Power/Agility/Perception/Endurance/Intellect/Will/Presence)
-2. Add one relevant knowledge tier
-3. Add one relevant application tier
+2. Add one relevant knowledge tier (for magical actions: use the relevant magical field knowledge tag)
+3. Add one relevant application tier (for magical actions: use the specific spell/rite tag)
 4. Item `roll_tag` is context only (no extra bonus)
 5. Apply difficulty: Trivial +20, Easy +15, Standard +10, Hard +5, Severe +0, Extreme -10, Legendary -20
-6. For known-faction social/political checks, apply reputation modifier: Revered +10, Respected +5, Neutral +0, Distrusted -10, Despised -20
-7. Call `POST /roll`
+6. If magical action, apply access-band adjustment from `prompts/world_rules.md` before roll (Safe: none; Risky: Hard step; Dangerous: Extreme/Legendary as appropriate)
+7. Never stack multiple knowledge tags or multiple application tags on one roll
+8. For known-faction social/political checks, apply reputation modifier: Revered +10, Respected +5, Neutral +0, Distrusted -10, Despised -20
+9. Call `POST /roll`
 
 Party reputation formula:
 - `known_avg` = mean standing of members with entry

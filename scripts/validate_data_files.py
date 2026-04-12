@@ -17,6 +17,21 @@ DOMAIN_KEYS = {
     "presence",
 }
 
+SPELL_FIELDS = {
+    "sacred",
+    "warding",
+    "binding",
+    "invocation",
+    "elemental",
+    "nature",
+    "arcane_theory",
+    "illusion",
+    "runecraft",
+    "necromancy",
+    "alchemy",
+    "innate",
+}
+
 
 def _failures_append(failures: list[str], condition: bool, message: str) -> None:
     if not condition:
@@ -125,6 +140,93 @@ def _validate_tag_rows(path: Path, failures: list[str], expected_count: int) -> 
                     )
 
 
+def _validate_spells(path: Path, failures: list[str]) -> None:
+    rows = _load_json(path)
+    seen_indices: set[str] = set()
+
+    _failures_append(failures, len(rows) > 0, f"{path.name}: expected at least 1 spell entry")
+
+    required_keys = {
+        "index",
+        "name",
+        "field",
+        "primary_domain",
+        "alternate_domain",
+        "max_tier",
+        "description",
+        "tiers",
+    }
+
+    for i, row in enumerate(rows):
+        label = f"{path.name}[{i}]"
+        _failures_append(failures, isinstance(row, dict), f"{label}: expected object")
+        if not isinstance(row, dict):
+            continue
+
+        _failures_append(
+            failures,
+            set(row.keys()) == required_keys,
+            f"{label}: keys must match {sorted(required_keys)}",
+        )
+
+        idx = row.get("index")
+        _failures_append(failures, isinstance(idx, str) and idx, f"{label}.index must be non-empty string")
+        if isinstance(idx, str):
+            _failures_append(failures, idx not in seen_indices, f"{label}.index duplicated: {idx}")
+            seen_indices.add(idx)
+
+        _failures_append(failures, isinstance(row.get("name"), str) and row.get("name"), f"{label}.name must be non-empty string")
+        _failures_append(
+            failures,
+            isinstance(row.get("description"), str) and row.get("description"),
+            f"{label}.description must be non-empty string",
+        )
+
+        field = row.get("field")
+        _failures_append(
+            failures,
+            isinstance(field, str) and field in SPELL_FIELDS,
+            f"{label}.field must be one of {sorted(SPELL_FIELDS)}",
+        )
+
+        primary = row.get("primary_domain")
+        _failures_append(
+            failures,
+            isinstance(primary, str) and primary in DOMAIN_KEYS,
+            f"{label}.primary_domain must be one of {sorted(DOMAIN_KEYS)}",
+        )
+
+        alternate = row.get("alternate_domain")
+        _failures_append(
+            failures,
+            alternate is None or (isinstance(alternate, str) and alternate in DOMAIN_KEYS),
+            f"{label}.alternate_domain must be null or one of {sorted(DOMAIN_KEYS)}",
+        )
+
+        max_tier = row.get("max_tier")
+        _failures_append(
+            failures,
+            isinstance(max_tier, int) and 1 <= max_tier <= 5,
+            f"{label}.max_tier must be int between 1 and 5",
+        )
+
+        tiers = row.get("tiers")
+        _failures_append(failures, isinstance(tiers, dict), f"{label}.tiers must be object")
+        if isinstance(tiers, dict) and isinstance(max_tier, int) and 1 <= max_tier <= 5:
+            expected_keys = {str(n) for n in range(1, max_tier + 1)}
+            _failures_append(
+                failures,
+                set(tiers.keys()) == expected_keys,
+                f"{label}.tiers keys must match {sorted(expected_keys)}",
+            )
+            for tier_key, tier_text in tiers.items():
+                _failures_append(
+                    failures,
+                    isinstance(tier_text, str) and bool(tier_text.strip()),
+                    f"{label}.tiers.{tier_key} must be non-empty string",
+                )
+
+
 def main() -> None:
     repo_root = Path(__file__).resolve().parents[1]
     data_dir = repo_root / "data"
@@ -133,6 +235,7 @@ def main() -> None:
     _validate_species(data_dir / "species.json", failures)
     _validate_tag_rows(data_dir / "focus.json", failures, expected_count=7)
     _validate_tag_rows(data_dir / "backgrounds.json", failures, expected_count=8)
+    _validate_spells(data_dir / "spells.json", failures)
 
     if failures:
         print("❌ Data validation failed")

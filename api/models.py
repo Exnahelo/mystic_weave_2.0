@@ -222,7 +222,6 @@ class CharacterModel(BaseModel):
     species:        str   # e.g. "human", "dragonborn"
     focus:          str   # e.g. "devoted", "stalker"
     background:     str   # e.g. "soldier", "acolyte"
-    level:          int   = 1
     hp:             HP
     domains:        DomainScores
     knowledge:      dict[str, int] = Field(default_factory=dict)   # tag name → tier (1–5)
@@ -234,14 +233,7 @@ class CharacterModel(BaseModel):
     identity:       Identity       = Field(default_factory=Identity)
     equipment:      Equipment      = Field(default_factory=Equipment)
     reputation:     list[ReputationEntry] = Field(default_factory=list)
-    advancement:    AdvancementState
-
-    @field_validator("level")
-    @classmethod
-    def level_positive(cls, v: int) -> int:
-        if v < 1:
-            raise ValueError("level must be at least 1")
-        return v
+    advancement:    AdvancementState = Field(default_factory=AdvancementState)
 
 
 # ---------------------------------------------------------------------------

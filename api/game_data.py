@@ -16,6 +16,7 @@ from typing import Any
 _DATA_DIR = Path(__file__).parent.parent / "data"
 _DATA_FILES = ("species.json", "focus.json", "backgrounds.json")
 _ITEM_DATA_FILES = ("mundane_items.json", "magical_items.json")
+_SPELL_DATA_FILES = ("spells.json",)
 
 
 @lru_cache(maxsize=None)
@@ -142,7 +143,7 @@ def data_fingerprint() -> str:
     Exposed by GET /version for deployment/contract sanity checks.
     """
     hasher = hashlib.sha256()
-    for filename in (*_DATA_FILES, *_ITEM_DATA_FILES):
+    for filename in (*_DATA_FILES, *_ITEM_DATA_FILES, *_SPELL_DATA_FILES):
         path = _DATA_DIR / filename
         with open(path, "rb") as f:
             hasher.update(f.read())
@@ -216,7 +217,6 @@ def seed_character(
         "species":        species_index,
         "focus":          focus_index,
         "background":     background_index,
-        "level":          1,
         "hp":             {"current": 100, "max": 100},
         "domains":        domains,
         "knowledge":      knowledge,

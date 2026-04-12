@@ -115,6 +115,15 @@ async def save_state(
         else:
             merged_character = incoming_character
 
+        # Backward-compatibility guard: ensure advancement block always exists
+        # even when older/partial clients omit it.
+        if not isinstance(merged_character.get("advancement"), dict):
+            merged_character["advancement"] = {
+                "points_available": 0,
+                "points_spent": 0,
+                "points_earned_total": 0,
+            }
+
         try:
             validated_character = CharacterModel.model_validate(merged_character)
             validated_world = WorldModel.model_validate(world_json)

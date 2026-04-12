@@ -109,6 +109,35 @@
       "intellect": 25,
       "will": 45,
       "presence": 55
-    }
+    },
+    "species_traits": [
+      {
+        "name": "Draconic Breath",
+        "type": "innate",
+        "description": "The dragonborn exhales magical energy in a cone or line. Breath type is determined by draconic lineage — established at character creation or through narrative discovery. This trait is always available and requires no field knowledge to use.",
+        "roll": "Will (controlled channeling) or Power (raw output) — GPT selects based on intent",
+        "application_tag": "dragon_breath",
+        "fatigue": "Fatiguing — short rest required before repeated use in the same scene",
+        "progression": "Dragon Breath application tag improves through use. Higher tiers extend range, area, or intensity narratively. Field knowledge in Elemental or Sacred may refine breath in specific traditions but is not required.",
+        "lineage_types": [
+          "radiant",
+          "fire",
+          "cold",
+          "lightning",
+          "acid",
+          "necrotic"
+        ]
+      },
+      {
+        "name": "Draconic Resistance",
+        "type": "innate",
+        "description": "Dragonborn have natural resistance to their breath damage type. Difficulty of resisting effects of that damage type is reduced by one step."
+      },
+      {
+        "name": "Darkvision",
+        "type": "innate",
+        "description": "Dragonborn can see in darkness as though it were dim light. Perception rolls in darkness do not take the standard darkness difficulty penalty."
+      }
+    ]
   }
 ]

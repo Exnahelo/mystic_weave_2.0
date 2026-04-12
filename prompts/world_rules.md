@@ -103,6 +103,26 @@ Each of the seven domains has five knowledge skills. Tiers 1–5, each tier adds
 **Will:** Discipline, Meditation, Courage, Resolve, Warding
 **Presence:** Persuasion, Deception, Performance, Command, Diplomacy
 
+### Magical Fields (knowledge track)
+
+Magical fields are knowledge tags and follow normal tier math (+1 per tier).
+
+| Field | Primary Domain | Governs |
+|---|---|---|
+| Sacred | Will | Devotional practice, liturgy, purification, consecration, divine invocation |
+| Warding | Will | Protective barriers, seals, anti-corruption protocols, ward maintenance |
+| Binding | Will | Oaths, contracts, compulsions, sworn duties with magical weight |
+| Elemental | Endurance | Raw elemental channeling — fire, water, earth, air — through sustained output |
+| Nature | Perception | Druidic and biome magic, ley-flow, living systems |
+| Arcane Theory | Intellect | Structured arcane architecture, runes, formulae, spell engineering |
+| Illusion | Intellect | Constructed perception, false images, sensory manipulation |
+| Runecraft | Intellect | Inscribed magical structures, glyphs, permanent enchantment work |
+| Necromancy | Intellect | Death energy, undead interaction, life force manipulation |
+| Alchemy | Intellect | Magical compound preparation, transmutation, reagent work |
+| Invocation | Presence | Channeling through authority, formal command, public rites, entity interaction |
+
+Cross-domain note: some fields can roll in more than one domain depending on primary risk. Example: Sacred may roll Will for concentration or Presence for formal invocation; Binding may roll Will for oath-holding or Presence for commanded acknowledgment. If two domains are equally plausible, use the lower score.
+
 ### Application Tags (trained execution)
 
 Specific tools, weapons, or methods. Tiers 1–5, each tier adds +1 to target number.
@@ -119,10 +139,101 @@ Specific tools, weapons, or methods. Tiers 1–5, each tier adds +1 to target nu
 | Arcane Implements | Intellect |
 | Herbalism & Alchemy | Intellect |
 | Sacred Rites | Will |
+| Dragon Breath | Will / Power |
 | Musical Instruments | Presence |
 | Disguise & Forgery | Presence |
 
 Maximum competency contribution: Knowledge 5 + Application 5 = +10.
+
+---
+
+## Magic
+
+Magic uses the standard roll framework; no separate subsystem is introduced.
+
+### Roll Formula (unchanged)
+
+`Target = Domain Score + Field Knowledge Tier + Spell/Rite Tag Tier + Difficulty Modifier`
+
+Roll assembly rules:
+- Select one domain based on primary failure risk.
+- Select one magical field knowledge tag.
+- Select one spell/rite application tag.
+- Apply standard difficulty plus any access-band penalty.
+- Never stack multiple fields or multiple spell tags on a single roll.
+
+### Access Bands
+
+**Safe Use**
+- Caster has relevant field tag and specific spell/rite tag.
+- Roll normally, no extra risk.
+
+**Risky Use**
+- Caster has relevant field tag but not specific spell/rite tag.
+- Apply **Hard (+5)** on top of standard difficulty.
+- On failure, apply **Strain** before narrative outcome.
+
+**Dangerous Use**
+- Field tag absent OR field tier below the attempted working's required tier.
+- Apply **Extreme (-10)** or **Legendary (-20)** depending on how far outside knowledge the attempt is.
+- On any failure degree, use **Backlash** outcomes instead of standard failure narration.
+
+### Field Tier Access Ceilings
+
+| Field Tier | Maximum safe spell tier | What becomes accessible |
+|---|---|---|
+| T1 | T1 spells only | Minor workings, basic blessings, first attempts |
+| T2 | T2 spells | Reliable practice, stronger single-target effects |
+| T3 | T3 spells | Formal rites, multi-target or sustained effects |
+| T4 | T4 spells | Major sanctification, powerful warding, communal rites |
+| T5 | T5 spells | Master-level workings, legendary effects |
+
+If attempted spell tier exceeds field tier, the attempt is Dangerous Use regardless of spell tag tier.
+
+### Failure Model (Magic)
+
+**Minor Miss** (partial failure or better, Safe/Risky)
+- Working fizzles, weakens, or partially resolves; no lasting cost.
+
+**Strain** (failure band, Safe/Risky)
+- Fatigue, pain, temporary instability, or lost time.
+- Working fails; caster is impaired for next sustained-magic roll until rest.
+
+**Backlash** (any failure in Dangerous Use, or critical failure in any band)
+- Apply one or more narrative outcomes:
+  - Damage
+  - Condition (temporary impairment)
+  - Corrupted effect (misfire/inversion/wrong target)
+  - Unwanted attention
+  - Sacred offense (for divine magic: reputation/access impact possible)
+  - Environmental instability
+
+**Catastrophic Failure**
+- Trigger: roll 100 in Dangerous Use, or forbidden magic.
+- Consequences are permanent, irreversible, and character-scale world-altering.
+
+### Spell and Rite Tag Examples
+
+Examples only (not exhaustive):
+
+| Spell / Rite | Field | Primary Domain |
+|---|---|---|
+| Bless Water | Sacred | Will |
+| Purify Food and Drink | Sacred | Will |
+| Consecrate Threshold | Sacred | Will or Presence |
+| Oathbinding Prayer | Binding | Will or Presence |
+| Warding Circle | Warding | Will |
+| Invoke Courage | Sacred / Invocation | Presence |
+| Funeral Rite | Sacred | Will |
+| Hallow Object | Sacred | Will |
+| Dragon Breath | Innate | Will or Power |
+| Runic Seal | Runecraft | Intellect |
+| Elemental Channel | Elemental | Endurance or Power |
+| Detect Magic | Arcane Theory | Perception or Intellect |
+
+### Breath Weapon (Innate, not learned magic)
+
+Draconic breath is an innate species capability, not a learned spell. It does not require a magical field tag.
 
 ---
 

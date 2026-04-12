@@ -265,7 +265,6 @@ def part2(client: httpx.Client, session_id: str) -> None:
             "species": "dragonborn",
             "focus": "devoted",
             "background": "soldier",
-            "level": 1,
             "hp": {"current": 85, "max": 100},
             "domains": {
                 "power": 45, "agility": 35, "perception": 35,

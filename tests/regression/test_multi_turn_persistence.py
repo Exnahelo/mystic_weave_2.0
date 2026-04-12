@@ -77,7 +77,6 @@ def _base_character() -> dict:
         "species": "dragonborn",
         "focus": "devoted",
         "background": "soldier",
-        "level": 1,
         "hp": {"current": 100, "max": 100},
         "domains": {
             "power": 45,

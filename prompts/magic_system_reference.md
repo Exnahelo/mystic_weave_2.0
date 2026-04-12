@@ -1,80 +1,145 @@
 # Mystic Weave — Magic System Reference
 
-This document defines how magic is adjudicated at runtime. It extends `prompts/world_rules.md` and must not override core roll math.
+Magic extends existing competency mechanics. No separate infrastructure is introduced.
 
-## Core Resolution Rule
+---
 
-All magical actions use the same roll framework:
+## Core Structure
 
-`Target = Domain Score + Knowledge Tier + Application Tier + Difficulty Modifier`
+Magic has two tracks that work together:
 
-Runtime constraints:
-- Select exactly **one** domain.
-- Select at most **one** knowledge tag and **one** application tag.
-- Do not stack multiple knowledge or multiple application tags.
-- If uncertain whether a tag applies, do not apply it.
+### Magical Fields (Knowledge Tags)
+- Broad areas of magical understanding.
+- Use normal knowledge tier math (T1–T5, +1 per tier).
+- Field tier determines what can be attempted safely.
 
-## Domain Mapping for Magic Use
+### Individual Spells and Rites (Application Tags)
+- Specific practiced workings inside a field.
+- Use normal application tier math (T1–T5, +1 per tier).
+- Improve through repeated consequential use, same as other application tags.
 
-Use the domain that best matches failure risk, not flavor text.
+---
 
-| Domain | Use for magical actions where primary risk is... |
-|---|---|
-| Intellect | Incorrect arcane theory, bad runic structure, unstable spell architecture |
-| Will | Loss of control, concentration break, psychic/spiritual overload, ward maintenance |
-| Presence | Channeling through authority/oath/social force, public rites, commanding entities |
-| Perception | Reading magical signatures, tracking ley-flow, spotting distortions/curses |
-| Endurance | Sustained channeling under pain/fatigue/environmental pressure |
-| Agility | Precision gesture sequences, fast reactive casting in motion |
-| Power | High-force channeling where raw output and containment are the key risk |
+## Magical Fields
 
-Tie-break rule: if two domains are equally plausible, choose the lower domain score.
-
-## Magic-Relevant Knowledge Tags
-
-These are existing canonical knowledge tags applied to magical contexts:
-
-- **Arcana (Intellect):** theory, schools, spell structure, magical diagnostics
-- **History (Intellect):** old rites, legacy wards, historical spellcraft conventions
-- **Engineering (Intellect):** runic constructs, magical devices, containment frameworks
-- **Linguistics (Intellect):** true names, dead tongues, binding syntax
-- **Warding (Will):** barriers, seals, anti-corruption protocols
-- **Discipline (Will):** controlled channeling, suppression of backlash
-- **Meditation (Will):** stabilizing focus for long/complex rituals
-- **Insight (Perception):** reading intent/signature in intelligent magic phenomena
-- **Nature (Perception):** druidic/biome magic, ley-flow tied to terrain
-- **Command (Presence):** formal invocation through recognized authority structures
-
-## Magic-Relevant Application Tags
-
-These are existing application tags used for magical execution:
-
-- **Arcane Implements (Intellect):** staves, foci, attuned tools, precision channeling
-- **Herbalism & Alchemy (Intellect):** reagents, catalysts, stabilizers, ritual compounds
-- **Sacred Rites (Will):** consecration, purification, oaths, divine-liturgical frameworks
-- **Musical Instruments (Presence):** resonance-based casting, cadence-bound rituals
-
-Item `roll_tag` handling remains canonical: matching `roll_tag` is contextual legitimacy, not extra numeric bonus.
-
-## Effect-Scale Difficulty Ladder (Magic)
-
-Use this ladder when calibrating magical effect scale. Then adjust for environment, time pressure, opposition, and instability.
-
-| Effect Scale | Typical Scope | Base Difficulty |
+| Field | Primary Domain | Governs |
 |---|---|---|
-| Minor utility | Light, spark, brief illusion, harmless cantrip-like effect | Easy (+15) |
-| Controlled practical | Reliable single-target utility, minor ward, short-range detection | Standard (+10) |
-| Tactical field use | Combat-relevant cast, active counterspell, fast ritual under pressure | Hard (+5) |
-| Major ritual | Multi-step rite, broad area influence, durable magical alteration | Severe (+0) |
-| High-risk arcana | Forbidden/volatile energies, unstable bindings, hostile ley interference | Extreme (-10) |
-| Legendary working | Valley-scale shifts, mythic wards, ancient relic-grade effects | Legendary (-20) |
+| Sacred | Will | Devotional practice, liturgy, purification, consecration, divine invocation |
+| Warding | Will | Protective barriers, seals, anti-corruption protocols, ward maintenance |
+| Binding | Will | Oaths, contracts, compulsions, sworn duties with magical weight |
+| Elemental | Endurance | Raw elemental channeling through sustained output |
+| Nature | Perception | Druidic and biome magic, ley-flow, living systems |
+| Arcane Theory | Intellect | Structured arcane architecture, runes, formulae, spell engineering |
+| Illusion | Intellect | Constructed perception, false images, sensory manipulation |
+| Runecraft | Intellect | Inscribed magical structures, glyphs, permanent enchantment work |
+| Necromancy | Intellect | Death energy, undead interaction, life-force manipulation |
+| Alchemy | Intellect | Magical compound preparation, transmutation, reagent work |
+| Invocation | Presence | Channeling through authority, formal command, public rites, entity interaction |
 
-## Consequence Guidance for Magical Failure
+Cross-domain note:
+- Some fields naturally cross domains by action risk.
+- Example: Sacred may roll Will (concentration) or Presence (formal invocation).
+- Example: Binding may roll Will (oath endurance) or Presence (commanded acknowledgment).
+- If two domains are equally plausible, use the lower score.
 
-Use roll `degree` + narrative logic; preserve world continuity.
+---
 
-- **Partial failure:** diminished effect, short duration, visible strain, costly side effect
-- **Failure:** intended effect fails; introduces immediate complication or exposure
-- **Critical failure:** backlash, corruption spread, shattered focus, collateral narrative consequence
+## Access Model
 
-Never retcon magical outcomes. Save durable magical changes to state/location records.
+### Safe Use
+- Caster has the relevant field knowledge tag and the specific spell/rite application tag.
+- Roll normally.
+
+### Risky Use
+- Caster has the relevant field knowledge tag but not the specific spell/rite tag.
+- Apply a **Hard** difficulty modifier on top of standard difficulty.
+- On failure, apply **Strain** before narrative outcome.
+
+### Dangerous Use
+- Field tag absent entirely, or field tier below what the working requires.
+- Apply **Extreme** or **Legendary** depending on distance beyond knowledge.
+- On any failure degree, use **Backlash** outcomes instead of standard failure narration.
+
+---
+
+## Field Tier Access Ceilings
+
+| Field Tier | Maximum safe spell tier | What becomes accessible |
+|---|---|---|
+| T1 | T1 spells only | Minor workings, basic blessings, first attempts |
+| T2 | T2 spells | Reliable practice, stronger single-target effects |
+| T3 | T3 spells | Formal rites, multi-target or sustained effects |
+| T4 | T4 spells | Major sanctification, powerful warding, communal rites |
+| T5 | T5 spells | Master-level workings, legendary effects |
+
+Attempting above field tier is Dangerous Use even if spell tag tier is high.
+
+---
+
+## Failure Model
+
+### Minor Miss (Safe/Risky, partial failure or better)
+- Working weakens, fizzles, or partially resolves.
+- No lasting cost beyond reduced effect.
+
+### Strain (Safe/Risky, failure band)
+- Fatigue, pain, temporary instability, or lost time.
+- Working fails; caster is impaired for the next sustained-magic roll until rest.
+
+### Backlash (Dangerous any failure, or critical failure in any band)
+Apply one or more outcomes:
+- Damage
+- Condition (temporary impairment)
+- Corrupted effect (misfire/inversion/wrong target)
+- Unwanted attention
+- Sacred offense (for divine magic, reputation/access impact possible)
+- Environmental instability
+
+### Catastrophic Failure
+- Roll 100 in Dangerous Use, or forbidden magic attempt.
+- Consequences are permanent, irreversible, and character-scale world-altering.
+
+---
+
+## Breath Weapon (Innate, Separate from Learned Magic)
+
+- Draconic breath is innate species capability, not a learned spell.
+- No magical field tag is required.
+- Uses `dragon_breath` application tag with Will or Power based on intent.
+
+---
+
+## Roll Formula (Unchanged)
+
+`Target = Domain Score + Field Knowledge Tier + Spell/Rite Tag Tier + Difficulty Modifier`
+
+The GPT selects:
+1. One domain (primary failure risk)
+2. One field knowledge tag
+3. One spell/rite application tag
+4. Standard difficulty plus access-band adjustment
+
+Never stack multiple field tags or multiple spell tags on one roll.
+
+---
+
+## Spell and Rite Tag Examples
+
+Canonical spell names and tier structures live in `data/spells.json`; always reference that file before accepting player-declared spell tags.
+
+Examples only (not exhaustive):
+
+| Spell / Rite | Field | Primary Domain |
+|---|---|---|
+| Bless Water | Sacred | Will |
+| Purify Food and Drink | Sacred | Will |
+| Consecrate Threshold | Sacred | Will or Presence |
+| Oathbinding Prayer | Binding | Will or Presence |
+| Warding Circle | Warding | Will |
+| Invoke Courage | Sacred / Invocation | Presence |
+| Funeral Rite | Sacred | Will |
+| Hallow Object | Sacred | Will |
+| Dragon Breath | Innate | Will or Power |
+| Runic Seal | Runecraft | Intellect |
+| Elemental Channel | Elemental | Endurance or Power |
+| Detect Magic | Arcane Theory | Perception or Intellect |

@@ -14,11 +14,13 @@ This document is the authoritative, step-by-step reference for character creatio
 2. Call `GET /options` to retrieve all valid species.
 3. Present the species list with their primary domain and domain score spread.
 4. Player chooses a species.
+5. If species is dragonborn, establish breath lineage type at creation (`radiant`, `fire`, `cold`, `lightning`, `acid`, `necrotic`) or explicitly defer to narrative discovery.
 
 ### Stage 2 — Focus Archetype
 
 1. Present the focus archetype list from `GET /options` with descriptions and starting tags.
 2. Player chooses a focus. Any species can choose any focus.
+3. Magical fields are valid knowledge tags for progression and can be introduced in play via repeated consequential magical use (same as other tags).
 
 ### Stage 3 — Background
 
