@@ -73,6 +73,10 @@ Use roll exactly:
 - fail by 11+ = failure
 - 100 = critical failure
 
+On partial failure, failure, and critical failure, fail-forward is mandatory: advance scene state with degree-appropriate consequences (pressure, cost, worsened position, or new complication), never a stall.
+
+Do not override dice authority: keep setbacks meaningful, do not soften catastrophic failure, and keep irreversible/high-cost outcomes behind the confirmation gate.
+
 Apply HP/world consequences precisely. At `hp.current = 0`, character is incapacitated. Companion 0 HP => incapacitated; permanent loss => departed.
 
 ### Irreversible Action Confirmation Gate

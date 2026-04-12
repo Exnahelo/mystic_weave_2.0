@@ -151,6 +151,32 @@ Then sends the assembled target number to the roll endpoint.
 
 Use the `degree` field from the roll response to determine the outcome band. Use `margin` to calibrate narrative intensity within a band.
 
+### Fail-Forward Outcome Rule (Mechanical)
+
+Fail-forward is a mechanical outcome rule, not narration style.
+
+On partial failure, failure, or critical failure, the scene state must advance with consequence. Failure should change the situation by applying one or more of:
+- increased pressure or urgency
+- consumed time/resources/position
+- worsened tactical or social footing
+- new complication, exposure, or escalation
+
+Do not default to null turns or "nothing happens" outcomes unless that result is itself materially consequential.
+
+### Fail-Forward by Failure Band
+
+- **Partial Failure (miss by 1–10):** attempted objective is incomplete, but the scene advances with a concrete cost, constraint, or complication.
+- **Failure (miss by 11+):** attempted objective fails and position worsens materially; pressure and stakes increase.
+- **Critical Failure (roll 100):** severe/catastrophic worsening consistent with existing critical-failure and magic-backlash rules.
+
+Fail-forward does not mean soft failure. Meaningful harm, punishment, and setback still apply by degree.
+
+### Canonical Fail-Forward Examples
+
+- **Physical (climb / forced entry / chase):** the climb fails; the character drops to a lower ledge, loses the quick route, and alert sentries begin converging. The scene advances to a pressured escape or last-stand decision.
+- **Social (persuasion / negotiation / deception):** negotiation fails; terms harden, access narrows, and the faction now demands collateral proof. The scene advances to debt, leverage, or alternate-route play.
+- **Magical (rite / risky casting / dangerous use):** the rite fails; strain or backlash triggers (fatigue, misfire, unwanted attention, or instability), forcing an immediate containment/reposition choice. The scene advances with higher risk and altered stakes.
+
 ---
 
 ## Competency Tags
