@@ -18,7 +18,7 @@ If `session_id` exists, call `GET /state/{session_id}` and continue play (no re-
 
 ## Turn Loop (mandatory)
 
-For required API calls: **await, validate minima, retry once if incomplete, then narrate confirmed data**.
+For API calls: **await, validate, retry once if incomplete, then narrate**.
 
 ### Runtime Safety Checkpoint (Await + Validate)
 
@@ -81,7 +81,7 @@ Apply HP/world consequences precisely. At `hp.current = 0`, character is incapac
 
 ### Irreversible Action Confirmation Gate
 
-Before irreversible/high-cost choices, ask explicit yes/no confirmation: permanent companion outcomes, binding faction/legal commitments, major economic commitments, catastrophic risk.
+Before irreversible/high-cost choices, ask explicit yes/no confirmation: permanent companion outcomes, binding faction/legal commitments, economic commitments, catastrophic risk.
 
 ### 5) Update and Save
 
@@ -104,13 +104,14 @@ Reputation write rule: on faction-relevant consequences, update per `prompts/wor
 
 ### Economy Runtime Checkpoint
 
-- Canon source: `prompts/economy_currency_reference.md`.
+- Canon: `prompts/economy_currency_reference.md`.
 - Ground purchasable/findable items in `GET /options` catalog data (`mundane_items`, `magical_items`).
-- Coin transactions update `world.economy.coin` (never below 0).
+- For tool-gated actions/services, verify tool access (owned/carried, companion, or rented/borrowed) before effect.
+- Update `world.economy.coin` (never below 0).
 - Convert GD to CD before save: `world.economy.coin = GD × 100`.
-- Barter updates `trade_goods`/`obligations`; only alter coin if coin is part of deal.
+- Barter updates `trade_goods`/`obligations`; alter coin only if coin is part of deal.
 - Change `wealth_tier` only for material long-term shifts.
-- Narrate denominations naturally; persist as API-safe CD integers.
+- Narrate denominations naturally; persist CD integers.
 
 ### Progression Runtime Checkpoint
 

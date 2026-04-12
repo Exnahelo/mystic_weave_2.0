@@ -135,9 +135,9 @@ Updated after world expansion, magic system, progression redesign, and item cata
 
 ### Item & Economy Cleanup
 
-- [ ] Remove weapon and armor price entries from `prompts/economy_currency_reference.md` — now live in `weapons_armor_reference.md`
-- [ ] Add tool sufficiency rule to `prompts/engine.md` Economy Runtime Checkpoint
-- [ ] Update `prompts/character_creation.md` domain ceiling references to 80
+- [x] Remove weapon and armor price entries from `prompts/economy_currency_reference.md` — now live in `weapons_armor_reference.md`
+- [x] Add tool sufficiency rule to `prompts/engine.md` Economy Runtime Checkpoint
+- [x] Update `prompts/character_creation.md` domain ceiling references to 80
 
 ### World & Lore Updates
 

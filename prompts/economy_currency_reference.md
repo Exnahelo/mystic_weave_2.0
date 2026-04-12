@@ -9,7 +9,7 @@ Status: Canonical. Upload to GPT builder as a knowledge file.
 
 Drakenvale operates on two parallel economic systems that coexist and complement each other.
 
-**Coin economy** — used for everyday transactions, common goods, services, lodging, weapons, and mundane materials. Operated through the Silver Scale Trading Company (SSTC) for external trade. Used freely outside Drakenvale and in SSTC-adjacent commerce inside the valley.
+**Coin economy** — used for everyday transactions, common goods, services, lodging, and mundane materials. Operated through the Silver Scale Trading Company (SSTC) for external trade. Used freely outside Drakenvale and in SSTC-adjacent commerce inside the valley.
 
 **Barter economy** — used for high-value exchanges involving magical items, magical services, rare materials, specialized knowledge, information, relics, and high-skill labor. Barter is considered more prestigious and carries more social weight than coin. A barter transaction is a relationship; a coin transaction is a convenience.
 
@@ -108,7 +108,7 @@ Prices are baseline for a typical settled region. Remote locations, dangerous ro
 | Fishing kit | 8 SD |
 | Crowbar | 2 SD |
 
-Weapons and armor pricing is defined in `prompts/weapons_armor_reference.md`. Do not use this file for weapon or armor costs.
+Weapons and armor pricing is canonical in `prompts/weapons_armor_reference.md`. Do not use this file for weapon or armor costs.
 
 ### Animals & Transport
 
