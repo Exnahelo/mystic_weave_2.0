@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-seed_locations.py — Convert Obsidian markdown files to Postgres location records.
+seed_locations.py — Convert prompt world YAML files to Postgres location records.
 
 Usage:
     python3 scripts/seed_locations.py
 
-Reads all .md files from /obsidian/world/, parses YAML front matter,
+Reads all .yaml files from prompts/world/, parses the YAML payload,
 and upserts each location into the `locations` and `world_graph` tables.
 
-Markdown file format expected:
+Location file format expected:
 ---
 id: thornvale
 name: Thornvale
@@ -21,8 +21,7 @@ known_npcs: [aldric-the-smith, wren-innkeeper]
 discovered: true
 ---
 
-Any body text after the front matter is ignored (or can be used as
-additional description if the description field is absent).
+Files are stored as YAML documents with `---` delimiters.
 """
 
 from __future__ import annotations
@@ -58,7 +57,7 @@ FRONT_MATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
 
 
 def parse_location_file(path: Path) -> dict | None:
-    """Parse a markdown file and return a location dict, or None if invalid."""
+    """Parse a location YAML file and return a location dict, or None if invalid."""
     text = path.read_text(encoding="utf-8")
     match = FRONT_MATTER_RE.match(text)
     if not match:
@@ -91,16 +90,16 @@ def parse_location_file(path: Path) -> dict | None:
 
 async def seed(database_url: str) -> None:
     if not OBSIDIAN_DIR.exists():
-        print(f"Obsidian world directory not found: {OBSIDIAN_DIR}")
-        print("Create /obsidian/world/ and add .md files to seed locations.")
+        print(f"Prompt world directory not found: {OBSIDIAN_DIR}")
+        print("Create prompts/world/ and add .yaml files to seed locations.")
         return
 
-    md_files = sorted(OBSIDIAN_DIR.glob("*.md"))
+    md_files = sorted(OBSIDIAN_DIR.glob("*.yaml"))
     if not md_files:
-        print(f"No .md files found in {OBSIDIAN_DIR}")
+        print(f"No .yaml files found in {OBSIDIAN_DIR}")
         return
 
-    print(f"Found {len(md_files)} markdown file(s) in {OBSIDIAN_DIR}")
+    print(f"Found {len(md_files)} location file(s) in {OBSIDIAN_DIR}")
 
     locations = []
     for path in md_files:

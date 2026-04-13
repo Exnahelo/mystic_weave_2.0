@@ -124,7 +124,7 @@ Pacing updates at scene resolution: adjust `tension` (rise/fall/hold), set `last
 - Change weather only when justified; validate enums before save.
 
 ### Economy Runtime Checkpoint
-- Canon: `prompts/economy_currency_reference.md`.
+- Canon: `prompts/economy_rules.md`.
 - Ground buy/find inventory in `GET /options` (`mundane_items`, `magical_items`).
 - Update `world.economy.coin` (never below 0).
 - Persist coin as CD (`GD × 100`).
@@ -165,7 +165,7 @@ Pacing updates at scene resolution: adjust `tension` (rise/fall/hold), set `last
 1) `prompts/engine.md`
 2) `prompts/world_rules.md`
 3) Core world docs (`world.md`, `geography.md`, `history.md`, `groups.md`, `npcs.md`)
-4) `prompts/world/*.md`
+4) `prompts/world/*.yaml`
 5) `prompts/reference_archive/*` + design notes
 
 If conflict remains, choose conservative interpretation and avoid permanent canon changes.

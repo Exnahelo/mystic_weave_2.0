@@ -235,7 +235,7 @@ def main() -> None:
     _validate_species(data_dir / "charachter-species.json", failures)
     _validate_tag_rows(data_dir / "charachter-focus.json", failures, expected_count=7)
     _validate_tag_rows(data_dir / "charachter-backgrounds.json", failures, expected_count=8)
-    _validate_spells(data_dir / "spells.json", failures)
+    _validate_spells(data_dir / "magic-spells.json", failures)
 
     if failures:
         print("❌ Data validation failed")

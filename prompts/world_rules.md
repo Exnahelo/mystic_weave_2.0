@@ -198,7 +198,7 @@ Each of the seven domains has five knowledge skills. Tiers 1–5, each tier adds
 ### Magical Fields (knowledge tag table)
 
 Magical fields are knowledge tags and follow normal tier math (+1 per tier).
-Canonical full specification: `prompts/magic_system_reference.md`.
+Canonical full specification: `prompts/magic_rules.md`.
 
 | Field | Primary Domain | Governs |
 |---|---|---|
@@ -504,7 +504,7 @@ The world is a graph of connected location nodes. Movement is along defined edge
 
 ## Economy Resolution Rules
 
-Use `prompts/economy_currency_reference.md` as the canonical economy/currency reference.
+Use `prompts/economy_rules.md` as the canonical economy/currency reference.
 
 - Everyday purchases use coin when appropriate to context.
 - High-value magical services, rare materials, relics, and sensitive information default to barter.

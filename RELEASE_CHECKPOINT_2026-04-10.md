@@ -7,10 +7,10 @@ Baseline checkpoint for the post-audit prompt/world topology state.
 - Prompt-system hardening and runtime guardrail follow-up from the 2026-04-10 audit
 - API/OpenAPI follow-up alignment through v3.1.0
 - New reference docs:
-  - `prompts/magic_system_reference.md`
-  - `prompts/difficulty_reference.md`
-  - `prompts/notable_items_reference.md`
-- World topology reciprocity audit across `prompts/world/*.md`
+  - `prompts/magic_rules.md`
+  - `prompts/difficulty_level.md`
+  - `prompts/items_rules.md`
+- World topology reciprocity audit across `prompts/world/*.yaml`
 - Corrected reciprocal route:
   - `stronghold-of-drakenvale` ↔ `volcanic-highlands`
 

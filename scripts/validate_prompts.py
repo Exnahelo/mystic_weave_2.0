@@ -11,7 +11,12 @@ REQUIRED_PROMPTS = {
     "prompts/engine.md": ["# Mystic Weave", "## Turn Loop", "## API Reference"],
     "prompts/character_creation.md": ["# Mystic Weave", "## Character Creation Flow", "## API Fields for Character Creation"],
     "prompts/world_rules.md": ["#", "##"],
-    "prompts/economy_currency_reference.md": ["# Mystic Weave — Economy & Currency Reference", "## Currency — The Drake System", "## Economy Rules for the GPT (Non-Negotiable)"],
+    "prompts/economy_rules.md": ["# Mystic Weave — Economy Rules", "## Coin Economy Rules", "## Barter Economy Rules"],
+    "prompts/world.md": ["# Drakenvale", "## Governance", "## Reference Files"],
+    "prompts/geography.md": ["# Drakenvale — Geography", "## Formation", "## Major Regions"],
+    "prompts/history.md": ["#", "##"],
+    "prompts/groups.md": ["# Drakenvale — Groups", "## Purpose", "## Civic and State Institutions"],
+    "prompts/npcs.md": ["#", "##"],
 }
 
 ENGINE_REQUIRED_SECTIONS = [
@@ -31,17 +36,17 @@ CALENDAR_REQUIRED_MARKERS = [
 ]
 
 KNOWN_CONTRADICTION_WARNING_MARKERS = {
-    "economy_consistency": [
-        ("prompts/drakenvale_world.md", "barter in enchanted artifacts, knowledge, and services. Coin use exists but is secondary"),
-        ("prompts/drakenvale_factions.md", "Barter in enchanted artifacts, knowledge, and services is primary"),
+    "economy_structure": [
+        ("prompts/world.md", "## Economy"),
+        ("prompts/economy_rules.md", "## Barter Economy Rules"),
     ],
-    "arcane_conservatory_access_consistency": [
-        ("prompts/drakenvale_factions.md", "Open to all residents for standard materials"),
-        ("prompts/drakenvale_organizations.md", "Open to all residents. Restricted sections require Council approval"),
+    "group_canon_merge": [
+        ("prompts/world.md", "Drakenvale is sustained by a small number of major institutions whose detailed structure belongs in `groups.md`."),
+        ("prompts/groups.md", 'It replaces any prior split between "organizations" and "factions."'),
     ],
-    "crisis_protocol_maturity_baseline": [
-        ("prompts/drakenvale_factions.md", "## Crisis Protocols (Baseline)"),
-        ("prompts/drakenvale_factions.md", "baseline operating norms, not a fully codified wartime charter"),
+    "arcane_conservatory_presence": [
+        ("prompts/world.md", "- **Arcane Conservatory** — elite advanced magical study and arcane refinement"),
+        ("prompts/groups.md", "### Arcane Conservatory"),
     ],
 }
 
@@ -84,11 +89,11 @@ def main() -> None:
                 failures.append(f"prompts/calendar.md missing required marker: {marker}")
 
     world_dir = repo_root / "prompts" / "world"
-    world_files = sorted(world_dir.glob("*.md")) if world_dir.exists() else []
+    world_files = sorted(world_dir.glob("*.yaml")) if world_dir.exists() else []
     if len(world_files) == 0:
-        failures.append("prompts/world has no location markdown files")
+        failures.append("prompts/world has no location yaml files")
 
-    # Soft checks: ensure known contradiction-pair markers remain present.
+    # Soft checks: ensure known cross-file markers remain present.
     # These emit warnings (non-fatal) so maintainers can detect drift early
     # without blocking unrelated prompt edits.
     for check_name, markers in KNOWN_CONTRADICTION_WARNING_MARKERS.items():

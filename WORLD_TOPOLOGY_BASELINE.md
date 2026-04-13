@@ -1,6 +1,6 @@
 # World Topology Baseline — 2026-04-12
 
-Post-audit baseline for `prompts/world/*.md` connection reciprocity after the expanded settlement/location pass.
+Post-audit baseline for `prompts/world/*.yaml` connection reciprocity after the expanded settlement/location pass.
 
 ## Scope
 
@@ -71,7 +71,7 @@ Guidance:
 
 ## Future content update rules
 
-When adding or revising `prompts/world/*.md`:
+When adding or revising `prompts/world/*.yaml`:
 1. Default all navigable in-map routes to reciprocal links.
 2. If a link is intentionally one-way, document the reason in the PR or release note.
 3. Hidden lairs, sealed spaces, and discovery-gated sanctums should not expose inbound links from public locations unless that reveal is intentional.

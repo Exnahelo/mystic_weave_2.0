@@ -29,12 +29,12 @@ Python 3.13 · FastAPI · uvicorn · asyncpg · Pydantic v2 · Postgres on Railw
 - **7 focus archetypes** — Champion, Sentinel, Stalker, Wayfinder, Arcanist, Devoted, Speaker
 - **8 backgrounds** — Soldier, Scholar, Criminal, Noble, Outlander, Artisan, Acolyte, Performer
 
-**Character layers** (v3.1.0)
+**Character layers** (v3.2.0)
 - **Identity** — origin, motivations, quirks, bonds, flaws, wound, alignment (two-axis enum + ethos note)
 - **Equipment** — worn / carried / stashed slots, optional `roll_tag` linking items to application tags
 - **Reputation** — per-faction standing (−100 to +100); party reputation computed by GPT at resolution time
 
-**World layers** (v3.1.0)
+**World layers** (v3.2.0)
 - **Companions** — lightweight companion schema with identity, optional stat block, disposition, and faction standing
 - **Economy** — wealth tier (universal) + raw coin (currency regions); trade goods and obligations
 - **Politics** — faction memberships, active obligations, legal standing, leverage, tensions, Conclave status
@@ -43,11 +43,11 @@ System reference: `prompts/world_rules.md` and `prompts/character_creation.md`
 
 ## 2026-04-10 Content / World Topology Notes
 
-- Added canonical reference docs for magic, difficulty, and notable items:
-  - `prompts/magic_system_reference.md`
-  - `prompts/difficulty_reference.md`
-  - `prompts/notable_items_reference.md`
-- World topology audit completed for `prompts/world/*.md`.
+- Added canonical rules/reference docs for magic, difficulty, and items:
+  - `prompts/magic_rules.md`
+  - `prompts/difficulty_level.md`
+  - `prompts/items_rules.md`
+- World topology audit completed for `prompts/world/*.yaml`.
 - Corrected one in-map reciprocity gap:
   - `stronghold-of-drakenvale` ↔ `volcanic-highlands`
 - Retained intentional discovery-gated one-way access for Eryndor's hidden sanctum:
@@ -70,7 +70,9 @@ Reference: `WORLD_TOPOLOGY_BASELINE.md`
 | POST | `/character/create` | Re-seed character into existing session |
 | GET | `/state/{session_id}` | Load game state |
 | POST | `/state/{session_id}` | Save game state (UPSERT) |
+| POST | `/state/{session_id}/delta` | Apply structured state delta |
 | POST | `/roll` | Authoritative d100 dice resolution |
+| GET | `/scene/{session_id}` | Build compact scene context |
 | GET | `/location/{id}` | Load location data |
 | GET | `/location/{id}/connections` | Get valid movement options |
 | POST | `/location` | Create/update location |
@@ -80,7 +82,7 @@ Reference: `WORLD_TOPOLOGY_BASELINE.md`
 ```
 api/
   main.py              # FastAPI app — version string here (keep in sync with openapi.yaml)
-  models.py            # Pydantic v2 models (v3.1.0 schema)
+  models.py            # Pydantic v2 models (v3.2.0 schema)
   game_data.py         # Game system data loader + seed_character
   database.py          # asyncpg pool management
   routes/
@@ -88,8 +90,9 @@ api/
     location.py        # GET/POST /location
     options.py         # GET /options
     roll.py            # POST /roll (d100 roll-under)
+    scene.py           # GET /scene/{session_id}
     session.py         # POST /session/new
-    state.py           # GET/POST /state/{session_id}
+    state.py           # GET/POST /state/{session_id} + POST /state/{session_id}/delta
 core/
   dice_roller.py       # Dice rolling logic — do not modify
 data/
@@ -100,14 +103,14 @@ prompts/               # Obsidian vault — GPT knowledge files + world content
   engine.md            # GPT system prompt — paste into GPT builder Instructions (<8000 chars)
   character_creation.md
   world_rules.md
-  drakenvale_world.md
-  drakenvale_organizations.md
-  drakenvale_characters.md
-  drakenvale_biomes.md
-  drakenvale_factions.md
-  drakenvale_design_notes.md  # Internal — do NOT upload to GPT builder
+  world.md
+  geography.md
+  history.md
+  groups.md
+  npcs.md
+  design_notes.md      # Internal — do NOT upload to GPT builder
 schemas/
-  openapi.yaml         # OpenAPI 3.1.1 spec v3.1.0 — upload to GPT builder Actions
+  openapi.yaml         # OpenAPI 3.1.1 spec v3.2.0 — upload to GPT builder Actions
 scripts/
   seed_locations.py    # Seed locations from prompts/world/ into DB
   verify_production_contract.py  # Validate production against repo expectations
@@ -156,7 +159,7 @@ curl http://localhost:8000/version
 curl http://localhost:8000/options
 curl -X POST http://localhost:8000/session/new \
   -H "Content-Type: application/json" \
-  -d '{"character_name":"Krath","species":"dragonborn","focus":"devoted","background":"soldier","adjustment_points":{"will":2,"endurance":3},"starting_location":"thornvale"}'
+  -d '{"character_name":"Krath","species":"dragonborn","focus":"devoted","background":"soldier","adjustment_points":{"will":2,"endurance":3},"starting_location":"drakenvale-city"}'
 curl -X POST http://localhost:8000/roll \
   -H "Content-Type: application/json" \
   -d '{"target":64}'
@@ -220,4 +223,4 @@ When bumping the API version, update it in **two places**:
 
 Both must stay in sync. The contract test at `tests/contract/test_openapi_contract.py` asserts the version string — update that assertion too.
 
-**Current version:** 3.1.0
+**Current version:** 3.2.0

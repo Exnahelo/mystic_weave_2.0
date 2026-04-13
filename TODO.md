@@ -141,10 +141,10 @@ Updated after world expansion, magic system, progression redesign, and item cata
 
 ### World & Lore Updates
 
-- [x] Update `prompts/drakenvale_geography.md` with new settlements and travel times
-- [x] Add Vigil / Platinum Accord remnant to `prompts/drakenvale_organizations.md`
-- [x] Add Serevane and The Warden of Greymantle to `prompts/drakenvale_characters.md`
-- [x] Add Vigil faction entry to `prompts/drakenvale_factions.md`
+- [x] Update `prompts/geography.md` with new settlements and travel times
+- [x] Add Vigil / Platinum Accord remnant to `prompts/groups.md`
+- [x] Add Serevane and The Warden of Greymantle to `prompts/npcs.md`
+- [x] Add Vigil faction entry to `prompts/groups.md`
 - [x] Add regional economic nodes to `prompts/economy_currency_reference.md`
 - [x] Update `prompts/sstc_operations.md` route network with new named locations
 - [x] Update `WORLD_TOPOLOGY_BASELINE.md` for all new locations and reciprocity audit

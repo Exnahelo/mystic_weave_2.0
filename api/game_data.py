@@ -44,8 +44,8 @@ def get_species(index: str) -> dict[str, Any]:
 
 
 def list_species() -> list[dict[str, Any]]:
-    """Return all species as a list of summary dicts."""
-    data = _load_json("charachter-species.json")
+    data = _load_json("charachter-focus.json")
+    data = _load_json("charachter-focus.json")
     return [
         {
             "index": k,
@@ -71,7 +71,7 @@ def get_focus(index: str) -> dict[str, Any]:
 
 def list_focus() -> list[dict[str, Any]]:
     """Return all focus archetypes as a list of summary dicts."""
-    data = _load_json("focus.json")
+    data = _load_json("charachter-focus.json")
     return [
         {
             "index": k,

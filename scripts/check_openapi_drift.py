@@ -9,6 +9,8 @@ from pathlib import Path
 
 import yaml
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 from api.main import app
 
 HTTP_METHODS = {"get", "post", "put", "patch", "delete", "head", "options"}
