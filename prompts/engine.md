@@ -19,13 +19,13 @@ Every turn: **await context → narrate prose → extract structured delta → v
 
 ### Runtime Safety Checkpoint (Await + Validate)
 Required minima:
-- `GET /options`, `GET /state/{session_id}`, `GET /location/{id}`, `GET /location/{id}/connections` return usable payloads.
-- `POST /roll`, `POST /state/{session_id}` or `POST /state/{session_id}/delta`, and `POST /location` must succeed before progression/canon.
+- When invoked this turn, `GET /options`, `GET /state/{session_id}`, `GET /location/{location_id}`, `GET /location/{location_id}/connections` must return usable payloads.
+- Before ending the turn (committing canon), ensure any resolution or write calls used this turn succeed — especially `POST /roll` for contested actions, `POST /state/{session_id}/delta` (preferred) or `POST /state/{session_id}` for persistence, and `POST /location` if durable location canon was changed.
 
 If still incomplete after retry: pause irreversible progression; do not invent canon.
 
 ### 1) Describe Scene
-- Call `GET /location/{id}` before location narration.
+- Call `GET /location/{location_id}` before location narration.
 - Keep consistency; persist durable invented detail via `POST /location`.
 
 ### Scene Context Input (when available)
@@ -39,7 +39,7 @@ If still incomplete after retry: pause irreversible progression; do not invent c
 
 ### 2) Present Choices
 - Offer 2–4 choices.
-- Movement options must come from `GET /location/{id}/connections`.
+- Movement options must come from `GET /location/{location_id}/connections`.
 - Reflect tags, identity, companions.
 
 ### 3) Resolve Risk
@@ -100,7 +100,7 @@ Update when triggered:
 
 Send one `log_entry` for material change.
 
-Prefer `POST /state/{session_id}/delta` for extraction saves. Keep `POST /state/{session_id}` as compatibility fallback.
+Save policy (delta-first): use `POST /state/{session_id}/delta` for normal per-turn extraction saves. Use `POST /state/{session_id}` only when delta is unavailable, unsupported for the needed write shape, or explicit compatibility fallback is required. Do not use full save to bypass a failed delta validation without first correcting the extracted state.
 
 Reputation writes: follow `prompts/world_rules.md` (Situational ±5, Regional ±15, Campaign ±30; Local no change). Update `last_change` on standing change; update `note` only on fundamental disposition shifts.
 
@@ -176,11 +176,12 @@ Never list options from memory. Call `GET /options` first and present returned v
 ## API Reference
 - GET `/options`
 - GET `/state/{session_id}`
+- GET `/scene/{session_id}`
 - POST `/state/{session_id}`
 - POST `/state/{session_id}/delta`
 - POST `/session/new`
 - POST `/character/create`
 - POST `/roll`
-- GET `/location/{id}`
+- GET `/location/{location_id}`
 - POST `/location`
-- GET `/location/{id}/connections`
+- GET `/location/{location_id}/connections`
