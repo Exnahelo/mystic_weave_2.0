@@ -1,0 +1,382 @@
+[
+  {
+    "id": "ammo_arrows_standard_01",
+    "name": "Arrows",
+    "category": "ammunition",
+    "ammo_class": "standard",
+    "used_with": ["shortbow", "longbow"],
+    "bundle_size": 20,
+    "tags": ["ammo", "bow", "standard"],
+    "special_effect_tag": null,
+    "recoverable": true,
+    "consumption_model": "narrative",
+    "rarity": "common",
+    "value_cd": 20,
+    "description": "Standard arrows used with shortbows and longbows for ordinary ranged combat.",
+    "narrative_effects": [
+      "Required to use compatible bows for ordinary ranged attacks.",
+      "Some fired arrows may be recoverable depending on impact, terrain, and scene outcome."
+    ]
+  },
+  {
+    "id": "ammo_bolts_standard_01",
+    "name": "Bolts",
+    "category": "ammunition",
+    "ammo_class": "standard",
+    "used_with": ["light_crossbow", "heavy_crossbow"],
+    "bundle_size": 20,
+    "tags": ["ammo", "crossbow", "standard"],
+    "special_effect_tag": null,
+    "recoverable": true,
+    "consumption_model": "narrative",
+    "rarity": "common",
+    "value_cd": 30,
+    "description": "Standard crossbow bolts used with light and heavy crossbows.",
+    "narrative_effects": [
+      "Required to use compatible crossbows for ordinary ranged attacks.",
+      "Some fired bolts may be recoverable depending on impact, terrain, and scene outcome."
+    ]
+  },
+  {
+    "id": "ammo_sling_stones_standard_01",
+    "name": "Sling Stones",
+    "category": "ammunition",
+    "ammo_class": "standard",
+    "used_with": ["sling"],
+    "bundle_size": 20,
+    "tags": ["ammo", "sling", "standard"],
+    "special_effect_tag": null,
+    "recoverable": false,
+    "consumption_model": "narrative",
+    "rarity": "common",
+    "value_cd": 5,
+    "description": "Smooth stone ammunition sized for practical sling use.",
+    "narrative_effects": [
+      "Required to use a sling effectively at range.",
+      "Spent sling stones are usually treated as lost, scattered, or not worth recovering individually."
+    ]
+  },
+  {
+    "id": "ammo_blowgun_needles_standard_01",
+    "name": "Blowgun Needles",
+    "category": "ammunition",
+    "ammo_class": "standard",
+    "used_with": ["blowgun"],
+    "bundle_size": 20,
+    "tags": ["ammo", "blowgun", "standard"],
+    "special_effect_tag": null,
+    "recoverable": false,
+    "consumption_model": "narrative",
+    "rarity": "common",
+    "value_cd": 10,
+    "description": "Light blowgun needles intended for quiet projectile use.",
+    "narrative_effects": [
+      "Required to use a blowgun effectively.",
+      "Spent needles are usually lost, bent, or impractical to recover in useful quantity."
+    ]
+  },
+  {
+    "id": "ammo_arrows_broadhead_01",
+    "name": "Broadhead Arrows",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["shortbow", "longbow"],
+    "bundle_size": 10,
+    "tags": ["ammo", "bow", "broadhead", "hunting"],
+    "special_effect_tag": "bleed_pressure",
+    "recoverable": true,
+    "consumption_model": "narrative",
+    "rarity": "common",
+    "value_cd": 35,
+    "description": "Wide-bladed arrows built for hunting and soft-target lethality rather than armor penetration.",
+    "narrative_effects": [
+      "Supports stronger bleeding or flesh-wound framing against unarmored or lightly protected targets.",
+      "May be recoverable if not badly bent or lodged."
+    ]
+  },
+  {
+    "id": "ammo_arrows_bodkin_01",
+    "name": "Bodkin Arrows",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["shortbow", "longbow"],
+    "bundle_size": 10,
+    "tags": ["ammo", "bow", "bodkin", "armor_piercing"],
+    "special_effect_tag": "armor_pressure",
+    "recoverable": true,
+    "consumption_model": "narrative",
+    "rarity": "uncommon",
+    "value_cd": 45,
+    "description": "Narrow hardened arrows designed to better threaten armor gaps and tougher targets.",
+    "narrative_effects": [
+      "Supports armor-pressuring or armor-gap attack framing where shot placement is credible.",
+      "May be recoverable if not shattered or deeply buried."
+    ]
+  },
+  {
+    "id": "ammo_fire_arrows_01",
+    "name": "Fire Arrows",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["shortbow", "longbow"],
+    "bundle_size": 5,
+    "tags": ["ammo", "bow", "fire", "incendiary"],
+    "special_effect_tag": "fire",
+    "recoverable": false,
+    "consumption_model": "expended",
+    "rarity": "uncommon",
+    "value_cd": 120,
+    "description": "Prepared arrows intended to carry flame into vulnerable materials, structures, or exposed targets.",
+    "narrative_effects": [
+      "Supports ignition and fire-delivery framing through compatible bows.",
+      "Usually destroyed or rendered unusable after firing."
+    ]
+  },
+  {
+    "id": "ammo_frost_arrows_01",
+    "name": "Frost Arrows",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["shortbow", "longbow"],
+    "bundle_size": 5,
+    "tags": ["ammo", "bow", "frost", "elemental"],
+    "special_effect_tag": "frost",
+    "recoverable": false,
+    "consumption_model": "expended",
+    "rarity": "uncommon",
+    "value_cd": 140,
+    "description": "Arrows prepared with alchemical or magical frost charge for chilling impact effects.",
+    "narrative_effects": [
+      "Supports chill, brittle-surface, or slowing-impact framing where frost effects are plausible.",
+      "Usually loses its prepared charge once fired."
+    ]
+  },
+  {
+    "id": "ammo_signal_arrows_01",
+    "name": "Signal Arrows",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["shortbow", "longbow"],
+    "bundle_size": 5,
+    "tags": ["ammo", "bow", "signal", "utility"],
+    "special_effect_tag": "signal",
+    "recoverable": false,
+    "consumption_model": "expended",
+    "rarity": "common",
+    "value_cd": 60,
+    "description": "Specialized arrows designed for visible signaling, noise, or marking rather than battlefield lethality.",
+    "narrative_effects": [
+      "Supports signaling, marking, or long-distance nonverbal coordination.",
+      "Usually expended in the act of signaling rather than recovered for reuse."
+    ]
+  },
+  {
+    "id": "ammo_rope_arrows_01",
+    "name": "Rope Arrows",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["longbow"],
+    "bundle_size": 3,
+    "tags": ["ammo", "bow", "utility", "climbing"],
+    "special_effect_tag": "anchoring",
+    "recoverable": true,
+    "consumption_model": "narrative",
+    "rarity": "uncommon",
+    "value_cd": 90,
+    "description": "Heavy arrowheads designed to carry and anchor light climbing line or signaling cord.",
+    "narrative_effects": [
+      "Supports line-placement or difficult elevated anchoring where conditions allow.",
+      "May be recoverable if the anchor holds and the head remains intact."
+    ]
+  },
+  {
+    "id": "ammo_bolts_broadhead_01",
+    "name": "Broadhead Bolts",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["light_crossbow", "heavy_crossbow"],
+    "bundle_size": 10,
+    "tags": ["ammo", "crossbow", "broadhead", "hunting"],
+    "special_effect_tag": "bleed_pressure",
+    "recoverable": true,
+    "consumption_model": "narrative",
+    "rarity": "common",
+    "value_cd": 45,
+    "description": "Heavy broadhead bolts intended for hunting and soft-target lethality.",
+    "narrative_effects": [
+      "Supports stronger bleeding or flesh-wound framing against unarmored or lightly protected targets.",
+      "May be recoverable if not badly damaged on impact."
+    ]
+  },
+  {
+    "id": "ammo_bolts_bodkin_01",
+    "name": "Bodkin Bolts",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["light_crossbow", "heavy_crossbow"],
+    "bundle_size": 10,
+    "tags": ["ammo", "crossbow", "bodkin", "armor_piercing"],
+    "special_effect_tag": "armor_pressure",
+    "recoverable": true,
+    "consumption_model": "narrative",
+    "rarity": "uncommon",
+    "value_cd": 60,
+    "description": "Narrow reinforced bolts built to better threaten armor seams and tougher defensive targets.",
+    "narrative_effects": [
+      "Supports armor-pressure framing where a heavy penetrating shot is plausible.",
+      "May be recoverable if not ruined by the impact."
+    ]
+  },
+  {
+    "id": "ammo_fire_bolts_01",
+    "name": "Fire Bolts",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["light_crossbow", "heavy_crossbow"],
+    "bundle_size": 5,
+    "tags": ["ammo", "crossbow", "fire", "incendiary"],
+    "special_effect_tag": "fire",
+    "recoverable": false,
+    "consumption_model": "expended",
+    "rarity": "uncommon",
+    "value_cd": 130,
+    "description": "Prepared crossbow bolts carrying incendiary charge for controlled ignition or destructive strike delivery.",
+    "narrative_effects": [
+      "Supports ignition and fire-delivery framing through compatible crossbows.",
+      "Usually destroyed or stripped of special function after firing."
+    ]
+  },
+  {
+    "id": "ammo_frost_bolts_01",
+    "name": "Frost Bolts",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["light_crossbow", "heavy_crossbow"],
+    "bundle_size": 5,
+    "tags": ["ammo", "crossbow", "frost", "elemental"],
+    "special_effect_tag": "frost",
+    "recoverable": false,
+    "consumption_model": "expended",
+    "rarity": "uncommon",
+    "value_cd": 150,
+    "description": "Charged bolts intended to deliver chilling force or brittle-impact pressure on contact.",
+    "narrative_effects": [
+      "Supports frost-infused impact, chilling pressure, or brittle-material framing.",
+      "Usually loses its prepared charge once fired."
+    ]
+  },
+  {
+    "id": "ammo_blessed_bolts_01",
+    "name": "Blessed Bolts",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["light_crossbow", "heavy_crossbow"],
+    "bundle_size": 5,
+    "tags": ["ammo", "crossbow", "sacred", "bahamutic"],
+    "special_effect_tag": "sacred",
+    "recoverable": false,
+    "consumption_model": "expended",
+    "rarity": "rare",
+    "value_cd": 180,
+    "description": "Consecrated bolts prepared for use in rites of sanctioned violence against profane or corrupted threats.",
+    "narrative_effects": [
+      "Supports sacred-pressure framing where holy authority is recognized and relevant.",
+      "Typically treated as ritually expended whether physically recoverable or not."
+    ]
+  },
+  {
+    "id": "ammo_sling_stones_weighted_01",
+    "name": "Weighted Sling Stones",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["sling"],
+    "bundle_size": 20,
+    "tags": ["ammo", "sling", "weighted", "impact"],
+    "special_effect_tag": "impact_pressure",
+    "recoverable": false,
+    "consumption_model": "narrative",
+    "rarity": "common",
+    "value_cd": 12,
+    "description": "Dense selected stones or shaped pellets intended to hit harder than ordinary sling ammunition.",
+    "narrative_effects": [
+      "Supports stronger blunt-impact framing than ordinary sling stones.",
+      "Usually treated as spent, scattered, or not worth recovering one by one."
+    ]
+  },
+  {
+    "id": "ammo_sling_firepots_01",
+    "name": "Sling Firepots",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["sling"],
+    "bundle_size": 5,
+    "tags": ["ammo", "sling", "fire", "fragile", "incendiary"],
+    "special_effect_tag": "fire",
+    "recoverable": false,
+    "consumption_model": "expended",
+    "rarity": "uncommon",
+    "value_cd": 90,
+    "description": "Fragile sling-fired incendiary capsules intended to shatter and ignite on impact.",
+    "narrative_effects": [
+      "Supports small-scale ignition, distraction, or fire-setting through sling delivery.",
+      "Destroyed on use."
+    ]
+  },
+  {
+    "id": "ammo_blowgun_needles_poisoned_01",
+    "name": "Poisoned Blowgun Needles",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["blowgun"],
+    "bundle_size": 10,
+    "tags": ["ammo", "blowgun", "poison", "stealth"],
+    "special_effect_tag": "poison",
+    "recoverable": false,
+    "consumption_model": "expended",
+    "rarity": "uncommon",
+    "value_cd": 85,
+    "description": "Prepared blowgun needles carrying toxin for quiet delivery where subtle harm matters more than force.",
+    "narrative_effects": [
+      "Supports toxin-delivery framing through stealth-oriented ranged attacks.",
+      "Treated as expended once fired whether the needle survives or not."
+    ]
+  },
+  {
+    "id": "ammo_blowgun_needles_sleep_01",
+    "name": "Sleep Needles",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["blowgun"],
+    "bundle_size": 10,
+    "tags": ["ammo", "blowgun", "sleep", "stealth", "subdual"],
+    "special_effect_tag": "sleep",
+    "recoverable": false,
+    "consumption_model": "expended",
+    "rarity": "uncommon",
+    "value_cd": 95,
+    "description": "Specialized sedative-treated needles meant for subdual, capture, or quiet takedown attempts.",
+    "narrative_effects": [
+      "Supports sleep, sedation, or subdual framing where delivery and dosage are plausible.",
+      "Treated as expended after use."
+    ]
+  },
+  {
+    "id": "ammo_blowgun_needles_marking_01",
+    "name": "Marking Needles",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["blowgun"],
+    "bundle_size": 10,
+    "tags": ["ammo", "blowgun", "marker", "tracking", "utility"],
+    "special_effect_tag": "marking",
+    "recoverable": false,
+    "consumption_model": "expended",
+    "rarity": "common",
+    "value_cd": 40,
+    "description": "Special needles designed to deliver dye, scent marker, or similar tagging payloads rather than direct harm.",
+    "narrative_effects": [
+      "Supports marking, tracking, or identification framing against unaware or fleeing targets.",
+      "Treated as expended once delivered."
+    ]
+  }
+]

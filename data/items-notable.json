@@ -1,0 +1,322 @@
+[
+  {
+    "id": "item_radiant_blade_01",
+    "name": "Radiant Blade",
+    "category": "weapon",
+    "description": "A disciplined luminous blade associated with controlled force and clean martial execution.",
+    "tags": ["weapon", "notable", "radiant"],
+    "roll_tag": "melee",
+    "consumable": false,
+    "charges": null,
+    "rarity": "rare",
+    "value_cd": null,
+    "narrative_effects": [
+      "On strong success or critical success, may convert minor collateral harm to controlled impact in scene narration."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_wardbreaker_spear_01",
+    "name": "Wardbreaker Spear",
+    "category": "weapon",
+    "description": "A heavy spear forged or tuned for use against hardened barriers, ward-lines, and disciplined defensive formations.",
+    "tags": ["weapon", "notable", "anti_barrier"],
+    "roll_tag": "reach",
+    "consumable": false,
+    "charges": null,
+    "rarity": "rare",
+    "value_cd": null,
+    "narrative_effects": [
+      "Grants narrative justification to contest reinforced barriers or shield lines."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_quicksilver_knife_01",
+    "name": "Quicksilver Knife",
+    "category": "weapon",
+    "description": "A swift, finely balanced knife associated with silent work, speed, and clean close-quarters execution.",
+    "tags": ["weapon", "notable", "stealth"],
+    "roll_tag": "grappling",
+    "consumable": false,
+    "charges": null,
+    "rarity": "rare",
+    "value_cd": null,
+    "narrative_effects": [
+      "Supports stealth takedown narration when the action already succeeds."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_skystring_bow_01",
+    "name": "Skystring Bow",
+    "category": "weapon",
+    "description": "A high-performance bow known for unusual stability and precision in difficult air conditions.",
+    "tags": ["weapon", "notable", "precision", "bow"],
+    "roll_tag": "ranged",
+    "consumable": false,
+    "charges": null,
+    "rarity": "rare",
+    "value_cd": null,
+    "narrative_effects": [
+      "Enables long-range precision shots in high-wind scenes without contradiction."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_bastion_mail_01",
+    "name": "Bastion Mail",
+    "category": "armor",
+    "description": "A notable defensive harness associated with resilience, disciplined guard, and battlefield staying power.",
+    "tags": ["armor", "notable", "defensive"],
+    "roll_tag": "shields_armor",
+    "consumable": false,
+    "charges": null,
+    "rarity": "rare",
+    "value_cd": null,
+    "narrative_effects": [
+      "On partial failure in direct combat, reduce severity by one narrative step when plausible."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_aegis_kite_01",
+    "name": "Aegis Kite Shield",
+    "category": "armor",
+    "description": "A notable kite shield built or blessed for line-holding, interception, and allied protection.",
+    "tags": ["armor", "notable", "shield", "protective"],
+    "roll_tag": "shields_armor",
+    "consumable": false,
+    "charges": null,
+    "rarity": "rare",
+    "value_cd": null,
+    "narrative_effects": [
+      "Supports ally-protection framing and line-holding outcomes."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_monksteel_wraps_01",
+    "name": "Monksteel Handwraps",
+    "category": "weapon",
+    "description": "Reinforced handwraps designed for disciplined unarmed engagement against defended opponents.",
+    "tags": ["weapon", "notable", "unarmed", "martial"],
+    "roll_tag": "grappling",
+    "consumable": false,
+    "charges": null,
+    "rarity": "uncommon",
+    "value_cd": null,
+    "narrative_effects": [
+      "Enables meaningful unarmed engagement against armored foes."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_veilcloak_01",
+    "name": "Veilcloak",
+    "category": "utility",
+    "description": "A concealment-oriented cloak associated with identity masking, presence control, and formal-space deception.",
+    "tags": ["utility", "notable", "concealment", "social"],
+    "roll_tag": "disguise_forgery",
+    "consumable": false,
+    "charges": null,
+    "rarity": "rare",
+    "value_cd": null,
+    "narrative_effects": [
+      "Supports identity concealment checks in formal spaces."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_ghoststep_boots_01",
+    "name": "Ghoststep Boots",
+    "category": "utility",
+    "description": "Specialized boots associated with controlled footing, noise suppression, and infiltration movement.",
+    "tags": ["utility", "notable", "stealth", "movement"],
+    "roll_tag": "grappling",
+    "consumable": false,
+    "charges": null,
+    "rarity": "rare",
+    "value_cd": null,
+    "narrative_effects": [
+      "Supports silent movement framing in infiltration scenes."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_lockwhisper_set_01",
+    "name": "Lockwhisper Picks",
+    "category": "utility",
+    "description": "A refined lockpick set associated with quiet entry, speed, and practiced bypass work under pressure.",
+    "tags": ["utility", "notable", "lockpicking"],
+    "roll_tag": "lockpicking_traps",
+    "consumable": false,
+    "charges": null,
+    "rarity": "uncommon",
+    "value_cd": null,
+    "narrative_effects": [
+      "Supports rapid bypass attempts under time pressure."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_hawkeye_lens_01",
+    "name": "Hawkeye Lens",
+    "category": "utility",
+    "description": "A precision observation lens associated with long-sight reconnaissance and careful remote assessment.",
+    "tags": ["utility", "notable", "observation", "reconnaissance"],
+    "roll_tag": "ranged",
+    "consumable": false,
+    "charges": null,
+    "rarity": "uncommon",
+    "value_cd": null,
+    "narrative_effects": [
+      "Improves fictional positioning for long-sight reconnaissance."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_wayfarer_reins_01",
+    "name": "Wayfarer Reins",
+    "category": "utility",
+    "description": "Travel-grade reins associated with difficult route handling, hazard control, and disciplined mount or vehicle guidance.",
+    "tags": ["utility", "notable", "travel", "mounts"],
+    "roll_tag": "mounts_vehicles",
+    "consumable": false,
+    "charges": null,
+    "rarity": "uncommon",
+    "value_cd": null,
+    "narrative_effects": [
+      "Supports difficult mount or vehicle control in hazardous terrain."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_aether_staff_01",
+    "name": "Aether Staff",
+    "category": "arcane",
+    "description": "A refined magical staff associated with stable channeling and structured multi-step arcane working.",
+    "tags": ["arcane", "notable", "staff", "channeling"],
+    "roll_tag": "arcane_implements",
+    "consumable": false,
+    "charges": null,
+    "rarity": "rare",
+    "value_cd": null,
+    "narrative_effects": [
+      "Supports stable channeling for multi-step arcane actions."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_rune_compass_01",
+    "name": "Rune Compass",
+    "category": "arcane",
+    "description": "A magical orientation device associated with pathfinding, magical bearings, and navigation through distorted environments.",
+    "tags": ["arcane", "notable", "navigation", "runic"],
+    "roll_tag": "arcane_implements",
+    "consumable": false,
+    "charges": null,
+    "rarity": "rare",
+    "value_cd": null,
+    "narrative_effects": [
+      "Supports magical orientation and pathfinding in distorted zones."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_sunvial_elixir_01",
+    "name": "Sunvial Elixir",
+    "category": "consumable",
+    "description": "A potent restorative elixir intended for immediate treatment in scenes where intervention is possible.",
+    "tags": ["consumable", "notable", "restorative", "alchemy"],
+    "roll_tag": "herbalism_alchemy",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "rare",
+    "value_cd": null,
+    "narrative_effects": [
+      "Restore moderate HP once per scene where immediate treatment is plausible."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_emberseal_paste_01",
+    "name": "Emberseal Paste",
+    "category": "consumable",
+    "description": "A prepared protective paste used to temporarily suppress heat and burn exposure in severe environments.",
+    "tags": ["consumable", "notable", "heat_protection", "alchemy"],
+    "roll_tag": "herbalism_alchemy",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "uncommon",
+    "value_cd": null,
+    "narrative_effects": [
+      "Temporarily suppresses environmental burn exposure in volcanic scenes."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_sanctum_oil_01",
+    "name": "Sanctum Oil",
+    "category": "sacred",
+    "description": "A consecrated oil associated with purification, sanctification, and taint-cleansing rites.",
+    "tags": ["sacred", "notable", "consecration", "ritual"],
+    "roll_tag": "sacred_rites",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "rare",
+    "value_cd": null,
+    "narrative_effects": [
+      "Supports purification or consecration attempts at tainted sites."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_oathbell_01",
+    "name": "Oathbell of Accord",
+    "category": "sacred",
+    "description": "A formal vow-marking sacred instrument associated with binding promises, accord, and witnessed obligation.",
+    "tags": ["sacred", "notable", "oath", "accord"],
+    "roll_tag": "sacred_rites",
+    "consumable": false,
+    "charges": null,
+    "rarity": "rare",
+    "value_cd": null,
+    "narrative_effects": [
+      "Supports negotiation scenes where formal vows are binding."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_resonance_lyre_01",
+    "name": "Resonance Lyre",
+    "category": "utility",
+    "description": "A ritual-performance instrument associated with emotional regulation, crowd response, and coordinated ceremony.",
+    "tags": ["utility", "notable", "music", "ritual"],
+    "roll_tag": "musical_instruments",
+    "consumable": false,
+    "charges": null,
+    "rarity": "rare",
+    "value_cd": null,
+    "narrative_effects": [
+      "Supports crowd-calming or ritual synchronization actions."
+    ],
+    "is_notable": true
+  },
+  {
+    "id": "item_vault_tome_01",
+    "name": "Vault Cognition Tome",
+    "category": "special",
+    "description": "A restricted cognition-focused tome that grants controlled in-scene access to narrow specialized lore without serving as a permanent universal bypass.",
+    "tags": ["special", "notable", "lore", "restricted"],
+    "roll_tag": "arcane_implements",
+    "consumable": false,
+    "charges": null,
+    "rarity": "rare",
+    "value_cd": null,
+    "narrative_effects": [
+      "Grants temporary narrative access to specialized lore in-scene; not a permanent encyclopedic bypass."
+    ],
+    "is_notable": true
+  }
+]

@@ -1,0 +1,330 @@
+[
+  {
+    "id": "price_loaf_of_bread_01",
+    "name": "Loaf of bread",
+    "price_group": "consumables",
+    "price_cd": 2,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a loaf of bread."
+  },
+  {
+    "id": "price_mug_of_ale_01",
+    "name": "Mug of ale",
+    "price_group": "consumables",
+    "price_cd": 4,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a mug of ale."
+  },
+  {
+    "id": "price_trail_rations_1_day_01",
+    "name": "Trail rations (1 day)",
+    "price_group": "consumables",
+    "price_cd": 5,
+    "rarity": "common",
+    "description": "Baseline settled-region price for one day of trail rations."
+  },
+  {
+    "id": "price_meal_basic_01",
+    "name": "Meal (basic, inn or tavern)",
+    "price_group": "consumables",
+    "price_cd": 8,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a basic prepared meal."
+  },
+  {
+    "id": "price_candle_01",
+    "name": "Candle",
+    "price_group": "consumables",
+    "price_cd": 1,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a candle."
+  },
+  {
+    "id": "price_oil_flask_01",
+    "name": "Oil flask",
+    "price_group": "consumables",
+    "price_cd": 10,
+    "rarity": "common",
+    "description": "Baseline settled-region price for one flask of oil."
+  },
+  {
+    "id": "price_soap_01",
+    "name": "Soap",
+    "price_group": "consumables",
+    "price_cd": 2,
+    "rarity": "common",
+    "description": "Baseline settled-region price for basic soap."
+  },
+  {
+    "id": "price_poor_inn_bed_01",
+    "name": "Poor inn bed (common room floor)",
+    "price_group": "lodging_services",
+    "price_cd": 5,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a poor inn bed in a shared common room."
+  },
+  {
+    "id": "price_decent_private_room_01",
+    "name": "Decent private room",
+    "price_group": "lodging_services",
+    "price_cd": 200,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a decent private room."
+  },
+  {
+    "id": "price_stable_fee_per_night_01",
+    "name": "Stable fee (per night)",
+    "price_group": "lodging_services",
+    "price_cd": 5,
+    "rarity": "common",
+    "description": "Baseline settled-region price for stabling a mount overnight."
+  },
+  {
+    "id": "price_meal_plus_private_room_01",
+    "name": "Meal + decent room (together)",
+    "price_group": "lodging_services",
+    "price_cd": 208,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a decent room plus meal together."
+  },
+  {
+    "id": "price_water_refill_01",
+    "name": "Water refill (waterskin/flask)",
+    "price_group": "lodging_services",
+    "price_cd": 2,
+    "rarity": "common",
+    "description": "Baseline settled-region price to refill a waterskin or flask."
+  },
+  {
+    "id": "price_public_bathhouse_access_01",
+    "name": "Public bathhouse access",
+    "price_group": "lodging_services",
+    "price_cd": 10,
+    "rarity": "common",
+    "description": "Baseline settled-region price for bathhouse access."
+  },
+  {
+    "id": "price_laundry_service_simple_load_01",
+    "name": "Laundry service (simple load)",
+    "price_group": "lodging_services",
+    "price_cd": 8,
+    "rarity": "common",
+    "description": "Baseline settled-region price for simple laundry service."
+  },
+  {
+    "id": "price_ferriage_person_light_gear_01",
+    "name": "Ferriage (river crossing, person + light gear)",
+    "price_group": "lodging_services",
+    "price_cd": 20,
+    "rarity": "common",
+    "description": "Baseline settled-region price for river crossing with one person and light gear."
+  },
+  {
+    "id": "price_ferriage_mount_cart_addon_01",
+    "name": "Ferriage (mount or cart add-on)",
+    "price_group": "lodging_services",
+    "price_cd": 100,
+    "rarity": "common",
+    "description": "Baseline settled-region add-on price for ferriage of a mount or cart."
+  },
+  {
+    "id": "price_hitching_posting_fee_day_use_01",
+    "name": "Hitching/posting fee (day use)",
+    "price_group": "lodging_services",
+    "price_cd": 2,
+    "rarity": "common",
+    "description": "Baseline settled-region price for day-use hitching or posting."
+  },
+  {
+    "id": "price_feed_watering_mount_per_day_01",
+    "name": "Feed + watering (mount, per day)",
+    "price_group": "lodging_services",
+    "price_cd": 10,
+    "rarity": "common",
+    "description": "Baseline settled-region price to feed and water a mount for one day."
+  },
+  {
+    "id": "price_wagon_passage_long_trip_01",
+    "name": "Wagon passage (long trip)",
+    "price_group": "lodging_services",
+    "price_cd": 500,
+    "rarity": "common",
+    "description": "Baseline settled-region price for wagon passage over a long trip."
+  },
+  {
+    "id": "price_day_laborer_hire_01",
+    "name": "Day laborer hire (1 day)",
+    "price_group": "lodging_services",
+    "price_cd": 50,
+    "rarity": "common",
+    "description": "Baseline settled-region price to hire a day laborer for one day."
+  },
+  {
+    "id": "price_skilled_guide_hire_01",
+    "name": "Skilled guide (1 day)",
+    "price_group": "lodging_services",
+    "price_cd": 200,
+    "rarity": "common",
+    "description": "Baseline settled-region price to hire a skilled guide for one day."
+  },
+  {
+    "id": "price_blacksmith_repair_simple_tool_01",
+    "name": "Blacksmith repair (simple tool)",
+    "price_group": "lodging_services",
+    "price_cd": 100,
+    "rarity": "common",
+    "description": "Baseline settled-region price for simple blacksmith repair work."
+  },
+  {
+    "id": "price_healer_visit_minor_wound_01",
+    "name": "Healer visit (minor wound)",
+    "price_group": "lodging_services",
+    "price_cd": 200,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a healer visit treating a minor wound."
+  },
+  {
+    "id": "price_torch_01",
+    "name": "Torch",
+    "price_group": "basic_gear",
+    "price_cd": 10,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a torch."
+  },
+  {
+    "id": "price_bedroll_01",
+    "name": "Bedroll",
+    "price_group": "basic_gear",
+    "price_cd": 50,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a bedroll."
+  },
+  {
+    "id": "price_blanket_01",
+    "name": "Blanket",
+    "price_group": "basic_gear",
+    "price_cd": 30,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a blanket."
+  },
+  {
+    "id": "price_waterskin_01",
+    "name": "Waterskin",
+    "price_group": "basic_gear",
+    "price_cd": 20,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a waterskin."
+  },
+  {
+    "id": "price_sack_01",
+    "name": "Sack",
+    "price_group": "basic_gear",
+    "price_cd": 5,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a sack."
+  },
+  {
+    "id": "price_backpack_01",
+    "name": "Backpack",
+    "price_group": "basic_gear",
+    "price_cd": 30,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a backpack."
+  },
+  {
+    "id": "price_rope_50ft_01",
+    "name": "Rope (50 ft)",
+    "price_group": "basic_gear",
+    "price_cd": 100,
+    "rarity": "common",
+    "description": "Baseline settled-region price for fifty feet of rope."
+  },
+  {
+    "id": "price_lantern_01",
+    "name": "Lantern",
+    "price_group": "basic_gear",
+    "price_cd": 50,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a lantern."
+  },
+  {
+    "id": "price_lock_simple_01",
+    "name": "Lock (simple)",
+    "price_group": "basic_gear",
+    "price_cd": 100,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a simple lock."
+  },
+  {
+    "id": "price_hammer_01",
+    "name": "Hammer",
+    "price_group": "tools_kits",
+    "price_cd": 50,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a hammer."
+  },
+  {
+    "id": "price_shovel_01",
+    "name": "Shovel",
+    "price_group": "tools_kits",
+    "price_cd": 100,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a shovel."
+  },
+  {
+    "id": "price_cooking_pot_01",
+    "name": "Cooking pot",
+    "price_group": "tools_kits",
+    "price_cd": 50,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a cooking pot."
+  },
+  {
+    "id": "price_sewing_kit_01",
+    "name": "Sewing kit",
+    "price_group": "tools_kits",
+    "price_cd": 20,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a sewing kit."
+  },
+  {
+    "id": "price_fishing_kit_01",
+    "name": "Fishing kit",
+    "price_group": "tools_kits",
+    "price_cd": 80,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a fishing kit."
+  },
+  {
+    "id": "price_crowbar_01",
+    "name": "Crowbar",
+    "price_group": "tools_kits",
+    "price_cd": 20,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a crowbar."
+  },
+  {
+    "id": "price_mule_01",
+    "name": "Mule",
+    "price_group": "animals_transport",
+    "price_cd": 800,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a mule."
+  },
+  {
+    "id": "price_riding_horse_01",
+    "name": "Riding horse",
+    "price_group": "animals_transport",
+    "price_cd": 7000,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a riding horse."
+  },
+  {
+    "id": "price_cart_01",
+    "name": "Cart",
+    "price_group": "animals_transport",
+    "price_cd": 1500,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a cart."
+  }
+]

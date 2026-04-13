@@ -1,0 +1,156 @@
+[
+  {
+    "id": "armor_unarmored_01",
+    "name": "Unarmored",
+    "category": "armor",
+    "knowledge_tag": "unarmored",
+    "application_tag": "unarmored",
+    "tags": ["armor", "unarmored", "baseline"],
+    "value_cd": 0,
+    "rarity": "common",
+    "description": "No armor worn. Some characters intentionally build around speed, mobility, or skill without protective gear.",
+    "narrative_effects": [
+      "No baseline Agility difficulty impact under normal conditions."
+    ]
+  },
+  {
+    "id": "armor_padded_01",
+    "name": "Padded",
+    "category": "armor",
+    "knowledge_tag": "light",
+    "application_tag": "padded",
+    "tags": ["armor", "light", "padded"],
+    "value_cd": 500,
+    "rarity": "common",
+    "description": "Layered quilted protection that offers basic defense without materially hindering mobility under ordinary conditions.",
+    "narrative_effects": [
+      "Supports light protection framing with no baseline Agility difficulty impact under normal conditions."
+    ]
+  },
+  {
+    "id": "armor_leather_01",
+    "name": "Leather",
+    "category": "armor",
+    "knowledge_tag": "light",
+    "application_tag": "leather",
+    "tags": ["armor", "light", "leather"],
+    "value_cd": 1000,
+    "rarity": "common",
+    "description": "Flexible leather armor that balances protection and movement, common among scouts, hunters, and lightly equipped fighters.",
+    "narrative_effects": [
+      "Supports light protection framing with no baseline Agility difficulty impact under normal conditions."
+    ]
+  },
+  {
+    "id": "armor_hide_01",
+    "name": "Hide",
+    "category": "armor",
+    "knowledge_tag": "light",
+    "application_tag": "hide",
+    "tags": ["armor", "light", "hide"],
+    "value_cd": 800,
+    "rarity": "common",
+    "description": "Thicker hide armor offering rugged protection while remaining within the light armor category.",
+    "narrative_effects": [
+      "Supports light protection framing with no baseline Agility difficulty impact under normal conditions."
+    ]
+  },
+  {
+    "id": "armor_chain_shirt_01",
+    "name": "Chain Shirt",
+    "category": "armor",
+    "knowledge_tag": "medium",
+    "application_tag": "chain_shirt",
+    "tags": ["armor", "medium", "chain"],
+    "value_cd": 3000,
+    "rarity": "common",
+    "description": "A lighter chain-based armor that offers stronger coverage than light gear while preserving more mobility than heavier battlefield harnesses.",
+    "narrative_effects": [
+      "May increase Agility difficulty by one step in demanding physical contexts, depending on situation and judgment."
+    ]
+  },
+  {
+    "id": "armor_scale_mail_01",
+    "name": "Scale Mail",
+    "category": "armor",
+    "knowledge_tag": "medium",
+    "application_tag": "scale_mail",
+    "tags": ["armor", "medium", "scale"],
+    "value_cd": 4000,
+    "rarity": "common",
+    "description": "Overlapping scale armor built for practical battlefield defense with moderate bulk and movement cost.",
+    "narrative_effects": [
+      "May increase Agility difficulty by one step in demanding physical contexts, depending on situation and judgment."
+    ]
+  },
+  {
+    "id": "armor_breastplate_01",
+    "name": "Breastplate",
+    "category": "armor",
+    "knowledge_tag": "medium",
+    "application_tag": "breastplate",
+    "tags": ["armor", "medium", "plate"],
+    "value_cd": 5000,
+    "rarity": "common",
+    "description": "A shaped torso plate paired with lighter supporting materials, offering strong core protection without the full burden of heavy armor.",
+    "narrative_effects": [
+      "May increase Agility difficulty by one step in demanding physical contexts, depending on situation and judgment."
+    ]
+  },
+  {
+    "id": "armor_chain_mail_01",
+    "name": "Chain Mail",
+    "category": "armor",
+    "knowledge_tag": "heavy",
+    "application_tag": "chain_mail",
+    "tags": ["armor", "heavy", "chain"],
+    "value_cd": 7500,
+    "rarity": "common",
+    "description": "A full battlefield chain harness that provides serious protection at the cost of agility and physical ease.",
+    "narrative_effects": [
+      "Increases Agility difficulty by one step as a baseline and by two steps in demanding physical contexts."
+    ]
+  },
+  {
+    "id": "armor_splint_01",
+    "name": "Splint",
+    "category": "armor",
+    "knowledge_tag": "heavy",
+    "application_tag": "splint",
+    "tags": ["armor", "heavy", "splint"],
+    "value_cd": 10000,
+    "rarity": "common",
+    "description": "A heavy segmented armor built for strong defense and battlefield durability with substantial movement cost.",
+    "narrative_effects": [
+      "Increases Agility difficulty by one step as a baseline and by two steps in demanding physical contexts."
+    ]
+  },
+  {
+    "id": "armor_plate_01",
+    "name": "Plate",
+    "category": "armor",
+    "knowledge_tag": "heavy",
+    "application_tag": "plate",
+    "tags": ["armor", "heavy", "plate"],
+    "value_cd": 150000,
+    "rarity": "rare",
+    "description": "The heaviest common battlefield armor, offering maximum conventional protection with major mobility burden outside trained use.",
+    "narrative_effects": [
+      "Increases Agility difficulty by one step as a baseline and by two steps in demanding physical contexts."
+    ]
+  },
+  {
+    "id": "shield_01",
+    "name": "Shield",
+    "category": "shield",
+    "knowledge_tag": "shield",
+    "application_tag": "shield",
+    "tags": ["shield", "defensive", "equipment"],
+    "value_cd": 100,
+    "rarity": "common",
+    "description": "A general shield entry. Specific size and type are handled narratively at runtime rather than as separate catalog items.",
+    "narrative_effects": [
+      "Supports active defensive framing. Movement and handling impact depend on described size and type, judged at runtime."
+    ]
+  }
+]

@@ -1,0 +1,1345 @@
+[
+  {
+    "id": "item_mundane_tinderbox_01",
+    "name": "Tinderbox",
+    "category": "survival",
+    "subcategory": "fire_starting",
+    "description": "A compact kit for reliably lighting fires without relying on improvisation.",
+    "tags": ["survival", "camp", "tool"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 5,
+    "narrative_effects": [
+      "Required to reliably light fires without improvising a method."
+    ]
+  },
+  {
+    "id": "item_mundane_lantern_01",
+    "name": "Lantern",
+    "category": "survival",
+    "subcategory": "light_source",
+    "description": "A hooded lantern that provides steady light in darkness when fueled with oil.",
+    "tags": ["survival", "camp", "light", "tool"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 30,
+    "narrative_effects": [
+      "Provides reliable light in darkness when supplied with oil."
+    ]
+  },
+  {
+    "id": "item_mundane_lantern_hood_01",
+    "name": "Lantern Hood",
+    "category": "survival",
+    "subcategory": "light_control",
+    "description": "A fitted hood attachment that controls and narrows lantern light.",
+    "tags": ["survival", "camp", "light", "attachment"],
+    "roll_tag": null,
+    "tool_role": "modifier",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Controls and directs lantern light output for concealment or focus."
+    ]
+  },
+  {
+    "id": "item_mundane_fishing_line_hook_01",
+    "name": "Fishing Line and Hook",
+    "category": "survival",
+    "subcategory": "fishing",
+    "description": "A simple but functional line-and-hook kit for fishing as food gathering or small-scale resource collection.",
+    "tags": ["survival", "camp", "fishing", "tool"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 3,
+    "narrative_effects": [
+      "Required to attempt fishing as food or resource gathering without crude improvisation."
+    ]
+  },
+  {
+    "id": "item_mundane_hunting_trap_01",
+    "name": "Hunting Trap",
+    "category": "survival",
+    "subcategory": "trapping",
+    "description": "A spring-loaded trap used for hunting or immobilizing targets when properly set.",
+    "tags": ["survival", "camp", "trapping", "tactical"],
+    "roll_tag": "trapping",
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 50,
+    "narrative_effects": [
+      "Required to set a proper trap; supports immobilization attempts where setup and conditions are plausible."
+    ]
+  },
+  {
+    "id": "item_mundane_bedroll_01",
+    "name": "Bedroll",
+    "category": "survival",
+    "subcategory": "rest",
+    "description": "A portable sleeping roll that provides basic field rest conditions.",
+    "tags": ["survival", "camp", "rest"],
+    "roll_tag": null,
+    "tool_role": "difficulty_shift",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 20,
+    "narrative_effects": [
+      "Counts as adequate rest conditions for recovery-related narration and rolls."
+    ]
+  },
+  {
+    "id": "item_mundane_blanket_01",
+    "name": "Blanket",
+    "category": "survival",
+    "subcategory": "warmth",
+    "description": "A heavy travel blanket used to reduce exposure during cold conditions.",
+    "tags": ["survival", "camp", "cold_weather"],
+    "roll_tag": null,
+    "tool_role": "difficulty_shift",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 50,
+    "narrative_effects": [
+      "Reduces difficulty against cold exposure where a blanket would meaningfully help."
+    ]
+  },
+  {
+    "id": "item_mundane_tarp_01",
+    "name": "Tarp",
+    "category": "survival",
+    "subcategory": "shelter",
+    "description": "A weather-resistant tarp used for improvised shelter, cover, or gear protection.",
+    "tags": ["survival", "camp", "shelter"],
+    "roll_tag": null,
+    "tool_role": "difficulty_shift",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Provides improvised shelter and reduces exposure difficulty where setup is plausible."
+    ]
+  },
+  {
+    "id": "item_mundane_tent_2p_01",
+    "name": "Tent (2-person)",
+    "category": "survival",
+    "subcategory": "shelter",
+    "description": "A compact two-person travel tent offering full field shelter.",
+    "tags": ["survival", "camp", "shelter"],
+    "roll_tag": null,
+    "tool_role": "difficulty_shift",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 20,
+    "narrative_effects": [
+      "Counts as fully sheltered rest conditions in the field."
+    ]
+  },
+  {
+    "id": "item_mundane_pole_10ft_01",
+    "name": "Pole (10 ft)",
+    "category": "survival",
+    "subcategory": "reach_tool",
+    "description": "A long utility pole for probing, vaulting, testing surfaces, or reaching distant objects without contact.",
+    "tags": ["survival", "camp", "utility", "tool"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 1,
+    "narrative_effects": [
+      "Supports probing, reaching, and testing unsafe spaces without direct contact."
+    ]
+  },
+  {
+    "id": "item_mundane_shovel_01",
+    "name": "Shovel",
+    "category": "survival",
+    "subcategory": "digging_tool",
+    "description": "A practical digging tool for graves, trenches, pits, and excavation work.",
+    "tags": ["survival", "camp", "tool", "labor"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 20,
+    "narrative_effects": [
+      "Required for efficient digging and supports sustained excavation work."
+    ]
+  },
+  {
+    "id": "item_mundane_backpack_01",
+    "name": "Backpack",
+    "category": "movement_load",
+    "subcategory": "storage",
+    "description": "A standard travel pack for carrying a full personal gear load.",
+    "tags": ["storage", "travel", "utility"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 20,
+    "narrative_effects": [
+      "Required to carry a full gear load without improvised storage penalties."
+    ]
+  },
+  {
+    "id": "item_mundane_pouch_01",
+    "name": "Pouch",
+    "category": "movement_load",
+    "subcategory": "storage",
+    "description": "A small belt pouch for coin, seals, and pocket-sized valuables.",
+    "tags": ["storage", "utility"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 5,
+    "narrative_effects": [
+      "Provides standard storage for coin and small carried items."
+    ]
+  },
+  {
+    "id": "item_mundane_collection_pouch_01",
+    "name": "Collection Pouch",
+    "category": "movement_load",
+    "subcategory": "storage",
+    "description": "A practical pouch for storing gathered herbs, minerals, or small natural materials.",
+    "tags": ["storage", "gathering", "utility"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 5,
+    "narrative_effects": [
+      "Provides bulk storage for gathered natural materials."
+    ]
+  },
+  {
+    "id": "item_mundane_sack_01",
+    "name": "Sack",
+    "category": "movement_load",
+    "subcategory": "storage",
+    "description": "A plain open sack for bulk carrying with minimal protection.",
+    "tags": ["storage", "utility"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 1,
+    "narrative_effects": [
+      "Provides basic bulk storage with no closure or special protection."
+    ]
+  },
+  {
+    "id": "item_mundane_chest_01",
+    "name": "Chest",
+    "category": "movement_load",
+    "subcategory": "fixed_storage",
+    "description": "A heavy secure storage container intended for fixed locations rather than travel.",
+    "tags": ["storage", "secure", "fixed"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 5000,
+    "narrative_effects": [
+      "Provides secure storage at a fixed location for valuables or records."
+    ]
+  },
+  {
+    "id": "item_mundane_barrel_01",
+    "name": "Barrel",
+    "category": "movement_load",
+    "subcategory": "bulk_storage",
+    "description": "A heavy barrel for storing liquid or dry goods in meaningful volume.",
+    "tags": ["storage", "bulk", "trade"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 200,
+    "narrative_effects": [
+      "Supports bulk storage of liquid or dry goods."
+    ]
+  },
+  {
+    "id": "item_mundane_basket_01",
+    "name": "Basket",
+    "category": "movement_load",
+    "subcategory": "open_storage",
+    "description": "An open carry basket used for market goods, produce, and field collection.",
+    "tags": ["storage", "market", "utility"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 20,
+    "narrative_effects": [
+      "Provides open carry storage for produce, tools, or market goods."
+    ]
+  },
+  {
+    "id": "item_mundane_waterskin_01",
+    "name": "Waterskin",
+    "category": "movement_load",
+    "subcategory": "liquid_storage",
+    "description": "A travel-ready water container required for carrying drinking water on the road.",
+    "tags": ["storage", "travel", "liquid"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 20,
+    "narrative_effects": [
+      "Required to carry water during travel without improvised containers."
+    ]
+  },
+  {
+    "id": "item_mundane_flask_01",
+    "name": "Flask",
+    "category": "movement_load",
+    "subcategory": "liquid_storage",
+    "description": "A compact container for carrying a pint of liquid.",
+    "tags": ["storage", "liquid", "utility"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Carries a small working quantity of liquid for field use."
+    ]
+  },
+  {
+    "id": "item_mundane_vial_01",
+    "name": "Vial",
+    "category": "movement_load",
+    "subcategory": "precise_storage",
+    "description": "A small sealed glass container for precise, delicate, or sacred liquids.",
+    "tags": ["storage", "liquid", "precise"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Supports careful storage of precise, alchemical, or sacred liquids."
+    ]
+  },
+  {
+    "id": "item_mundane_quiver_01",
+    "name": "Quiver",
+    "category": "movement_load",
+    "subcategory": "ammo_storage",
+    "description": "A ready-access carrier for arrows or similar ammunition.",
+    "tags": ["storage", "weapon_support", "ranged"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Required to carry arrows in ready access for field use."
+    ]
+  },
+  {
+    "id": "item_mundane_map_scroll_case_01",
+    "name": "Map/Scroll Case",
+    "category": "movement_load",
+    "subcategory": "document_storage",
+    "description": "A protective case for maps, scrolls, and other weather-sensitive documents.",
+    "tags": ["storage", "documents", "travel"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Protects documents from weather, crushing, and routine travel damage."
+    ]
+  },
+  {
+    "id": "item_mundane_saddlebag_01",
+    "name": "Saddlebag",
+    "category": "movement_load",
+    "subcategory": "mount_storage",
+    "description": "A matched pair of bags for carrying a full gear load on a mount.",
+    "tags": ["storage", "mount", "travel"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 50,
+    "narrative_effects": [
+      "Required to carry a full gear load on a mount without improvised burden issues."
+    ]
+  },
+  {
+    "id": "item_mundane_feed_bag_01",
+    "name": "Feed Bag",
+    "category": "movement_load",
+    "subcategory": "mount_support",
+    "description": "A feed bag used to maintain and feed a mount during travel.",
+    "tags": ["mount", "travel", "utility"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Supports feeding and maintaining a mount on sustained travel."
+    ]
+  },
+  {
+    "id": "item_mundane_knife_01",
+    "name": "Knife",
+    "category": "craft_trade",
+    "subcategory": "cutting_tool",
+    "description": "A practical knife suited for fine cutting, harvesting, improvised surgery, and general camp use.",
+    "tags": ["craft", "tool", "cutting", "utility"],
+    "roll_tag": null,
+    "tool_role": "difficulty_shift",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 20,
+    "narrative_effects": [
+      "Reduces difficulty of fine cutting tasks and supports harvesting, field craft, or improvised medical use."
+    ]
+  },
+  {
+    "id": "item_mundane_needle_01",
+    "name": "Needle",
+    "category": "craft_trade",
+    "subcategory": "fine_tool",
+    "description": "A fine piercing tool required for sewing, suturing, and delicate joining work.",
+    "tags": ["craft", "tool", "fine_work"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 5,
+    "narrative_effects": [
+      "Required for sewing, suturing, and other fine joining tasks."
+    ]
+  },
+  {
+    "id": "item_mundane_awl_01",
+    "name": "Awl",
+    "category": "craft_trade",
+    "subcategory": "piercing_tool",
+    "description": "A hand tool used to pierce leather or heavy material in craft and repair work.",
+    "tags": ["craft", "tool", "leatherwork"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 5,
+    "narrative_effects": [
+      "Required for piercing leather or similarly heavy materials."
+    ]
+  },
+  {
+    "id": "item_mundane_chisel_01",
+    "name": "Chisel",
+    "category": "craft_trade",
+    "subcategory": "shaping_tool",
+    "description": "A precision shaping tool for fine stone or wood work.",
+    "tags": ["craft", "tool", "stonework", "woodwork"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Required for fine shaping of wood or stone."
+    ]
+  },
+  {
+    "id": "item_mundane_hammer_01",
+    "name": "Hammer",
+    "category": "craft_trade",
+    "subcategory": "impact_tool",
+    "description": "A standard hammer used for driving, breaking, and basic construction work.",
+    "tags": ["craft", "tool", "construction"],
+    "roll_tag": null,
+    "tool_role": "difficulty_shift",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Reduces difficulty of driving, breaking, or impact-based work tasks."
+    ]
+  },
+  {
+    "id": "item_mundane_mallet_01",
+    "name": "Mallet",
+    "category": "craft_trade",
+    "subcategory": "fine_impact_tool",
+    "description": "A softer impact tool used for controlled carving and delicate masonry work.",
+    "tags": ["craft", "tool", "woodwork", "masonry"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Required for fine woodcarving or masonry work where a hammer would be too crude."
+    ]
+  },
+  {
+    "id": "item_mundane_pliers_01",
+    "name": "Pliers",
+    "category": "craft_trade",
+    "subcategory": "gripping_tool",
+    "description": "A gripping tool for bending, pinching, and manipulating small materials.",
+    "tags": ["craft", "tool", "fine_work"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Supports gripping and bending fine materials during repair or fabrication."
+    ]
+  },
+  {
+    "id": "item_mundane_fine_files_set_01",
+    "name": "Fine Files (set)",
+    "category": "craft_trade",
+    "subcategory": "precision_tool",
+    "description": "A set of precision files used to shape, smooth, and finish metal or stone surfaces.",
+    "tags": ["craft", "tool", "precision"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 20,
+    "narrative_effects": [
+      "Required for precision shaping or finishing of metal and stone."
+    ]
+  },
+  {
+    "id": "item_mundane_wire_coil_01",
+    "name": "Wire (coil)",
+    "category": "craft_trade",
+    "subcategory": "binding_material",
+    "description": "A coil of workable wire for binding, rigging, and mechanical improvisation.",
+    "tags": ["craft", "utility", "binding", "mechanical"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 5,
+    "narrative_effects": [
+      "Supports binding, rigging, and mechanical improvisation."
+    ]
+  },
+  {
+    "id": "item_mundane_mortar_pestle_01",
+    "name": "Mortar and Pestle",
+    "category": "craft_trade",
+    "subcategory": "preparation_tool",
+    "description": "A grinding set used to prepare herbs, minerals, powders, and compounds.",
+    "tags": ["craft", "tool", "alchemy", "herbalism"],
+    "roll_tag": "herbalism_alchemy",
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 15,
+    "narrative_effects": [
+      "Required for grinding herbs, minerals, and prepared compounds."
+    ]
+  },
+  {
+    "id": "item_mundane_measuring_spoons_set_01",
+    "name": "Measuring Spoon (set)",
+    "category": "craft_trade",
+    "subcategory": "measurement_tool",
+    "description": "A set of precise measuring spoons for careful preparation and dose control.",
+    "tags": ["craft", "tool", "precision", "alchemy"],
+    "roll_tag": null,
+    "tool_role": "difficulty_shift",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Reduces difficulty of precise preparation tasks where measurement matters."
+    ]
+  },
+  {
+    "id": "item_mundane_scales_small_01",
+    "name": "Scales (small)",
+    "category": "craft_trade",
+    "subcategory": "measurement_tool",
+    "description": "A compact weighing instrument for exact small-weight measurement.",
+    "tags": ["craft", "tool", "trade", "precision"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 30,
+    "narrative_effects": [
+      "Required for precise weight measurement in trade, alchemy, or assay work."
+    ]
+  },
+  {
+    "id": "item_mundane_loupe_01",
+    "name": "Loupe",
+    "category": "craft_trade",
+    "subcategory": "inspection_tool",
+    "description": "A magnifying lens for close appraisal, flaw detection, and fine inspection.",
+    "tags": ["craft", "tool", "inspection", "appraisal"],
+    "roll_tag": null,
+    "tool_role": "difficulty_shift",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 50,
+    "narrative_effects": [
+      "Reduces difficulty of fine inspection or appraisal where magnification helps."
+    ]
+  },
+  {
+    "id": "item_mundane_tension_wrench_01",
+    "name": "Tension Wrench",
+    "category": "craft_trade",
+    "subcategory": "lock_tool",
+    "description": "A lockpicking component used to apply controlled tension during picking attempts.",
+    "tags": ["craft", "tool", "lockpicking"],
+    "roll_tag": "lockpicking",
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Required as a core component for lockpicking attempts."
+    ]
+  },
+  {
+    "id": "item_mundane_brushes_set_01",
+    "name": "Brushes (set)",
+    "category": "craft_trade",
+    "subcategory": "application_tool",
+    "description": "A set of brushes for painting, cosmetic work, and fine application tasks.",
+    "tags": ["craft", "tool", "art", "cosmetic"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 15,
+    "narrative_effects": [
+      "Required for painting, cosmetic application, and other fine brushwork."
+    ]
+  },
+  {
+    "id": "item_mundane_cooks_pot_01",
+    "name": "Cook's Pot",
+    "category": "craft_trade",
+    "subcategory": "cooking_tool",
+    "description": "A durable field or hearth pot for boiling, brewing, and proper meal preparation.",
+    "tags": ["craft", "camp", "cooking"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 20,
+    "narrative_effects": [
+      "Required for boiling, brewing, and prepared cooking beyond open-fire roasting."
+    ]
+  },
+  {
+    "id": "item_mundane_brazier_01",
+    "name": "Brazier",
+    "category": "craft_trade",
+    "subcategory": "portable_heat",
+    "description": "A portable heat source for alchemical, culinary, or warming use.",
+    "tags": ["craft", "camp", "heat", "alchemy"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 30,
+    "narrative_effects": [
+      "Provides controlled portable heat for cooking, warming, or preparation work."
+    ]
+  },
+  {
+    "id": "item_mundane_straight_edge_01",
+    "name": "Straight Edge",
+    "category": "craft_trade",
+    "subcategory": "drafting_tool",
+    "description": "A rigid measuring edge for precise drafting, alignment, and marking.",
+    "tags": ["craft", "tool", "drafting", "measurement"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 5,
+    "narrative_effects": [
+      "Required for precise drafting, straight marking, or alignment work."
+    ]
+  },
+  {
+    "id": "item_mundane_compass_01",
+    "name": "Compass",
+    "category": "craft_trade",
+    "subcategory": "navigation_tool",
+    "description": "A directional compass used to steady navigation across uncertain terrain.",
+    "tags": ["travel", "navigation", "tool"],
+    "roll_tag": null,
+    "tool_role": "difficulty_shift",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 50,
+    "narrative_effects": [
+      "Reduces navigation difficulty where a compass can meaningfully orient travel."
+    ]
+  },
+  {
+    "id": "item_mundane_splint_01",
+    "name": "Splint",
+    "category": "craft_trade",
+    "subcategory": "medical_tool",
+    "description": "A rigid support used for bone setting and limb immobilization.",
+    "tags": ["medical", "tool", "field_care"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Required for proper bone setting and limb immobilization."
+    ]
+  },
+  {
+    "id": "item_mundane_paper_sheet_01",
+    "name": "Paper (sheet)",
+    "category": "information_records",
+    "subcategory": "writing_material",
+    "description": "A standard sheet used for notes, records, letters, and informal documents.",
+    "tags": ["writing", "records", "utility"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 2,
+    "narrative_effects": [
+      "Required for written communication and routine record-keeping."
+    ]
+  },
+  {
+    "id": "item_mundane_parchment_sheet_01",
+    "name": "Parchment (sheet)",
+    "category": "information_records",
+    "subcategory": "durable_writing_material",
+    "description": "A durable writing material used for formal, lasting, or important documents.",
+    "tags": ["writing", "records", "formal"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 30,
+    "narrative_effects": [
+      "Supports durable formal documentation where paper would be too fragile or informal."
+    ]
+  },
+  {
+    "id": "item_mundane_ink_pen_01",
+    "name": "Ink Pen",
+    "category": "information_records",
+    "subcategory": "writing_tool",
+    "description": "A pen used for writing, annotation, and formal document work.",
+    "tags": ["writing", "records", "tool"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 2,
+    "narrative_effects": [
+      "Required for routine writing when ink is available."
+    ]
+  },
+  {
+    "id": "item_mundane_blank_book_01",
+    "name": "Book (blank)",
+    "category": "information_records",
+    "subcategory": "record_book",
+    "description": "A bound blank book used as a journal, ledger, or reference volume.",
+    "tags": ["writing", "records", "reference"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 250,
+    "narrative_effects": [
+      "Supports journaling, record keeping, and reference use; accurate reference books may aid relevant intellect work."
+    ]
+  },
+  {
+    "id": "item_mundane_map_01",
+    "name": "Map",
+    "category": "information_records",
+    "subcategory": "navigation_aid",
+    "description": "A mapped representation of a known area used to aid travel and orientation.",
+    "tags": ["travel", "navigation", "records"],
+    "roll_tag": null,
+    "tool_role": "difficulty_shift",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Reduces navigation difficulty in the area it accurately represents."
+    ]
+  },
+  {
+    "id": "item_mundane_spyglass_01",
+    "name": "Spyglass",
+    "category": "information_records",
+    "subcategory": "observation_tool",
+    "description": "A distant-view optical tool for surveying terrain, movement, and remote details.",
+    "tags": ["observation", "travel", "tool"],
+    "roll_tag": null,
+    "tool_role": "difficulty_shift",
+    "consumable": false,
+    "charges": null,
+    "rarity": "uncommon",
+    "value_cd": 10000,
+    "narrative_effects": [
+      "Reduces difficulty of distant visual observation where line of sight is available."
+    ]
+  },
+  {
+    "id": "item_mundane_travelers_clothes_01",
+    "name": "Traveler's Clothes",
+    "category": "social_appearance",
+    "subcategory": "attire",
+    "description": "Practical baseline clothing acceptable in most ordinary social settings.",
+    "tags": ["clothing", "social", "travel"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 50,
+    "narrative_effects": [
+      "Provides baseline acceptable appearance for most everyday contexts."
+    ]
+  },
+  {
+    "id": "item_mundane_fine_clothes_01",
+    "name": "Fine Clothes",
+    "category": "social_appearance",
+    "subcategory": "formal_attire",
+    "description": "Well-made formal clothing suitable for elite, ceremonial, or high-society settings.",
+    "tags": ["clothing", "social", "formal"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 150,
+    "narrative_effects": [
+      "Required for formal or high-society access where appearance matters."
+    ]
+  },
+  {
+    "id": "item_mundane_robe_01",
+    "name": "Robe",
+    "category": "social_appearance",
+    "subcategory": "institutional_attire",
+    "description": "A robe associated with religious, scholarly, or institutional identity.",
+    "tags": ["clothing", "social", "scholarly", "religious"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Marks a religious or scholarly role and may be required for some institutional access."
+    ]
+  },
+  {
+    "id": "item_mundane_costume_01",
+    "name": "Costume",
+    "category": "social_appearance",
+    "subcategory": "disguise_attire",
+    "description": "Role-specific clothing intended to support impersonation or performed identity.",
+    "tags": ["clothing", "social", "deception", "disguise"],
+    "roll_tag": null,
+    "tool_role": "difficulty_shift",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 50,
+    "narrative_effects": [
+      "Reduces deception difficulty when impersonating the represented role convincingly."
+    ]
+  },
+  {
+    "id": "item_mundane_rope_50ft_01",
+    "name": "Rope (50 ft)",
+    "category": "tactical",
+    "subcategory": "rigging_tool",
+    "description": "A sturdy fifty-foot length of rope for climbing support, binding, hauling, and rigging.",
+    "tags": ["tactical", "travel", "utility", "binding"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Required for climbing assists, binding, hauling, and basic rigging work."
+    ]
+  },
+  {
+    "id": "item_mundane_grappling_hook_01",
+    "name": "Grappling Hook",
+    "category": "tactical",
+    "subcategory": "anchoring_tool",
+    "description": "A hooked anchor used with rope to catch and secure elevated surfaces.",
+    "tags": ["tactical", "travel", "climbing"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 20,
+    "narrative_effects": [
+      "Required to anchor rope to elevated or difficult surfaces without another fixed point."
+    ]
+  },
+  {
+    "id": "item_mundane_chain_10ft_01",
+    "name": "Chain (10 ft)",
+    "category": "tactical",
+    "subcategory": "binding_tool",
+    "description": "A short length of chain for secure restraint, anchoring, or reinforced binding.",
+    "tags": ["tactical", "binding", "secure"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 50,
+    "narrative_effects": [
+      "Provides stronger binding than rope and is harder to break or cut."
+    ]
+  },
+  {
+    "id": "item_mundane_crowbar_01",
+    "name": "Crowbar",
+    "category": "tactical",
+    "subcategory": "forcing_tool",
+    "description": "A heavy pry bar for forcing doors, containers, and lodged structures.",
+    "tags": ["tactical", "tool", "breach"],
+    "roll_tag": null,
+    "tool_role": "difficulty_shift",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 20,
+    "narrative_effects": [
+      "Reduces difficulty of forcing doors, lids, and secured containers."
+    ]
+  },
+  {
+    "id": "item_mundane_net_01",
+    "name": "Net",
+    "category": "tactical",
+    "subcategory": "restraint_tool",
+    "description": "A thrown or deployed net used for restraint, trapping, or fishing.",
+    "tags": ["tactical", "restraint", "fishing", "trapping"],
+    "roll_tag": "grappling",
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Supports restraint, fishing, or trapping attempts where deployment is plausible."
+    ]
+  },
+  {
+    "id": "item_mundane_manacles_01",
+    "name": "Manacles",
+    "category": "tactical",
+    "subcategory": "secure_restraint",
+    "description": "A metal restraint requiring a key or difficult escape effort once secured.",
+    "tags": ["tactical", "restraint", "secure"],
+    "roll_tag": "grappling",
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 20,
+    "narrative_effects": [
+      "Provides a secure restraint that is harder to escape than rope."
+    ]
+  },
+  {
+    "id": "item_mundane_steel_mirror_01",
+    "name": "Mirror (steel)",
+    "category": "tactical",
+    "subcategory": "sight_tool",
+    "description": "A polished steel mirror used for sight around corners, signaling, or visual checks without exposure.",
+    "tags": ["tactical", "utility", "signal", "observation"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 50,
+    "narrative_effects": [
+      "Supports line-of-sight tricks around corners and signaling at a distance."
+    ]
+  },
+  {
+    "id": "item_mundane_signal_whistle_01",
+    "name": "Signal Whistle",
+    "category": "tactical",
+    "subcategory": "coordination_tool",
+    "description": "A whistle for loud short-range signaling and group coordination.",
+    "tags": ["tactical", "signal", "utility"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 1,
+    "narrative_effects": [
+      "Supports audible signaling and coordinated movement or response."
+    ]
+  },
+  {
+    "id": "item_mundane_field_rations_01",
+    "name": "Field Rations (per day)",
+    "category": "consumable",
+    "subcategory": "food",
+    "description": "A one-day ration pack intended to sustain travel without fresh provisioning.",
+    "tags": ["consumable", "survival", "food"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 5,
+    "narrative_effects": [
+      "Required to avoid hunger penalties during extended travel without other food sources."
+    ]
+  },
+  {
+    "id": "item_mundane_torch_01",
+    "name": "Torch",
+    "category": "consumable",
+    "subcategory": "light_source",
+    "description": "A simple handheld light source that burns out after roughly an hour.",
+    "tags": ["consumable", "survival", "light"],
+    "roll_tag": null,
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 1,
+    "narrative_effects": [
+      "Provides temporary light in darkness before burning out."
+    ]
+  },
+  {
+    "id": "item_mundane_candle_01",
+    "name": "Candle",
+    "category": "consumable",
+    "subcategory": "light_source",
+    "description": "A small fragile light source that burns for about an hour in calm conditions.",
+    "tags": ["consumable", "light", "utility"],
+    "roll_tag": null,
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 1,
+    "narrative_effects": [
+      "Provides minimal light for a short duration and is easily extinguished."
+    ]
+  },
+  {
+    "id": "item_mundane_oil_flask_01",
+    "name": "Oil (per flask)",
+    "category": "consumable",
+    "subcategory": "fuel",
+    "description": "A flask of lamp oil used as lantern fuel or as an ignitable liquid in dangerous situations.",
+    "tags": ["consumable", "fuel", "light", "tactical"],
+    "roll_tag": null,
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Fuels lanterns for extended use and may support ignited offensive or sabotage framing."
+    ]
+  },
+  {
+    "id": "item_mundane_bandaging_cloth_01",
+    "name": "Bandaging Cloth",
+    "category": "consumable",
+    "subcategory": "medical_supply",
+    "description": "Clean cloth strips used for wound dressing and ordinary field care.",
+    "tags": ["consumable", "medical", "field_care"],
+    "roll_tag": "medicine",
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Expended on wound dressing and basic field treatment."
+    ]
+  },
+  {
+    "id": "item_mundane_tourniquet_01",
+    "name": "Tourniquet",
+    "category": "consumable",
+    "subcategory": "medical_supply",
+    "description": "A field emergency restraint used to control severe bleeding until further treatment is possible.",
+    "tags": ["consumable", "medical", "emergency"],
+    "roll_tag": "medicine",
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 15,
+    "narrative_effects": [
+      "Expended to stop severe bleeding and buy time before further medical intervention."
+    ]
+  },
+  {
+    "id": "item_mundane_antitoxin_01",
+    "name": "Antitoxin (vial)",
+    "category": "consumable",
+    "subcategory": "medical_alchemical",
+    "description": "A prepared antitoxin vial used to resist or reduce poison effects for a short period.",
+    "tags": ["consumable", "medical", "alchemy", "anti_poison"],
+    "roll_tag": "herbalism_alchemy",
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "uncommon",
+    "value_cd": 500,
+    "narrative_effects": [
+      "Supports resistance or reduction of poison effects for roughly an hour."
+    ]
+  },
+  {
+    "id": "item_mundane_adhesive_01",
+    "name": "Adhesive",
+    "category": "consumable",
+    "subcategory": "craft_supply",
+    "description": "A bonding compound used to secure materials during repair or fabrication.",
+    "tags": ["consumable", "craft", "repair"],
+    "roll_tag": null,
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 10,
+    "narrative_effects": [
+      "Expended to bond materials during repair, assembly, or improvisation."
+    ]
+  },
+  {
+    "id": "item_mundane_pigments_set_01",
+    "name": "Pigments (set)",
+    "category": "consumable",
+    "subcategory": "craft_supply",
+    "description": "A set of expendable pigments for painting, dyeing, or cosmetic disguise work.",
+    "tags": ["consumable", "craft", "art", "disguise"],
+    "roll_tag": null,
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 20,
+    "narrative_effects": [
+      "Required for painting, dyeing, or cosmetic disguise and depleted with use."
+    ]
+  },
+  {
+    "id": "item_mundane_thread_01",
+    "name": "Thread",
+    "category": "consumable",
+    "subcategory": "craft_supply",
+    "description": "A spool of thread used for sewing, mending, and suturing.",
+    "tags": ["consumable", "craft", "medical", "sewing"],
+    "roll_tag": null,
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 2,
+    "narrative_effects": [
+      "Required for sewing or suturing and expended through repeated use."
+    ]
+  },
+  {
+    "id": "item_mundane_ink_bottle_01",
+    "name": "Ink (bottle)",
+    "category": "consumable",
+    "subcategory": "writing_supply",
+    "description": "A bottle of writing ink used for correspondence, annotation, and recordkeeping.",
+    "tags": ["consumable", "writing", "records"],
+    "roll_tag": null,
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 100,
+    "narrative_effects": [
+      "Required for sustained writing and depleted through document use."
+    ]
+  },
+  {
+    "id": "item_mundane_sealing_wax_01",
+    "name": "Sealing Wax",
+    "category": "consumable",
+    "subcategory": "document_supply",
+    "description": "A wax seal material used to close and authenticate formal correspondence or records.",
+    "tags": ["consumable", "writing", "formal", "authentication"],
+    "roll_tag": null,
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 5,
+    "narrative_effects": [
+      "Required for formal sealing and authentication of documents, and expended on use."
+    ]
+  },
+  {
+    "id": "item_mundane_perfume_vial_01",
+    "name": "Perfume (vial)",
+    "category": "consumable",
+    "subcategory": "social_aid",
+    "description": "A vial of fragrance used to improve close-range social presentation.",
+    "tags": ["consumable", "social", "appearance"],
+    "roll_tag": null,
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 50,
+    "narrative_effects": [
+      "Supports improved presentation in close social interaction for a short duration."
+    ]
+  },
+  {
+    "id": "item_mundane_acid_vial_01",
+    "name": "Acid (vial)",
+    "category": "consumable",
+    "subcategory": "alchemical_offense",
+    "description": "A vial of corrosive acid used against objects or creatures on contact.",
+    "tags": ["consumable", "alchemy", "offensive"],
+    "roll_tag": "herbalism_alchemy",
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "uncommon",
+    "value_cd": 250,
+    "narrative_effects": [
+      "Supports corrosive damage or material degradation on direct contact."
+    ]
+  },
+  {
+    "id": "item_mundane_alchemists_fire_01",
+    "name": "Alchemist's Fire (flask)",
+    "category": "consumable",
+    "subcategory": "alchemical_offense",
+    "description": "A volatile flask designed to ignite a struck target until extinguished.",
+    "tags": ["consumable", "alchemy", "offensive", "fire"],
+    "roll_tag": "herbalism_alchemy",
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "uncommon",
+    "value_cd": 250,
+    "narrative_effects": [
+      "Supports ignition and ongoing burning pressure until put out."
+    ]
+  },
+  {
+    "id": "item_mundane_poison_basic_01",
+    "name": "Poison, Basic (vial)",
+    "category": "consumable",
+    "subcategory": "toxin",
+    "description": "A basic weapon poison applied to deliver harmful effects on the next successful hit.",
+    "tags": ["consumable", "poison", "offensive"],
+    "roll_tag": "herbalism_alchemy",
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "rare",
+    "value_cd": 1000,
+    "narrative_effects": [
+      "Coats a weapon to deliver a poison effect on the next successful strike."
+    ]
+  }
+]

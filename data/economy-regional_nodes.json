@@ -1,0 +1,86 @@
+[
+  {
+    "id": "economy_node_zarkharath_cinderpit_01",
+    "name": "Zarkharath / Cinderpit",
+    "settlements": ["zarkharath", "cinderpit"],
+    "region": "Volcanic Highlands",
+    "market_profile": ["industrial", "forge_output", "military_adjacent", "processed_materials"],
+    "primary_exports": ["processed_ore", "metalwork", "forge_output", "military_adjacent_craft_goods"],
+    "primary_services": ["smithing", "refinement", "forge_labor"],
+    "sstc_connected": true,
+    "availability_tier": "high",
+    "description": "Primary industrial node for forge output, processed ore, and metalworking in the Volcanic Highlands."
+  },
+  {
+    "id": "economy_node_deephollow_01",
+    "name": "Deephollow",
+    "settlements": ["deephollow"],
+    "region": "Crystal Caverns",
+    "market_profile": ["arcane_materials", "mineral_exports", "logistics_hub"],
+    "primary_exports": ["raw_crystals", "resonance_components", "arcane_materials", "spell_amplification_components"],
+    "primary_services": ["crystal_processing", "subterranean_logistics", "mineral_assay"],
+    "sstc_connected": true,
+    "availability_tier": "high",
+    "description": "Primary subterranean export node for crystals, resonance materials, and specialized arcane components."
+  },
+  {
+    "id": "economy_node_dracelune_feywood_threshold_01",
+    "name": "Dracélune / Feywood Threshold",
+    "settlements": ["dracelune", "feywood-glade-border", "thornveil"],
+    "region": "Western Forest / Feywood Threshold",
+    "market_profile": ["threshold_trade", "liminal_exchange", "mixed_merchants", "rare_goods"],
+    "primary_exports": ["feywood_goods", "enchanted_materials", "rare_herbs", "liminal_trade_goods", "brokered_information"],
+    "primary_services": ["trade_mediation", "threshold_guiding", "brokerage", "cross_cultural_exchange"],
+    "sstc_connected": true,
+    "availability_tier": "moderate",
+    "description": "Western threshold trade node centered on Dracélune, where ordinary basin commerce meets Feywood-adjacent exchange in mediated, semi-liminal form."
+  },
+  {
+    "id": "economy_node_mirefall_brackenmoor_01",
+    "name": "Mirefall / Brackenmoor",
+    "settlements": ["mirefall", "brackenmoor"],
+    "region": "Mystic Wetlands",
+    "market_profile": ["wetland_trade", "rare_herbs", "restoratives", "divination_adjacent"],
+    "primary_exports": ["rare_herbs", "restorative_compounds", "wetland_specimens", "information"],
+    "primary_services": ["wetland_guiding", "divination_adjacent_services", "specimen_trade"],
+    "sstc_connected": true,
+    "availability_tier": "moderate",
+    "description": "Wetland-edge trade node known for rare herbs, restorative goods, specimen trade, and information-sensitive services."
+  },
+  {
+    "id": "economy_node_core_supply_villages_01",
+    "name": "Core Supply Villages",
+    "settlements": ["ashfield", "scalemere", "silvercut", "dewhollow", "stonemark"],
+    "region": "Distributed Basin Supply Belt",
+    "market_profile": ["agricultural", "resource_extraction", "village_supply", "production_inputs"],
+    "primary_exports": ["grain", "livestock", "fish", "silverwood_timber", "magical_flora", "quarry_stone"],
+    "primary_services": ["food_supply", "timber_processing", "flora_harvesting", "quarry_output"],
+    "sstc_connected": true,
+    "availability_tier": "high",
+    "description": "Distributed support cluster of core resource villages feeding the basin with food, timber, flora, fish, and stone."
+  },
+  {
+    "id": "economy_node_lastmark_01",
+    "name": "Lastmark",
+    "settlements": ["lastmark"],
+    "region": "Inner Ramparts / Alpine Approach",
+    "market_profile": ["resupply", "guide_economy", "route_chokepoint", "highland_trade"],
+    "primary_exports": ["route_access", "guide_contracts", "highland_resupply"],
+    "primary_services": ["guiding", "route_preparation", "resupply", "stabling"],
+    "sstc_connected": true,
+    "availability_tier": "moderate",
+    "description": "A high-route resupply chokepoint and guide economy supporting dangerous alpine and Inner Rampart travel."
+  },
+  {
+    "id": "economy_node_greymantle_platinum_oath_corridor_01",
+    "name": "Greymantle / Platinum Oath Approach Corridor",
+    "settlements": ["greymantle", "platinum-oath-approach"],
+    "region": "Southern Dark Quadrant Edge",
+    "market_profile": ["controlled_access", "low_trust_exchange", "security_screened", "edge_trade"],
+    "primary_exports": ["specialized_ward_materials", "repair_goods", "food_support_traffic"],
+    "primary_services": ["screened_corridor_support", "repair", "restricted_supply_transfer"],
+    "sstc_connected": false,
+    "availability_tier": "low",
+    "description": "A low-trust but persistent exchange corridor supporting monastery traffic, repairs, food movement, and specialized ward materials under tight scrutiny."
+  }
+]

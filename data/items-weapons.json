@@ -1,0 +1,437 @@
+[
+  {
+    "id": "weapon_knife_01",
+    "name": "Knife",
+    "category": "weapon",
+    "knowledge_tag": "grappling",
+    "application_tag": "knife",
+    "primary_domain": "agility",
+    "tags": ["weapon", "grappling", "light", "concealable", "utility"],
+    "value_cd": 20,
+    "rarity": "common",
+    "description": "A compact close-quarters blade suited to tight spaces, quick draws, and general utility use.",
+    "narrative_effects": [
+      "Supports discreet melee actions in tight spaces where larger weapons are awkward."
+    ]
+  },
+  {
+    "id": "weapon_dagger_01",
+    "name": "Dagger",
+    "category": "weapon",
+    "knowledge_tag": "grappling",
+    "application_tag": "dagger",
+    "primary_domain": "agility",
+    "tags": ["weapon", "grappling", "light", "concealable", "thrusting"],
+    "value_cd": 50,
+    "rarity": "common",
+    "description": "A balanced short blade designed for close fighting, fast strikes, and easy carry.",
+    "narrative_effects": [
+      "Supports rapid close-quarters stabbing and defensive knife work."
+    ]
+  },
+  {
+    "id": "weapon_hand_axe_01",
+    "name": "Hand Axe",
+    "category": "weapon",
+    "knowledge_tag": "grappling",
+    "application_tag": "hand_axe",
+    "primary_domain": "agility",
+    "tags": ["weapon", "grappling", "light", "chopping", "throwable_candidate"],
+    "value_cd": 80,
+    "rarity": "common",
+    "description": "A compact axe suited to close fighting, harsh utility work, and brutal short-range strikes.",
+    "narrative_effects": [
+      "Supports tight-quarters chopping attacks and rough field utility where a small axe is practical."
+    ]
+  },
+  {
+    "id": "weapon_brass_knuckles_01",
+    "name": "Brass Knuckles",
+    "category": "weapon",
+    "knowledge_tag": "grappling",
+    "application_tag": "brass_knuckles",
+    "primary_domain": "agility",
+    "tags": ["weapon", "grappling", "concealable", "unarmed_adjacent"],
+    "value_cd": 30,
+    "rarity": "common",
+    "description": "A compact fist reinforcement favored in brawls and dirty close combat.",
+    "narrative_effects": [
+      "Supports brutal close-in striking where fists alone would be less effective."
+    ]
+  },
+  {
+    "id": "weapon_clawed_gauntlet_01",
+    "name": "Clawed Gauntlet",
+    "category": "weapon",
+    "knowledge_tag": "grappling",
+    "application_tag": "clawed_gauntlet",
+    "primary_domain": "agility",
+    "tags": ["weapon", "grappling", "gauntlet", "slashing", "intimidating"],
+    "value_cd": 60,
+    "rarity": "common",
+    "description": "A fitted gauntlet with hardened claw-like projections for tearing strikes and vicious clinch fighting.",
+    "narrative_effects": [
+      "Supports raking, tearing, and close-control fighting with an overtly vicious style."
+    ]
+  },
+  {
+    "id": "weapon_club_01",
+    "name": "Club",
+    "category": "weapon",
+    "knowledge_tag": "melee",
+    "application_tag": "club",
+    "primary_domain": "power",
+    "tags": ["weapon", "melee", "bludgeoning", "simple"],
+    "value_cd": 10,
+    "rarity": "common",
+    "description": "A basic striking weapon that relies on force and simplicity rather than refinement.",
+    "narrative_effects": [
+      "Supports straightforward blunt-force attacks with minimal technical complexity."
+    ]
+  },
+  {
+    "id": "weapon_mace_01",
+    "name": "Mace",
+    "category": "weapon",
+    "knowledge_tag": "melee",
+    "application_tag": "mace",
+    "primary_domain": "power",
+    "tags": ["weapon", "melee", "bludgeoning", "armored_opponent"],
+    "value_cd": 150,
+    "rarity": "common",
+    "description": "A one-handed crushing weapon built to deliver punishing impact through armor and guard.",
+    "narrative_effects": [
+      "Supports crushing blows against guarded or armored targets."
+    ]
+  },
+  {
+    "id": "weapon_war_hammer_01",
+    "name": "War Hammer",
+    "category": "weapon",
+    "knowledge_tag": "melee",
+    "application_tag": "war_hammer",
+    "primary_domain": "power",
+    "tags": ["weapon", "melee", "bludgeoning", "armor_breaking"],
+    "value_cd": 150,
+    "rarity": "common",
+    "description": "A compact battlefield hammer designed for focused, forceful impact.",
+    "narrative_effects": [
+      "Supports concentrated armor-breaking or guard-crushing melee strikes."
+    ]
+  },
+  {
+    "id": "weapon_shortsword_01",
+    "name": "Shortsword",
+    "category": "weapon",
+    "knowledge_tag": "melee",
+    "application_tag": "shortsword",
+    "primary_domain": "power",
+    "tags": ["weapon", "melee", "blade", "military"],
+    "value_cd": 500,
+    "rarity": "common",
+    "description": "A shorter battlefield sword suited to disciplined close combat and compact fighting lines.",
+    "narrative_effects": [
+      "Supports disciplined cutting and thrusting in close melee without the reach of a full sword."
+    ]
+  },
+  {
+    "id": "weapon_sword_01",
+    "name": "Sword",
+    "category": "weapon",
+    "knowledge_tag": "melee",
+    "application_tag": "sword",
+    "primary_domain": "power",
+    "tags": ["weapon", "melee", "blade", "martial"],
+    "value_cd": 800,
+    "rarity": "common",
+    "description": "A standard full-length sword built for decisive battlefield or dueling use.",
+    "narrative_effects": [
+      "Supports versatile melee offense with strong cultural and martial legitimacy."
+    ]
+  },
+  {
+    "id": "weapon_axe_01",
+    "name": "Axe",
+    "category": "weapon",
+    "knowledge_tag": "melee",
+    "application_tag": "axe",
+    "primary_domain": "power",
+    "tags": ["weapon", "melee", "chopping", "martial"],
+    "value_cd": 300,
+    "rarity": "common",
+    "description": "A full-sized combat axe built for committed chopping strikes and heavy momentum.",
+    "narrative_effects": [
+      "Supports forceful cutting attacks that emphasize commitment and impact."
+    ]
+  },
+  {
+    "id": "weapon_greataxe_01",
+    "name": "Greataxe",
+    "category": "weapon",
+    "knowledge_tag": "melee",
+    "application_tag": "greataxe",
+    "primary_domain": "power",
+    "tags": ["weapon", "melee", "heavy", "chopping", "two_handed"],
+    "value_cd": 500,
+    "rarity": "common",
+    "description": "A heavy two-handed axe built for devastating committed swings.",
+    "narrative_effects": [
+      "Supports brutal high-commitment strikes that trade speed for impact."
+    ]
+  },
+  {
+    "id": "weapon_greatsword_01",
+    "name": "Greatsword",
+    "category": "weapon",
+    "knowledge_tag": "melee",
+    "application_tag": "greatsword",
+    "primary_domain": "power",
+    "tags": ["weapon", "melee", "heavy", "blade", "two_handed"],
+    "value_cd": 1500,
+    "rarity": "common",
+    "description": "A large two-handed sword meant for powerful sweeping offense and battlefield dominance.",
+    "narrative_effects": [
+      "Supports broad, forceful blade work with heavy striking presence."
+    ]
+  },
+  {
+    "id": "weapon_spear_01",
+    "name": "Spear",
+    "category": "weapon",
+    "knowledge_tag": "reach",
+    "application_tag": "spear",
+    "primary_domain": "power",
+    "tags": ["weapon", "reach", "piercing", "versatile"],
+    "value_cd": 100,
+    "rarity": "common",
+    "description": "A versatile pole weapon built for thrusting, spacing, and disciplined line fighting.",
+    "narrative_effects": [
+      "Supports thrusting attacks that capitalize on distance and controlled engagement."
+    ]
+  },
+  {
+    "id": "weapon_war_staff_01",
+    "name": "War Staff",
+    "category": "weapon",
+    "knowledge_tag": "reach",
+    "application_tag": "war_staff",
+    "primary_domain": "power",
+    "tags": ["weapon", "reach", "bludgeoning", "staff"],
+    "value_cd": 50,
+    "rarity": "common",
+    "description": "A reinforced fighting staff suited to spacing, leverage, and defensive control.",
+    "narrative_effects": [
+      "Supports measured striking, interception, and spacing control in melee."
+    ]
+  },
+  {
+    "id": "weapon_polearm_01",
+    "name": "Polearm",
+    "category": "weapon",
+    "knowledge_tag": "reach",
+    "application_tag": "polearm",
+    "primary_domain": "power",
+    "tags": ["weapon", "reach", "polearm", "martial"],
+    "value_cd": 400,
+    "rarity": "common",
+    "description": "A general battlefield polearm designed for line control, distance, and leverage.",
+    "narrative_effects": [
+      "Supports battlefield spacing and punishing attacks before foes can close."
+    ]
+  },
+  {
+    "id": "weapon_halberd_01",
+    "name": "Halberd",
+    "category": "weapon",
+    "knowledge_tag": "reach",
+    "application_tag": "halberd",
+    "primary_domain": "power",
+    "tags": ["weapon", "reach", "polearm", "hooking", "chopping"],
+    "value_cd": 500,
+    "rarity": "common",
+    "description": "A complex polearm combining thrusting reach with chopping and hooking threat.",
+    "narrative_effects": [
+      "Supports mixed reach fighting with hooking, chopping, and positional control."
+    ]
+  },
+  {
+    "id": "weapon_pike_01",
+    "name": "Pike",
+    "category": "weapon",
+    "knowledge_tag": "reach",
+    "application_tag": "pike",
+    "primary_domain": "power",
+    "tags": ["weapon", "reach", "piercing", "formation"],
+    "value_cd": 300,
+    "rarity": "common",
+    "description": "A long formation spear meant to keep enemies at distance and punish frontal advance.",
+    "narrative_effects": [
+      "Supports extended-distance thrusting and anti-charge battlefield framing."
+    ]
+  },
+  {
+    "id": "weapon_shortbow_01",
+    "name": "Shortbow",
+    "category": "weapon",
+    "knowledge_tag": "ranged",
+    "application_tag": "shortbow",
+    "primary_domain": "perception",
+    "tags": ["weapon", "ranged", "bow", "mobile"],
+    "value_cd": 300,
+    "rarity": "common",
+    "description": "A compact bow suited to mobile shooting and practical field use.",
+    "narrative_effects": [
+      "Supports flexible ranged attacks with moderate power and easier handling."
+    ]
+  },
+  {
+    "id": "weapon_longbow_01",
+    "name": "Longbow",
+    "category": "weapon",
+    "knowledge_tag": "ranged",
+    "application_tag": "longbow",
+    "primary_domain": "perception",
+    "tags": ["weapon", "ranged", "bow", "long_range"],
+    "value_cd": 1500,
+    "rarity": "common",
+    "description": "A powerful bow built for distance, discipline, and precision at range.",
+    "narrative_effects": [
+      "Supports longer-range shooting with stronger battlefield presence than a shortbow."
+    ]
+  },
+  {
+    "id": "weapon_sling_01",
+    "name": "Sling",
+    "category": "weapon",
+    "knowledge_tag": "ranged",
+    "application_tag": "sling",
+    "primary_domain": "perception",
+    "tags": ["weapon", "ranged", "sling", "simple"],
+    "value_cd": 20,
+    "rarity": "common",
+    "description": "A simple ranged weapon using stones or similar projectiles through practiced release.",
+    "narrative_effects": [
+      "Supports low-cost ranged harassment where stones or sling ammo are available."
+    ]
+  },
+  {
+    "id": "weapon_throwing_knife_01",
+    "name": "Throwing Knife",
+    "category": "weapon",
+    "knowledge_tag": "ranged",
+    "application_tag": "throwing_knife",
+    "primary_domain": "perception",
+    "tags": ["weapon", "ranged", "thrown", "light", "concealable"],
+    "value_cd": 30,
+    "rarity": "common",
+    "description": "A balanced knife intended for short-range thrown attacks.",
+    "narrative_effects": [
+      "Supports quick thrown attacks at short distance with light easily carried weapons."
+    ]
+  },
+  {
+    "id": "weapon_javelin_01",
+    "name": "Javelin",
+    "category": "weapon",
+    "knowledge_tag": "ranged",
+    "application_tag": "javelin",
+    "primary_domain": "perception",
+    "tags": ["weapon", "ranged", "thrown", "piercing"],
+    "value_cd": 50,
+    "rarity": "common",
+    "description": "A light throwing spear designed for forceful ranged delivery.",
+    "narrative_effects": [
+      "Supports strong thrown attacks with more force and reach than smaller thrown weapons."
+    ]
+  },
+  {
+    "id": "weapon_light_crossbow_01",
+    "name": "Light Crossbow",
+    "category": "weapon",
+    "knowledge_tag": "mechanical",
+    "application_tag": "light_crossbow",
+    "primary_domain": "perception",
+    "tags": ["weapon", "mechanical", "crossbow", "projectile"],
+    "value_cd": 500,
+    "rarity": "common",
+    "description": "A mechanically assisted ranged weapon that favors stability over rate of fire.",
+    "narrative_effects": [
+      "Supports controlled ranged fire with mechanical draw power rather than bow technique."
+    ]
+  },
+  {
+    "id": "weapon_heavy_crossbow_01",
+    "name": "Heavy Crossbow",
+    "category": "weapon",
+    "knowledge_tag": "mechanical",
+    "application_tag": "heavy_crossbow",
+    "primary_domain": "perception",
+    "tags": ["weapon", "mechanical", "crossbow", "heavy", "projectile"],
+    "value_cd": 1000,
+    "rarity": "common",
+    "description": "A heavier mechanically assisted ranged weapon built for punishing power at the cost of speed.",
+    "narrative_effects": [
+      "Supports slow, forceful mechanical ranged attacks with strong impact."
+    ]
+  },
+  {
+    "id": "weapon_whip_01",
+    "name": "Whip",
+    "category": "weapon",
+    "knowledge_tag": "unconventional",
+    "application_tag": "whip",
+    "primary_domain": "varies",
+    "tags": ["weapon", "unconventional", "flexible", "control"],
+    "value_cd": 100,
+    "rarity": "common",
+    "description": "A flexible weapon used more for control, reach tricks, and intimidation than straightforward damage.",
+    "narrative_effects": [
+      "Supports unconventional control, disorientation, or spacing tactics depending on context."
+    ]
+  },
+  {
+    "id": "weapon_net_01",
+    "name": "Net (weapon use)",
+    "category": "weapon",
+    "knowledge_tag": "unconventional",
+    "application_tag": "net",
+    "primary_domain": "varies",
+    "tags": ["weapon", "unconventional", "restraint", "control"],
+    "value_cd": 10,
+    "rarity": "common",
+    "description": "A thrown restraint tool used in combat to entangle and control rather than injure.",
+    "narrative_effects": [
+      "Supports entangling, restraining, or disrupting movement instead of direct weapon damage."
+    ]
+  },
+  {
+    "id": "weapon_blowgun_01",
+    "name": "Blowgun",
+    "category": "weapon",
+    "knowledge_tag": "unconventional",
+    "application_tag": "blowgun",
+    "primary_domain": "varies",
+    "tags": ["weapon", "unconventional", "projectile", "stealth"],
+    "value_cd": 80,
+    "rarity": "common",
+    "description": "A subtle projectile weapon suited to quiet delivery over force.",
+    "narrative_effects": [
+      "Supports discreet ranged delivery where stealth or toxin use matters more than raw damage."
+    ]
+  },
+  {
+    "id": "weapon_chain_01",
+    "name": "Chain (weapon use)",
+    "category": "weapon",
+    "knowledge_tag": "unconventional",
+    "application_tag": "chain",
+    "primary_domain": "varies",
+    "tags": ["weapon", "unconventional", "flexible", "improvised_adjacent"],
+    "value_cd": 50,
+    "rarity": "common",
+    "description": "A weighted chain used offensively through momentum, entanglement, and difficult angles of attack.",
+    "narrative_effects": [
+      "Supports entangling, whipping, and otherwise irregular attacks that depend on context and handling."
+    ]
+  }
+]

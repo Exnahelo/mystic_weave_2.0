@@ -1,0 +1,38 @@
+[
+  {
+    "id": "currency_copper_drake",
+    "name": "Copper Drake",
+    "abbreviation": "CD",
+    "tier": "copper",
+    "value_in_gd": 0.01,
+    "value_in_cd": 1,
+    "shorthand": "1 CD = one hundredth of a gold"
+  },
+  {
+    "id": "currency_silver_drake",
+    "name": "Silver Drake",
+    "abbreviation": "SD",
+    "tier": "silver",
+    "value_in_gd": 0.10,
+    "value_in_cd": 10,
+    "shorthand": "1 SD = one tenth of a gold"
+  },
+  {
+    "id": "currency_gold_drake",
+    "name": "Gold Drake",
+    "abbreviation": "GD",
+    "tier": "gold",
+    "value_in_gd": 1.00,
+    "value_in_cd": 100,
+    "shorthand": "Standard reference unit"
+  },
+  {
+    "id": "currency_platinum_drake",
+    "name": "Platinum Drake",
+    "abbreviation": "PD",
+    "tier": "platinum",
+    "value_in_gd": 10.00,
+    "value_in_cd": 1000,
+    "shorthand": "High-value transactions"
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "wealth_tier_destitute",
+    "wealth_tier": "destitute",
+    "starting_coin_target_gd": 0.5,
+    "starting_coin_cd": 50,
+    "description": "A handful of coppers. No financial safety net."
+  },
+  {
+    "id": "wealth_tier_modest",
+    "wealth_tier": "modest",
+    "starting_coin_target_gd": 5.0,
+    "starting_coin_cd": 500,
+    "description": "Working class. Can cover food and shelter short-term."
+  },
+  {
+    "id": "wealth_tier_comfortable",
+    "wealth_tier": "comfortable",
+    "starting_coin_target_gd": 40.0,
+    "starting_coin_cd": 4000,
+    "description": "Skilled professional or minor noble. Some savings."
+  },
+  {
+    "id": "wealth_tier_wealthy",
+    "wealth_tier": "wealthy",
+    "starting_coin_target_gd": 150.0,
+    "starting_coin_cd": 15000,
+    "description": "Minor merchant, landowner, or officer. Meaningful reserves."
+  },
+  {
+    "id": "wealth_tier_affluent",
+    "wealth_tier": "affluent",
+    "starting_coin_target_gd": 500.0,
+    "starting_coin_cd": 50000,
+    "description": "Significant wealth. Rarely carries coin directly; uses credit, agents, or barter."
+  }
+]
