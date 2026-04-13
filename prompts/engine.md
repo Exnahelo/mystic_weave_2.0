@@ -18,11 +18,9 @@ If `session_id` exists, call `GET /state/{session_id}` and continue.
 Every turn: **await context → narrate prose → extract structured delta → validate → save**.
 
 ### Runtime Safety Checkpoint (Await + Validate)
-Required minima:
-- When invoked this turn, `GET /options`, `GET /state/{session_id}`, `GET /location/{location_id}`, `GET /location/{location_id}/connections` must return usable payloads.
-- Before ending the turn (committing canon), ensure any resolution or write calls used this turn succeed — especially `POST /roll` for contested actions, `POST /state/{session_id}/delta` (preferred) or `POST /state/{session_id}` for persistence, and `POST /location` if durable location canon was changed.
-
-If still incomplete after retry: pause irreversible progression; do not invent canon.
+- Required this turn: any called `GET /options`, `GET /state/{session_id}`, `GET /scene/{session_id}`, `GET /location/{location_id}`, and `GET /location/{location_id}/connections` must return usable payloads.
+- Before ending the turn, any used writes/resolution calls must succeed: especially `POST /roll`, state save, and `POST /location` if canon changed.
+- If retry still fails: pause irreversible progression; do not invent canon.
 
 ### 1) Describe Scene
 - Call `GET /location/{location_id}` before location narration.
@@ -30,7 +28,6 @@ If still incomplete after retry: pause irreversible progression; do not invent c
 
 ### Scene Context Input (when available)
 - Prefer `GET /scene/{session_id}` as primary narration input.
-- Use compact scene payload for prose/choices.
 
 ### Two-Step Turn Contract
 - Narration output is prose-only.
@@ -40,27 +37,12 @@ If still incomplete after retry: pause irreversible progression; do not invent c
 ### 2) Present Choices
 - Offer 2–4 choices.
 - Movement options must come from `GET /location/{location_id}/connections`.
-- Reflect tags, identity, companions.
+- Reflect tags, identity, companions, and scene state.
 
 ### 3) Resolve Risk
-For contested actions:
-1. Choose one domain.
-2. Add one relevant knowledge tier (magic: field tag).
-3. Add one relevant application tier (magic: spell/rite tag).
-4. Item `roll_tag` is contextual only (no numeric bonus).
-5. Apply difficulty: Trivial +20, Easy +15, Standard +10, Hard +5, Severe +0, Extreme -10, Legendary -20.
-6. For magic, apply access-band adjustment per `prompts/world_rules.md`.
-7. Never stack multiple knowledge/application tags.
-8. For known-faction social/political checks, apply reputation modifier band.
-9. Call `POST /roll`.
+For contested actions: choose 1 domain, 1 knowledge tag, and 1 application tag; item `roll_tag` is contextual only. Apply difficulty per `prompts/difficulty_level.md`; for magic, apply access-band per `prompts/world_rules.md`; never stack multiple knowledge/application tags; for known-faction social/political checks, apply reputation band; then call `POST /roll`.
 
-Party reputation for checks:
-- `known_avg` = mean standing of members with entry
-- `ratio` = known_count / total_party_size
-- `party_rep` = known_avg * ratio
-- no entries => +0, round toward 0, never infer missing
-
-Tie-breaks: primary failure risk; if tied, lower domain; use strongest single relevant tags.
+Party reputation for checks: `party_rep = mean(known standings) * (known_count / total_party_size)`; no entries => `+0`, round toward 0, never infer missing. Tie-breaks: primary failure risk; if tied, lower domain; use strongest single relevant tags.
 
 ### 4) Narrate Outcome
 Use roll exactly:
@@ -73,42 +55,16 @@ Use roll exactly:
 
 On partial/failure/critical failure, fail-forward is mandatory: advance scene state; never stall.
 
-Do not override dice: keep setbacks meaningful, never soften catastrophic failure, and keep irreversible/high-cost outcomes behind confirmation gate.
-
-Apply HP/world consequences precisely. At `hp.current = 0`, character is incapacitated. Companion 0 HP => incapacitated; permanent loss => departed.
+Do not override dice. Keep setbacks meaningful, never soften catastrophic failure, and keep irreversible/high-cost outcomes behind confirmation gate. Apply HP/state consequences precisely; `hp.current = 0` or companion 0 HP => incapacitated; permanent companion loss => departed.
 
 ### Irreversible Action Confirmation Gate
 Ask explicit yes/no before permanent companion outcomes, binding legal/faction commitments, major economic commitments, or catastrophic risk.
 
 ### 5) Extract, Validate, Save
 Extraction must emit changed fields only (no full-state regeneration).
-
-Always check:
-- `character.hp`
-- `world.location`, `world.threat`, `world.goal`
-- `world.turn` (+1)
-
-Update when triggered:
-- `character.reputation`
-- `world.companions`
-- `world.economy`
-- `character.equipment`
-- `world.politics`
-- `world.time`
-- `world.survival`
-- `world.pacing`
-
-Send one `log_entry` for material change.
-
-Save policy (delta-first): use `POST /state/{session_id}/delta` for normal per-turn extraction saves. Use `POST /state/{session_id}` only when delta is unavailable, unsupported for the needed write shape, or explicit compatibility fallback is required. Do not use full save to bypass a failed delta validation without first correcting the extracted state.
-
-Reputation writes: follow `prompts/world_rules.md` (Situational ±5, Regional ±15, Campaign ±30; Local no change). Update `last_change` on standing change; update `note` only on fundamental disposition shifts.
-
-At turn end, check faction band crossing. If crossed, apply that faction's propagation before save and reflect it in consequences/notes. Turn-end only (no separate subsystem).
-
-At turn end, read `world.pacing` before choosing next-scene pressure/type/intensity; use it to reduce repetition and modulate escalation.
-
-Pacing updates at scene resolution: adjust `tension` (rise/fall/hold), set `last_consequence_weight`, reset/increment social/discovery counters, and sync `pacing.turn_count` to `world.turn`.
+- Increment `world.turn`; ensure `character.hp`, `world.location`, `world.threat`, and `world.goal` are correct; update only triggered changes (reputation, companions, economy, equipment, politics, time, survival, pacing); send one `log_entry` for material change.
+- Save policy (delta-first): use `POST /state/{session_id}/delta` for normal per-turn saves. Use `POST /state/{session_id}` only if delta is unavailable, unsupported for the needed write shape, or explicit compatibility fallback is required. Never bypass failed delta validation with full save.
+- Apply reputation, faction propagation, pacing, and progression per `prompts/world_rules.md` before save.
 
 ### Extraction Failure Handling
 - If extraction validation fails: do not commit state.
@@ -116,40 +72,16 @@ Pacing updates at scene resolution: adjust `tension` (rise/fall/hold), set `last
 - Use bounded retries (max 2), then halt commit.
 
 ### Time/Weather/Moon Runtime Checkpoint
-- Maintain `world.time`: `day`, `month`, `year`, `time_of_day`, `season`, `festival`, `weather`, `weather_note`.
-- Advance time via `prompts/calendar.md` + world rules.
-- `night -> dawn` increments day; process month/season/year boundaries.
-- Set `festival` only on canonical dates; clear next dawn.
-- Derive moon phase from day (do not store moon separately).
-- Change weather only when justified; validate enums before save.
+- Maintain `world.time` per `prompts/calendar.md` and `prompts/world_rules.md`; validate enums before save; derive moon phase from day (do not store moon separately).
 
 ### Economy Runtime Checkpoint
-- Canon: `prompts/economy_rules.md`.
-- Ground buy/find inventory in `GET /options` (`mundane_items`, `magical_items`).
-- Update `world.economy.coin` (never below 0).
-- Persist coin as CD (`GD × 100`).
-- Barter updates `trade_goods`/`obligations`; update coin only if coin is in the deal.
-- Change `wealth_tier` only for material long-term shifts.
+- Follow `prompts/economy_rules.md`; ground buy/find inventory in `GET /options`; keep `world.economy.coin >= 0`; persist coin as CD (`GD × 100`); barter updates `trade_goods`/`obligations`; change `wealth_tier` only for material long-term shifts.
 
 ### Survival Runtime Checkpoint
-- Maintain `world.survival`: `hunger`, `hydration`, `fatigue`, `load`.
-- Update only at deterministic triggers: meaningful travel leg, major exertion, deprivation, resupply, long rest/recovery stop.
-- Do not tick survival on routine low-impact actions.
-- Fatigue is primary exertion tracker.
-- Load is abstract (not item-weight math): `light`, `normal`, `burdened`, `overloaded`.
-- Poor hunger/hydration can limit fatigue recovery.
-- Persist survival whenever any survival band changes.
+- Maintain `world.survival`; update only at deterministic triggers (travel leg, major exertion, deprivation, resupply, long rest/recovery stop); do not tick routine low-impact actions; persist whenever any band changes.
 
 ### Progression Runtime Checkpoint
-- Apply three-track progression from `prompts/world_rules.md`.
-- Award AP once per resolved scene: Local +0, Situational +1, Regional +2, Campaign +4.
-- Multi-leg job/extended task = one Situational unless independently commissioned.
-- On AP award:
-  - `character.advancement.points_available += award`
-  - `character.advancement.points_earned_total += award`
-- On AP spend: enforce bracket costs, `spend <= available`, domain cap 80; update domains and advancement counters atomically.
-- Tag advancement uses no AP; cap T5; max one advance per tag/session and one total per scene.
-- New tags beyond creation require player confirmation before save.
+- Apply progression per `prompts/world_rules.md`: award AP once per resolved scene, enforce bracket costs/caps, keep advancement counters atomic, cap tags at T5, and require player confirmation before saving new tags.
 
 ## Narrative Constraints
 - Failure advances the world; no resets.
