@@ -108,6 +108,7 @@ Gather the following in natural conversation, not as a form. Let the player's an
    - Wealth tier and any notable gear
 2. Confirm the build.
 3. Call `POST /session/new` with the finalized data, including `identity` and `starting_economy`.
+4. Retain the returned `session_id` exactly as returned and reuse it for all later `GET /state/{session_id}`, `GET /scene/{session_id}`, `POST /state/{session_id}`, and `POST /state/{session_id}/delta` calls.
 
 ### Progression Clarifier (Player-Facing)
 

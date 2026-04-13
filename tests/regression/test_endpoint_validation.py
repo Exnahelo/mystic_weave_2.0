@@ -59,6 +59,50 @@ class FakeConn:
         return None
 
 
+class SessionDeltaFlowConn:
+    def __init__(self) -> None:
+        self.rows: dict[str, dict[str, str]] = {}
+
+    async def execute(self, query, *args):
+        if "INSERT INTO game_states (session_id, character, world, log, updated_at)" in query and "'[]'::jsonb" in query:
+            self.rows[args[0]] = {
+                "session_id": args[0],
+                "character": args[1],
+                "world": args[2],
+                "log": json.dumps([]),
+            }
+        return "OK"
+
+    async def fetchrow(self, query, *args):
+        if "SELECT character, world FROM game_states" in query:
+            row = self.rows.get(args[0])
+            if row is None:
+                return None
+            return {"character": row["character"], "world": row["world"]}
+
+        if "RETURNING session_id, character, world, log, updated_at" in query:
+            sid = args[0]
+            row = self.rows[sid]
+            row["character"] = args[1]
+            row["world"] = args[2]
+            row["log"] = json.dumps(json.loads(row["log"]) + json.loads(args[4]))
+            return {
+                "session_id": sid,
+                "character": row["character"],
+                "world": row["world"],
+                "log": row["log"],
+                "updated_at": datetime.now(),
+            }
+
+        if "SELECT character FROM game_states" in query:
+            row = self.rows.get(args[0])
+            if row is None:
+                return None
+            return {"character": row["character"]}
+
+        return None
+
+
 def _build_valid_character() -> dict:
     return {
         "name": "Krath",
@@ -447,3 +491,39 @@ def test_state_delta_returns_404_when_session_not_found() -> None:
         )
 
     assert r.status_code == 404
+
+
+@pytest.mark.regression
+def test_session_new_response_session_id_round_trips_into_first_delta_save() -> None:
+    app = FastAPI()
+    app.include_router(session.router)
+    app.include_router(state.router)
+    pool = FakePool(SessionDeltaFlowConn())
+    app.dependency_overrides[get_pool] = lambda: pool
+
+    with TestClient(app) as client:
+        created = client.post(
+            "/session/new",
+            json={
+                "character_name": "A",
+                "species": "human",
+                "focus": "champion",
+                "background": "soldier",
+            },
+        )
+
+        assert created.status_code == 201
+        session_id = created.json()["session_id"]
+
+        delta = client.post(
+            f"/state/{session_id}/delta",
+            json={
+                "character": {"notes": "first delta"},
+                "log_entry": "first delta",
+            },
+        )
+
+        assert delta.status_code == 200
+        payload = delta.json()
+        assert payload["session_id"] == session_id
+        assert payload["character"]["notes"] == "first delta"
