@@ -8,7 +8,7 @@ Updated after world expansion, magic system, progression redesign, and item cata
   - [x] `POST /session/new`
   - [x] `GET/POST /state/{session_id}`
   - [x] `POST /character/create`
-- [x] Preserve and validate v3.1.0 schema blocks end-to-end:
+- [x] Preserve and validate v3.2.0 schema blocks end-to-end:
   - [x] character `identity`, `equipment`, `reputation`
   - [x] world `companions`, `economy`, `politics`
 - [x] Ensure `Economy.coin` and `Economy.wealth_tier` are enforced via model validation
