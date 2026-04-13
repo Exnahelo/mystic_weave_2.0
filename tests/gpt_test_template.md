@@ -88,11 +88,11 @@ Use this character consistently across all blocks so state accumulates meaningfu
 4. On at least one turn, interact with a named Drakenvale faction (Dragon Guard, Draconic Council, or SSTC).
 
 ### Pass Criteria (per turn)
-- [ ] GPT called `GET /location/{id}` before describing the scene
+- [ ] GPT called `GET /location/{location_id}` before describing the scene
 - [ ] GPT presented 2–4 meaningful choices including movement options
 - [ ] For contested actions, GPT called `POST /roll` with a visible target number
 - [ ] GPT narrated the outcome exactly matching the degree returned
-- [ ] GPT called `POST /state/{session_id}` at the end of the turn
+- [ ] GPT called `POST /state/{session_id}/delta` (preferred) or `POST /state/{session_id}` (fallback) at the end of the turn
 - [ ] Turn counter incremented
 
 ### Pass Criteria (across all turns)

@@ -44,8 +44,7 @@ def get_species(index: str) -> dict[str, Any]:
 
 
 def list_species() -> list[dict[str, Any]]:
-    data = _load_json("charachter-focus.json")
-    data = _load_json("charachter-focus.json")
+    data = _load_json("charachter-species.json")
     return [
         {
             "index": k,

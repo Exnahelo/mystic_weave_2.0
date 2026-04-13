@@ -98,9 +98,9 @@ def main() -> None:
         alpha_update = client.post("/location", json=alpha)
         expect_status(alpha_update, 200, "POST /location alpha (update)")
 
-        expect_status(client.get(f"/location/{alpha_id}"), 200, "GET /location/{id}")
+        expect_status(client.get(f"/location/{alpha_id}"), 200, "GET /location/{location_id}")
         conn_resp = client.get(f"/location/{alpha_id}/connections")
-        expect_status(conn_resp, 200, "GET /location/{id}/connections")
+        expect_status(conn_resp, 200, "GET /location/{location_id}/connections")
         conns = {c["to_id"] for c in conn_resp.json().get("connections", [])}
         if beta_id not in conns:
             fail("connections endpoint missing expected beta target")

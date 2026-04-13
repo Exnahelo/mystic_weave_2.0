@@ -1,9 +1,9 @@
 """
 routes/location.py — Location graph endpoints
 
-GET  /location/{id}               — load location data before describing any place
+GET  /location/{location_id}      — load location data before describing any place
 POST /location                    — create or update a location (discovered locations must be saved immediately)
-GET  /location/{id}/connections   — get valid movement options from current location
+GET  /location/{location_id}/connections   — get valid movement options from current location
 """
 
 from __future__ import annotations

@@ -497,14 +497,14 @@ def part3(client: httpx.Client) -> None:
 def part4(client: httpx.Client) -> None:
     section("PART 4 — Location Graph")
 
-    subsection("Test 4.1 — GET /location/{id}")
+    subsection("Test 4.1 — GET /location/{location_id}")
     r = client.get("/location/test-loc-alpha")
     check("4.1.a", r.status_code == 200, f"GET /location/test-loc-alpha → {r.status_code}")
     if r.status_code == 200:
         loc = r.json()
         check("4.1.b", loc["name"] == "Test Location Alpha", f"name: {loc['name']}")
 
-    subsection("Test 4.2 — GET /location/{id}/connections")
+    subsection("Test 4.2 — GET /location/{location_id}/connections")
     r = client.get("/location/test-loc-alpha/connections")
     check("4.2.a", r.status_code == 200, f"GET connections → {r.status_code}")
     if r.status_code == 200:

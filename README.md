@@ -73,8 +73,8 @@ Reference: `WORLD_TOPOLOGY_BASELINE.md`
 | POST | `/state/{session_id}/delta` | Apply structured state delta |
 | POST | `/roll` | Authoritative d100 dice resolution |
 | GET | `/scene/{session_id}` | Build compact scene context |
-| GET | `/location/{id}` | Load location data |
-| GET | `/location/{id}/connections` | Get valid movement options |
+| GET | `/location/{location_id}` | Load location data |
+| GET | `/location/{location_id}/connections` | Get valid movement options |
 | POST | `/location` | Create/update location |
 
 ## Project Structure

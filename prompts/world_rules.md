@@ -495,7 +495,7 @@ Character death is a valid outcome. It is not reversed. The world reacts to it.
 
 The world is a graph of connected location nodes. Movement is along defined edges only.
 
-- Before describing any location, call `GET /location/{id}`
+- Before describing any location, call `GET /location/{location_id}`
 - Only present connections as movement options
 - New locations require discovery and immediate save via `POST /location`
 - NPCs are persistent — name one, save it to the location record
