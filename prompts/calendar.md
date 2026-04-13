@@ -180,7 +180,7 @@ Advancing past `night` increments `day` by 1 and returns to `dawn`.
 
 ## Travel Time Reference
 
-Use this table to determine how many time steps a journey costs. Source: `drakenvale_geography.md`.
+Use this table to determine how many time steps a journey costs. Source: `geography.md`.
 
 | Journey | Time Cost |
 |---|---|

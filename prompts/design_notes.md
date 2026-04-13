@@ -15,13 +15,40 @@
 
 | File | Status | GPT-Ready |
 | --- | --- | --- |
-| `drakenvale_world.md` | Complete | Yes |
-| `drakenvale_organizations.md` | Complete | Yes |
-| `drakenvale_characters.md` | Complete | Yes |
-| `drakenvale_biomes.md` | Complete | Yes |
-| `drakenvale_design_notes.md` | Living document | No |
+| `world.md` | Canon source of truth | Yes |
+| `geography.md` | Canon source of truth | Yes |
+| `history.md` | Canon source of truth | Yes |
+| `groups.md` | Canon source of truth | Yes |
+| `npcs.md` | Canon source of truth | Yes |
+| `design_notes.md` | Living author document | No |
 
-**Phase 4 (content layer) is locked until the 20-turn loop test passes.** These files are authored and ready, but do not upload to GPT builder until the test clears.
+**Design Notes Policy:** This file is author-facing only and is not part of runtime canon upload.
+
+---
+
+## Migration Notes (April 2026)
+
+### Canon file migration
+
+- `drakenvale_world.md` -> `world.md`
+- `drakenvale_geography.md` -> `geography.md`
+- `drakenvale_history.md` -> `history.md`
+- `drakenvale_characters.md` -> `npcs.md`
+- `drakenvale_organizations.md` + `factions.md` -> `groups.md`
+- `drakenvale_biomes.md` merged into `geography.md` and retired
+
+### Retired canon terms
+
+- Prefer **Heartstone** over legacy "Radiant Crystal" naming in active canon/runtime files.
+- Prefer **Heartmass / Hollow Crown** framing over legacy valley-center framing.
+
+### Runtime node migration checklist
+
+- [x] Patch Stronghold/Draconic Hall/Sacred Pools for Heartmass-Heartstone model
+- [x] Align Temple to Tiamat / Rift of Discord separation language
+- [x] Align settlement placement text to geography grid logic
+- [x] Add core runtime nodes: Heartmass, Southern Lake, Inner Ramparts, Drakenvale City
+- [ ] Plan YAML migration for structured location metadata (future phase)
 
 ---
 
@@ -29,13 +56,13 @@
 
 These were open questions that have now been answered and committed to the world files.
 
-**Radiant Crystal** — Forged from the combined magic of the founding dragons at the time of Drakenvale's creation. Housed in the Draconic Hall, center of the room. Dual function: ambient power object AND Council tiebreaker through Bahamut's influence. Canon. In `drakenvale_world.md`.
+**Heartstone (legacy: "Radiant Crystal")** — Discovered during early Heartmass excavation and later infused with the founding dragons' gathered magic. Housed in the Draconic Hall. Serves as an exceptional deadlock-guidance artifact. Canon. In `world.md`.
 
-**Mortal/kobold political standing** — Advisory standing, petition rights, no vote. Mortals can hold enforcement roles (Acolytes of Justice). Kobolds are a protected class with welfare access. Neither group holds formal political representation. Canon. In `drakenvale_world.md`.
+**Mortal/kobold political standing** — Advisory standing, petition rights, no vote. Mortals can hold enforcement roles (Acolytes of Justice). Kobolds are a protected class with welfare access. Neither group holds formal political representation. Canon. In `world.md`.
 
 **Wardens vs. Dragon Guard** — Two distinct organizations. The Wardens report to Eryndor in peacetime (sacred sites, internal security, investigation). They temporarily fall under Zarkeros when militarized (precision strikes, crisis response). The Dragon Guard is Zarkeros's exclusively for external defense. Canon. In both world and organizations files.
 
-**Trial of Wings** — Non-lethal ritualized duel, overseen by the Council, for disputes of honor or grievance. Rarely invoked, highly respected. Open to dragons and dragonborn; mortals typically use mediation instead. Canon. In `drakenvale_world.md`.
+**Trial of Wings** — Non-lethal ritualized duel, overseen by the Council, for disputes of honor or grievance. Rarely invoked, highly respected. Open to dragons and dragonborn; mortals typically use mediation instead. Canon. In `world.md`.
 
 **SSTC relationship** — Independent guild, not a state organ. All three Council members hold advisory or operational roles within it. Varethyn runs the Amethyst Veil through its trade routes. Canon. In both world and organizations files.
 
@@ -69,7 +96,7 @@ These were identified in a prior gap analysis session. Status noted for each.
 
 Still thin: Specific cultural traditions unique to mortals and kobolds are not yet authored. The biomes file captures their functional roles but their cultural identity within Drakenvale is underdeveloped.
 
-**Design note:** Consider adding a short cultural section to `drakenvale_world.md` or a standalone `drakenvale_culture.md` that addresses mortal and kobold artistic traditions, festivals, and spiritual life distinct from draconic practice.
+**Design note:** Consider adding a short cultural section to `world.md` or a standalone `culture.md` that addresses mortal and kobold artistic traditions, festivals, and spiritual life distinct from draconic practice.
 
 ### 2. Coordination and Communication During Crises
 
@@ -115,7 +142,7 @@ Still missing: Artifact tracking system. No mechanism for reclaiming misused art
 
 **Status: Flagged, not resolved.** The Platinum Acolytes' outreach to mortals and kobolds is mentioned but thin.
 
-**Design note:** Same as gap #1 — this is a cultural authoring gap, not a structural one. Low priority for GPT function but high priority for world texture. Flag for `drakenvale_culture.md`.
+**Design note:** Same as gap #1 — this is a cultural authoring gap, not a structural one. Low priority for GPT function but high priority for world texture. Flag for `culture.md`.
 
 ### 8. Post-Crisis Recovery
 
@@ -175,6 +202,6 @@ Files to keep in Obsidian as reference but not GPT-upload:
 
 ### Ptarian Codex Note
 
-The `NEW_NEW_DRAKENVALE.docx` contains the most complete version of the Ptarian Codex as a formal charter document. If a full in-world legal text is ever needed (for roleplay, as a found document, etc.), that file is the source. It was intentionally not included in the GPT files because its length and legal prose format are not useful for the GPT's narrative function. The principles are captured in `drakenvale_world.md`.
+The `NEW_NEW_DRAKENVALE.docx` contains the most complete version of the Ptarian Codex as a formal charter document. If a full in-world legal text is ever needed (for roleplay, as a found document, etc.), that file is the source. It was intentionally not included in the GPT files because its length and legal prose format are not useful for the GPT's narrative function. The principles are captured in `world.md`.
 
 ---

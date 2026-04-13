@@ -2,9 +2,9 @@
 id: valley-edge-overlook
 name: Valley Edge Overlook
 type: landmark
-description: The fog breaks. The slope levels into a broad stone ledge, and Drakenvale opens below in full view for the first time. The Stronghold is visible in the distance — platinum-veined stone carved into dragon spines and claws, embedded in the mountainside at the valley's center. Between here and there, the temperate forest canopy stretches unbroken, silverwood trees shimmering faintly even in daylight. Crystalline rivers thread through the green, catching the sun. The air hums with latent magic. Dragons wheel in the distant sky above the Aeries. It is beautiful, and it is clearly not a place that tolerates uninvited guests.
+description: The fog breaks. The slope levels into a broad stone ledge, and the Hollow Crown opens below in full view for the first time. At the basin’s center rises the Heartmass, pale and unnatural against older stone, with the Stronghold carved from its face in dragon-spine arches and vaulted tiers. South of the central rise, the city of Drakenvale spreads across lower terraces and lake-facing districts toward the broad southern lake. Forest belts, rivers, and distant district smoke-lines mark the larger living basin around the core. Dragons wheel above the Aeries. It is beautiful, and it is clearly not a place that tolerates uninvited guests.
 tags: [overlook, safe, vista, landmark]
-connections: [misty-descent, silverwood-trail]
+connections: [misty-descent, silverwood-trail, stronghold-of-drakenvale, drakenvale-city]
 threat_level: 1
 known_npcs: []
 discovered: true

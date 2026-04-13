@@ -1,0 +1,11 @@
+---
+id: heartmass
+name: Heartmass
+type: landmark
+description: The colossal central landform of the Hollow Crown: a fused mass of celestial meteor-stone and platinum-veined mountain heartrock left where the world-killing impact lodged. Pale, immense, and visibly unnatural against surrounding stone, the Heartmass forms the geological and symbolic center of Drakenvale. The Stronghold was carved directly from this formation.
+tags: [drakenvale, heartmass, landmark, central, geology, sacred]
+connections: [stronghold-of-drakenvale, draconic-hall, drakenvale-city, sacred-pools]
+threat_level: 0
+known_npcs: []
+discovered: true
+---

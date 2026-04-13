@@ -437,6 +437,58 @@ class SaveStateRequest(BaseModel):
     log_entry:  str
 
 
+class CharacterStateDelta(BaseModel):
+    """Typed partial character update for extraction-driven turn commits."""
+    model_config = ConfigDict(extra="forbid")
+
+    hp: HP | None = None
+    knowledge: dict[str, int] | None = None
+    application: dict[str, int] | None = None
+    status_effects: list[str] | None = None
+    notes: str | None = None
+    identity: Identity | None = None
+    equipment: Equipment | None = None
+    reputation: list[ReputationEntry] | None = None
+    advancement: AdvancementState | None = None
+
+    def has_updates(self) -> bool:
+        return any(v is not None for v in self.model_dump(exclude_none=False).values())
+
+
+class WorldStateDelta(BaseModel):
+    """Typed partial world update for extraction-driven turn commits."""
+    model_config = ConfigDict(extra="forbid")
+
+    location: str | None = None
+    threat: str | None = None
+    goal: str | None = None
+    turn: int | None = None
+    companions: list[CompanionModel] | None = None
+    economy: Economy | None = None
+    politics: Politics | None = None
+    time: TimeState | None = None
+    survival: SurvivalState | None = None
+    pacing: PacingState | None = None
+
+    def has_updates(self) -> bool:
+        return any(v is not None for v in self.model_dump(exclude_none=False).values())
+
+
+class ApplyStateDeltaRequest(BaseModel):
+    """Body for POST /state/{session_id}/delta"""
+    model_config = ConfigDict(extra="forbid")
+
+    character: CharacterStateDelta = Field(default_factory=CharacterStateDelta)
+    world: WorldStateDelta = Field(default_factory=WorldStateDelta)
+    log_entry: str
+
+    @model_validator(mode="after")
+    def requires_any_delta(self) -> ApplyStateDeltaRequest:
+        if not self.character.has_updates() and not self.world.has_updates():
+            raise ValueError("state delta must include at least one character or world change")
+        return self
+
+
 class GameStateResponse(BaseModel):
     """Response for GET /state/{session_id}"""
     session_id: str

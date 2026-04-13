@@ -1,13 +1,15 @@
 # Silver Scale Trading Company — Operations Network
 
 Version 1.0 — April 2026  
-Status: Canonical operations reference for SSTC route narration and logistics context.
+Status: Supplemental operational reference (author/runtime aid), not a primary canon file.
 
 ---
 
 ## Operating Model
 
 The SSTC runs a hub-and-spoke network with **Stronghold logistics arbitration** and specialized regional depots. Route reliability depends on season, threat posture, and Council restrictions, but these nodes are considered stable operating anchors.
+
+Core institutional canon for SSTC, Amethyst Veil, and Sapphire Sentinels lives in `groups.md`.
 
 ---
 

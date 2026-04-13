@@ -65,6 +65,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /state/{session_id}/delta:
+    post:
+      summary: Save State Delta
+      description: Apply a validated structured state delta to stored game state,
+        then append one log entry atomically.
+      operationId: save_state_delta_state__session_id__delta_post
+      parameters:
+      - name: session_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Session Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplyStateDeltaRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameStateResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /session/new:
     post:
       summary: New Session
@@ -408,6 +440,21 @@ components:
       - neutral
       - chaotic
       title: AlignmentOrder
+    ApplyStateDeltaRequest:
+      properties:
+        character:
+          $ref: '#/components/schemas/CharacterStateDelta'
+        world:
+          $ref: '#/components/schemas/WorldStateDelta'
+        log_entry:
+          type: string
+          title: Log Entry
+      additionalProperties: false
+      type: object
+      required:
+      - log_entry
+      title: ApplyStateDeltaRequest
+      description: Body for POST /state/{session_id}/delta
     BackgroundOption:
       properties:
         index:
@@ -583,6 +630,61 @@ components:
       - hp
       - domains
       title: CharacterModel
+    CharacterStateDelta:
+      properties:
+        hp:
+          anyOf:
+          - $ref: '#/components/schemas/HP'
+          - type: 'null'
+        knowledge:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Knowledge
+        application:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Application
+        status_effects:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Status Effects
+        notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notes
+        identity:
+          anyOf:
+          - $ref: '#/components/schemas/Identity-Input'
+          - type: 'null'
+        equipment:
+          anyOf:
+          - $ref: '#/components/schemas/Equipment-Input'
+          - type: 'null'
+        reputation:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ReputationEntry'
+            type: array
+          - type: 'null'
+          title: Reputation
+        advancement:
+          anyOf:
+          - $ref: '#/components/schemas/AdvancementState'
+          - type: 'null'
+      additionalProperties: false
+      type: object
+      title: CharacterStateDelta
+      description: Typed partial character update for extraction-driven turn commits.
     CompanionModel-Input:
       properties:
         id:
@@ -1816,3 +1918,56 @@ components:
       - threat
       - goal
       title: WorldModel
+    WorldStateDelta:
+      properties:
+        location:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Location
+        threat:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Threat
+        goal:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Goal
+        turn:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Turn
+        companions:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/CompanionModel-Input'
+            type: array
+          - type: 'null'
+          title: Companions
+        economy:
+          anyOf:
+          - $ref: '#/components/schemas/Economy'
+          - type: 'null'
+        politics:
+          anyOf:
+          - $ref: '#/components/schemas/Politics'
+          - type: 'null'
+        time:
+          anyOf:
+          - $ref: '#/components/schemas/TimeState'
+          - type: 'null'
+        survival:
+          anyOf:
+          - $ref: '#/components/schemas/SurvivalState'
+          - type: 'null'
+        pacing:
+          anyOf:
+          - $ref: '#/components/schemas/PacingState'
+          - type: 'null'
+      additionalProperties: false
+      type: object
+      title: WorldStateDelta
+      description: Typed partial world update for extraction-driven turn commits.

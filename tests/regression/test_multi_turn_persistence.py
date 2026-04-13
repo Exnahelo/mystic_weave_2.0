@@ -41,6 +41,12 @@ class MultiTurnFakeConn:
         if "SELECT character FROM game_states" in query:
             return {"character": json.dumps(self.character)}
 
+        if "SELECT character, world FROM game_states" in query:
+            return {
+                "character": json.dumps(self.character),
+                "world": json.dumps(self.world),
+            }
+
         if "RETURNING session_id, character, world, log, updated_at" in query:
             # args follow save_state SQL in routes/state.py
             # 0 session_id
@@ -273,3 +279,53 @@ def test_multi_turn_companion_lifecycle_and_political_economy_progression() -> N
         assert body["character"]["equipment"]["carried"] == []
         assert len(body["character"]["equipment"]["stashed"]) == 1
         assert body["log"] == ["Companion down.", "Companion departed."]
+
+
+@pytest.mark.regression
+def test_delta_save_applies_partial_updates_and_preserves_unsent_fields() -> None:
+    session_id = "deltachain1"
+    conn = MultiTurnFakeConn(session_id, _base_character(), _base_world())
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        r = client.post(
+            f"/state/{session_id}/delta",
+            json={
+                "character": {"notes": "Delta note"},
+                "world": {"turn": 2, "threat": "medium"},
+                "log_entry": "Delta applied.",
+            },
+        )
+
+    assert r.status_code == 200
+    body = r.json()
+    assert body["character"]["notes"] == "Delta note"
+    assert body["character"]["identity"]["origin"] == "Exile"
+    assert body["world"]["turn"] == 2
+    assert body["world"]["threat"] == "medium"
+    assert body["world"]["goal"] == "survive"
+    assert body["world"]["pacing"]["turn_count"] == 2
+    assert body["log"] == ["Delta applied."]
+
+
+@pytest.mark.regression
+def test_delta_save_validation_failure_does_not_commit_state_or_log() -> None:
+    session_id = "deltachain2"
+    base_character = _base_character()
+    base_world = _base_world()
+    conn = MultiTurnFakeConn(session_id, base_character, base_world)
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        r = client.post(
+            f"/state/{session_id}/delta",
+            json={
+                "world": {"turn": 0},
+                "log_entry": "Should not persist.",
+            },
+        )
+
+    assert r.status_code == 422
+    assert conn.character["notes"] == base_character["notes"]
+    assert conn.world["turn"] == base_world["turn"]
+    assert conn.log == []

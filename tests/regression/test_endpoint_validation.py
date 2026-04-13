@@ -29,8 +29,9 @@ class FakePool:
 
 
 class FakeConn:
-    def __init__(self, *, select_character=None, upsert_row=None):
+    def __init__(self, *, select_character=None, select_world=None, upsert_row=None):
         self.select_character = select_character
+        self.select_world = select_world
         self.upsert_row = upsert_row
         self.execute_calls: list[tuple[str, tuple]] = []
 
@@ -39,6 +40,14 @@ class FakeConn:
         return "OK"
 
     async def fetchrow(self, query, *args):
+        if "SELECT character, world FROM game_states" in query:
+            if self.select_character is None or self.select_world is None:
+                return None
+            return {
+                "character": json.dumps(self.select_character),
+                "world": json.dumps(self.select_world),
+            }
+
         if "SELECT character FROM game_states" in query:
             if self.select_character is None:
                 return None
@@ -389,3 +398,52 @@ def test_state_save_accepts_legacy_level_and_magic_trait_fields() -> None:
     assert payload["character"]["level"] == 2
     assert payload["character"]["magic_fields"] == ["arcane", "sacred"]
     assert payload["character"]["draconic_traits"] == ["draconic_resilience"]
+
+
+@pytest.mark.regression
+def test_state_delta_rejects_empty_delta_with_422() -> None:
+    app = _make_app_with_router(state.router, FakePool(FakeConn()))
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/state/abc12345/delta",
+            json={
+                "character": {},
+                "world": {},
+                "log_entry": "noop",
+            },
+        )
+
+    assert r.status_code == 422
+
+
+@pytest.mark.regression
+def test_state_delta_rejects_unknown_field_with_422() -> None:
+    app = _make_app_with_router(state.router, FakePool(FakeConn()))
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/state/abc12345/delta",
+            json={
+                "character": {"unknown_field": "x"},
+                "log_entry": "bad",
+            },
+        )
+
+    assert r.status_code == 422
+
+
+@pytest.mark.regression
+def test_state_delta_returns_404_when_session_not_found() -> None:
+    app = _make_app_with_router(state.router, FakePool(FakeConn()))
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/state/missing/delta",
+            json={
+                "character": {"notes": "delta note"},
+                "log_entry": "entry",
+            },
+        )
+
+    assert r.status_code == 404

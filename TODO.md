@@ -219,11 +219,11 @@ These are structural improvements identified from architecture review. None requ
 
 ### NPC Relationship Propagation Rules
 
-- [ ] Add explicit relationship propagation rules to the Reputation section in `prompts/world_rules.md`
+- [x] Add explicit relationship propagation rules to the Reputation section in `prompts/world_rules.md`
   - Define what changes when standing crosses into a new band
   - Treat propagation as a gameplay consequence layer, not just flavor text
   - Keep the rules lightweight and faction-agnostic unless a specific faction has authored exceptions
-- [ ] Define canonical standing-band effects in `prompts/world_rules.md`
+- [x] Define canonical standing-band effects in `prompts/world_rules.md`
   - `Revered` (61 to 100)
     - privileged access, proactive help, sensitive information, reduced scrutiny, stronger benefit of the doubt
   - `Respected` (21 to 60)
@@ -234,7 +234,7 @@ These are structural improvements identified from architecture review. None requ
     - guarded interactions, reduced access, higher scrutiny, refusals on sensitive requests
   - `Despised` (-61 to -100)
     - denied access, active obstruction, possible reporting/hostility depending on faction and context
-- [ ] Clarify propagation scope in `prompts/world_rules.md`
+- [x] Clarify propagation scope in `prompts/world_rules.md`
   - Propagation affects:
     - service availability
     - information access
@@ -244,22 +244,22 @@ These are structural improvements identified from architecture review. None requ
     - which jobs, requests, or aid offers become available
   - Propagation does not require separate subsystem math
   - Propagation should be applied conservatively and according to the faction’s nature
-- [ ] Define threshold-crossing behavior in `prompts/world_rules.md`
+- [x] Define threshold-crossing behavior in `prompts/world_rules.md`
   - Apply propagation when standing crosses from one band into another
   - Do not re-trigger the same unlock/lock consequence every turn if the standing remains in the same band
   - On crossing a threshold, update access and posture for future scenes
   - Use `last_change` for the triggering event; use `note` only when the faction’s overall disposition meaningfully changes
-- [ ] Add faction-agnostic examples to `prompts/world_rules.md`
+- [x] Add faction-agnostic examples to `prompts/world_rules.md`
   - Crossing from Neutral -> Respected opens routine cooperation or trusted introductions
   - Crossing from Respected -> Revered opens sensitive access or proactive support
   - Crossing from Neutral -> Distrusted closes sensitive requests and increases scrutiny
   - Crossing from Distrusted -> Despised causes denial, expulsion, reporting, or active interference depending on faction context
-- [ ] Update `prompts/engine.md` turn-end save behavior
+- [x] Update `prompts/engine.md` turn-end save behavior
   - Require the GPT to check whether any faction standing crossed a band threshold during the turn
   - If a threshold was crossed, apply the appropriate propagation before save
   - Reflect the result in scene consequences, future availability, and reputation notes where applicable
   - Keep this as a turn-end rule, not a separate mid-scene subsystem unless the crossing itself is the scene outcome
-- [ ] Keep propagation bounded and compatible with current architecture
+- [x] Keep propagation bounded and compatible with current architecture
   - Do not add a new complex faction-simulation subsystem in this pass
   - Do not create automatic cross-faction chain reactions unless explicitly authored later
   - Keep propagation tied to the specific faction whose standing changed
@@ -267,46 +267,46 @@ These are structural improvements identified from architecture review. None requ
 
 ### Pacing Variables
 
-- [ ] Add a typed `pacing` block to world state in `api/models.py`
+- [x] Add a typed `pacing` block to world state in `api/models.py`
   - Add a new `PacingState` model
   - Add it to `WorldModel` as a lightweight control block
   - Keep it small, deterministic, and GPT-readable
-- [ ] Define the canonical `pacing` fields in `api/models.py`
+- [x] Define the canonical `pacing` fields in `api/models.py`
   - `tension` — integer 0–10
   - `last_consequence_weight` — `local` / `situational` / `regional` / `campaign`
   - `turns_since_social_beat` — non-negative integer
   - `turns_since_discovery` — non-negative integer
   - `turn_count` — non-negative integer
   - Add validation/clamping where appropriate
-- [ ] Resolve counter ownership before implementation
+- [x] Resolve counter ownership before implementation
   - Decide whether `pacing.turn_count` replaces `world.turn`, mirrors it, or is derived from it
   - Prefer a single source of truth to avoid drift
   - If both are kept for compatibility, document which one is authoritative and when the other is synchronized
-- [ ] Update `schemas/openapi.yaml` to include the new `pacing` block
+- [x] Update `schemas/openapi.yaml` to include the new `pacing` block
   - Keep schema aligned with `api/models.py`
   - Preserve existing request/response structure outside the added block
-- [ ] Add canonical pacing rules to `prompts/world_rules.md`
+- [x] Add canonical pacing rules to `prompts/world_rules.md`
   - Define what each pacing field means in play
   - Define how tension should rise, fall, or hold
   - Define when `last_consequence_weight` changes
   - Define when social beats and discovery beats reset their counters
   - Keep pacing descriptive and directional, not a heavy subsystem
-- [ ] Add pacing read rules to `prompts/engine.md`
+- [x] Add pacing read rules to `prompts/engine.md`
   - Require the GPT to check pacing before selecting scene type, pressure, and intensity
   - Use pacing to avoid repetitive scene selection
   - Use pacing to modulate escalation rather than override current stakes or canon
   - Keep prompt wording short and enforceable
-- [ ] Add pacing update rules to `prompts/engine.md`
+- [x] Add pacing update rules to `prompts/engine.md`
   - Update `tension` when scene outcomes materially escalate or release pressure
   - Reset `turns_since_social_beat` when a meaningful social scene occurs; otherwise increment
   - Reset `turns_since_discovery` when a meaningful discovery occurs; otherwise increment
   - Update `last_consequence_weight` at scene resolution using the existing consequence scale
   - Synchronize `turn_count` with the chosen authoritative turn counter at save time
-- [ ] Keep pacing bounded and compatible with current architecture
+- [x] Keep pacing bounded and compatible with current architecture
   - Do not introduce a separate pacing engine or scheduler in this pass
   - Do not let pacing override dice results, location logic, or faction logic
   - Treat pacing as scene-selection guidance for the GPT, not a replacement for state consequences
-- [ ] Add tests for pacing model behavior
+- [x] Add tests for pacing model behavior
   - Validate field bounds and enum values
   - Validate default initialization
   - Validate synchronization behavior for `turn_count`
@@ -314,12 +314,59 @@ These are structural improvements identified from architecture review. None requ
 
 ### Extraction Step Separation
 
-- [ ] Split the current single GPT turn into two calls:
-  - [ ] Call 1: Narration — GPT receives scene context, produces prose only
-  - [ ] Call 2: Extraction — GPT receives narration output, produces structured state delta JSON only
-- [ ] State delta passes schema validation before the save goes through
-- [ ] Failed validation returns to narration without committing — GPT retries extraction with correction prompt
-- [ ] This is the highest reliability improvement available; implement after scene manager
+- [ ] Design a typed state-delta contract in `api/models.py`
+  - Add a lightweight model for structured turn-end state changes
+  - Keep it additive to the current full-state save contract in the first pass
+  - Cover only fields that may change during a turn rather than resending the full stored state
+- [ ] Define the extraction payload shape
+  - Include structured updates for relevant character fields
+  - Include structured updates for relevant world fields
+  - Include log entry output
+  - Keep the payload deterministic and machine-validated
+  - Do not require the extractor to regenerate unchanged state
+- [ ] Decide application semantics before implementation
+  - Define how a validated delta is applied to the existing stored state
+  - Preserve current deep-merge behavior where appropriate
+  - Be explicit about which sections are merged and which sections are replaced
+  - Avoid ambiguous partial-update behavior
+- [ ] Implement schema validation for extracted state deltas
+  - Validate extraction output before any save is committed
+  - Reject malformed or incomplete extraction payloads cleanly
+  - Keep error payloads short and plain
+  - Preserve current state if validation fails
+- [ ] Add a delta-application layer on the backend
+  - Accept current stored state plus validated delta
+  - Produce a final full state object for persistence
+  - Reuse existing model validation before final save
+  - Keep final persistence compatible with the existing saved `CharacterModel` + `WorldModel` contract
+- [ ] Define two-step turn handling in the prompt/runtime design
+  - Step 1: Narration receives scene context and produces prose only
+  - Step 2: Extraction receives scene context + narration result and produces structured state delta only
+  - Keep narration and extraction responsibilities explicitly separated
+  - Do not allow narration prose to serve as the save payload
+- [ ] Update `prompts/engine.md` to reflect the split
+  - Clarify that narration is prose-only
+  - Clarify that extraction is structured-output-only
+  - Clarify that state changes are committed only after extraction validates
+  - Keep the engine file within the current size limit
+- [ ] Add extraction failure handling rules
+  - If extraction validation fails, do not commit state
+  - Retry extraction with a correction prompt, not a new narration pass
+  - Preserve the original narration unless the failure proves the narration depended on invalid state assumptions
+  - Limit retries to a bounded, deterministic path
+- [ ] Keep rollout additive and backward-compatible
+  - Do not remove the current full-state save path in the first pass
+  - Keep existing GPT builder / Actions flows operational while the new extraction path is introduced
+  - Treat this as a reliability upgrade layered onto current architecture, not a full rebuild
+- [ ] Add tests for extraction and delta application
+  - Validate accepted delta shapes
+  - Validate rejection of malformed extraction payloads
+  - Validate merge/application behavior for character and world updates
+  - Validate no state commit occurs on failed extraction
+  - Validate final saved state still conforms to canonical models
+- [ ] Implement only after scene manager is stable
+  - Scene context should be the primary input to narration and extraction before splitting the turn flow
+  - Do not build extraction separation on top of raw full-state prompting if scene manager is the next intended architecture step
 
 ### Episodic Memory Compression
 

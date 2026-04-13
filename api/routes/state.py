@@ -19,9 +19,27 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import ValidationError
 
 from api.database import get_pool
-from api.models import CharacterModel, GameStateResponse, SaveStateRequest, WorldModel
+from api.models import (
+    ApplyStateDeltaRequest,
+    CharacterModel,
+    GameStateResponse,
+    SaveStateRequest,
+    WorldModel,
+)
 
 router = APIRouter()
+
+
+def _plain_validation_errors(err: ValidationError) -> list[dict[str, Any]]:
+    """Return JSON-serializable pydantic errors without python exception objects."""
+    cleaned: list[dict[str, Any]] = []
+    for item in err.errors():
+        clone = dict(item)
+        ctx = clone.get("ctx")
+        if isinstance(ctx, dict):
+            clone["ctx"] = {k: str(v) for k, v in ctx.items()}
+        cleaned.append(clone)
+    return cleaned
 
 
 def _deep_merge(base: dict[str, Any], incoming: dict[str, Any]) -> dict[str, Any]:
@@ -135,7 +153,7 @@ async def save_state(
             validated_character = CharacterModel.model_validate(merged_character)
             validated_world = WorldModel.model_validate(world_json)
         except ValidationError as e:
-            raise HTTPException(status_code=422, detail=e.errors())
+            raise HTTPException(status_code=422, detail=_plain_validation_errors(e))
 
         # Authoritative turn counter is world.turn; pacing.turn_count mirrors it.
         validated_world.pacing.turn_count = validated_world.turn
@@ -156,6 +174,93 @@ async def save_state(
             """,
             session_id,
             json.dumps(merged_character_json),
+            json.dumps(validated_world_json),
+            json.dumps([body.log_entry]),   # initial log on INSERT
+            log_entry_json,                 # appended entry on UPDATE
+        )
+
+    try:
+        response_character = CharacterModel.model_validate(json.loads(row["character"]))
+        response_world = WorldModel.model_validate(json.loads(row["world"]))
+    except ValidationError as e:
+        raise HTTPException(status_code=500, detail={"message": "stored game state is invalid", "errors": e.errors()})
+
+    return GameStateResponse(
+        session_id=row["session_id"],
+        character=response_character,
+        world=response_world,
+        log=json.loads(row["log"]),
+        updated_at=row["updated_at"],
+    )
+
+
+@router.post(
+    "/state/{session_id}/delta",
+    response_model=GameStateResponse,
+    description=(
+        "Apply a validated structured state delta to stored game state, then append one log "
+        "entry atomically."
+    ),
+)
+async def save_state_delta(
+    session_id: str,
+    body: ApplyStateDeltaRequest,
+    pool: asyncpg.Pool = Depends(get_pool),
+) -> GameStateResponse:
+    """Apply partial typed state updates and persist validated full state."""
+    character_delta = body.character.model_dump(exclude_none=True, by_alias=True)
+    world_delta = body.world.model_dump(exclude_none=True)
+    log_entry_json = json.dumps([body.log_entry])
+
+    async with pool.acquire() as conn:
+        existing_row = await conn.fetchrow(
+            "SELECT character, world FROM game_states WHERE session_id = $1",
+            session_id,
+        )
+
+        if existing_row is None:
+            raise HTTPException(status_code=404, detail="session not found")
+
+        existing_character: dict[str, Any] = json.loads(existing_row["character"])
+        existing_world: dict[str, Any] = json.loads(existing_row["world"])
+
+        merged_character = _deep_merge(existing_character, character_delta)
+        merged_world = _deep_merge(existing_world, world_delta)
+
+        # Backward-compatibility guard: ensure advancement block always exists
+        # even when older/partial clients omit it.
+        if not isinstance(merged_character.get("advancement"), dict):
+            merged_character["advancement"] = {
+                "points_available": 0,
+                "points_spent": 0,
+                "points_earned_total": 0,
+            }
+
+        try:
+            validated_character = CharacterModel.model_validate(merged_character)
+            validated_world = WorldModel.model_validate(merged_world)
+        except ValidationError as e:
+            raise HTTPException(status_code=422, detail=_plain_validation_errors(e))
+
+        # Authoritative turn counter is world.turn; pacing.turn_count mirrors it.
+        validated_world.pacing.turn_count = validated_world.turn
+
+        validated_character_json = validated_character.model_dump(by_alias=True)
+        validated_world_json = validated_world.model_dump()
+
+        row = await conn.fetchrow(
+            """
+            INSERT INTO game_states (session_id, character, world, log, updated_at)
+            VALUES ($1, $2::jsonb, $3::jsonb, $4::jsonb, now())
+            ON CONFLICT (session_id) DO UPDATE
+              SET character   = EXCLUDED.character,
+                  world       = EXCLUDED.world,
+                  log         = game_states.log || $5::jsonb,
+                  updated_at  = now()
+            RETURNING session_id, character, world, log, updated_at
+            """,
+            session_id,
+            json.dumps(validated_character_json),
             json.dumps(validated_world_json),
             json.dumps([body.log_entry]),   # initial log on INSERT
             log_entry_json,                 # appended entry on UPDATE
