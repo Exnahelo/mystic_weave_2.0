@@ -14,9 +14,9 @@ from pathlib import Path
 from typing import Any
 
 _DATA_DIR = Path(__file__).parent.parent / "data"
-_DATA_FILES = ("species.json", "focus.json", "backgrounds.json")
-_ITEM_DATA_FILES = ("mundane_items.json", "magical_items.json")
-_SPELL_DATA_FILES = ("spells.json",)
+_DATA_FILES = ("charachter-species.json", "charachter-focus.json", "charachter-backgrounds.json")
+_ITEM_DATA_FILES = ("items-mundane.json", "items-magical.json")
+_SPELL_DATA_FILES = ("magic-spells.json",)
 
 
 @lru_cache(maxsize=None)
@@ -37,7 +37,7 @@ def _load_json(filename: str) -> dict[str, Any] | list[Any]:
 
 def get_species(index: str) -> dict[str, Any]:
     """Return species data for the given index (e.g. 'human', 'dragonborn')."""
-    data = _load_json("species.json")
+    data = _load_json("charachter-species.json")
     if index not in data:
         raise ValueError(f"Unknown species: {index!r}. Valid: {sorted(data.keys())}")
     return data[index]
@@ -45,7 +45,7 @@ def get_species(index: str) -> dict[str, Any]:
 
 def list_species() -> list[dict[str, Any]]:
     """Return all species as a list of summary dicts."""
-    data = _load_json("species.json")
+    data = _load_json("charachter-species.json")
     return [
         {
             "index": k,
@@ -63,7 +63,7 @@ def list_species() -> list[dict[str, Any]]:
 
 def get_focus(index: str) -> dict[str, Any]:
     """Return focus archetype data for the given index (e.g. 'devoted')."""
-    data = _load_json("focus.json")
+    data = _load_json("charachter-focus.json")
     if index not in data:
         raise ValueError(f"Unknown focus: {index!r}. Valid: {sorted(data.keys())}")
     return data[index]
@@ -90,7 +90,7 @@ def list_focus() -> list[dict[str, Any]]:
 
 def get_background(index: str) -> dict[str, Any]:
     """Return background data for the given index (e.g. 'soldier')."""
-    data = _load_json("backgrounds.json")
+    data = _load_json("charachter-backgrounds.json")
     if index not in data:
         raise ValueError(f"Unknown background: {index!r}. Valid: {sorted(data.keys())}")
     return data[index]
@@ -98,7 +98,7 @@ def get_background(index: str) -> dict[str, Any]:
 
 def list_backgrounds() -> list[dict[str, Any]]:
     """Return all backgrounds as a list of summary dicts."""
-    data = _load_json("backgrounds.json")
+    data = _load_json("charachter-backgrounds.json")
     return [
         {
             "index": k,
@@ -117,7 +117,7 @@ def list_backgrounds() -> list[dict[str, Any]]:
 
 def list_mundane_items() -> list[dict[str, Any]]:
     """Return all mundane catalog items."""
-    data = _load_json("mundane_items.json")
+    data = _load_json("items-mundane.json")
     if not isinstance(data, list):
         return []
     return data
@@ -125,7 +125,7 @@ def list_mundane_items() -> list[dict[str, Any]]:
 
 def list_magical_items() -> list[dict[str, Any]]:
     """Return all magical catalog items."""
-    data = _load_json("magical_items.json")
+    data = _load_json("items-magical.json")
     if not isinstance(data, list):
         return []
     return data

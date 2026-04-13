@@ -68,8 +68,8 @@ Updated after world expansion, magic system, progression redesign, and item cata
 - [x] Blessed water added to mundane consumables as sacred preparation at `0 CD`
 - [x] World expanded — 13 new location stubs + 7 wilderness/trail stubs authored and seeded
 - [x] Magic system redesigned — fields as knowledge tags, spells as application tags, access bands, failure model
-- [x] Created `data/spells.json` baseline
-- [x] Added species traits block to dragonborn in `data/species.json`
+- [x] Created `data/magic-spells.json` baseline
+- [x] Added species traits block to dragonborn in `data/charachter-species.json`
 - [x] Add character payload compatibility support for legacy/expanded keys:
   - [x] accept deprecated `level`
   - [x] accept `magic_fields`
@@ -102,8 +102,8 @@ Updated after world expansion, magic system, progression redesign, and item cata
 
 ### Application Tag Updates
 
-- [x] Update `data/backgrounds.json` — remap old weapon tags to new taxonomy
-- [x] Update `data/focus.json` — remap old weapon tags to new taxonomy
+- [x] Update `data/charachter-backgrounds.json` — remap old weapon tags to new taxonomy
+- [x] Update `data/charachter-focus.json` — remap old weapon tags to new taxonomy
 - [x] Update `prompts/world_rules.md` application tag table with new weapon taxonomy
 - [x] Update `prompts/character_creation.md` tag name references
 - [x] Update `schemas/openapi.yaml` if weapon tags are enumerated

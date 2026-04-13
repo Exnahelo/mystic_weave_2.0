@@ -19,7 +19,7 @@ It defines:
 Structured spell catalogs belong in JSON data files, not here.
 
 Use this file together with:
-- `magic_spells.json` or the current spell data files
+- `magic-spells.json` or the current spell data files
 - `world_rules.md`
 - `engine.md`
 - `combat_rules.md` when magic is used during conflict
@@ -294,7 +294,7 @@ This section will eventually define:
 
 ## Reference Files
 
-- `magic_spells.json` or current spell data files — canonical spell catalog
+- `magic-spells.json` or current spell data files — canonical spell catalog
 - `world_rules.md` — broader world/system-facing rules
 - `combat_rules.md` — combat-facing interpretation when magic enters conflict
 - `engine.md` — runtime system logic and adjudication guidance

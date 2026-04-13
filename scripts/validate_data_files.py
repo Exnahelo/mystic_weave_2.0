@@ -232,9 +232,9 @@ def main() -> None:
     data_dir = repo_root / "data"
 
     failures: list[str] = []
-    _validate_species(data_dir / "species.json", failures)
-    _validate_tag_rows(data_dir / "focus.json", failures, expected_count=7)
-    _validate_tag_rows(data_dir / "backgrounds.json", failures, expected_count=8)
+    _validate_species(data_dir / "charachter-species.json", failures)
+    _validate_tag_rows(data_dir / "charachter-focus.json", failures, expected_count=7)
+    _validate_tag_rows(data_dir / "charachter-backgrounds.json", failures, expected_count=8)
     _validate_spells(data_dir / "spells.json", failures)
 
     if failures:

@@ -93,9 +93,9 @@ api/
 core/
   dice_roller.py       # Dice rolling logic — do not modify
 data/
-  species.json         # 8 species with domain scores
-  focus.json           # 7 focus archetypes with tags
-  backgrounds.json     # 8 backgrounds with tags
+  charachter-species.json         # 8 species with domain scores
+  charachter-focus.json           # 7 focus archetypes with tags
+  charachter-backgrounds.json     # 8 backgrounds with tags
 prompts/               # Obsidian vault — GPT knowledge files + world content
   engine.md            # GPT system prompt — paste into GPT builder Instructions (<8000 chars)
   character_creation.md
