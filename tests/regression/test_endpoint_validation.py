@@ -40,6 +40,17 @@ class FakeConn:
         return "OK"
 
     async def fetchrow(self, query, *args):
+        if "SELECT session_id, character, world, log, updated_at FROM game_states" in query:
+            if self.select_character is None or self.select_world is None:
+                return None
+            return {
+                "session_id": args[0],
+                "character": json.dumps(self.select_character),
+                "world": json.dumps(self.select_world),
+                "log": json.dumps([]),
+                "updated_at": datetime.now(),
+            }
+
         if "SELECT character, world FROM game_states" in query:
             if self.select_character is None or self.select_world is None:
                 return None
@@ -491,6 +502,33 @@ def test_state_delta_returns_404_when_session_not_found() -> None:
         )
 
     assert r.status_code == 404
+
+
+@pytest.mark.regression
+def test_state_load_accepts_migrated_character_compatibility_fields() -> None:
+    migrated_character = _build_valid_character()
+    migrated_character["advancement"] = {
+        "points_spent": 2,
+        "points_available": 0,
+        "points_earned_total": 2,
+    }
+    migrated_character["magic_fields"] = ["sacred", "warding"]
+    migrated_character["draconic_traits"] = ["radiant_breath_lineage", "dragon_breath"]
+
+    conn = FakeConn(
+        select_character=migrated_character,
+        select_world=_build_valid_world(),
+    )
+    app = _make_app_with_router(state.router, FakePool(conn))
+
+    with TestClient(app) as client:
+        r = client.get("/state/74a30d9f")
+
+    assert r.status_code == 200
+    payload = r.json()
+    assert payload["character"]["advancement"]["points_spent"] == 2
+    assert payload["character"]["magic_fields"] == ["sacred", "warding"]
+    assert payload["character"]["draconic_traits"] == ["radiant_breath_lineage", "dragon_breath"]
 
 
 @pytest.mark.regression
