@@ -14,10 +14,11 @@ It is intentionally lighter than a full combat engine document. Use it as the cu
 Structured equipment catalogs belong in JSON data files, not here.
 
 Use this file together with:
-- `items_weapons.json`
-- `items_armor.json`
-- `items_ammunition.json`
-- `items_mundane.json`
+- `items-weapons.json`
+- `items-armor.json`
+- `items-ammunition.json`
+- `items-mundane.json`
+- 'items-notable.json'
 - `world_rules.md`
 - `engine.md`
 
@@ -184,10 +185,11 @@ Until fuller combat rules are finalized, follow these principles:
 
 ## Reference Files
 
-- `items_weapons.json` — authoritative weapon catalog
-- `items_armor.json` — authoritative armor and shield catalog
-- `items_ammunition.json` — authoritative ammunition catalog
-- `items_mundane.json` — broader mundane equipment catalog
+- `items-weapons.json` — authoritative weapon catalog
+- `items-armor.json` — authoritative armor and shield catalog
+- `items-ammunition.json` — authoritative ammunition catalog
+- `items-mundane.json` — broader mundane equipment catalog
+- 'items-notable.json'
 - `world_rules.md` — world/system-facing rules outside combat-specific handling
 - `engine.md` — broader runtime logic and system interpretation
 
