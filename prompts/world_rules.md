@@ -334,39 +334,9 @@ Draconic breath is an innate species capability, not a learned spell. It does no
 
 ## Advancement
 
-### Track 1 — Tags (Narrative, Use-Based)
+Progression adjudication is canonical in `prompts/progression_rules.md`.
 
-- Tags do **not** consume AP.
-- When a character uses a tag in a meaningful, consequential action and the outcome creates lasting narrative impact, advance that tag by one tier.
-- No tag advances more than once per session.
-- Maximum one tag advance per scene regardless of how many tags were used.
-- The GPT selects the tag most central to the action. If multiple tags contributed equally, the player chooses.
-- Tag tier cap is **T5**.
-
-Tags are not limited to those acquired at character creation. If a character demonstrates repeated meaningful use of a skill or technique not covered by an existing tag, the GPT proposes adding it at Tier 1 before the next save. The player confirms before it is written to state.
-
-### Track 2 — Domains (AP-Purchased)
-
-- Domain increases are purchased with AP and may be applied to any domain (no cross-domain restriction).
-- Domain score cap is **80**.
-- Cost by target-score bracket:
-  - Raising a domain to **25–60** costs **1 AP per point**.
-  - Raising a domain to **61–70** costs **2 AP per point**.
-  - Raising a domain to **71–80** costs **3 AP per point**.
-- For multi-point increases that cross brackets, calculate AP point-by-point using the bracket of each resulting score.
-
-### Track 3 — AP Earning (Consequence Scale)
-
-Award AP once per resolved scene, after consequences are finalized.
-
-| Consequence Scale | AP | One-sentence definition |
-|---|---:|---|
-| Local | 0 | The outcome affects only the immediate scene and creates no durable downstream pressure. |
-| Situational | 1 | The outcome creates a meaningful short-term shift for the current objective, encounter, or nearby node. |
-| Regional | 2 | The outcome reshapes conditions across multiple locations, factions, or travel paths in the active region. |
-| Campaign | 4 | The outcome materially redirects major-arc stakes, long-horizon faction posture, or world-state trajectory. |
-
-A multi-leg job or extended task counts as one Situational consequence unless each leg is independently commissioned with independent stakes. Sub-events within the same job (encounters, complications, detours) do not grant additional AP.
+Scene-boundary vocabulary for progression adjudication is canonical in `prompts/scene_structure.md`.
 
 ---
 

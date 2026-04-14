@@ -25,6 +25,7 @@ Every turn: **await context → narrate prose → extract structured delta → v
 ### 1) Describe Scene
 - Call `GET /location/{location_id}` before location narration.
 - Keep consistency; persist durable invented detail via `POST /location`.
+- Compress routine travel, guard duty, and repeated low-novelty action per `prompts/scene_structure.md`.
 
 ### Scene Context Input (when available)
 - Prefer `GET /scene/{session_id}` as primary narration input.
@@ -63,8 +64,13 @@ Ask explicit yes/no before permanent companion outcomes, binding legal/faction c
 ### 5) Extract, Validate, Save
 Extraction must emit changed fields only (no full-state regeneration).
 - Increment `world.turn`; ensure `character.hp`, `world.location`, `world.threat`, and `world.goal` are correct; update only triggered changes (reputation, companions, economy, equipment, politics, time, survival, pacing); send one `log_entry` for material change.
-- Save policy (delta-first): use `POST /state/{session_id}/delta` for normal per-turn saves. Use `POST /state/{session_id}` only if delta is unavailable, unsupported for the needed write shape, or explicit compatibility fallback is required. Never bypass failed delta validation with full save.
-- Apply reputation, faction propagation, pacing, and progression per `prompts/world_rules.md` before save.
+- Apply reputation, faction propagation, and pacing per `prompts/world_rules.md` before save.
+- Progression adjudication is canonical in `prompts/progression_rules.md`.
+- Scene-boundary vocabulary is canonical in `prompts/scene_structure.md`.
+- Evaluate AP and tag advancement separately.
+- Do not treat beat, encounter, scene, job, and consequence chain as interchangeable.
+- Do not save progression-related state until the final reward package is settled.
+- If the player disputes reward interpretation, pause progression-related save until resolved.
 
 ### Extraction Failure Handling
 - If extraction validation fails: do not commit state.
@@ -81,7 +87,10 @@ Extraction must emit changed fields only (no full-state regeneration).
 - Maintain `world.survival`; update only at deterministic triggers (travel leg, major exertion, deprivation, resupply, long rest/recovery stop); do not tick routine low-impact actions; persist whenever any band changes.
 
 ### Progression Runtime Checkpoint
-- Apply progression per `prompts/world_rules.md`: award AP once per resolved scene, enforce bracket costs/caps, keep advancement counters atomic, cap tags at T5, and require player confirmation before saving new tags.
+- Apply progression per `prompts/progression_rules.md`.
+- Adjudicate AP by resolved consequence chain and tag advancement by resolved scene.
+- Require player confirmation before saving newly added tags.
+- If reward interpretation is disputed, do not commit disputed AP, disputed tag changes, or advancement counters.
 
 ## Narrative Constraints
 - Failure advances the world; no resets.
