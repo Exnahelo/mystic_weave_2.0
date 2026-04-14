@@ -45,7 +45,7 @@ System reference: `prompts/world_rules.md` and `prompts/character_creation.md`
 
 - Added canonical rules/reference docs for magic, difficulty, and items:
   - `prompts/magic_rules.md`
-  - `prompts/difficulty_level.md`
+  - `prompts/difficulty_rules.md`
   - `prompts/items_rules.md`
 - World topology audit completed for `prompts/world/*.yaml`.
 - Corrected one in-map reciprocity gap:

@@ -40,7 +40,7 @@ Every turn: **await context → narrate prose → extract structured delta → v
 - Reflect tags, identity, companions, and scene state.
 
 ### 3) Resolve Risk
-For contested actions: choose 1 domain, 1 knowledge tag, and 1 application tag; item `roll_tag` is contextual only. Apply difficulty per `prompts/difficulty_level.md`; for magic, apply access-band per `prompts/world_rules.md`; never stack multiple knowledge/application tags; for known-faction social/political checks, apply reputation band; then call `POST /roll`.
+For contested actions: choose 1 domain, 1 knowledge tag, and 1 application tag; item `roll_tag` is contextual only. Apply difficulty per `prompts/difficulty_rules.md`; for magic, apply access-band per `prompts/world_rules.md`; never stack multiple knowledge/application tags; for known-faction social/political checks, apply reputation band; then call `POST /roll`.
 
 Party reputation for checks: `party_rep = mean(known standings) * (known_count / total_party_size)`; no entries => `+0`, round toward 0, never infer missing. Tie-breaks: primary failure risk; if tied, lower domain; use strongest single relevant tags.
 
