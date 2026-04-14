@@ -20,10 +20,14 @@ from pydantic import ValidationError
 
 from api.database import get_pool
 from api.models import (
+    AdvancementState,
     ApplyStateDeltaRequest,
     CharacterModel,
     GameStateResponse,
+    PacingState,
     SaveStateRequest,
+    SurvivalState,
+    TimeState,
     WorldModel,
 )
 
@@ -69,6 +73,34 @@ def _deep_merge(base: dict[str, Any], incoming: dict[str, Any]) -> dict[str, Any
     return result
 
 
+def _normalize_character_state(payload: dict[str, Any]) -> dict[str, Any]:
+    """Backfill missing structured character fields for legacy/incomplete payloads."""
+    normalized = dict(payload)
+    if not isinstance(normalized.get("knowledge"), dict):
+        normalized["knowledge"] = {}
+    if not isinstance(normalized.get("application"), dict):
+        normalized["application"] = {}
+    if not isinstance(normalized.get("magic_fields"), list):
+        normalized["magic_fields"] = []
+    if not isinstance(normalized.get("draconic_traits"), list):
+        normalized["draconic_traits"] = []
+    if not isinstance(normalized.get("advancement"), dict):
+        normalized["advancement"] = AdvancementState().model_dump()
+    return normalized
+
+
+def _normalize_world_state(payload: dict[str, Any]) -> dict[str, Any]:
+    """Backfill missing structured world fields for legacy/incomplete payloads."""
+    normalized = dict(payload)
+    if not isinstance(normalized.get("time"), dict):
+        normalized["time"] = TimeState().model_dump()
+    if not isinstance(normalized.get("survival"), dict):
+        normalized["survival"] = SurvivalState().model_dump()
+    if not isinstance(normalized.get("pacing"), dict):
+        normalized["pacing"] = PacingState().model_dump()
+    return normalized
+
+
 @router.get("/state/{session_id}", response_model=GameStateResponse)
 async def load_state(
     session_id: str,
@@ -104,8 +136,8 @@ async def load_state(
     "/state/{session_id}",
     response_model=GameStateResponse,
     description=(
-        "Save game state, deep-merge character updates onto stored state, replace world "
-        "state, and append one log entry atomically."
+        "Save game state, deep-merge character and world updates onto stored state, "
+        "and append one log entry atomically."
     ),
 )
 async def save_state(
@@ -120,38 +152,36 @@ async def save_state(
     the GPT omits (languages, spells, equipment, feat_choices, biography, etc.)
     are preserved from the previous save rather than wiped.
 
-    World is replaced in full (it is small and always fully specified).
+    World fields are deep-merged onto the stored record so that older/minimal
+    payloads do not wipe structured state blocks.
     The log_entry is appended atomically in SQL.
     """
-    incoming_character = body.character.model_dump(by_alias=True)
-    world_json = body.world.model_dump()
+    incoming_character = body.character.model_dump(exclude_unset=True, by_alias=True)
+    world_json = body.world.model_dump(exclude_unset=True)
     log_entry_json = json.dumps([body.log_entry])
 
     async with pool.acquire() as conn:
-        # Load existing character to merge against
+        # Load existing state to merge against
         existing_row = await conn.fetchrow(
-            "SELECT character FROM game_states WHERE session_id = $1",
+            "SELECT character, world FROM game_states WHERE session_id = $1",
             session_id,
         )
 
         if existing_row is not None:
             existing_character: dict[str, Any] = json.loads(existing_row["character"])
+            existing_world: dict[str, Any] = json.loads(existing_row["world"])
             merged_character = _deep_merge(existing_character, incoming_character)
+            merged_world = _deep_merge(existing_world, world_json)
         else:
             merged_character = incoming_character
+            merged_world = world_json
 
-        # Backward-compatibility guard: ensure advancement block always exists
-        # even when older/partial clients omit it.
-        if not isinstance(merged_character.get("advancement"), dict):
-            merged_character["advancement"] = {
-                "points_available": 0,
-                "points_spent": 0,
-                "points_earned_total": 0,
-            }
+        merged_character = _normalize_character_state(merged_character)
+        merged_world = _normalize_world_state(merged_world)
 
         try:
             validated_character = CharacterModel.model_validate(merged_character)
-            validated_world = WorldModel.model_validate(world_json)
+            validated_world = WorldModel.model_validate(merged_world)
         except ValidationError as e:
             raise HTTPException(status_code=422, detail=_plain_validation_errors(e))
 
@@ -227,14 +257,8 @@ async def save_state_delta(
         merged_character = _deep_merge(existing_character, character_delta)
         merged_world = _deep_merge(existing_world, world_delta)
 
-        # Backward-compatibility guard: ensure advancement block always exists
-        # even when older/partial clients omit it.
-        if not isinstance(merged_character.get("advancement"), dict):
-            merged_character["advancement"] = {
-                "points_available": 0,
-                "points_spent": 0,
-                "points_earned_total": 0,
-            }
+        merged_character = _normalize_character_state(merged_character)
+        merged_world = _normalize_world_state(merged_world)
 
         try:
             validated_character = CharacterModel.model_validate(merged_character)

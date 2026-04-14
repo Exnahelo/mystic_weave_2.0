@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
 from api.database import get_pool
+from api.models import CharacterModel, WorldModel
 from api.routes import session, state
 
 
@@ -65,7 +66,15 @@ class FakeConn:
             return {"character": json.dumps(self.select_character)}
 
         if "RETURNING session_id, character, world, log, updated_at" in query:
-            return self.upsert_row
+            if self.upsert_row is not None:
+                return self.upsert_row
+            return {
+                "session_id": args[0],
+                "character": args[1],
+                "world": args[2],
+                "log": args[4],
+                "updated_at": datetime.now(),
+            }
 
         return None
 
@@ -191,6 +200,12 @@ def _build_valid_world() -> dict:
             "weather": "clear",
             "weather_note": "",
         },
+        "survival": {
+            "hunger": "sated",
+            "hydration": "hydrated",
+            "fatigue": "rested",
+            "load": "normal",
+        },
     }
 
 
@@ -246,13 +261,7 @@ def test_state_save_rejects_invalid_merged_character_from_legacy_extra_key() -> 
 
     conn = FakeConn(
         select_character=existing_character,
-        upsert_row={
-            "session_id": "abc12345",
-            "character": json.dumps(_build_valid_character()),
-            "world": json.dumps(_build_valid_world()),
-            "log": json.dumps(["entry"]),
-            "updated_at": datetime.now(),
-        },
+        select_world=_build_valid_world(),
     )
 
     app = _make_app_with_router(state.router, FakePool(conn))
@@ -453,6 +462,137 @@ def test_state_save_accepts_legacy_level_and_magic_trait_fields() -> None:
     assert payload["character"]["level"] == 2
     assert payload["character"]["magic_fields"] == ["arcane", "sacred"]
     assert payload["character"]["draconic_traits"] == ["draconic_resilience"]
+
+
+@pytest.mark.regression
+def test_state_save_preserves_existing_world_structured_blocks_when_legacy_payload_omits_them() -> None:
+    existing_world = _build_valid_world()
+    existing_world["time"]["weather"] = "mist"
+    existing_world["survival"]["fatigue"] = "tired"
+    existing_world["pacing"]["tension"] = 6
+
+    conn = FakeConn(
+        select_character=_build_valid_character(),
+        select_world=existing_world,
+    )
+
+    app = _make_app_with_router(state.router, FakePool(conn))
+    legacy_world = {
+        "location": "test-loc-alpha",
+        "threat": "stormfront",
+        "goal": "survive",
+        "turn": 2,
+        "companions": [],
+        "economy": _build_valid_world()["economy"],
+        "politics": _build_valid_world()["politics"],
+    }
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/state/abc12345",
+            json={
+                "character": _build_valid_character(),
+                "world": legacy_world,
+                "log_entry": "legacy world persisted",
+            },
+        )
+
+    assert r.status_code == 200
+    payload = r.json()
+    assert payload["world"]["time"]["weather"] == "mist"
+    assert payload["world"]["survival"]["fatigue"] == "tired"
+    assert payload["world"]["pacing"]["tension"] == 6
+    assert payload["world"]["pacing"]["turn_count"] == 2
+
+
+@pytest.mark.regression
+def test_state_save_normalizes_missing_legacy_character_structured_fields() -> None:
+    legacy_character = _build_valid_character()
+    del legacy_character["knowledge"]
+    del legacy_character["application"]
+    del legacy_character["advancement"]
+
+    conn = FakeConn(
+        select_character=legacy_character,
+        select_world=_build_valid_world(),
+    )
+
+    app = _make_app_with_router(state.router, FakePool(conn))
+    incoming_character = _build_valid_character()
+    del incoming_character["knowledge"]
+    del incoming_character["application"]
+    del incoming_character["advancement"]
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/state/abc12345",
+            json={
+                "character": incoming_character,
+                "world": _build_valid_world(),
+                "log_entry": "legacy normalized",
+            },
+        )
+
+    assert r.status_code == 200
+    payload = r.json()
+    assert payload["character"]["knowledge"] == {}
+    assert payload["character"]["application"] == {}
+    assert payload["character"]["magic_fields"] == []
+    assert payload["character"]["draconic_traits"] == []
+    assert payload["character"]["advancement"] == {
+        "points_available": 0,
+        "points_spent": 0,
+        "points_earned_total": 0,
+    }
+    CharacterModel.model_validate(payload["character"])
+    WorldModel.model_validate(payload["world"])
+
+
+@pytest.mark.regression
+def test_state_delta_normalizes_missing_structured_blocks_and_response_validates() -> None:
+    legacy_character = _build_valid_character()
+    del legacy_character["knowledge"]
+    del legacy_character["application"]
+    del legacy_character["advancement"]
+
+    legacy_world = _build_valid_world()
+    del legacy_world["time"]
+    del legacy_world["survival"]
+    del legacy_world["pacing"]
+
+    conn = FakeConn(
+        select_character=legacy_character,
+        select_world=legacy_world,
+    )
+
+    app = _make_app_with_router(state.router, FakePool(conn))
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/state/abc12345/delta",
+            json={
+                "character": {"notes": "delta note"},
+                "world": {"turn": 2},
+                "log_entry": "delta normalized",
+            },
+        )
+
+    assert r.status_code == 200
+    payload = r.json()
+    assert payload["character"]["knowledge"] == {}
+    assert payload["character"]["application"] == {}
+    assert payload["character"]["magic_fields"] == []
+    assert payload["character"]["draconic_traits"] == []
+    assert payload["character"]["advancement"] == {
+        "points_available": 0,
+        "points_spent": 0,
+        "points_earned_total": 0,
+    }
+    assert payload["world"]["time"]["day"] == 1
+    assert payload["world"]["survival"]["hunger"] == "sated"
+    assert payload["world"]["pacing"]["turn_count"] == 2
+    CharacterModel.model_validate(payload["character"])
+    WorldModel.model_validate(payload["world"])
 
 
 @pytest.mark.regression

@@ -375,7 +375,205 @@ These are structural improvements identified from architecture review. None requ
 - [ ] Add summary retrieval to state load — GPT receives recent log entries plus compressed summaries for older sessions
 - [ ] Trigger: manual initially, automated after every 20 turns later
 
+--- world/ file mapping
+
+## Mystic Weave World File Refactor — To-Do and Starter File Map
+
+### Goal
+
+Refactor world/location content into a hierarchical structure that scales cleanly for cities, wilderness zones, and future expansion.
+
+The target model is:
+
+- **Region**
+- **Settlement**
+- **District** (optional, for larger settlements)
+- **Location node**
+- **Sub-location node** only when it is truly navigable or mechanically distinct
+
+This avoids:
+
+- mega-files for entire cities
+- filename hacks as pseudo-architecture
+- brittle expansion as the world grows
+
+--- world/ file mapping
+
+### Repo To-Do
+
+#### 1. Create a hierarchical world directory layout
+
+Move from flat or loosely grouped location content to:
+
+- region
+- settlement
+- district
+- location
+
+#### 2. Define canonical file roles
+
+Use separate file types for:
+
+- `region.json`
+- `settlement.json`
+- `district.json`
+- `location.json`
+- `region_zone.json` for wilderness/travel areas
+
+#### 3. Add stable IDs and explicit parent references
+
+Each file should explicitly declare where it belongs in the hierarchy.
+
+Do not rely on filenames alone for structure.
+
+#### 4. Use one file per navigable node
+
+Create separate files for places that are actual travel or scene targets:
+
+- shrines
+- inns
+- trade halls
+- gates
+- plazas
+- forges
+- towers
+- cellars
+- docks
+- roads
+- ruins
+
+#### 5. Do not split minor scene flavor into files
+
+These should usually remain inside the main location description:
+
+- booths
+- corners
+- tables
+- fireplaces
+- generic upstairs seating
+
+Create separate files only when a sub-area is meaningfully distinct.
+
+#### 6. Normalize graph connections
+
+Connections should point to stable location IDs, not free-text names.
+
+#### 7. Separate canon from planning notes
+
+World files intended for GPT upload should contain canonical usable data, not mixed author commentary.
+
+#### 8. Add integrity validation
+
+Validate:
+
+- unique IDs
+- valid parent references
+- valid connection targets
+- no orphaned locations
+- no duplicate IDs
+- no broken settlement/district/location references
+
+#### 9. Migrate gradually
+
+Do not try to restructure the whole world at once.
+
+Use **Drakenvale** as the reference implementation first.
+
+#### 10. Document the pattern
+
+Add a short `README.md` in `data/world/` so future files follow one pattern instead of improvising.
+
 ---
+
+### Recommended Directory Layout
+
+```text
+data/
+  world/
+    README.md
+
+    regions/
+      drakenvale/
+        region.json
+
+        settlements/
+          stronghold_of_drakenvale/
+            settlement.json
+
+            districts/
+              platinum_quarter.json
+              trade_quarter.json
+              forgeward.json
+              lower_borough.json
+
+            locations/
+              platinum_heart.json
+              infernal_forge.json
+              amethyst_vault.json
+              council_chamber.json
+              wardens_hall.json
+              sstc_tradehall.json
+              lantern_rest.json
+              east_gate.json
+              market_square.json
+
+          grasslands_edge_post/
+            settlement.json
+            locations/
+              post_square.json
+              quartermaster_office.json
+              caravan_yard.json
+              mess_hall.json
+              watchtower.json
+
+          dracelune/
+            settlement.json
+            districts/
+              moonmarket.json
+              riverward.json
+            locations/
+              moonmarket_plaza.json
+              river_docks.json
+              pilgrims_rest.json
+              customs_house.json
+              north_gate.json
+
+        wilderness/
+          draconic_grasslands/
+            region_zone.json
+            locations/
+              southbound_route.json
+              ambush_fold.json
+              caravan_halt.json
+              old_stone_marker.json
+
+          feywood_glade/
+            region_zone.json
+            locations/
+              glade_edge_path.json
+              mist_hollow.json
+              bent_oak_crossing.json
+              vanished_trail.json
+
+      ashfall_reaches/
+        region.json
+
+        settlements/
+          cinderwatch/
+            settlement.json
+            locations/
+              watch_keep.json
+              ash_market.json
+              pilgrim_gate.json
+
+        wilderness/
+          ember_road/
+            region_zone.json
+            locations/
+              scorched_mile.json
+              basalt_bridge.json
+
+------
 
 ## 🚫 Restricted Future Builds
 
