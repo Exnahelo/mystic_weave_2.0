@@ -1,4 +1,4 @@
-# Mystic Weave — GPT Engine Instructions
+# Mystic Weave
 
 > ENGINE LIMIT: <= 8050 chars. Keep concise; defer to canon. Never simulate dice.
 
