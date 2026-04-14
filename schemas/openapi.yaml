@@ -1,4 +1,4 @@
-openapi: 3.1.1
+openapi: 3.1.0
 info:
   title: Mystic Weave
   description: Persistent game state backend for a text-based RPG powered by a custom
@@ -36,8 +36,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       summary: Save State
-      description: Save game state, deep-merge character updates onto stored state,
-        replace world state, and append one log entry atomically.
+      description: Save game state, deep-merge character and world updates onto stored
+        state, and append one log entry atomically.
       operationId: save_state_state__session_id__post
       parameters:
       - name: session_id
@@ -1578,16 +1578,21 @@ components:
     SaveStateRequest:
       properties:
         character:
-          $ref: '#/components/schemas/CharacterModel-Input'
+          anyOf:
+          - $ref: '#/components/schemas/CharacterModel-Input'
+          - $ref: '#/components/schemas/CharacterStateDelta'
+          title: Character
         world:
-          $ref: '#/components/schemas/WorldModel-Input'
+          anyOf:
+          - $ref: '#/components/schemas/WorldModel-Input'
+          - $ref: '#/components/schemas/WorldStateDelta'
+          title: World
         log_entry:
           type: string
           title: Log Entry
+      additionalProperties: false
       type: object
       required:
-      - character
-      - world
       - log_entry
       title: SaveStateRequest
       description: Body for POST /state/{session_id}

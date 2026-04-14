@@ -329,3 +329,40 @@ def test_delta_save_validation_failure_does_not_commit_state_or_log() -> None:
     assert conn.character["notes"] == base_character["notes"]
     assert conn.world["turn"] == base_world["turn"]
     assert conn.log == []
+
+
+@pytest.mark.regression
+def test_full_save_partial_payload_preserves_knowledge_and_application() -> None:
+    session_id = "fullsave1"
+    base_character = _base_character()
+    base_world = _base_world()
+    conn = MultiTurnFakeConn(session_id, base_character, base_world)
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        r = client.post(
+            f"/state/{session_id}",
+            json={
+                "character": {
+                    "hp": {"current": 88, "max": 100},
+                    "notes": "Partial full-save update.",
+                },
+                "world": {
+                    "turn": 2,
+                    "threat": "medium",
+                },
+                "log_entry": "Partial full save applied.",
+            },
+        )
+
+    assert r.status_code == 200
+    body = r.json()
+    assert body["character"]["hp"]["current"] == 88
+    assert body["character"]["notes"] == "Partial full-save update."
+    assert body["character"]["knowledge"] == base_character["knowledge"]
+    assert body["character"]["application"] == base_character["application"]
+    assert body["world"]["turn"] == 2
+    assert body["world"]["threat"] == "medium"
+    assert body["world"]["goal"] == base_world["goal"]
+    assert body["world"]["pacing"]["turn_count"] == 2
+    assert body["log"] == ["Partial full save applied."]

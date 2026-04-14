@@ -430,13 +430,6 @@ class WorldModel(BaseModel):
 # State request / response models
 # ---------------------------------------------------------------------------
 
-class SaveStateRequest(BaseModel):
-    """Body for POST /state/{session_id}"""
-    character:  CharacterModel
-    world:      WorldModel
-    log_entry:  str
-
-
 class CharacterStateDelta(BaseModel):
     """Typed partial character update for extraction-driven turn commits."""
     model_config = ConfigDict(extra="forbid")
@@ -487,6 +480,15 @@ class ApplyStateDeltaRequest(BaseModel):
         if not self.character.has_updates() and not self.world.has_updates():
             raise ValueError("state delta must include at least one character or world change")
         return self
+
+
+class SaveStateRequest(BaseModel):
+    """Body for POST /state/{session_id}"""
+    model_config = ConfigDict(extra="forbid")
+
+    character: CharacterModel | CharacterStateDelta = Field(default_factory=CharacterStateDelta)
+    world: WorldModel | WorldStateDelta = Field(default_factory=WorldStateDelta)
+    log_entry: str
 
 
 class GameStateResponse(BaseModel):
