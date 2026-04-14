@@ -12,8 +12,15 @@ if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
 
+def _sqlalchemy_url(url: str) -> str:
+    if url.startswith("postgresql://") and not url.startswith("postgresql+psycopg://"):
+        return url.replace("postgresql://", "postgresql+psycopg://", 1)
+    return url
+
+
 def _resolved_url() -> str:
-    return os.environ.get("DATABASE_URL") or config.get_main_option("sqlalchemy.url")
+    raw_url = os.environ.get("DATABASE_URL") or config.get_main_option("sqlalchemy.url")
+    return _sqlalchemy_url(raw_url)
 
 
 def run_migrations_offline() -> None:
