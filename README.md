@@ -82,7 +82,7 @@ Reference: `WORLD_TOPOLOGY_BASELINE.md`
 ```
 api/
   main.py              # FastAPI app — version string here (keep in sync with openapi.yaml)
-  models.py            # Pydantic v2 models (v3.2.0 schema)
+  models.py            # Pydantic v2 models (v3.1.1 schema)
   game_data.py         # Game system data loader + seed_character
   database.py          # asyncpg pool management
   routes/
@@ -110,7 +110,7 @@ prompts/               # Obsidian vault — GPT knowledge files + world content
   npcs.md
   design_notes.md      # Internal — do NOT upload to GPT builder
 schemas/
-  openapi.yaml         # OpenAPI 3.1.1 spec v3.2.0 — upload to GPT builder Actions
+  openapi.yaml         # OpenAPI 3.1.1 spec v3.1.1 — upload to GPT builder Actions
 scripts/
   seed_locations.py    # Seed locations from prompts/world/ into DB
   verify_production_contract.py  # Validate production against repo expectations
@@ -223,4 +223,4 @@ When bumping the API version, update it in **two places**:
 
 Both must stay in sync. The contract test at `tests/contract/test_openapi_contract.py` asserts the version string — update that assertion too.
 
-**Current version:** 3.2.0
+**Current version:** 3.1.1

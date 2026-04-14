@@ -8,7 +8,7 @@ Updated after world expansion, magic system, progression redesign, and item cata
   - [x] `POST /session/new`
   - [x] `GET/POST /state/{session_id}`
   - [x] `POST /character/create`
-- [x] Preserve and validate v3.2.0 schema blocks end-to-end:
+- [x] Preserve and validate v3.1.1 schema blocks end-to-end:
   - [x] character `identity`, `equipment`, `reputation`
   - [x] world `companions`, `economy`, `politics`
 - [x] Ensure `Economy.coin` and `Economy.wealth_tier` are enforced via model validation
@@ -24,8 +24,8 @@ Updated after world expansion, magic system, progression redesign, and item cata
   - [x] endpoint schema refs in OpenAPI contract tests
   - [x] validation regression tests for negative coin and invalid wealth tier
 - [x] Align version/docs consistency items:
-  - [x] `api/main.py` version set to `3.2.0`
-  - [x] `scripts/verify_production_contract.py` checks `3.2.0`
+  - [x] `api/main.py` version set to `3.1.1`
+  - [x] `scripts/verify_production_contract.py` checks `3.1.1`
   - [x] README cleanup and `.env.example` added
 - [x] Validation test run passing for hardened scope (`11 passed`)
 - [x] Add Alembic migrations for schema lifecycle (replace ad hoc/manual DB evolution)
