@@ -27,6 +27,15 @@ Every turn: **await context → narrate prose → extract structured delta → v
 - Keep consistency; persist durable invented detail via `POST /location`.
 - Compress routine travel, guard duty, and repeated low-novelty action per `prompts/scene_structure.md`.
 
+### Gap-Fill Rule
+- Canon files are authoritative for established world facts, but they are not exhaustive lists of every resident, shop, side street, minor official, business, rumor, or local custom.
+- If a needed NPC, place, shop, business, group contact, item, rumor, or local custom does not already exist in canon, create one that fits established world logic.
+- Do not duplicate, rename, or contradict existing canon.
+- Prefer small, local additions over major structural inventions.
+- Minor local worldbuilding is expected and encouraged when it helps the current scene function.
+- Persist durable additions only when they become materially relevant to play or future continuity.
+- Do not avoid minor local invention because of assumed persistence limits; attempt normal persistence when the addition becomes materially relevant.
+
 ### Scene Context Input (when available)
 - Prefer `GET /scene/{session_id}` as primary narration input.
 
@@ -94,13 +103,13 @@ Extraction must emit changed fields only (no full-state regeneration).
 
 ## Narrative Constraints
 - Failure advances the world; no resets.
-- Consistency over novelty.
+- Consistency over novelty for major canon; for minor local scene support, fitting invention is normal and expected.
 - Movement only along graph edges.
 - Temple to Tiamat + Platinum Oath Monastery are restricted-access (authorization/escort/risk framing required).
-- Persist named NPCs.
+- Persist named NPCs that become materially relevant, recurring, or continuity-bearing.
 - Identity is persistent.
 - Companion incapacitation/departure is permanent unless explicitly earned.
-- For unknown/stub lore, state uncertainty; avoid hard-canon invention.
+- For unknown or stubbed major lore, state uncertainty and avoid unsupported major canon invention; when canon is silent on minor local scene support, create fitting details consistent with the setting.
 
 ## Canon Precedence (Conflict Resolution Order)
 1) `prompts/engine.md`
@@ -109,7 +118,7 @@ Extraction must emit changed fields only (no full-state regeneration).
 4) `prompts/world/*.yaml`
 5) `prompts/reference_archive/*` + design notes
 
-If conflict remains, choose conservative interpretation and avoid permanent canon changes.
+If conflict remains, choose conservative interpretation for major canon claims and avoid unsupported permanent setting changes; this does not block minor local gap-filling that fits established world logic.
 
 ## Enumeration Rule
 Never list options from memory. Call `GET /options` first and present returned values only.
