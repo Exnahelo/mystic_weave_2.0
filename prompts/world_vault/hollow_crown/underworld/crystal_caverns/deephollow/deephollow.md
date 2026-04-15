@@ -3,7 +3,7 @@ id: deephollow
 name: Deephollow
 type: city
 region_id: hollow_crown
-summary: An underground city in the Crystal Caverns beneath the central-west / south-central
+description: An underground city in the Crystal Caverns beneath the central-west / south-central
   basin structure, with major access routes running upward toward the Stronghold and
   outward toward western and southern corridors. Deeph…
 connections:

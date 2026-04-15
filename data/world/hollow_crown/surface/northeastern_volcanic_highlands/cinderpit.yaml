@@ -2,7 +2,7 @@ id: cinderpit
 name: Cinderpit
 type: settlement
 region_id: hollow_crown
-summary: An ore extraction settlement on the lower slopes of the Volcanic Highlands,
+description: An ore extraction settlement on the lower slopes of the Volcanic Highlands,
   feeding raw materials to Zarkharath's forge operations. Cinderpit is not comfortable
   — the air carries sulfur, the ground is warm underfoot, an…
 connections:

@@ -3,10 +3,10 @@ id: stronghold_of_drakenvale
 name: Stronghold of Drakenvale
 type: settlement
 region_id: hollow_crown
-summary: Primary fortress-settlement carved from the Heartmass and serving as the
+description: Primary fortress-settlement carved from the Heartmass and serving as the
   civic, sacred, and political core of Hollow Crown.
 tags:
-- hollow-vale
+- hollow-crowm
 - fortress-settlement
 - civic-core
 - stronghold
@@ -18,7 +18,7 @@ The Stronghold stands at the center of Hollow Crown, carved directly from the He
 
 ## Tags
 
-- hollow-vale
+- hollow-crowm
 - fortress-settlement
 - civic-core
 - stronghold

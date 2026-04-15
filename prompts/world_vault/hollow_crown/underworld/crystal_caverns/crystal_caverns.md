@@ -2,7 +2,7 @@
 id: crystal-caverns
 name: Crystal Caverns
 type: region_zone
-summary: A subterranean labyrinth beneath the valley floor, accessible through cave
+description: A subterranean labyrinth beneath the valley floor, accessible through cave
   systems under the Stronghold, under the Temperate Forest, and at scattered surface
   points none of which are publicly known. Finding an entrance…
 tags:

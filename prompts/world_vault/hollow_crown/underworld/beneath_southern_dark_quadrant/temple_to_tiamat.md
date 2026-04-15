@@ -3,7 +3,7 @@ id: temple-to-tiamat
 name: Temple to Tiamat
 type: sealed-temple
 region_id: hollow_crown
-summary: Sealed and heavily warded temple buried beneath the southern dark quadrant,
+description: Sealed and heavily warded temple buried beneath the southern dark quadrant,
   treated as one of the most dangerous points in Hollow Crown.
 connections:
 - shadowed-hollows

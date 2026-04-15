@@ -2,10 +2,10 @@
 id: underworld
 name: Underworld
 type: region_zone
-summary: Subsurface layer of Hollow Crown containing the Crystal Caverns and the deep
+description: Subsurface layer of Hollow Crown containing the Crystal Caverns and the deep
   southern reaches beneath the dark quadrant.
 tags:
-- hollow-vale
+- hollow-crowm
 - underworld
 - subterranean
 ---
@@ -16,7 +16,7 @@ Subsurface layer of Hollow Crown containing the Crystal Caverns and the deep sou
 
 ## Tags
 
-- hollow-vale
+- hollow-crowm
 - underworld
 - subterranean
 

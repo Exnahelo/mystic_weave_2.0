@@ -3,7 +3,7 @@ id: feywood-glade-border
 name: Feywood Glade Border
 type: route-node
 region_id: hollow_crown
-summary: A threshold marker and travel node at the edge of the Feywood Glade. Placeholder-safe
+description: A threshold marker and travel node at the edge of the Feywood Glade. Placeholder-safe
   content until the full border canon is authored.
 connections:
 - dracelune

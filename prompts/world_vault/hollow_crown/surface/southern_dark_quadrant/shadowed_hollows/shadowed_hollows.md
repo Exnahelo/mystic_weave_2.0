@@ -2,7 +2,7 @@
 id: shadowed-hollows
 name: Shadowed Hollows
 type: region_zone
-summary: The biome above and around the Temple to Tiamat, where necrotic energy seeps
+description: The biome above and around the Temple to Tiamat, where necrotic energy seeps
   upward through the rock. The vegetation here is twisted and pale. Shadows move independently
   of light sources. Wraiths and shadow creatures ar…
 tags:

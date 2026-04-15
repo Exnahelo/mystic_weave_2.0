@@ -2,7 +2,7 @@ id: lastmark
 name: Lastmark
 type: settlement
 region_id: hollow_crown
-summary: 'A high approach waystation in one of the more stable Inner Rampart sectors
+description: 'A high approach waystation in one of the more stable Inner Rampart sectors
   beneath the Alpine Peaks. Lastmark is small, functional, and built low against wind
   and stonefall: a stable, a depot, an inn, and guide housing…'
 connections:

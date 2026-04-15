@@ -1,0 +1,15 @@
+id: kebab-case-node-id
+name: Human Readable Name
+type: location  # region | settlement | district | location | region_zone | hazard | dungeon
+region_id: hollow_crown
+settlement_id:  # omit if not inside a settlement
+district_id:    # omit if not inside a district
+parent_location_id:  # omit if top-level for its tier
+description: One or two sentence canonical description. This is the runtime-facing text.
+connections:
+- connected-node-id
+tags:
+- hollow-crown
+known_npcs: []
+threat_level: 0  # 0–5
+discovered: false

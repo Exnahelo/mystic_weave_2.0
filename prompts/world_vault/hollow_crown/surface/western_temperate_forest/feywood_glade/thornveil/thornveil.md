@@ -3,7 +3,7 @@ id: thornveil
 name: Thornveil
 type: settlement
 region_id: hollow_crown
-summary: Placeholder-safe runtime node pending fuller canon migration.
+description: Placeholder-safe runtime node pending fuller canon migration.
 connections: []
 tags:
 - placeholder

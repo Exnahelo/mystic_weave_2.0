@@ -3,7 +3,7 @@ id: the-aeries
 name: Aeries
 type: location
 region_id: hollow_crown
-summary: Open-air dragon perches and elevated private spaces in the upper reaches
+description: Open-air dragon perches and elevated private spaces in the upper reaches
   of the Stronghold of Drakenvale.
 connections: []
 tags:

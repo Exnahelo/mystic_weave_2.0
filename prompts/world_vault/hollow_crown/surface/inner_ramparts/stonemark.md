@@ -3,7 +3,7 @@ id: stonemark
 name: Stonemark
 type: settlement
 region_id: hollow_crown
-summary: A quarry settlement in the Inner Ramparts and alpine foothill transition,
+description: A quarry settlement in the Inner Ramparts and alpine foothill transition,
   supplying cut stone and mineral output to the Stronghold and basin infrastructure.
   Stonemark is built from its own product — low, dense, wind-res…
 connections:

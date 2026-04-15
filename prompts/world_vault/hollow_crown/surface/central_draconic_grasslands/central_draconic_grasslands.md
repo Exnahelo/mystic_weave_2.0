@@ -2,10 +2,10 @@
 id: central_draconic_grasslands
 name: Central Draconic Grasslands
 type: region_zone
-summary: Open agricultural and patrol-traveled southern basin corridor linking the
+description: Open agricultural and patrol-traveled southern basin corridor linking the
   stronghold-facing settlements, highland approaches, and grassland routes.
 tags:
-- hollow-vale
+- hollow-crowm
 - grasslands
 - surface
 ---
@@ -16,7 +16,7 @@ Open agricultural and patrol-traveled southern basin corridor linking the strong
 
 ## Tags
 
-- hollow-vale
+- hollow-crowm
 - grasslands
 - surface
 

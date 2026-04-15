@@ -3,12 +3,12 @@ id: drakenvale-city
 name: Drakenvale City
 type: city
 region_id: hollow_crown
-summary: The central city built around and below the Stronghold, spreading across
+description: The central city built around and below the Stronghold, spreading across
   lower terraces, plazas, bridges, roads, and lakefront approaches around the Heartmass-carved
   core.
 connections: []
 tags:
-- hollow-vale
+- hollow-crowm
 - city
 - central-settlement
 - drakenvale
@@ -23,7 +23,7 @@ Drakenvale is the central city built around and below the Stronghold, concentrat
 
 ## Tags
 
-- hollow-vale
+- hollow-crowm
 - city
 - central-settlement
 - drakenvale

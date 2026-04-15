@@ -2,10 +2,10 @@
 id: feywood_glade
 name: Feywood Glade
 type: region_zone
-summary: Fixed pocket region within the western temperate forest whose interior does
+description: Fixed pocket region within the western temperate forest whose interior does
   not obey ordinary spatial logic.
 tags:
-- hollow-vale
+- hollow-crowm
 - feywood
 - forest
 - liminal
@@ -17,7 +17,7 @@ The Feywood Glade occupies a fixed location within the western forest, but its i
 
 ## Tags
 
-- hollow-vale
+- hollow-crowm
 - feywood
 - forest
 - liminal

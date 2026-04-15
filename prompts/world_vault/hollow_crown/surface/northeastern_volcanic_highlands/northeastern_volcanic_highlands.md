@@ -2,10 +2,10 @@
 id: northeastern_volcanic_highlands
 name: Northeastern Volcanic Highlands
 type: region_zone
-summary: Geothermally active northeastern highland sector containing Zarkharath, Cinderpit,
+description: Geothermally active northeastern highland sector containing Zarkharath, Cinderpit,
   the Infernal Forge, and Zarkeros’s Fortress.
 tags:
-- hollow-vale
+- hollow-crowm
 - volcanic-highlands
 - surface
 - northeast
@@ -17,7 +17,7 @@ The northeastern volcanic highlands are geothermally active and contain Zarkhara
 
 ## Tags
 
-- hollow-vale
+- hollow-crowm
 - volcanic-highlands
 - surface
 - northeast

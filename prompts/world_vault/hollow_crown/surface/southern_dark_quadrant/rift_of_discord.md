@@ -3,7 +3,7 @@ id: rift-of-discord
 name: Rift of Discord
 type: hazard
 region_id: hollow_crown
-summary: A war-scar chasm of unstable magical energy adjacent to the Shadowed Hollows,
+description: A war-scar chasm of unstable magical energy adjacent to the Shadowed Hollows,
   created during the Discordant War when a rogue faction sought to unseal the Temple
   to Tiamat. The Rift is not a dungeon — it is a wound. Chao…
 connections:

@@ -2,10 +2,10 @@
 id: southwestern_mystic_wetlands
 name: Southwestern Mystic Wetlands
 type: region_zone
-summary: Southwestern low-basin wetland region where waters from the southern basin
+description: Southwestern low-basin wetland region where waters from the southern basin
   gather, spread, and disappear into subterranean outflow channels.
 tags:
-- hollow-vale
+- hollow-crowm
 - wetlands
 - surface
 - southwest
@@ -17,7 +17,7 @@ The southwestern mystic wetlands form the low-basin drainage region where waters
 
 ## Tags
 
-- hollow-vale
+- hollow-crowm
 - wetlands
 - surface
 - southwest

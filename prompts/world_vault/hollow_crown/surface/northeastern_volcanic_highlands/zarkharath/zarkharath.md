@@ -3,7 +3,7 @@ id: zarkharath
 name: Zarkharath
 type: city
 region_id: hollow_crown
-summary: The forge city of the Volcanic Highlands, built into the slopes beneath Zarkeros's
+description: The forge city of the Volcanic Highlands, built into the slopes beneath Zarkeros's
   lair. Zarkharath is loud, hot, and perpetually productive. Smoke from the Infernal
   Forge Guild's operations hangs over the settlement at…
 connections:

@@ -3,7 +3,7 @@ id: sacred-pools
 name: Sacred Pools
 type: location
 region_id: hollow_crown
-summary: A revered pool complex on the Drakenvale approaches used for ritual reflection,
+description: A revered pool complex on the Drakenvale approaches used for ritual reflection,
   healing, and guarded sacred access. Placeholder-safe summary pending fuller canon
   migration.
 connections:

@@ -3,7 +3,7 @@ id: shadowed-hollows-approach
 name: Shadowed Hollows Approach
 type: hazard
 region_id: hollow_crown
-summary: Placeholder-safe runtime node pending fuller canon migration.
+description: Placeholder-safe runtime node pending fuller canon migration.
 connections: []
 tags:
 - placeholder
