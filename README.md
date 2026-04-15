@@ -156,16 +156,6 @@ World content authority:
 - `prompts/world_vault/` = markdown authoring/reference layer
 - `prompts/world/` = legacy flat YAML source for unmigrated nodes only
 
-World content authority:
-- `data/world/` = canonical structured runtime world layer
-- `prompts/world_vault/` = markdown authoring/reference layer
-- `prompts/world/` = legacy flat YAML source for unmigrated nodes only
-
-World content authority:
-- `data/world/` = canonical structured runtime world layer
-- `prompts/world_vault/` = markdown authoring/reference layer
-- `prompts/world/` = legacy flat YAML source for unmigrated nodes only
-
 ### Smoke Tests
 
 ```bash

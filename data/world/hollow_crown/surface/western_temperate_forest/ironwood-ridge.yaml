@@ -8,4 +8,3 @@ connections: [glacial-stream-crossing, wardline-threshold]
 threat_level: 2
 known_npcs: []
 discovered: true
----

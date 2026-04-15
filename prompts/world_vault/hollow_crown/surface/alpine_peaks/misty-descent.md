@@ -12,8 +12,7 @@ tags:
 - mist
 - wetland-edge
 - disorienting
-known_npcs:
-[]
+known_npcs: []
 threat_level: 2
 discovered: true
 ---

@@ -12,8 +12,7 @@ tags:
 - forest
 - shelter
 - yeti-territory
-known_npcs:
-[]
+known_npcs: []
 threat_level: 2
 discovered: true
 ---

@@ -8,4 +8,3 @@ connections: [alpine-pass, ironwood-ridge]
 threat_level: 2
 known_npcs: []
 discovered: true
----

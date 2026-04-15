@@ -86,6 +86,9 @@ Updated after world expansion, magic system, progression redesign, and item cata
 
 ### Schema & Model Cleanup
 
+- [x] Normalize `summary` → `description`
+- [ ] Normalize `description` field usage across region-level YAML files that
+      currently omit it (hollow_crown.yaml, underworld.yaml, inner_ramparts.yaml, etc.)
 - [x] Decide deprecation timeline for legacy compatibility fields in `CharacterModel` (`level`, `magic_fields`, `draconic_traits` alias)
   - [x] **v3.2.x (now):** retain compatibility fields; mark as deprecated in schema/docs.
   - [x] **v3.3.0:** stop server-generated writes for `level`/`magic_fields`; continue read compatibility.

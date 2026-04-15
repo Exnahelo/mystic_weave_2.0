@@ -12,8 +12,7 @@ tags:
 - threshold
 - magical-barrier
 - narrative-gate
-known_npcs:
-[]
+known_npcs: []
 threat_level: 2
 discovered: true
 ---

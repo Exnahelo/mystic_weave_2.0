@@ -12,8 +12,7 @@ tags:
 - water
 - rest-point
 - bridge
-known_npcs:
-[]
+known_npcs: []
 threat_level: 2
 discovered: true
 ---

@@ -13,8 +13,7 @@ tags:
 - dangerous
 - drakenvale
 - psionic
-known_npcs:
-[]
+known_npcs: []
 threat_level: 4
 discovered: false
 ---

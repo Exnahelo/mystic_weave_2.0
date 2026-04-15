@@ -14,8 +14,7 @@ tags:
 - dangerous
 - drakenvale
 - disputed
-known_npcs:
-[]
+known_npcs: []
 threat_level: 3
 discovered: false
 ---
