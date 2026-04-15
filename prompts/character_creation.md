@@ -79,7 +79,7 @@ Gather the following in natural conversation, not as a form. Let the player's an
    - Gather for each: name, species (optional), role in the party (optional).
    - Ask the same narrative questions from Stage 5 — briefly, not exhaustively. A companion needs at minimum: one motivation and one quirk to feel present.
    - Ask disposition toward the player character: how does this companion feel about them? (Map to a rough disposition: devoted, loyal, friendly, cautious, wary, or hostile.)
-   - Store each companion in `world.companions` with `status: active`.
+   - Store each companion in `world.companions` with `status: active`, and submit them with the `POST /session/new` call.
 3. If alone, `world.companions` stays empty.
 
 **Companion rule — party reputation:** When the party approaches a faction, compute party reputation as:
@@ -93,7 +93,7 @@ Gather the following in natural conversation, not as a form. Let the player's an
 1. Ask: "How are they set up materially — do they have coin, useful gear, or are they scraping by?"
 2. Map the answer to `wealth_tier` (destitute / modest / comfortable / wealthy / affluent). Default: modest.
 3. Set starting `coin` using `prompts/economy_rules.md` tier guidance and supporting JSON data.
-4. If they mention specific items, add them to `equipment.worn` or `equipment.carried` as appropriate.
+4. If they mention specific items, add them to `equipment.worn` or `equipment.carried` as appropriate, and submit them with the `POST /session/new` call.
 5. If they mention debts or obligations, add them to `economy.obligations`.
 6. Do not prompt exhaustively for every item. Let the player volunteer what matters.
 
@@ -107,7 +107,7 @@ Gather the following in natural conversation, not as a form. Let the player's an
    - Companions (if any) and their roles
    - Wealth tier and any notable gear
 2. Confirm the build.
-3. Call `POST /session/new` with the finalized data, including `identity` and `starting_economy`.
+3. Call `POST /session/new` with the finalized data, including `identity`, `starting_economy`, any collected `companions`, and any collected starting `equipment`.
 4. Retain the returned `session_id` exactly as returned and reuse it for all later `GET /state/{session_id}`, `GET /scene/{session_id}`, `POST /state/{session_id}`, and `POST /state/{session_id}/delta` calls.
 
 ### Progression Clarifier (Player-Facing)
@@ -198,6 +198,8 @@ Do not introduce legacy/alternate weapon tag names during character creation.
 | `starting_economy.wealth_tier` | 7 | Default: modest |
 | `starting_economy.coin` | 7 | Default: 0 |
 | `equipment.worn` / `equipment.carried` | 7 | From player description |
+| `companions` | 8 | Optional on `POST /session/new` |
+| `equipment` | 8 | Optional on `POST /session/new` |
 | `economy.obligations` | 7 | Debts, favors, sworn duties |
 | `starting_location` | 8 | Set by GPT from world context |
 | `goal` | 8 | Ask player or set narratively |

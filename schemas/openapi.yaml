@@ -636,6 +636,13 @@ components:
           anyOf:
           - $ref: '#/components/schemas/HP'
           - type: 'null'
+        domains:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Domains
         knowledge:
           anyOf:
           - additionalProperties:
@@ -673,6 +680,10 @@ components:
             type: array
           - type: 'null'
           title: Reputation
+        advancement:
+          anyOf:
+          - $ref: '#/components/schemas/AdvancementState'
+          - type: 'null'
       additionalProperties: false
       type: object
       title: CharacterStateDelta
@@ -1403,6 +1414,17 @@ components:
           $ref: '#/components/schemas/Identity-Input'
         starting_economy:
           $ref: '#/components/schemas/Economy'
+        companions:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/CompanionModel-Input'
+            type: array
+          - type: 'null'
+          title: Companions
+        equipment:
+          anyOf:
+          - $ref: '#/components/schemas/Equipment-Input'
+          - type: 'null'
       type: object
       required:
       - character_name

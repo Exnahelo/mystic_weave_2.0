@@ -30,9 +30,9 @@ Three ancient dragons rule by consensus. Major decisions of lasting political, l
 
 | Dragon | Type | Alignment | Domain |
 | --- | --- | --- | --- |
-| [[Eryndor the Radiant]] | Gold Dragon | Lawful Good | Justice, diplomacy, moral guidance |
-| [[Zarkeros the Inferno]] | Red Dragon | Lawful Evil | Strength, defense, resource management |
-| [[Varethyn of the Amethyst Gaze]] | Amethyst Dragon | Neutral | Wisdom, arcane knowledge, balance |
+| Eryndor the Radiant | Gold Dragon | Lawful Good | Justice, diplomacy, moral guidance |
+| Zarkeros the Inferno | Red Dragon | Lawful Evil | Strength, defense, resource management |
+| Varethyn of the Amethyst Gaze | Amethyst Dragon | Neutral | Wisdom, arcane knowledge, balance |
 
 When the Council cannot reach consensus, disputes may be referred to the **Heartstone**, the radiant artifact housed at the center of the Draconic Hall. It is both a remnant of the sanctuary’s founding and a living instrument of guidance, invoked only in matters of genuine deadlock or exceptional communal significance.
 

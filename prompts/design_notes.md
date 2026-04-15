@@ -20,6 +20,17 @@
 | `history.md` | Canon source of truth | Yes |
 | `groups.md` | Canon source of truth | Yes |
 | `npcs.md` | Canon source of truth | Yes |
+| `calendar.md` | Canon runtime/support reference | Yes |
+| `character_creation.md` | Canon runtime/support reference | Yes |
+| `combat_rules.md` | Canon runtime/support reference | Yes |
+| `difficulty_rules.md` | Canon runtime/support reference | Yes |
+| `economy_rules.md` | Canon runtime/support reference | Yes |
+| `engine.md` | Canon runtime system prompt | Yes |
+| `items_rules.md` | Canon runtime/support reference | Yes |
+| `magic_rules.md` | Canon runtime/support reference | Yes |
+| `progression_rules.md` | Canon runtime/support reference | Yes |
+| `scene_structure.md` | Canon runtime/support reference | Yes |
+| `world_rules.md` | Canon source of truth | Yes |
 | `design_notes.md` | Living author document | No |
 
 **Design Notes Policy:** This file is author-facing only and is not part of runtime canon upload.
@@ -49,6 +60,11 @@
 - [x] Align settlement placement text to geography grid logic
 - [x] Add core runtime nodes: Heartmass, Southern Lake, Inner Ramparts, Drakenvale City
 - [ ] Plan YAML migration for structured location metadata (future phase)
+
+### Runtime/system migration confirmations
+
+- Extraction step separation is complete; the structured delta contract is live in the API/runtime path.
+- `magic_rules.md` is now the authoritative source for magic difficulty and access-band handling.
 
 ---
 

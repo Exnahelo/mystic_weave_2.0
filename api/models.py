@@ -444,12 +444,14 @@ class CharacterStateDelta(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     hp: HP | None = None
+    domains: dict[str, int] | None = None
     knowledge: dict[str, int] | None = None
     application: dict[str, int] | None = None
     status_effects: list[str] | None = None
     notes: str | None = None
     equipment: EquipmentDelta | None = None
     reputation: list[ReputationEntry] | None = None
+    advancement: AdvancementState | None = None
 
     def has_updates(self) -> bool:
         return any(v is not None for v in self.model_dump(exclude_none=False).values())
@@ -553,6 +555,8 @@ class NewSessionRequest(BaseModel):
     # New in v3.1.0 — all optional; GPT gathers these during character creation
     identity:         Identity          = Field(default_factory=Identity)
     starting_economy: Economy           = Field(default_factory=Economy)
+    companions:       list[CompanionModel] | None = None
+    equipment:        Equipment | None = None
 
 
 class NewSessionResponse(BaseModel):

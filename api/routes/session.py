@@ -58,13 +58,16 @@ async def new_session(
     except ValidationError as e:
         raise HTTPException(status_code=422, detail=e.errors())
 
+    if body.equipment is not None:
+        validated_character.equipment = body.equipment
+
     # Build initial world state
     world: dict = {
         "location":   body.starting_location,
         "threat":     body.threat,
         "goal":       body.goal,
         "turn":       1,
-        "companions": [],
+        "companions": [c.model_dump() for c in body.companions] if body.companions else [],
         "economy":    body.starting_economy.model_dump(),
         "politics": {
             "faction_memberships":  [],
@@ -107,6 +110,6 @@ async def new_session(
 
     return NewSessionResponse(
         session_id=session_id,
-        character=character_json,
-        world=world_json,
+        character=validated_character,
+        world=validated_world,
     )

@@ -33,9 +33,9 @@ These are the major power anchors of Drakenvale. Their identity, position, autho
 
 | Dragon | Type | Alignment | Domain | Commands |
 | --- | --- | --- | --- | --- |
-| [[Eryndor the Radiant]] | Ancient Gold Dragon | Lawful Good | Justice, diplomacy, moral guidance | Wardens (peacetime), Platinum Acolytes |
-| [[Zarkeros the Inferno]] | Ancient Red Dragon | Lawful Evil | Strength, defense, resources | Dragon Guard, Wardens (crisis) |
-| [[Varethyn of the Amethyst Gaze]] | Ancient Amethyst Dragon | Neutral | Wisdom, arcane knowledge, balance | Arcane Conservatory, Amethyst Veil |
+| Eryndor the Radiant | Ancient Gold Dragon | Lawful Good | Justice, diplomacy, moral guidance | Wardens (peacetime), Platinum Acolytes |
+| Zarkeros the Inferno | Ancient Red Dragon | Lawful Evil | Strength, defense, resources | Dragon Guard, Wardens (crisis) |
+| Varethyn of the Amethyst Gaze | Ancient Amethyst Dragon | Neutral | Wisdom, arcane knowledge, balance | Arcane Conservatory, Amethyst Veil |
 
 All three hold equal weight in deliberation. Major decisions require unanimous approval. In cases of true deadlock, the **Heartstone** may be invoked for guidance.
 

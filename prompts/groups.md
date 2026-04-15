@@ -57,7 +57,7 @@ Groups operating against the law, outside public authority, or at the margins of
 The supreme governing authority of Drakenvale.
 
 **Type:** Governing triumvirate  
-**Leadership:** [[Eryndor the Radiant]], [[Zarkeros the Inferno]], [[Varethyn of the Amethyst Gaze]]  
+**Leadership:** Eryndor the Radiant, Zarkeros the Inferno, Varethyn of the Amethyst Gaze
 **Status:** Canonical, active, public
 
 The Council is the final political authority of the sanctuary. It governs by consensus, with unanimous approval required for major decisions of enduring legal, military, theological, or strategic significance. It interprets and enforces the Ptarian Code, controls disclosure of the Hollow Crown’s existence, and oversees the balance of power among the realm’s major institutions.
@@ -85,7 +85,7 @@ They hold high standing in Drakenvale’s social order and are often the practic
 Drakenvale’s primary external defense force.
 
 **Type:** Military  
-**Leadership:** [[Zarkeros the Inferno]]  
+**Leadership:** Zarkeros the Inferno
 **Status:** Canonical, active, public
 
 The Dragon Guard is responsible for external defense, border security, aerial response, major threat mobilization, and military deterrence. Its composition includes dragonborn warriors, kobold engineers, mortal mages, dragons of varying alignments, mounted and aerial assets, and reserve support forces.
@@ -99,7 +99,7 @@ The Guard’s authority is strongest at the edges of the Hollow Crown, along dan
 Drakenvale’s internal security, sacred-site, and anomaly-response force.
 
 **Type:** Internal security / sacred protection force  
-**Leadership:** [[Eryndor the Radiant]] in peacetime; temporarily militarized under [[Zarkeros the Inferno]] in crisis  
+**Leadership:** Eryndor the Radiant in peacetime; temporarily militarized under Zarkeros the Inferno in crisis
 **Status:** Canonical, active, public
 
 The Wardens protect the Platinum Heart, the Amethyst Vault, the Heartstone chamber, and the sealed Temple to Tiamat. They investigate magical anomalies, internal disturbances, corruption threats, cult activity, and breaches involving sacred or strategically sensitive sites.
@@ -153,7 +153,7 @@ The Sapphire Choir maintains oral history, formal performance, ritual music, lit
 The spiritual backbone of Drakenvale’s public sacred life.
 
 **Type:** Religious order  
-**Leadership:** Broadly aligned with [[Eryndor the Radiant]]  
+**Leadership:** Broadly aligned with Eryndor the Radiant
 **Status:** Canonical, active, public
 
 The Platinum Acolytes maintain sacred rites, public observances, atonement practice, moral instruction, and the routine sacred life of the sanctuary. They tend the Platinum Heart, oversee much of the sanctuary’s visible Bahamutic religious life, and help preserve the moral authority of the Ptarian Code.
@@ -181,7 +181,7 @@ It is not the same as the Arcane Conservatory. The Hall of Scales is broad, foun
 The elite center of advanced magical study and dangerous arcane refinement.
 
 **Type:** Advanced magical institution  
-**Leadership:** [[Varethyn of the Amethyst Gaze]]  
+**Leadership:** Varethyn of the Amethyst Gaze
 **Status:** Canonical, active, public
 
 The Arcane Conservatory is where exceptional magical talent is cultivated beyond the level of general education. It is concerned with refined arcane mastery, difficult theory, dangerous magical practice, elite instruction, and the preservation and controlled handling of powerful knowledge.
@@ -195,7 +195,7 @@ Its role is not mass education. It is the sanctuary’s advanced magical thresho
 The concealed surviving remnant of the Platinum Accord, publicly known only as the monastic order of Platinum Oath.
 
 **Type:** Restricted monastic watch order / Accord remnant  
-**Leadership:** [[Serevane]]  
+**Leadership:** Serevane
 **Status:** Canonical, active, partially concealed
 
 Publicly, the Vigil appears as the disciplined monastic order of Platinum Oath Monastery, associated with Rift vigilance, hard devotional practice, and dangerous perimeter work. Internally, it preserves the living remnant of the Platinum Accord.
@@ -245,7 +245,7 @@ It is both economically useful and politically sensitive because trade is one of
 The principal crafted-power and strategic manufacturing body of the realm.
 
 **Type:** Craft guild / industrial body  
-**Leadership:** Operates under the strategic influence of [[Zarkeros the Inferno]]  
+**Leadership:** Operates under the strategic influence of Zarkeros the Inferno
 **Status:** Canonical, active, public
 
 The Infernal Forge Guild produces weapons, armor, tools, constructs, enchanted implements, and a range of specialized crafted goods necessary for both daily life and defense. It is one of the sanctuary’s most important production bodies and a major consumer of ore, heat, magical materials, and skilled labor.
@@ -261,7 +261,7 @@ Its work ties the Volcanic Highlands directly to the practical strength of the r
 Varethyn’s covert intelligence architecture.
 
 **Type:** Covert intelligence network  
-**Leadership:** [[Varethyn of the Amethyst Gaze]]  
+**Leadership:** Varethyn of the Amethyst Gaze
 **Status:** Canonical, active, secret
 
 The Amethyst Veil is the hidden intelligence network through which Varethyn gathers information, shapes perception, tracks threat patterns, and maintains awareness beyond the visible reach of ordinary governance. It is not a public institution.
