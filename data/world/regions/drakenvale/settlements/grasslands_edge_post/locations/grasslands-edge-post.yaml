@@ -3,15 +3,21 @@ name: Grasslands Edge Post
 type: outpost
 region_id: drakenvale
 settlement_id: grasslands_edge_post
-summary: A fortified post at the grassland approaches, serving as a stable placeholder
-  settlement node for the first-pass world cutover.
+summary: A windswept frontier post of watchtowers, wagon yards, ration sheds, and patrol
+  stables at the point where open grassland traffic compresses into the stronghold-facing
+  road. Caravans are inspected here, Dragon Guard riders rotate through in visible numbers,
+  and most scenes should feel practical, exposed, and transit-driven rather than urban or
+  ceremonial.
 connections:
 - draconic-grasslands-edge
 - stronghold-of-drakenvale
 tags:
 - drakenvale
 - frontier
-- placeholder
+- outpost
+- caravan-route
+- patrol
+- exposed
 known_npcs: []
-threat_level: 0
+threat_level: 1
 discovered: true
