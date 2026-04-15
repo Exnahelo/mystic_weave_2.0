@@ -2,7 +2,7 @@
 id: western_temperate_forest
 name: Western Temperate Forest
 type: region_zone
-summary: Largest western surface woodland in Hollow Vale, containing Dracelune, Feywood
+summary: Largest western surface woodland in Hollow Crown, containing Dracelune, Feywood
   Glade, and surrounding trade-facing forest settlements.
 tags:
 - hollow-vale

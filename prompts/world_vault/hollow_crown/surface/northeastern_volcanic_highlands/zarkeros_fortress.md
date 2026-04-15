@@ -3,15 +3,15 @@ id: zarkeros_lair
 name: Zarkeros’s Lair
 type: lair
 region_id: hollow_crown
-summary: A volcanic dragon’s lair carved deep into the northeastern crater wall, in the heart of the Volcanic Highlands. Rivers of molten lava flow through channels cut through the surrounding stone, filling the chamber with heat, glare, and constant red light.
+summary: A volcanic dragon’s lair carved deep into the northeastern crater wall in the heart of the Volcanic Highlands. Rivers of molten lava flow through channels in the stone, filling the chamber with heat, glare, and constant red light.
 connections:
   - northeastern_volcanic_highlands
 tags:
   - hollow_crown
   - zarkeros
+  - lair
   - red_dragon
   - volcanic
-  - lair
   - restricted
 known_npcs:
   - Zarkeros the Inferno
@@ -21,15 +21,15 @@ discovered: false
 
 # Zarkeros’s Lair
 
-A volcanic dragon’s lair carved deep into the northeastern crater wall, in the heart of the Volcanic Highlands. Rivers of molten lava flow through channels cut through the surrounding stone, filling the chamber with heat, glare, and constant red light.
+A volcanic dragon’s lair carved deep into the northeastern crater wall in the heart of the Volcanic Highlands. Rivers of molten lava flow through channels in the stone, filling the chamber with heat, glare, and constant red light.
 
 ## Tags
 
 - hollow_crown
 - zarkeros
+- lair
 - red_dragon
 - volcanic
-- lair
 - restricted
 
 ## Connected Nodes

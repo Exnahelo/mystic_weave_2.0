@@ -10,7 +10,7 @@ connections:
 - inner-ramparts
 - stonemark
 - alpine-peaks-outer
-- stronghold-of-drakenvale
+- stronghold_of_drakenvale
 tags:
 - alpine-peaks
 - waystation
@@ -39,7 +39,7 @@ A high approach waystation in one of the more stable Inner Rampart sectors benea
 - `inner-ramparts`
 - `stonemark`
 - `alpine-peaks-outer`
-- `stronghold-of-drakenvale`
+- `stronghold_of_drakenvale`
 
 ## Authoring Notes
 

@@ -9,7 +9,7 @@ summary: An ore extraction settlement on the lower slopes of the Volcanic Highla
 connections:
 - zarkharath
 - ashfield
-- volcanic-highlands-trail
+- northeastern_volcanic_highlands
 tags:
 - volcanic-highlands
 - mining
@@ -39,7 +39,7 @@ An ore extraction settlement on the lower slopes of the Volcanic Highlands, feed
 
 - `zarkharath`
 - `ashfield`
-- `volcanic-highlands-trail`
+- `northeastern_volcanic_highlands`
 
 ## Authoring Notes
 

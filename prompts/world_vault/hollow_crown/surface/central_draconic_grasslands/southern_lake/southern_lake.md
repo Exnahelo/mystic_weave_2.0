@@ -6,7 +6,7 @@ region_id: hollow_crown
 summary: Great south-facing freshwater body at the base of the city, fed by sacred
   and civic waters descending from the Stronghold.
 connections:
-- stronghold-of-drakenvale
+- stronghold_of_drakenvale
 - drakenvale-city
 - ashfield
 tags:
@@ -32,7 +32,7 @@ A great lake lies south of the Stronghold at the base of the city. Sacred waters
 
 ## Connected Nodes
 
-- `stronghold-of-drakenvale`
+- `stronghold_of_drakenvale`
 - `drakenvale-city`
 - `ashfield`
 

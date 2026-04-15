@@ -10,7 +10,7 @@ connections:
 - inner-ramparts
 - lastmark
 - stonemark-deep-cuts
-- stronghold-of-drakenvale
+- stronghold_of_drakenvale
 tags:
 - alpine-peaks
 - quarry
@@ -41,7 +41,7 @@ A quarry settlement in the Inner Ramparts and alpine foothill transition, supply
 - `inner-ramparts`
 - `lastmark`
 - `stonemark-deep-cuts`
-- `stronghold-of-drakenvale`
+- `stronghold_of_drakenvale`
 
 ## Authoring Notes
 

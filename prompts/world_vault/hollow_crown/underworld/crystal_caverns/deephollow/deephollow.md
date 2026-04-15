@@ -7,7 +7,7 @@ summary: An underground city in the Crystal Caverns beneath the central-west / s
   basin structure, with major access routes running upward toward the Stronghold and
   outward toward western and southern corridors. Deeph…
 connections:
-- stronghold-of-drakenvale
+- stronghold_of_drakenvale
 - inner-ramparts
 - zarkharath
 - deephollow-lower-tunnels
@@ -38,7 +38,7 @@ An underground city in the Crystal Caverns beneath the central-west / south-cent
 
 ## Connected Nodes
 
-- `stronghold-of-drakenvale`
+- `stronghold_of_drakenvale`
 - `inner-ramparts`
 - `zarkharath`
 - `deephollow-lower-tunnels`

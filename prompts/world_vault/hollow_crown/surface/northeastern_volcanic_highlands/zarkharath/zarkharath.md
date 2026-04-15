@@ -7,9 +7,9 @@ summary: The forge city of the Volcanic Highlands, built into the slopes beneath
   lair. Zarkharath is loud, hot, and perpetually productive. Smoke from the Infernal
   Forge Guild's operations hangs over the settlement at…
 connections:
-- stronghold-of-drakenvale
+- stronghold_of_drakenvale
 - cinderpit
-- volcanic-highlands-trail
+- northeastern_volcanic_highlands
 tags:
 - volcanic-highlands
 - forge
@@ -38,9 +38,9 @@ The forge city of the Volcanic Highlands, built into the slopes beneath Zarkeros
 
 ## Connected Nodes
 
-- `stronghold-of-drakenvale`
+- `stronghold_of_drakenvale`
 - `cinderpit`
-- `volcanic-highlands-trail`
+- `northeastern_volcanic_highlands`
 
 ## Authoring Notes
 
