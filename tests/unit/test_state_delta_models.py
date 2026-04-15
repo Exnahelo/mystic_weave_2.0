@@ -2,6 +2,7 @@ import pytest
 from pydantic import ValidationError
 
 from api.models import ApplyStateDeltaRequest
+from api.routes.state import validate_delta
 
 
 @pytest.mark.unit
@@ -37,3 +38,20 @@ def test_apply_state_delta_rejects_unknown_keys() -> None:
                 "log_entry": "bad",
             }
         )
+
+
+@pytest.mark.unit
+def test_validate_delta_accepts_valid_delta() -> None:
+    body = ApplyStateDeltaRequest.model_validate(
+        {"character": {"notes": "changed"}, "log_entry": "turn summary"}
+    )
+    assert validate_delta(body) is None
+
+
+@pytest.mark.unit
+def test_validate_delta_rejects_blank_log_entry() -> None:
+    body = ApplyStateDeltaRequest.model_validate(
+        {"character": {"notes": "changed"}, "log_entry": "   "}
+    )
+    with pytest.raises(ValueError, match="log_entry is required"):
+        validate_delta(body)

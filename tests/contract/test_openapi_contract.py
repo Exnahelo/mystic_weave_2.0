@@ -100,3 +100,22 @@ def test_openapi_policy_has_top_level_servers_url() -> None:
     assert isinstance(servers, list)
     assert servers
     assert any(isinstance(server.get("url"), str) and server["url"].strip() for server in servers)
+
+
+@pytest.mark.contract
+def test_openapi_contract_has_state_delta_endpoint() -> None:
+    spec = app.openapi()
+    assert "/state/{session_id}/delta" in spec["paths"]
+    delta_post = spec["paths"]["/state/{session_id}/delta"]["post"]
+    request_schema = delta_post["requestBody"]["content"]["application/json"]["schema"]
+    assert request_schema["$ref"] == "#/components/schemas/ApplyStateDeltaRequest"
+
+
+@pytest.mark.contract
+def test_openapi_contract_has_state_delta_schema_components() -> None:
+    spec = app.openapi()
+    schemas = spec["components"]["schemas"]
+    assert "ApplyStateDeltaRequest" in schemas
+    assert "CharacterStateDelta" in schemas
+    assert "WorldStateDelta" in schemas
+    assert "EquipmentDelta" in schemas

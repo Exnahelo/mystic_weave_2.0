@@ -135,6 +135,15 @@ class Equipment(BaseModel):
     stashed: list[EquipmentItem] = Field(default_factory=list)   # at a known location, not on person
 
 
+class EquipmentDelta(BaseModel):
+    """Sparse equipment update; merges by slot rather than replacing all equipment."""
+    model_config = ConfigDict(extra="forbid")
+
+    worn: list[EquipmentItem] | None = None
+    carried: list[EquipmentItem] | None = None
+    stashed: list[EquipmentItem] | None = None
+
+
 class Identity(BaseModel):
     """
     Narrative character block. Captured at creation, GPT-readable every session.
@@ -439,10 +448,8 @@ class CharacterStateDelta(BaseModel):
     application: dict[str, int] | None = None
     status_effects: list[str] | None = None
     notes: str | None = None
-    identity: Identity | None = None
-    equipment: Equipment | None = None
+    equipment: EquipmentDelta | None = None
     reputation: list[ReputationEntry] | None = None
-    advancement: AdvancementState | None = None
 
     def has_updates(self) -> bool:
         return any(v is not None for v in self.model_dump(exclude_none=False).values())

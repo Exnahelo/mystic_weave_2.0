@@ -662,13 +662,9 @@ components:
           - type: string
           - type: 'null'
           title: Notes
-        identity:
-          anyOf:
-          - $ref: '#/components/schemas/Identity-Input'
-          - type: 'null'
         equipment:
           anyOf:
-          - $ref: '#/components/schemas/Equipment-Input'
+          - $ref: '#/components/schemas/EquipmentDelta'
           - type: 'null'
         reputation:
           anyOf:
@@ -677,10 +673,6 @@ components:
             type: array
           - type: 'null'
           title: Reputation
-        advancement:
-          anyOf:
-          - $ref: '#/components/schemas/AdvancementState'
-          - type: 'null'
       additionalProperties: false
       type: object
       title: CharacterStateDelta
@@ -995,6 +987,34 @@ components:
       type: object
       title: Equipment
       description: Three-slot equipment inventory.
+    EquipmentDelta:
+      properties:
+        worn:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/EquipmentItem'
+            type: array
+          - type: 'null'
+          title: Worn
+        carried:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/EquipmentItem'
+            type: array
+          - type: 'null'
+          title: Carried
+        stashed:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/EquipmentItem'
+            type: array
+          - type: 'null'
+          title: Stashed
+      additionalProperties: false
+      type: object
+      title: EquipmentDelta
+      description: Sparse equipment update; merges by slot rather than replacing all
+        equipment.
     EquipmentItem:
       properties:
         id:
