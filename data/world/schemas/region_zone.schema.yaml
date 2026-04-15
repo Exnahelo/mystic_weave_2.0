@@ -1,8 +1,0 @@
-kind: region_zone
-required:
-- id
-- name
-- type
-- region_id
-- summary
-- tags

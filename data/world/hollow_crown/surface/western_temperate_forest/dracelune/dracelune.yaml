@@ -1,0 +1,10 @@
+id: dracelune
+name: Dracélune
+type: city
+region_id: hollow_crown
+summary: Western threshold settlement at the Feywood trade edge; canonical settlement
+  shell for the Dracélune-first migration subset.
+tags:
+- drakenvale
+- threshold-settlement
+- feywood

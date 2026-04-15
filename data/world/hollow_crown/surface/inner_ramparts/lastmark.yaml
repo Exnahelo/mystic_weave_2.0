@@ -1,0 +1,21 @@
+id: lastmark
+name: Lastmark
+type: settlement
+region_id: hollow_crown
+summary: 'A high approach waystation in one of the more stable Inner Rampart sectors
+  beneath the Alpine Peaks. Lastmark is small, functional, and built low against wind
+  and stonefall: a stable, a depot, an inn, and guide housing…'
+connections:
+- inner-ramparts
+- stonemark
+- alpine-peaks-outer
+- stronghold-of-drakenvale
+tags:
+- alpine-peaks
+- waystation
+- border
+- drakenvale
+- last-stop
+known_npcs: []
+threat_level: 3
+discovered: true

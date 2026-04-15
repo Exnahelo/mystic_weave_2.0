@@ -1,9 +1,0 @@
-id: drakenvale
-name: Drakenvale
-type: region
-summary: First-pass canonical region container for the Drakenvale runtime world hierarchy,
-  including stronghold, threshold settlements, and adjacent wilderness approach zones.
-tags:
-- drakenvale
-- runtime-canonical
-- first-pass

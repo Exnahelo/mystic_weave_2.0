@@ -1,0 +1,14 @@
+id: greymantle
+name: Greymantle
+type: city
+region_id: hollow_crown
+summary: Placeholder-safe runtime node pending fuller canon migration.
+connections: []
+tags:
+- greymantle
+- city
+- dark-quadrant-edge
+- drakenvale
+known_npcs: []
+threat_level: 0
+discovered: true

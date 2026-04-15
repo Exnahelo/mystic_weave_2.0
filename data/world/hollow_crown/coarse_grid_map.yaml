@@ -1,0 +1,16 @@
+id: coarse-grid-map
+name: Coarse Grid Map
+type: map-index
+region_id: hollow_crown
+summary: Canonical coarse-placement map for Hollow Crown fixing the broad spatial relationships
+  of major regions, corridors, and anchors.
+connections:
+- travel-and-region-index
+tags:
+- hollow-vale
+- map
+- geography
+- canonical
+known_npcs: []
+threat_level: 0
+discovered: true

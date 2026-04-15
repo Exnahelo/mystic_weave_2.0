@@ -1,0 +1,23 @@
+id: platinum-oath-monastery
+name: Platinum Oath Monastery
+type: monastery
+region_id: hollow_crown
+summary: A fortified monastery built into a natural rock shelf overlooking the Rift
+  of Discord, occupying one of the most geographically defensible positions in Drakenvale.
+  Three sides are sheer cliff face. The fourth is a singl…
+connections:
+- greymantle
+- rift-of-discord-edge
+tags:
+- rift-of-discord
+- platinum-accord
+- monastery
+- warden-training
+- drakenvale
+- lore-significant
+- bahamut
+- vigil
+known_npcs:
+- Serevane
+threat_level: 3
+discovered: false

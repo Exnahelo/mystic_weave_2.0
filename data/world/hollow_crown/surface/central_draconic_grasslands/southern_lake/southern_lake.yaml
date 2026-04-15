@@ -1,0 +1,18 @@
+id: southern-lake
+name: Southern Lake
+type: lake
+region_id: hollow_crown
+summary: Great south-facing freshwater body at the base of the city, fed by sacred
+  and civic waters descending from the Stronghold.
+connections:
+- stronghold-of-drakenvale
+- drakenvale-city
+- ashfield
+tags:
+- hollow-vale
+- lake
+- central-basin
+- water
+known_npcs: []
+threat_level: 0
+discovered: true

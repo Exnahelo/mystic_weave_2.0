@@ -1,0 +1,22 @@
+id: stonemark
+name: Stonemark
+type: settlement
+region_id: hollow_crown
+summary: A quarry settlement in the Inner Ramparts and alpine foothill transition,
+  supplying cut stone and mineral output to the Stronghold and basin infrastructure.
+  Stonemark is built from its own product — low, dense, wind-res…
+connections:
+- inner-ramparts
+- lastmark
+- stonemark-deep-cuts
+- stronghold-of-drakenvale
+tags:
+- alpine-peaks
+- quarry
+- mining
+- stone
+- village
+- drakenvale
+known_npcs: []
+threat_level: 2
+discovered: true

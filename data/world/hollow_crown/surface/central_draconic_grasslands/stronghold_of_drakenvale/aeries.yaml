@@ -1,0 +1,16 @@
+id: the-aeries
+name: Aeries
+type: location
+region_id: hollow_vale
+summary: Open-air dragon perches and elevated private spaces in the upper reaches
+  of the Stronghold of Drakenvale.
+connections: []
+tags:
+- stronghold
+- dragon
+- aeries
+- elevated
+known_npcs: []
+threat_level: 0
+discovered: true
+settlement_id: stronghold_of_drakenvale

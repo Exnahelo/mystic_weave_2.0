@@ -1,7 +1,0 @@
-kind: region
-required:
-- id
-- name
-- type
-- summary
-- tags

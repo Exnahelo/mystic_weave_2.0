@@ -1,0 +1,32 @@
+---
+id: alpine-peaks-outer
+name: Alpine Peaks
+type: region_zone
+summary: The outer face of the Alpine Peaks beyond Lastmark — the true mountain barrier
+  that encircles Drakenvale. No settlements exist here. The terrain is ice, rock,
+  and wind. The Dragon Guard does not patrol this far out; the…
+tags:
+- alpine-peaks
+- wilderness
+- border
+- traversal
+- drakenvale
+- dangerous
+---
+
+# Alpine Peaks
+
+The outer face of the Alpine Peaks beyond Lastmark — the true mountain barrier that encircles Drakenvale. No settlements exist here. The terrain is ice, rock, and wind. The Dragon Guard does not patrol this far out; the…
+
+## Tags
+
+- alpine-peaks
+- wilderness
+- border
+- traversal
+- drakenvale
+- dangerous
+
+## Authoring Notes
+
+Expand atmosphere, scene texture, and canon detail here if stronger source material is authored later. Do not change the mirrored path or stable runtime identifier without a coordinated migration.

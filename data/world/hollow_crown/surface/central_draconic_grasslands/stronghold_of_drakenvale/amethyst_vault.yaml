@@ -1,0 +1,12 @@
+id: amethyst-vault
+name: Amethyst Vault
+type: location
+region_id: hollow_vale
+summary: Placeholder-safe runtime node pending fuller canon migration.
+connections: []
+tags:
+- placeholder
+known_npcs: []
+threat_level: 0
+discovered: true
+settlement_id: stronghold_of_drakenvale
