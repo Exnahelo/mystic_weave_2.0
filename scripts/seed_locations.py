@@ -5,23 +5,11 @@ seed_locations.py — Convert prompt world YAML files to Postgres location recor
 Usage:
     python3 scripts/seed_locations.py
 
-Reads all .yaml files from prompts/world/, parses the YAML payload,
+Reads all canonical world .yaml files from data/world/, parses the YAML payload,
 and upserts each location into the `locations` and `world_graph` tables.
 
 Location file format expected:
----
-id: thornvale
-name: Thornvale
-type: village
-description: A quiet farming settlement at the edge of the Ashwood.
-tags: [rural, low-threat, trade-road]
-connections: [ashwood-east, kings-road-north]
-threat_level: 2
-known_npcs: [aldric-the-smith, wren-innkeeper]
-discovered: true
----
-
-Files are stored as YAML documents with `---` delimiters.
+id, name, type, region_id, summary, connections, tags
 """
 
 from __future__ import annotations
@@ -29,7 +17,6 @@ from __future__ import annotations
 import asyncio
 import json
 import os
-import re
 import sys
 from pathlib import Path
 
@@ -52,20 +39,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-OBSIDIAN_DIR = Path(__file__).parent.parent / "prompts" / "world"
-FRONT_MATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
+CANONICAL_WORLD_DIR = Path(__file__).parent.parent / "data" / "world"
+LEGACY_WORLD_DIR = Path(__file__).parent.parent / "prompts" / "world"
 
 
 def parse_location_file(path: Path) -> dict | None:
     """Parse a location YAML file and return a location dict, or None if invalid."""
-    text = path.read_text(encoding="utf-8")
-    match = FRONT_MATTER_RE.match(text)
-    if not match:
-        print(f"  SKIP {path.name} — no YAML front matter found")
-        return None
-
     try:
-        data = yaml.safe_load(match.group(1))
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
     except yaml.YAMLError as e:
         print(f"  SKIP {path.name} — YAML parse error: {e}")
         return None
@@ -79,7 +60,7 @@ def parse_location_file(path: Path) -> dict | None:
         "id": str(data["id"]),
         "name": str(data["name"]),
         "type": str(data.get("type", "unknown")),
-        "description": str(data.get("description", "")),
+        "description": str(data.get("summary") or data.get("description", "")),
         "tags": list(data.get("tags", [])),
         "connections": list(data.get("connections", [])),
         "threat_level": int(data.get("threat_level", 0)),
@@ -89,20 +70,41 @@ def parse_location_file(path: Path) -> dict | None:
 
 
 async def seed(database_url: str) -> None:
-    if not OBSIDIAN_DIR.exists():
-        print(f"Prompt world directory not found: {OBSIDIAN_DIR}")
-        print("Create prompts/world/ and add .yaml files to seed locations.")
+    if not CANONICAL_WORLD_DIR.exists():
+        print(f"Canonical world directory not found: {CANONICAL_WORLD_DIR}")
+        print("Create data/world/ and add canonical .yaml files to seed locations.")
         return
 
-    md_files = sorted(OBSIDIAN_DIR.glob("*.yaml"))
-    if not md_files:
-        print(f"No .yaml files found in {OBSIDIAN_DIR}")
+    canonical_files = sorted(CANONICAL_WORLD_DIR.rglob("*.yaml"))
+    canonical_files = [p for p in canonical_files if p.name not in {"region.yaml", "settlement.yaml", "district.yaml", "region_zone.yaml"} and not p.parent.name == "schemas"]
+
+    if LEGACY_WORLD_DIR.exists():
+        legacy_files = sorted(LEGACY_WORLD_DIR.glob("*.yaml"))
+        legacy_ids: dict[str, Path] = {}
+        for path in legacy_files:
+            loc = parse_location_file(path)
+            if loc:
+                legacy_ids[loc["id"]] = path
+        canonical_ids: dict[str, Path] = {}
+        for path in canonical_files:
+            loc = parse_location_file(path)
+            if loc:
+                canonical_ids[loc["id"]] = path
+        overlap = sorted(set(legacy_ids) & set(canonical_ids))
+        if overlap:
+            print("ERROR: duplicate structured world IDs exist in both legacy and canonical roots:")
+            for loc_id in overlap:
+                print(f"  {loc_id}: {legacy_ids[loc_id]} <-> {canonical_ids[loc_id]}")
+            sys.exit(1)
+
+    if not canonical_files:
+        print(f"No canonical location .yaml files found in {CANONICAL_WORLD_DIR}")
         return
 
-    print(f"Found {len(md_files)} location file(s) in {OBSIDIAN_DIR}")
+    print(f"Found {len(canonical_files)} canonical location file(s) in {CANONICAL_WORLD_DIR}")
 
     locations = []
-    for path in md_files:
+    for path in canonical_files:
         loc = parse_location_file(path)
         if loc:
             locations.append(loc)

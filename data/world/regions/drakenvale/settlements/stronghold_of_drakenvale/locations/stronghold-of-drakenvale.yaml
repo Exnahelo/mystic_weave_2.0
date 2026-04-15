@@ -1,0 +1,12 @@
+id: stronghold-of-drakenvale
+name: Stronghold Of Drakenvale
+type: location
+region_id: drakenvale
+settlement_id: stronghold_of_drakenvale
+summary: Placeholder-safe runtime node pending fuller canon migration.
+connections: []
+tags:
+- placeholder
+known_npcs: []
+threat_level: 0
+discovered: true

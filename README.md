@@ -47,7 +47,7 @@ System reference: `prompts/world_rules.md` and `prompts/character_creation.md`
   - `prompts/magic_rules.md`
   - `prompts/difficulty_rules.md`
   - `prompts/items_rules.md`
-- World topology audit completed for `prompts/world/*.yaml`.
+- World topology audit completed for the legacy flat world YAML set that has since been reorganized under `data/world/`.
 - Corrected one in-map reciprocity gap:
   - `stronghold-of-drakenvale` ↔ `volcanic-highlands`
 - Retained intentional discovery-gated one-way access for Eryndor's hidden sanctum:
@@ -112,7 +112,7 @@ prompts/               # Obsidian vault — GPT knowledge files + world content
 schemas/
   openapi.yaml         # OpenAPI document format 3.1.0, schema/release version 3.4.0 — upload to GPT builder Actions
 scripts/
-  seed_locations.py    # Seed locations from prompts/world/ into DB
+  seed_locations.py    # Seed canonical structured world data from data/world/ into DB
   verify_production_contract.py  # Validate production against repo expectations
 tests/
   loop_test.py         # Full API loop test (local or Railway)
@@ -150,6 +150,21 @@ alembic downgrade -1
 ```
 
 Note: Railway deploys run migrations explicitly in predeploy using `DATABASE_URL`; app startup should only initialize serving dependencies.
+
+World content authority:
+- `data/world/` = canonical structured runtime world layer
+- `prompts/world_vault/` = markdown authoring/reference layer
+- `prompts/world/` = legacy flat YAML source for unmigrated nodes only
+
+World content authority:
+- `data/world/` = canonical structured runtime world layer
+- `prompts/world_vault/` = markdown authoring/reference layer
+- `prompts/world/` = legacy flat YAML source for unmigrated nodes only
+
+World content authority:
+- `data/world/` = canonical structured runtime world layer
+- `prompts/world_vault/` = markdown authoring/reference layer
+- `prompts/world/` = legacy flat YAML source for unmigrated nodes only
 
 ### Smoke Tests
 

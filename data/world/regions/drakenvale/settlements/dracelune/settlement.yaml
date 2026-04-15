@@ -1,0 +1,10 @@
+id: dracelune
+name: "Drac\xE9lune"
+type: settlement
+region_id: drakenvale
+summary: "Western threshold settlement at the Feywood trade edge; canonical settlement\
+  \ shell for the Drac\xE9lune-first migration subset."
+tags:
+- drakenvale
+- threshold-settlement
+- feywood

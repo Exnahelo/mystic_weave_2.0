@@ -109,7 +109,7 @@ If extraction validation fails: do not commit state; retry extraction with corre
 1) `prompts/engine.md`
 2) `prompts/world_rules.md`
 3) Core world docs (`world.md`, `geography.md`, `history.md`, `groups.md`, `npcs.md`)
-4) `prompts/world/*.yaml`
+4) canonical runtime world YAML under `data/world/`
 5) `prompts/reference_archive/*` + design notes
 
 If conflict remains, choose conservative interpretation for major canon claims and avoid unsupported permanent setting changes; this does not block minor local gap-filling that fits established world logic.

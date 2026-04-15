@@ -88,11 +88,6 @@ def main() -> None:
             if marker not in calendar_content:
                 failures.append(f"prompts/calendar.md missing required marker: {marker}")
 
-    world_dir = repo_root / "prompts" / "world"
-    world_files = sorted(world_dir.glob("*.yaml")) if world_dir.exists() else []
-    if len(world_files) == 0:
-        failures.append("prompts/world has no location yaml files")
-
     # Soft checks: ensure known cross-file markers remain present.
     # These emit warnings (non-fatal) so maintainers can detect drift early
     # without blocking unrelated prompt edits.
@@ -124,3 +119,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    

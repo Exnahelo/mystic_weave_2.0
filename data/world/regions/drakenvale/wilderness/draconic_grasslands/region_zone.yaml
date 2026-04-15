@@ -1,0 +1,10 @@
+id: draconic_grasslands
+name: Draconic Grasslands
+type: region_zone
+region_id: drakenvale
+summary: Open agricultural and patrol-traveled southern basin corridor linking the
+  stronghold-facing settlements, highland approaches, and grassland routes.
+tags:
+- drakenvale
+- grasslands
+- travel-zone

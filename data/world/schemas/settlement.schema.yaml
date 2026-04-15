@@ -1,0 +1,8 @@
+kind: settlement
+required:
+- id
+- name
+- type
+- region_id
+- summary
+- tags

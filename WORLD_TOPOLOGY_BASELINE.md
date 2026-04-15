@@ -1,10 +1,10 @@
 # World Topology Baseline — 2026-04-12
 
-Post-audit baseline for `prompts/world/*.yaml` connection reciprocity after the expanded settlement/location pass.
+Post-audit baseline for the legacy flat `prompts/world/*.yaml` connection reciprocity before hierarchical cutover into `data/world/`.
 
 ## Scope
 
-Audit performed against all current world location files under `prompts/world/`.
+Audit performed against the legacy flat world location files that originally lived under `prompts/world/`.
 
 Current scan totals:
 - 48 location files with `id` + `connections`
@@ -71,7 +71,7 @@ Guidance:
 
 ## Future content update rules
 
-When adding or revising `prompts/world/*.yaml`:
+When migrating or revising canonical runtime world nodes:
 1. Default all navigable in-map routes to reciprocal links.
 2. If a link is intentionally one-way, document the reason in the PR or release note.
 3. Hidden lairs, sealed spaces, and discovery-gated sanctums should not expose inbound links from public locations unless that reveal is intentional.

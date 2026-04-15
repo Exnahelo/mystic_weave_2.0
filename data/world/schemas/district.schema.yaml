@@ -1,0 +1,9 @@
+kind: district
+required:
+- id
+- name
+- type
+- region_id
+- settlement_id
+- summary
+- tags

@@ -1,0 +1,11 @@
+id: valley-edge-overlook
+name: Valley Edge Overlook
+type: location
+region_id: drakenvale
+summary: Placeholder-safe runtime node pending fuller canon migration.
+connections: []
+tags:
+- placeholder
+known_npcs: []
+threat_level: 0
+discovered: true
