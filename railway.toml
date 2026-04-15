@@ -1,3 +1,3 @@
 [deploy]
-preDeployCommand = "alembic upgrade head"
+preDeployCommand = "alembic stamp 20260410_0001"
 startCommand = "uvicorn api.main:app --host 0.0.0.0 --port $PORT"
