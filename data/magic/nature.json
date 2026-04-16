@@ -1,202 +1,137 @@
 [
   {
-    "index": "nature_briar_touch",
-    "name": "Briar Touch",
+    "index": "seedwake",
+    "name": "Seedwake",
     "field": "nature",
+    "tier": 1,
     "primary_domain": "perception",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Coaxes sprouts, buds, and young growth into immediate usefulness."
   },
   {
-    "index": "nature_birds_warning",
-    "name": "Birds' Warning",
+    "index": "beast_calm",
+    "name": "Beast Calm",
     "field": "nature",
+    "tier": 1,
     "primary_domain": "perception",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Soothes fear or aggression in ordinary animals and makes the caster seem less threatening."
   },
   {
-    "index": "nature_moss_ward",
-    "name": "Moss Ward",
+    "index": "foragers_sense",
+    "name": "Forager's Sense",
     "field": "nature",
+    "tier": 1,
     "primary_domain": "perception",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Sharpens perception for water, spoor, edible plants, rot, disease, and nearby ecological disturbance."
   },
   {
-    "index": "nature_root_sense",
-    "name": "Root Sense",
+    "index": "thorn_lash",
+    "name": "Thorn Lash",
     "field": "nature",
+    "tier": 1,
     "primary_domain": "perception",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Animates briars, roots, or vines into a brief strike or entangling snap."
   },
   {
-    "index": "nature_stream_whisper",
-    "name": "Stream Whisper",
+    "index": "sap_mend",
+    "name": "Sap Mend",
     "field": "nature",
+    "tier": 1,
     "primary_domain": "perception",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Stabilizes plants, fresh-cut wood, natural fibers, and modest organic injury."
   },
   {
-    "index": "nature_thorn_snare",
-    "name": "Thorn Snare",
+    "index": "vine_snare",
+    "name": "Vine Snare",
     "field": "nature",
+    "tier": 2,
     "primary_domain": "perception",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Summons roots and creepers to bind ankles, weapons, wheels, or a narrow path."
   },
   {
-    "index": "nature_canopy_shroud",
-    "name": "Canopy Shroud",
+    "index": "barkskin",
+    "name": "Barkskin",
     "field": "nature",
+    "tier": 2,
     "primary_domain": "perception",
-    "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "alternate_domain": "endurance",
+    "description": "Hardens skin or clothing with layered living fiber that reduces cuts, glancing blows, and bleeding."
   },
   {
-    "index": "nature_beast_truce",
-    "name": "Beast Truce",
+    "index": "bloom_of_remedy",
+    "name": "Bloom of Remedy",
     "field": "nature",
+    "tier": 2,
     "primary_domain": "perception",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Forces medicinal plants, herbs, and restorative growth to mature rapidly for treatment or triage."
   },
   {
-    "index": "nature_bloom_revitalization",
-    "name": "Bloom Revitalization",
+    "index": "speak_to_the_small_wild",
+    "name": "Speak to the Small Wild",
     "field": "nature",
+    "tier": 2,
     "primary_domain": "perception",
-    "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "alternate_domain": "presence",
+    "description": "Allows meaningful exchange with beasts, birds, insects, vermin, and local spirits of growth and place."
   },
   {
-    "index": "nature_grove_call",
-    "name": "Grove Call",
+    "index": "predators_aspect",
+    "name": "Predator's Aspect",
     "field": "nature",
+    "tier": 3,
     "primary_domain": "perception",
-    "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "alternate_domain": "endurance",
+    "description": "Bestows sharpened senses, burst movement, and natural weaponry modeled after a chosen beast."
   },
   {
-    "index": "nature_ley_bloom",
-    "name": "Ley Bloom",
+    "index": "verdant_surge",
+    "name": "Verdant Surge",
     "field": "nature",
+    "tier": 3,
     "primary_domain": "perception",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Drives explosive overgrowth through an area, overtaking roads, walls, trenches, and structures with living terrain."
   },
   {
-    "index": "nature_hibernal_embrace",
-    "name": "Hibernal Embrace",
+    "index": "rot_denied",
+    "name": "Rot Denied",
     "field": "nature",
+    "tier": 3,
     "primary_domain": "perception",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Purges blight, mold, parasites, and unnatural decay from creatures, crops, and sanctified ecosystems."
   },
   {
-    "index": "nature_ancient_thicket",
-    "name": "Ancient Thicket",
+    "index": "heartwood_sanctuary",
+    "name": "Heartwood Sanctuary",
     "field": "nature",
+    "tier": 4,
     "primary_domain": "perception",
     "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "description": "Raises a living shelter of trunks, roots, leaves, and medicinal growth that protects, conceals, and nourishes those within."
   },
   {
-    "index": "nature_wildheart_tide",
-    "name": "Wildheart Tide",
+    "index": "awaken_the_grove",
+    "name": "Awaken the Grove",
     "field": "nature",
+    "tier": 4,
     "primary_domain": "perception",
     "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "description": "Elevates a woodland, marsh, fungal bed, or other living site into active alliance, making the land itself perceive and respond."
   },
   {
-    "index": "nature_worldroot_awakening",
-    "name": "Worldroot Awakening",
+    "index": "sovereign_of_the_living_land",
+    "name": "Sovereign of the Living Land",
     "field": "nature",
+    "tier": 5,
     "primary_domain": "perception",
     "alternate_domain": null,
-    "max_tier": 5,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect.",
-      "5": "TODO \u2014 tier 5 effect."
-    }
+    "description": "The supreme nature working: the caster speaks with the authority of ecosystem itself, commanding beasts, growth, and terrain in unified concert."
   }
 ]

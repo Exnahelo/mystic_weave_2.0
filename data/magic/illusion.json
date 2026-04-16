@@ -1,202 +1,137 @@
 [
   {
-    "index": "illusion_glamour_hint",
-    "name": "Glamour Hint",
+    "index": "minor_glamour",
+    "name": "Minor Glamour",
     "field": "illusion",
+    "tier": 1,
     "primary_domain": "presence",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Changes color, voice, scent, or superficial appearance of a person or object."
   },
   {
-    "index": "illusion_false_footfall",
-    "name": "False Footfall",
+    "index": "phantom_sound",
+    "name": "Phantom Sound",
     "field": "illusion",
+    "tier": 1,
     "primary_domain": "presence",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Creates misleading noises of movement, speech, impact, or nearby activity."
   },
   {
-    "index": "illusion_mask_of_familiarity",
-    "name": "Mask of Familiarity",
+    "index": "blur_edge",
+    "name": "Blur Edge",
     "field": "illusion",
+    "tier": 1,
     "primary_domain": "presence",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Softens the outline of a creature or object so aim, attention, and tracking slide off."
   },
   {
-    "index": "illusion_drifting_echo",
-    "name": "Drifting Echo",
+    "index": "minor_figment",
+    "name": "Minor Figment",
     "field": "illusion",
+    "tier": 1,
     "primary_domain": "presence",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Produces a small harmless image, shadow, light, or false occupancy cue."
   },
   {
-    "index": "illusion_shimmer_veil",
-    "name": "Shimmer Veil",
+    "index": "veil_of_plainness",
+    "name": "Veil of Plainness",
     "field": "illusion",
+    "tier": 1,
     "primary_domain": "presence",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Makes a target seem ordinary, forgettable, harmless, or contextually expected."
   },
   {
-    "index": "illusion_crowd_double",
-    "name": "Crowd Double",
+    "index": "mirror_self",
+    "name": "Mirror Self",
     "field": "illusion",
+    "tier": 2,
     "primary_domain": "presence",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Produces one or more moving decoys that mimic the caster closely enough to split attention and draw attacks."
   },
   {
-    "index": "illusion_silent_stage",
-    "name": "Silent Stage",
+    "index": "hallway_trick",
+    "name": "Hallway Trick",
     "field": "illusion",
+    "tier": 2,
     "primary_domain": "presence",
-    "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "alternate_domain": "intellect",
+    "description": "Distorts depth, direction, doors, and scale in a corridor, path, or room to confuse pursuit."
   },
   {
-    "index": "illusion_veil_of_absence",
-    "name": "Veil of Absence",
-    "field": "illusion",
-    "primary_domain": "presence",
-    "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
-  },
-  {
-    "index": "illusion_phantom_messenger",
-    "name": "Phantom Messenger",
-    "field": "illusion",
-    "primary_domain": "presence",
-    "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
-  },
-  {
-    "index": "illusion_house_of_mirrors",
-    "name": "House of Mirrors",
-    "field": "illusion",
-    "primary_domain": "presence",
-    "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
-  },
-  {
-    "index": "illusion_borrowed_face",
+    "index": "borrowed_face",
     "name": "Borrowed Face",
     "field": "illusion",
+    "tier": 2,
     "primary_domain": "presence",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Overlays the caster with a convincing disguise of age, expression, stature, and identity."
   },
   {
-    "index": "illusion_midnight_pageant",
-    "name": "Midnight Pageant",
+    "index": "veilmind",
+    "name": "Veilmind",
     "field": "illusion",
+    "tier": 2,
     "primary_domain": "presence",
-    "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "alternate_domain": "will",
+    "description": "Clouds attention and witness certainty, making targets doubt what they saw, heard, or meant to do."
   },
   {
-    "index": "illusion_city_of_smoke",
-    "name": "City of Smoke",
+    "index": "compelling_image",
+    "name": "Compelling Image",
     "field": "illusion",
+    "tier": 3,
     "primary_domain": "presence",
     "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "description": "Creates a stable multisensory illusion convincing enough to guide movement, emotion, and tactical choices."
   },
   {
-    "index": "illusion_grand_delusion",
-    "name": "Grand Delusion",
+    "index": "nightmare_phantasm",
+    "name": "Nightmare Phantasm",
     "field": "illusion",
+    "tier": 3,
     "primary_domain": "presence",
-    "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "alternate_domain": "will",
+    "description": "Weaponizes fear, desire, or expectation into targeted illusion that induces hesitation, panic, or misjudgment."
   },
   {
-    "index": "illusion_perfect_unreality",
-    "name": "Perfect Unreality",
+    "index": "false_memory_stitch",
+    "name": "False Memory Stitch",
     "field": "illusion",
+    "tier": 3,
+    "primary_domain": "presence",
+    "alternate_domain": "intellect",
+    "description": "Plants or edits a narrow memory impression such as a brief meeting, a face glimpsed, or a door believed locked."
+  },
+  {
+    "index": "mirage_dominion",
+    "name": "Mirage Dominion",
+    "field": "illusion",
+    "tier": 4,
     "primary_domain": "presence",
     "alternate_domain": null,
-    "max_tier": 5,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect.",
-      "5": "TODO \u2014 tier 5 effect."
-    }
+    "description": "Recasts the visible logic of a district, camp, hall, or battlefield so that routes, identities, and events seem to follow a false pattern."
+  },
+  {
+    "index": "dream_theater",
+    "name": "Dream Theater",
+    "field": "illusion",
+    "tier": 4,
+    "primary_domain": "presence",
+    "alternate_domain": null,
+    "description": "Overwrites a broad scene with a coherent sensory reality strong enough to change behavior."
+  },
+  {
+    "index": "sovereign_glamour",
+    "name": "Sovereign Glamour",
+    "field": "illusion",
+    "tier": 5,
+    "primary_domain": "presence",
+    "alternate_domain": null,
+    "description": "The supreme illusion: for a scene or site, the caster authors the dominant perceived reality, forcing navigation, trust, targeting, and fear to obey its logic unless actively broken."
   }
 ]

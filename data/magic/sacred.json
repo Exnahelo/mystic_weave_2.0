@@ -1,202 +1,137 @@
 [
   {
-    "index": "bless_water",
-    "name": "Bless Water",
+    "index": "witness_flame",
+    "name": "Witness Flame",
     "field": "sacred",
+    "tier": 1,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Kindles a steady sacred light that reveals spiritual corruption, desecration, hidden altars, and nearby malign residue."
   },
   {
-    "index": "sacred_rites",
-    "name": "Sacred Rites",
+    "index": "merciful_touch",
+    "name": "Merciful Touch",
     "field": "sacred",
+    "tier": 1,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Channels restorative grace through touch to close minor wounds, steady pain, and ease fatigue or panic."
   },
   {
-    "index": "consecrate_threshold",
-    "name": "Consecrate Threshold",
+    "index": "quiet_the_heart",
+    "name": "Quiet the Heart",
     "field": "sacred",
+    "tier": 1,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Settles fear, grief, frenzy, and spiritual agitation, making the target harder to break, intimidate, or provoke."
   },
   {
-    "index": "purify_food_and_drink",
-    "name": "Purify Food and Drink",
+    "index": "rite_of_purification",
+    "name": "Rite of Purification",
     "field": "sacred",
+    "tier": 1,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Cleanses food, drink, flesh, tools, or a small space of mundane spoilage, minor poison, and low spiritual contamination."
   },
   {
-    "index": "devotional_focus",
-    "name": "Devotional Focus",
+    "index": "hallow_mark",
+    "name": "Hallow Mark",
     "field": "sacred",
+    "tier": 1,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Places a sign of sanctified intent on a person, object, or threshold, making it easier to recognize, protect, or ritually defend."
   },
   {
-    "index": "saints_intercession",
-    "name": "Saint's Intercession",
+    "index": "pilgrims_grace",
+    "name": "Pilgrim's Grace",
     "field": "sacred",
+    "tier": 2,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Blesses a traveler or group against illness, dread, foul air, and minor misfortune during a journey."
   },
   {
-    "index": "pilgrims_restoration",
-    "name": "Pilgrim's Restoration",
+    "index": "halo_ward",
+    "name": "Halo Ward",
     "field": "sacred",
+    "tier": 2,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Wraps a target in a soft aura that weakens curses, necrotic influence, and hostile spiritual intrusion."
   },
   {
-    "index": "hymn_of_sanctuary",
-    "name": "Hymn of Sanctuary",
+    "index": "rebuke_the_unclean",
+    "name": "Rebuke the Unclean",
     "field": "sacred",
+    "tier": 2,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Projects holy force that staggers undead, fiends, possessed beings, and spiritually corrupted entities."
   },
   {
-    "index": "litany_of_rebuke",
-    "name": "Litany of Rebuke",
+    "index": "oath_of_witness",
+    "name": "Oath of Witness",
     "field": "sacred",
+    "tier": 2,
     "primary_domain": "will",
-    "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "alternate_domain": "presence",
+    "description": "Sanctifies a spoken oath, confession, or sworn office so that deliberate betrayal brings visible spiritual backlash."
   },
   {
-    "index": "vigil_of_the_radiant_host",
-    "name": "Vigil of the Radiant Host",
+    "index": "sanctuary_circle",
+    "name": "Sanctuary Circle",
     "field": "sacred",
+    "tier": 3,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Consecrates a defined zone where curses weaken, hostile spirits lose force, and allies recover composure and endurance."
   },
   {
-    "index": "anoint_the_faithful",
-    "name": "Anoint the Faithful",
+    "index": "greater_intercession",
+    "name": "Greater Intercession",
     "field": "sacred",
+    "tier": 3,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Calls down a stronger healing current that restores serious injury, returns the dying from the edge, and mends deep exhaustion."
   },
   {
-    "index": "canticle_of_hallowing",
-    "name": "Canticle of Hallowing",
+    "index": "dawn_judgment",
+    "name": "Dawn Judgment",
     "field": "sacred",
+    "tier": 3,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Shapes concentrated sacred radiance into a decisive strike that scourges corruption while sparing the innocent where possible."
   },
   {
-    "index": "procession_of_the_martyrs",
-    "name": "Procession of the Martyrs",
+    "index": "temple_ground",
+    "name": "Temple Ground",
     "field": "sacred",
+    "tier": 4,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "description": "Transforms a room, shrine, battlefield, or burial site into holy terrain that suppresses blight, fear, haunting, and profane workings."
   },
   {
-    "index": "cathedral_of_light",
-    "name": "Cathedral of Light",
+    "index": "procession_of_reckoning",
+    "name": "Procession of Reckoning",
     "field": "sacred",
+    "tier": 4,
     "primary_domain": "will",
-    "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "alternate_domain": "presence",
+    "description": "Sends a rolling surge of sacred force through a scene, healing allies, exposing concealed evil, and breaking lesser malign enchantments."
   },
   {
-    "index": "apotheosis_of_grace",
-    "name": "Apotheosis of Grace",
+    "index": "theophanic_miracle",
+    "name": "Theophanic Miracle",
     "field": "sacred",
+    "tier": 5,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 5,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect.",
-      "5": "TODO \u2014 tier 5 effect."
-    }
+    "description": "The supreme sacred working: a vast eruption of grace, revelation, healing, and judgment that can cleanse a defiled place, break a regional curse, or restore hope to the broken."
   }
 ]

@@ -1,202 +1,137 @@
 [
   {
-    "index": "warding_circle",
-    "name": "Warding Circle",
+    "index": "dustline_seal",
+    "name": "Dustline Seal",
     "field": "warding",
+    "tier": 1,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Closes cracks, bars minor intrusion, and keeps out vermin, drafts, ash, and casual tampering from a camp or chamber."
   },
   {
-    "index": "seal_threshold",
-    "name": "Seal Threshold",
+    "index": "alarm_sigil",
+    "name": "Alarm Sigil",
     "field": "warding",
+    "tier": 1,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Attunes a point, object, or boundary to warn the caster when crossed, touched, or disturbed."
   },
   {
-    "index": "ward_object",
-    "name": "Ward Object",
+    "index": "guard_charm",
+    "name": "Guard Charm",
     "field": "warding",
+    "tier": 1,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Places a brief protective force on a creature or object that blunts one strike, fall, or magical surge."
   },
   {
-    "index": "detect_corruption",
-    "name": "Detect Corruption",
+    "index": "travelers_veil",
+    "name": "Traveler's Veil",
     "field": "warding",
+    "tier": 1,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Shields a target from cold, heat, rain, sparks, and mild environmental strain."
   },
   {
-    "index": "stabilize_ward",
-    "name": "Stabilize Ward",
+    "index": "anchor_charm",
+    "name": "Anchor Charm",
     "field": "warding",
+    "tier": 1,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Stabilizes body and mind against knockback, fear, compulsion, magical disorientation, and forced movement."
   },
   {
-    "index": "aegis_mesh",
-    "name": "Aegis Mesh",
+    "index": "threshold_lock",
+    "name": "Threshold Lock",
     "field": "warding",
+    "tier": 2,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Mystically seals a door, gate, chest, or portal against opening, tampering, and unauthorized entry."
   },
   {
-    "index": "sentinel_sigils",
-    "name": "Sentinel Sigils",
+    "index": "deflecting_plane",
+    "name": "Deflecting Plane",
     "field": "warding",
+    "tier": 2,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Raises a directional barrier that turns aside arrows, stones, debris, and lesser projectiles."
   },
   {
-    "index": "banishing_perimeter",
-    "name": "Banishing Perimeter",
+    "index": "hexbreak",
+    "name": "Hexbreak",
     "field": "warding",
+    "tier": 2,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Weakens or unravels one active curse, hostile enchantment, tether, or magical mark."
   },
   {
-    "index": "bastion_knot",
-    "name": "Bastion Knot",
+    "index": "shelter_sphere",
+    "name": "Shelter Sphere",
     "field": "warding",
+    "tier": 2,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Creates a compact warded refuge against weather, smoke, debris, and incidental hostile magic."
   },
   {
-    "index": "mirror_barrier",
-    "name": "Mirror Barrier",
+    "index": "null_mantle",
+    "name": "Null Mantle",
     "field": "warding",
+    "tier": 3,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Wraps a target in disciplined ward-force that dampens poison, magic, draining effects, and concentrated harm."
   },
   {
-    "index": "consecrated_bulwark",
-    "name": "Consecrated Bulwark",
+    "index": "spell_reversal",
+    "name": "Spell Reversal",
     "field": "warding",
+    "tier": 3,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Interrupts, frays, redirects, or partially reflects an incoming spell if caught at the right moment."
   },
   {
-    "index": "labyrinth_seal",
-    "name": "Labyrinth Seal",
+    "index": "bastion_line",
+    "name": "Bastion Line",
     "field": "warding",
+    "tier": 3,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Raises a standing barrier of structured force that enemies struggle to cross and allies can safely fight behind."
   },
   {
-    "index": "fortress_lattice",
-    "name": "Fortress Lattice",
+    "index": "fortress_weave",
+    "name": "Fortress Weave",
     "field": "warding",
+    "tier": 4,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "description": "Interlocks wards across a structure or camp so walls, gates, and watchpoints resist intrusion, scrying, sorcery, and siege strain."
   },
   {
-    "index": "unmaking_rampart",
-    "name": "Unmaking Rampart",
+    "index": "dome_of_refusal",
+    "name": "Dome of Refusal",
     "field": "warding",
+    "tier": 4,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "description": "Erects a broad hemispheric barrier that repels storms, volleys, summoned entry, and lesser spells while isolating those within."
   },
   {
-    "index": "eternal_palisade",
-    "name": "Eternal Palisade",
+    "index": "citadel_absolute",
+    "name": "Citadel Absolute",
     "field": "warding",
+    "tier": 5,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 5,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect.",
-      "5": "TODO \u2014 tier 5 effect."
-    }
+    "description": "The supreme ward: for a brief span, a chosen site, host, or cause becomes extraordinarily difficult to breach, corrupt, overturn, or meaningfully damage."
   }
 ]

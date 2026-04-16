@@ -1,202 +1,137 @@
 [
   {
-    "index": "alchemy_clarifying_draught",
-    "name": "Clarifying Draught",
+    "index": "distill_purity",
+    "name": "Distill Purity",
     "field": "alchemy",
+    "tier": 1,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Separates toxins, impurities, spoilage, and magical contamination from liquids and simple compounds."
   },
   {
-    "index": "alchemy_smoke_vial",
-    "name": "Smoke Vial",
+    "index": "emberglass_phial",
+    "name": "Emberglass Phial",
     "field": "alchemy",
+    "tier": 1,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Produces a small volatile reaction for flame, flash, smoke, heat, or ignition."
   },
   {
-    "index": "alchemy_mender_paste",
-    "name": "Mender Paste",
+    "index": "quick_salve",
+    "name": "Quick Salve",
     "field": "alchemy",
+    "tier": 1,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Creates a field-ready paste that numbs pain, seals light wounds, and stabilizes a subject long enough for better treatment."
   },
   {
-    "index": "alchemy_quicksilver_trace",
-    "name": "Quicksilver Trace",
+    "index": "solvent_drop",
+    "name": "Solvent Drop",
     "field": "alchemy",
+    "tier": 1,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Dissolves glue, rust, grime, resin, or simple bindings without ruining the core material."
   },
   {
-    "index": "alchemy_bitter_antidote",
-    "name": "Bitter Antidote",
+    "index": "assayers_eye",
+    "name": "Assayer's Eye",
     "field": "alchemy",
+    "tier": 1,
     "primary_domain": "intellect",
-    "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "alternate_domain": "perception",
+    "description": "Identifies broad properties in a substance: poisonous, curative, catalytic, volatile, spoiled, unstable, or inert."
   },
   {
-    "index": "alchemy_scorching_reagent",
-    "name": "Scorching Reagent",
+    "index": "flashpowder",
+    "name": "Flashpowder",
     "field": "alchemy",
+    "tier": 2,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Throws or ignites a compound that bursts in glare, smoke, heat, or concussive sting."
+  },  
+  {
+    "index": "stoneblood_elixir",
+    "name": "Stoneblood Elixir",
+    "field": "alchemy",
+    "tier": 2,
+    "primary_domain": "intellect",
+    "alternate_domain": "endurance",
+    "description": "Temporarily hardens skin, blood, or bone against injury and fatigue at the cost of stiffness or slowdown."
   },
   {
-    "index": "alchemy_stoneblood_tonic",
-    "name": "Stoneblood Tonic",
+    "index": "vapor_veil",
+    "name": "Vapor Veil",
     "field": "alchemy",
+    "tier": 2,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Boils a mixture into concealing mist, sedative fume, irritant cloud, or suggestive haze depending on ingredients."
   },
   {
-    "index": "alchemy_frostglass_elixir",
-    "name": "Frostglass Elixir",
+    "index": "quickbrew_elixir",
+    "name": "Quickbrew Elixir",
     "field": "alchemy",
+    "tier": 2,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Rapidly compounds a simple antidote, stimulant, restorative, coagulant, or utility draught from prepared materials."
   },
   {
-    "index": "alchemy_mercurial_solvent",
-    "name": "Mercurial Solvent",
+    "index": "transmuters_edge",
+    "name": "Transmuter's Edge",
     "field": "alchemy",
+    "tier": 3,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Temporarily alters the material quality of an object or surface — brittle to supple, dull to keen, dense to porous, reactive to inert."
   },
   {
-    "index": "alchemy_philosophers_emulsion",
-    "name": "Philosopher's Emulsion",
+    "index": "homunculus_seed",
+    "name": "Homunculus Seed",
     "field": "alchemy",
+    "tier": 3,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Brews and shapes a small obedient alchemical servitor for scouting, carrying, tending apparatus, or delivering substances."
   },
   {
-    "index": "alchemy_sunmetal_distillate",
-    "name": "Sunmetal Distillate",
+    "index": "philosophers_suspension",
+    "name": "Philosopher's Suspension",
     "field": "alchemy",
+    "tier": 3,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Places a body, specimen, reagent, or volatile mixture into near-perfect suspended stability against decay, separation, or immediate failure."
   },
   {
-    "index": "alchemy_revivifying_serum",
-    "name": "Revivifying Serum",
+    "index": "plagueveil_crucible",
+    "name": "Plagueveil Crucible",
     "field": "alchemy",
+    "tier": 4,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Floods an area with engineered alchemical atmosphere that may heal, sedate, blind, sterilize, corrode, or poison depending on design."
   },
   {
-    "index": "alchemy_dragons_retort",
-    "name": "Dragon's Retort",
+    "index": "transmutation_crucible",
+    "name": "Transmutation Crucible",
     "field": "alchemy",
+    "tier": 4,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "description": "Rewrites the physical properties of a significant mass of matter — stone to ceramic, metal to brittle salt, timber to mineral fiber, and similar controlled shifts."
   },
   {
-    "index": "alchemy_transmuters_deluge",
-    "name": "Transmuter's Deluge",
+    "index": "magnum_opus",
+    "name": "Magnum Opus",
     "field": "alchemy",
+    "tier": 5,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
-  },
-  {
-    "index": "alchemy_auric_rebirth",
-    "name": "Auric Rebirth",
-    "field": "alchemy",
-    "primary_domain": "intellect",
-    "alternate_domain": null,
-    "max_tier": 5,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect.",
-      "5": "TODO \u2014 tier 5 effect."
-    }
+    "description": "The supreme alchemical working: a mythic transformation of body, matter, or condition capable of creating panacea, perfection, monstrosity, or profound purification according to intent and method."
   }
 ]

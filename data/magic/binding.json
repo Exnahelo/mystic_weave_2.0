@@ -1,202 +1,137 @@
 [
   {
-    "index": "binding_minor_oath",
-    "name": "Minor Oath",
+    "index": "snaring_thread",
+    "name": "Snaring Thread",
     "field": "binding",
+    "tier": 1,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Launches a visible or invisible magical tether that catches a limb, object, or fleeing target for a moment."
   },
   {
-    "index": "binding_compel_truth",
-    "name": "Compel Truth",
+    "index": "clasp_of_stillness",
+    "name": "Clasp of Stillness",
     "field": "binding",
+    "tier": 1,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Briefly arrests a creature's motion, enough to spoil a charge, leap, swing, or escape."
   },
   {
-    "index": "binding_seal_promise",
-    "name": "Seal Promise",
+    "index": "claim_mark",
+    "name": "Claim Mark",
     "field": "binding",
+    "tier": 1,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Places a metaphysical tag on a creature, object, or threshold, making it easier to track, hold, or later bind."
   },
   {
-    "index": "binding_mark_contract",
-    "name": "Mark Contract",
+    "index": "tongue_knot",
+    "name": "Tongue-Knot",
     "field": "binding",
+    "tier": 1,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Snags speech for a heartbeat, disrupting shouted commands, lies, chants, and verbal spellcasting."
   },
   {
-    "index": "binding_sworn_word",
-    "name": "Sworn Word",
+    "index": "gentle_shackles",
+    "name": "Gentle Shackles",
     "field": "binding",
+    "tier": 1,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Summons restraints that hold without needless pain, suitable for captives, panicked allies, or controlled transport."
   },
   {
-    "index": "binding_chain_of_duty",
-    "name": "Chain of Duty",
+    "index": "hunters_leash",
+    "name": "Hunter's Leash",
     "field": "binding",
+    "tier": 2,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Maintains directional lock on a marked target and makes fleeing beyond a set distance more difficult."
   },
   {
-    "index": "binding_geas_of_service",
-    "name": "Geas of Service",
+    "index": "chain_bind",
+    "name": "Chain Bind",
     "field": "binding",
+    "tier": 2,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Throws spectral restraints that punish struggle, casting, or rapid movement by tightening with resistance."
   },
   {
-    "index": "binding_testament_knot",
-    "name": "Testament Knot",
+    "index": "pact_knot",
+    "name": "Pact Knot",
     "field": "binding",
+    "tier": 2,
     "primary_domain": "will",
-    "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "alternate_domain": "presence",
+    "description": "Binds willing parties to an agreement, making betrayal or breach spiritually legible."
   },
   {
-    "index": "binding_vassals_accord",
-    "name": "Vassal's Accord",
+    "index": "edict_chain",
+    "name": "Edict Chain",
     "field": "binding",
+    "tier": 2,
     "primary_domain": "will",
-    "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "alternate_domain": "presence",
+    "description": "Imposes a limited prohibition or obligation on a willing or weakened subject."
   },
   {
-    "index": "binding_iron_compulsion",
-    "name": "Iron Compulsion",
+    "index": "prison_sigil",
+    "name": "Prison Sigil",
     "field": "binding",
+    "tier": 3,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Creates a fixed binding circle or trigger-rune that roots one or more targets inside a defined area."
   },
   {
-    "index": "binding_throne_decree",
-    "name": "Throne Decree",
+    "index": "geas",
+    "name": "Geas",
     "field": "binding",
+    "tier": 3,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Lays a formal magical injunction on a subject: obey a duty, avoid an act, or suffer consequence for violation."
   },
   {
-    "index": "binding_soul_writ",
-    "name": "Soul Writ",
+    "index": "name_seal",
+    "name": "Name-Seal",
     "field": "binding",
+    "tier": 3,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Restricts a powerful being through its true identity, suppressing transformation, manifestation, or evasive magic."
   },
   {
-    "index": "binding_covenant_pillar",
-    "name": "Covenant Pillar",
+    "index": "circle_of_subdual",
+    "name": "Circle of Subdual",
     "field": "binding",
+    "tier": 4,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "description": "Establishes a wide zone in which hostile movement slows, teleportation falters, and resistance strengthens the restraint."
   },
   {
-    "index": "binding_judges_chain",
-    "name": "Judge's Chain",
+    "index": "judgment_collar",
+    "name": "Judgment Collar",
     "field": "binding",
+    "tier": 4,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "description": "Places overwhelming law-force on a single dangerous target, allowing only limited action unless the binding is broken."
   },
   {
-    "index": "binding_imperishable_vow",
-    "name": "Imperishable Vow",
+    "index": "absolute_seal",
+    "name": "Absolute Seal",
     "field": "binding",
+    "tier": 5,
     "primary_domain": "will",
     "alternate_domain": null,
-    "max_tier": 5,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect.",
-      "5": "TODO \u2014 tier 5 effect."
-    }
-  }
+    "description": "The supreme binding: a near-perfect metaphysical prison capable of containing a great beast, archmage, spirit, relic, or catastrophic gateway."
+}
 ]

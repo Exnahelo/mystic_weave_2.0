@@ -1,202 +1,137 @@
 [
   {
-    "index": "necromancy_grave_sense",
-    "name": "Grave Sense",
+    "index": "grave_candle",
+    "name": "Grave Candle",
     "field": "necromancy",
+    "tier": 1,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Summons a corpse-light that reveals recent death, burial disturbance, and lingering spirit presence."
   },
   {
-    "index": "necromancy_bone_whisper",
-    "name": "Bone Whisper",
+    "index": "last_whisper",
+    "name": "Last Whisper",
     "field": "necromancy",
+    "tier": 1,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Draws a fading emotional or sensory residue from a recent death: fear, grief, duty, betrayal, direction, or final intent."
   },
   {
-    "index": "necromancy_mourners_candle",
-    "name": "Mourner's Candle",
+    "index": "gravechill",
+    "name": "Gravechill",
     "field": "necromancy",
+    "tier": 1,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Drains warmth and vigor from a target, leaving limbs heavy and concentration brittle."
   },
   {
-    "index": "necromancy_shade_tether",
-    "name": "Shade Tether",
+    "index": "bone_hand",
+    "name": "Bone Hand",
     "field": "necromancy",
+    "tier": 1,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Animates a small fragment of bone or dead matter into a pointer, dart, messenger, or simple manipulator."
   },
   {
-    "index": "necromancy_final_breath",
-    "name": "Final Breath",
+    "index": "rest_the_dead",
+    "name": "Rest the Dead",
     "field": "necromancy",
+    "tier": 1,
     "primary_domain": "intellect",
-    "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "alternate_domain": "will",
+    "description": "Still a corpse, quiet a weak haunting, and prevent immediate rise, theft, or defilement of remains."
   },
   {
-    "index": "necromancy_revenant_call",
-    "name": "Revenant Call",
+    "index": "speak_with_remains",
+    "name": "Speak with Remains",
     "field": "necromancy",
+    "tier": 2,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Questions a corpse, skull, ash, or relic for fragments of memory, identity, and knowledge."
   },
   {
-    "index": "necromancy_wake_the_remains",
-    "name": "Wake the Remains",
+    "index": "siphon_vigor",
+    "name": "Siphon Vigor",
     "field": "necromancy",
+    "tier": 2,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Transfers a sliver of life-force from one creature to steady, mend, or sustain another."
   },
   {
-    "index": "necromancy_funerary_bind",
-    "name": "Funerary Bind",
+    "index": "tomb_ward",
+    "name": "Tomb Ward",
     "field": "necromancy",
+    "tier": 2,
     "primary_domain": "intellect",
-    "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "alternate_domain": "will",
+    "description": "Sets funerary protection against spirit escape, corpse theft, hostile animation, and grave violation."
   },
   {
-    "index": "necromancy_pallid_transfer",
-    "name": "Pallid Transfer",
+    "index": "raise_servitor",
+    "name": "Raise Servitor",
     "field": "necromancy",
+    "tier": 2,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Animates one or more simple undead for labor, transport, watch duty, or basic combat obedience."
   },
   {
-    "index": "necromancy_black_procession",
-    "name": "Black Procession",
+    "index": "chain_a_ghost",
+    "name": "Chain a Ghost",
     "field": "necromancy",
+    "tier": 3,
     "primary_domain": "intellect",
-    "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "alternate_domain": "will",
+    "description": "Compels a spirit to remain, answer, guide, testify, or cease torment under enforced terms."
   },
   {
-    "index": "necromancy_lifethread_harvest",
-    "name": "Lifethread Harvest",
+    "index": "black_harvest",
+    "name": "Black Harvest",
     "field": "necromancy",
+    "tier": 3,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Draws deeply on recent death or grave-force to fuel major necromantic workings at ethical or physical cost."
   },
   {
-    "index": "necromancy_charnel_bulwark",
-    "name": "Charnel Bulwark",
+    "index": "legion_call",
+    "name": "Legion Call",
     "field": "necromancy",
+    "tier": 3,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Raises and coordinates a disciplined cluster of dead into useful organized function."
   },
   {
-    "index": "necromancy_tomb_kingdom",
-    "name": "Tomb Kingdom",
+    "index": "field_of_ashen_silence",
+    "name": "Field of Ashen Silence",
     "field": "necromancy",
+    "tier": 4,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "description": "Attunes a broad area to death: vitality weakens, sound dulls, healing becomes difficult, and spirits stir."
   },
   {
-    "index": "necromancy_eclipse_of_pulse",
-    "name": "Eclipse of Pulse",
+    "index": "tomb_road",
+    "name": "Tomb Road",
     "field": "necromancy",
+    "tier": 4,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "description": "Opens a temporary passage or active threshold between the living world and the liminal realm of the dead."
   },
   {
-    "index": "necromancy_empire_of_ashes",
-    "name": "Empire of Ashes",
+    "index": "throne_of_the_last_silence",
+    "name": "Throne of the Last Silence",
     "field": "necromancy",
+    "tier": 5,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 5,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect.",
-      "5": "TODO \u2014 tier 5 effect."
-    }
+    "description": "The supreme necromantic rite: the caster enthrones themselves as arbiter of the local boundary between life and death, commanding corpses, compelling spirits, and making mortality an immediate law of the scene."
   }
 ]

@@ -147,11 +147,10 @@ def _validate_spells(path: Path, failures: list[str]) -> None:
         "index",
         "name",
         "field",
+        "tier",
         "primary_domain",
         "alternate_domain",
-        "max_tier",
         "description",
-        "tiers",
     }
 
     for i, row in enumerate(rows):
@@ -200,28 +199,12 @@ def _validate_spells(path: Path, failures: list[str]) -> None:
             f"{label}.alternate_domain must be null or one of {sorted(DOMAIN_KEYS)}",
         )
 
-        max_tier = row.get("max_tier")
+        tier = row.get("tier")
         _failures_append(
             failures,
-            isinstance(max_tier, int) and 1 <= max_tier <= 5,
-            f"{label}.max_tier must be int between 1 and 5",
+            isinstance(tier, int) and 1 <= tier <= 5,
+            f"{label}.tier must be int between 1 and 5",
         )
-
-        tiers = row.get("tiers")
-        _failures_append(failures, isinstance(tiers, dict), f"{label}.tiers must be object")
-        if isinstance(tiers, dict) and isinstance(max_tier, int) and 1 <= max_tier <= 5:
-            expected_keys = {str(n) for n in range(1, max_tier + 1)}
-            _failures_append(
-                failures,
-                set(tiers.keys()) == expected_keys,
-                f"{label}.tiers keys must match {sorted(expected_keys)}",
-            )
-            for tier_key, tier_text in tiers.items():
-                _failures_append(
-                    failures,
-                    isinstance(tier_text, str) and bool(tier_text.strip()),
-                    f"{label}.tiers.{tier_key} must be non-empty string",
-                )
 
 
 def _validate_apparel(path: Path, failures: list[str]) -> None:

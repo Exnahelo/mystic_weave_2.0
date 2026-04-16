@@ -1,202 +1,137 @@
 [
   {
-    "index": "elemental_spark_lash",
-    "name": "Spark Lash",
+    "index": "ember_spark",
+    "name": "Ember Spark",
     "field": "elemental",
+    "tier": 1,
     "primary_domain": "endurance",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Ignites tinder, warms metal, and delivers a brief sting of fire."
   },
   {
-    "index": "elemental_coal_breath",
-    "name": "Coal Breath",
+    "index": "stone_grip",
+    "name": "Stone Grip",
     "field": "elemental",
+    "tier": 1,
     "primary_domain": "endurance",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Strengthens footing, handhold, and bracing force against loose ground or impact."
   },
   {
-    "index": "elemental_stonegrip",
-    "name": "Stonegrip",
+    "index": "watershape",
+    "name": "Watershape",
     "field": "elemental",
+    "tier": 1,
     "primary_domain": "endurance",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Draws, gathers, cleans, or redirects a small quantity of water into useful form."
   },
   {
-    "index": "elemental_mist_surge",
-    "name": "Mist Surge",
+    "index": "breath_of_frost",
+    "name": "Breath of Frost",
     "field": "elemental",
+    "tier": 1,
     "primary_domain": "endurance",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Cools surfaces and objects, preserves perishables, and leaves a film of rime or slick ice."
   },
   {
-    "index": "elemental_gust_flicker",
-    "name": "Gust Flicker",
+    "index": "storm_jolt",
+    "name": "Storm Jolt",
     "field": "elemental",
+    "tier": 1,
     "primary_domain": "endurance",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Discharges a sharp spark that startles nerves, powers a minor mechanism, or interrupts concentration."
   },
   {
-    "index": "elemental_flame_arc",
-    "name": "Flame Arc",
+    "index": "scouring_flame",
+    "name": "Scouring Flame",
     "field": "elemental",
+    "tier": 2,
     "primary_domain": "endurance",
-    "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "alternate_domain": "power",
+    "description": "Projects a directed tongue of fire to burn foes, sterilize filth, or clear obstructing growth."
   },
   {
-    "index": "elemental_frost_anchor",
-    "name": "Frost Anchor",
+    "index": "earthen_bulwark",
+    "name": "Earthen Bulwark",
     "field": "elemental",
+    "tier": 2,
     "primary_domain": "endurance",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Raises a wall, berm, ramp, or slab of compacted earth and stone for cover and control."
   },
   {
-    "index": "elemental_sandveil",
-    "name": "Sandveil",
+    "index": "torrent_lash",
+    "name": "Torrent Lash",
     "field": "elemental",
+    "tier": 2,
     "primary_domain": "endurance",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Whips water into a striking or shoving form that batters targets and douses flame."
   },
   {
-    "index": "elemental_river_strike",
-    "name": "River Strike",
+    "index": "gale_step",
+    "name": "Gale Step",
     "field": "elemental",
+    "tier": 2,
     "primary_domain": "endurance",
-    "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "alternate_domain": "agility",
+    "description": "Uses compressed wind to leap farther, break falls, dart through danger, or shove bodies off balance."
   },
   {
-    "index": "elemental_thunder_column",
-    "name": "Thunder Column",
+    "index": "lightning_lance",
+    "name": "Lightning Lance",
     "field": "elemental",
+    "tier": 3,
     "primary_domain": "endurance",
-    "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "alternate_domain": "power",
+    "description": "Calls a focused bolt of storm force that pierces armor, machinery, and clustered enemies."
   },
   {
-    "index": "elemental_magma_shell",
-    "name": "Magma Shell",
+    "index": "magma_vein",
+    "name": "Magma Vein",
     "field": "elemental",
+    "tier": 3,
     "primary_domain": "endurance",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Heats and splits the ground with searing force, creating molten hazards and broken footing."
   },
   {
-    "index": "elemental_tempest_chain",
-    "name": "Tempest Chain",
+    "index": "winters_grasp",
+    "name": "Winter's Grasp",
     "field": "elemental",
+    "tier": 3,
     "primary_domain": "endurance",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Spreads hard freeze across a substantial area, locking structures, slowing forces, and trapping targets in ice-rimed stillness."
   },
   {
-    "index": "elemental_quaking_crown",
-    "name": "Quaking Crown",
+    "index": "storm_front",
+    "name": "Storm Front",
     "field": "elemental",
+    "tier": 4,
     "primary_domain": "endurance",
     "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "description": "Conjures a roaming mass of wind, rain, thunder, lightning, and reduced visibility under the caster's control."
   },
   {
-    "index": "elemental_storm_furnace",
-    "name": "Storm Furnace",
+    "index": "earthwake",
+    "name": "Earthwake",
     "field": "elemental",
+    "tier": 4,
     "primary_domain": "endurance",
-    "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "alternate_domain": "power",
+    "description": "Heaves terrain into ridges, trenches, pillars, and fissures, redrawing movement and line of sight across a wide area."
   },
   {
-    "index": "elemental_worldfire_cataclysm",
-    "name": "Worldfire Cataclysm",
+    "index": "cataclysm_accord",
+    "name": "Cataclysm Accord",
     "field": "elemental",
+    "tier": 5,
     "primary_domain": "endurance",
     "alternate_domain": null,
-    "max_tier": 5,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect.",
-      "5": "TODO \u2014 tier 5 effect."
-    }
+    "description": "The supreme elemental convergence: storm, quake, flood, frost, and flame answer a single will and remake the scene in raw primal violence."
   }
 ]

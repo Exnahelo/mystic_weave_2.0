@@ -1,202 +1,137 @@
 [
   {
-    "index": "runecraft_chalk_sigil",
-    "name": "Chalk Sigil",
+    "index": "trace_rune",
+    "name": "Trace Rune",
     "field": "runecraft",
+    "tier": 1,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Draws a stable magical mark that carries a simple instruction, ownership sign, warning, or symbolic condition."
   },
   {
-    "index": "runecraft_mark_of_holding",
-    "name": "Mark of Holding",
+    "index": "spark_rune",
+    "name": "Spark Rune",
     "field": "runecraft",
+    "tier": 1,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Charges a small rune with a pulse of light, heat, sound, force, or signal on activation."
   },
   {
-    "index": "runecraft_waystone_glyph",
-    "name": "Waystone Glyph",
+    "index": "holding_glyph",
+    "name": "Holding Glyph",
     "field": "runecraft",
+    "tier": 1,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Preserves freshness, charge, chill, warmth, edge, or readiness within a marked object."
   },
   {
-    "index": "runecraft_ember_rune",
-    "name": "Ember Rune",
+    "index": "pattern_sight",
+    "name": "Pattern Sight",
     "field": "runecraft",
+    "tier": 1,
     "primary_domain": "intellect",
-    "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "alternate_domain": "perception",
+    "description": "Reveals flaws in proportions, stress, geometry, copied sigils, and tampering in magical or crafted structures."
   },
   {
-    "index": "runecraft_anchor_sign",
-    "name": "Anchor Sign",
+    "index": "imprint_script",
+    "name": "Imprint Script",
     "field": "runecraft",
+    "tier": 1,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 1,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect."
-    }
+    "description": "Fixes writing, diagrams, maps, and formal text against casual forgery, erasure, or alteration."
   },
   {
-    "index": "runecraft_sealed_formula",
-    "name": "Sealed Formula",
+    "index": "snare_rune",
+    "name": "Snare Rune",
     "field": "runecraft",
+    "tier": 2,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Creates a triggered glyph that blinds, shocks, marks, restrains, or otherwise punishes intrusion."
   },
   {
-    "index": "runecraft_guardians_glyph",
-    "name": "Guardian's Glyph",
+    "index": "bridge_rune",
+    "name": "Bridge Rune",
     "field": "runecraft",
+    "tier": 2,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Projects temporary runic paths, stairs, footholds, or crossing geometry from marked anchors."
   },
   {
-    "index": "runecraft_resonance_array",
-    "name": "Resonance Array",
+    "index": "relay_glyph",
+    "name": "Relay Glyph",
     "field": "runecraft",
+    "tier": 2,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Links two or more runes so a signal, trigger, charge, or simple message passes between them."
   },
   {
-    "index": "runecraft_locking_script",
-    "name": "Locking Script",
+    "index": "pattern_lock",
+    "name": "Pattern Lock",
     "field": "runecraft",
+    "tier": 2,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 2,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect."
-    }
+    "description": "Inscribes a lock or threshold that opens only to a defined phrase, gesture, bloodline, symbol, or sequence."
   },
   {
-    "index": "runecraft_archon_matrix",
-    "name": "Archon Matrix",
+    "index": "engine_array",
+    "name": "Engine Array",
     "field": "runecraft",
+    "tier": 3,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Builds a functioning runic system that powers repeated operations such as heating, lifting, sealing, filtering, signaling, or defense."
   },
   {
-    "index": "runecraft_memory_sigil",
-    "name": "Memory Sigil",
+    "index": "severing_rune",
+    "name": "Severing Rune",
     "field": "runecraft",
+    "tier": 3,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Cuts the bond between magic and anchor, enchantment and target, spirit and vessel, or script and function."
   },
   {
-    "index": "runecraft_bastion_runes",
-    "name": "Bastion Runes",
+    "index": "living_script",
+    "name": "Living Script",
     "field": "runecraft",
+    "tier": 3,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 3,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect."
-    }
+    "description": "Creates an adaptive rune that rewrites parts of itself within set boundaries to respond to changing conditions."
   },
   {
-    "index": "runecraft_cathedral_inscription",
-    "name": "Cathedral Inscription",
+    "index": "grand_inscription",
+    "name": "Grand Inscription",
     "field": "runecraft",
+    "tier": 4,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "description": "Covers a large site with coordinated runic architecture so walls, gates, corridors, and devices behave as a unified magical system."
   },
   {
-    "index": "runecraft_everseal_engine",
-    "name": "Everseal Engine",
+    "index": "law_pillar_array",
+    "name": "Law-Pillar Array",
     "field": "runecraft",
+    "tier": 4,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 4,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect."
-    }
+    "description": "Raises standing inscriptions that define what may occur inside a zone: movement, speech, entry, violence, or spell-use."
   },
   {
-    "index": "runecraft_imperishable_lexicon",
-    "name": "Imperishable Lexicon",
+    "index": "world_inscription",
+    "name": "World Inscription",
     "field": "runecraft",
+    "tier": 5,
     "primary_domain": "intellect",
     "alternate_domain": null,
-    "max_tier": 5,
-    "description": "TODO \u2014 placeholder description.",
-    "tiers": {
-      "1": "TODO \u2014 tier 1 effect.",
-      "2": "TODO \u2014 tier 2 effect.",
-      "3": "TODO \u2014 tier 3 effect.",
-      "4": "TODO \u2014 tier 4 effect.",
-      "5": "TODO \u2014 tier 5 effect."
-    }
+    "description": "The supreme runic working: the caster writes a temporary magical law into place itself, altering how a whole site behaves until the inscription is broken or rewritten."
   }
 ]
