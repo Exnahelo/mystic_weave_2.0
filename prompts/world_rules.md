@@ -214,6 +214,8 @@ Canonical full specification: `prompts/magic_rules.md`.
 
 Cross-domain note: some fields can roll in more than one domain depending on context. Example: Sacred may roll Will for concentration or Presence for formal invocation; Binding may roll Will for oath endurance or Presence for command recognition. If two domains are equally plausible, use the lower score. Cross-domain does not change which domain gates field knowledge — that is always the primary domain.
 
+Magical field knowledge tiers are gated by the field's primary domain score. See `prompts/magic_rules.md` for the domain-gating threshold table.
+
 ### Application Tags (trained execution)
 
 Specific tools, weapons, or methods. Tiers 1–5, each tier adds +1 to target number.
