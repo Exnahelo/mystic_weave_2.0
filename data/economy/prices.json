@@ -326,5 +326,597 @@
     "price_cd": 1500,
     "rarity": "common",
     "description": "Baseline settled-region price for a cart."
+  },
+  {
+    "id": "price_turnshoes_01",
+    "name": "Turnshoes",
+    "price_group": "apparel",
+    "price_cd": 30,
+    "rarity": "common",
+    "description": "Baseline settled-region price for turnshoes."
+  },
+  {
+    "id": "price_waxed_turnshoes_01",
+    "name": "Waxed Turnshoes",
+    "price_group": "apparel",
+    "price_cd": 60,
+    "rarity": "common",
+    "description": "Baseline settled-region price for waxed turnshoes."
+  },
+  {
+    "id": "price_court_shoes_01",
+    "name": "Court Shoes",
+    "price_group": "apparel",
+    "price_cd": 300,
+    "rarity": "common",
+    "description": "Baseline settled-region price for court shoes."
+  },
+  {
+    "id": "price_boots_01",
+    "name": "Boots",
+    "price_group": "apparel",
+    "price_cd": 200,
+    "rarity": "common",
+    "description": "Baseline settled-region price for boots."
+  },
+  {
+    "id": "price_reinforced_boots_01",
+    "name": "Reinforced Boots",
+    "price_group": "apparel",
+    "price_cd": 500,
+    "rarity": "common",
+    "description": "Baseline settled-region price for reinforced boots."
+  },
+  {
+    "id": "price_field_boots_01",
+    "name": "Field Boots",
+    "price_group": "apparel",
+    "price_cd": 1000,
+    "rarity": "common",
+    "description": "Baseline settled-region price for field boots."
+  },
+  {
+    "id": "price_gloves_01",
+    "name": "Gloves",
+    "price_group": "apparel",
+    "price_cd": 50,
+    "rarity": "common",
+    "description": "Baseline settled-region price for gloves."
+  },
+  {
+    "id": "price_reinforced_gloves_01",
+    "name": "Reinforced Gloves",
+    "price_group": "apparel",
+    "price_cd": 150,
+    "rarity": "common",
+    "description": "Baseline settled-region price for reinforced gloves."
+  },
+  {
+    "id": "price_field_gloves_01",
+    "name": "Field Gloves",
+    "price_group": "apparel",
+    "price_cd": 400,
+    "rarity": "common",
+    "description": "Baseline settled-region price for field gloves."
+  },
+  {
+    "id": "price_cloak_01",
+    "name": "Cloak",
+    "price_group": "apparel",
+    "price_cd": 100,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a cloak."
+  },
+  {
+    "id": "price_waxed_cloak_01",
+    "name": "Waxed Cloak",
+    "price_group": "apparel",
+    "price_cd": 250,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a waxed cloak."
+  },
+  {
+    "id": "price_field_cloak_01",
+    "name": "Field Cloak",
+    "price_group": "apparel",
+    "price_cd": 600,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a field cloak."
+  },
+  {
+    "id": "price_court_cloak_01",
+    "name": "Court Cloak",
+    "price_group": "apparel",
+    "price_cd": 800,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a court cloak."
+  },
+  {
+    "id": "price_common_clothes_01",
+    "name": "Common Clothes",
+    "price_group": "apparel",
+    "price_cd": 20,
+    "rarity": "common",
+    "description": "Baseline settled-region price for common clothes."
+  },
+  {
+    "id": "price_work_clothes_01",
+    "name": "Work Clothes",
+    "price_group": "apparel",
+    "price_cd": 40,
+    "rarity": "common",
+    "description": "Baseline settled-region price for work clothes."
+  },
+  {
+    "id": "price_traveling_clothes_01",
+    "name": "Traveling Clothes",
+    "price_group": "apparel",
+    "price_cd": 50,
+    "rarity": "common",
+    "description": "Baseline settled-region price for traveling clothes."
+  },
+  {
+    "id": "price_fine_clothes_01",
+    "name": "Fine Clothes",
+    "price_group": "apparel",
+    "price_cd": 1500,
+    "rarity": "common",
+    "description": "Baseline settled-region price for fine clothes."
+  },
+  {
+    "id": "price_ceremonial_vestments_01",
+    "name": "Ceremonial Vestments",
+    "price_group": "apparel",
+    "price_cd": 2000,
+    "rarity": "uncommon",
+    "description": "Baseline settled-region price for ceremonial vestments."
+  },
+  {
+    "id": "price_knife_01",
+    "name": "Knife",
+    "price_group": "weapons_armor",
+    "price_cd": 20,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a knife."
+  },
+  {
+    "id": "price_dagger_01",
+    "name": "Dagger",
+    "price_group": "weapons_armor",
+    "price_cd": 50,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a dagger."
+  },
+  {
+    "id": "price_hand_axe_01",
+    "name": "Hand Axe",
+    "price_group": "weapons_armor",
+    "price_cd": 80,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a hand axe."
+  },
+  {
+    "id": "price_club_01",
+    "name": "Club",
+    "price_group": "weapons_armor",
+    "price_cd": 10,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a club."
+  },
+  {
+    "id": "price_mace_01",
+    "name": "Mace",
+    "price_group": "weapons_armor",
+    "price_cd": 150,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a mace."
+  },
+  {
+    "id": "price_war_hammer_01",
+    "name": "War Hammer",
+    "price_group": "weapons_armor",
+    "price_cd": 150,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a war hammer."
+  },
+  {
+    "id": "price_shortsword_01",
+    "name": "Shortsword",
+    "price_group": "weapons_armor",
+    "price_cd": 500,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a shortsword."
+  },
+  {
+    "id": "price_sword_01",
+    "name": "Sword",
+    "price_group": "weapons_armor",
+    "price_cd": 800,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a sword."
+  },
+  {
+    "id": "price_axe_01",
+    "name": "Axe",
+    "price_group": "weapons_armor",
+    "price_cd": 300,
+    "rarity": "common",
+    "description": "Baseline settled-region price for an axe."
+  },
+  {
+    "id": "price_greataxe_01",
+    "name": "Greataxe",
+    "price_group": "weapons_armor",
+    "price_cd": 500,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a greataxe."
+  },
+  {
+    "id": "price_greatsword_01",
+    "name": "Greatsword",
+    "price_group": "weapons_armor",
+    "price_cd": 1500,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a greatsword."
+  },
+  {
+    "id": "price_spear_01",
+    "name": "Spear",
+    "price_group": "weapons_armor",
+    "price_cd": 100,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a spear."
+  },
+  {
+    "id": "price_halberd_01",
+    "name": "Halberd",
+    "price_group": "weapons_armor",
+    "price_cd": 500,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a halberd."
+  },
+  {
+    "id": "price_pike_01",
+    "name": "Pike",
+    "price_group": "weapons_armor",
+    "price_cd": 300,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a pike."
+  },
+  {
+    "id": "price_shortbow_01",
+    "name": "Shortbow",
+    "price_group": "weapons_armor",
+    "price_cd": 300,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a shortbow."
+  },
+  {
+    "id": "price_longbow_01",
+    "name": "Longbow",
+    "price_group": "weapons_armor",
+    "price_cd": 1500,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a longbow."
+  },
+  {
+    "id": "price_sling_01",
+    "name": "Sling",
+    "price_group": "weapons_armor",
+    "price_cd": 20,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a sling."
+  },
+  {
+    "id": "price_light_crossbow_01",
+    "name": "Light Crossbow",
+    "price_group": "weapons_armor",
+    "price_cd": 1500,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a light crossbow."
+  },
+  {
+    "id": "price_heavy_crossbow_01",
+    "name": "Heavy Crossbow",
+    "price_group": "weapons_armor",
+    "price_cd": 3000,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a heavy crossbow."
+  },
+  {
+    "id": "price_padded_armor_01",
+    "name": "Padded Armor",
+    "price_group": "weapons_armor",
+    "price_cd": 500,
+    "rarity": "common",
+    "description": "Baseline settled-region price for padded armor."
+  },
+  {
+    "id": "price_leather_armor_01",
+    "name": "Leather Armor",
+    "price_group": "weapons_armor",
+    "price_cd": 1000,
+    "rarity": "common",
+    "description": "Baseline settled-region price for leather armor."
+  },
+  {
+    "id": "price_hide_armor_01",
+    "name": "Hide Armor",
+    "price_group": "weapons_armor",
+    "price_cd": 800,
+    "rarity": "common",
+    "description": "Baseline settled-region price for hide armor."
+  },
+  {
+    "id": "price_studded_leather_01",
+    "name": "Studded Leather",
+    "price_group": "weapons_armor",
+    "price_cd": 4500,
+    "rarity": "common",
+    "description": "Baseline settled-region price for studded leather armor."
+  },
+  {
+    "id": "price_chain_shirt_01",
+    "name": "Chain Shirt",
+    "price_group": "weapons_armor",
+    "price_cd": 3000,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a chain shirt."
+  },
+  {
+    "id": "price_scale_mail_01",
+    "name": "Scale Mail",
+    "price_group": "weapons_armor",
+    "price_cd": 4000,
+    "rarity": "common",
+    "description": "Baseline settled-region price for scale mail."
+  },
+  {
+    "id": "price_breastplate_01",
+    "name": "Breastplate",
+    "price_group": "weapons_armor",
+    "price_cd": 5000,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a breastplate."
+  },
+  {
+    "id": "price_chain_mail_01",
+    "name": "Chain Mail",
+    "price_group": "weapons_armor",
+    "price_cd": 7500,
+    "rarity": "common",
+    "description": "Baseline settled-region price for chain mail."
+  },
+  {
+    "id": "price_splint_armor_01",
+    "name": "Splint Armor",
+    "price_group": "weapons_armor",
+    "price_cd": 10000,
+    "rarity": "common",
+    "description": "Baseline settled-region price for splint armor."
+  },
+  {
+    "id": "price_plate_armor_01",
+    "name": "Plate Armor",
+    "price_group": "weapons_armor",
+    "price_cd": 150000,
+    "rarity": "rare",
+    "description": "Baseline settled-region price for plate armor."
+  },
+  {
+    "id": "price_shield_01",
+    "name": "Shield",
+    "price_group": "weapons_armor",
+    "price_cd": 100,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a shield."
+  },
+  {
+    "id": "price_sabatons_01",
+    "name": "Sabatons",
+    "price_group": "weapons_armor",
+    "price_cd": 2000,
+    "rarity": "common",
+    "description": "Baseline settled-region price for sabatons."
+  },
+  {
+    "id": "price_gauntlets_01",
+    "name": "Gauntlets",
+    "price_group": "weapons_armor",
+    "price_cd": 1500,
+    "rarity": "common",
+    "description": "Baseline settled-region price for gauntlets."
+  },
+  {
+    "id": "price_bracers_01",
+    "name": "Bracers",
+    "price_group": "weapons_armor",
+    "price_cd": 300,
+    "rarity": "common",
+    "description": "Baseline settled-region price for bracers."
+  },
+  {
+    "id": "price_arrows_standard_01",
+    "name": "Arrows (20)",
+    "price_group": "weapons_armor",
+    "price_cd": 20,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a bundle of 20 standard arrows."
+  },
+  {
+    "id": "price_bolts_standard_01",
+    "name": "Bolts (20)",
+    "price_group": "weapons_armor",
+    "price_cd": 30,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a bundle of 20 standard bolts."
+  },
+  {
+    "id": "price_sling_stones_01",
+    "name": "Sling Stones (20)",
+    "price_group": "weapons_armor",
+    "price_cd": 5,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a bundle of 20 sling stones."
+  },
+  {
+    "id": "price_quiver_01",
+    "name": "Quiver",
+    "price_group": "basic_gear",
+    "price_cd": 100,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a quiver."
+  },
+  {
+    "id": "price_lantern_hood_01",
+    "name": "Lantern Hood",
+    "price_group": "basic_gear",
+    "price_cd": 10,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a lantern hood attachment."
+  },
+  {
+    "id": "price_chalk_01",
+    "name": "Chalk (piece)",
+    "price_group": "basic_gear",
+    "price_cd": 1,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a piece of chalk."
+  },
+  {
+    "id": "price_ink_01",
+    "name": "Ink (vial)",
+    "price_group": "basic_gear",
+    "price_cd": 50,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a vial of ink."
+  },
+  {
+    "id": "price_ink_pen_01",
+    "name": "Ink Pen",
+    "price_group": "basic_gear",
+    "price_cd": 2,
+    "rarity": "common",
+    "description": "Baseline settled-region price for an ink pen."
+  },
+  {
+    "id": "price_paper_01",
+    "name": "Paper (sheet)",
+    "price_group": "basic_gear",
+    "price_cd": 2,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a sheet of paper."
+  },
+  {
+    "id": "price_sealing_wax_01",
+    "name": "Sealing Wax",
+    "price_group": "basic_gear",
+    "price_cd": 5,
+    "rarity": "common",
+    "description": "Baseline settled-region price for sealing wax."
+  },
+  {
+    "id": "price_vial_01",
+    "name": "Vial",
+    "price_group": "basic_gear",
+    "price_cd": 10,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a glass vial."
+  },
+  {
+    "id": "price_flask_01",
+    "name": "Flask",
+    "price_group": "basic_gear",
+    "price_cd": 10,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a flask."
+  },
+  {
+    "id": "price_map_scroll_case_01",
+    "name": "Map/Scroll Case",
+    "price_group": "basic_gear",
+    "price_cd": 10,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a map or scroll case."
+  },
+  {
+    "id": "price_compass_01",
+    "name": "Compass",
+    "price_group": "basic_gear",
+    "price_cd": 500,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a compass."
+  },
+  {
+    "id": "price_tinderbox_01",
+    "name": "Tinderbox",
+    "price_group": "basic_gear",
+    "price_cd": 10,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a tinderbox."
+  },
+  {
+    "id": "price_tent_01",
+    "name": "Tent",
+    "price_group": "basic_gear",
+    "price_cd": 200,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a tent."
+  },
+  {
+    "id": "price_glass_bottle_01",
+    "name": "Glass Bottle",
+    "price_group": "basic_gear",
+    "price_cd": 20,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a glass bottle."
+  },
+  {
+    "id": "price_wine_common_01",
+    "name": "Wine (common, glass)",
+    "price_group": "consumables",
+    "price_cd": 6,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a glass of common wine."
+  },
+  {
+    "id": "price_wine_fine_01",
+    "name": "Wine (fine, glass)",
+    "price_group": "consumables",
+    "price_cd": 30,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a glass of fine wine."
+  },
+  {
+    "id": "price_hot_water_wash_service_01",
+    "name": "Hot water and wash basin (inn service)",
+    "price_group": "lodging_services",
+    "price_cd": 8,
+    "rarity": "common",
+    "description": "Baseline settled-region price for hot water and wash basin brought to a room."
+  },
+  {
+    "id": "price_mid_range_room_01",
+    "name": "Mid-range inn room (single, per night)",
+    "price_group": "lodging_services",
+    "price_cd": 50,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a clean single room at a mid-range inn."
+  },
+  {
+    "id": "price_stable_loft_cot_01",
+    "name": "Stable loft cot (per night)",
+    "price_group": "lodging_services",
+    "price_cd": 15,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a stable loft cot."
+  },
+  {
+    "id": "price_message_carry_local_01",
+    "name": "Message carry (local, within settlement)",
+    "price_group": "lodging_services",
+    "price_cd": 5,
+    "rarity": "common",
+    "description": "Baseline settled-region price for local message delivery within a settlement."
   }
 ]
