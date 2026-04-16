@@ -119,3 +119,39 @@ def test_openapi_contract_has_state_delta_schema_components() -> None:
     assert "CharacterStateDelta" in schemas
     assert "WorldStateDelta" in schemas
     assert "EquipmentDelta" in schemas
+
+
+@pytest.mark.contract
+def test_openapi_contract_character_delta_includes_magic_and_draconic_fields() -> None:
+    spec = app.openapi()
+    properties = spec["components"]["schemas"]["CharacterStateDelta"]["properties"]
+
+    assert "magic_fields" in properties
+    magic_fields_schema = properties["magic_fields"]
+    assert "anyOf" in magic_fields_schema
+    array_variant = next(option for option in magic_fields_schema["anyOf"] if option.get("type") == "array")
+    assert array_variant["items"]["type"] == "string"
+
+    assert "draconic_traits" in properties
+    draconic_traits_schema = properties["draconic_traits"]
+    assert "anyOf" in draconic_traits_schema
+    array_variant = next(option for option in draconic_traits_schema["anyOf"] if option.get("type") == "array")
+    assert array_variant["items"]["type"] == "string"
+
+
+@pytest.mark.contract
+def test_openapi_contract_world_delta_uses_sparse_economy_schema() -> None:
+    spec = app.openapi()
+    economy_property = spec["components"]["schemas"]["WorldStateDelta"]["properties"]["economy"]
+    assert "anyOf" in economy_property
+    ref_variant = next(
+        option for option in economy_property["anyOf"] if "$ref" in option
+    )
+    economy_schema = _resolve_schema(spec, ref_variant)
+
+    assert economy_schema["type"] == "object"
+    assert economy_schema.get("required") in (None, [])
+    assert "coin" in economy_schema["properties"]
+    assert "wealth_tier" in economy_schema["properties"]
+    assert "trade_goods" in economy_schema["properties"]
+    assert "obligations" in economy_schema["properties"]

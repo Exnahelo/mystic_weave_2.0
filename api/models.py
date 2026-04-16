@@ -277,6 +277,23 @@ class Economy(BaseModel):
         return v
 
 
+class EconomyDelta(BaseModel):
+    """Sparse economy update for delta application."""
+    model_config = ConfigDict(extra="forbid")
+
+    wealth_tier: WealthTier | None = None
+    coin: int | None = None
+    trade_goods: list[str] | None = None
+    obligations: list[str] | None = None
+
+    @field_validator("coin")
+    @classmethod
+    def coin_non_negative(cls, v: int | None) -> int | None:
+        if v is not None and v < 0:
+            raise ValueError("coin cannot be negative")
+        return v
+
+
 class Politics(BaseModel):
     """
     World-level relational and political state.
@@ -452,6 +469,8 @@ class CharacterStateDelta(BaseModel):
     equipment: EquipmentDelta | None = None
     reputation: list[ReputationEntry] | None = None
     advancement: AdvancementState | None = None
+    magic_fields: list[str] | None = None
+    draconic_traits: list[str] | None = None
 
     def has_updates(self) -> bool:
         return any(v is not None for v in self.model_dump(exclude_none=False).values())
@@ -466,7 +485,7 @@ class WorldStateDelta(BaseModel):
     goal: str | None = None
     turn: int | None = None
     companions: list[CompanionModel] | None = None
-    economy: Economy | None = None
+    economy: EconomyDelta | None = None
     politics: Politics | None = None
     time: TimeState | None = None
     survival: SurvivalState | None = None

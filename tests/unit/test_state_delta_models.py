@@ -18,6 +18,28 @@ def test_apply_state_delta_accepts_partial_character_only() -> None:
 
 
 @pytest.mark.unit
+def test_apply_state_delta_accepts_magic_fields() -> None:
+    body = ApplyStateDeltaRequest.model_validate(
+        {
+            "character": {"magic_fields": ["arcane", "sacred"]},
+            "log_entry": "delta",
+        }
+    )
+    assert body.character.magic_fields == ["arcane", "sacred"]
+
+
+@pytest.mark.unit
+def test_apply_state_delta_accepts_draconic_traits() -> None:
+    body = ApplyStateDeltaRequest.model_validate(
+        {
+            "character": {"draconic_traits": ["dragon_breath"]},
+            "log_entry": "delta",
+        }
+    )
+    assert body.character.draconic_traits == ["dragon_breath"]
+
+
+@pytest.mark.unit
 def test_apply_state_delta_rejects_noop_delta() -> None:
     with pytest.raises(ValidationError):
         ApplyStateDeltaRequest.model_validate(

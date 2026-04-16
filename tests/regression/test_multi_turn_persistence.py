@@ -38,6 +38,15 @@ class MultiTurnFakeConn:
         self.updated_at = datetime.now()
 
     async def fetchrow(self, query, *args):
+        if "SELECT session_id, character, world, log, updated_at FROM game_states" in query:
+            return {
+                "session_id": self.session_id,
+                "character": json.dumps(self.character),
+                "world": json.dumps(self.world),
+                "log": json.dumps(self.log),
+                "updated_at": self.updated_at,
+            }
+
         if "SELECT character FROM game_states" in query:
             return {"character": json.dumps(self.character)}
 
@@ -119,6 +128,8 @@ def _base_character() -> dict:
             "points_spent": 0,
             "points_earned_total": 0,
         },
+        "magic_fields": [],
+        "draconic_traits": [],
     }
 
 
@@ -329,6 +340,96 @@ def test_delta_save_validation_failure_does_not_commit_state_or_log() -> None:
     assert conn.character["notes"] == base_character["notes"]
     assert conn.world["turn"] == base_world["turn"]
     assert conn.log == []
+
+
+@pytest.mark.regression
+def test_delta_save_persists_magic_fields() -> None:
+    session_id = "deltamagic1"
+    conn = MultiTurnFakeConn(session_id, _base_character(), _base_world())
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        r = client.post(
+            f"/state/{session_id}/delta",
+            json={
+                "character": {"magic_fields": ["arcane", "warding"]},
+                "log_entry": "Magic fields updated.",
+            },
+        )
+
+        assert r.status_code == 200
+        payload = r.json()
+        assert payload["character"]["magic_fields"] == ["arcane", "warding"]
+
+        loaded = client.get(f"/state/{session_id}")
+
+    assert loaded.status_code == 200
+    assert loaded.json()["character"]["magic_fields"] == ["arcane", "warding"]
+
+
+@pytest.mark.regression
+def test_delta_save_persists_draconic_traits() -> None:
+    session_id = "deltadraconic1"
+    conn = MultiTurnFakeConn(session_id, _base_character(), _base_world())
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        r = client.post(
+            f"/state/{session_id}/delta",
+            json={
+                "character": {"draconic_traits": ["dragon_breath", "scaled_hide"]},
+                "log_entry": "Draconic traits updated.",
+            },
+        )
+
+        assert r.status_code == 200
+        payload = r.json()
+        assert payload["character"]["draconic_traits"] == ["dragon_breath", "scaled_hide"]
+
+        loaded = client.get(f"/state/{session_id}")
+
+    assert loaded.status_code == 200
+    assert loaded.json()["character"]["draconic_traits"] == ["dragon_breath", "scaled_hide"]
+
+
+@pytest.mark.regression
+def test_delta_save_updates_coin_without_overwriting_other_economy_fields() -> None:
+    session_id = "deltaeconomy1"
+    conn = MultiTurnFakeConn(session_id, _base_character(), _base_world())
+    app = _make_app(FakePool(conn))
+
+    conn.world["economy"] = {
+        "wealth_tier": "wealthy",
+        "coin": 1200,
+        "trade_goods": ["salt", "silk"],
+        "obligations": ["caravan debt", "guild tithe"],
+    }
+
+    with TestClient(app) as client:
+        r = client.post(
+            f"/state/{session_id}/delta",
+            json={
+                "world": {"economy": {"coin": 300}},
+                "log_entry": "Spent coin.",
+            },
+        )
+
+        assert r.status_code == 200
+        payload = r.json()
+
+        assert payload["world"]["economy"]["coin"] == 300
+        assert payload["world"]["economy"]["wealth_tier"] == "wealthy"
+        assert payload["world"]["economy"]["trade_goods"] == ["salt", "silk"]
+        assert payload["world"]["economy"]["obligations"] == ["caravan debt", "guild tithe"]
+
+        loaded = client.get(f"/state/{session_id}")
+
+    assert loaded.status_code == 200
+    loaded_economy = loaded.json()["world"]["economy"]
+    assert loaded_economy["coin"] == 300
+    assert loaded_economy["wealth_tier"] == "wealthy"
+    assert loaded_economy["trade_goods"] == ["salt", "silk"]
+    assert loaded_economy["obligations"] == ["caravan debt", "guild tithe"]
 
 
 @pytest.mark.regression
