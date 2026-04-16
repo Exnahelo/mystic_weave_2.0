@@ -13,12 +13,13 @@ It does **not** duplicate item catalogs. Structured item definitions live in JSO
 
 Use this file together with:
 
-* `items-ammunition.json`
-* `items-armor.json`
-* `items-magical.json`
-* `items-mundane.json`
-* `items-notable.json`
-* `items-weapons.json`
+* `data/items/ammunition.json`
+* `data/items/apparel.json`
+* `data/items/armor.json`
+* `data/items/gear.json`
+* `data/items/magical.json`
+* `data/items/notable.json`
+* `data/items/weapons.json`
 * `combat_rules.md`
 * `economy_rules.md`
 * `world_rules.md`
@@ -53,20 +54,29 @@ If a needed item is not listed, the GPT may infer a nearest comparable only when
 
 ## Item Categories
 
-The current item data is divided into six catalog groups.
+The current item data is divided into seven catalog groups.
 
 ### Ammunition
 
-Use `items-ammunition.json` for:
+Use `data/items/ammunition.json` for:
 
 * compatible projectile resources
 * standard and specialty ammunition
 * recoverability judgments
 * tag-based payload logic
 
+### Apparel
+
+Use `data/items/apparel.json` for:
+
+* clothing sets (common, work, travel, fine, ceremonial)
+* footwear (turnshoes, boots, court shoes)
+* handwear (gloves — non-combat)
+* outerwear (cloaks)
+
 ### Armor
 
-Use `items-armor.json` for:
+Use `data/items/armor.json` for:
 
 * unarmored state
 * armor categories
@@ -76,15 +86,15 @@ Use `items-armor.json` for:
 
 ### Magical
 
-Use `items-magical.json` for:
+Use `data/items/magical.json` for:
 
 * standard magical items
 * reusable arcane, sacred, or utility magic gear
 * magical consumables not elevated to notable-item status
 
-### Mundane
+### Gear
 
-Use `items-mundane.json` for:
+Use `data/items/gear.json` for:
 
 * ordinary gear
 * tools
@@ -92,10 +102,11 @@ Use `items-mundane.json` for:
 * storage
 * travel equipment
 * common tactical and social equipment
+* cordage (twine, waxed line, cord) alongside rope and rigging utility
 
 ### Notable
 
-Use `items-notable.json` for:
+Use `data/items/notable.json` for:
 
 * named or setting-significant items
 * rarer gear with stronger narrative identity
@@ -103,7 +114,7 @@ Use `items-notable.json` for:
 
 ### Weapons
 
-Use `items-weapons.json` for:
+Use `data/items/weapons.json` for:
 
 * weapon knowledge/application handling
 * primary combat family matching
@@ -159,7 +170,7 @@ Use the item data to determine whether a consumable is:
 
 For non-ammunition consumables, assume that use normally reduces availability immediately unless the fiction strongly supports otherwise.
 
-For ammunition, follow ammunition-specific rules from `items-ammunition.json` and `combat_rules.md`.
+For ammunition, follow ammunition-specific rules from `data/items/ammunition.json` and `combat_rules.md`.
 
 ---
 
@@ -324,12 +335,13 @@ This section will eventually define how the GPT should reason about:
 
 ## Reference Files
 
-* `items-ammunition.json` — ammunition catalog and specialty payload data
-* `items-armor.json` — armor and shield catalog
-* `items-magical.json` — standard magical item catalog
-* `items-mundane.json` — ordinary gear and tool catalog
-* `items-notable.json` — named and setting-significant item catalog
-* `items-weapons.json` — weapon catalog and combat-family item data
+* `data/items/ammunition.json` — ammunition catalog and specialty payload data
+* `data/items/apparel.json` — clothing, footwear, handwear, and outerwear catalog
+* `data/items/armor.json` — armor and shield catalog
+* `data/items/gear.json` — ordinary gear, tools, storage, camp items, and cordage catalog
+* `data/items/magical.json` — standard magical item catalog
+* `data/items/notable.json` — named and setting-significant item catalog
+* `data/items/weapons.json` — weapon catalog and combat-family item data
 * `combat_rules.md` — combat-facing handling of weapons, armor, and ammunition
 * `economy_rules.md` — buying, barter, pricing pressure, and transaction state rules
 * `world_rules.md` — broader world/system-facing rules

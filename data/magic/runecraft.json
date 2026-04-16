@@ -1,0 +1,202 @@
+[
+  {
+    "index": "runecraft_chalk_sigil",
+    "name": "Chalk Sigil",
+    "field": "runecraft",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "runecraft_mark_of_holding",
+    "name": "Mark of Holding",
+    "field": "runecraft",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "runecraft_waystone_glyph",
+    "name": "Waystone Glyph",
+    "field": "runecraft",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "runecraft_ember_rune",
+    "name": "Ember Rune",
+    "field": "runecraft",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "runecraft_anchor_sign",
+    "name": "Anchor Sign",
+    "field": "runecraft",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "runecraft_sealed_formula",
+    "name": "Sealed Formula",
+    "field": "runecraft",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "runecraft_guardians_glyph",
+    "name": "Guardian's Glyph",
+    "field": "runecraft",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "runecraft_resonance_array",
+    "name": "Resonance Array",
+    "field": "runecraft",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "runecraft_locking_script",
+    "name": "Locking Script",
+    "field": "runecraft",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "runecraft_archon_matrix",
+    "name": "Archon Matrix",
+    "field": "runecraft",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 3,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect."
+    }
+  },
+  {
+    "index": "runecraft_memory_sigil",
+    "name": "Memory Sigil",
+    "field": "runecraft",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 3,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect."
+    }
+  },
+  {
+    "index": "runecraft_bastion_runes",
+    "name": "Bastion Runes",
+    "field": "runecraft",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 3,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect."
+    }
+  },
+  {
+    "index": "runecraft_cathedral_inscription",
+    "name": "Cathedral Inscription",
+    "field": "runecraft",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 4,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect.",
+      "4": "TODO \u2014 tier 4 effect."
+    }
+  },
+  {
+    "index": "runecraft_everseal_engine",
+    "name": "Everseal Engine",
+    "field": "runecraft",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 4,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect.",
+      "4": "TODO \u2014 tier 4 effect."
+    }
+  },
+  {
+    "index": "runecraft_imperishable_lexicon",
+    "name": "Imperishable Lexicon",
+    "field": "runecraft",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 5,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect.",
+      "4": "TODO \u2014 tier 4 effect.",
+      "5": "TODO \u2014 tier 5 effect."
+    }
+  }
+]

@@ -1,0 +1,202 @@
+[
+  {
+    "index": "nature_briar_touch",
+    "name": "Briar Touch",
+    "field": "nature",
+    "primary_domain": "perception",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "nature_birds_warning",
+    "name": "Birds' Warning",
+    "field": "nature",
+    "primary_domain": "perception",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "nature_moss_ward",
+    "name": "Moss Ward",
+    "field": "nature",
+    "primary_domain": "perception",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "nature_root_sense",
+    "name": "Root Sense",
+    "field": "nature",
+    "primary_domain": "perception",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "nature_stream_whisper",
+    "name": "Stream Whisper",
+    "field": "nature",
+    "primary_domain": "perception",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "nature_thorn_snare",
+    "name": "Thorn Snare",
+    "field": "nature",
+    "primary_domain": "perception",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "nature_canopy_shroud",
+    "name": "Canopy Shroud",
+    "field": "nature",
+    "primary_domain": "perception",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "nature_beast_truce",
+    "name": "Beast Truce",
+    "field": "nature",
+    "primary_domain": "perception",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "nature_bloom_revitalization",
+    "name": "Bloom Revitalization",
+    "field": "nature",
+    "primary_domain": "perception",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "nature_grove_call",
+    "name": "Grove Call",
+    "field": "nature",
+    "primary_domain": "perception",
+    "alternate_domain": null,
+    "max_tier": 3,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect."
+    }
+  },
+  {
+    "index": "nature_ley_bloom",
+    "name": "Ley Bloom",
+    "field": "nature",
+    "primary_domain": "perception",
+    "alternate_domain": null,
+    "max_tier": 3,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect."
+    }
+  },
+  {
+    "index": "nature_hibernal_embrace",
+    "name": "Hibernal Embrace",
+    "field": "nature",
+    "primary_domain": "perception",
+    "alternate_domain": null,
+    "max_tier": 3,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect."
+    }
+  },
+  {
+    "index": "nature_ancient_thicket",
+    "name": "Ancient Thicket",
+    "field": "nature",
+    "primary_domain": "perception",
+    "alternate_domain": null,
+    "max_tier": 4,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect.",
+      "4": "TODO \u2014 tier 4 effect."
+    }
+  },
+  {
+    "index": "nature_wildheart_tide",
+    "name": "Wildheart Tide",
+    "field": "nature",
+    "primary_domain": "perception",
+    "alternate_domain": null,
+    "max_tier": 4,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect.",
+      "4": "TODO \u2014 tier 4 effect."
+    }
+  },
+  {
+    "index": "nature_worldroot_awakening",
+    "name": "Worldroot Awakening",
+    "field": "nature",
+    "primary_domain": "perception",
+    "alternate_domain": null,
+    "max_tier": 5,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect.",
+      "4": "TODO \u2014 tier 4 effect.",
+      "5": "TODO \u2014 tier 5 effect."
+    }
+  }
+]

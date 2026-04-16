@@ -1,0 +1,202 @@
+[
+  {
+    "index": "alchemy_clarifying_draught",
+    "name": "Clarifying Draught",
+    "field": "alchemy",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "alchemy_smoke_vial",
+    "name": "Smoke Vial",
+    "field": "alchemy",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "alchemy_mender_paste",
+    "name": "Mender Paste",
+    "field": "alchemy",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "alchemy_quicksilver_trace",
+    "name": "Quicksilver Trace",
+    "field": "alchemy",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "alchemy_bitter_antidote",
+    "name": "Bitter Antidote",
+    "field": "alchemy",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "alchemy_scorching_reagent",
+    "name": "Scorching Reagent",
+    "field": "alchemy",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "alchemy_stoneblood_tonic",
+    "name": "Stoneblood Tonic",
+    "field": "alchemy",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "alchemy_frostglass_elixir",
+    "name": "Frostglass Elixir",
+    "field": "alchemy",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "alchemy_mercurial_solvent",
+    "name": "Mercurial Solvent",
+    "field": "alchemy",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "alchemy_philosophers_emulsion",
+    "name": "Philosopher's Emulsion",
+    "field": "alchemy",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 3,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect."
+    }
+  },
+  {
+    "index": "alchemy_sunmetal_distillate",
+    "name": "Sunmetal Distillate",
+    "field": "alchemy",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 3,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect."
+    }
+  },
+  {
+    "index": "alchemy_revivifying_serum",
+    "name": "Revivifying Serum",
+    "field": "alchemy",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 3,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect."
+    }
+  },
+  {
+    "index": "alchemy_dragons_retort",
+    "name": "Dragon's Retort",
+    "field": "alchemy",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 4,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect.",
+      "4": "TODO \u2014 tier 4 effect."
+    }
+  },
+  {
+    "index": "alchemy_transmuters_deluge",
+    "name": "Transmuter's Deluge",
+    "field": "alchemy",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 4,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect.",
+      "4": "TODO \u2014 tier 4 effect."
+    }
+  },
+  {
+    "index": "alchemy_auric_rebirth",
+    "name": "Auric Rebirth",
+    "field": "alchemy",
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "max_tier": 5,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect.",
+      "4": "TODO \u2014 tier 4 effect.",
+      "5": "TODO \u2014 tier 5 effect."
+    }
+  }
+]

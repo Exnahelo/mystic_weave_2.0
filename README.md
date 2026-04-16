@@ -96,9 +96,36 @@ api/
 core/
   dice_roller.py       # Dice rolling logic — do not modify
 data/
-  charachter-species.json         # 8 species with domain scores
-  charachter-focus.json           # 7 focus archetypes with tags
-  charachter-backgrounds.json     # 8 backgrounds with tags
+  characters/
+    species.json
+    focus.json
+    backgrounds.json
+    starting-wealth.json
+  economy/
+    currency.json
+    prices.json
+    regional-nodes.json
+  items/
+    ammunition.json
+    apparel.json
+    armor.json
+    gear.json
+    magical.json
+    notable.json
+    weapons.json
+  magic/
+    fields.json
+    sacred.json
+    warding.json
+    binding.json
+    elemental.json
+    nature.json
+    illusion.json
+    runecraft.json
+    alchemy.json
+    necromancy.json
+  magic-spells.json               # legacy spell catalog retained temporarily
+  world/
 prompts/               # Obsidian vault — GPT knowledge files + world content
   engine.md            # GPT system prompt — paste into GPT builder Instructions (<8000 chars)
   character_creation.md

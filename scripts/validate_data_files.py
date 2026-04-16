@@ -21,15 +21,12 @@ SPELL_FIELDS = {
     "sacred",
     "warding",
     "binding",
-    "invocation",
     "elemental",
     "nature",
-    "arcane_theory",
     "illusion",
     "runecraft",
     "necromancy",
     "alchemy",
-    "innate",
 }
 
 
@@ -227,15 +224,60 @@ def _validate_spells(path: Path, failures: list[str]) -> None:
                 )
 
 
+def _validate_apparel(path: Path, failures: list[str]) -> None:
+    rows = _load_json(path)
+    seen_ids: set[str] = set()
+    valid_subcategories = {"footwear", "handwear", "outerwear", "clothing"}
+
+    for i, row in enumerate(rows):
+        label = f"{path.name}[{i}]"
+        _failures_append(failures, isinstance(row, dict), f"{label}: expected object")
+        if not isinstance(row, dict):
+            continue
+
+        item_id = row.get("id")
+        _failures_append(failures, isinstance(item_id, str) and item_id, f"{label}.id must be non-empty string")
+        if isinstance(item_id, str):
+            _failures_append(failures, item_id not in seen_ids, f"{label}.id duplicated: {item_id}")
+            seen_ids.add(item_id)
+
+        _failures_append(failures, isinstance(row.get("name"), str) and row.get("name"), f"{label}.name must be non-empty string")
+        _failures_append(failures, row.get("category") == "apparel", f"{label}.category must equal 'apparel'")
+        _failures_append(
+            failures,
+            isinstance(row.get("subcategory"), str) and row.get("subcategory") in valid_subcategories,
+            f"{label}.subcategory must be one of {sorted(valid_subcategories)}",
+        )
+        _failures_append(failures, isinstance(row.get("tags"), list) and len(row.get("tags", [])) > 0, f"{label}.tags must be non-empty list")
+        _failures_append(failures, isinstance(row.get("value_cd"), int), f"{label}.value_cd must be int")
+        _failures_append(failures, isinstance(row.get("rarity"), str) and row.get("rarity"), f"{label}.rarity must be non-empty string")
+        _failures_append(
+            failures,
+            isinstance(row.get("description"), str) and bool(row.get("description", "").strip()),
+            f"{label}.description must be non-empty string",
+        )
+        _failures_append(
+            failures,
+            isinstance(row.get("narrative_effects"), list) and len(row.get("narrative_effects", [])) > 0,
+            f"{label}.narrative_effects must be non-empty list",
+        )
+
+
 def main() -> None:
     repo_root = Path(__file__).resolve().parents[1]
     data_dir = repo_root / "data"
 
     failures: list[str] = []
-    _validate_species(data_dir / "charachter-species.json", failures)
-    _validate_tag_rows(data_dir / "charachter-focus.json", failures, expected_count=7)
-    _validate_tag_rows(data_dir / "charachter-backgrounds.json", failures, expected_count=8)
-    _validate_spells(data_dir / "magic-spells.json", failures)
+    _validate_species(data_dir / "characters" / "species.json", failures)
+    _validate_tag_rows(data_dir / "characters" / "focus.json", failures, expected_count=7)
+    _validate_tag_rows(data_dir / "characters" / "backgrounds.json", failures, expected_count=8)
+    _validate_apparel(data_dir / "items" / "apparel.json", failures)
+
+    magic_dir = data_dir / "magic"
+    for spell_file in sorted(magic_dir.glob("*.json")):
+        if spell_file.name == "fields.json":
+            continue
+        _validate_spells(spell_file, failures)
 
     if failures:
         print("❌ Data validation failed")

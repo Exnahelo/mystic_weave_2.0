@@ -30,11 +30,11 @@
     ]
   },
   {
-    "id": "weapon_hand_axe_01",
-    "name": "Hand Axe",
+    "id": "weapon_handaxe_01",
+    "name": "Handaxe",
     "category": "weapon",
     "knowledge_tag": "grappling",
-    "application_tag": "hand_axe",
+    "application_tag": "handaxe",
     "primary_domain": "agility",
     "tags": ["weapon", "grappling", "light", "chopping", "throwable_candidate"],
     "value_cd": 80,

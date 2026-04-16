@@ -1,0 +1,202 @@
+[
+  {
+    "index": "bless_water",
+    "name": "Bless Water",
+    "field": "sacred",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "sacred_rites",
+    "name": "Sacred Rites",
+    "field": "sacred",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "consecrate_threshold",
+    "name": "Consecrate Threshold",
+    "field": "sacred",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "purify_food_and_drink",
+    "name": "Purify Food and Drink",
+    "field": "sacred",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "devotional_focus",
+    "name": "Devotional Focus",
+    "field": "sacred",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "saints_intercession",
+    "name": "Saint's Intercession",
+    "field": "sacred",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "pilgrims_restoration",
+    "name": "Pilgrim's Restoration",
+    "field": "sacred",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "hymn_of_sanctuary",
+    "name": "Hymn of Sanctuary",
+    "field": "sacred",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "litany_of_rebuke",
+    "name": "Litany of Rebuke",
+    "field": "sacred",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "vigil_of_the_radiant_host",
+    "name": "Vigil of the Radiant Host",
+    "field": "sacred",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 3,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect."
+    }
+  },
+  {
+    "index": "anoint_the_faithful",
+    "name": "Anoint the Faithful",
+    "field": "sacred",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 3,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect."
+    }
+  },
+  {
+    "index": "canticle_of_hallowing",
+    "name": "Canticle of Hallowing",
+    "field": "sacred",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 3,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect."
+    }
+  },
+  {
+    "index": "procession_of_the_martyrs",
+    "name": "Procession of the Martyrs",
+    "field": "sacred",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 4,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect.",
+      "4": "TODO \u2014 tier 4 effect."
+    }
+  },
+  {
+    "index": "cathedral_of_light",
+    "name": "Cathedral of Light",
+    "field": "sacred",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 4,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect.",
+      "4": "TODO \u2014 tier 4 effect."
+    }
+  },
+  {
+    "index": "apotheosis_of_grace",
+    "name": "Apotheosis of Grace",
+    "field": "sacred",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 5,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect.",
+      "4": "TODO \u2014 tier 4 effect.",
+      "5": "TODO \u2014 tier 5 effect."
+    }
+  }
+]

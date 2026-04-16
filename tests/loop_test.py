@@ -129,6 +129,7 @@ def part1(client: httpx.Client) -> str | None:
         check("1.1.d", len(opts.get("backgrounds", [])) == 8, f"backgrounds count: {len(opts.get('backgrounds', []))}")
         check("1.1.da", isinstance(opts.get("mundane_items"), list), "mundane_items is a list")
         check("1.1.db", isinstance(opts.get("magical_items"), list), "magical_items is a list")
+        check("1.1.dc", isinstance(opts.get("apparel_items"), list), "apparel_items is a list")
         species_indices = [s["index"] for s in opts.get("species", [])]
         check("1.1.e", "dragonborn" in species_indices, f"'dragonborn' in species")
         check("1.1.f", "human" in species_indices, f"'human' in species")
@@ -142,6 +143,8 @@ def part1(client: httpx.Client) -> str | None:
             ("Blessed Water" in magical_item_names) or ("Holy Water" in magical_item_names),
             "Blessed Water or Holy Water present in magical_items",
         )
+        apparel_item_names = [item.get("name") for item in opts.get("apparel_items", [])]
+        check("1.1.j", "Common Clothes" in apparel_item_names, "Common Clothes present in apparel_items")
 
     subsection("Test 1.2 — Seed test locations")
     r = client.post("/location", json=TEST_LOC_ALPHA)

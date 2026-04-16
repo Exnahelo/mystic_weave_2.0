@@ -1,0 +1,202 @@
+[
+  {
+    "index": "warding_circle",
+    "name": "Warding Circle",
+    "field": "warding",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "seal_threshold",
+    "name": "Seal Threshold",
+    "field": "warding",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "ward_object",
+    "name": "Ward Object",
+    "field": "warding",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "detect_corruption",
+    "name": "Detect Corruption",
+    "field": "warding",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "stabilize_ward",
+    "name": "Stabilize Ward",
+    "field": "warding",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 1,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect."
+    }
+  },
+  {
+    "index": "aegis_mesh",
+    "name": "Aegis Mesh",
+    "field": "warding",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "sentinel_sigils",
+    "name": "Sentinel Sigils",
+    "field": "warding",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "banishing_perimeter",
+    "name": "Banishing Perimeter",
+    "field": "warding",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "bastion_knot",
+    "name": "Bastion Knot",
+    "field": "warding",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 2,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect."
+    }
+  },
+  {
+    "index": "mirror_barrier",
+    "name": "Mirror Barrier",
+    "field": "warding",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 3,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect."
+    }
+  },
+  {
+    "index": "consecrated_bulwark",
+    "name": "Consecrated Bulwark",
+    "field": "warding",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 3,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect."
+    }
+  },
+  {
+    "index": "labyrinth_seal",
+    "name": "Labyrinth Seal",
+    "field": "warding",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 3,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect."
+    }
+  },
+  {
+    "index": "fortress_lattice",
+    "name": "Fortress Lattice",
+    "field": "warding",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 4,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect.",
+      "4": "TODO \u2014 tier 4 effect."
+    }
+  },
+  {
+    "index": "unmaking_rampart",
+    "name": "Unmaking Rampart",
+    "field": "warding",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 4,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect.",
+      "4": "TODO \u2014 tier 4 effect."
+    }
+  },
+  {
+    "index": "eternal_palisade",
+    "name": "Eternal Palisade",
+    "field": "warding",
+    "primary_domain": "will",
+    "alternate_domain": null,
+    "max_tier": 5,
+    "description": "TODO \u2014 placeholder description.",
+    "tiers": {
+      "1": "TODO \u2014 tier 1 effect.",
+      "2": "TODO \u2014 tier 2 effect.",
+      "3": "TODO \u2014 tier 3 effect.",
+      "4": "TODO \u2014 tier 4 effect.",
+      "5": "TODO \u2014 tier 5 effect."
+    }
+  }
+]

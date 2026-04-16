@@ -14,6 +14,7 @@ from __future__ import annotations
 from fastapi import APIRouter
 
 from api.game_data import (
+    list_apparel_items,
     list_backgrounds,
     list_focus,
     list_magical_items,
@@ -45,6 +46,7 @@ async def get_options() -> OptionsResponse:
     backgrounds = [BackgroundOption(**b) for b in list_backgrounds()]
     mundane_items = [ItemOption(**item) for item in list_mundane_items()]
     magical_items = [ItemOption(**item) for item in list_magical_items()]
+    apparel_items = [ItemOption(**item) for item in list_apparel_items()]
 
     return OptionsResponse(
         species=species,
@@ -52,4 +54,5 @@ async def get_options() -> OptionsResponse:
         backgrounds=backgrounds,
         mundane_items=mundane_items,
         magical_items=magical_items,
+        apparel_items=apparel_items,
     )

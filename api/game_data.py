@@ -14,9 +14,22 @@ from pathlib import Path
 from typing import Any
 
 _DATA_DIR = Path(__file__).parent.parent / "data"
-_DATA_FILES = ("charachter-species.json", "charachter-focus.json", "charachter-backgrounds.json")
-_ITEM_DATA_FILES = ("items-mundane.json", "items-magical.json")
+_DATA_FILES = (
+    "characters/species.json",
+    "characters/focus.json",
+    "characters/backgrounds.json",
+)
+_ITEM_DATA_FILES = (
+    "items/gear.json",
+    "items/magical.json",
+    "items/apparel.json",
+    "items/armor.json",
+    "items/weapons.json",
+    "items/ammunition.json",
+    "items/notable.json",
+)
 _SPELL_DATA_FILES = ("magic-spells.json",)
+_MAGIC_DIR = _DATA_DIR / "magic"
 
 
 @lru_cache(maxsize=None)
@@ -37,14 +50,14 @@ def _load_json(filename: str) -> dict[str, Any] | list[Any]:
 
 def get_species(index: str) -> dict[str, Any]:
     """Return species data for the given index (e.g. 'human', 'dragonborn')."""
-    data = _load_json("charachter-species.json")
+    data = _load_json("characters/species.json")
     if index not in data:
         raise ValueError(f"Unknown species: {index!r}. Valid: {sorted(data.keys())}")
     return data[index]
 
 
 def list_species() -> list[dict[str, Any]]:
-    data = _load_json("charachter-species.json")
+    data = _load_json("characters/species.json")
     return [
         {
             "index": k,
@@ -62,7 +75,7 @@ def list_species() -> list[dict[str, Any]]:
 
 def get_focus(index: str) -> dict[str, Any]:
     """Return focus archetype data for the given index (e.g. 'devoted')."""
-    data = _load_json("charachter-focus.json")
+    data = _load_json("characters/focus.json")
     if index not in data:
         raise ValueError(f"Unknown focus: {index!r}. Valid: {sorted(data.keys())}")
     return data[index]
@@ -70,7 +83,7 @@ def get_focus(index: str) -> dict[str, Any]:
 
 def list_focus() -> list[dict[str, Any]]:
     """Return all focus archetypes as a list of summary dicts."""
-    data = _load_json("charachter-focus.json")
+    data = _load_json("characters/focus.json")
     return [
         {
             "index": k,
@@ -89,7 +102,7 @@ def list_focus() -> list[dict[str, Any]]:
 
 def get_background(index: str) -> dict[str, Any]:
     """Return background data for the given index (e.g. 'soldier')."""
-    data = _load_json("charachter-backgrounds.json")
+    data = _load_json("characters/backgrounds.json")
     if index not in data:
         raise ValueError(f"Unknown background: {index!r}. Valid: {sorted(data.keys())}")
     return data[index]
@@ -97,7 +110,7 @@ def get_background(index: str) -> dict[str, Any]:
 
 def list_backgrounds() -> list[dict[str, Any]]:
     """Return all backgrounds as a list of summary dicts."""
-    data = _load_json("charachter-backgrounds.json")
+    data = _load_json("characters/backgrounds.json")
     return [
         {
             "index": k,
@@ -116,7 +129,7 @@ def list_backgrounds() -> list[dict[str, Any]]:
 
 def list_mundane_items() -> list[dict[str, Any]]:
     """Return all mundane catalog items."""
-    data = _load_json("items-mundane.json")
+    data = _load_json("items/gear.json")
     if not isinstance(data, list):
         return []
     return data
@@ -124,15 +137,23 @@ def list_mundane_items() -> list[dict[str, Any]]:
 
 def list_magical_items() -> list[dict[str, Any]]:
     """Return all magical catalog items."""
-    data = _load_json("items-magical.json")
+    data = _load_json("items/magical.json")
+    if not isinstance(data, list):
+        return []
+    return data
+
+
+def list_apparel_items() -> list[dict[str, Any]]:
+    """Return all apparel catalog items."""
+    data = _load_json("items/apparel.json")
     if not isinstance(data, list):
         return []
     return data
 
 
 def list_all_items() -> list[dict[str, Any]]:
-    """Return concatenated mundane + magical item catalogs."""
-    return list_mundane_items() + list_magical_items()
+    """Return concatenated mundane + magical + apparel item catalogs."""
+    return list_mundane_items() + list_magical_items() + list_apparel_items()
 
 
 def data_fingerprint() -> str:
@@ -146,6 +167,11 @@ def data_fingerprint() -> str:
         path = _DATA_DIR / filename
         with open(path, "rb") as f:
             hasher.update(f.read())
+
+    if _MAGIC_DIR.exists():
+        for path in sorted(_MAGIC_DIR.glob("*.json")):
+            with open(path, "rb") as f:
+                hasher.update(f.read())
     return hasher.hexdigest()
 
 

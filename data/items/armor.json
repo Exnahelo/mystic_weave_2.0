@@ -5,7 +5,11 @@
     "category": "armor",
     "knowledge_tag": "unarmored",
     "application_tag": "unarmored",
-    "tags": ["armor", "unarmored", "baseline"],
+    "tags": [
+      "armor",
+      "unarmored",
+      "baseline"
+    ],
     "value_cd": 0,
     "rarity": "common",
     "description": "No armor worn. Some characters intentionally build around speed, mobility, or skill without protective gear.",
@@ -19,7 +23,11 @@
     "category": "armor",
     "knowledge_tag": "light",
     "application_tag": "padded",
-    "tags": ["armor", "light", "padded"],
+    "tags": [
+      "armor",
+      "light",
+      "padded"
+    ],
     "value_cd": 500,
     "rarity": "common",
     "description": "Layered quilted protection that offers basic defense without materially hindering mobility under ordinary conditions.",
@@ -33,7 +41,11 @@
     "category": "armor",
     "knowledge_tag": "light",
     "application_tag": "leather",
-    "tags": ["armor", "light", "leather"],
+    "tags": [
+      "armor",
+      "light",
+      "leather"
+    ],
     "value_cd": 1000,
     "rarity": "common",
     "description": "Flexible leather armor that balances protection and movement, common among scouts, hunters, and lightly equipped fighters.",
@@ -47,7 +59,11 @@
     "category": "armor",
     "knowledge_tag": "light",
     "application_tag": "hide",
-    "tags": ["armor", "light", "hide"],
+    "tags": [
+      "armor",
+      "light",
+      "hide"
+    ],
     "value_cd": 800,
     "rarity": "common",
     "description": "Thicker hide armor offering rugged protection while remaining within the light armor category.",
@@ -61,7 +77,11 @@
     "category": "armor",
     "knowledge_tag": "medium",
     "application_tag": "chain_shirt",
-    "tags": ["armor", "medium", "chain"],
+    "tags": [
+      "armor",
+      "medium",
+      "chain"
+    ],
     "value_cd": 3000,
     "rarity": "common",
     "description": "A lighter chain-based armor that offers stronger coverage than light gear while preserving more mobility than heavier battlefield harnesses.",
@@ -75,7 +95,11 @@
     "category": "armor",
     "knowledge_tag": "medium",
     "application_tag": "scale_mail",
-    "tags": ["armor", "medium", "scale"],
+    "tags": [
+      "armor",
+      "medium",
+      "scale"
+    ],
     "value_cd": 4000,
     "rarity": "common",
     "description": "Overlapping scale armor built for practical battlefield defense with moderate bulk and movement cost.",
@@ -89,7 +113,11 @@
     "category": "armor",
     "knowledge_tag": "medium",
     "application_tag": "breastplate",
-    "tags": ["armor", "medium", "plate"],
+    "tags": [
+      "armor",
+      "medium",
+      "plate"
+    ],
     "value_cd": 5000,
     "rarity": "common",
     "description": "A shaped torso plate paired with lighter supporting materials, offering strong core protection without the full burden of heavy armor.",
@@ -103,7 +131,11 @@
     "category": "armor",
     "knowledge_tag": "heavy",
     "application_tag": "chain_mail",
-    "tags": ["armor", "heavy", "chain"],
+    "tags": [
+      "armor",
+      "heavy",
+      "chain"
+    ],
     "value_cd": 7500,
     "rarity": "common",
     "description": "A full battlefield chain harness that provides serious protection at the cost of agility and physical ease.",
@@ -117,7 +149,11 @@
     "category": "armor",
     "knowledge_tag": "heavy",
     "application_tag": "splint",
-    "tags": ["armor", "heavy", "splint"],
+    "tags": [
+      "armor",
+      "heavy",
+      "splint"
+    ],
     "value_cd": 10000,
     "rarity": "common",
     "description": "A heavy segmented armor built for strong defense and battlefield durability with substantial movement cost.",
@@ -131,7 +167,11 @@
     "category": "armor",
     "knowledge_tag": "heavy",
     "application_tag": "plate",
-    "tags": ["armor", "heavy", "plate"],
+    "tags": [
+      "armor",
+      "heavy",
+      "plate"
+    ],
     "value_cd": 150000,
     "rarity": "rare",
     "description": "The heaviest common battlefield armor, offering maximum conventional protection with major mobility burden outside trained use.",
@@ -145,12 +185,91 @@
     "category": "shield",
     "knowledge_tag": "shield",
     "application_tag": "shield",
-    "tags": ["shield", "defensive", "equipment"],
+    "tags": [
+      "shield",
+      "defensive",
+      "equipment"
+    ],
     "value_cd": 100,
     "rarity": "common",
     "description": "A general shield entry. Specific size and type are handled narratively at runtime rather than as separate catalog items.",
     "narrative_effects": [
       "Supports active defensive framing. Movement and handling impact depend on described size and type, judged at runtime."
+    ]
+  },
+  {
+    "id": "armor_sabatons_01",
+    "name": "Sabatons",
+    "category": "armor",
+    "knowledge_tag": "heavy",
+    "application_tag": "sabatons",
+    "tags": [
+      "armor",
+      "heavy",
+      "foot_protection"
+    ],
+    "value_cd": 2000,
+    "rarity": "common",
+    "description": "Armored foot protection worn with plate or heavy combat gear to guard the feet and ankles during battle.",
+    "narrative_effects": [
+      "Provides heavy foot and ankle protection; increases Agility difficulty by one step as a baseline with other heavy armor."
+    ]
+  },
+  {
+    "id": "armor_gauntlets_01",
+    "name": "Gauntlets",
+    "category": "armor",
+    "knowledge_tag": "heavy",
+    "application_tag": "gauntlets",
+    "tags": [
+      "armor",
+      "heavy",
+      "hand_protection",
+      "combat"
+    ],
+    "value_cd": 1500,
+    "rarity": "common",
+    "description": "Heavy protective hand-wear for combat, armor use, and maximum hand and wrist protection.",
+    "narrative_effects": [
+      "Provides heavy hand and wrist protection; increases fine manipulation difficulty in demanding contexts."
+    ]
+  },
+  {
+    "id": "armor_bracers_01",
+    "name": "Bracers",
+    "category": "armor",
+    "knowledge_tag": "light",
+    "application_tag": "bracers",
+    "tags": [
+      "armor",
+      "light",
+      "forearm_protection",
+      "archery"
+    ],
+    "value_cd": 300,
+    "rarity": "common",
+    "description": "Forearm guards for added protection, archery support, and light combat defense without covering the hands.",
+    "narrative_effects": [
+      "Supports forearm protection and archery string clearance with no baseline Agility difficulty impact."
+    ]
+  },
+  {
+    "id": "armor_studded_leather_01",
+    "name": "Studded Leather",
+    "category": "armor",
+    "knowledge_tag": "light",
+    "application_tag": "studded_leather",
+    "tags": [
+      "armor",
+      "light",
+      "studded",
+      "reinforced"
+    ],
+    "value_cd": 4500,
+    "rarity": "common",
+    "description": "Leather armor reinforced with metal studs or rivets for improved protection while maintaining light armor mobility.",
+    "narrative_effects": [
+      "Supports light protection framing with no baseline Agility difficulty impact under normal conditions."
     ]
   }
 ]

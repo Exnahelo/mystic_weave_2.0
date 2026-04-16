@@ -756,3 +756,4 @@ class OptionsResponse(BaseModel):
     backgrounds: list[BackgroundOption]
     mundane_items: list[ItemOption] = Field(default_factory=list)
     magical_items: list[ItemOption] = Field(default_factory=list)
+    apparel_items: list[ItemOption] = Field(default_factory=list)

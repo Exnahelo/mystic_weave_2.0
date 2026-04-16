@@ -1475,6 +1475,11 @@ components:
             $ref: '#/components/schemas/ItemOption'
           type: array
           title: Magical Items
+        apparel_items:
+          items:
+            $ref: '#/components/schemas/ItemOption'
+          type: array
+          title: Apparel Items
       type: object
       required:
       - species

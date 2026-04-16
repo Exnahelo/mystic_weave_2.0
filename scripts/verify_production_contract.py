@@ -29,9 +29,9 @@ def _load_expected_indices(repo_root: Path) -> tuple[set[str], set[str], set[str
         return set(payload.keys())
 
     return (
-        load_indices("charachter-species.json"),
-        load_indices("charachter-focus.json"),
-        load_indices("charachter-backgrounds.json"),
+        load_indices("characters/species.json"),
+        load_indices("characters/focus.json"),
+        load_indices("characters/backgrounds.json"),
     )
 
 

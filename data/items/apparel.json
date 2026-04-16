@@ -1,0 +1,335 @@
+[
+  {
+    "id": "apparel_footwear_turnshoes_01",
+    "name": "Turnshoes",
+    "category": "apparel",
+    "subcategory": "footwear",
+    "tags": [
+      "apparel",
+      "footwear",
+      "daily",
+      "basic"
+    ],
+    "value_cd": 30,
+    "rarity": "common",
+    "description": "Standard soft-soled daily footwear suitable for settled environments and light walking.",
+    "narrative_effects": [
+      "Provides baseline footwear for town and indoor use with no special protection."
+    ]
+  },
+  {
+    "id": "apparel_footwear_waxed_turnshoes_01",
+    "name": "Waxed Turnshoes",
+    "category": "apparel",
+    "subcategory": "footwear",
+    "tags": [
+      "apparel",
+      "footwear",
+      "utilitarian",
+      "weather_resistant"
+    ],
+    "value_cd": 60,
+    "rarity": "common",
+    "description": "Weather-treated turnshoes with tougher soles and improved wet-weather performance for working use.",
+    "narrative_effects": [
+      "Supports everyday outdoor work and light travel in variable weather."
+    ]
+  },
+  {
+    "id": "apparel_footwear_court_shoes_01",
+    "name": "Court Shoes",
+    "category": "apparel",
+    "subcategory": "footwear",
+    "tags": [
+      "apparel",
+      "footwear",
+      "formal",
+      "noble"
+    ],
+    "value_cd": 300,
+    "rarity": "common",
+    "description": "Formal footwear crafted for court, ceremony, and noble gatherings.",
+    "narrative_effects": [
+      "Supports formal social framing in elite or ceremonial settings."
+    ]
+  },
+  {
+    "id": "apparel_footwear_boots_01",
+    "name": "Boots",
+    "category": "apparel",
+    "subcategory": "footwear",
+    "tags": [
+      "apparel",
+      "footwear",
+      "travel",
+      "rugged"
+    ],
+    "value_cd": 200,
+    "rarity": "common",
+    "description": "Standard rugged boots for travel, labor, and common outdoor use.",
+    "narrative_effects": [
+      "Provides reliable footwear for road travel, field work, and general outdoor conditions."
+    ]
+  },
+  {
+    "id": "apparel_footwear_reinforced_boots_01",
+    "name": "Reinforced Boots",
+    "category": "apparel",
+    "subcategory": "footwear",
+    "tags": [
+      "apparel",
+      "footwear",
+      "reinforced",
+      "durable",
+      "combat"
+    ],
+    "value_cd": 500,
+    "rarity": "common",
+    "description": "Tougher boots with added support and durability for marching, combat, and hard wear.",
+    "narrative_effects": [
+      "Supports sustained marching and rough terrain with improved ankle support and sole durability."
+    ]
+  },
+  {
+    "id": "apparel_footwear_field_boots_01",
+    "name": "Field Boots",
+    "category": "apparel",
+    "subcategory": "footwear",
+    "tags": [
+      "apparel",
+      "footwear",
+      "field",
+      "all_weather",
+      "premium"
+    ],
+    "value_cd": 1000,
+    "rarity": "common",
+    "description": "High-end all-weather boots built for maximum durability, protection, and sustained outdoor use.",
+    "narrative_effects": [
+      "Supports extended field operations in harsh conditions with maximum foot protection and weatherproofing."
+    ]
+  },
+  {
+    "id": "apparel_handwear_gloves_01",
+    "name": "Gloves",
+    "category": "apparel",
+    "subcategory": "handwear",
+    "tags": [
+      "apparel",
+      "handwear",
+      "daily",
+      "utility"
+    ],
+    "value_cd": 50,
+    "rarity": "common",
+    "description": "Standard leather gloves for daily work, travel, and general use.",
+    "narrative_effects": [
+      "Provides baseline hand protection for work, travel, and ordinary handling."
+    ]
+  },
+  {
+    "id": "apparel_handwear_reinforced_gloves_01",
+    "name": "Reinforced Gloves",
+    "category": "apparel",
+    "subcategory": "handwear",
+    "tags": [
+      "apparel",
+      "handwear",
+      "reinforced",
+      "durable",
+      "labor"
+    ],
+    "value_cd": 150,
+    "rarity": "common",
+    "description": "Tougher gloves with added padding and durability for labor, combat, and rough handling.",
+    "narrative_effects": [
+      "Supports sustained heavy labor and rough handling with improved grip and impact padding."
+    ]
+  },
+  {
+    "id": "apparel_handwear_field_gloves_01",
+    "name": "Field Gloves",
+    "category": "apparel",
+    "subcategory": "handwear",
+    "tags": [
+      "apparel",
+      "handwear",
+      "field",
+      "all_weather",
+      "premium"
+    ],
+    "value_cd": 400,
+    "rarity": "common",
+    "description": "High-end all-weather gloves built for maximum durability, protection, and sustained hard use.",
+    "narrative_effects": [
+      "Supports extended field operations with maximum hand protection and weatherproofing."
+    ]
+  },
+  {
+    "id": "apparel_outerwear_cloak_01",
+    "name": "Cloak",
+    "category": "apparel",
+    "subcategory": "outerwear",
+    "tags": [
+      "apparel",
+      "outerwear",
+      "travel",
+      "weather"
+    ],
+    "value_cd": 100,
+    "rarity": "common",
+    "description": "Standard outerwear for travel, weather protection, and everyday use.",
+    "narrative_effects": [
+      "Provides baseline weather cover and warmth for road travel and outdoor activity."
+    ]
+  },
+  {
+    "id": "apparel_outerwear_waxed_cloak_01",
+    "name": "Waxed Cloak",
+    "category": "apparel",
+    "subcategory": "outerwear",
+    "tags": [
+      "apparel",
+      "outerwear",
+      "waxed",
+      "weather_resistant",
+      "travel"
+    ],
+    "value_cd": 250,
+    "rarity": "common",
+    "description": "Wax-treated cloak with better weather resistance for rough travel and wet conditions.",
+    "narrative_effects": [
+      "Supports travel in rain and wet conditions without soaking through quickly."
+    ]
+  },
+  {
+    "id": "apparel_outerwear_field_cloak_01",
+    "name": "Field Cloak",
+    "category": "apparel",
+    "subcategory": "outerwear",
+    "tags": [
+      "apparel",
+      "outerwear",
+      "field",
+      "reinforced",
+      "all_weather",
+      "premium"
+    ],
+    "value_cd": 600,
+    "rarity": "common",
+    "description": "High-end reinforced cloak built for maximum durability, protection, and sustained outdoor use.",
+    "narrative_effects": [
+      "Supports extended field operations in harsh weather with reinforced construction and full weatherproofing."
+    ]
+  },
+  {
+    "id": "apparel_outerwear_court_cloak_01",
+    "name": "Court Cloak",
+    "category": "apparel",
+    "subcategory": "outerwear",
+    "tags": [
+      "apparel",
+      "outerwear",
+      "formal",
+      "noble",
+      "court"
+    ],
+    "value_cd": 800,
+    "rarity": "common",
+    "description": "Formal high-status outerwear for nobles, ceremonies, and appearances at court or elite gatherings.",
+    "narrative_effects": [
+      "Supports formal social framing and status signaling in elite or ceremonial settings."
+    ]
+  },
+  {
+    "id": "apparel_clothing_common_clothes_01",
+    "name": "Common Clothes",
+    "category": "apparel",
+    "subcategory": "clothing",
+    "tags": [
+      "apparel",
+      "clothing",
+      "daily",
+      "basic"
+    ],
+    "value_cd": 20,
+    "rarity": "common",
+    "description": "Simple everyday clothing worn by laborers, farmers, and ordinary folk.",
+    "narrative_effects": [
+      "Provides baseline unremarkable appearance appropriate for common settings."
+    ]
+  },
+  {
+    "id": "apparel_clothing_work_clothes_01",
+    "name": "Work Clothes",
+    "category": "apparel",
+    "subcategory": "clothing",
+    "tags": [
+      "apparel",
+      "clothing",
+      "labor",
+      "durable"
+    ],
+    "value_cd": 40,
+    "rarity": "common",
+    "description": "Sturdy practical clothing designed for physical labor, yard work, and trade use.",
+    "narrative_effects": [
+      "Supports manual labor and trade work without premature wear."
+    ]
+  },
+  {
+    "id": "apparel_clothing_traveling_clothes_01",
+    "name": "Traveling Clothes",
+    "category": "apparel",
+    "subcategory": "clothing",
+    "tags": [
+      "apparel",
+      "clothing",
+      "travel",
+      "road"
+    ],
+    "value_cd": 50,
+    "rarity": "common",
+    "description": "Practical road-ready clothing acceptable in most ordinary social settings.",
+    "narrative_effects": [
+      "Provides baseline acceptable appearance for travel and most everyday contexts."
+    ]
+  },
+  {
+    "id": "apparel_clothing_fine_clothes_01",
+    "name": "Fine Clothes",
+    "category": "apparel",
+    "subcategory": "clothing",
+    "tags": [
+      "apparel",
+      "clothing",
+      "formal",
+      "noble"
+    ],
+    "value_cd": 1500,
+    "rarity": "common",
+    "description": "Well-made formal clothing suitable for elite, ceremonial, or high-society settings.",
+    "narrative_effects": [
+      "Supports social checks in formal or elite environments where appearance signals status."
+    ]
+  },
+  {
+    "id": "apparel_clothing_ceremonial_vestments_01",
+    "name": "Ceremonial Vestments",
+    "category": "apparel",
+    "subcategory": "clothing",
+    "tags": [
+      "apparel",
+      "clothing",
+      "ceremonial",
+      "sacred",
+      "formal"
+    ],
+    "value_cd": 2000,
+    "rarity": "uncommon",
+    "description": "Formal vestments crafted for religious ceremonies, sacred rites, and devotional occasions.",
+    "narrative_effects": [
+      "Supports sacred and ceremonial framing where devotional attire carries institutional weight."
+    ]
+  }
+]

@@ -11,10 +11,10 @@ This file contains the GPT-facing rules for handling coin, barter, pricing conte
 
 Use this file together with:
 
-* `economy-currency.json`
-* `character-starting-wealth.json`
-* `economy-prices.json`
-* `economy-regional-nodes.json`
+* `data/economy/currency.json`
+* `data/characters/starting-wealth.json`
+* `data/economy/prices.json`
+* `data/economy/regional-nodes.json`
 
 ---
 
@@ -118,7 +118,7 @@ The GPT may adjust price pressure within reason when conditions justify it, incl
 * wartime or disruption
 * high-trust or high-hostility environments
 
-Use `economy-regional-nodes.json` to judge what is plausibly common, scarce, exported, imported, or unusually available in a region.
+Use `data/economy/regional-nodes.json` to judge what is plausibly common, scarce, exported, imported, or unusually available in a region.
 
 SSTC-connected nodes tend toward more stable market access and more reliable baseline pricing than isolated or dangerous regions.
 
@@ -171,10 +171,10 @@ These are mandatory.
 
 ## Reference Files
 
-* `economy-currency.json` — denomination data and conversion values
-* `character-starting-wealth.json` — starting wealth tiers for character creation
-* `economy-prices.json` — baseline price tables stored in CD
-* `economy-regional-nodes.json` — regional availability and trade-node heuristics
+* `data/economy/currency.json` — denomination data and conversion values
+* `data/characters/starting-wealth.json` — starting wealth tiers for character creation
+* `data/economy/prices.json` — baseline price tables stored in CD
+* `data/economy/regional-nodes.json` — regional availability and trade-node heuristics
 * `world.md` — world-level social and economic context
 * `groups.md` — SSTC and institutional trade context
 
