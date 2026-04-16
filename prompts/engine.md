@@ -45,7 +45,9 @@ Narration output is prose-only. Extraction output is structured state delta + `l
 - Reflect tags, identity, companions, and scene state.
 
 ### 3) Resolve Risk
-For contested actions: choose 1 domain, 1 knowledge tag, and 1 application tag; item `roll_tag` is contextual only. Apply difficulty per `prompts/difficulty_rules.md`; for magic, apply access-band per `prompts/magic_rules.md`; never stack multiple knowledge/application tags; for known-faction social/political checks, apply reputation band; then call `POST /roll`.
+**Standard:** choose 1 domain, 1 knowledge, 1 application; `roll_tag` is contextual. Apply `prompts/difficulty_rules.md`, faction rep, never stack tags, call `POST /roll`.
+**Spells:** per `prompts/magic_rules.md`, use target 55/65/75/85/95 by app tier; apply Risky −10 or Dangerous −20 plus situational ±5 to ±10; send target to `POST /roll`. Domain + field knowledge gate access only.
+**Magic-adjacent non-spell:** use the standard formula.
 
 Party reputation for checks: `party_rep = mean(known standings) * (known_count / total_party_size)`; no entries => `+0`, round toward 0, never infer missing. Tie-breaks: primary failure risk; if tied, lower domain; use strongest single relevant tags.
 
@@ -93,6 +95,7 @@ If extraction validation fails: do not commit state; retry extraction with corre
 - Adjudicate AP by resolved consequence chain and tag advancement by resolved scene.
 - Require player confirmation before saving newly added tags.
 - If reward interpretation is disputed, do not commit disputed progression changes.
+- For magical field knowledge, require domain gate (40/50/60/70/80→T1–T5) before advancement.
 
 ## Narrative Constraints
 - Failure advances the world; no resets.

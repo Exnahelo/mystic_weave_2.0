@@ -204,17 +204,15 @@ Canonical full specification: `prompts/magic_rules.md`.
 |---|---|---|
 | Sacred | Will | Devotional practice, liturgy, purification, consecration, divine invocation |
 | Warding | Will | Protective barriers, seals, anti-corruption protocols, ward maintenance |
-| Binding | Will | Oaths, contracts, compulsions, sworn duties with magical weight |
-| Elemental | Endurance | Raw elemental channeling — fire, water, earth, air — through sustained output |
+| Binding | Will | Oaths, pacts, compulsions, sworn duties, and channeled authority with magical weight |
+| Elemental | Endurance | Raw elemental channeling through sustained output |
 | Nature | Perception | Druidic and biome magic, ley-flow, living systems |
-| Arcane Theory | Intellect | Structured arcane architecture, runes, formulae, spell engineering |
-| Illusion | Intellect | Constructed perception, false images, sensory manipulation |
-| Runecraft | Intellect | Inscribed magical structures, glyphs, permanent enchantment work |
-| Necromancy | Intellect | Death energy, undead interaction, life force manipulation |
+| Illusion | Presence | Constructed perception, false images, sensory manipulation |
+| Runecraft | Intellect | Inscribed magical structures: runes, glyphs, sigils, permanent enchantment |
 | Alchemy | Intellect | Magical compound preparation, transmutation, reagent work |
-| Invocation | Presence | Channeling through authority, formal command, public rites, entity interaction |
+| Necromancy | Intellect | Death energy, undead interaction, life-force manipulation |
 
-Cross-domain note: some fields can roll in more than one domain depending on primary risk. Example: Sacred may roll Will for concentration or Presence for formal invocation; Binding may roll Will for oath-holding or Presence for commanded acknowledgment. If two domains are equally plausible, use the lower score.
+Cross-domain note: some fields can roll in more than one domain depending on context. Example: Sacred may roll Will for concentration or Presence for formal invocation; Binding may roll Will for oath endurance or Presence for command recognition. If two domains are equally plausible, use the lower score. Cross-domain does not change which domain gates field knowledge — that is always the primary domain.
 
 ### Application Tags (trained execution)
 
@@ -244,8 +242,88 @@ Maximum competency contribution: Knowledge 5 + Application 5 = +10.
 
 ## Magic
 
-Magic uses the standard roll framework; no separate subsystem is introduced.
-Canonical rules for magical access bands, difficulty handling, field tier ceilings, and magic failure outcomes live in `prompts/magic_rules.md`. Use that file as the authoritative source for all magic adjudication.
+Magic uses three linked layers. Full specification: `prompts/magic_rules.md`.
+
+### Layer 1 — Domain Score Gates Field Knowledge
+
+| Domain Score | Maximum Field Knowledge Tier |
+|---|---|
+| 40 | T1 |
+| 50 | T2 |
+| 60 | T3 |
+| 70 | T4 |
+| 80 | T5 |
+
+Domain score gates the ceiling only. Advancement through use still required.
+
+### Layer 2 — Field Knowledge Gates Spell Access
+
+| Field Knowledge Tier | Spells Accessible |
+|---|---|
+| T1 | Tier 1 spells in that field |
+| T2 | Tier 1–2 spells |
+| T3 | Tier 1–3 spells |
+| T4 | Tier 1–4 spells |
+| T5 | Tier 1–5 spells |
+
+Attempting a spell above the field tier is Dangerous Use regardless of application tier.
+
+### Layer 3 — Spell Application Determines Success
+
+Spell rolls use a fixed threshold, NOT the standard competency roll formula.
+
+| Application Tier | Target Number |
+|---|---|
+| T1 | 55 |
+| T2 | 65 |
+| T3 | 75 |
+| T4 | 85 |
+| T5 | 95 |
+
+d100 roll-under via `POST /roll`. Roll 1 = critical success. Roll 100 = critical failure.
+Situational modifiers: up to ±10 based on conditions.
+Standard roll formula applies to non-spell magical actions (identification, resistance, concentration).
+
+### Magical Fields (Knowledge Tags)
+
+| Field | Primary Domain | Governs |
+|---|---|---|
+| Sacred | Will | Devotional practice, liturgy, purification, consecration, divine invocation |
+| Warding | Will | Protective barriers, seals, anti-corruption protocols, ward maintenance |
+| Binding | Will | Oaths, pacts, compulsions, sworn duties, and channeled authority with magical weight |
+| Elemental | Endurance | Raw elemental channeling through sustained output |
+| Nature | Perception | Druidic and biome magic, ley-flow, living systems |
+| Illusion | Presence | Constructed perception, false images, sensory manipulation |
+| Runecraft | Intellect | Inscribed magical structures: runes, glyphs, sigils, permanent enchantment |
+| Alchemy | Intellect | Magical compound preparation, transmutation, reagent work |
+| Necromancy | Intellect | Death energy, undead interaction, life-force manipulation |
+
+Cross-domain note: some fields can roll in more than one domain depending on context. Example: Sacred may roll Will for concentration or Presence for formal invocation. If two domains are equally plausible, use the lower score. Cross-domain does not change which domain gates field knowledge — that is always the primary domain.
+
+### Access Bands
+
+| Band | Field Tag? | Spell Tag? | Within Ceiling? | Threshold Penalty |
+|---|---|---|---|---|
+| Safe | Yes | Yes | Yes | None |
+| Risky | Yes | No | Yes | −10 |
+| Dangerous | No, or over ceiling | — | — | −20 |
+
+Risky Use: on failure, apply Strain before narrative consequences.
+Dangerous Use: on any failure, use Backlash outcomes.
+
+### Failure Model (Magic)
+
+**Minor Miss** — Safe/Risky partial failure. Working weakens or fizzles. No lasting cost.
+
+**Strain** — Safe/Risky failure. Fatigue, pain, temporary instability, lost time. Caster impaired until rest.
+
+**Backlash** — Any Dangerous Use failure, or critical failure in any band. Damage, corrupted effect, wrong target, unwanted attention, sacred offense, environmental instability.
+
+**Catastrophic Failure** — Roll 100 in Dangerous Use, or forbidden magic. Permanent, irreversible, character-scale consequences.
+
+### Breath Weapon (Innate, Not Learned Magic)
+
+Draconic breath is an innate species capability, not a learned spell. It does not use the spell threshold table. It does not require a magical field knowledge tag. Use `dragon_breath` as the application tag and resolve with the **standard competency roll formula** using Will or Power based on intent.
 
 ---
 

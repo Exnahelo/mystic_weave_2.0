@@ -1,6 +1,6 @@
 # Mystic Weave — Magic Rules
 
-Version 1.0 — April 2026  
+Version 2.0 — April 2026
 Status: Canonical. Upload to GPT builder as a knowledge file.
 
 ---
@@ -10,43 +10,70 @@ Status: Canonical. Upload to GPT builder as a knowledge file.
 This file contains the GPT-facing rules for how magic works in Mystic Weave.
 
 It defines:
+- the three-layer magic access system (domain → field knowledge → spell application)
 - magical fields as knowledge tags
 - individual spells and rites as application tags
+- the spell resolution threshold system
 - access bands for safe, risky, and dangerous casting
 - magical failure outcomes
-- the roll structure used when adjudicating magic
 
-Structured spell catalogs belong in JSON data files, not here.
+Structured spell catalogs belong in JSON data files under `data/magic/`, not here.
 
 Use this file together with:
-- `data/magic/` per-field spell files
+- per-field spell files under `data/magic/`
+- `data/magic/fields.json`
 - `world_rules.md`
 - `engine.md`
 - `combat_rules.md` when magic is used during conflict
+- `progression_rules.md` for tag advancement adjudication
 
 ---
 
 ## Core Structure
 
-Magic extends the existing competency system. No separate magic infrastructure is introduced.
+Magic extends the existing competency system. No separate mana pool, spell slot system, or hidden casting economy is introduced.
 
-Magic has two linked layers:
+Magic has three linked layers:
 
-### Magical Fields (Knowledge Tags)
+### Layer 1 — Domain Score (Gates Field Knowledge)
 
-Magical fields are broad areas of magical understanding.
+A character's domain score determines the maximum field knowledge tier available in fields governed by that domain.
 
-- Use normal knowledge tier math (T1–T5, +1 per tier)
-- Field tier determines what can be attempted safely
-- Field knowledge reflects understanding, training, and safe access
+| Domain Score | Maximum Field Knowledge Tier |
+|---|---|
+| 40 | T1 |
+| 50 | T2 |
+| 60 | T3 |
+| 70 | T4 |
+| 80 | T5 |
 
-### Individual Spells and Rites (Application Tags)
+A character with Will 53 can advance Sacred, Warding, or Binding knowledge up to T2 but not T3. Raising Will to 60 makes T3 available to unlock.
 
-Spells and rites are specific practiced workings within a field.
+Domain score gates the ceiling. It does not automatically grant the knowledge tier — the character must still earn the advancement through use per `progression_rules.md`.
 
-- Use normal application tier math (T1–T5, +1 per tier)
-- Improve through repeated consequential use, same as other application tags
-- A caster may understand a field broadly without being equally practiced in every spell within it
+### Layer 2 — Field Knowledge (Gates Spell Access)
+
+Magical fields are broad areas of magical understanding, tracked as knowledge tags.
+
+| Field Knowledge Tier | Spells Accessible |
+|---|---|
+| T1 | Tier 1 spells in that field |
+| T2 | Tier 1–2 spells in that field |
+| T3 | Tier 1–3 spells in that field |
+| T4 | Tier 1–4 spells in that field |
+| T5 | Tier 1–5 spells in that field |
+
+Field knowledge governs what a character can safely attempt. Attempting a spell above the field tier is Dangerous Use regardless of application tier.
+
+Field knowledge tiers advance through meaningful consequential use, per `progression_rules.md`. They do not consume AP.
+
+### Layer 3 — Spell Application (Determines Success)
+
+Individual spells are application tags. The application tier determines how reliably the caster succeeds when casting that specific spell.
+
+Spell application tiers advance through repeated consequential use, per `progression_rules.md`. They do not consume AP.
+
+See **Spell Resolution** below for the threshold table.
 
 ---
 
@@ -61,19 +88,65 @@ Spells and rites are specific practiced workings within a field.
 | Nature | Perception | Druidic and biome magic, ley-flow, living systems |
 | Illusion | Presence | Constructed perception, false images, sensory manipulation |
 | Runecraft | Intellect | Inscribed magical structures: runes, glyphs, sigils, permanent enchantment |
-| Necromancy | Intellect | Death energy, undead interaction, life-force manipulation |
 | Alchemy | Intellect | Magical compound preparation, transmutation, reagent work |
+| Necromancy | Intellect | Death energy, undead interaction, life-force manipulation |
 
 ### Cross-Domain Rule
 
-Some magical fields may roll through more than one plausible domain depending on the action and risk.
+Some magical fields may roll through more than one plausible domain depending on the action and context.
 
 Examples:
 - Sacred may use **Will** for concentration or **Presence** for formal invocation
 - Binding may use **Will** for oath endurance or **Presence** for command recognition
-- Elemental may sometimes lean toward **Power** in aggressive output contexts if the broader rules allow it
+- Elemental may lean toward **Power** in aggressive output contexts
 
 If two domains are equally plausible, use the lower score.
+
+The cross-domain rule affects which domain is used for the spell roll's situational context. It does **not** affect which domain gates the field knowledge tier — that is always the field's primary domain.
+
+---
+
+## Spell Resolution
+
+Spell rolls use a **fixed threshold** determined by the caster's application tier with that specific spell. This is a separate formula from the standard competency roll used for non-spell actions.
+
+### Spell Threshold Table
+
+| Application Tier | Target Number | Success Rate |
+|---|---|---|
+| T1 | 55 | 55% |
+| T2 | 65 | 65% |
+| T3 | 75 | 75% |
+| T4 | 85 | 85% |
+| T5 | 95 | 95% |
+
+Roll d100 via `POST /roll`. Success if roll ≤ target.
+Roll 1 = critical success.
+Roll 100 = critical failure.
+
+### Situational Modifiers
+
+Situational conditions may shift the target by up to ±10.
+
+| Condition | Modifier |
+|---|---|
+| Ideal conditions (calm, prepared, sanctified space, ritual support) | +5 |
+| Standard conditions | +0 |
+| Hostile conditions (active combat, environmental pressure, interruption) | −5 |
+| Extreme conditions (catastrophic environment, active counterspell, grievous injury) | −10 |
+
+A T3 caster under hostile conditions rolls against 75 − 5 = 70.
+A T1 caster in ideal conditions rolls against 55 + 5 = 60.
+
+### What Does Not Enter The Spell Roll
+
+Domain score and field knowledge tier do **not** contribute to the spell target number. They gate access only.
+
+The standard competency roll formula (`Domain + Knowledge Tier + Application Tier + Difficulty Modifier`) is used for non-spell contested actions. Spell rolls use the threshold table above.
+
+### Magic-Adjacent Non-Spell Actions
+
+Actions that involve magical knowledge but are not spell-casting — such as identifying a magical inscription, resisting a magical effect, analyzing an enchantment, or maintaining concentration under pressure — still use the standard roll formula with the relevant domain and tags.
 
 ---
 
@@ -85,47 +158,44 @@ Magic use follows three access bands.
 
 Use Safe Use when:
 - the caster has the relevant field knowledge tag
-- the caster has the specific spell or rite application tag
-- the spell tier does not exceed the field tier’s safe ceiling
+- the caster has the specific spell application tag
+- the spell's catalog tier does not exceed the caster's field knowledge tier
 
 Adjudication:
-- roll normally
+- use the spell threshold table
+- apply situational modifiers if relevant
 
 ### Risky Use
 
 Use Risky Use when:
 - the caster has the relevant field knowledge tag
-- the caster does **not** have the specific spell or rite application tag
-- the attempted working is still within the caster’s field access ceiling
+- the caster does **not** have the specific spell application tag
+- the attempted working is still within the caster's field knowledge tier ceiling
 
 Adjudication:
-- apply **Hard** difficulty on top of the base difficulty
+- determine one final target by applying a **−10** access penalty to the spell threshold, then adjust for situational modifiers if relevant
 - on failure, apply **Strain** before resolving narrative consequences
+
+A character with Sacred T2 attempting a T2 spell they have never practiced: base threshold is 55 (T1 application assumed for untrained), adjusted to a final target of 45 before any situational modifier. Unreliable, as intended.
 
 ### Dangerous Use
 
 Use Dangerous Use when:
 - the caster lacks the relevant field knowledge tag entirely
-- or the attempted working exceeds the field tier’s safe access ceiling
-- or the magic is forbidden, unstable, or clearly beyond the caster’s established competence
+- or the attempted working exceeds the field knowledge tier ceiling
+- or the magic is forbidden, unstable, or clearly beyond the caster's established competence
 
 Adjudication:
-- apply **Extreme** or **Legendary** difficulty depending on how far beyond safe access the attempt is
+- determine one final target by applying a **−20** access penalty to the spell threshold, then adjust for situational modifiers if relevant
 - on any failure degree, resolve using **Backlash** outcomes rather than ordinary failure narration
 
----
+### Access Band Summary
 
-## Field Tier Access Ceilings
-
-| Field Tier | Maximum Safe Spell Tier | What becomes safely accessible |
-|---|---|---|
-| T1 | T1 | Minor workings, first blessings, basic practical magic |
-| T2 | T2 | Reliable practice, stronger single-target effects |
-| T3 | T3 | Formal rites, sustained effects, multi-target workings |
-| T4 | T4 | Major sanctification, stronger warding, communal rites |
-| T5 | T5 | Master-level workings, legendary magical effects |
-
-Attempting a spell above the field tier is Dangerous Use even if the application tag is high.
+| Band | Field Tag? | Spell Tag? | Within Ceiling? | Threshold Penalty |
+|---|---|---|---|---|
+| Safe | Yes | Yes | Yes | None |
+| Risky | Yes | No | Yes | −10 |
+| Dangerous | No, or over ceiling | — | — | −20 |
 
 ---
 
@@ -195,65 +265,52 @@ Results should be:
 
 ---
 
-## Breath Weapon
+## Spell Catalog Structure
 
-### Breath Weapon (Innate, Separate from Learned Magic)
+Each magical field has a pyramid of spells:
 
-Draconic breath is innate species capability, not a learned spell.
+| Tier | Spells Per Field | Character |
+|---|---|---|
+| T1 | 5 | Foundational tools — minor, practical, daily-use workings |
+| T2 | 4 | Applied techniques — real tactical and situational value |
+| T3 | 3 | Formal and decisive workings — scene-changing |
+| T4 | 2 | Major site- or scene-shaping powers |
+| T5 | 1 | Apex expression — mythic-scale capstone |
 
-Rules:
-- no magical field knowledge tag is required
-- use `dragon_breath` as the application tag
-- use **Will** or **Power** based on intent and the broader action framing
+Total: 15 spells per field, 135 spells across 9 fields.
 
-This is separate from learned magical practice.
+Each spell has a fixed tier. A T3 spell is always T3. It does not scale. The character's growth comes from improving their application tier with that spell (T1 → T5 mastery), not from the spell becoming more powerful.
 
----
-
-## Roll Formula
-
-`Target = Domain Score + Field Knowledge Tier + Spell/Rite Tag Tier + Difficulty Modifier`
-
-The GPT should select:
-
-1. one domain
-2. one field knowledge tag
-3. one spell or rite application tag
-4. base difficulty plus any access-band adjustment
-
-Never stack multiple field tags or multiple spell tags on a single roll.
+Canonical spell data lives in per-field JSON files under `data/magic/`.
 
 ---
 
-## Spell Data Authority
+## GPT Spell Resolution Procedure
 
-Canonical spell names, tiers, and structured spell definitions belong in spell data files.
+When a character attempts to cast a spell:
 
-The GPT should always reference the authoritative spell data before accepting or resolving a player-declared spell tag.
-
-Do not invent canonical spells if structured spell data already exists.
+1. **Verify field access.** Does the caster have the field knowledge tag? If not → Dangerous Use.
+2. **Verify tier access.** Is the spell's catalog tier within the caster's field knowledge tier? If not → Dangerous Use.
+3. **Verify spell tag.** Does the caster have the specific spell application tag? If not → Risky Use. If yes → Safe Use.
+4. **Determine application tier.** Look up the caster's application tier for this spell. If Risky Use (no tag), treat as T1.
+5. **Look up base threshold** from the spell threshold table.
+6. **Determine one final target** by applying the access-band penalty (none / −10 / −20) and then any situational modifier (±5 to ±10 based on conditions).
+7. **Send final target to `POST /roll`.**
+8. **Narrate outcome** using the failure model if the roll fails.
 
 ---
 
 ## GPT Magic Conduct Rules
 
-1. **Use the normal competency system first.**  
-   Magic extends existing knowledge/application logic rather than replacing it.
-
-2. **Field knowledge governs safety.**  
-   Spell familiarity alone is not enough if the caster lacks the field.
-
-3. **Application tags govern practiced precision.**  
-   Knowing a field does not mean automatic fluency in every spell.
-
-4. **Do not invent extra infrastructure.**  
-   No separate mana pool, spell slot system, or hidden casting economy should be added unless another rules file explicitly introduces it.
-
-5. **Use failure labels consistently.**  
-   Minor Miss, Strain, Backlash, and Catastrophic Failure are the canonical failure bands.
-
-6. **Respect context.**  
-   Sacred, forbidden, unstable, communal, ritual, battlefield, and environmental contexts all affect how magic is narrated.
+1. **Magic extends existing competency logic.** No separate subsystem.
+2. **Domain gates field knowledge.** Check the domain-gating table before allowing field advancement.
+3. **Field knowledge gates spell access.** A caster cannot safely attempt spells above their field tier.
+4. **Application tier determines success.** Use the threshold table, not the standard roll formula.
+5. **Use the standard roll formula for non-spell magical actions** (identification, resistance, concentration, analysis).
+6. **Use failure labels consistently.** Minor Miss, Strain, Backlash, and Catastrophic Failure are the canonical failure bands.
+7. **Respect context.** Sacred, forbidden, unstable, communal, ritual, battlefield, and environmental contexts all affect how magic is narrated.
+8. **Do not invent spells.** Reference the canonical spell data files before accepting or resolving a player-declared spell. Do not fabricate spells if structured data already exists.
+9. **Do not invent extra infrastructure.** No mana pool, spell slot system, or hidden casting economy unless another rules file explicitly introduces it.
 
 ---
 
@@ -292,13 +349,15 @@ This section will eventually define:
 
 ## Reference Files
 
-- `data/magic/` per-field spell files — canonical spell catalog
-- `world_rules.md` — broader world/system-facing rules
+- `data/magic/fields.json` — canonical field definitions
+- `data/magic/{field}.json` — per-field spell catalogs (sacred, warding, binding, elemental, nature, illusion, runecraft, alchemy, necromancy)
+- `world_rules.md` — broader world/system-facing rules (contains a summarized magic section that must stay in sync with this file)
 - `combat_rules.md` — combat-facing interpretation when magic enters conflict
 - `engine.md` — runtime system logic and adjudication guidance
+- `progression_rules.md` — tag advancement adjudication rules
 
 ---
 
 ## Summary
 
-Magic in Mystic Weave is not a separate engine. It is an extension of the existing competency system through magical fields as knowledge tags and spells or rites as application tags. Safe access depends on field knowledge, practiced casting depends on application tags, and failure consequences escalate according to access band and context.
+Magic in Mystic Weave is governed by three layers: domain score gates field knowledge, field knowledge gates spell access, and spell application tier determines success through a fixed threshold table. Safe casting uses the threshold directly. Risky and Dangerous use apply penalties. Failure consequences escalate by access band. The standard competency roll formula is reserved for non-spell actions. No separate magic engine exists.
