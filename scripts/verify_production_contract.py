@@ -4,7 +4,7 @@ Verify production API contract/data footprint against repository expectations.
 
 Checks:
 - OpenAPI required fields for NewSessionRequest and RollRequest
-- /options species/focus/background counts and index sets
+- /options ancestry/culture/focus/background counts and index sets
 - /version metadata (api_version + data counts)
 """
 
@@ -18,7 +18,7 @@ from pathlib import Path
 import httpx
 
 
-def _load_expected_indices(repo_root: Path) -> tuple[set[str], set[str], set[str]]:
+def _load_expected_indices(repo_root: Path) -> tuple[set[str], set[str], set[str], set[str]]:
     data_dir = repo_root / "data"
 
     def load_indices(filename: str) -> set[str]:
@@ -30,6 +30,7 @@ def _load_expected_indices(repo_root: Path) -> tuple[set[str], set[str], set[str
 
     return (
         load_indices("characters/ancestry.json"),
+        load_indices("characters/culture.json"),
         load_indices("characters/focus.json"),
         load_indices("characters/backgrounds.json"),
     )
@@ -52,7 +53,7 @@ def main() -> None:
     base_url = args.base_url.rstrip("/")
 
     repo_root = Path(__file__).resolve().parents[1]
-    exp_species, exp_focus, exp_backgrounds = _load_expected_indices(repo_root)
+    exp_ancestries, exp_cultures, exp_focus, exp_backgrounds = _load_expected_indices(repo_root)
 
     with httpx.Client(base_url=base_url, timeout=20.0) as client:
         openapi = client.get("/openapi.json")
@@ -61,7 +62,7 @@ def main() -> None:
         spec = openapi.json()
 
         new_session_required = spec["components"]["schemas"]["NewSessionRequest"]["required"]
-        if new_session_required != ["character_name", "species", "focus", "background"]:
+        if new_session_required != ["character_name", "ancestry", "culture", "focus", "background"]:
             fail(f"NewSessionRequest.required mismatch: {new_session_required}")
 
         roll_required = spec["components"]["schemas"]["RollRequest"]["required"]
@@ -72,12 +73,15 @@ def main() -> None:
         if options.status_code != 200:
             fail(f"GET /options -> {options.status_code}")
         opts = options.json()
-        species = {s["index"] for s in opts.get("species", [])}
+        ancestries = {s["index"] for s in opts.get("ancestries", [])}
+        cultures = {c["index"] for c in opts.get("cultures", [])}
         focus = {f["index"] for f in opts.get("focus", [])}
         backgrounds = {b["index"] for b in opts.get("backgrounds", [])}
 
-        if species != exp_species:
-            fail(f"Species indices mismatch. expected={sorted(exp_species)} got={sorted(species)}")
+        if ancestries != exp_ancestries:
+            fail(f"Ancestry indices mismatch. expected={sorted(exp_ancestries)} got={sorted(ancestries)}")
+        if cultures != exp_cultures:
+            fail(f"Culture indices mismatch. expected={sorted(exp_cultures)} got={sorted(cultures)}")
         if focus != exp_focus:
             fail(f"Focus indices mismatch. expected={sorted(exp_focus)} got={sorted(focus)}")
         if backgrounds != exp_backgrounds:
@@ -90,16 +94,18 @@ def main() -> None:
         if version.status_code != 200:
             fail(f"GET /version -> {version.status_code}")
         v = version.json()
-        if v.get("api_version") != "3.4.0":
+        if v.get("api_version") != "4.0.0":
             fail(f"api_version mismatch in /version: {v.get('api_version')}")
-        if v.get("species_count") != len(exp_species):
-            fail(f"/version species_count mismatch: {v.get('species_count')}")
+        if v.get("ancestry_count") != len(exp_ancestries):
+            fail(f"/version ancestry_count mismatch: {v.get('ancestry_count')}")
+        if v.get("culture_count") != len(exp_cultures):
+            fail(f"/version culture_count mismatch: {v.get('culture_count')}")
         if v.get("focus_count") != len(exp_focus):
             fail(f"/version focus_count mismatch: {v.get('focus_count')}")
         if v.get("backgrounds_count") != len(exp_backgrounds):
             fail(f"/version backgrounds_count mismatch: {v.get('backgrounds_count')}")
 
-    print("✅ Production contract/options/version checks passed")
+    print("✅ Production contract verified")
 
 
 if __name__ == "__main__":
