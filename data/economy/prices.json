@@ -24,6 +24,14 @@
     "description": "Baseline settled-region price for one day of trail rations."
   },
   {
+    "id": "price_cold_meal_01",
+    "name": "Cold meal (bread, cheese, dried fruit)",
+    "price_group": "consumables",
+    "price_cd": 4,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a cold ready-to-eat meal."
+  },
+  {
     "id": "price_meal_basic_01",
     "name": "Meal (basic, inn or tavern)",
     "price_group": "consumables",
