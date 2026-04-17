@@ -18,25 +18,14 @@ def test_apply_state_delta_accepts_partial_character_only() -> None:
 
 
 @pytest.mark.unit
-def test_apply_state_delta_accepts_magic_fields() -> None:
+def test_apply_state_delta_accepts_fields_dict() -> None:
     body = ApplyStateDeltaRequest.model_validate(
         {
-            "character": {"magic_fields": ["arcane", "sacred"]},
+            "character": {"fields": {"sacred": 2, "warding": 1}},
             "log_entry": "delta",
         }
     )
-    assert body.character.magic_fields == ["arcane", "sacred"]
-
-
-@pytest.mark.unit
-def test_apply_state_delta_accepts_draconic_traits() -> None:
-    body = ApplyStateDeltaRequest.model_validate(
-        {
-            "character": {"draconic_traits": ["dragon_breath"]},
-            "log_entry": "delta",
-        }
-    )
-    assert body.character.draconic_traits == ["dragon_breath"]
+    assert body.character.fields == {"sacred": 2, "warding": 1}
 
 
 @pytest.mark.unit

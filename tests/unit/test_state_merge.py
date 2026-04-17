@@ -39,7 +39,8 @@ def _current_state() -> dict:
     character = CharacterModel.model_validate(
         {
             "name": "Krath",
-            "species": "dragonborn",
+            "ancestry": "dragonborn",
+            "culture": "draconic_grasslands",
             "focus": "devoted",
             "background": "soldier",
             "hp": {"current": 90, "max": 100},
@@ -54,6 +55,7 @@ def _current_state() -> dict:
             },
             "knowledge": {"discipline": 2},
             "application": {"melee": 2},
+            "fields": {"sacred": 1},
             "status_effects": ["bruised"],
             "notes": "existing",
             "equipment": {

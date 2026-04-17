@@ -27,12 +27,12 @@ def _resolve_schema(spec: dict, schema: dict) -> dict:
 def test_openapi_contract_has_expected_core_shapes() -> None:
     # Avoid startup/lifespan side effects (DB pool creation) for pure contract checks.
     spec = app.openapi()
-    assert spec["info"]["version"] == "3.4.0"
+    assert spec["info"]["version"] == "4.0.0"
 
     new_session_required = spec["components"]["schemas"]["NewSessionRequest"][
         "required"
     ]
-    assert new_session_required == ["character_name", "species", "focus", "background"]
+    assert new_session_required == ["character_name", "ancestry", "culture", "focus", "background"]
 
     roll_required = spec["components"]["schemas"]["RollRequest"]["required"]
     assert roll_required == ["target"]
@@ -122,21 +122,15 @@ def test_openapi_contract_has_state_delta_schema_components() -> None:
 
 
 @pytest.mark.contract
-def test_openapi_contract_character_delta_includes_magic_and_draconic_fields() -> None:
+def test_openapi_contract_character_delta_includes_fields_dict() -> None:
     spec = app.openapi()
     properties = spec["components"]["schemas"]["CharacterStateDelta"]["properties"]
 
-    assert "magic_fields" in properties
-    magic_fields_schema = properties["magic_fields"]
-    assert "anyOf" in magic_fields_schema
-    array_variant = next(option for option in magic_fields_schema["anyOf"] if option.get("type") == "array")
-    assert array_variant["items"]["type"] == "string"
-
-    assert "draconic_traits" in properties
-    draconic_traits_schema = properties["draconic_traits"]
-    assert "anyOf" in draconic_traits_schema
-    array_variant = next(option for option in draconic_traits_schema["anyOf"] if option.get("type") == "array")
-    assert array_variant["items"]["type"] == "string"
+    assert "fields" in properties
+    fields_schema = properties["fields"]
+    assert "anyOf" in fields_schema
+    object_variant = next(option for option in fields_schema["anyOf"] if option.get("type") == "object")
+    assert object_variant["additionalProperties"]["type"] == "integer"
 
 
 @pytest.mark.contract
