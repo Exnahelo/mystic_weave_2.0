@@ -16,9 +16,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from api.database import close_pool, create_pool
 from api.game_data import (
     data_fingerprint,
+    list_ancestries,
     list_backgrounds,
     list_focus,
-    list_species,
 )
 from api.models import HealthResponse, VersionResponse
 from api.routes import character, location, options, roll, scene, session, state
@@ -84,7 +84,7 @@ async def health_check() -> HealthResponse:
 async def version() -> VersionResponse:
     """Deployment/version metadata for sanity checks across environments."""
     git_sha = os.getenv("RAILWAY_GIT_COMMIT_SHA") or os.getenv("GIT_SHA") or "unknown"
-    species_count = len(list_species())
+    species_count = len(list_ancestries())
     focus_count = len(list_focus())
     backgrounds_count = len(list_backgrounds())
     return {

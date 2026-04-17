@@ -15,11 +15,12 @@ from fastapi import APIRouter
 
 from api.game_data import (
     list_apparel_items,
+    list_ancestries,
     list_backgrounds,
+    list_cultures,
     list_focus,
     list_magical_items,
     list_mundane_items,
-    list_species,
 )
 from api.models import (
     BackgroundOption,
@@ -41,7 +42,8 @@ async def get_options() -> OptionsResponse:
     Only present options returned by this endpoint — do not offer any options
     not listed here. Never enumerate from memory.
     """
-    species = [SpeciesOption(**s) for s in list_species()]
+    species = [SpeciesOption(**s) for s in list_ancestries()]
+    _ = list_cultures()
     focus = [FocusOption(**f) for f in list_focus()]
     backgrounds = [BackgroundOption(**b) for b in list_backgrounds()]
     mundane_items = [ItemOption(**item) for item in list_mundane_items()]

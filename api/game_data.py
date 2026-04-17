@@ -1,8 +1,9 @@
 """
 game_data.py — Load game system JSON data and expose helper functions.
 
-Replaces srd5e.py. Data lives in /data/ as JSON files for species,
-focus archetypes, backgrounds, knowledge skills, and application categories.
+Replaces srd5e.py. Data lives in /data/ as JSON files for ancestry,
+culture, focus archetypes, backgrounds, knowledge skills, and application
+categories.
 """
 
 from __future__ import annotations
@@ -15,7 +16,8 @@ from typing import Any
 
 _DATA_DIR = Path(__file__).parent.parent / "data"
 _DATA_FILES = (
-    "characters/species.json",
+    "characters/ancestry.json",
+    "characters/culture.json",
     "characters/focus.json",
     "characters/backgrounds.json",
 )
@@ -36,8 +38,19 @@ _MAGIC_DIR = _DATA_DIR / "magic"
 def _load_json(filename: str) -> dict[str, Any] | list[Any]:
     """Load a JSON file from the data directory."""
     path = _DATA_DIR / filename
+    if path.name.startswith("_"):
+        return {}
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
+    if isinstance(data, dict):
+        return {k: v for k, v in data.items() if not str(k).startswith("_")}
+    if isinstance(data, list):
+        filtered = []
+        for item in data:
+            if isinstance(item, dict) and str(item.get("index", "")).startswith("_"):
+                continue
+            filtered.append(item)
+        data = filtered
     # If it's a list of objects with 'index' keys, convert to dict
     if isinstance(data, list) and data and "index" in data[0]:
         return {item["index"]: item for item in data}
@@ -45,25 +58,56 @@ def _load_json(filename: str) -> dict[str, Any] | list[Any]:
 
 
 # ---------------------------------------------------------------------------
-# Species
+# Ancestries
 # ---------------------------------------------------------------------------
 
-def get_species(index: str) -> dict[str, Any]:
-    """Return species data for the given index (e.g. 'human', 'dragonborn')."""
-    data = _load_json("characters/species.json")
+def get_ancestry(index: str) -> dict[str, Any]:
+    """Return ancestry data for the given index (e.g. 'human', 'dragonborn')."""
+    data = _load_json("characters/ancestry.json")
     if index not in data:
-        raise ValueError(f"Unknown species: {index!r}. Valid: {sorted(data.keys())}")
+        raise ValueError(f"Unknown ancestry: {index!r}. Valid: {sorted(data.keys())}")
     return data[index]
 
 
-def list_species() -> list[dict[str, Any]]:
-    data = _load_json("characters/species.json")
+def list_ancestries() -> list[dict[str, Any]]:
+    data = _load_json("characters/ancestry.json")
     return [
         {
             "index": k,
             "name": v["name"],
+            "description": v.get("description", ""),
             "primary_domain": v.get("primary_domain"),
             "domains": v["domains"],
+            "traits": v.get("traits", []),
+        }
+        for k, v in data.items()
+    ]
+
+
+# ---------------------------------------------------------------------------
+# Cultures
+# ---------------------------------------------------------------------------
+
+def get_culture(index: str) -> dict[str, Any]:
+    """Return culture data for the given index."""
+    data = _load_json("characters/culture.json")
+    if index not in data:
+        raise ValueError(f"Unknown culture: {index!r}. Valid: {sorted(data.keys())}")
+    return data[index]
+
+
+def list_cultures() -> list[dict[str, Any]]:
+    """Return all cultures as a list of summary dicts."""
+    data = _load_json("characters/culture.json")
+    return [
+        {
+            "index": k,
+            "name": v["name"],
+            "description": v.get("description", ""),
+            "domain_bonuses": v.get("domain_bonuses", {}),
+            "knowledge_tags": v.get("knowledge_tags", {}),
+            "application_tags": v.get("application_tags", {}),
+            "field_tags": v.get("field_tags", {}),
         }
         for k, v in data.items()
     ]
@@ -201,7 +245,7 @@ def seed_character(
 
     Returns the character dict ready for JSONB storage.
     """
-    species    = get_species(species_index)
+    species    = get_ancestry(species_index)
     focus      = get_focus(focus_index)
     background = get_background(background_index)
 

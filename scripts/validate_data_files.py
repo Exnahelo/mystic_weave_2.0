@@ -251,7 +251,7 @@ def main() -> None:
     data_dir = repo_root / "data"
 
     failures: list[str] = []
-    _validate_species(data_dir / "characters" / "species.json", failures)
+    _validate_species(data_dir / "characters" / "ancestry.json", failures)
     _validate_tag_rows(data_dir / "characters" / "focus.json", failures, expected_count=7)
     _validate_tag_rows(data_dir / "characters" / "backgrounds.json", failures, expected_count=8)
     _validate_apparel(data_dir / "items" / "apparel.json", failures)
