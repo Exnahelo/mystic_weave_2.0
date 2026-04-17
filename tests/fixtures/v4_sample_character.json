@@ -1,0 +1,11 @@
+{
+  "character_name": "Test",
+  "ancestry": "dragonborn",
+  "culture": "draconic_grasslands",
+  "focus": "devoted",
+  "background": "acolyte",
+  "adjustment_points": {
+    "will": 5,
+    "endurance": 5
+  }
+}
