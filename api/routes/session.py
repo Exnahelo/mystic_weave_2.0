@@ -1,8 +1,8 @@
 """
 routes/session.py — POST /session/new
 
-Creates a new game session. The character is seeded from game system data
-using the provided species, focus archetype, and background.
+    Creates a new game session. The character is seeded from game system data
+    using the provided ancestry, culture, focus archetype, and background.
 """
 
 from __future__ import annotations
@@ -35,7 +35,7 @@ async def new_session(
     Create a new game session.
 
     Seeds the character from local game system data using the provided
-    species, focus, and background. Returns the session_id and initial
+    ancestry, culture, focus, and background. Returns the session_id and initial
     character + world state.
     """
     session_id = _short_id()
@@ -44,7 +44,8 @@ async def new_session(
     try:
         character = seed_character(
             name=body.character_name,
-            species_index=body.species,
+            ancestry_index=body.ancestry,
+            culture_index=body.culture,
             focus_index=body.focus,
             background_index=body.background,
             adjustment_points=body.adjustment_points.model_dump(),

@@ -1,7 +1,7 @@
 """
 routes/options.py — GET /options
 
-Returns all supported species, focus archetypes, and backgrounds
+Returns all supported ancestries, cultures, focus archetypes, and backgrounds
 from the local game system JSON data.
 
 The GPT calls this once at the start of character creation to enumerate
@@ -23,11 +23,12 @@ from api.game_data import (
     list_mundane_items,
 )
 from api.models import (
+    AncestryOption,
     BackgroundOption,
+    CultureOption,
     FocusOption,
     ItemOption,
     OptionsResponse,
-    SpeciesOption,
 )
 
 router = APIRouter()
@@ -36,14 +37,14 @@ router = APIRouter()
 @router.get("/options", response_model=OptionsResponse, tags=["options"])
 async def get_options() -> OptionsResponse:
     """
-    Return all supported species, focus archetypes, and backgrounds.
+    Return all supported ancestries, cultures, focus archetypes, and backgrounds.
 
-    Call this before asking the player to choose species, focus, or background.
+    Call this before asking the player to choose ancestry, culture, focus, or background.
     Only present options returned by this endpoint — do not offer any options
     not listed here. Never enumerate from memory.
     """
-    species = [SpeciesOption(**s) for s in list_ancestries()]
-    _ = list_cultures()
+    ancestries = [AncestryOption(**a) for a in list_ancestries()]
+    cultures = [CultureOption(**c) for c in list_cultures()]
     focus = [FocusOption(**f) for f in list_focus()]
     backgrounds = [BackgroundOption(**b) for b in list_backgrounds()]
     mundane_items = [ItemOption(**item) for item in list_mundane_items()]
@@ -51,7 +52,8 @@ async def get_options() -> OptionsResponse:
     apparel_items = [ItemOption(**item) for item in list_apparel_items()]
 
     return OptionsResponse(
-        species=species,
+        ancestries=ancestries,
+        cultures=cultures,
         focus=focus,
         backgrounds=backgrounds,
         mundane_items=mundane_items,

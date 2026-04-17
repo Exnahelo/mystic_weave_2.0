@@ -133,8 +133,10 @@ def list_focus() -> list[dict[str, Any]]:
             "index": k,
             "name": v["name"],
             "description": v.get("description", ""),
+            "signature_tag": v.get("signature_tag"),
             "knowledge_tags": v.get("knowledge_tags", {}),
             "application_tags": v.get("application_tags", {}),
+            "field_tags": v.get("field_tags", {}),
         }
         for k, v in data.items()
     ]
@@ -160,8 +162,10 @@ def list_backgrounds() -> list[dict[str, Any]]:
             "index": k,
             "name": v["name"],
             "description": v.get("description", ""),
+            "domain_bonuses": v.get("domain_bonuses", {}),
             "knowledge_tags": v.get("knowledge_tags", {}),
             "application_tags": v.get("application_tags", {}),
+            "field_tags": v.get("field_tags", {}),
         }
         for k, v in data.items()
     ]

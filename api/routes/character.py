@@ -43,7 +43,8 @@ async def create_character(
         try:
             character = seed_character(
                 name=body.name,
-                species_index=body.species,
+                ancestry_index=body.ancestry,
+                culture_index=body.culture,
                 focus_index=body.focus,
                 background_index=body.background,
                 adjustment_points=body.adjustment_points.model_dump(),
