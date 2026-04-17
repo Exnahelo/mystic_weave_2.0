@@ -213,6 +213,8 @@ def data_fingerprint() -> str:
     hasher = hashlib.sha256()
     for filename in (*_DATA_FILES, *_ITEM_DATA_FILES, *_SPELL_DATA_FILES):
         path = _DATA_DIR / filename
+        if not path.exists():
+            continue
         with open(path, "rb") as f:
             hasher.update(f.read())
 

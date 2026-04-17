@@ -18,6 +18,7 @@ from api.game_data import (
     data_fingerprint,
     list_ancestries,
     list_backgrounds,
+    list_cultures,
     list_focus,
 )
 from api.models import HealthResponse, VersionResponse
@@ -39,7 +40,7 @@ app = FastAPI(
         "The GPT is the narrator; this API is the memory. "
         "d100 roll-under resolution with domain scores and competency tiers."
     ),
-    version="3.4.0",
+    version="4.0.0",
     servers=[
         {
             "url": "https://mysticweave-production.up.railway.app",
@@ -84,7 +85,8 @@ async def health_check() -> HealthResponse:
 async def version() -> VersionResponse:
     """Deployment/version metadata for sanity checks across environments."""
     git_sha = os.getenv("RAILWAY_GIT_COMMIT_SHA") or os.getenv("GIT_SHA") or "unknown"
-    species_count = len(list_ancestries())
+    ancestry_count = len(list_ancestries())
+    culture_count = len(list_cultures())
     focus_count = len(list_focus())
     backgrounds_count = len(list_backgrounds())
     return {
@@ -92,7 +94,8 @@ async def version() -> VersionResponse:
         "api_version": app.version,
         "git_sha": git_sha,
         "data_fingerprint": data_fingerprint(),
-        "species_count": species_count,
+        "ancestry_count": ancestry_count,
+        "culture_count": culture_count,
         "focus_count": focus_count,
         "backgrounds_count": backgrounds_count,
     }
