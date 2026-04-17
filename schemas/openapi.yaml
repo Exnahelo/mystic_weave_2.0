@@ -4,7 +4,7 @@ info:
   description: Persistent game state backend for a text-based RPG powered by a custom
     GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution
     with domain scores and competency tiers.
-  version: 3.4.0
+  version: 4.0.0
 servers:
 - url: https://mysticweave-production.up.railway.app
   description: Production (Railway)
@@ -105,7 +105,7 @@ paths:
 
         Seeds the character from local game system data using the provided
 
-        species, focus, and background. Returns the session_id and initial
+        ancestry, culture, focus, and background. Returns the session_id and initial
 
         character + world state.'
       operationId: new_session_session_new_post
@@ -277,14 +277,10 @@ paths:
       tags:
       - options
       summary: Get Options
-      description: 'Return all supported species, focus archetypes, and backgrounds.
-
-
-        Call this before asking the player to choose species, focus, or background.
-
-        Only present options returned by this endpoint — do not offer any options
-
-        not listed here. Never enumerate from memory.'
+      description: "Return all supported ancestries, cultures, focus archetypes, and\
+        \ backgrounds.\n\nCall this before asking the player to choose ancestry, culture,\
+        \ focus, or background.\nOnly present options returned by this endpoint \u2014\
+        \ do not offer any options\nnot listed here. Never enumerate from memory."
       operationId: get_options_options_get
       responses:
         '200':
@@ -324,7 +320,7 @@ paths:
       tags:
       - health
       summary: Root
-      description: Root — confirms the API is running.
+      description: "Root \u2014 confirms the API is running."
       operationId: root__get
       responses:
         '200':
@@ -338,7 +334,7 @@ paths:
       tags:
       - health
       summary: Health Check
-      description: Health check endpoint — used by Railway and uptime monitors.
+      description: "Health check endpoint \u2014 used by Railway and uptime monitors."
       operationId: health_check_health_get
       responses:
         '200':
@@ -395,7 +391,7 @@ components:
           default: 0
       type: object
       title: AdjustmentPoints
-      description: Player's +5 domain adjustment pool at creation. Max +3 per domain.
+      description: Player's +10 domain adjustment pool at creation. Max +5 per domain.
     AdvancementState:
       properties:
         points_available:
@@ -440,6 +436,81 @@ components:
       - neutral
       - chaotic
       title: AlignmentOrder
+    AncestryOption:
+      properties:
+        index:
+          type: string
+          title: Index
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+          default: ''
+        primary_domain:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Primary Domain
+        domains:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Domains
+        traits:
+          items:
+            $ref: '#/components/schemas/AncestryTrait'
+          type: array
+          title: Traits
+      type: object
+      required:
+      - index
+      - name
+      - domains
+      title: AncestryOption
+    AncestryTrait:
+      properties:
+        name:
+          type: string
+          title: Name
+        type:
+          type: string
+          title: Type
+        description:
+          type: string
+          title: Description
+        mechanical_note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Mechanical Note
+        application_tag:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Application Tag
+        roll_domain:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Roll Domain
+        usage:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Usage
+        fatigue:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fatigue
+      type: object
+      required:
+      - name
+      - type
+      - description
+      title: AncestryTrait
     ApplyStateDeltaRequest:
       properties:
         character:
@@ -467,6 +538,11 @@ components:
           type: string
           title: Description
           default: ''
+        domain_bonuses:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Domain Bonuses
         knowledge_tags:
           additionalProperties:
             type: integer
@@ -477,6 +553,11 @@ components:
             type: integer
           type: object
           title: Application Tags
+        field_tags:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Field Tags
       type: object
       required:
       - index
@@ -487,9 +568,12 @@ components:
         name:
           type: string
           title: Name
-        species:
+        ancestry:
           type: string
-          title: Species
+          title: Ancestry
+        culture:
+          type: string
+          title: Culture
         focus:
           type: string
           title: Focus
@@ -510,6 +594,11 @@ components:
             type: integer
           type: object
           title: Application
+        fields:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Fields
         status_effects:
           items:
             type: string
@@ -530,27 +619,12 @@ components:
           title: Reputation
         advancement:
           $ref: '#/components/schemas/AdvancementState'
-        level:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Level
-          description: Deprecated legacy field.
-        magic_fields:
-          items:
-            type: string
-          type: array
-          title: Magic Fields
-        draconic_traits:
-          items:
-            type: string
-          type: array
-          title: Draconic Traits
       additionalProperties: false
       type: object
       required:
       - name
-      - species
+      - ancestry
+      - culture
       - focus
       - background
       - hp
@@ -561,9 +635,12 @@ components:
         name:
           type: string
           title: Name
-        species:
+        ancestry:
           type: string
-          title: Species
+          title: Ancestry
+        culture:
+          type: string
+          title: Culture
         focus:
           type: string
           title: Focus
@@ -584,6 +661,11 @@ components:
             type: integer
           type: object
           title: Application
+        fields:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Fields
         status_effects:
           items:
             type: string
@@ -604,27 +686,12 @@ components:
           title: Reputation
         advancement:
           $ref: '#/components/schemas/AdvancementState'
-        level:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Level
-          description: Deprecated legacy field.
-        magic_fields:
-          items:
-            type: string
-          type: array
-          title: Magic Fields
-        draconic_traits:
-          items:
-            type: string
-          type: array
-          title: Draconic Traits
       additionalProperties: false
       type: object
       required:
       - name
-      - species
+      - ancestry
+      - culture
       - focus
       - background
       - hp
@@ -657,6 +724,13 @@ components:
             type: object
           - type: 'null'
           title: Application
+        fields:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Fields
         status_effects:
           anyOf:
           - items:
@@ -740,12 +814,12 @@ components:
       - id
       - name
       title: CompanionModel
-      description: "Lightweight companion schema. Not a full PC — no focus/background\
+      description: "Lightweight companion schema. Not a full PC \u2014 no focus/background\
         \ mechanics.\nDomains and tags are optional; include only if the companion\
         \ participates\nin rolls. Status defaults to active.\n\nParty reputation formula\
         \ (computed by GPT at resolution time, not stored):\n  known_avg  = mean(standing\
         \ for members with an entry for the faction)\n  ratio      = known_count /\
-        \ total_party_size\n  party_rep  = known_avg × ratio"
+        \ total_party_size\n  party_rep  = known_avg \xD7 ratio"
     CompanionModel-Output:
       properties:
         id:
@@ -798,12 +872,12 @@ components:
       - id
       - name
       title: CompanionModel
-      description: "Lightweight companion schema. Not a full PC — no focus/background\
+      description: "Lightweight companion schema. Not a full PC \u2014 no focus/background\
         \ mechanics.\nDomains and tags are optional; include only if the companion\
         \ participates\nin rolls. Status defaults to active.\n\nParty reputation formula\
         \ (computed by GPT at resolution time, not stored):\n  known_avg  = mean(standing\
         \ for members with an entry for the faction)\n  ratio      = known_count /\
-        \ total_party_size\n  party_rep  = known_avg × ratio"
+        \ total_party_size\n  party_rep  = known_avg \xD7 ratio"
     CompanionStatus:
       type: string
       enum:
@@ -861,9 +935,12 @@ components:
         name:
           type: string
           title: Name
-        species:
+        ancestry:
           type: string
-          title: Species
+          title: Ancestry
+        culture:
+          type: string
+          title: Culture
         focus:
           type: string
           title: Focus
@@ -878,12 +955,13 @@ components:
       required:
       - session_id
       - name
-      - species
+      - ancestry
+      - culture
       - focus
       - background
       title: CreateCharacterRequest
-      description: Body for POST /character/create — seeds character from game system
-        data.
+      description: "Body for POST /character/create \u2014 seeds character from game\
+        \ system data."
     CreateCharacterResponse:
       properties:
         session_id:
@@ -896,6 +974,43 @@ components:
       - session_id
       - character
       title: CreateCharacterResponse
+    CultureOption:
+      properties:
+        index:
+          type: string
+          title: Index
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+          default: ''
+        domain_bonuses:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Domain Bonuses
+        knowledge_tags:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Knowledge Tags
+        application_tags:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Application Tags
+        field_tags:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Field Tags
+      type: object
+      required:
+      - index
+      - name
+      title: CultureOption
     DomainScores:
       properties:
         power:
@@ -958,6 +1073,35 @@ components:
         as a raw integer for regions that use hard currency (e.g. outside
 
         Drakenvale via the SSTC). 100 CD = 1 GD.'
+    EconomyDelta:
+      properties:
+        wealth_tier:
+          anyOf:
+          - $ref: '#/components/schemas/WealthTier'
+          - type: 'null'
+        coin:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Coin
+        trade_goods:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Trade Goods
+        obligations:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Obligations
+      additionalProperties: false
+      type: object
+      title: EconomyDelta
+      description: Sparse economy update for delta application.
     Equipment-Input:
       properties:
         worn:
@@ -1096,6 +1240,16 @@ components:
             type: integer
           type: object
           title: Application Tags
+        field_tags:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Field Tags
+        signature_tag:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Signature Tag
       type: object
       required:
       - index
@@ -1212,10 +1366,9 @@ components:
           $ref: '#/components/schemas/Alignment'
       type: object
       title: Identity
-      description: 'Narrative character block. Captured at creation, GPT-readable
-        every session.
-
-        All fields optional at creation — can be filled in as play reveals them.'
+      description: "Narrative character block. Captured at creation, GPT-readable\
+        \ every session.\nAll fields optional at creation \u2014 can be filled in\
+        \ as play reveals them."
     Identity-Output:
       properties:
         origin:
@@ -1250,10 +1403,9 @@ components:
           $ref: '#/components/schemas/Alignment'
       type: object
       title: Identity
-      description: 'Narrative character block. Captured at creation, GPT-readable
-        every session.
-
-        All fields optional at creation — can be filled in as play reveals them.'
+      description: "Narrative character block. Captured at creation, GPT-readable\
+        \ every session.\nAll fields optional at creation \u2014 can be filled in\
+        \ as play reveals them."
     ItemOption:
       properties:
         id:
@@ -1387,9 +1539,12 @@ components:
         character_name:
           type: string
           title: Character Name
-        species:
+        ancestry:
           type: string
-          title: Species
+          title: Ancestry
+        culture:
+          type: string
+          title: Culture
         focus:
           type: string
           title: Focus
@@ -1428,7 +1583,8 @@ components:
       type: object
       required:
       - character_name
-      - species
+      - ancestry
+      - culture
       - focus
       - background
       title: NewSessionRequest
@@ -1450,11 +1606,16 @@ components:
       title: NewSessionResponse
     OptionsResponse:
       properties:
-        species:
+        ancestries:
           items:
-            $ref: '#/components/schemas/SpeciesOption'
+            $ref: '#/components/schemas/AncestryOption'
           type: array
-          title: Species
+          title: Ancestries
+        cultures:
+          items:
+            $ref: '#/components/schemas/CultureOption'
+          type: array
+          title: Cultures
         focus:
           items:
             $ref: '#/components/schemas/FocusOption'
@@ -1482,12 +1643,13 @@ components:
           title: Apparel Items
       type: object
       required:
-      - species
+      - ancestries
+      - cultures
       - focus
       - backgrounds
       title: OptionsResponse
-      description: Response for GET /options — all supported species, focus archetypes,
-        backgrounds.
+      description: "Response for GET /options \u2014 all supported ancestries, cultures,\
+        \ focus archetypes, and backgrounds."
     PacingState:
       properties:
         tension:
@@ -1544,9 +1706,8 @@ components:
           default: unknown
       type: object
       title: Politics
-      description: 'World-level relational and political state.
-
-        Not a subsystem — a lightweight store for the GPT to track active context.'
+      description: "World-level relational and political state.\nNot a subsystem \u2014\
+        \ a lightweight store for the GPT to track active context."
     ReputationEntry:
       properties:
         faction:
@@ -1588,7 +1749,7 @@ components:
       required:
       - target
       title: RollRequest
-      description: Body for POST /roll — d100 roll-under resolution.
+      description: "Body for POST /roll \u2014 d100 roll-under resolution."
     RollResponse:
       properties:
         roll:
@@ -1737,30 +1898,6 @@ components:
       - hp
       title: SceneRelevantCharacterState
       description: Narration-relevant subset of character/world state.
-    SpeciesOption:
-      properties:
-        index:
-          type: string
-          title: Index
-        name:
-          type: string
-          title: Name
-        primary_domain:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Primary Domain
-        domains:
-          additionalProperties:
-            type: integer
-          type: object
-          title: Domains
-      type: object
-      required:
-      - index
-      - name
-      - domains
-      title: SpeciesOption
     SurvivalState:
       properties:
         hunger:
@@ -1859,9 +1996,12 @@ components:
         data_fingerprint:
           type: string
           title: Data Fingerprint
-        species_count:
+        ancestry_count:
           type: integer
-          title: Species Count
+          title: Ancestry Count
+        culture_count:
+          type: integer
+          title: Culture Count
         focus_count:
           type: integer
           title: Focus Count
@@ -1874,7 +2014,8 @@ components:
       - api_version
       - git_sha
       - data_fingerprint
-      - species_count
+      - ancestry_count
+      - culture_count
       - focus_count
       - backgrounds_count
       title: VersionResponse
@@ -2001,7 +2142,7 @@ components:
           title: Companions
         economy:
           anyOf:
-          - $ref: '#/components/schemas/Economy'
+          - $ref: '#/components/schemas/EconomyDelta'
           - type: 'null'
         politics:
           anyOf:
@@ -2023,3 +2164,4 @@ components:
       type: object
       title: WorldStateDelta
       description: Typed partial world update for extraction-driven turn commits.
+

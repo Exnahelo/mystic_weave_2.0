@@ -464,13 +464,12 @@ class CharacterStateDelta(BaseModel):
     domains: dict[str, int] | None = None
     knowledge: dict[str, int] | None = None
     application: dict[str, int] | None = None
+    fields: dict[str, int] | None = None
     status_effects: list[str] | None = None
     notes: str | None = None
     equipment: EquipmentDelta | None = None
     reputation: list[ReputationEntry] | None = None
     advancement: AdvancementState | None = None
-    magic_fields: list[str] | None = None
-    draconic_traits: list[str] | None = None
 
     def has_updates(self) -> bool:
         return any(v is not None for v in self.model_dump(exclude_none=False).values())

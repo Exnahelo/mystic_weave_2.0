@@ -81,10 +81,8 @@ def _normalize_character_state(payload: dict[str, Any]) -> dict[str, Any]:
         normalized["knowledge"] = {}
     if not isinstance(normalized.get("application"), dict):
         normalized["application"] = {}
-    if not isinstance(normalized.get("magic_fields"), list):
-        normalized["magic_fields"] = []
-    if not isinstance(normalized.get("draconic_traits"), list):
-        normalized["draconic_traits"] = []
+    if not isinstance(normalized.get("fields"), dict):
+        normalized["fields"] = {}
     if not isinstance(normalized.get("advancement"), dict):
         normalized["advancement"] = AdvancementState().model_dump()
     return normalized
