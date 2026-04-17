@@ -225,71 +225,93 @@ def data_fingerprint() -> str:
 
 def seed_character(
     name: str,
-    species_index: str,
+    ancestry_index: str,
+    culture_index: str,
     focus_index: str,
     background_index: str,
     adjustment_points: dict[str, int] | None = None,
     identity: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """
-    Build a complete character dict from species + focus + background.
+    Build a complete character dict from ancestry + culture + focus + background.
 
     Applies:
-    - Species base domain scores + player adjustment points
-    - Focus knowledge and application tags
-    - Background knowledge and application tags
-    - Tag stacking rule (duplicate tags advance to tier 2, capped at 2)
+    - Ancestry base domain scores
+    - Culture and background domain bonuses
+    - Player adjustment points (+10 total, max +5 per domain)
+    - Knowledge, application, and field tag stacking across all four layers
+    - Ancestry trait application tags at T1 when present
 
     Optional identity dict is passed through verbatim — it is validated
     upstream by the Identity Pydantic model before reaching here.
 
     Returns the character dict ready for JSONB storage.
     """
-    species    = get_ancestry(species_index)
+    ancestry   = get_ancestry(ancestry_index)
+    culture    = get_culture(culture_index)
     focus      = get_focus(focus_index)
     background = get_background(background_index)
 
     # --- Domain scores ---
-    domains   = dict(species["domains"])  # copy base scores
+    domains = dict(ancestry["domains"])
+
+    for layer in (culture, background):
+        for domain, bonus in layer.get("domain_bonuses", {}).items():
+            if domain not in domains:
+                raise ValueError(f"Invalid domain: {domain!r}")
+            domains[domain] += bonus
+
     adj       = adjustment_points or {}
     total_adj = sum(adj.values())
-    if total_adj > 5:
-        raise ValueError(f"Adjustment pool is 5 points max. Got {total_adj}.")
+    if total_adj > 10:
+        raise ValueError(f"Adjustment pool is 10 points max. Got {total_adj}.")
     for domain, points in adj.items():
         if domain not in domains:
             raise ValueError(f"Invalid domain: {domain!r}")
-        if points > 3:
-            raise ValueError(f"Max +3 per domain. {domain} got +{points}.")
+        if points > 5:
+            raise ValueError(f"Max +5 per domain. {domain} got +{points}.")
         domains[domain] += points
+        if domains[domain] > 80:
+            raise ValueError(f"Domain {domain!r} cannot exceed 80. Got {domains[domain]}.")
 
-    # --- Competency tags ---
-    # Start with focus tags
-    knowledge:   dict[str, int] = dict(focus.get("knowledge_tags", {}))
-    application: dict[str, int] = dict(focus.get("application_tags", {}))
+    for domain, score in domains.items():
+        if score > 80:
+            raise ValueError(f"Domain {domain!r} cannot exceed 80. Got {score}.")
 
-    # Merge background tags — stacking rule: duplicates advance to Tier 2
-    for tag, tier in background.get("knowledge_tags", {}).items():
-        if tag in knowledge:
-            knowledge[tag] = min(knowledge[tag] + 1, 2)   # stack, cap at T2
-        else:
-            knowledge[tag] = tier
+    # --- Competency and field tags ---
+    knowledge: dict[str, int] = {}
+    application: dict[str, int] = {}
+    fields: dict[str, int] = {}
 
-    for tag, tier in background.get("application_tags", {}).items():
-        if tag in application:
-            application[tag] = min(application[tag] + 1, 2)
-        else:
-            application[tag] = tier
+    def _stack_tags(target: dict[str, int], source: dict[str, int]) -> None:
+        for tag, tier in source.items():
+            if tag in target:
+                target[tag] = min(target[tag] + 1, 5)
+            else:
+                target[tag] = tier
+
+    for trait in ancestry.get("traits", []):
+        application_tag = trait.get("application_tag")
+        if application_tag and application_tag not in application:
+            application[application_tag] = 1
+
+    for layer in (culture, background, focus):
+        _stack_tags(knowledge, layer.get("knowledge_tags", {}))
+        _stack_tags(application, layer.get("application_tags", {}))
+        _stack_tags(fields, layer.get("field_tags", {}))
 
     # --- Assemble character dict ---
     character: dict[str, Any] = {
         "name":           name,
-        "species":        species_index,
+        "ancestry":       ancestry_index,
+        "culture":        culture_index,
         "focus":          focus_index,
         "background":     background_index,
         "hp":             {"current": 100, "max": 100},
         "domains":        domains,
         "knowledge":      knowledge,
         "application":    application,
+        "fields":         fields,
         "status_effects": [],
         "notes":          "",
         # v3.1.0 narrative and inventory blocks
