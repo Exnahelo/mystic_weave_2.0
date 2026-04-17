@@ -1,0 +1,92 @@
+[
+  {
+    "index": "sacred",
+    "name": "Sacred",
+    "primary_domain": "will",
+    "secondary_domain": "presence",
+    "domain_note": "Will for devotional concentration; Presence for formal invocation.",
+    "description": "Devotional practice, liturgy, purification, consecration, divine invocation.",
+    "examples": ["Consecrating a threshold against corruption", "Formal invocation during a rite", "Purifying a tainted water source"],
+    "kind": "magical"
+  },
+  {
+    "index": "warding",
+    "name": "Warding",
+    "primary_domain": "will",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Protective barriers, seals, anti-corruption protocols, ward construction and maintenance.",
+    "examples": ["Raising a protective circle", "Sealing a necrotic leak", "Maintaining a long-standing ward on a building"],
+    "kind": "magical"
+  },
+  {
+    "index": "binding",
+    "name": "Binding",
+    "primary_domain": "will",
+    "secondary_domain": "presence",
+    "domain_note": "Will for sustained oath concentration; Presence for command recognition.",
+    "description": "Oaths, pacts, compulsions, sworn duties, channeled authority with magical weight.",
+    "examples": ["Binding a summoned creature to a task", "Sealing a pact between parties", "Compelling truth with an oath"],
+    "kind": "magical"
+  },
+  {
+    "index": "elemental",
+    "name": "Elemental",
+    "primary_domain": "endurance",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Raw elemental channeling through sustained output — fire, cold, lightning, stone, wind.",
+    "examples": ["Channeling a sustained flame barrier", "Calling a focused gust to clear mist", "Freezing a river crossing"],
+    "kind": "magical"
+  },
+  {
+    "index": "druidry",
+    "name": "Druidry",
+    "primary_domain": "perception",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Living-systems magic: biome work, ley-flow manipulation, plant and animal shaping, ecosystem intervention. Renamed from the prior 'nature' field to avoid collision with the Nature knowledge group.",
+    "examples": ["Awakening a grove into active defense", "Compelling overgrowth across a road", "Speaking with wild creatures"],
+    "kind": "magical"
+  },
+  {
+    "index": "illusion",
+    "name": "Illusion",
+    "primary_domain": "presence",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Constructed perception: false images, sensory manipulation, glamour, disguise magic.",
+    "examples": ["Projecting a phantom self across a room", "Masking a building from sight", "Planting a false memory of appearance"],
+    "kind": "magical"
+  },
+  {
+    "index": "runecraft",
+    "name": "Runecraft",
+    "primary_domain": "intellect",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Inscribed magical structures: runes, glyphs, sigils, permanent enchantment through written work.",
+    "examples": ["Inscribing a ward rune onto a door", "Designing a permanent light glyph", "Reading a complex runic trap"],
+    "kind": "magical"
+  },
+  {
+    "index": "alchemy",
+    "name": "Alchemy",
+    "primary_domain": "intellect",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Magical compound preparation, transmutation, reagent work, potion and tincture crafting.",
+    "examples": ["Brewing a healing tincture", "Transmuting lead into a ritual component", "Preparing reagents for a larger working"],
+    "kind": "magical"
+  },
+  {
+    "index": "necromancy",
+    "name": "Necromancy",
+    "primary_domain": "intellect",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Death energy, undead interaction, life-force manipulation. Culturally forbidden or restricted in most civilized areas.",
+    "examples": ["Reading a death imprint on a body", "Compelling a restless shade to speak", "Disrupting an undead threshold"],
+    "kind": "magical"
+  }
+]

@@ -44,7 +44,7 @@ Narration output is prose-only. Extraction output is structured state delta + `l
 - Reflect tags, identity, companions, and scene state.
 
 ### 3) Resolve Risk
-**Standard:** choose 1 domain, 1 knowledge, 1 application; `roll_tag` is contextual. Apply `prompts/difficulty_rules.md`, faction rep, never stack tags, call `POST /roll`.
+**Standard:** choose 1 domain, 1 group, 1 application; `roll_tag` is contextual. Apply `prompts/difficulty_rules.md`, faction rep, never stack tags, call `POST /roll`.
 **Spells:** per `prompts/magic_rules.md`, use target 55/65/75/85/95 by app tier; apply Risky −10 or Dangerous −20 plus situational ±5 to ±10; send target to `POST /roll`. Domain + field knowledge gate access only.
 **Magic-adjacent non-spell:** use the standard formula.
 

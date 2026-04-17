@@ -183,21 +183,47 @@ Fail-forward does not mean soft failure. Meaningful harm, punishment, and setbac
 
 Item references remain contextual only: an item's `roll_tag` can justify fit for an action, but never grants an additional numeric modifier beyond normal domain/tag/difficulty assembly.
 
-### Knowledge Tags (understanding)
+### Knowledge Groups (broad understanding)
 
-Each of the seven domains has five knowledge skills. Tiers 1–5, each tier adds +1 to target number.
+Knowledge groups are the broad competency layer. Tiers 1–5, each tier adds +1 to target number.
 
-**Power:** Athletics, Intimidation, Breaking, Lifting, Brawling
-**Agility:** Stealth, Acrobatics, Sleight of Hand, Evasion, Reflexes
-**Perception:** Tracking, Investigation, Insight, Surveillance, Natural Lore
-**Endurance:** Survival, Fortitude, Recovery, Resistance, Exertion
-**Intellect:** Arcana, History, Medicine, Engineering, Linguistics
-**Will:** Discipline, Meditation, Courage, Resolve, Focus
-**Presence:** Persuasion, Deception, Performance, Command, Diplomacy
+| Group | Domain | Summary |
+|---|---|---|
+| Athletics | Power / Endurance | Gross motor effort under load: hauling, climbing, swimming, forced movement |
+| Mobility | Agility | Balance, acrobatics, traversal, evasion, riding balance |
+| Stealth | Agility | Going unseen, unheard, and untracked in the moment |
+| Skulduggery | Agility | Precision illicit technique: sleight of hand, locks, sabotage, forgery |
+| Awareness | Perception | Immediate noticing: danger, tells, tension, crowd shifts |
+| Investigation | Perception / Intellect | Structured inquiry, deduction, evidence reading, interrogation |
+| Tracking | Perception | Following trails, spoor, route inference, counter-tracking |
+| Survival | Endurance | Enduring hostile conditions, shelter, fire, navigation, camp discipline |
+| Nature | Perception | Understanding living systems: animals, plants, agriculture, ecology |
+| Medicine | Intellect | Diagnosis, treatment, surgery, pharmacology, mental care |
+| Combat | Power | The active execution of violence, weapons, armor, shields |
+| Warfare | Will / Intellect | Tactical understanding, battlefield reading, command presence |
+| Craft | Intellect | Making and repairing practical things through trade skill |
+| Engineering | Intellect | Mechanisms, structures, lockworks, siege logic, arcane substrates |
+| Lore | Intellect | History, law, politics, religion, linguistics, genealogy, economics |
+| Influence | Presence | Persuasion, deception, diplomacy, command, pressure, etiquette |
+| Performance | Presence | Singing, instruments, dance, oratory, theater, storytelling |
+| Discipline | Will | Focus, courage, resolve, composure, meditation, oath endurance |
+| Arcana | Intellect | Non-spell magical understanding: theory, wards, rituals, risk |
 
-### Magical Fields (knowledge tag table)
+### Applications (specific trained execution)
 
-Magical fields are knowledge tags and follow normal tier math (+1 per tier).
+Applications sit under a parent knowledge group. Tiers 1–5, each tier adds +1 to target number. Use one relevant group tier + one relevant application tier for a normal non-spell roll.
+
+Examples:
+- **Athletics** → hauling, climbing, swimming, forced_movement, grappling
+- **Mobility** → acrobatics, balance, evasion, parkour, riding_posture
+- **Influence** → persuasion, deception, diplomacy, command, pressure, seduction, etiquette
+- **Arcana** → theory, ritual_structure, field_recognition, enchantment_analysis, ward_reading, risk_assessment
+
+Applications do not replace groups; they narrow how the character expresses that broader training.
+
+### Magical Fields
+
+Magical fields are parallel to knowledge groups and follow the same tier math (+1 per tier), but they additionally gate spell access.
 Canonical full specification: `prompts/magic_rules.md`.
 
 | Field | Primary Domain | Governs |
@@ -206,7 +232,7 @@ Canonical full specification: `prompts/magic_rules.md`.
 | Warding | Will | Protective barriers, seals, anti-corruption protocols, ward maintenance |
 | Binding | Will | Oaths, pacts, compulsions, sworn duties, and channeled authority with magical weight |
 | Elemental | Endurance | Raw elemental channeling through sustained output |
-| Nature | Perception | Druidic and biome magic, ley-flow, living systems |
+| Druidry | Perception | Living-systems magic, ley-flow, plant/animal shaping, ecosystem intervention |
 | Illusion | Presence | Constructed perception, false images, sensory manipulation |
 | Runecraft | Intellect | Inscribed magical structures: runes, glyphs, sigils, permanent enchantment |
 | Alchemy | Intellect | Magical compound preparation, transmutation, reagent work |
@@ -216,29 +242,7 @@ Cross-domain note: some fields can roll in more than one domain depending on con
 
 Magical field knowledge tiers are gated by the field's primary domain score. See `prompts/magic_rules.md` for the domain-gating threshold table.
 
-### Application Tags (trained execution)
-
-Specific tools, weapons, or methods. Tiers 1–5, each tier adds +1 to target number.
-
-Weapon application taxonomy is canonical across data and prompts: **grappling, melee, reach, ranged, mechanical, unconventional**.
-
-| Category | Primary Domain |
-|---|---|
-| Grappling | Agility |
-| Melee | Power |
-| Reach | Power |
-| Ranged | Perception |
-| Mechanical | Perception |
-| Unconventional | Varies — GPT judges per weapon |
-| Shields & Armor | Endurance |
-| Arcane Implements | Intellect |
-| Herbalism & Alchemy | Intellect |
-| Sacred Rites | Will |
-| Dragon Breath | Will / Power |
-| Musical Instruments | Presence |
-| Disguise & Forgery | Presence |
-
-Maximum competency contribution: Knowledge 5 + Application 5 = +10.
+Maximum competency contribution on a standard non-spell roll: Knowledge Group 5 + Application 5 = +10.
 
 ---
 
@@ -286,7 +290,7 @@ d100 roll-under via `POST /roll`. Roll 1 = critical success. Roll 100 = critical
 Situational modifiers: up to ±10 based on conditions.
 Standard roll formula applies to non-spell magical actions (identification, resistance, concentration).
 
-### Magical Fields (Knowledge Tags)
+### Magical Fields
 
 | Field | Primary Domain | Governs |
 |---|---|---|
@@ -294,7 +298,7 @@ Standard roll formula applies to non-spell magical actions (identification, resi
 | Warding | Will | Protective barriers, seals, anti-corruption protocols, ward maintenance |
 | Binding | Will | Oaths, pacts, compulsions, sworn duties, and channeled authority with magical weight |
 | Elemental | Endurance | Raw elemental channeling through sustained output |
-| Nature | Perception | Druidic and biome magic, ley-flow, living systems |
+| Druidry | Perception | Living-systems magic, ley-flow, plant/animal shaping, ecosystem intervention |
 | Illusion | Presence | Constructed perception, false images, sensory manipulation |
 | Runecraft | Intellect | Inscribed magical structures: runes, glyphs, sigils, permanent enchantment |
 | Alchemy | Intellect | Magical compound preparation, transmutation, reagent work |

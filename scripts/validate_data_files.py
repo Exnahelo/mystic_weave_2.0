@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -22,7 +23,7 @@ FIELD_KEYS = {
     "warding",
     "binding",
     "elemental",
-    "nature",
+    "druidry",
     "illusion",
     "runecraft",
     "alchemy",
@@ -33,6 +34,11 @@ SPELL_FIELDS = FIELD_KEYS
 TRAIT_TYPES = {"passive", "conditional", "active"}
 TRAIT_USAGES = {"always", "per_scene", "per_day"}
 TRAIT_FATIGUE = {"none", "fatiguing"}
+SNAKE_CASE_RE = re.compile(r"^[a-z0-9]+(?:_[a-z0-9]+)*$")
+
+VALID_KNOWLEDGE_GROUPS: set[str] = set()
+VALID_MAGIC_FIELDS: set[str] = set()
+VALID_APPLICATIONS: set[str] = set()
 
 
 def _failures_append(failures: list[str], condition: bool, message: str) -> None:
@@ -51,6 +57,51 @@ def _load_json(path: Path) -> list[dict]:
         row for row in payload
         if not (isinstance(row, dict) and str(row.get("index", "")).startswith("_"))
     ]
+
+
+def _load_tag_file(path: Path) -> list[dict]:
+    return _load_json(path)
+
+
+def _validate_snake_case(label: str, value: object, failures: list[str]) -> None:
+    _failures_append(
+        failures,
+        isinstance(value, str) and bool(SNAKE_CASE_RE.fullmatch(value)),
+        f"{label} must be snake_case",
+    )
+
+
+def _validate_character_tag_refs(
+    label: str,
+    row: dict,
+    failures: list[str],
+) -> None:
+    knowledge_tags = row.get("knowledge_tags")
+    application_tags = row.get("application_tags")
+    field_tags = row.get("field_tags")
+
+    if isinstance(knowledge_tags, dict):
+        for tag in knowledge_tags:
+            if tag in VALID_APPLICATIONS:
+                failures.append(f"unknown tag slot: application '{tag}' placed in knowledge_tags in {label}")
+            elif tag in VALID_MAGIC_FIELDS:
+                failures.append(f"unknown tag slot: magic field '{tag}' placed in knowledge_tags in {label}")
+            elif tag not in VALID_KNOWLEDGE_GROUPS:
+                failures.append(f"unknown tag '{tag}' in {label}.knowledge_tags")
+
+    if isinstance(application_tags, dict):
+        for tag in application_tags:
+            if tag in VALID_KNOWLEDGE_GROUPS:
+                failures.append(f"unknown tag slot: knowledge group '{tag}' placed in application_tags in {label}")
+            elif tag in VALID_MAGIC_FIELDS:
+                failures.append(f"unknown tag slot: magic field '{tag}' placed in application_tags in {label}")
+            elif tag not in VALID_APPLICATIONS:
+                failures.append(f"unknown tag '{tag}' in {label}.application_tags")
+
+    if isinstance(field_tags, dict):
+        for tag in field_tags:
+            if tag not in VALID_MAGIC_FIELDS:
+                failures.append(f"unknown tag '{tag}' in {label}.field_tags")
 
 
 def _validate_tag_dict(
@@ -86,6 +137,106 @@ def _validate_field_tags(label: str, field_tags: object, failures: list[str]) ->
             isinstance(val, int) and 1 <= val <= 5,
             f"{label}.field_tags.{key} tier must be int between 1 and 5",
         )
+
+
+def _validate_knowledge_groups(path: Path, failures: list[str]) -> None:
+    rows = _load_tag_file(path)
+    seen_indices: set[str] = set()
+    _failures_append(failures, len(rows) == 19, f"{path.name}: expected 19 entries")
+
+    for i, row in enumerate(rows):
+        label = f"{path.name}[{i}]"
+        _failures_append(failures, isinstance(row, dict), f"{label}: expected object")
+        if not isinstance(row, dict):
+            continue
+        idx = row.get("index")
+        if isinstance(idx, str) and idx.startswith("_"):
+            continue
+        _failures_append(failures, isinstance(idx, str) and idx, f"{label}.index must be non-empty string")
+        _validate_snake_case(f"{label}.index", idx, failures)
+        if isinstance(idx, str):
+            _failures_append(failures, idx not in seen_indices, f"{label}.index duplicated: {idx}")
+            seen_indices.add(idx)
+        _failures_append(failures, row.get("primary_domain") in DOMAIN_KEYS, f"{label}.primary_domain must be one of {sorted(DOMAIN_KEYS)}")
+        secondary = row.get("secondary_domain")
+        _failures_append(
+            failures,
+            secondary is None or secondary in DOMAIN_KEYS,
+            f"{label}.secondary_domain must be null or one of {sorted(DOMAIN_KEYS)}",
+        )
+        _failures_append(failures, row.get("kind") == "mundane", f"{label}.kind must equal 'mundane'")
+        _failures_append(failures, isinstance(row.get("description"), str) and row.get("description").strip(), f"{label}.description must be non-empty string")
+        examples = row.get("examples")
+        _failures_append(failures, isinstance(examples, list) and len(examples) > 0, f"{label}.examples must be non-empty list")
+
+
+def _validate_magic_fields(path: Path, failures: list[str]) -> None:
+    rows = _load_tag_file(path)
+    seen_indices: set[str] = set()
+    _failures_append(failures, len(rows) == 9, f"{path.name}: expected 9 entries")
+    indices = {row.get("index") for row in rows if isinstance(row, dict)}
+    _failures_append(failures, "druidry" in indices, f"{path.name}: druidry entry missing")
+    _failures_append(failures, "nature" not in indices, f"{path.name}: nature entry must be absent")
+
+    for i, row in enumerate(rows):
+        label = f"{path.name}[{i}]"
+        _failures_append(failures, isinstance(row, dict), f"{label}: expected object")
+        if not isinstance(row, dict):
+            continue
+        idx = row.get("index")
+        if isinstance(idx, str) and idx.startswith("_"):
+            continue
+        _failures_append(failures, isinstance(idx, str) and idx, f"{label}.index must be non-empty string")
+        _validate_snake_case(f"{label}.index", idx, failures)
+        if isinstance(idx, str):
+            _failures_append(failures, idx not in seen_indices, f"{label}.index duplicated: {idx}")
+            seen_indices.add(idx)
+        _failures_append(failures, row.get("primary_domain") in DOMAIN_KEYS, f"{label}.primary_domain must be one of {sorted(DOMAIN_KEYS)}")
+        secondary = row.get("secondary_domain")
+        _failures_append(
+            failures,
+            secondary is None or secondary in DOMAIN_KEYS,
+            f"{label}.secondary_domain must be null or one of {sorted(DOMAIN_KEYS)}",
+        )
+        _failures_append(failures, row.get("kind") == "magical", f"{label}.kind must equal 'magical'")
+        _failures_append(failures, isinstance(row.get("description"), str) and row.get("description").strip(), f"{label}.description must be non-empty string")
+        examples = row.get("examples")
+        _failures_append(failures, isinstance(examples, list) and len(examples) > 0, f"{label}.examples must be non-empty list")
+
+
+def _validate_applications(path: Path, failures: list[str]) -> None:
+    rows = _load_tag_file(path)
+    seen_indices: set[str] = set()
+    _failures_append(failures, len(rows) == 117, f"{path.name}: expected 117 entries")
+
+    for i, row in enumerate(rows):
+        label = f"{path.name}[{i}]"
+        _failures_append(failures, isinstance(row, dict), f"{label}: expected object")
+        if not isinstance(row, dict):
+            continue
+        idx = row.get("index")
+        if isinstance(idx, str) and idx.startswith("_"):
+            continue
+        _failures_append(failures, isinstance(idx, str) and idx, f"{label}.index must be non-empty string")
+        _validate_snake_case(f"{label}.index", idx, failures)
+        if isinstance(idx, str):
+            _failures_append(failures, idx not in seen_indices, f"{label}.index duplicated: {idx}")
+            seen_indices.add(idx)
+        group = row.get("group")
+        _failures_append(
+            failures,
+            isinstance(group, str) and group in VALID_KNOWLEDGE_GROUPS,
+            f"{label}.group must reference a knowledge_groups.json index",
+        )
+        primary = row.get("primary_domain")
+        _failures_append(
+            failures,
+            primary in DOMAIN_KEYS or primary == "varies",
+            f"{label}.primary_domain must be one of {sorted(DOMAIN_KEYS)} or 'varies'",
+        )
+        _failures_append(failures, isinstance(row.get("description"), str) and row.get("description").strip(), f"{label}.description must be non-empty string")
+        examples = row.get("examples")
+        _failures_append(failures, isinstance(examples, list) and len(examples) >= 1, f"{label}.examples must include at least 1 entry")
 
 
 def _validate_domain_bonuses(label: str, bonuses: object, failures: list[str]) -> None:
@@ -159,8 +310,8 @@ def _validate_ancestries(path: Path, failures: list[str]) -> None:
             application_tag = trait.get("application_tag")
             _failures_append(
                 failures,
-                application_tag is None or isinstance(application_tag, str),
-                f"{trait_label}.application_tag must be string or null",
+                application_tag is None or (isinstance(application_tag, str) and application_tag in VALID_APPLICATIONS),
+                f"{trait_label}.application_tag must be a valid application tag or null",
             )
             roll_domain = trait.get("roll_domain")
             _failures_append(
@@ -212,6 +363,7 @@ def _validate_cultures(path: Path, failures: list[str]) -> None:
         _validate_tag_dict(label, row.get("knowledge_tags"), "knowledge_tags", failures)
         _validate_tag_dict(label, row.get("application_tags"), "application_tags", failures)
         _validate_field_tags(label, row.get("field_tags"), failures)
+        _validate_character_tag_refs(label, row, failures)
 
 
 def _validate_tag_rows(path: Path, failures: list[str], expected_count: int) -> None:
@@ -247,6 +399,7 @@ def _validate_tag_rows(path: Path, failures: list[str], expected_count: int) -> 
         _validate_tag_dict(label, row.get("knowledge_tags"), "knowledge_tags", failures)
         _validate_tag_dict(label, row.get("application_tags"), "application_tags", failures)
         _validate_field_tags(label, row.get("field_tags"), failures)
+        _validate_character_tag_refs(label, row, failures)
 
         if is_focus:
             signature_tag = row.get("signature_tag")
@@ -334,6 +487,12 @@ def _validate_apparel(path: Path, failures: list[str]) -> None:
         )
         _failures_append(failures, isinstance(row.get("tags"), list) and len(row.get("tags", [])) > 0, f"{label}.tags must be non-empty list")
         _failures_append(failures, isinstance(row.get("value_cd"), int), f"{label}.value_cd must be int")
+        roll_tag = row.get("roll_tag")
+        _failures_append(
+            failures,
+            roll_tag is None or roll_tag in VALID_APPLICATIONS,
+            f"unknown tag '{roll_tag}' in {path.name} item roll_tag",
+        )
         _failures_append(failures, isinstance(row.get("rarity"), str) and row.get("rarity"), f"{label}.rarity must be non-empty string")
         _failures_append(
             failures,
@@ -347,16 +506,42 @@ def _validate_apparel(path: Path, failures: list[str]) -> None:
         )
 
 
+def _validate_items_roll_tags(path: Path, failures: list[str]) -> None:
+    rows = _load_json(path)
+    for i, row in enumerate(rows):
+        label = f"{path.name}[{i}]"
+        if not isinstance(row, dict):
+            continue
+        roll_tag = row.get("roll_tag")
+        _failures_append(
+            failures,
+            roll_tag is None or roll_tag in VALID_APPLICATIONS,
+            f"unknown tag '{roll_tag}' in {label}.roll_tag",
+        )
+
+
 def main() -> None:
     repo_root = Path(__file__).resolve().parents[1]
     data_dir = repo_root / "data"
 
+    global VALID_KNOWLEDGE_GROUPS, VALID_MAGIC_FIELDS, VALID_APPLICATIONS
+    VALID_KNOWLEDGE_GROUPS = {g["index"] for g in _load_tag_file(data_dir / "tags" / "knowledge_groups.json")}
+    VALID_MAGIC_FIELDS = {f["index"] for f in _load_tag_file(data_dir / "tags" / "magic_fields.json")}
+    VALID_APPLICATIONS = {a["index"] for a in _load_tag_file(data_dir / "tags" / "applications.json")}
+
     failures: list[str] = []
+    _validate_knowledge_groups(data_dir / "tags" / "knowledge_groups.json", failures)
+    _validate_magic_fields(data_dir / "tags" / "magic_fields.json", failures)
+    _validate_applications(data_dir / "tags" / "applications.json", failures)
     _validate_ancestries(data_dir / "characters" / "ancestry.json", failures)
     _validate_cultures(data_dir / "characters" / "culture.json", failures)
     _validate_tag_rows(data_dir / "characters" / "focus.json", failures, expected_count=7)
     _validate_tag_rows(data_dir / "characters" / "backgrounds.json", failures, expected_count=8)
     _validate_apparel(data_dir / "items" / "apparel.json", failures)
+    for item_file in (data_dir / "items").glob("*.json"):
+        if item_file.name.startswith("_"):
+            continue
+        _validate_items_roll_tags(item_file, failures)
 
     magic_dir = data_dir / "magic"
     for spell_file in sorted(magic_dir.glob("*.json")):

@@ -1,0 +1,192 @@
+[
+  {
+    "index": "athletics",
+    "name": "Athletics",
+    "primary_domain": "power",
+    "secondary_domain": "endurance",
+    "domain_note": "Gross motor under load. GPT selects Power for burst effort, Endurance for sustained effort.",
+    "description": "Whole-body physical capability under pressure: hauling, climbing, swimming, forced movement, raw grappling. The gross-motor execution side of physicality, distinct from the fine-motor control of Mobility.",
+    "examples": ["Dragging an ally from a collapsing building", "Forcing a stuck door open", "Swimming against a hard current"],
+    "kind": "mundane"
+  },
+  {
+    "index": "mobility",
+    "name": "Mobility",
+    "primary_domain": "agility",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Controlled movement, balance, and reactive footwork. Fine-motor body control distinct from Athletics' raw effort. Covers acrobatics, terrain traversal, evasion, riding balance, and recovery from falls.",
+    "examples": ["Rooftop chase across broken tile", "Tumbling clear of a collapsing ceiling", "Keeping your seat when the horse rears"],
+    "kind": "mundane"
+  },
+  {
+    "index": "stealth",
+    "name": "Stealth",
+    "primary_domain": "agility",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Remaining unnoticed: quiet movement, concealment, shadowing, infiltration, and exfiltration. The discipline of not being seen, heard, or remembered.",
+    "examples": ["Slipping past guards in a lit corridor", "Tailing a target through a market without being made", "Finding a hiding place under pressure"],
+    "kind": "mundane"
+  },
+  {
+    "index": "skulduggery",
+    "name": "Skulduggery",
+    "primary_domain": "agility",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Precision illicit technique: sleight of hand, lockwork, trap handling, document forgery, disguise prep, sabotage. The technical side of dirty work, distinct from Stealth's remaining unseen.",
+    "examples": ["Picking a pocket in a crowded market", "Bypassing a trapped lock", "Forging a travel writ"],
+    "kind": "mundane"
+  },
+  {
+    "index": "awareness",
+    "name": "Awareness",
+    "primary_domain": "perception",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Reading the immediate environment: noticing danger, spotting changes, scanning crowds, detecting ambushes, sensing tension. Active watchfulness in the moment, distinct from Investigation's structured inquiry.",
+    "examples": ["Spotting the assassin in a diplomatic reception", "Feeling the room shift before violence breaks out", "Catching the tell on a liar"],
+    "kind": "mundane"
+  },
+  {
+    "index": "investigation",
+    "name": "Investigation",
+    "primary_domain": "perception",
+    "secondary_domain": "intellect",
+    "domain_note": "Perception for physical evidence work; Intellect for analytical synthesis and deduction.",
+    "description": "Structured inquiry: evidence reading, deduction, scene reconstruction, anomaly analysis, interrogation, document examination. The retrospective and analytical counterpart to Awareness's immediate noticing.",
+    "examples": ["Reconstructing a murder from blood spatter", "Finding the forgery in a stack of legitimate contracts", "Cross-examining a witness"],
+    "kind": "mundane"
+  },
+  {
+    "index": "tracking",
+    "name": "Tracking",
+    "primary_domain": "perception",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Following movement through the world: spoor reading, passage-time estimation, route inference, quarry habits, urban shadowing at the physical trail level, and counter-tracking.",
+    "examples": ["Dating tracks through a forest floor", "Predicting where the fleeing target will emerge", "Erasing your own trail through pursuit terrain"],
+    "kind": "mundane"
+  },
+  {
+    "index": "survival",
+    "name": "Survival",
+    "primary_domain": "endurance",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Living through hostile conditions: shelter, firecraft, weather reading, camp selection, hazard response, navigation, and endurance under field privation. The active discipline of not dying in conditions, distinct from Nature's understanding of living systems.",
+    "examples": ["Building shelter in a freezing storm", "Starting a fire with damp wood", "Navigating by stars through unfamiliar terrain"],
+    "kind": "mundane"
+  },
+  {
+    "index": "nature",
+    "name": "Nature",
+    "primary_domain": "perception",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Understanding living systems: animals, plants, agriculture, ecology. The knowledge of how living things work, distinct from Survival's hostile-conditions response. A botanist has high Nature and zero Survival.",
+    "examples": ["Identifying a poisonous plant on sight", "Calming a panicked herd", "Diagnosing why an orchard is failing"],
+    "kind": "mundane"
+  },
+  {
+    "index": "medicine",
+    "name": "Medicine",
+    "primary_domain": "intellect",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Diagnosis, treatment, wound care, pharmacology, surgery, and mental care. The medical discipline focused on humanoid bodies and minds. Veterinary work lives under Nature.",
+    "examples": ["Stabilizing a gut wound in the field", "Identifying a poison from its symptoms", "Treating shock after violence"],
+    "kind": "mundane"
+  },
+  {
+    "index": "combat",
+    "name": "Combat",
+    "primary_domain": "power",
+    "secondary_domain": null,
+    "domain_note": "Ranged and mechanical combat applications use Perception instead of Power.",
+    "description": "Active execution of violence: weapon use, unarmed technique, armor wearing, shield work. The doing side of fighting, distinct from Warfare's tactical understanding.",
+    "examples": ["A sword thrust through a gap in enemy armor", "Loosing a bow at a moving target", "Pinning an opponent in a joint lock"],
+    "kind": "mundane"
+  },
+  {
+    "index": "warfare",
+    "name": "Warfare",
+    "primary_domain": "will",
+    "secondary_domain": "intellect",
+    "domain_note": "Will for presence and nerve on the battlefield; Intellect for tactical analysis.",
+    "description": "Understanding violence: battlefield reading, threat assessment, formation logic, command presence, martial intimidation. The knowing side of combat. A general has Warfare; a gladiator has Combat.",
+    "examples": ["Reading an ambush before it closes", "Holding a unit's discipline under artillery", "Spotting the weakness in an enemy formation"],
+    "kind": "mundane"
+  },
+  {
+    "index": "craft",
+    "name": "Craft",
+    "primary_domain": "intellect",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Making and repairing practical things: smithing, carpentry, masonry, leatherwork, textiles, cooking, pottery, maintenance. The trades of physical production.",
+    "examples": ["Forging a blade that holds edge", "Repairing a collapsed roof beam", "Preparing a feast for a visiting noble"],
+    "kind": "mundane"
+  },
+  {
+    "index": "engineering",
+    "name": "Engineering",
+    "primary_domain": "intellect",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Mechanisms, structures, load paths, siege logic, lockworks, and the material preparation of substrates that can hold magic. More systemic than Craft — engineering is about how and why things hold together.",
+    "examples": ["Designing a working trap", "Analyzing bridge failure before collapse", "Preparing a stone foundation to receive enchantment"],
+    "kind": "mundane"
+  },
+  {
+    "index": "lore",
+    "name": "Lore",
+    "primary_domain": "intellect",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Academic and civic memory: history, linguistics, law, religion (as study), politics, genealogy, cartography, economics. The world's accumulated knowledge. Distinct from Arcana's magical theory.",
+    "examples": ["Recalling a century-old treaty clause", "Translating an archaic inscription", "Tracing a family's hidden lineage"],
+    "kind": "mundane"
+  },
+  {
+    "index": "influence",
+    "name": "Influence",
+    "primary_domain": "presence",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Social leverage: persuasion, deception, diplomacy, command, pressure, seduction, etiquette. The full spectrum of shaping other people's behavior.",
+    "examples": ["Talking a guard into letting you pass", "Negotiating terms with a hostile faction", "Applying pressure to extract a favor"],
+    "kind": "mundane"
+  },
+  {
+    "index": "performance",
+    "name": "Performance",
+    "primary_domain": "presence",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Performative expression: singing, instruments, dance, oratory, theatrical work, storytelling. Distinct from Influence — a performance isn't trying to change someone's mind, it's being witnessed.",
+    "examples": ["Holding a tavern rapt with a long ballad", "Delivering a funeral oration", "Dancing at a high noble's wedding"],
+    "kind": "mundane"
+  },
+  {
+    "index": "discipline",
+    "name": "Discipline",
+    "primary_domain": "will",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Self-mastery: focus, courage, resolve, composure, meditation, fear mastery, oath endurance. The inner regulation of attention, emotion, and commitment.",
+    "examples": ["Maintaining concentration during a long ritual", "Holding ground against a charging terror", "Keeping an oath that costs everything"],
+    "kind": "mundane"
+  },
+  {
+    "index": "arcana",
+    "name": "Arcana",
+    "primary_domain": "intellect",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Non-spell magical understanding: theoretical knowledge, ritual structure analysis, field recognition, enchantment reading, risk assessment. Knowing magic without casting it. Required for identifying what a magical working is, what it does, and how dangerous it might be.",
+    "examples": ["Identifying the field behind an unknown spell", "Reading a ward without activating it", "Analyzing an enchanted object's function"],
+    "kind": "mundane"
+  }
+]

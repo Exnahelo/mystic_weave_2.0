@@ -4,7 +4,7 @@ info:
   description: Persistent game state backend for a text-based RPG powered by a custom
     GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution
     with domain scores and competency tiers.
-  version: 4.0.0
+  version: 4.1.0
 servers:
 - url: https://mysticweave-production.up.railway.app
   description: Production (Railway)
@@ -315,6 +315,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /tags:
+    get:
+      tags:
+      - tags
+      summary: Get Tags
+      description: 'Return the canonical tag vocabularies: knowledge groups, magic
+        fields, applications.'
+      operationId: get_tags_tags_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagsResponse'
   /:
     get:
       tags:
@@ -511,6 +526,41 @@ components:
       - type
       - description
       title: AncestryTrait
+    ApplicationEntry:
+      properties:
+        index:
+          type: string
+          title: Index
+        name:
+          type: string
+          title: Name
+        group:
+          type: string
+          title: Group
+        primary_domain:
+          type: string
+          title: Primary Domain
+        domain_note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Domain Note
+        description:
+          type: string
+          title: Description
+        examples:
+          items:
+            type: string
+          type: array
+          title: Examples
+      type: object
+      required:
+      - index
+      - name
+      - group
+      - primary_domain
+      - description
+      title: ApplicationEntry
     ApplyStateDeltaRequest:
       properties:
         character:
@@ -1459,6 +1509,46 @@ components:
       - name
       - category
       title: ItemOption
+    KnowledgeGroupEntry:
+      properties:
+        index:
+          type: string
+          title: Index
+        name:
+          type: string
+          title: Name
+        primary_domain:
+          type: string
+          title: Primary Domain
+        secondary_domain:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Secondary Domain
+        domain_note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Domain Note
+        description:
+          type: string
+          title: Description
+        examples:
+          items:
+            type: string
+          type: array
+          title: Examples
+        kind:
+          type: string
+          title: Kind
+      type: object
+      required:
+      - index
+      - name
+      - primary_domain
+      - description
+      - kind
+      title: KnowledgeGroupEntry
     LoadState:
       type: string
       enum:
@@ -1534,6 +1624,46 @@ components:
       - name
       - data
       title: LocationResponse
+    MagicFieldEntry:
+      properties:
+        index:
+          type: string
+          title: Index
+        name:
+          type: string
+          title: Name
+        primary_domain:
+          type: string
+          title: Primary Domain
+        secondary_domain:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Secondary Domain
+        domain_note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Domain Note
+        description:
+          type: string
+          title: Description
+        examples:
+          items:
+            type: string
+          type: array
+          title: Examples
+        kind:
+          type: string
+          title: Kind
+      type: object
+      required:
+      - index
+      - name
+      - primary_domain
+      - description
+      - kind
+      title: MagicFieldEntry
     NewSessionRequest:
       properties:
         character_name:
@@ -1915,6 +2045,29 @@ components:
       type: object
       title: SurvivalState
       description: Lightweight survival/load tracking using coarse state bands.
+    TagsResponse:
+      properties:
+        knowledge_groups:
+          items:
+            $ref: '#/components/schemas/KnowledgeGroupEntry'
+          type: array
+          title: Knowledge Groups
+        magic_fields:
+          items:
+            $ref: '#/components/schemas/MagicFieldEntry'
+          type: array
+          title: Magic Fields
+        applications:
+          items:
+            $ref: '#/components/schemas/ApplicationEntry'
+          type: array
+          title: Applications
+      type: object
+      required:
+      - knowledge_groups
+      - magic_fields
+      - applications
+      title: TagsResponse
     TimeOfDay:
       type: string
       enum:
@@ -2164,4 +2317,3 @@ components:
       type: object
       title: WorldStateDelta
       description: Typed partial world update for extraction-driven turn commits.
-

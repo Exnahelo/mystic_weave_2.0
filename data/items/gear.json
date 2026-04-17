@@ -98,7 +98,7 @@
       "trapping",
       "tactical"
     ],
-    "roll_tag": "trapping",
+    "roll_tag": "lockpicking_traps",
     "tool_role": "permission",
     "consumable": false,
     "charges": null,
@@ -733,7 +733,7 @@
       "alchemy",
       "herbalism"
     ],
-    "roll_tag": "herbalism_alchemy",
+    "roll_tag": "pharmacology",
     "tool_role": "permission",
     "consumable": false,
     "charges": null,
@@ -820,7 +820,7 @@
       "tool",
       "lockpicking"
     ],
-    "roll_tag": "lockpicking",
+    "roll_tag": "lockpicking_traps",
     "tool_role": "permission",
     "consumable": false,
     "charges": null,
@@ -1396,7 +1396,7 @@
       "medical",
       "field_care"
     ],
-    "roll_tag": "medicine",
+    "roll_tag": "field_triage",
     "tool_role": "consumable",
     "consumable": true,
     "charges": 1,
@@ -1417,7 +1417,7 @@
       "medical",
       "emergency"
     ],
-    "roll_tag": "medicine",
+    "roll_tag": "field_triage",
     "tool_role": "consumable",
     "consumable": true,
     "charges": 1,
@@ -1439,7 +1439,7 @@
       "alchemy",
       "anti_poison"
     ],
-    "roll_tag": "herbalism_alchemy",
+    "roll_tag": "pharmacology",
     "tool_role": "consumable",
     "consumable": true,
     "charges": 1,
@@ -1589,7 +1589,7 @@
       "alchemy",
       "offensive"
     ],
-    "roll_tag": "herbalism_alchemy",
+    "roll_tag": "pharmacology",
     "tool_role": "consumable",
     "consumable": true,
     "charges": 1,
@@ -1611,7 +1611,7 @@
       "offensive",
       "fire"
     ],
-    "roll_tag": "herbalism_alchemy",
+    "roll_tag": "pharmacology",
     "tool_role": "consumable",
     "consumable": true,
     "charges": 1,
@@ -1632,7 +1632,7 @@
       "poison",
       "offensive"
     ],
-    "roll_tag": "herbalism_alchemy",
+    "roll_tag": "pharmacology",
     "tool_role": "consumable",
     "consumable": true,
     "charges": 1,

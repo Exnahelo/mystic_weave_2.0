@@ -30,7 +30,7 @@ This document is the authoritative, step-by-step reference for character creatio
 
 1. Present the focus archetype list from `GET /options` with descriptions and starting tags.
 2. Player chooses a focus. Any ancestry can choose any focus.
-3. Magical fields are valid knowledge tag choices (same tier math/progression rules as other knowledge tags). Canonical fields: `Sacred`, `Warding`, `Binding`, `Elemental`, `Nature`, `Illusion`, `Runecraft`, `Alchemy`, `Necromancy`. Field knowledge tiers are gated by the field's primary domain score — see `prompts/magic_rules.md`.
+3. Magical fields are valid field-tag choices and use the same tier math/progression rules as knowledge groups. Canonical fields: `Sacred`, `Warding`, `Binding`, `Elemental`, `Druidry`, `Illusion`, `Runecraft`, `Alchemy`, `Necromancy`. Field knowledge tiers are gated by the field's primary domain score — see `prompts/magic_rules.md`.
 4. If ancestry is dragonborn, confirm breath lineage type is established during creation (`radiant`, `fire`, `cold`, `lightning`, `acid`, `necrotic`) or explicitly marked as deferred to narrative discovery.
 
 ### Stage 5 — Adjustment Points
@@ -132,6 +132,13 @@ If the player asks how progression works after creation, explain briefly:
 
 When multiple layers grant the same tag, the tag advances by +1 tier per additional source, up to Tier 5.
 
+Characters gain:
+- **knowledge groups** for broad competency
+- **applications** for specific trained expression
+- **field tags** for magical field access
+
+For a normal non-spell roll, use **one knowledge group tier + one application tier**. Do not stack multiple groups or multiple applications into the same roll.
+
 Example: Devoted + Acolyte + Draconic Grasslands all support sacred practice, so Sacred field stacks upward instead of being wasted.
 
 ### Weapon Application Taxonomy (Canonical)
@@ -160,14 +167,14 @@ Do not introduce legacy/alternate weapon tag names during character creation.
 
 | Culture | Domain Bonuses | Signature Tag Types |
 |---|---|---|
-| Alpine Peaks | Per +3, End +4, Wil +3 | survival, fortitude, tracking |
-| Inner Ramparts | Pow +2, Agi +3, Per +2, End +3 | acrobatics, surveillance, exertion |
-| Draconic Grasslands | Int +3, Wil +3, Pre +4 | diplomacy, history, command, sacred |
-| Drakenvale | Int +4, Wil +3, Pre +3 | persuasion, history, linguistics |
-| Volcanic Highlands | Pow +4, End +4, Wil +2 | exertion, intimidation, resistance, elemental |
-| Temperate Forest | Agi +3, Per +4, End +3 | tracking, natural_lore, stealth |
-| Mystic Wetlands | Per +4, Int +3, Wil +3 | investigation, natural_lore, medicine |
-| Feywood Glade | Int +3, Wil +3, Pre +4 | deception, insight, arcana, illusion |
+| Alpine Peaks | Per +3, End +4, Wil +3 | survival, tracking, privation_endurance |
+| Inner Ramparts | Pow +2, Agi +3, Per +2, End +3 | mobility, awareness, acrobatics, scan |
+| Draconic Grasslands | Int +3, Wil +3, Pre +4 | influence, lore, diplomacy, command, sacred |
+| Drakenvale | Int +4, Wil +3, Pre +3 | lore, influence, persuasion, history, linguistics |
+| Volcanic Highlands | Pow +4, End +4, Wil +2 | combat, survival, hauling, intimidation_posture, elemental |
+| Temperate Forest | Agi +3, Per +4, End +3 | tracking, stealth, ecology |
+| Mystic Wetlands | Per +4, Int +3, Wil +3 | investigation, medicine, ecology, pharmacology |
+| Feywood Glade | Int +3, Wil +3, Pre +4 | arcana, deception, tell_reading, illusion |
 | Crystal Caverns | Per +3, Int +4, Wil +3 | arcana, investigation, meditation, runecraft |
 | Platinum Oath Monastery | End +3, Wil +5, Pre +2 | discipline, meditation, courage, Warding field |
 
@@ -176,12 +183,12 @@ Do not introduce legacy/alternate weapon tag names during character creation.
 | Focus | Signature Tag | Description |
 |---|---|---|
 | Champion | Athletics K2 | Front-line fighter, direct combat |
-| Sentinel | Courage K2 | Protector, holds the line |
+| Sentinel | Discipline K2 | Protector, holds the line |
 | Stalker | Stealth K2 | Ambush, infiltration, precision |
 | Wayfinder | Survival K2 | Explorer, survivalist, tracker |
 | Arcanist | Arcana K2 | Arcane scholar, magical power |
 | Devoted | Discipline K2 | Spiritual warrior, faith and authority |
-| Speaker | Persuasion K2 | Social operator, inspirer, manipulator |
+| Speaker | Influence K2 | Social operator, inspirer, manipulator |
 
 ## Background Reference (verify against GET /options)
 

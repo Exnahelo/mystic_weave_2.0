@@ -1,0 +1,1406 @@
+[
+  {
+    "index": "hauling",
+    "name": "Hauling",
+    "group": "athletics",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Moving or lifting heavy loads through brute physical effort.",
+    "examples": [
+      "Drag a wounded ally to cover",
+      "Carry a supply crate uphill"
+    ]
+  },
+  {
+    "index": "climbing",
+    "name": "Climbing",
+    "group": "athletics",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Ascending, descending, and holding to difficult vertical surfaces under strain.",
+    "examples": [
+      "Climb a wet cliff face",
+      "Scale a siege ladder under fire"
+    ]
+  },
+  {
+    "index": "swimming",
+    "name": "Swimming",
+    "group": "athletics",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Driving the body through water against current, distance, or hazard.",
+    "examples": [
+      "Cross a freezing river",
+      "Swim against a rip current"
+    ]
+  },
+  {
+    "index": "forced_movement",
+    "name": "Forced Movement",
+    "group": "athletics",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Driving bodies or obstacles where they do not want to go.",
+    "examples": [
+      "Shoulder through a barricade",
+      "Push an enemy off balance"
+    ]
+  },
+  {
+    "index": "grappling",
+    "name": "Grappling",
+    "group": "athletics",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Applying raw holds, clinches, and body control through strength and leverage.",
+    "examples": [
+      "Pin a struggling opponent",
+      "Hold someone in place long enough to flee"
+    ]
+  },
+  {
+    "index": "acrobatics",
+    "name": "Acrobatics",
+    "group": "mobility",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Flips, tumbles, and aerial body control through tight spaces or unstable footing.",
+    "examples": [
+      "Somersault over a low wall",
+      "Twist clear of a falling beam"
+    ]
+  },
+  {
+    "index": "balance",
+    "name": "Balance",
+    "group": "mobility",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Maintaining stable footing on narrow, shifting, or treacherous surfaces.",
+    "examples": [
+      "Cross a slick roof ridge",
+      "Stay upright on a rocking wagon"
+    ]
+  },
+  {
+    "index": "evasion",
+    "name": "Evasion",
+    "group": "mobility",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Dodging danger through reflexive movement and positional adjustment.",
+    "examples": [
+      "Slip past a spear thrust",
+      "Dive behind cover before the blast"
+    ]
+  },
+  {
+    "index": "parkour",
+    "name": "Parkour",
+    "group": "mobility",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Linking vaults, climbs, drops, and rebounds into fluid traversal.",
+    "examples": [
+      "Vault a market stall in pursuit",
+      "Chain a wall-run into a ledge grab"
+    ]
+  },
+  {
+    "index": "riding_posture",
+    "name": "Riding Posture",
+    "group": "mobility",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Keeping seat, posture, and control while mounted or riding rough conveyance.",
+    "examples": [
+      "Stay seated when a horse rears",
+      "Keep balance in a jolting carriage"
+    ]
+  },
+  {
+    "index": "infiltration",
+    "name": "Infiltration",
+    "group": "stealth",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Entering guarded, observed, or restricted spaces without being detected.",
+    "examples": [
+      "Slip into a guarded archive",
+      "Cross a checkpoint unseen"
+    ]
+  },
+  {
+    "index": "concealment",
+    "name": "Concealment",
+    "group": "stealth",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Using cover, shadow, and placement to stay visually hidden.",
+    "examples": [
+      "Hide in a curtained alcove",
+      "Disappear into stacked cargo"
+    ]
+  },
+  {
+    "index": "quiet_movement",
+    "name": "Quiet Movement",
+    "group": "stealth",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Moving with minimal sound across floors, brush, or clutter.",
+    "examples": [
+      "Cross a creaking hallway silently",
+      "Approach through dry leaves unheard"
+    ]
+  },
+  {
+    "index": "shadowing",
+    "name": "Shadowing",
+    "group": "stealth",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Following a target without losing them or drawing notice.",
+    "examples": [
+      "Trail a courier through the bazaar",
+      "Keep a suspect in sight after dark"
+    ]
+  },
+  {
+    "index": "escape_routing",
+    "name": "Escape Routing",
+    "group": "stealth",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Finding and using exits, hide paths, and break-contact routes under pressure.",
+    "examples": [
+      "Lose pursuers in an alley maze",
+      "Slip out through service corridors"
+    ]
+  },
+  {
+    "index": "sleight_of_hand",
+    "name": "Sleight of Hand",
+    "group": "skulduggery",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Palming, switching, and concealing small objects with precise handwork.",
+    "examples": [
+      "Lift a key unnoticed",
+      "Palm a coin during inspection"
+    ]
+  },
+  {
+    "index": "lockpicking_traps",
+    "name": "Lockpicking & Traps",
+    "group": "skulduggery",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Opening secured mechanisms and disarming simple to complex trapwork.",
+    "examples": [
+      "Pick a manor door lock",
+      "Disable a spring-loaded dart plate"
+    ]
+  },
+  {
+    "index": "disguise_forgery",
+    "name": "Disguise & Forgery",
+    "group": "skulduggery",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Preparing false appearances and documents that can survive scrutiny.",
+    "examples": [
+      "Forge a travel permit",
+      "Assemble a servant disguise"
+    ]
+  },
+  {
+    "index": "sabotage",
+    "name": "Sabotage",
+    "group": "skulduggery",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Quietly damaging function, timing, or trust in tools, systems, or plans.",
+    "examples": [
+      "Cut a saddle strap to fail later",
+      "Spoil a winch before the lift"
+    ]
+  },
+  {
+    "index": "cheating",
+    "name": "Cheating",
+    "group": "skulduggery",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Manipulating games, wagers, and tests of chance without being caught.",
+    "examples": [
+      "Stack dice in your favor",
+      "Signal a partner during cards"
+    ]
+  },
+  {
+    "index": "scan",
+    "name": "Scan",
+    "group": "awareness",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Rapidly sweeping a scene for threats, exits, and anomalies.",
+    "examples": [
+      "Check a room on entry",
+      "Search rooftops for watchers"
+    ]
+  },
+  {
+    "index": "crowd_reading",
+    "name": "Crowd Reading",
+    "group": "awareness",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Reading mood, flow, and pressure points in a group of people.",
+    "examples": [
+      "Spot panic spreading in a crowd",
+      "Find who the room is watching"
+    ]
+  },
+  {
+    "index": "ambush_sense",
+    "name": "Ambush Sense",
+    "group": "awareness",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Catching the signs that violence or interception is about to happen.",
+    "examples": [
+      "Notice the too-quiet roadside",
+      "Feel the trap before it springs"
+    ]
+  },
+  {
+    "index": "danger_sense",
+    "name": "Danger Sense",
+    "group": "awareness",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Detecting immediate threats through sharpened situational alertness.",
+    "examples": [
+      "Realize the bridge is giving way",
+      "Hear the blade drawn behind you"
+    ]
+  },
+  {
+    "index": "tell_reading",
+    "name": "Tell Reading",
+    "group": "awareness",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Spotting involuntary cues that reveal nerves, lies, or intent.",
+    "examples": [
+      "Catch a witness flinch at one name",
+      "See the duelist telegraph a strike"
+    ]
+  },
+  {
+    "index": "scene_reconstruction",
+    "name": "Scene Reconstruction",
+    "group": "investigation",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Rebuilding what happened from traces, damage, and position.",
+    "examples": [
+      "Reconstruct a struggle from broken furniture",
+      "Infer entry and exit points from debris"
+    ]
+  },
+  {
+    "index": "document_examination",
+    "name": "Document Examination",
+    "group": "investigation",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Inspecting texts for forgery, alteration, provenance, or hidden meaning.",
+    "examples": [
+      "Identify a falsified seal",
+      "Find scraping marks from an amended contract"
+    ]
+  },
+  {
+    "index": "anomaly_analysis",
+    "name": "Anomaly Analysis",
+    "group": "investigation",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Isolating what does not fit and following that inconsistency to meaning.",
+    "examples": [
+      "Notice one clean bootprint in a muddy yard",
+      "Flag the only ledger entry written twice"
+    ]
+  },
+  {
+    "index": "interrogation",
+    "name": "Interrogation",
+    "group": "investigation",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Pressing, sequencing, and steering questions to extract usable truth.",
+    "examples": [
+      "Corner a suspect with timeline gaps",
+      "Break a witness\u2019s rehearsed story"
+    ]
+  },
+  {
+    "index": "forensics",
+    "name": "Forensics",
+    "group": "investigation",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Reading material evidence like blood, residue, damage, and trace transfer.",
+    "examples": [
+      "Match ash to a specific fuel",
+      "Read blood spray across a wall"
+    ]
+  },
+  {
+    "index": "spoor_reading",
+    "name": "Spoor Reading",
+    "group": "tracking",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Reading tracks, droppings, breakage, and sign left by passage.",
+    "examples": [
+      "Follow bootprints through wet clay",
+      "Identify wolf sign near camp"
+    ]
+  },
+  {
+    "index": "passage_estimation",
+    "name": "Passage Estimation",
+    "group": "tracking",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Estimating when something passed and how fast it was moving.",
+    "examples": [
+      "Judge tracks as hours old",
+      "Estimate how long since riders passed"
+    ]
+  },
+  {
+    "index": "quarry_habits",
+    "name": "Quarry Habits",
+    "group": "tracking",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Predicting movement from the needs and tendencies of the thing pursued.",
+    "examples": [
+      "Guess where a wounded stag will bed down",
+      "Anticipate a fugitive heading for water"
+    ]
+  },
+  {
+    "index": "urban_tracking",
+    "name": "Urban Tracking",
+    "group": "tracking",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Following physical trails through streets, traffic, and crowded infrastructure.",
+    "examples": [
+      "Trace muddy prints into a tenement",
+      "Follow wagon gouges across a square"
+    ]
+  },
+  {
+    "index": "counter_tracking",
+    "name": "Counter-Tracking",
+    "group": "tracking",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Masking, breaking, or falsifying trails to frustrate pursuit.",
+    "examples": [
+      "Brush out your camp sign",
+      "Lay a misleading trail at a fork"
+    ]
+  },
+  {
+    "index": "shelter",
+    "name": "Shelter",
+    "group": "survival",
+    "primary_domain": "endurance",
+    "domain_note": null,
+    "description": "Selecting or building protection against exposure, weather, and terrain.",
+    "examples": [
+      "Raise a windbreak before nightfall",
+      "Find safe cover in a storm"
+    ]
+  },
+  {
+    "index": "firecraft",
+    "name": "Firecraft",
+    "group": "survival",
+    "primary_domain": "endurance",
+    "domain_note": null,
+    "description": "Starting, sustaining, and managing fire in poor field conditions.",
+    "examples": [
+      "Light damp tinder at dusk",
+      "Keep a hidden cooking fire low"
+    ]
+  },
+  {
+    "index": "weather_sense",
+    "name": "Weather Sense",
+    "group": "survival",
+    "primary_domain": "endurance",
+    "domain_note": null,
+    "description": "Reading signs of changing weather before it hits.",
+    "examples": [
+      "Call a storm from the cloud shelf",
+      "Notice a flash freeze coming"
+    ]
+  },
+  {
+    "index": "camp_discipline",
+    "name": "Camp Discipline",
+    "group": "survival",
+    "primary_domain": "endurance",
+    "domain_note": null,
+    "description": "Maintaining routine, security, and cleanliness that keep a group alive in the field.",
+    "examples": [
+      "Choose a defensible campsite",
+      "Set watches and stores correctly"
+    ]
+  },
+  {
+    "index": "privation_endurance",
+    "name": "Privation Endurance",
+    "group": "survival",
+    "primary_domain": "endurance",
+    "domain_note": null,
+    "description": "Continuing to function through hunger, thirst, cold, fatigue, or lack of sleep.",
+    "examples": [
+      "March another hour while dehydrated",
+      "Stay sharp through a freezing watch"
+    ]
+  },
+  {
+    "index": "navigation",
+    "name": "Navigation",
+    "group": "survival",
+    "primary_domain": "endurance",
+    "domain_note": null,
+    "description": "Practical wayfinding across wilderness, coast, or roadless terrain.",
+    "examples": [
+      "Hold a bearing through fog",
+      "Navigate by stars over open ground"
+    ]
+  },
+  {
+    "index": "animal_handling",
+    "name": "Animal Handling",
+    "group": "nature",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Directing, calming, and reading the behavior of domesticated or semi-trained animals.",
+    "examples": [
+      "Settle a spooked mule",
+      "Guide hounds onto a scent"
+    ]
+  },
+  {
+    "index": "wild_creature_lore",
+    "name": "Wild Creature Lore",
+    "group": "nature",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Recognizing wild species, habits, signs, and risk behaviors.",
+    "examples": [
+      "Identify a nesting drake\u2019s warning signs",
+      "Know when a boar is about to charge"
+    ]
+  },
+  {
+    "index": "botany",
+    "name": "Botany",
+    "group": "nature",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Identifying plants, growth patterns, and useful or dangerous flora.",
+    "examples": [
+      "Spot a poisonous reedbed",
+      "Identify a medicinal root in the wild"
+    ]
+  },
+  {
+    "index": "agriculture",
+    "name": "Agriculture",
+    "group": "nature",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Understanding crops, soil cycles, herd care, and managed food production.",
+    "examples": [
+      "Diagnose blight in a barley field",
+      "Judge when a pasture is overgrazed"
+    ]
+  },
+  {
+    "index": "ecology",
+    "name": "Ecology",
+    "group": "nature",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Reading how living systems interact across terrain, season, and pressure.",
+    "examples": [
+      "Explain why fish vanished from a stream",
+      "Read what predator loss did to a valley"
+    ]
+  },
+  {
+    "index": "veterinary",
+    "name": "Veterinary",
+    "group": "nature",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Treating the health, injury, and stress of non-humanoid animals.",
+    "examples": [
+      "Set a dog\u2019s broken leg",
+      "Treat rot in a draft horse hoof"
+    ]
+  },
+  {
+    "index": "surgery",
+    "name": "Surgery",
+    "group": "medicine",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Performing invasive treatment to repair severe trauma or internal harm.",
+    "examples": [
+      "Remove an arrowhead cleanly",
+      "Stitch a deep abdominal wound"
+    ]
+  },
+  {
+    "index": "pharmacology",
+    "name": "Pharmacology",
+    "group": "medicine",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Preparing and administering medicinal compounds, antidotes, and dosages.",
+    "examples": [
+      "Mix a fever reducer",
+      "Dose an antidote from symptoms"
+    ]
+  },
+  {
+    "index": "diagnosis",
+    "name": "Diagnosis",
+    "group": "medicine",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Identifying illness, injury, poison, or disorder from signs and symptoms.",
+    "examples": [
+      "Recognize septic infection early",
+      "Differentiate poison from disease"
+    ]
+  },
+  {
+    "index": "field_triage",
+    "name": "Field Triage",
+    "group": "medicine",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Stabilizing casualties quickly under dangerous or resource-poor conditions.",
+    "examples": [
+      "Stop bleeding during a retreat",
+      "Prioritize who can still be saved"
+    ]
+  },
+  {
+    "index": "mental_care",
+    "name": "Mental Care",
+    "group": "medicine",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Supporting shock, panic, grief, trauma, and cognitive distress with care techniques.",
+    "examples": [
+      "Talk someone down from battle panic",
+      "Manage acute shock after a massacre"
+    ]
+  },
+  {
+    "index": "melee",
+    "name": "Melee",
+    "group": "combat",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Using hand weapons effectively at close range in active combat.",
+    "examples": [
+      "Trade blows with a swordsman",
+      "Drive a dagger into clinch range"
+    ]
+  },
+  {
+    "index": "reach",
+    "name": "Reach",
+    "group": "combat",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Controlling distance and leverage with polearms, spears, and long weapons.",
+    "examples": [
+      "Keep foes back with a spear",
+      "Hook a rider from the saddle"
+    ]
+  },
+  {
+    "index": "ranged",
+    "name": "Ranged",
+    "group": "combat",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Delivering accurate attacks with thrown or launched weapons at distance.",
+    "examples": [
+      "Put an arrow through a gap",
+      "Hit a runner with a javelin"
+    ]
+  },
+  {
+    "index": "mechanical",
+    "name": "Mechanical",
+    "group": "combat",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Operating crossbows and similar mechanical launchers under combat pressure.",
+    "examples": [
+      "Reload a heavy crossbow quickly",
+      "Pick a target through cover with a crank bow"
+    ]
+  },
+  {
+    "index": "brawling",
+    "name": "Brawling",
+    "group": "combat",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Applying trained unarmed strikes, clinches, and dirty fighting at close quarters.",
+    "examples": [
+      "Drop a guard with an elbow strike",
+      "Fight in a tavern crush without a weapon"
+    ]
+  },
+  {
+    "index": "unconventional",
+    "name": "Unconventional",
+    "group": "combat",
+    "primary_domain": "varies",
+    "domain_note": "GPT judges per weapon.",
+    "description": "Using improvised, exotic, or unfamiliar weapons outside standard forms.",
+    "examples": [
+      "Fight with a chair leg",
+      "Turn a chain into a battlefield weapon"
+    ]
+  },
+  {
+    "index": "shields",
+    "name": "Shields",
+    "group": "combat",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Using shields for defense, control, bashing, and line holding.",
+    "examples": [
+      "Catch a blow on the rim",
+      "Shield-rush someone off a stair"
+    ]
+  },
+  {
+    "index": "light_armor",
+    "name": "Light Armor",
+    "group": "combat",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Fighting effectively while wearing flexible light protective gear.",
+    "examples": [
+      "Move freely in padded armor",
+      "Keep speed while armored lightly"
+    ]
+  },
+  {
+    "index": "medium_armor",
+    "name": "Medium Armor",
+    "group": "combat",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Managing weight, coverage, and movement in moderate battlefield armor.",
+    "examples": [
+      "Advance in mail without overcommitting",
+      "Fight through repeated impacts in scale"
+    ]
+  },
+  {
+    "index": "heavy_armor",
+    "name": "Heavy Armor",
+    "group": "combat",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Operating in heavy protective armor without losing combat function.",
+    "examples": [
+      "Hold a choke point in plate",
+      "Turn weight into unstoppable pressure"
+    ]
+  },
+  {
+    "index": "dragon_breath",
+    "name": "Dragon Breath",
+    "group": "combat",
+    "primary_domain": "will",
+    "domain_note": "Will for controlled channeling, Power for raw output.",
+    "description": "Channeling innate draconic breath with control rather than pure force.",
+    "examples": [
+      "Exhale a fire cone without catching allies",
+      "Sustain a lightning line through panic"
+    ]
+  },
+  {
+    "index": "tactics",
+    "name": "Tactics",
+    "group": "warfare",
+    "primary_domain": "will",
+    "domain_note": null,
+    "description": "Selecting and adapting battlefield plans under shifting pressure.",
+    "examples": [
+      "Choose the stronger flank to hit",
+      "Reform a defense when the line buckles"
+    ]
+  },
+  {
+    "index": "threat_assessment",
+    "name": "Threat Assessment",
+    "group": "warfare",
+    "primary_domain": "will",
+    "domain_note": null,
+    "description": "Identifying the most dangerous combatant, position, or vector in a fight.",
+    "examples": [
+      "Spot the hidden commander",
+      "Recognize the real threat in a skirmish"
+    ]
+  },
+  {
+    "index": "weapon_identification",
+    "name": "Weapon Identification",
+    "group": "warfare",
+    "primary_domain": "will",
+    "domain_note": null,
+    "description": "Recognizing arms, capability, doctrine, and likely use from equipment seen.",
+    "examples": [
+      "Judge pike formation intent at a glance",
+      "Read a killer by how they carry steel"
+    ]
+  },
+  {
+    "index": "formation_reading",
+    "name": "Formation Reading",
+    "group": "warfare",
+    "primary_domain": "will",
+    "domain_note": null,
+    "description": "Interpreting unit layout, cohesion, and tactical intent from battlefield arrangement.",
+    "examples": [
+      "See a feigned retreat coming",
+      "Find the weak seam in a shield wall"
+    ]
+  },
+  {
+    "index": "command_presence",
+    "name": "Command Presence",
+    "group": "warfare",
+    "primary_domain": "will",
+    "domain_note": null,
+    "description": "Projecting authority that steadies allies and organizes action in violence.",
+    "examples": [
+      "Rally shaken troops",
+      "Impose order during a chaotic withdrawal"
+    ]
+  },
+  {
+    "index": "intimidation_posture",
+    "name": "Intimidation Posture",
+    "group": "warfare",
+    "primary_domain": "will",
+    "domain_note": null,
+    "description": "Using martial bearing and controlled menace to deter or cow opposition.",
+    "examples": [
+      "Break militia nerve with a veteran stare",
+      "Make raiders hesitate before the charge"
+    ]
+  },
+  {
+    "index": "smithing",
+    "name": "Smithing",
+    "group": "craft",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Forging, shaping, and heat-treating metal tools, fittings, and weapons.",
+    "examples": [
+      "Forge a serviceable knife",
+      "Reset a bent hinge pin"
+    ]
+  },
+  {
+    "index": "carpentry",
+    "name": "Carpentry",
+    "group": "craft",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Building and repairing wooden structures, frames, tools, and furniture.",
+    "examples": [
+      "Brace a damaged doorframe",
+      "Build a field stretcher from timber"
+    ]
+  },
+  {
+    "index": "masonry",
+    "name": "Masonry",
+    "group": "craft",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Working stone, mortar, brick, and load-bearing surfaces by hand.",
+    "examples": [
+      "Reset loose stair stones",
+      "Patch a cracked hearth wall"
+    ]
+  },
+  {
+    "index": "leatherwork",
+    "name": "Leatherwork",
+    "group": "craft",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Cutting, stitching, shaping, and repairing leather goods and tack.",
+    "examples": [
+      "Repair a split harness",
+      "Make a fitted belt sheath"
+    ]
+  },
+  {
+    "index": "textiles",
+    "name": "Textiles",
+    "group": "craft",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Producing and repairing cloth, stitching, weaving, and fiber goods.",
+    "examples": [
+      "Mend a torn cloak",
+      "Weave a sturdy travel sash"
+    ]
+  },
+  {
+    "index": "cooking",
+    "name": "Cooking",
+    "group": "craft",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Preparing food safely, efficiently, and well from available ingredients.",
+    "examples": [
+      "Stretch sparse rations into a meal",
+      "Cook for a visiting lord without waste"
+    ]
+  },
+  {
+    "index": "pottery",
+    "name": "Pottery",
+    "group": "craft",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Forming and firing ceramic vessels, tiles, and simple fired goods.",
+    "examples": [
+      "Throw a water jar",
+      "Fire replacement roof tiles"
+    ]
+  },
+  {
+    "index": "maintenance",
+    "name": "Maintenance",
+    "group": "craft",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Routine upkeep that keeps tools, gear, and fixtures functional.",
+    "examples": [
+      "Sharpen a work axe",
+      "Keep a wagon from shaking apart"
+    ]
+  },
+  {
+    "index": "mechanisms",
+    "name": "Mechanisms",
+    "group": "engineering",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Designing and understanding moving parts, gears, springs, and transfers of force.",
+    "examples": [
+      "Diagnose a jammed gear train",
+      "Design a spring-loaded release"
+    ]
+  },
+  {
+    "index": "structures",
+    "name": "Structures",
+    "group": "engineering",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Reading and planning how buildings and supports bear load and fail.",
+    "examples": [
+      "Judge whether a tower can take more stress",
+      "Reinforce a cracked support span"
+    ]
+  },
+  {
+    "index": "siegeworks",
+    "name": "Siegeworks",
+    "group": "engineering",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Constructing and assessing engines, emplacements, breaches, and fortification stress.",
+    "examples": [
+      "Site a trebuchet platform",
+      "Estimate when a gate will fail"
+    ]
+  },
+  {
+    "index": "civil_works",
+    "name": "Civil Works",
+    "group": "engineering",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Planning roads, drainage, canals, bridges, and other public infrastructure.",
+    "examples": [
+      "Route runoff away from a roadbed",
+      "Assess a bridge for wagon traffic"
+    ]
+  },
+  {
+    "index": "lockworks",
+    "name": "Lockworks",
+    "group": "engineering",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Understanding complex locks, latches, tumblers, and security mechanisms.",
+    "examples": [
+      "Diagram a vault lock from its feel",
+      "Explain why a latch keeps failing"
+    ]
+  },
+  {
+    "index": "arcane_structure",
+    "name": "Arcane Structure",
+    "group": "engineering",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Preparing or analyzing material substrates built to hold magical load safely.",
+    "examples": [
+      "Prepare stone to take inscription",
+      "Spot structural failure in an enchanted frame"
+    ]
+  },
+  {
+    "index": "history",
+    "name": "History",
+    "group": "lore",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Recalling historical events, eras, precedents, and remembered causes.",
+    "examples": [
+      "Recall who held the valley two wars ago",
+      "Place a ruin in the correct dynasty"
+    ]
+  },
+  {
+    "index": "linguistics",
+    "name": "Linguistics",
+    "group": "lore",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Analyzing languages, scripts, dialects, and how meaning shifts across them.",
+    "examples": [
+      "Translate an archaic oath",
+      "Identify a speaker\u2019s regional dialect"
+    ]
+  },
+  {
+    "index": "law",
+    "name": "Law",
+    "group": "lore",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Understanding codes, rights, procedure, and legal interpretation.",
+    "examples": [
+      "Quote caravan toll exemptions",
+      "Recognize an unlawful arrest order"
+    ]
+  },
+  {
+    "index": "religion",
+    "name": "Religion",
+    "group": "lore",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Knowing doctrines, rites, institutions, and sacred history as scholarship.",
+    "examples": [
+      "Identify a sect from its vestments",
+      "Recall the taboo of a local shrine"
+    ]
+  },
+  {
+    "index": "politics",
+    "name": "Politics",
+    "group": "lore",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Understanding power blocs, leverage, interests, and civic maneuvering.",
+    "examples": [
+      "Read why a council delayed a vote",
+      "Predict who benefits from the decree"
+    ]
+  },
+  {
+    "index": "genealogy",
+    "name": "Genealogy",
+    "group": "lore",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Tracing lineage, descent, inheritance, and family connections.",
+    "examples": [
+      "Expose a hidden claimant line",
+      "Recognize a house by marriage ties"
+    ]
+  },
+  {
+    "index": "cartography",
+    "name": "Cartography",
+    "group": "lore",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Understanding mapmaking, scale, symbol systems, and geographic representation.",
+    "examples": [
+      "Judge whether a map is outdated",
+      "Spot deliberate distortion in a chart"
+    ]
+  },
+  {
+    "index": "economics",
+    "name": "Economics",
+    "group": "lore",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Understanding markets, trade flow, scarcity, and material incentives.",
+    "examples": [
+      "Explain a grain price spike",
+      "Predict shortage after a road closure"
+    ]
+  },
+  {
+    "index": "persuasion",
+    "name": "Persuasion",
+    "group": "influence",
+    "primary_domain": "presence",
+    "domain_note": null,
+    "description": "Moving someone through reason, rapport, or appealing framing.",
+    "examples": [
+      "Talk a guard into bending protocol",
+      "Convince a merchant to wait for payment"
+    ]
+  },
+  {
+    "index": "deception",
+    "name": "Deception",
+    "group": "influence",
+    "primary_domain": "presence",
+    "domain_note": null,
+    "description": "Misleading others through lies, omissions, and believable false presentation.",
+    "examples": [
+      "Sell a false story under pressure",
+      "Bluff as an authorized courier"
+    ]
+  },
+  {
+    "index": "diplomacy",
+    "name": "Diplomacy",
+    "group": "influence",
+    "primary_domain": "presence",
+    "domain_note": null,
+    "description": "Managing tense relationships through tact, formality, and mutually survivable terms.",
+    "examples": [
+      "Broker a truce between rivals",
+      "Keep negotiations from collapsing"
+    ]
+  },
+  {
+    "index": "command",
+    "name": "Command",
+    "group": "influence",
+    "primary_domain": "presence",
+    "domain_note": null,
+    "description": "Issuing direction that others feel compelled to follow in the moment.",
+    "examples": [
+      "Take control during a fire",
+      "Order bystanders into a bucket line"
+    ]
+  },
+  {
+    "index": "pressure",
+    "name": "Pressure",
+    "group": "influence",
+    "primary_domain": "presence",
+    "domain_note": null,
+    "description": "Applying leverage, threat, or discomfort to force compliance or concession.",
+    "examples": [
+      "Lean on a debtor for answers",
+      "Make a witness crack with steady menace"
+    ]
+  },
+  {
+    "index": "seduction",
+    "name": "Seduction",
+    "group": "influence",
+    "primary_domain": "presence",
+    "domain_note": null,
+    "description": "Using attraction, intimacy, and suggestive rapport to shape behavior.",
+    "examples": [
+      "Draw out a lonely informant",
+      "Turn flirtation into access"
+    ]
+  },
+  {
+    "index": "etiquette",
+    "name": "Etiquette",
+    "group": "influence",
+    "primary_domain": "presence",
+    "domain_note": null,
+    "description": "Navigating status rules, manners, and formal social expectations correctly.",
+    "examples": [
+      "Avoid offending a noble host",
+      "Use the right greeting at court"
+    ]
+  },
+  {
+    "index": "singing",
+    "name": "Singing",
+    "group": "performance",
+    "primary_domain": "presence",
+    "domain_note": null,
+    "description": "Using voice musically for solo, choral, or ceremonial performance.",
+    "examples": [
+      "Hold a long hall quiet with a lament",
+      "Lead a marching hymn"
+    ]
+  },
+  {
+    "index": "musical_instruments",
+    "name": "Musical Instruments",
+    "group": "performance",
+    "primary_domain": "presence",
+    "domain_note": null,
+    "description": "Playing instruments with skill sufficient for audience performance.",
+    "examples": [
+      "Play a fiddle reel for dancers",
+      "Accompany a solemn rite on harp"
+    ]
+  },
+  {
+    "index": "oratory",
+    "name": "Oratory",
+    "group": "performance",
+    "primary_domain": "presence",
+    "domain_note": null,
+    "description": "Delivering prepared speech for audience attention, emotion, and impact.",
+    "examples": [
+      "Give a funeral address",
+      "Recite a public proclamation with force"
+    ]
+  },
+  {
+    "index": "dance",
+    "name": "Dance",
+    "group": "performance",
+    "primary_domain": "presence",
+    "domain_note": null,
+    "description": "Performing expressive or formal movement for ceremony, story, or spectacle.",
+    "examples": [
+      "Lead a court dance correctly",
+      "Perform a war dance before a crowd"
+    ]
+  },
+  {
+    "index": "theatrical",
+    "name": "Theatrical",
+    "group": "performance",
+    "primary_domain": "presence",
+    "domain_note": null,
+    "description": "Acting, staging, and embodying roles for witnessed dramatic effect.",
+    "examples": [
+      "Play a grieving king convincingly",
+      "Sell a comic scene on stage"
+    ]
+  },
+  {
+    "index": "storytelling",
+    "name": "Storytelling",
+    "group": "performance",
+    "primary_domain": "presence",
+    "domain_note": null,
+    "description": "Holding attention through spoken narrative, pacing, and dramatic image.",
+    "examples": [
+      "Keep a tavern enthralled with a saga",
+      "Tell a fireside ghost story well"
+    ]
+  },
+  {
+    "index": "focus",
+    "name": "Focus",
+    "group": "discipline",
+    "primary_domain": "will",
+    "domain_note": null,
+    "description": "Sustaining attention on a chosen task despite distraction or pain.",
+    "examples": [
+      "Hold concentration in a noisy ritual",
+      "Ignore taunts while aiming a delicate action"
+    ]
+  },
+  {
+    "index": "courage",
+    "name": "Courage",
+    "group": "discipline",
+    "primary_domain": "will",
+    "domain_note": null,
+    "description": "Acting through fear, dread, or imminent harm without breaking.",
+    "examples": [
+      "Advance on a monster anyway",
+      "Open the cursed door first"
+    ]
+  },
+  {
+    "index": "resolve",
+    "name": "Resolve",
+    "group": "discipline",
+    "primary_domain": "will",
+    "domain_note": null,
+    "description": "Maintaining commitment, endurance of purpose, and refusal to yield.",
+    "examples": [
+      "Keep marching after morale breaks",
+      "Refuse a bribe that would end the oath"
+    ]
+  },
+  {
+    "index": "composure",
+    "name": "Composure",
+    "group": "discipline",
+    "primary_domain": "will",
+    "domain_note": null,
+    "description": "Maintaining outward control and clarity under emotional or social strain.",
+    "examples": [
+      "Keep a steady voice during accusation",
+      "Hide panic in front of subordinates"
+    ]
+  },
+  {
+    "index": "meditation",
+    "name": "Meditation",
+    "group": "discipline",
+    "primary_domain": "will",
+    "domain_note": null,
+    "description": "Using trained inward practice to settle mind, breath, and attention.",
+    "examples": [
+      "Enter restorative trance quickly",
+      "Center yourself before a rite"
+    ]
+  },
+  {
+    "index": "fear_mastery",
+    "name": "Fear Mastery",
+    "group": "discipline",
+    "primary_domain": "will",
+    "domain_note": null,
+    "description": "Regulating terror responses so fear does not control action.",
+    "examples": [
+      "Stand fast before a dragon\u2019s roar",
+      "Walk into the haunted vault without freezing"
+    ]
+  },
+  {
+    "index": "oath_endurance",
+    "name": "Oath Endurance",
+    "group": "discipline",
+    "primary_domain": "will",
+    "domain_note": null,
+    "description": "Bearing the cost of vows, strictures, and long commitments without faltering.",
+    "examples": [
+      "Keep sacred silence through hardship",
+      "Honor a sworn duty at personal loss"
+    ]
+  },
+  {
+    "index": "theory",
+    "name": "Theory",
+    "group": "arcana",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Applying magical principles and abstract models to understand a working.",
+    "examples": [
+      "Explain why a charm destabilized",
+      "Identify the logic behind a sigil array"
+    ]
+  },
+  {
+    "index": "ritual_structure",
+    "name": "Ritual Structure",
+    "group": "arcana",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Reading how a ritual is sequenced, scaffolded, and meant to hold together.",
+    "examples": [
+      "Map the stages of a summoning rite",
+      "Spot the missing step in a consecration"
+    ]
+  },
+  {
+    "index": "field_recognition",
+    "name": "Field Recognition",
+    "group": "arcana",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Identifying which magical field a phenomenon belongs to from its signs.",
+    "examples": [
+      "Recognize warding from the residue pattern",
+      "Tell illusion from sacred influence"
+    ]
+  },
+  {
+    "index": "enchantment_analysis",
+    "name": "Enchantment Analysis",
+    "group": "arcana",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Examining enchanted objects to infer purpose, behavior, and limits.",
+    "examples": [
+      "Determine what a ring is meant to do",
+      "Assess whether a blade carries stored magic"
+    ]
+  },
+  {
+    "index": "ward_reading",
+    "name": "Ward Reading",
+    "group": "arcana",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Interpreting wards, seals, and protective inscriptions without triggering them.",
+    "examples": [
+      "Read a threshold seal before entry",
+      "Trace the edge of a protective lattice"
+    ]
+  },
+  {
+    "index": "risk_assessment",
+    "name": "Risk Assessment",
+    "group": "arcana",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Judging danger, instability, and likely fallout in magical conditions.",
+    "examples": [
+      "Estimate how close a ritual is to collapse",
+      "Warn whether handling the relic is safe"
+    ]
+  }
+]

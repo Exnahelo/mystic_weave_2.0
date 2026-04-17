@@ -3,6 +3,8 @@
 Version 2.0 — April 2026
 Status: Canonical. Upload to GPT builder as a knowledge file.
 
+**Rename note:** the magical field formerly called **Nature** is now **Druidry** to avoid collision with the mundane **Nature** knowledge group.
+
 ---
 
 ## Purpose
@@ -21,7 +23,7 @@ Structured spell catalogs belong in JSON data files under `data/magic/`, not her
 
 Use this file together with:
 - per-field spell files under `data/magic/`
-- `data/magic/fields.json`
+- `data/tags/magic_fields.json`
 - `world_rules.md`
 - `engine.md`
 - `combat_rules.md` when magic is used during conflict
@@ -85,7 +87,7 @@ See **Spell Resolution** below for the threshold table.
 | Warding | Will | Protective barriers, seals, anti-corruption protocols, ward maintenance |
 | Binding | Will | Oaths, pacts, compulsions, sworn duties, and channeled authority with magical weight |
 | Elemental | Endurance | Raw elemental channeling through sustained output |
-| Nature | Perception | Druidic and biome magic, ley-flow, living systems |
+| Druidry | Perception | Druidic and biome magic, ley-flow, living systems |
 | Illusion | Presence | Constructed perception, false images, sensory manipulation |
 | Runecraft | Intellect | Inscribed magical structures: runes, glyphs, sigils, permanent enchantment |
 | Alchemy | Intellect | Magical compound preparation, transmutation, reagent work |
@@ -349,8 +351,8 @@ This section will eventually define:
 
 ## Reference Files
 
-- `data/magic/fields.json` — canonical field definitions
-- `data/magic/{field}.json` — per-field spell catalogs (sacred, warding, binding, elemental, nature, illusion, runecraft, alchemy, necromancy)
+- `data/tags/magic_fields.json` — canonical field definitions
+- `data/magic/{field}.json` — per-field spell catalogs (sacred, warding, binding, elemental, druidry, illusion, runecraft, alchemy, necromancy)
 - `world_rules.md` — broader world/system-facing rules (contains a summarized magic section that must stay in sync with this file)
 - `combat_rules.md` — combat-facing interpretation when magic enters conflict
 - `engine.md` — runtime system logic and adjudication guidance

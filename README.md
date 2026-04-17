@@ -59,6 +59,13 @@ System reference: `prompts/world_rules.md` and `prompts/character_creation.md`
 
 Reference: `WORLD_TOPOLOGY_BASELINE.md`
 
+## v4.1.0 Changelog
+
+- Added canonical tag registry files under `data/tags/`
+- Added `GET /tags` endpoint for knowledge groups, magic fields, and applications
+- Renamed the magic field `nature` to `druidry`
+- Enforced the knowledge-group/application two-level taxonomy through data validation
+
 ## API Endpoints
 
 | Method | Path | Purpose |

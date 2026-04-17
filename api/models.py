@@ -797,6 +797,38 @@ class ItemOption(BaseModel):
     effects: list[str] = Field(default_factory=list)
 
 
+class KnowledgeGroupEntry(BaseModel):
+    index: str
+    name: str
+    primary_domain: str
+    secondary_domain: str | None = None
+    domain_note: str | None = None
+    description: str
+    examples: list[str] = Field(default_factory=list)
+    kind: str
+
+
+class MagicFieldEntry(BaseModel):
+    index: str
+    name: str
+    primary_domain: str
+    secondary_domain: str | None = None
+    domain_note: str | None = None
+    description: str
+    examples: list[str] = Field(default_factory=list)
+    kind: str
+
+
+class ApplicationEntry(BaseModel):
+    index: str
+    name: str
+    group: str
+    primary_domain: str
+    domain_note: str | None = None
+    description: str
+    examples: list[str] = Field(default_factory=list)
+
+
 class OptionsResponse(BaseModel):
     """Response for GET /options — all supported ancestries, cultures, focus archetypes, and backgrounds."""
     ancestries:  list[AncestryOption]
@@ -806,3 +838,9 @@ class OptionsResponse(BaseModel):
     mundane_items: list[ItemOption] = Field(default_factory=list)
     magical_items: list[ItemOption] = Field(default_factory=list)
     apparel_items: list[ItemOption] = Field(default_factory=list)
+
+
+class TagsResponse(BaseModel):
+    knowledge_groups: list[KnowledgeGroupEntry]
+    magic_fields: list[MagicFieldEntry]
+    applications: list[ApplicationEntry]

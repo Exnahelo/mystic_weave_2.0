@@ -21,6 +21,11 @@ _DATA_FILES = (
     "characters/focus.json",
     "characters/backgrounds.json",
 )
+_TAG_REGISTRY_FILES = (
+    "tags/knowledge_groups.json",
+    "tags/magic_fields.json",
+    "tags/applications.json",
+)
 _ITEM_DATA_FILES = (
     "items/gear.json",
     "items/magical.json",
@@ -30,7 +35,17 @@ _ITEM_DATA_FILES = (
     "items/ammunition.json",
     "items/notable.json",
 )
-_SPELL_DATA_FILES = ("magic-spells.json",)
+_SPELL_DATA_FILES = (
+    "magic/alchemy.json",
+    "magic/binding.json",
+    "magic/druidry.json",
+    "magic/elemental.json",
+    "magic/illusion.json",
+    "magic/necromancy.json",
+    "magic/runecraft.json",
+    "magic/sacred.json",
+    "magic/warding.json",
+)
 _MAGIC_DIR = _DATA_DIR / "magic"
 
 
@@ -175,6 +190,61 @@ def list_backgrounds() -> list[dict[str, Any]]:
 # Item catalogs
 # ---------------------------------------------------------------------------
 
+def list_knowledge_groups() -> list[dict[str, Any]]:
+    """Return all mundane knowledge group entries."""
+    data = _load_json("tags/knowledge_groups.json")
+    if not isinstance(data, dict):
+        return []
+    return list(data.values())
+
+
+def get_knowledge_group(index: str) -> dict[str, Any]:
+    """Return a specific knowledge group by index."""
+    data = _load_json("tags/knowledge_groups.json")
+    if index not in data:
+        raise ValueError(f"Unknown knowledge group: {index!r}. Valid: {sorted(data.keys())}")
+    return data[index]
+
+
+def list_magic_fields() -> list[dict[str, Any]]:
+    """Return all magic field entries."""
+    data = _load_json("tags/magic_fields.json")
+    if not isinstance(data, dict):
+        return []
+    return list(data.values())
+
+
+def get_magic_field(index: str) -> dict[str, Any]:
+    """Return a specific magic field by index."""
+    data = _load_json("tags/magic_fields.json")
+    if index not in data:
+        raise ValueError(f"Unknown magic field: {index!r}. Valid: {sorted(data.keys())}")
+    return data[index]
+
+
+def list_applications() -> list[dict[str, Any]]:
+    """Return all application entries."""
+    data = _load_json("tags/applications.json")
+    if not isinstance(data, dict):
+        return []
+    return list(data.values())
+
+
+def get_application(index: str) -> dict[str, Any]:
+    """Return a specific application by index."""
+    data = _load_json("tags/applications.json")
+    if index not in data:
+        raise ValueError(f"Unknown application: {index!r}. Valid: {sorted(data.keys())}")
+    return data[index]
+
+
+def get_application_group(app_index: str) -> str | None:
+    """Return the parent group/field index for an application, or None."""
+    data = _load_json("tags/applications.json")
+    if app_index not in data:
+        return None
+    return data[app_index].get("group")
+
 def list_mundane_items() -> list[dict[str, Any]]:
     """Return all mundane catalog items."""
     data = _load_json("items/gear.json")
@@ -211,17 +281,26 @@ def data_fingerprint() -> str:
     Exposed by GET /version for deployment/contract sanity checks.
     """
     hasher = hashlib.sha256()
-    for filename in (*_DATA_FILES, *_ITEM_DATA_FILES, *_SPELL_DATA_FILES):
+    for filename in (*_DATA_FILES, *_ITEM_DATA_FILES):
         path = _DATA_DIR / filename
         if not path.exists():
             continue
         with open(path, "rb") as f:
             hasher.update(f.read())
 
-    if _MAGIC_DIR.exists():
-        for path in sorted(_MAGIC_DIR.glob("*.json")):
-            with open(path, "rb") as f:
-                hasher.update(f.read())
+    for filename in _TAG_REGISTRY_FILES:
+        path = _DATA_DIR / filename
+        if not path.exists():
+            continue
+        with open(path, "rb") as f:
+            hasher.update(f.read())
+
+    for filename in _SPELL_DATA_FILES:
+        path = _DATA_DIR / filename
+        if not path.exists():
+            continue
+        with open(path, "rb") as f:
+            hasher.update(f.read())
     return hasher.hexdigest()
 
 

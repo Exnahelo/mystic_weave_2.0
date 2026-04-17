@@ -1,0 +1,10 @@
+{
+  "index": "snake_case_stable_id",
+  "name": "Display Name",
+  "primary_domain": "power | agility | perception | endurance | intellect | will | presence",
+  "secondary_domain": "domain_name or null",
+  "domain_note": "Optional text for context-dependent domain, or null",
+  "description": "Paragraph distinguishing this group from adjacent groups.",
+  "examples": ["Concrete example 1", "Concrete example 2", "Concrete example 3"],
+  "kind": "mundane"
+}

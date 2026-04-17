@@ -1,0 +1,10 @@
+{
+  "index": "snake_case_stable_id",
+  "name": "Display Name",
+  "primary_domain": "power | agility | perception | endurance | intellect | will | presence",
+  "secondary_domain": "domain_name or null",
+  "domain_note": "Optional cross-domain note, or null",
+  "description": "Paragraph describing the field.",
+  "examples": ["Example 1", "Example 2", "Example 3"],
+  "kind": "magical"
+}

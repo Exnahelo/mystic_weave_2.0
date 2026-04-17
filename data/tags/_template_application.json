@@ -1,0 +1,9 @@
+{
+  "index": "snake_case_stable_id",
+  "name": "Display Name",
+  "group": "parent_knowledge_group_or_field_index",
+  "primary_domain": "domain_name or varies",
+  "domain_note": "Optional override note, or null",
+  "description": "One-sentence description.",
+  "examples": ["Use case 1", "Use case 2"]
+}

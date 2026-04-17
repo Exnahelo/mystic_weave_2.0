@@ -22,7 +22,7 @@ from api.game_data import (
     list_focus,
 )
 from api.models import HealthResponse, VersionResponse
-from api.routes import character, location, options, roll, scene, session, state
+from api.routes import character, location, options, roll, scene, session, state, tags
 
 
 @asynccontextmanager
@@ -40,7 +40,7 @@ app = FastAPI(
         "The GPT is the narrator; this API is the memory. "
         "d100 roll-under resolution with domain scores and competency tiers."
     ),
-    version="4.0.0",
+    version="4.1.0",
     servers=[
         {
             "url": "https://mysticweave-production.up.railway.app",
@@ -67,6 +67,7 @@ app.include_router(roll.router)
 app.include_router(location.router)
 app.include_router(options.router)
 app.include_router(scene.router)
+app.include_router(tags.router)
 
 
 @app.get("/", tags=["health"], response_model=HealthResponse)

@@ -2,7 +2,7 @@
   {
     "index": "seedwake",
     "name": "Seedwake",
-    "field": "nature",
+    "field": "druidry",
     "tier": 1,
     "primary_domain": "perception",
     "alternate_domain": null,
@@ -11,7 +11,7 @@
   {
     "index": "beast_calm",
     "name": "Beast Calm",
-    "field": "nature",
+    "field": "druidry",
     "tier": 1,
     "primary_domain": "perception",
     "alternate_domain": null,
@@ -20,7 +20,7 @@
   {
     "index": "foragers_sense",
     "name": "Forager's Sense",
-    "field": "nature",
+    "field": "druidry",
     "tier": 1,
     "primary_domain": "perception",
     "alternate_domain": null,
@@ -29,7 +29,7 @@
   {
     "index": "thorn_lash",
     "name": "Thorn Lash",
-    "field": "nature",
+    "field": "druidry",
     "tier": 1,
     "primary_domain": "perception",
     "alternate_domain": null,
@@ -38,7 +38,7 @@
   {
     "index": "sap_mend",
     "name": "Sap Mend",
-    "field": "nature",
+    "field": "druidry",
     "tier": 1,
     "primary_domain": "perception",
     "alternate_domain": null,
@@ -47,7 +47,7 @@
   {
     "index": "vine_snare",
     "name": "Vine Snare",
-    "field": "nature",
+    "field": "druidry",
     "tier": 2,
     "primary_domain": "perception",
     "alternate_domain": null,
@@ -56,7 +56,7 @@
   {
     "index": "barkskin",
     "name": "Barkskin",
-    "field": "nature",
+    "field": "druidry",
     "tier": 2,
     "primary_domain": "perception",
     "alternate_domain": "endurance",
@@ -65,7 +65,7 @@
   {
     "index": "bloom_of_remedy",
     "name": "Bloom of Remedy",
-    "field": "nature",
+    "field": "druidry",
     "tier": 2,
     "primary_domain": "perception",
     "alternate_domain": null,
@@ -74,7 +74,7 @@
   {
     "index": "speak_to_the_small_wild",
     "name": "Speak to the Small Wild",
-    "field": "nature",
+    "field": "druidry",
     "tier": 2,
     "primary_domain": "perception",
     "alternate_domain": "presence",
@@ -83,7 +83,7 @@
   {
     "index": "predators_aspect",
     "name": "Predator's Aspect",
-    "field": "nature",
+    "field": "druidry",
     "tier": 3,
     "primary_domain": "perception",
     "alternate_domain": "endurance",
@@ -92,7 +92,7 @@
   {
     "index": "verdant_surge",
     "name": "Verdant Surge",
-    "field": "nature",
+    "field": "druidry",
     "tier": 3,
     "primary_domain": "perception",
     "alternate_domain": null,
@@ -101,7 +101,7 @@
   {
     "index": "rot_denied",
     "name": "Rot Denied",
-    "field": "nature",
+    "field": "druidry",
     "tier": 3,
     "primary_domain": "perception",
     "alternate_domain": null,
@@ -110,7 +110,7 @@
   {
     "index": "heartwood_sanctuary",
     "name": "Heartwood Sanctuary",
-    "field": "nature",
+    "field": "druidry",
     "tier": 4,
     "primary_domain": "perception",
     "alternate_domain": null,
@@ -119,7 +119,7 @@
   {
     "index": "awaken_the_grove",
     "name": "Awaken the Grove",
-    "field": "nature",
+    "field": "druidry",
     "tier": 4,
     "primary_domain": "perception",
     "alternate_domain": null,
@@ -128,10 +128,10 @@
   {
     "index": "sovereign_of_the_living_land",
     "name": "Sovereign of the Living Land",
-    "field": "nature",
+    "field": "druidry",
     "tier": 5,
     "primary_domain": "perception",
     "alternate_domain": null,
-    "description": "The supreme nature working: the caster speaks with the authority of ecosystem itself, commanding beasts, growth, and terrain in unified concert."
+    "description": "The supreme druidry working: the caster speaks with the authority of ecosystem itself, commanding beasts, growth, and terrain in unified concert."
   }
 ]
