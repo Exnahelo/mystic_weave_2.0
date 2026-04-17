@@ -1,0 +1,92 @@
+[
+  {
+    "index": "alpine_peaks",
+    "name": "Alpine Peaks",
+    "description": "Raised on the outer mountain barrier — ice, rock, wind, and the discipline of surviving them.",
+    "domain_bonuses": {"power": 0, "agility": 0, "perception": 3, "endurance": 4, "intellect": 0, "will": 3, "presence": 0},
+    "knowledge_tags": {"survival": 1, "fortitude": 1, "tracking": 1},
+    "application_tags": {"mounts_vehicles": 1},
+    "field_tags": {}
+  },
+  {
+    "index": "inner_ramparts",
+    "name": "Inner Ramparts",
+    "description": "Raised along the broken escarpment belt — cliff roads, stone ledges, hidden ways.",
+    "domain_bonuses": {"power": 2, "agility": 3, "perception": 2, "endurance": 3, "intellect": 0, "will": 0, "presence": 0},
+    "knowledge_tags": {"acrobatics": 1, "surveillance": 1, "exertion": 1},
+    "application_tags": {"lockpicking_traps": 1},
+    "field_tags": {}
+  },
+  {
+    "index": "draconic_grasslands",
+    "name": "Draconic Grasslands",
+    "description": "Raised on the ceremonial central meadows around Drakenvale city and the Stronghold.",
+    "domain_bonuses": {"power": 0, "agility": 0, "perception": 0, "endurance": 0, "intellect": 3, "will": 3, "presence": 4},
+    "knowledge_tags": {"diplomacy": 1, "history": 1, "command": 1},
+    "application_tags": {"sacred_rites": 1},
+    "field_tags": {"sacred": 1}
+  },
+  {
+    "index": "drakenvale_city",
+    "name": "Drakenvale",
+    "description": "Raised in the cosmopolitan capital — libraries, halls, markets, formal civic life.",
+    "domain_bonuses": {"power": 0, "agility": 0, "perception": 0, "endurance": 0, "intellect": 4, "will": 3, "presence": 3},
+    "knowledge_tags": {"persuasion": 1, "history": 1, "linguistics": 1},
+    "application_tags": {"musical_instruments": 1},
+    "field_tags": {}
+  },
+  {
+    "index": "volcanic_highlands",
+    "name": "Volcanic Highlands",
+    "description": "Raised in the geothermally active northeast — forges, lava channels, basalt settlements.",
+    "domain_bonuses": {"power": 4, "agility": 0, "perception": 0, "endurance": 4, "intellect": 0, "will": 2, "presence": 0},
+    "knowledge_tags": {"exertion": 1, "intimidation": 1, "resistance": 1},
+    "application_tags": {"shields_armor": 1},
+    "field_tags": {"elemental": 1}
+  },
+  {
+    "index": "temperate_forest",
+    "name": "Temperate Forest",
+    "description": "Raised in the outer basin woodland — silverwood groves, quiet settlements, old roads.",
+    "domain_bonuses": {"power": 0, "agility": 3, "perception": 4, "endurance": 3, "intellect": 0, "will": 0, "presence": 0},
+    "knowledge_tags": {"tracking": 1, "natural_lore": 1, "stealth": 1},
+    "application_tags": {"ranged": 1},
+    "field_tags": {}
+  },
+  {
+    "index": "mystic_wetlands",
+    "name": "Mystic Wetlands",
+    "description": "Raised in the southwestern low basin — fog, marsh, hidden pools, liminal crossings.",
+    "domain_bonuses": {"power": 0, "agility": 0, "perception": 4, "endurance": 0, "intellect": 3, "will": 3, "presence": 0},
+    "knowledge_tags": {"investigation": 1, "natural_lore": 1, "medicine": 1},
+    "application_tags": {"herbalism_alchemy": 1},
+    "field_tags": {}
+  },
+  {
+    "index": "feywood_glade",
+    "name": "Feywood Glade",
+    "description": "Raised in the fixed forest pocket — Feywild-touched, non-Euclidean, fey-shaped childhood.",
+    "domain_bonuses": {"power": 0, "agility": 0, "perception": 0, "endurance": 0, "intellect": 3, "will": 3, "presence": 4},
+    "knowledge_tags": {"deception": 1, "insight": 1, "arcana": 1},
+    "application_tags": {"arcane_implements": 1},
+    "field_tags": {"illusion": 1}
+  },
+  {
+    "index": "crystal_caverns",
+    "name": "Crystal Caverns",
+    "description": "Raised in the subterranean labyrinth — psionic resonance, crystal veins, amplified magic.",
+    "domain_bonuses": {"power": 0, "agility": 0, "perception": 3, "endurance": 0, "intellect": 4, "will": 3, "presence": 0},
+    "knowledge_tags": {"arcana": 1, "investigation": 1, "meditation": 1},
+    "application_tags": {"arcane_implements": 1},
+    "field_tags": {"runecraft": 1}
+  },
+  {
+    "index": "platinum_oath_monastery",
+    "name": "Platinum Oath Monastery",
+    "description": "Raised in the warded corridor near the Rift of Discord — discipline, vigilance, containment.",
+    "domain_bonuses": {"power": 0, "agility": 0, "perception": 0, "endurance": 3, "intellect": 0, "will": 5, "presence": 2},
+    "knowledge_tags": {"discipline": 1, "meditation": 1, "courage": 1},
+    "application_tags": {"sacred_rites": 1},
+    "field_tags": {"warding": 1}
+  }
+]

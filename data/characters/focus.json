@@ -2,50 +2,64 @@
   {
     "index": "champion",
     "name": "Champion",
-    "description": "Front-line fighter, direct combat",
+    "description": "Front-line fighter — direct combat, physical dominance.",
+    "signature_tag": "athletics",
     "knowledge_tags": {"athletics": 2, "brawling": 1, "fortitude": 1},
-    "application_tags": {"melee": 1, "grappling": 1}
+    "application_tags": {"melee": 1, "grappling": 1},
+    "field_tags": {}
   },
   {
     "index": "sentinel",
     "name": "Sentinel",
-    "description": "Protector, holds the line",
+    "description": "Protector — holds the line, shields allies, absorbs pressure.",
+    "signature_tag": "courage",
     "knowledge_tags": {"courage": 2, "resistance": 1, "fortitude": 1},
-    "application_tags": {"shields_armor": 1, "melee": 1, "reach": 1}
+    "application_tags": {"shields_armor": 1, "melee": 1, "reach": 1},
+    "field_tags": {}
   },
   {
     "index": "stalker",
     "name": "Stalker",
-    "description": "Ambush, infiltration, precision",
+    "description": "Ambush specialist — infiltration, precision, unseen strike.",
+    "signature_tag": "stealth",
     "knowledge_tags": {"stealth": 2, "evasion": 1, "investigation": 1},
-    "application_tags": {"grappling": 1, "lockpicking_traps": 1, "unconventional": 1}
+    "application_tags": {"grappling": 1, "lockpicking_traps": 1, "unconventional": 1},
+    "field_tags": {}
   },
   {
     "index": "wayfinder",
     "name": "Wayfinder",
-    "description": "Explorer, survivalist, tracker",
-    "knowledge_tags": {"survival": 2, "nature": 1, "tracking": 1},
-    "application_tags": {"ranged": 1, "mounts_vehicles": 1, "mechanical": 1}
+    "description": "Explorer, survivalist, tracker — reads the land.",
+    "signature_tag": "survival",
+    "knowledge_tags": {"survival": 2, "natural_lore": 1, "tracking": 1},
+    "application_tags": {"ranged": 1, "mounts_vehicles": 1, "mechanical": 1},
+    "field_tags": {}
   },
   {
     "index": "arcanist",
     "name": "Arcanist",
-    "description": "Arcane scholar, magical power",
+    "description": "Arcane scholar — magical theory applied to inscribed and researched magic.",
+    "signature_tag": "arcana",
     "knowledge_tags": {"arcana": 2, "history": 1, "engineering": 1},
-    "application_tags": {"arcane_implements": 1, "herbalism_alchemy": 1}
+    "application_tags": {"arcane_implements": 1, "herbalism_alchemy": 1},
+    "field_tags": {"runecraft": 1}
   },
   {
     "index": "devoted",
     "name": "Devoted",
-    "description": "Spiritual warrior, faith and authority",
+    "description": "Spiritual warrior — faith, authority, sacred practice made functional.",
+    "signature_tag": "discipline",
     "knowledge_tags": {"discipline": 2, "courage": 1, "command": 1},
-    "application_tags": {"sacred_rites": 1, "shields_armor": 1}
+    "application_tags": {"sacred_rites": 1, "shields_armor": 1},
+    "field_tags": {"sacred": 1}
   },
   {
     "index": "speaker",
     "name": "Speaker",
-    "description": "Social operator, inspirer, manipulator",
+    "description": "Social operator — inspirer, manipulator, reader of rooms.",
+    "signature_tag": "persuasion",
     "knowledge_tags": {"persuasion": 2, "deception": 1, "insight": 1},
-    "application_tags": {"musical_instruments": 1, "disguise_forgery": 1}
+    "application_tags": {"musical_instruments": 1, "disguise_forgery": 1},
+    "field_tags": {}
   }
 ]

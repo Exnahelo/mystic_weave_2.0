@@ -1,0 +1,26 @@
+{
+  "index": "string (snake_case, stable)",
+  "name": "Display Name",
+  "description": "One-line summary of the ancestry",
+  "domains": {
+    "power": 0,
+    "agility": 0,
+    "perception": 0,
+    "endurance": 0,
+    "intellect": 0,
+    "will": 0,
+    "presence": 0
+  },
+  "traits": [
+    {
+      "name": "Trait Name",
+      "type": "passive | conditional | active",
+      "description": "Narrative description",
+      "mechanical_note": "Precise mechanical effect or null for pure flavor",
+      "application_tag": "tag_name or null",
+      "roll_domain": "domain_name or null",
+      "usage": "always | per_scene | per_day | null",
+      "fatigue": "none | fatiguing | null"
+    }
+  ]
+}

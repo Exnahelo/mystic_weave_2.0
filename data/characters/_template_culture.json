@@ -1,0 +1,23 @@
+{
+  "index": "string (snake_case, stable)",
+  "name": "Display Name",
+  "description": "One-line summary of the culture",
+  "domain_bonuses": {
+    "power": 0,
+    "agility": 0,
+    "perception": 0,
+    "endurance": 0,
+    "intellect": 0,
+    "will": 0,
+    "presence": 0
+  },
+  "knowledge_tags": {
+    "tag_name": 1
+  },
+  "application_tags": {
+    "tag_name": 1
+  },
+  "field_tags": {
+    "field_name": 1
+  }
+}

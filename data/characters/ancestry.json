@@ -1,0 +1,226 @@
+[
+  {
+    "index": "human",
+    "name": "Human",
+    "description": "Adaptable, generalist lineage with no pronounced biological specialization.",
+    "domains": {"power": 40, "agility": 40, "perception": 40, "endurance": 40, "intellect": 40, "will": 40, "presence": 40},
+    "traits": [
+      {
+        "name": "Adaptable",
+        "type": "passive",
+        "description": "Humans adapt quickly to whatever environment shapes them.",
+        "mechanical_note": "Gain one extra knowledge tag at T1 during character creation, from any domain.",
+        "application_tag": null,
+        "roll_domain": null,
+        "usage": "always",
+        "fatigue": null
+      }
+    ]
+  },
+  {
+    "index": "orc",
+    "name": "Orc",
+    "description": "Powerful and resilient, built for endurance and combat.",
+    "domains": {"power": 55, "agility": 35, "perception": 30, "endurance": 50, "intellect": 30, "will": 45, "presence": 35},
+    "traits": [
+      {
+        "name": "Relentless",
+        "type": "active",
+        "description": "Refusal to fall when others would.",
+        "mechanical_note": "Once per scene, survive a would-be incapacitating outcome at 1 HP. Take one fatigue step afterward.",
+        "application_tag": null,
+        "roll_domain": null,
+        "usage": "per_scene",
+        "fatigue": "fatiguing"
+      }
+    ]
+  },
+  {
+    "index": "elf",
+    "name": "Elf",
+    "description": "Long-lived, perceptive, and attuned to subtlety.",
+    "domains": {"power": 30, "agility": 55, "perception": 45, "endurance": 30, "intellect": 40, "will": 35, "presence": 45},
+    "traits": [
+      {
+        "name": "Keen Senses",
+        "type": "conditional",
+        "description": "Elves notice what others miss.",
+        "mechanical_note": "Investigation and surveillance rolls to detect hidden or concealed things do not take the standard concealment difficulty penalty.",
+        "application_tag": null,
+        "roll_domain": null,
+        "usage": "always",
+        "fatigue": null
+      },
+      {
+        "name": "Trance",
+        "type": "passive",
+        "description": "Elves rest through meditative trance rather than sleep.",
+        "mechanical_note": "Full rest in 4 hours instead of 8. Resting in unfamiliar environments does not add the standard unfamiliar-rest difficulty.",
+        "application_tag": null,
+        "roll_domain": null,
+        "usage": "always",
+        "fatigue": null
+      },
+      {
+        "name": "Darkvision",
+        "type": "passive",
+        "description": "Elves see in near-darkness as if in dim light.",
+        "mechanical_note": "No darkness difficulty penalty to Perception rolls.",
+        "application_tag": null,
+        "roll_domain": null,
+        "usage": "always",
+        "fatigue": null
+      }
+    ]
+  },
+  {
+    "index": "halfling",
+    "name": "Halfling",
+    "description": "Small, nimble, and uncannily fortunate.",
+    "domains": {"power": 30, "agility": 45, "perception": 55, "endurance": 35, "intellect": 35, "will": 45, "presence": 35},
+    "traits": [
+      {
+        "name": "Uncanny Luck",
+        "type": "active",
+        "description": "Fate bends slightly in a halfling's favor.",
+        "mechanical_note": "Once per day, after seeing a roll result, declare a reroll and take either result.",
+        "application_tag": null,
+        "roll_domain": null,
+        "usage": "per_day",
+        "fatigue": null
+      },
+      {
+        "name": "Small Stature",
+        "type": "conditional",
+        "description": "Halflings disappear into crowd and cover.",
+        "mechanical_note": "Stealth rolls when cover or crowd is available: difficulty reduced one step.",
+        "application_tag": null,
+        "roll_domain": null,
+        "usage": "always",
+        "fatigue": null
+      }
+    ]
+  },
+  {
+    "index": "dwarf",
+    "name": "Dwarf",
+    "description": "Sturdy, patient, and at home in stone.",
+    "domains": {"power": 50, "agility": 30, "perception": 35, "endurance": 55, "intellect": 40, "will": 40, "presence": 30},
+    "traits": [
+      {
+        "name": "Darkvision",
+        "type": "passive",
+        "description": "Dwarves see in near-darkness as if in dim light.",
+        "mechanical_note": "No darkness difficulty penalty to Perception rolls.",
+        "application_tag": null,
+        "roll_domain": null,
+        "usage": "always",
+        "fatigue": null
+      },
+      {
+        "name": "Stone Sense",
+        "type": "conditional",
+        "description": "Dwarves read stone and worked rock instinctively.",
+        "mechanical_note": "Detecting structural weakness, hidden passages, or unstable terrain in stone or underground construction: difficulty reduced one step.",
+        "application_tag": null,
+        "roll_domain": null,
+        "usage": "always",
+        "fatigue": null
+      }
+    ]
+  },
+  {
+    "index": "gnome",
+    "name": "Gnome",
+    "description": "Clever, curious, and resistant to the tricks of other minds.",
+    "domains": {"power": 30, "agility": 40, "perception": 45, "endurance": 30, "intellect": 55, "will": 45, "presence": 35},
+    "traits": [
+      {
+        "name": "Fey Resistance",
+        "type": "passive",
+        "description": "Gnomes shrug off mind-shaping magic.",
+        "mechanical_note": "Resistance to illusion and enchantment effects: outcomes reduced one step narratively.",
+        "application_tag": null,
+        "roll_domain": null,
+        "usage": "always",
+        "fatigue": null
+      },
+      {
+        "name": "Tinker's Instinct",
+        "type": "conditional",
+        "description": "Small mechanisms make immediate sense to a gnome.",
+        "mechanical_note": "Engineering rolls on small mechanical devices: difficulty reduced one step.",
+        "application_tag": null,
+        "roll_domain": null,
+        "usage": "always",
+        "fatigue": null
+      }
+    ]
+  },
+  {
+    "index": "tiefling",
+    "name": "Tiefling",
+    "description": "Infernal-blooded, willful, and resistant to burning harm.",
+    "domains": {"power": 35, "agility": 40, "perception": 35, "endurance": 35, "intellect": 45, "will": 55, "presence": 35},
+    "traits": [
+      {
+        "name": "Infernal Resistance",
+        "type": "passive",
+        "description": "Tiefling blood shrugs off fire and death.",
+        "mechanical_note": "Resistance to fire and necrotic damage: outcomes reduced one step narratively.",
+        "application_tag": null,
+        "roll_domain": null,
+        "usage": "always",
+        "fatigue": null
+      },
+      {
+        "name": "Darkvision",
+        "type": "passive",
+        "description": "Tieflings see in near-darkness as if in dim light.",
+        "mechanical_note": "No darkness difficulty penalty to Perception rolls.",
+        "application_tag": null,
+        "roll_domain": null,
+        "usage": "always",
+        "fatigue": null
+      }
+    ]
+  },
+  {
+    "index": "dragonborn",
+    "name": "Dragonborn",
+    "description": "Dragon-descended, with breath, scale, and presence of lineage.",
+    "domains": {"power": 45, "agility": 35, "perception": 35, "endurance": 40, "intellect": 30, "will": 45, "presence": 50},
+    "traits": [
+      {
+        "name": "Draconic Breath",
+        "type": "active",
+        "description": "Exhale magical energy in cone or line. Breath type fixed at creation or narrative discovery.",
+        "mechanical_note": "Innate dragon_breath application tag at T1. Fatiguing: short rest required before repeated use in the same scene.",
+        "application_tag": "dragon_breath",
+        "roll_domain": "will_or_power",
+        "usage": "per_scene",
+        "fatigue": "fatiguing"
+      },
+      {
+        "name": "Draconic Resistance",
+        "type": "passive",
+        "description": "Dragonborn resist their own breath damage type.",
+        "mechanical_note": "Resistance to the breath damage type established at creation: outcomes reduced one step narratively.",
+        "application_tag": null,
+        "roll_domain": null,
+        "usage": "always",
+        "fatigue": null
+      },
+      {
+        "name": "Darkvision",
+        "type": "passive",
+        "description": "Dragonborn see in near-darkness as if in dim light.",
+        "mechanical_note": "No darkness difficulty penalty to Perception rolls.",
+        "application_tag": null,
+        "roll_domain": null,
+        "usage": "always",
+        "fatigue": null
+      }
+    ]
+  }
+]
