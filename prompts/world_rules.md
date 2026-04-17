@@ -18,7 +18,7 @@ Characters have seven domains scored 25–80:
 | Will | Discipline, self-regulation, mental resilience, concentration under pressure |
 | Presence | Social weight, confidence, expressiveness, influence over others |
 
-Domain scores are set by species at character creation, adjusted by a +5 player pool (max +3 per domain). Starting values are usually within species baselines (commonly 25–60), but campaign progression can raise domains to 80 through AP spend.
+Domain scores are set by ancestry base (280 total), culture bonus (10), background bonus (10), and player adjustment (10 points, max +5 per domain). Starting values are usually within ancestry baselines (commonly 25–60 before bonuses), but campaign progression can raise domains to 80 through AP spend.
 
 ---
 
@@ -189,10 +189,10 @@ Each of the seven domains has five knowledge skills. Tiers 1–5, each tier adds
 
 **Power:** Athletics, Intimidation, Breaking, Lifting, Brawling
 **Agility:** Stealth, Acrobatics, Sleight of Hand, Evasion, Reflexes
-**Perception:** Tracking, Investigation, Insight, Surveillance, Nature
+**Perception:** Tracking, Investigation, Insight, Surveillance, Natural Lore
 **Endurance:** Survival, Fortitude, Recovery, Resistance, Exertion
 **Intellect:** Arcana, History, Medicine, Engineering, Linguistics
-**Will:** Discipline, Meditation, Courage, Resolve, Warding
+**Will:** Discipline, Meditation, Courage, Resolve, Focus
 **Presence:** Persuasion, Deception, Performance, Command, Diplomacy
 
 ### Magical Fields (knowledge tag table)
