@@ -17,7 +17,7 @@ DOMAIN_KEYS = {
     "presence",
 }
 
-SPELL_FIELDS = {
+FIELD_KEYS = {
     "sacred",
     "warding",
     "binding",
@@ -25,9 +25,14 @@ SPELL_FIELDS = {
     "nature",
     "illusion",
     "runecraft",
-    "necromancy",
     "alchemy",
+    "necromancy",
 }
+
+SPELL_FIELDS = FIELD_KEYS
+TRAIT_TYPES = {"passive", "conditional", "active"}
+TRAIT_USAGES = {"always", "per_scene", "per_day"}
+TRAIT_FATIGUE = {"none", "fatiguing"}
 
 
 def _failures_append(failures: list[str], condition: bool, message: str) -> None:
@@ -36,20 +41,73 @@ def _failures_append(failures: list[str], condition: bool, message: str) -> None
 
 
 def _load_json(path: Path) -> list[dict]:
+    if path.name.startswith("_"):
+        return []
     with path.open("r", encoding="utf-8") as f:
         payload = json.load(f)
     if not isinstance(payload, list):
         raise ValueError(f"{path.name}: expected top-level list")
-    return payload
+    return [
+        row for row in payload
+        if not (isinstance(row, dict) and str(row.get("index", "")).startswith("_"))
+    ]
 
 
-def _validate_species(path: Path, failures: list[str]) -> None:
-    species = _load_json(path)
+def _validate_tag_dict(
+    label: str,
+    tag_group: object,
+    group_name: str,
+    failures: list[str],
+    *,
+    allow_empty: bool = False,
+) -> None:
+    _failures_append(failures, isinstance(tag_group, dict), f"{label}.{group_name} must be object")
+    if not isinstance(tag_group, dict):
+        return
+    if not allow_empty:
+        _failures_append(failures, len(tag_group) > 0, f"{label}.{group_name} must include at least one tag")
+    for tkey, tval in tag_group.items():
+        _failures_append(failures, isinstance(tkey, str) and tkey, f"{label}.{group_name} contains invalid tag key")
+        _failures_append(
+            failures,
+            isinstance(tval, int) and 1 <= tval <= 5,
+            f"{label}.{group_name}.{tkey} tier must be int between 1 and 5",
+        )
+
+
+def _validate_field_tags(label: str, field_tags: object, failures: list[str]) -> None:
+    _failures_append(failures, isinstance(field_tags, dict), f"{label}.field_tags must be object")
+    if not isinstance(field_tags, dict):
+        return
+    for key, val in field_tags.items():
+        _failures_append(failures, key in FIELD_KEYS, f"{label}.field_tags.{key} must be one of {sorted(FIELD_KEYS)}")
+        _failures_append(
+            failures,
+            isinstance(val, int) and 1 <= val <= 5,
+            f"{label}.field_tags.{key} tier must be int between 1 and 5",
+        )
+
+
+def _validate_domain_bonuses(label: str, bonuses: object, failures: list[str]) -> None:
+    _failures_append(failures, isinstance(bonuses, dict), f"{label}.domain_bonuses must be object")
+    if not isinstance(bonuses, dict):
+        return
+    _failures_append(failures, set(bonuses.keys()) == DOMAIN_KEYS, f"{label}.domain_bonuses keys mismatch")
+    total = 0
+    for dkey, val in bonuses.items():
+        _failures_append(failures, isinstance(val, int), f"{label}.domain_bonuses.{dkey} must be int")
+        if isinstance(val, int):
+            total += val
+            _failures_append(failures, val >= 0, f"{label}.domain_bonuses.{dkey} must be >= 0")
+    _failures_append(failures, total == 10, f"{label}.domain_bonuses total must be 10 (got {total})")
+
+
+def _validate_ancestries(path: Path, failures: list[str]) -> None:
+    ancestries = _load_json(path)
     seen_indices: set[str] = set()
+    _failures_append(failures, len(ancestries) == 8, f"{path.name}: expected 8 ancestry entries")
 
-    _failures_append(failures, len(species) == 8, f"{path.name}: expected 8 species entries")
-
-    for i, row in enumerate(species):
+    for i, row in enumerate(ancestries):
         label = f"{path.name}[{i}]"
         _failures_append(failures, isinstance(row, dict), f"{label}: expected object")
         if not isinstance(row, dict):
@@ -62,12 +120,10 @@ def _validate_species(path: Path, failures: list[str]) -> None:
             seen_indices.add(idx)
 
         _failures_append(failures, isinstance(row.get("name"), str) and row.get("name"), f"{label}.name must be non-empty string")
-
-        primary = row.get("primary_domain")
         _failures_append(
             failures,
-            (primary is None) or (isinstance(primary, str) and primary in DOMAIN_KEYS),
-            f"{label}.primary_domain must be null or one of domain keys",
+            isinstance(row.get("description"), str) and row.get("description"),
+            f"{label}.description must be non-empty string",
         )
 
         domains = row.get("domains")
@@ -79,17 +135,90 @@ def _validate_species(path: Path, failures: list[str]) -> None:
                 _failures_append(failures, isinstance(val, int), f"{label}.domains.{dkey} must be int")
                 if isinstance(val, int):
                     total += val
-                    _failures_append(
-                        failures,
-                        1 <= val <= 60,
-                        f"{label}.domains.{dkey} must be between 1 and 60",
-                    )
+                    _failures_append(failures, 1 <= val <= 60, f"{label}.domains.{dkey} must be between 1 and 60")
             _failures_append(failures, total == 280, f"{label}.domains total must be 280 (got {total})")
+
+        traits = row.get("traits")
+        _failures_append(failures, isinstance(traits, list), f"{label}.traits must be list")
+        if not isinstance(traits, list):
+            continue
+
+        for t_idx, trait in enumerate(traits):
+            trait_label = f"{label}.traits[{t_idx}]"
+            _failures_append(failures, isinstance(trait, dict), f"{trait_label} must be object")
+            if not isinstance(trait, dict):
+                continue
+            _failures_append(failures, isinstance(trait.get("name"), str) and trait.get("name"), f"{trait_label}.name must be non-empty string")
+            _failures_append(failures, trait.get("type") in TRAIT_TYPES, f"{trait_label}.type must be one of {sorted(TRAIT_TYPES)}")
+            _failures_append(
+                failures,
+                isinstance(trait.get("description"), str) and trait.get("description"),
+                f"{trait_label}.description must be non-empty string",
+            )
+
+            application_tag = trait.get("application_tag")
+            _failures_append(
+                failures,
+                application_tag is None or isinstance(application_tag, str),
+                f"{trait_label}.application_tag must be string or null",
+            )
+            roll_domain = trait.get("roll_domain")
+            _failures_append(
+                failures,
+                roll_domain is None or roll_domain in DOMAIN_KEYS or roll_domain == "will_or_power",
+                f"{trait_label}.roll_domain must be domain key, 'will_or_power', or null",
+            )
+            usage = trait.get("usage")
+            _failures_append(
+                failures,
+                usage is None or usage in TRAIT_USAGES,
+                f"{trait_label}.usage must be one of {sorted(TRAIT_USAGES)} or null",
+            )
+            fatigue = trait.get("fatigue")
+            _failures_append(
+                failures,
+                fatigue is None or fatigue in TRAIT_FATIGUE,
+                f"{trait_label}.fatigue must be one of {sorted(TRAIT_FATIGUE)} or null",
+            )
+            _failures_append(
+                failures,
+                trait.get("mechanical_note") is None or isinstance(trait.get("mechanical_note"), str),
+                f"{trait_label}.mechanical_note must be string or null",
+            )
+
+
+def _validate_cultures(path: Path, failures: list[str]) -> None:
+    cultures = _load_json(path)
+    seen_indices: set[str] = set()
+    _failures_append(failures, len(cultures) == 10, f"{path.name}: expected 10 culture entries")
+
+    for i, row in enumerate(cultures):
+        label = f"{path.name}[{i}]"
+        _failures_append(failures, isinstance(row, dict), f"{label}: expected object")
+        if not isinstance(row, dict):
+            continue
+        idx = row.get("index")
+        _failures_append(failures, isinstance(idx, str) and idx, f"{label}.index must be non-empty string")
+        if isinstance(idx, str):
+            _failures_append(failures, idx not in seen_indices, f"{label}.index duplicated: {idx}")
+            seen_indices.add(idx)
+        _failures_append(failures, isinstance(row.get("name"), str) and row.get("name"), f"{label}.name must be non-empty string")
+        _failures_append(
+            failures,
+            isinstance(row.get("description"), str) and row.get("description"),
+            f"{label}.description must be non-empty string",
+        )
+        _validate_domain_bonuses(label, row.get("domain_bonuses"), failures)
+        _validate_tag_dict(label, row.get("knowledge_tags"), "knowledge_tags", failures)
+        _validate_tag_dict(label, row.get("application_tags"), "application_tags", failures)
+        _validate_field_tags(label, row.get("field_tags"), failures)
 
 
 def _validate_tag_rows(path: Path, failures: list[str], expected_count: int) -> None:
     rows = _load_json(path)
     seen_indices: set[str] = set()
+    is_focus = path.name == "focus.json"
+    is_background = path.name == "backgrounds.json"
 
     _failures_append(failures, len(rows) == expected_count, f"{path.name}: expected {expected_count} entries")
 
@@ -112,29 +241,23 @@ def _validate_tag_rows(path: Path, failures: list[str], expected_count: int) -> 
             f"{label}.description must be non-empty string",
         )
 
-        k_tags = row.get("knowledge_tags")
-        a_tags = row.get("application_tags")
-        _failures_append(failures, isinstance(k_tags, dict), f"{label}.knowledge_tags must be object")
-        _failures_append(failures, isinstance(a_tags, dict), f"{label}.application_tags must be object")
+        if is_background:
+            _validate_domain_bonuses(label, row.get("domain_bonuses"), failures)
 
-        for tag_group, group_name in ((k_tags, "knowledge_tags"), (a_tags, "application_tags")):
-            if isinstance(tag_group, dict):
+        _validate_tag_dict(label, row.get("knowledge_tags"), "knowledge_tags", failures)
+        _validate_tag_dict(label, row.get("application_tags"), "application_tags", failures)
+        _validate_field_tags(label, row.get("field_tags"), failures)
+
+        if is_focus:
+            signature_tag = row.get("signature_tag")
+            _failures_append(failures, isinstance(signature_tag, str) and signature_tag, f"{label}.signature_tag must be non-empty string")
+            knowledge_tags = row.get("knowledge_tags")
+            if isinstance(signature_tag, str) and isinstance(knowledge_tags, dict):
                 _failures_append(
                     failures,
-                    len(tag_group) > 0,
-                    f"{label}.{group_name} must include at least one tag",
+                    knowledge_tags.get(signature_tag) == 2,
+                    f"{label}.signature_tag must appear in knowledge_tags at tier 2",
                 )
-                for tkey, tval in tag_group.items():
-                    _failures_append(
-                        failures,
-                        isinstance(tkey, str) and tkey,
-                        f"{label}.{group_name} contains invalid tag key",
-                    )
-                    _failures_append(
-                        failures,
-                        isinstance(tval, int) and 1 <= tval <= 5,
-                        f"{label}.{group_name}.{tkey} tier must be int between 1 and 5",
-                    )
 
 
 def _validate_spells(path: Path, failures: list[str]) -> None:
@@ -159,52 +282,30 @@ def _validate_spells(path: Path, failures: list[str]) -> None:
         if not isinstance(row, dict):
             continue
 
-        _failures_append(
-            failures,
-            set(row.keys()) == required_keys,
-            f"{label}: keys must match {sorted(required_keys)}",
-        )
-
+        _failures_append(failures, set(row.keys()) == required_keys, f"{label}: keys must match {sorted(required_keys)}")
         idx = row.get("index")
         _failures_append(failures, isinstance(idx, str) and idx, f"{label}.index must be non-empty string")
         if isinstance(idx, str):
             _failures_append(failures, idx not in seen_indices, f"{label}.index duplicated: {idx}")
             seen_indices.add(idx)
-
         _failures_append(failures, isinstance(row.get("name"), str) and row.get("name"), f"{label}.name must be non-empty string")
         _failures_append(
             failures,
             isinstance(row.get("description"), str) and row.get("description"),
             f"{label}.description must be non-empty string",
         )
-
         field = row.get("field")
-        _failures_append(
-            failures,
-            isinstance(field, str) and field in SPELL_FIELDS,
-            f"{label}.field must be one of {sorted(SPELL_FIELDS)}",
-        )
-
+        _failures_append(failures, isinstance(field, str) and field in SPELL_FIELDS, f"{label}.field must be one of {sorted(SPELL_FIELDS)}")
         primary = row.get("primary_domain")
-        _failures_append(
-            failures,
-            isinstance(primary, str) and primary in DOMAIN_KEYS,
-            f"{label}.primary_domain must be one of {sorted(DOMAIN_KEYS)}",
-        )
-
+        _failures_append(failures, isinstance(primary, str) and primary in DOMAIN_KEYS, f"{label}.primary_domain must be one of {sorted(DOMAIN_KEYS)}")
         alternate = row.get("alternate_domain")
         _failures_append(
             failures,
             alternate is None or (isinstance(alternate, str) and alternate in DOMAIN_KEYS),
             f"{label}.alternate_domain must be null or one of {sorted(DOMAIN_KEYS)}",
         )
-
         tier = row.get("tier")
-        _failures_append(
-            failures,
-            isinstance(tier, int) and 1 <= tier <= 5,
-            f"{label}.tier must be int between 1 and 5",
-        )
+        _failures_append(failures, isinstance(tier, int) and 1 <= tier <= 5, f"{label}.tier must be int between 1 and 5")
 
 
 def _validate_apparel(path: Path, failures: list[str]) -> None:
@@ -251,14 +352,15 @@ def main() -> None:
     data_dir = repo_root / "data"
 
     failures: list[str] = []
-    _validate_species(data_dir / "characters" / "ancestry.json", failures)
+    _validate_ancestries(data_dir / "characters" / "ancestry.json", failures)
+    _validate_cultures(data_dir / "characters" / "culture.json", failures)
     _validate_tag_rows(data_dir / "characters" / "focus.json", failures, expected_count=7)
     _validate_tag_rows(data_dir / "characters" / "backgrounds.json", failures, expected_count=8)
     _validate_apparel(data_dir / "items" / "apparel.json", failures)
 
     magic_dir = data_dir / "magic"
     for spell_file in sorted(magic_dir.glob("*.json")):
-        if spell_file.name == "fields.json":
+        if spell_file.name == "fields.json" or spell_file.name.startswith("_"):
             continue
         _validate_spells(spell_file, failures)
 
