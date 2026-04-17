@@ -1,20 +1,26 @@
 """
 models.py — Pydantic v2 models for all game entities.
 
-All models use Pydantic v2 syntax. Designed for Mystic Weave 2.0:
-d100 roll-under, domain scores, knowledge/application competency tiers.
+All models use Pydantic v2 syntax. Designed for Mystic Weave 4.0:
+d100 roll-under, domain scores, knowledge/application competency tiers,
+and a four-layer character system built from ancestry, culture,
+background, and focus.
 
 v3.1.0 additions:
   CharacterModel — identity, equipment, reputation blocks
   CompanionModel — lightweight companion schema
   WorldModel     — economy, politics blocks
+
+v4.0.0 additions:
+  CharacterModel — ancestry/culture/fields schema
+  Options models — ancestry + culture option payloads
 """
 
 from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
-from pydantic import AliasChoices, BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 
 # ---------------------------------------------------------------------------
@@ -228,29 +234,23 @@ class CharacterModel(BaseModel):
 
     # Core identity
     name:           str
-    species:        str   # e.g. "human", "dragonborn"
+    ancestry:       str   # e.g. "human", "dragonborn"
+    culture:        str
     focus:          str   # e.g. "devoted", "stalker"
     background:     str   # e.g. "soldier", "acolyte"
     hp:             HP
     domains:        DomainScores
     knowledge:      dict[str, int] = Field(default_factory=dict)   # tag name → tier (1–5)
     application:    dict[str, int] = Field(default_factory=dict)   # tag name → tier (1–5)
+    fields:         dict[str, int] = Field(default_factory=dict)   # field name → tier (1–5)
     status_effects: list[str]      = Field(default_factory=list)
     notes:          str            = ""
 
-    # New in v3.1.0
+    # v3.1.0+
     identity:       Identity       = Field(default_factory=Identity)
     equipment:      Equipment      = Field(default_factory=Equipment)
     reputation:     list[ReputationEntry] = Field(default_factory=list)
     advancement:    AdvancementState = Field(default_factory=AdvancementState)
-
-    # Compatibility and extensibility fields
-    level:          int | None = Field(default=None, description="Deprecated legacy field.")
-    magic_fields:   list[str] = Field(default_factory=list)
-    draconic_traits: list[str] = Field(
-        default_factory=list,
-        validation_alias=AliasChoices("draconic_traits", "species_traits"),
-    )
 
 
 # ---------------------------------------------------------------------------
@@ -533,7 +533,7 @@ class GameStateResponse(BaseModel):
 # ---------------------------------------------------------------------------
 
 class AdjustmentPoints(BaseModel):
-    """Player's +5 domain adjustment pool at creation. Max +3 per domain."""
+    """Player's +10 domain adjustment pool at creation. Max +5 per domain."""
     power:      int = 0
     agility:    int = 0
     perception: int = 0
@@ -548,23 +548,24 @@ class AdjustmentPoints(BaseModel):
     def per_domain_cap(cls, v: int) -> int:
         if v < 0:
             raise ValueError("adjustment points cannot be negative")
-        if v > 3:
-            raise ValueError("max +3 adjustment per domain")
+        if v > 5:
+            raise ValueError("max +5 adjustment per domain")
         return v
 
     @model_validator(mode="after")
     def total_pool_cap(self) -> AdjustmentPoints:
         total = (self.power + self.agility + self.perception +
                  self.endurance + self.intellect + self.will + self.presence)
-        if total > 5:
-            raise ValueError(f"Adjustment pool is 5 points max. Got {total}.")
+        if total > 10:
+            raise ValueError(f"Adjustment pool is 10 points max. Got {total}.")
         return self
 
 
 class NewSessionRequest(BaseModel):
     """Body for POST /session/new"""
     character_name:   str
-    species:          str
+    ancestry:         str
+    culture:          str
     focus:            str
     background:       str
     adjustment_points: AdjustmentPoints = Field(default_factory=AdjustmentPoints)
@@ -592,7 +593,8 @@ class CreateCharacterRequest(BaseModel):
     """Body for POST /character/create — seeds character from game system data."""
     session_id:        str
     name:              str
-    species:           str
+    ancestry:          str
+    culture:           str
     focus:             str
     background:        str
     adjustment_points: AdjustmentPoints = Field(default_factory=AdjustmentPoints)
@@ -618,7 +620,8 @@ class VersionResponse(BaseModel):
     api_version: str
     git_sha: str
     data_fingerprint: str
-    species_count: int
+    ancestry_count: int
+    culture_count: int
     focus_count: int
     backgrounds_count: int
 
@@ -731,11 +734,34 @@ class SceneContext(BaseModel):
 # Options models
 # ---------------------------------------------------------------------------
 
-class SpeciesOption(BaseModel):
+class AncestryTrait(BaseModel):
+    name: str
+    type: str
+    description: str
+    mechanical_note: str | None = None
+    application_tag: str | None = None
+    roll_domain: str | None = None
+    usage: str | None = None
+    fatigue: str | None = None
+
+
+class AncestryOption(BaseModel):
     index:          str
     name:           str
+    description:    str = ""
     primary_domain: str | None = None   # e.g. "power" for Orc, None for Human
     domains:        dict[str, int]      # all 7 domain base scores
+    traits:         list[AncestryTrait] = Field(default_factory=list)
+
+
+class CultureOption(BaseModel):
+    index: str
+    name: str
+    description: str = ""
+    domain_bonuses: dict[str, int] = Field(default_factory=dict)
+    knowledge_tags: dict[str, int] = Field(default_factory=dict)
+    application_tags: dict[str, int] = Field(default_factory=dict)
+    field_tags: dict[str, int] = Field(default_factory=dict)
 
 
 class FocusOption(BaseModel):
@@ -744,14 +770,18 @@ class FocusOption(BaseModel):
     description:      str             = ""
     knowledge_tags:   dict[str, int]  = Field(default_factory=dict)   # tag name → starting tier
     application_tags: dict[str, int]  = Field(default_factory=dict)   # tag name → starting tier
+    field_tags:       dict[str, int]  = Field(default_factory=dict)
+    signature_tag:    str | None      = None
 
 
 class BackgroundOption(BaseModel):
     index:            str
     name:             str
     description:      str             = ""
+    domain_bonuses:   dict[str, int]  = Field(default_factory=dict)
     knowledge_tags:   dict[str, int]  = Field(default_factory=dict)   # tag name → starting tier
     application_tags: dict[str, int]  = Field(default_factory=dict)   # tag name → starting tier
+    field_tags:       dict[str, int]  = Field(default_factory=dict)
 
 
 class ItemOption(BaseModel):
@@ -769,8 +799,9 @@ class ItemOption(BaseModel):
 
 
 class OptionsResponse(BaseModel):
-    """Response for GET /options — all supported species, focus archetypes, backgrounds."""
-    species:     list[SpeciesOption]
+    """Response for GET /options — all supported ancestries, cultures, focus archetypes, and backgrounds."""
+    ancestries:  list[AncestryOption]
+    cultures:    list[CultureOption]
     focus:       list[FocusOption]
     backgrounds: list[BackgroundOption]
     mundane_items: list[ItemOption] = Field(default_factory=list)
