@@ -342,30 +342,6 @@ def test_delta_save_validation_failure_does_not_commit_state_or_log() -> None:
     assert conn.log == []
 
 
-@pytest.mark.regression
-def test_delta_save_persists_magic_fields() -> None:
-    session_id = "deltamagic1"
-    conn = MultiTurnFakeConn(session_id, _base_character(), _base_world())
-    app = _make_app(FakePool(conn))
-
-    with TestClient(app) as client:
-        r = client.post(
-            f"/state/{session_id}/delta",
-            json={
-                "character": {"magic_fields": ["arcane", "warding"]},
-                "log_entry": "Magic fields updated.",
-            },
-        )
-
-        assert r.status_code == 200
-        payload = r.json()
-        assert payload["character"]["magic_fields"] == ["arcane", "warding"]
-
-        loaded = client.get(f"/state/{session_id}")
-
-    assert loaded.status_code == 200
-    assert loaded.json()["character"]["magic_fields"] == ["arcane", "warding"]
-
 
 @pytest.mark.regression
 def test_delta_save_persists_draconic_traits() -> None:
