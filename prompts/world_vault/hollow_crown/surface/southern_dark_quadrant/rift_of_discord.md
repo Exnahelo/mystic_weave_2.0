@@ -2,12 +2,13 @@
 id: rift-of-discord
 name: Rift of Discord
 type: hazard
-region_id: hollow_crown
+region_id: hollow-crown
 parent_location_id: southern-dark-quadrant
 description: The realm's deepest wound, a surface fracture in the land where the final battle of the Discordant War ended and the Platinum Warden gave his life. At the Rift's heart stands the ruined keep of the chromatic rebels — a shattered dark-stone complex built on the site before the war as a focus for the tapping of deep corruption. At the keep's center is the pit the rebels dug: a deliberate excavation into the earth, seeking the dark energy they sought to weaponize, that collapsed inward during Vindrael's sacrifice and now descends to a depth no one has measured. The ground around the keep is warped. The air carries a low pulsing resonance — the combined imprint of the digging corruption, the slaughter of the battle, and whatever ceremonies the rebels performed here in the war's closing days. It is not a place one visits casually. Those who enter without preparation leave diminished. Those who enter with training sometimes do not leave at all.
 connections:
 - rift-of-discord-edge
 - southern-dark-quadrant
+- shadowed-hollows
 tags:
 - drakenvale
 - rift-of-discord
@@ -112,7 +113,7 @@ Visitors exiting the Rift are typically observed by Vigil patrols without engage
 
 - `rift-of-discord-edge`
 - `southern-dark-quadrant`
-
+- `shadowed-hollows`
 ## Authoring Notes
 
 The Rift of Discord is a HAZARD type, not a settlement. Characters entering this node should be treated as entering a dangerous environment with cumulative exposure effects. The GPT should track approximate time-in-Rift during extended scenes and apply effects proportionally.

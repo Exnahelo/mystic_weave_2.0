@@ -1,7 +1,7 @@
 id: amethyst-vault
 name: Amethyst Vault
 type: location
-region_id: hollow_crown
+region_id: hollow-crown
 settlement_id: stronghold-of-drakenvale
 parent_location_id: stronghold-of-drakenvale
 description: A ground-level sanctum set within the Stronghold's inner gardens, its pale stone walls veined with natural amethyst that catches light from the reflective pools and enchanted mirrors within. The Vault serves as Varethyn's public seat — a space for mediation, reflection, and the contemplative arbitration that the Draconic Hall's weightier proceedings cannot accommodate. Disputes that would fracture in open council often resolve here, in silence, under the amethyst light. The surrounding gardens are deliberately ordinary — trees, benches, a long reflecting channel — and serve as a decompression zone between the Vault and the fortress proper.

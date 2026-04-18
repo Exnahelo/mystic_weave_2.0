@@ -2,11 +2,13 @@
 id: crystalhaven
 name: Crystalhaven
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: The Southern Lake's contemplative village, set on the southern shore opposite Scalemere where the grasslands give way to the water in a long gentle curve. Crystalhaven grew from a handful of hermitages established generations ago by people who wanted sustained proximity to the lake's quiet sacred character, and it has never grown much beyond that origin. The village is small, still, and organized around the rhythms of the water rather than the rhythms of work. Residents are a mix of permanent contemplatives, long-term retreatants, and seasonal pilgrims who come for weeks or months. Days are spent walking the shore, observing silent meals, tending modest gardens, practicing the village's distinctive craft traditions, or sitting in the small shrine at the waterline where the lake's sacred character is most accessible. Nothing happens quickly in Crystalhaven. This is the point.
 connections:
 - southern-lake
 - central-draconic-grasslands
+- scalemere
+- drakenvale-city
 tags:
 - drakenvale
 - crystalhaven
@@ -110,7 +112,8 @@ The village asks visitors to respect its quiet. Loud voices, disruptive behavior
 
 - `southern-lake`
 - `central-draconic-grasslands`
-
+- `scalemere`
+- `drakenvale-city`
 ## Authoring Notes
 
 Crystalhaven is a new canonical location established in Batch 4. It was not referenced in prior topology baselines or world documents.

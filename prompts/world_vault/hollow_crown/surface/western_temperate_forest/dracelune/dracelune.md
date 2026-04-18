@@ -2,7 +2,7 @@
 id: dracelune
 name: Dracélune
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: The realm's western trade capital and the threshold city between ordinary Drakenvale life and the untamed Feywood Glade beyond. Dracélune sits at the edge of the western temperate forest where the land softens toward liminal Fey-touched terrain, its streets and plazas built across stilted platforms, stone causeways, and terraced riverside districts. It is the first and last true city the Silver Scale Trading Company's caravans pass through on their inbound and outbound routes, the primary realm-side staging point for any expedition into the Feywood, and the most culturally porous settlement in the Hollow Crown. Dracélune is lively, music-thick, commercially fast, and quietly permissive in ways that make it feel less like the rest of Drakenvale and more like itself.
 connections:
 - western-temperate-forest
@@ -10,7 +10,8 @@ connections:
 - silvercut
 - dewhollow
 - scalemere
-- thornveil
+- mirefall
+- silverwood-trail
 tags:
 - drakenvale
 - dracelune
@@ -123,8 +124,8 @@ The Feywood Glade threshold is a controlled boundary. Passage across it is by pe
 - `silvercut`
 - `dewhollow`
 - `scalemere`
-- `thornveil`
-
+- `mirefall`
+- `silverwood-trail`
 ## Authoring Notes
 
 Dracélune is authored as a single parent settlement node. Its internal districts are described in scene texture but not authored as separate sub-nodes. If future storylines require specific district-level navigation (e.g., a particular West Bank tavern, a specific Feywood Outfitter shop), those can be authored as sub-locations at that time.

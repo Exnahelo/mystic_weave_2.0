@@ -1,5 +1,5 @@
 ---
-id: central_draconic_grasslands
+id: central-draconic-grasslands
 name: Central Draconic Grasslands
 type: region_zone
 description: Open agricultural and patrol-traveled southern basin corridor linking the

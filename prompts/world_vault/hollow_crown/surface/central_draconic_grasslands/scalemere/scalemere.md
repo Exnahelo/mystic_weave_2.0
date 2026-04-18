@@ -2,12 +2,15 @@
 id: scalemere
 name: Scalemere
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: The Southern Lake's principal fishing village, set on the eastern shoreline where the grasslands slope gently into the water. Scalemere's harbor holds the realm's largest working fishing fleet — broad-bottomed nets-craft and smaller line-boats crewed by families whose ancestors have fished these waters since the realm's early generations. The daily catch moves north along the lakeshore road to Drakenvale City's Lakefront Market, reaching the capital before the fish lose their morning freshness. The village is modest, functional, and quietly prosperous. Its residents know the lake's moods, its seasonal patterns, and the specific grace its waters carry, and they do their work with the long steady rhythm of people whose livelihood is reliable.
 connections:
 - southern-lake
 - drakenvale-city
 - ashfield
+- ashfield-fields
+- dracelune
+- crystalhaven
 tags:
 - drakenvale
 - scalemere
@@ -88,7 +91,9 @@ Dragon Guard presence is minimal — a small patrol station on the lakeshore roa
 - `southern-lake`
 - `drakenvale-city`
 - `ashfield`
-
+- `ashfield-fields`
+- `dracelune`
+- `crystalhaven`
 ## Authoring Notes
 
 Scalemere is placed in the central Draconic Grasslands region based on its position on the lake's eastern shoreline, where the grasslands meet the water. Earlier topology references may have placed it in the temperate forest; the grasslands placement is geographically more accurate.

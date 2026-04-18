@@ -1,7 +1,7 @@
 id: ashfield-fields
 name: Ashfield Fields
 type: region_zone
-region_id: hollow_crown
+region_id: hollow-crown
 parent_location_id: central-draconic-grasslands
 description: The realm's primary agricultural belt, spread across the central Draconic Grasslands around the civic anchor settlement of Ashfield. The Fields comprise worked grain ground, vegetable allotments, orchards, apiaries, dairy pasture, and the scattered grange-administered lands that collectively produce the food that sustains Drakenvale City and the realm's broader institutional economy. The terrain is gentle — rolling grassland that rises slightly toward the western forest margin and slopes gently southward toward the Southern Lake. Seasonal rhythms dominate the Fields'
 character: spring planting, summer growth, autumn harvest, winter rest. Fieldworkers, grange stewards, teamsters, and the seasonal migrant labor force that handles peak-season work all move through the zone on patterns older than the realm's institutional memory.

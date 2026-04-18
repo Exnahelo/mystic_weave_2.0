@@ -1,5 +1,5 @@
 ---
-id: southern_dark_quadrant
+id: southern-dark-quadrant
 name: Southern Dark Quadrant
 type: region_zone
 description: Corrupted southern sector of Hollow Crown containing Greymantle, the Shadowed

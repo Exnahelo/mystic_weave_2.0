@@ -2,12 +2,13 @@
 id: dewhollow
 name: Dewhollow
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: The realm's cultivator of Fey-influenced flora, set in the western temperate forest where the ordinary forest gradually softens toward the Feywood threshold. Dewhollow grows and harvests the plants that exist only in this liminal zone — the morning-bell flowers, the silverleaf herbs, the glasswort reeds, the various Fey-adjacent specimens that do not survive transplantation to ordinary terrain. Its residents are herbalists, cultivators, alchemists, and the occasional scholar on field assignment, drawn to the village by the specialized work rather than born to it. The village is small, quiet, and more technically skilled than any settlement of its size has any reason to be. Its harvests move to Dracélune for realm-wide distribution and to the Arcane Conservatory for specific commissions.
 connections:
 - western-temperate-forest
 - dracelune
 - feywood-glade-border
+- silverwood-trail
 tags:
 - drakenvale
 - dewhollow
@@ -108,7 +109,7 @@ Travelers wandering off the village's managed paths into the Feywood-adjacent zo
 - `western-temperate-forest`
 - `dracelune`
 - `feywood-glade-border`
-
+- `silverwood-trail`
 ## Authoring Notes
 
 Dewhollow's workforce composition — drawn from apprentices and trained practitioners rather than hereditary family lines — is canonically distinctive. This differentiates the village from Silvercut (hereditary logging families) and Scalemere (hereditary fishing families). Dewhollow is the realm's specialty-craft apprentice destination for herbalist and alchemy-adjacent training.

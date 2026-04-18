@@ -2,13 +2,14 @@
 id: platinum-oath-approach
 name: Platinum Oath Approach
 type: route-node
-region_id: hollow_crown
+region_id: hollow-crown
 parent_location_id: southern-dark-quadrant
 description: The secured mountain path ascending from the southern dark quadrant's lower terrain to the Platinum Oath Monastery at the summit. The Approach is not a pilgrim's road — it is a working military-monastic access corridor maintained by the Vigil and patrolled by the elite Wardens, with walled stages, manned gatehouses, and the engineered defensive architecture of an order whose heritage as the Platinum Accord has never truly been set aside. Visitors are welcomed in principle; the journey itself is the filter. The terrain is unforgiving, the distance is substantial, the corruption-adjacent surrounding country discourages casual approach, and the Vigil's checkpoints admit or decline travelers on the basis of genuine evaluation rather than ceremony. Those who reach the summit have earned their arrival. Those who do not are not the Vigil's concern.
 connections:
 - platinum-oath-monastery
 - greymantle
 - southern-dark-quadrant
+- rift-of-discord-edge
 tags:
 - drakenvale
 - platinum-oath-approach
@@ -117,7 +118,7 @@ The Approach is technically open to any traveler. In practice, access is control
 - `platinum-oath-monastery`
 - `greymantle`
 - `southern-dark-quadrant`
-
+- `rift-of-discord-edge`
 ## Authoring Notes
 
 The Platinum Oath Approach is route-node type but with substantially more defensive infrastructure than Silverwood Trail or Volcanic Highlands Trail. The type remains route-node (it is a connecting corridor, not a settlement), but the authoring reflects its distinctive military-monastic character.

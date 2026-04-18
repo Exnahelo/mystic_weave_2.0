@@ -2,9 +2,9 @@
 id: volcanic-highlands-trail
 name: Volcanic Highlands Trail
 type: route-node
-region_id: hollow_crown
+region_id: hollow-crown
 parent_location_id: northeastern-volcanic-highlands
-description: The realm's primary industrial supply corridor, running eastward from Zarkharath's Infernal Forge causeway to Cinderpit's mining operations through the open volcanic highlands. The trail is wider and more heavily built than most of the realm's routes — a constant flow of loaded ore and coal wagons westbound, empty haulers and provisioning supplies eastbound, and the specialized thermal-gear caravans that service the deep-shaft operations all demand the infrastructure. The terrain is unforgiving: dark volcanic stone underfoot, sparse vegetation, ambient heat from active vents along the route, and the particular ashy horizon that marks all volcanic-highlands travel. Dragonborn-heavy hauler crews work the trail continuously. A traveler unaccustomed to the thermal environment finds the journey exhausting; experienced travelers simply find it ordinary.
+description: The realm's primary industrial supply corridor, running eastward from Zarkharath's Infernal Forge causeway to Cinderpit's mining operations through the open volcanic highlands. The trail is wider and more heavily built than most of the realm's routes — a constant flow of loaded ore and coal wagons westbound, empty haulers and provisioning supplies eastbound, and the specialized thermal-gear caravans that service the deep-shaft operations all demand the infrastructure. The terrain is unforgiving: dark volcanic stone underfoot, sparse vegetation, ambient heat from active vents along the route, and the particular ashy horizon that marks all northeastern-volcanic-highlands travel. Dragonborn-heavy hauler crews work the trail continuously. A traveler unaccustomed to the thermal environment finds the journey exhausting; experienced travelers simply find it ordinary.
 connections:
 - zarkharath
 - cinderpit
@@ -12,7 +12,7 @@ connections:
 tags:
 - drakenvale
 - volcanic-highlands-trail
-- volcanic-highlands
+- northeastern-volcanic-highlands
 - route-node
 - industrial-corridor
 - supply-route
@@ -25,7 +25,7 @@ discovered: true
 
 # Volcanic Highlands Trail
 
-The realm's primary industrial supply corridor, running eastward from Zarkharath's Infernal Forge causeway to Cinderpit's mining operations through the open volcanic highlands. The trail is wider and more heavily built than most of the realm's routes — a constant flow of loaded ore and coal wagons westbound, empty haulers and provisioning supplies eastbound, and the specialized thermal-gear caravans that service the deep-shaft operations all demand the infrastructure. The terrain is unforgiving: dark volcanic stone underfoot, sparse vegetation, ambient heat from active vents along the route, and the particular ashy horizon that marks all volcanic-highlands travel. Dragonborn-heavy hauler crews work the trail continuously. A traveler unaccustomed to the thermal environment finds the journey exhausting; experienced travelers simply find it ordinary.
+The realm's primary industrial supply corridor, running eastward from Zarkharath's Infernal Forge causeway to Cinderpit's mining operations through the open volcanic highlands. The trail is wider and more heavily built than most of the realm's routes — a constant flow of loaded ore and coal wagons westbound, empty haulers and provisioning supplies eastbound, and the specialized thermal-gear caravans that service the deep-shaft operations all demand the infrastructure. The terrain is unforgiving: dark volcanic stone underfoot, sparse vegetation, ambient heat from active vents along the route, and the particular ashy horizon that marks all northeastern-volcanic-highlands travel. Dragonborn-heavy hauler crews work the trail continuously. A traveler unaccustomed to the thermal environment finds the journey exhausting; experienced travelers simply find it ordinary.
 
 ## Scene Texture
 
@@ -37,9 +37,9 @@ The terrain rises gradually eastward. Zarkharath sits at the lower edge of the v
 
 **Thermal features** are the trail's distinctive environmental signature. Active **heat vents** emerge along the route at irregular intervals. A vent is a fissure or shallow pit where thermal activity from the volcanic system below reaches the surface — sometimes as a plume of visible steam, sometimes as mere heat radiating from bare stone. Active vents are marked with iron warning posts and, where necessary, the trail routes around them rather than through them. Most vents are stable features that have existed for generations; occasionally a new vent opens, and the trail crews reroute around it when this happens.
 
-Old **lava channels** — dry stone channels where ancient flows once ran — cross the trail in multiple places. The trail crosses them on stone-bridge construction, straightforward engineering for relatively narrow channels, more substantial bridges for the wider ones. The channels are distinctive geological features; a traveler crossing one sees dark stone walls dropping several feet below the trail surface, often with mineral deposits along the channel floors that the volcanic-highlands crews occasionally work for specialty materials.
+Old **lava channels** — dry stone channels where ancient flows once ran — cross the trail in multiple places. The trail crosses them on stone-bridge construction, straightforward engineering for relatively narrow channels, more substantial bridges for the wider ones. The channels are distinctive geological features; a traveler crossing one sees dark stone walls dropping several feet below the trail surface, often with mineral deposits along the channel floors that the northeastern-volcanic-highlands crews occasionally work for specialty materials.
 
-**Atmospheric haze** is continuous along the trail. The volcanic system's constant low-level activity produces a slight haze that the prevailing winds carry across the highlands. The haze is not thick enough to obscure vision meaningfully but gives the light its ashy quality throughout the day. Midday sunlight is filtered; evening light turns rust-gold rather than ordinary gold; clear days still carry the particular sky-tint that distinguishes volcanic-highlands travel from travel elsewhere in the realm.
+**Atmospheric haze** is continuous along the trail. The volcanic system's constant low-level activity produces a slight haze that the prevailing winds carry across the highlands. The haze is not thick enough to obscure vision meaningfully but gives the light its ashy quality throughout the day. Midday sunlight is filtered; evening light turns rust-gold rather than ordinary gold; clear days still carry the particular sky-tint that distinguishes northeastern-volcanic-highlands travel from travel elsewhere in the realm.
 
 The sounds of the trail are practical and continuous. Wagon wheels on stone surface — a rhythmic rumble distinct from dirt-road travel. Hauler teams calling to their animals. The occasional whistle-signal between wagon drivers. The low hiss of steam from active vents. The wind, which is nearly constant in the highlands and carries its own character — drier, warmer, with the mineral smell that volcanic environments produce.
 
@@ -47,7 +47,7 @@ The sounds of the trail are practical and continuous. Wagon wheels on stone surf
 
 The full trail length — Zarkharath to Cinderpit — is approximately one day's travel with empty wagons, or a day and a half with loaded haulers. The trail's grade and the thermal environment make for tiring work; hauler teams rotate shifts at the midpoint rather than push through. Typical traveler footspeed is slower than on the Silverwood Trail despite the gentler grade — the heat and the wind combine to reduce pace.
 
-Travelers carry volcanic-highlands appropriate supplies: extra water (critical in the dry thermal environment), thermal-shielding gear for midday travel during peak summer, cold-weather gear for winter crossings (the highlands cool sharply at night), and the standard road supplies for any multi-day journey.
+Travelers carry northeastern-volcanic-highlands appropriate supplies: extra water (critical in the dry thermal environment), thermal-shielding gear for midday travel during peak summer, cold-weather gear for winter crossings (the highlands cool sharply at night), and the standard road supplies for any multi-day journey.
 
 **Midpoint waystation.** The trail's midpoint hosts a built waystation — more substantial than the Silverwood Trail's waysides because the highland environment demands it. The waystation provides: a covered shelter against thermal radiation and wind, a water tank maintained from a nearby stable spring, a cleared area for teams to rest, fodder stores, and basic repair tools for wagon and equipment issues. The waystation is maintained jointly by Zarkharath's Forge Guild and Cinderpit's Pit Master's office. Permanent staff rotate through in multi-week shifts. The waystation is not an inn but travelers with genuine need can overnight there; the rotating staff handles hospitality informally for those who require it.
 
@@ -77,7 +77,7 @@ The trail is not unfriendly. It is simply focused. Travelers looking for convers
 
 ## Access
 
-The trail is open to all travelers. Trailheads at both ends are marked and unrestricted. Casual travelers are welcome but uncommon — the volcanic-highlands environment is demanding enough that few visit without purpose.
+The trail is open to all travelers. Trailheads at both ends are marked and unrestricted. Casual travelers are welcome but uncommon — the northeastern-volcanic-highlands environment is demanding enough that few visit without purpose.
 
 Dragon Guard patrols pass along the trail on rotations shared with Zarkharath's garrison. A patrol presence is routine but not constant; the trail's civic safety is high, and patrols exist for coordination and observation rather than for active security.
 
@@ -89,7 +89,7 @@ The highlands beyond the trail proper are genuinely hazardous. Travelers wanderi
 
 - drakenvale
 - volcanic-highlands-trail
-- volcanic-highlands
+- northeastern-volcanic-highlands
 - route-node
 - industrial-corridor
 - supply-route
@@ -108,7 +108,7 @@ The Volcanic Highlands Trail is route-node type, same category as Silverwood Tra
 
 `known_npcs` is empty. Scene-instantiated characters appear as narrative requires (hauler crews, waystation staff, patrol members).
 
-The midpoint waystation is a canonical feature. It is more substantial than Silverwood Trail's Lamp Wayside because the volcanic-highlands environment demands more infrastructure. Joint maintenance by Forge Guild and Pit Master's office establishes institutional coordination between the two settlements.
+The midpoint waystation is a canonical feature. It is more substantial than Silverwood Trail's Lamp Wayside because the northeastern-volcanic-highlands environment demands more infrastructure. Joint maintenance by Forge Guild and Pit Master's office establishes institutional coordination between the two settlements.
 
 The three developed water stops are canonical features. They are not named individually (unlike Silverwood Trail's named waysides) because the trail's working character doesn't require the same level of wayside naming.
 

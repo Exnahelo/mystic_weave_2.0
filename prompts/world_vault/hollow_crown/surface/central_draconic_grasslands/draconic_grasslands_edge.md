@@ -2,7 +2,7 @@
 id: draconic-grasslands-edge
 name: Draconic Grasslands Edge
 type: route-node
-region_id: hollow_crown
+region_id: hollow-crown
 description: Placeholder-safe runtime node pending fuller canon migration.
 connections: []
 tags:

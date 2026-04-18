@@ -2,17 +2,17 @@
 id: mirefall
 name: Mirefall
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: The stilt-city of the Mystic Wetlands, built across a patchwork of raised platforms and high-ground islands in the southwestern marshes that collect the realm's basin drainage. Mirefall's character is defined by its water — the shallow channels running between its platforms, the heavy tree coverage overhanging its walkways, the wetland flora that grows wherever the city does not actively clear it. The settlement is quiet by the standards of the realm's other cities, its life organized around the central dome-hall where the community convenes and the adjacent craft-hall where the wetland's distinctive trades are practiced. Brackenmoor supplies its rare herbs; Dracélune handles its westward trade interface; the Mystic Wetlands themselves give it the raw materials that make it economically indispensable despite its peripheral location.
 connections:
-- mystic-wetlands
+- southwestern-mystic-wetlands
 - brackenmoor
 - dracelune
 - greymantle
 tags:
 - drakenvale
 - mirefall
-- mystic-wetlands
+- southwestern-mystic-wetlands
 - stilt-city
 - bayou
 - wetland
@@ -105,7 +105,7 @@ The Mystic Wetlands themselves extend well beyond the city in all directions. Br
 
 - drakenvale
 - mirefall
-- mystic-wetlands
+- southwestern-mystic-wetlands
 - stilt-city
 - bayou
 - wetland
@@ -116,7 +116,7 @@ The Mystic Wetlands themselves extend well beyond the city in all directions. Br
 
 ## Connected Nodes
 
-- `mystic-wetlands`
+- `southwestern-mystic-wetlands`
 - `brackenmoor`
 - `dracelune`
 - `greymantle`
@@ -133,7 +133,7 @@ The connection to `greymantle` matches the baseline's existing `greymantle → m
 
 The connection to `brackenmoor` is two-way. Brackenmoor is Mirefall's primary upstream supplier; goods flow from Brackenmoor to Mirefall and residents move in both directions.
 
-The connection to `mystic-wetlands` is the regional parent reference. Travel into the broader wetland beyond the city resolves through this node.
+The connection to `southwestern-mystic-wetlands` is the regional parent reference. Travel into the broader wetland beyond the city resolves through this node.
 
 The "two halls" structure (civic Hall + craft-hall) is a canonical feature. These are NOT authored as separate location nodes but are described within this node's scene texture. The Hall's collective-dining tradition is a reliable cultural hook for any Mirefall scene.
 

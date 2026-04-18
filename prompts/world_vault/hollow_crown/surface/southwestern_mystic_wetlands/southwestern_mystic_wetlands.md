@@ -1,5 +1,5 @@
 ---
-id: southwestern_mystic_wetlands
+id: southwestern-mystic-wetlands
 name: Southwestern Mystic Wetlands
 type: region_zone
 description: Southwestern low-basin wetland region where waters from the southern basin

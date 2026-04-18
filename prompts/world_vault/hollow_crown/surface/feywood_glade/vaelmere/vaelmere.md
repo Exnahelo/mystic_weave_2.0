@@ -2,7 +2,7 @@
 id: vaelmere
 name: Vaelmere
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 parent_location_id: feywood-glade
 description: The Feywood Glade's outer settlement and trade waypoint, positioned in the Glade's realm-facing interior where the sanctioned path from the Feywood Glade Border leads inward before continuing onward to Thornveil. Vaelmere is where external commerce becomes elven commerce — realm traders bringing goods through the Border meet Vaelmere's trade houses; elven goods bound for the Border are staged here before their outward journey. The settlement is also a real elven community in its own right, home to roughly six hundred residents who combine the trader, craftfolk, and civic roles a commercial waypoint requires with the continuous elven life that characterizes all Feywood settlements. Vaelmere exists to protect Thornveil from the friction of daily commercial contact with the realm while honoring the mercantile alliance that has sustained the Feywood-realm relationship for a thousand years.
 connections:

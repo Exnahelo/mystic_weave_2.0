@@ -2,7 +2,7 @@
 id: ashfield
 name: Ashfield
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: The realm's principal agricultural town, set in the southern Draconic Grasslands amid the wide fields that feed most of the Hollow Crown. Grain, root vegetables, livestock, dairy, and orchard fruit all move through Ashfield on their way to the city markets, and the town's character is shaped accordingly — practical, rhythmical, shaped by the harvest calendar, and populated by farmers, drovers, millers, and the traders who buy what the fields produce. Hall of Scales students walk down from the north on weekends for the town's cheaper beer and easier company, adding a reliable undercurrent of noise to Ashfield's otherwise early-to-bed rhythm.
 connections:
 - drakenvale-city

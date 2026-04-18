@@ -1,5 +1,5 @@
 ---
-id: hollow_crown
+id: hollow-crown
 name: Hollow Crown
 type: region
 description: Canonical geography-first realm root for the Drakenvale / Hollow Crown interior
@@ -13,7 +13,7 @@ tags:
 
 # Hollow Crown
 
-Canonical realm root for the Hollow Crown interior basin. This node replaces the old `regions/drakenvale/` container with the geography-first `hollow_crown/` structure required for the mirrored world trees.
+Canonical realm root for the Hollow Crown interior basin. This node replaces the old `regions/drakenvale/` container with the geography-first `hollow-crown/` structure required for the mirrored world trees.
 
 ## Tags
 

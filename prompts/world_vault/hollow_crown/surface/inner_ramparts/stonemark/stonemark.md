@@ -2,7 +2,7 @@
 id: stonemark
 name: Stonemark
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: The realm's principal quarry village, set in the Inner Ramparts' broken foothill terrain below Lastmark where the escarpments descend toward the central basin. Stonemark's residents work the quarries that have supplied the realm's construction economy since the sanctuary's founding — pale Heartmass-related stone from the high cuts, working-grade granite from the mid-slopes, and the specialized carving stone the finer masons favor. The village is built around the quarries rather than beside them, its streets following the contours the extraction left, its buildings constructed largely from the waste stone the commercial cuts did not want. Residents are practical, weathered, and proud of the stone that has raised half the realm's civic architecture.
 connections:
 - inner-ramparts

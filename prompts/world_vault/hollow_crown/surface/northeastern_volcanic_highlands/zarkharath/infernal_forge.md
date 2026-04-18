@@ -2,14 +2,14 @@
 id: infernal-forge
 name: Infernal Forge
 type: location
-region_id: hollow_crown
+region_id: hollow-crown
 description: Strategic forge complex in the volcanic highlands, tied to Zarkharath, ore
   extraction at Cinderpit, and the Infernal Forge Guild’s heavy industry.
 connections:
 - zarkharath
 - cinderpit
 tags:
-- volcanic-highlands
+- northeastern-volcanic-highlands
 - forge
 - industry
 - drakenvale
@@ -25,7 +25,7 @@ Strategic forge complex in the volcanic highlands, tied to Zarkharath, ore extra
 
 ## Tags
 
-- volcanic-highlands
+- northeastern-volcanic-highlands
 - forge
 - industry
 - drakenvale

@@ -2,7 +2,7 @@
 id: coarse-grid-map
 name: Coarse Grid Map
 type: map-index
-region_id: hollow_crown
+region_id: hollow-crown
 description: Canonical coarse-placement map for Hollow Crown fixing the broad spatial relationships
   of major regions, corridors, and anchors.
 connections:

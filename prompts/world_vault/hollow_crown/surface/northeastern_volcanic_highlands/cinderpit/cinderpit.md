@@ -2,17 +2,18 @@
 id: cinderpit
 name: Cinderpit
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: The realm's principal mining village, set on the volcanic highland slopes east of Zarkharath where coal seams, ore veins, and the specialty metal deposits only volcanic geology provides are extracted to feed the Infernal Forge. Cinderpit's crews work a network of shafts, adits, and open faces carved into the highland rock — the coal pits that give the village its name, the deeper ore mines, and the specialized operations that pull rare metals from deposits the realm would otherwise have to import. The village itself is compact, soot-streaked, and built for the work — stone construction against the ambient heat, heavy ventilation for the dust, and a constant low haze that the prevailing winds carry eastward away from the settlement proper. Residents are dragonborn-heavy and fire-tempered, and they keep the steady practiced rhythm of people whose work is physically demanding but reliably sustainable.
 connections:
 - northeastern-volcanic-highlands
 - zarkharath
 - volcanic-highlands-trail
+- infernal-forge
 tags:
 - drakenvale
 - cinderpit
 - mining-village
-- volcanic-highlands
+- northeastern-volcanic-highlands
 - coal
 - ore
 - specialty-metals
@@ -111,7 +112,7 @@ Extended stays are arranged through the Pit Master's office. Apprentices arrivin
 - drakenvale
 - cinderpit
 - mining-village
-- volcanic-highlands
+- northeastern-volcanic-highlands
 - coal
 - ore
 - specialty-metals
@@ -125,7 +126,7 @@ Extended stays are arranged through the Pit Master's office. Apprentices arrivin
 - `northeastern-volcanic-highlands`
 - `zarkharath`
 - `volcanic-highlands-trail`
-
+- `infernal-forge`
 ## Authoring Notes
 
 Cinderpit is the second major dragonborn-concentrated settlement in the realm, after Zarkharath. The demographic is functional — volcanic extraction work selects for fire-resistance — rather than cultural. This differentiates Cinderpit's dragonborn concentration from Zarkharath's (which is culturally centered on dragonborn religious and civic traditions). Both are dragonborn-heavy; each is heavy for its own reasons.

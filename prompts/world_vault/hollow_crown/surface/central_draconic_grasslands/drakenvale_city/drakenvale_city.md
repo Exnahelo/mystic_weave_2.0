@@ -2,7 +2,7 @@
 id: drakenvale-city
 name: Drakenvale City
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: The realm's principal metropolitan center, built onto the southern face of the Stronghold and curving along the north shore of the Southern Lake. The city rises from the lakefront in tiered stone districts, its upper terraces blending into the Stronghold's lower approaches and its lower districts spreading along the water in market streets, plazas, workshops, and residential quarters. It is species-mixed by default, civically ordered under the Ptarian Code, and carries the daily texture of an active high-functioning capital — guilds working, markets trading, Wardens patrolling, Dragon Guard overhead, and the Sacred Pools cascading down the Stronghold's face as the city's defining visual landmark.
 connections:
 - stronghold-of-drakenvale
@@ -10,6 +10,11 @@ connections:
 - southern-lake
 - ashfield
 - draconic-grasslands-edge
+- ashfield-fields
+- hall-of-scales
+- scalemere
+- stonemark
+- crystalhaven
 tags:
 - drakenvale
 - capital
@@ -107,7 +112,11 @@ The city connects to the Stronghold (ascending to the Administrative Quarter via
 - `southern-lake`
 - `ashfield`
 - `draconic-grasslands-edge`
-
+- `ashfield-fields`
+- `hall-of-scales`
+- `scalemere`
+- `stonemark`
+- `crystalhaven`
 ## Authoring Notes
 
 Drakenvale City is authored as a single parent settlement node. Its internal districts (Stronghold Terraces, Middle Tiers, Lakefront, Lower Warrens, Promenade) are described in scene texture but are NOT authored as independent sub-nodes. If a future storyline requires a specific district as its own navigable location (a specific warren, a specific market, a specific neighborhood), it can be authored at that time.

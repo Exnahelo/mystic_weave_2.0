@@ -1,7 +1,7 @@
 id: valley-edge-overlook
 name: Valley Edge Overlook
 type: landmark
-region_id: hollow_crown
+region_id: hollow-crown
 description: Placeholder-safe runtime node pending fuller canon migration.
 connections: []
 tags:

@@ -2,11 +2,11 @@
 id: temple-to-tiamat
 name: Temple to Tiamat
 type: sealed-site
-region_id: hollow_crown
-parent_location_id: beneath-southern-dark-quadrant
+region_id: hollow-crown
+parent_location_id: southern-dark-quadrant
 description: The sealed temple to the five-headed dragon goddess, built deep beneath the Shadowed Hollows at the founding of the sanctuary and disputed in every age since. The chromatic dragons of the founding coalition insisted on its construction as acknowledgment of their heritage and as formal respect for the principle of balance that underlay the entire Ptarian Pact; the metallic and gem dragons accepted the insistence as the price of unity, with the clear understanding that the temple would remain sealed rather than active. That understanding has held for a thousand years, with one catastrophic interruption. The Discordant War began when a rogue chromatic faction attempted to unseal the Temple; it ended when the Platinum Warden gave his life to reseal it. The Temple has remained sealed since. The Vigil maintains its wards. The elite Wardens patrol its threshold on rotation. No one living has seen its interior, and the realm's continuing peace depends on that not changing.
 connections:
-- beneath-southern-dark-quadrant
+- southern-dark-quadrant
 - shadowed-hollows-proper
 tags:
 - drakenvale
@@ -105,7 +105,7 @@ Breaching the seal — unsealing the Temple — is not addressed here in mechani
 
 ## Connected Nodes
 
-- `beneath-southern-dark-quadrant`
+- `southern-dark-quadrant`
 - `shadowed-hollows-proper`
 
 ## Authoring Notes
@@ -116,7 +116,7 @@ The interior of the Temple is canonically NOT AUTHORED. The founding documents d
 
 The connection to `shadowed-hollows-proper` is the canonical surface-to-subterranean descent path. Shadowed Hollows Proper is currently a placeholder exit per the topology baseline. When that node is authored (scheduled as a later concern), the reciprocal connection should be established. Until then, this connection is a forward reference.
 
-The connection to `beneath-southern-dark-quadrant` is the regional parent reference. The underworld region beneath the southern dark quadrant is the Temple's broader geographic context.
+The connection to `southern-dark-quadrant` is the regional parent reference. The underworld region beneath the southern dark quadrant is the Temple's broader geographic context.
 
 Threat level 4 reflects the site's extreme hazard to unprepared visitors. The forechamber itself is survivable for brief periods with adequate training; prolonged exposure or attempts to breach the seal are canonically catastrophic. The threat is not combat — the Vigil is not hostile to recognized visitors — but environmental, psychological, and consequential.
 

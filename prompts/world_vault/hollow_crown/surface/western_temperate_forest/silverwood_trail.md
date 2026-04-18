@@ -2,7 +2,7 @@
 id: silverwood-trail
 name: Silverwood Trail
 type: route-node
-region_id: hollow_crown
+region_id: hollow-crown
 parent_location_id: western-temperate-forest
 description: The primary forest road running northward from Dracélune to Silvercut through the western temperate forest's silverwood stands, named for the distinctive silvery-barked trees that dominate its middle reaches. The trail is well-maintained but narrow — single-wagon width for most of its length, with widened waysides at intervals for wagons to pass each other. Traffic is steady throughout the year: timber hauling southbound from Silvercut, trade goods and supplies northbound from Dracélune, and the occasional Silver Wing envoy or Hall of Guides representative passing through on forest-edge business. The trail is the realm's primary western forest artery and carries the particular quiet character of a road that has been walked for generations beneath the same canopy.
 connections:

@@ -2,7 +2,7 @@
 id: shadowed-hollows-approach
 name: Shadowed Hollows Approach
 type: route-node
-region_id: hollow_crown
+region_id: hollow-crown
 parent_location_id: southern-dark-quadrant
 description: The perimeter corridor zone surrounding the Shadowed Hollows, where the realm's ordinary southern dark quadrant terrain begins to darken into the Hollows' corrupted forest proper. The Approach is quieter than the Rift of Discord Edge — less dramatic, less visibly institutional — but the corruption here is genuinely present, and the Vigil patrols it with the same professional seriousness applied to all the realm's most sensitive threshold zones. The trees stand wrong here, their canopies too still, their shadows too long. Traveling through the Approach produces a specific atmosphere of wrongness that travelers who have crossed both Edges distinguish from the Rift's acute corruption by its diffuse, brooding quality. The Vigil maintains limited infrastructure — patrol routes, occasional waymarkers, a few stone shelter points — and intercepts unauthorized approach before it reaches the Hollows interior. Those who enter without sanction rarely return changed in ways that recover.
 connections:

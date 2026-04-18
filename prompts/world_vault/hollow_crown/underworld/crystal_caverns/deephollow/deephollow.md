@@ -2,7 +2,7 @@
 id: deephollow
 name: Deephollow
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 parent_location_id: crystal-caverns
 description: The only true underground city in the realm, carved into a vast crystal-rich cavern deep beneath the Hollow Crown's surface. Deephollow began as a mining camp when prospectors discovered a chamber veined with resonance crystals, deep metals, and subterranean magical materials; over centuries it grew into a stable underground settlement of thousands, organized around ongoing extraction and the specialized trade that moves its goods to the surface markets. The crystals catch and scatter the city's torchlight in slow shifting patterns across the walls and ceiling of the chamber, giving Deephollow a constant low luminescence that surface visitors find beautiful and unsettling in roughly equal measure.
 connections:

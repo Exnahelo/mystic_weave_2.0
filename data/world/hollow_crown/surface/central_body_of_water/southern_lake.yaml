@@ -1,7 +1,7 @@
 id: southern-lake
 name: Southern Lake
 type: region_zone
-region_id: hollow_crown
+region_id: hollow-crown
 description: The Hollow Crown's central body of water, a large lake occupying the valley floor's southern reach where the basin terrain dips lowest and the realm's rivers gather. The Southern Lake is fed continuously by the Sacred Pools cascading down from the Stronghold's Platinum Heart and carries in its waters a diluted form of that sacred resonance — subtle, non-dramatic, but real and cumulative for those who live along its shores and drink from it regularly. Its waters also reflect the realm itself, its shoreline touched by three of the Hollow Crown's principal settlements and by the agricultural belt that feeds the capital. Across the realm, the lake occupies a cultural position that is difficult to reduce to any single function — it is transport, food, sacred water, festival ground, and collective mirror all at once. Drakenvale has shaped itself around the lake for a thousand years, and the lake has subtly shaped Drakenvale in return.
 connections:
 - central-draconic-grasslands

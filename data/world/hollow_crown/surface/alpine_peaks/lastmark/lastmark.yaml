@@ -1,10 +1,10 @@
 id: lastmark
 name: Lastmark
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: The realm's border fort and ward-controlled entry point, carved directly into the mountain face at the Hollow Crown's high approach. Walls cut from the living stone rise in tiered courses above the outer ramparts, and the single sanctioned road into the kingdom passes beneath arched wardstones that no one crosses unsanctioned. Lastmark is military first, civic second — the Dragon Guard garrisons heavily here, the Wardens coordinate anomaly response from here, and the SSTC's inbound caravans are processed through the fort's customs halls before descending into the realm proper. Its population is working and disciplined, its pace is steady, and its walls have never been taken.
 connections:
-- inner-ramparts
+- alpine-peaks
 - stonemark
 - eryndors-lair
 - stronghold-of-drakenvale

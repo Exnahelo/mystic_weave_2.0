@@ -2,7 +2,7 @@
 id: travel-and-region-index
 name: Travel and Region Index
 type: travel-index
-region_id: hollow_crown
+region_id: hollow-crown
 description: Canonical travel and region routing index for Hollow Crown, summarizing major
   regional anchors and stable movement corridors.
 connections:

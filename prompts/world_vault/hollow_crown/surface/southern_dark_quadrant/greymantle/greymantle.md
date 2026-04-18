@@ -2,12 +2,15 @@
 id: greymantle
 name: Greymantle
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: The realm's outlaw edge-settlement, built where the southern dark quadrant gives way to the outer basin's rougher margins. Greymantle was founded after the Discordant War by a veteran who could not accept the kingdom's tight civic rhythms anymore and wanted somewhere his old company could exist outside its reach. The settlement grew. Misfits, the war-broken, the quietly exiled, and the simply unwanted drifted to it over the decades, until what began as a hard-drinking veterans' outpost became the only place in the realm where someone could plausibly disappear without the Council noticing. The Warden of Greymantle governs through reputation, hard boundaries, and the practical authority of a man who has earned his settlement's trust the long way. The realm tolerates the arrangement because the alternative is worse.
 connections:
 - southern-dark-quadrant
 - platinum-oath-approach
 - mirefall
+- platinum-oath-monastery
+- rift-of-discord-edge
+- shadowed-hollows-approach
 tags:
 - drakenvale
 - greymantle
@@ -113,7 +116,9 @@ Emergency assistance for visitors in genuine trouble — injury, illness, attack
 - `southern-dark-quadrant`
 - `platinum-oath-approach`
 - `mirefall`
-
+- `platinum-oath-monastery`
+- `rift-of-discord-edge`
+- `shadowed-hollows-approach`
 ## Authoring Notes
 
 The Warden of Greymantle is a canonical NPC from `npcs.md`. He is explicitly not named by personal name in canon — his identity is his title and his history. This ambiguity is deliberate and should be preserved. Specific Warden-incumbent details can be instantiated during play if a storyline requires them, but the canonical Warden is a type-and-history rather than a named figure.

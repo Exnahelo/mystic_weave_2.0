@@ -2,7 +2,7 @@
 id: rift-of-discord-edge
 name: Rift of Discord Edge
 type: route-node
-region_id: hollow_crown
+region_id: hollow-crown
 parent_location_id: southern-dark-quadrant
 description: The perimeter corridor zone surrounding the Rift of Discord, where the realm's ordinary dark-quadrant terrain begins to bleed into the Rift's active corruption. The Edge is the Rift's buffer — a span of warped but survivable land that absorbs enough of the interior's effects to keep the corruption from reaching the realm's civic settlements, while remaining a real and present zone in its own right. The Vigil patrols the Edge continuously, intercepts casual visitors before they reach the Rift proper, and coordinates the authorized traffic (elite Warden training rotations, Council-sanctioned investigations, the rare memorial visit) that moves through the corridor. The ground is broken, the trees are stunted, the light is wrong in ways that are difficult to articulate. Most travelers who reach the Edge feel the Rift before they see it. Many turn back on their own, which is the Edge's intended effect.
 connections:
@@ -10,6 +10,8 @@ connections:
 - greymantle
 - platinum-oath-approach
 - southern-dark-quadrant
+- platinum-oath-monastery
+- shadowed-hollows-approach
 tags:
 - drakenvale
 - rift-of-discord-edge
@@ -113,7 +115,8 @@ The Edge is technically open to any traveler — the Vigil does not maintain for
 - `greymantle`
 - `platinum-oath-approach`
 - `southern-dark-quadrant`
-
+- `platinum-oath-monastery`
+- `shadowed-hollows-approach`
 ## Authoring Notes
 
 The Rift of Discord Edge is a route-node type, consistent with the other corridor authoring. Its role as a threshold corridor rather than a settlement or region-zone shapes the scene-setting — environmental and atmospheric rather than civic.

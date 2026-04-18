@@ -2,7 +2,7 @@
 id: platinum-oath-monastery
 name: Platinum Oath Monastery
 type: monastery
-region_id: hollow_crown
+region_id: hollow-crown
 description: A fortified monastery built into a natural rock shelf overlooking the Rift
   of Discord, occupying one of the most geographically defensible positions in Drakenvale.
   Three sides are sheer cliff face. The fourth is a singl…

@@ -2,7 +2,7 @@
 id: stronghold-of-drakenvale
 name: Stronghold of Drakenvale
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: The central fortress of the Hollow Crown, carved directly from the pale platinum-veined Heartmass at the basin's center. Towers, terraces, and wing-shaped buttresses rise from the fused meteor-and-mountain stone in a scale that only ancient dragons and centuries of sacred labor could have produced. Its lower terraces blend into the stone plazas and civic roads of Drakenvale City to the south; its upper reaches end in the open Aeries and the high sanctum of the Platinum Heart. Within its walls lie the Draconic Hall, the Arcane Conservatory, the Administrative Quarter, and the Amethyst Vault, with the Draconic Forge beneath and the Sacred Pools beginning in its heights. It is fortress, cathedral, seat of government, and symbol of the sanctuary's continuity all at once.
 connections:
 - drakenvale-city
@@ -15,7 +15,10 @@ connections:
 - draconic-forge
 - sacred-pools
 - draconic-grasslands-edge
-- volcanic-highlands
+- northeastern-volcanic-highlands
+- deephollow
+- lastmark
+- zarkharath
 tags:
 - drakenvale
 - stronghold
@@ -88,8 +91,10 @@ The fortress operates on a rough vertical stratification, though the internal ge
 - `draconic-forge`
 - `sacred-pools`
 - `draconic-grasslands-edge`
-- `volcanic-highlands`
-
+- `northeastern-volcanic-highlands`
+- `deephollow`
+- `lastmark`
+- `zarkharath`
 ## Authoring Notes
 
 This is the parent settlement node. Its sub-locations (Draconic Hall, Platinum Heart, Amethyst Vault, Varethyn's Lair, Arcane Conservatory, Aeries, Administrative Quarter, Draconic Forge, Sacred Pools) each have their own location files and should be treated as navigable sub-nodes. Drakenvale City is a distinct adjacent settlement, not a sub-location.

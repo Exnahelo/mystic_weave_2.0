@@ -1,5 +1,5 @@
 ---
-id: western_temperate_forest
+id: western-temperate-forest
 name: Western Temperate Forest
 type: region_zone
 description: Largest western surface woodland in Hollow Crown, containing Dracelune, Feywood

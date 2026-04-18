@@ -2,7 +2,7 @@
 id: feywood-glade-border
 name: Feywood Glade Border
 type: route-node
-region_id: hollow_crown
+region_id: hollow-crown
 parent_location_id: western-temperate-forest
 description: The realm-side threshold to the Feywood Glade, where the road from Dracélune ends and the western temperate forest gives way to the Glade's liminal territory. From outside, the Border shows as an ordinary forest edge — a line of older, taller, stranger trees standing somewhat differently than their realm-side neighbors, the ground beyond them shifting in quality in ways that a traveler notices without being able to name. There is no wall, no gate, no physical barrier. The Border is marked by stone waymarkers set in place over generations and by the small Hall of Guides station that manages sanctioned expedition traffic from here. The realm honors an ancient alliance with the Feywood Glade: safe passage at the Border is reserved for those with guide sanction or elven welcome; unsanctioned entry is tolerated but genuinely consequential. Travelers who cross without preparation rarely return as they departed, and some do not return at all.
 connections:
@@ -10,6 +10,7 @@ connections:
 - dewhollow
 - feywood-glade
 - western-temperate-forest
+- vaelmere
 tags:
 - drakenvale
 - feywood-glade-border
@@ -137,7 +138,7 @@ Unsanctioned crossing is not physically prevented. Travelers who choose to cross
 - `dewhollow`
 - `feywood-glade`
 - `western-temperate-forest`
-
+- `vaelmere`
 ## Authoring Notes
 
 The Feywood Glade Border is route-node type, consistent with the other threshold authoring pattern established in Batch 5. Its role is threshold rather than corridor; the important element is the crossing event itself rather than travel through a zone.

@@ -2,7 +2,7 @@
 id: southern-lake
 name: Southern Lake
 type: region_zone
-region_id: hollow_crown
+region_id: hollow-crown
 description: The Hollow Crown's central body of water, a large lake occupying the valley floor's southern reach where the basin terrain dips lowest and the realm's rivers gather. The Southern Lake is fed continuously by the Sacred Pools cascading down from the Stronghold's Platinum Heart and carries in its waters a diluted form of that sacred resonance — subtle, non-dramatic, but real and cumulative for those who live along its shores and drink from it regularly. Its waters also reflect the realm itself, its shoreline touched by three of the Hollow Crown's principal settlements and by the agricultural belt that feeds the capital. Across the realm, the lake occupies a cultural position that is difficult to reduce to any single function — it is transport, food, sacred water, festival ground, and collective mirror all at once. Drakenvale has shaped itself around the lake for a thousand years, and the lake has subtly shaped Drakenvale in return.
 connections:
 - central-draconic-grasslands
@@ -131,7 +131,7 @@ Winter conditions require caution. Ice thickness is variable and ice edges can s
 
 The Southern Lake is a region-zone type, describing the body of water as a geographic feature. It is not a settlement and does not have civic infrastructure of its own — all civic infrastructure is in the lakefront settlements (Drakenvale City, Scalemere, Crystalhaven) or in the parent region.
 
-The placement in `data/world/hollow_crown/surface/central_body_of_water/` is a new directory created for this node. The Southern Lake does not fit cleanly into any of the existing regional divisions because it sits at the basin's literal center and is touched by multiple regions (grasslands to the north and east, wetlands to the south, various terrain to the west). A dedicated geographic parent directory for the central water feature handles this cleanly.
+The placement in `data/world/hollow-crown/surface/central_body_of_water/` is a new directory created for this node. The Southern Lake does not fit cleanly into any of the existing regional divisions because it sits at the basin's literal center and is touched by multiple regions (grasslands to the north and east, wetlands to the south, various terrain to the west). A dedicated geographic parent directory for the central water feature handles this cleanly.
 
 The connection to `sacred-pools` is two-way, reflecting the continuous inflow relationship. The Sacred Pools feed the lake; the lake receives the Pools' waters. The connection is structurally significant for both locations.
 

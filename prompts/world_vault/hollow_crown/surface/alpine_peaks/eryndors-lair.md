@@ -2,12 +2,12 @@
 id: eryndors-lair
 name: Eryndor's Lair
 type: lair
-region_id: hollow_crown
-parent_location_id: inner-ramparts
+region_id: hollow-crown
+parent_location_id: alpine-peaks
 description: The primary residence of Eryndor the Radiant, carved into the mountain's interior near Lastmark's approach. Unlike the dark hoard-caves of lesser dragons, the Lair is bright, open, and deliberately beautiful — enchanted skylights bring real sunlight to the inner chambers, polished marble and veined gold-quartz line the floors and walls, and the whole space carries the character of a sacred Bahamutic shrine integrated with the working rooms of a practicing Council diplomat. Eryndor lives, meditates, and conducts sensitive external business here. Access is controlled; arrival is typically by sanctioned convoy from Lastmark, and foreign diplomats approved for his audience are brought in under the realm's disorienting-wagon protocol so their route cannot be traced back after the visit.
 connections:
 - lastmark
-- inner-ramparts
+- alpine-peaks
 tags:
 - drakenvale
 - eryndor
@@ -16,7 +16,7 @@ tags:
 - bahamut
 - shrine
 - diplomacy
-- inner-ramparts
+- alpine-peaks
 - sanctioned-access
 - discovery-gated
 known_npcs:
@@ -115,14 +115,14 @@ Unauthorized approach does not reach the Lair. The route from Lastmark's screene
 - bahamut
 - shrine
 - diplomacy
-- inner-ramparts
+- alpine-peaks
 - sanctioned-access
 - discovery-gated
 
 ## Connected Nodes
 
 - `lastmark`
-- `inner-ramparts`
+- `alpine-peaks`
 
 ## Authoring Notes
 
@@ -142,7 +142,7 @@ The Shrine of Bahamut is a canonical sub-feature. It is described within this no
 
 The connection to `lastmark` is two-way but operationally asymmetric: realm residents travel convoy-escorted, foreign diplomats travel wagon-disoriented, and unauthorized attempts do not reach.
 
-The connection to `inner-ramparts` is the regional parent reference.
+The connection to `alpine-peaks` is the regional parent reference.
 
 Threat level 0 reflects the Lair's civic safety. Eryndor is not a danger to invited guests; uninvited intrusion has consequence, but the node itself is not hazardous territory.
 

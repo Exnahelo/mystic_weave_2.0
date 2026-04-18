@@ -2,17 +2,19 @@
 id: zarkharath
 name: Zarkharath
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: The realm's industrial heart, a volcanic city built around the Infernal Forge in the Northeastern Volcanic Highlands. The Forge itself sits in an active lava bed at the city's center — a massive enchanted complex fueled by volcanic heat and the breath of Zarkeros the Inferno, whose lair rises in the mountain cliff line across the flow. Between Forge and Lair a causeway crosses the molten ground; around the Forge the city spreads in concentric working districts — smelting yards, metalwork quarters, guild halls, foundry residences, and the administrative complex of the Infernal Forge Guild. Zarkharath is hot, loud, and proud of both. It produces the enchanted weapons, tools, armor, and constructs that the Dragon Guard, the Wardens, and the realm's institutional buyers all depend on.
 connections:
-- volcanic-highlands
+- northeastern-volcanic-highlands
 - cinderpit
 - volcanic-highlands-trail
 - stronghold-of-drakenvale
+- deephollow
+- infernal-forge
 tags:
 - drakenvale
 - zarkharath
-- volcanic-highlands
+- northeastern-volcanic-highlands
 - infernal-forge
 - zarkeros
 - industrial
@@ -105,7 +107,7 @@ Environmental hazards are real. The ambient temperature in the inner city distri
 
 - drakenvale
 - zarkharath
-- volcanic-highlands
+- northeastern-volcanic-highlands
 - infernal-forge
 - zarkeros
 - industrial
@@ -116,11 +118,12 @@ Environmental hazards are real. The ambient temperature in the inner city distri
 
 ## Connected Nodes
 
-- `volcanic-highlands`
+- `northeastern-volcanic-highlands`
 - `cinderpit`
 - `volcanic-highlands-trail`
 - `stronghold-of-drakenvale`
-
+- `deephollow`
+- `infernal-forge`
 ## Authoring Notes
 
 Zarkharath is the SOLE location of the Infernal Forge in canonical geography. The Stronghold's Draconic Forge (Batch 1) is a distinct, smaller, ceremonial facility. Any reference to "the Forge" in realm context that does not specify which Forge should default to the Infernal Forge here.
@@ -131,7 +134,7 @@ The Infernal Forge Guild is an organizational presence, not a distinct location 
 
 Guildmaster and Master of the Causeway are Tier-3 generative roles. The Guildmaster in particular is a significant NPC interface — characters seeking Zarkeros will encounter the Guildmaster first.
 
-The connection to `stronghold-of-drakenvale` matches the existing topology baseline (corrected to two-way). Cinderpit is a supply village scheduled for Batch 4. The `volcanic-highlands` regional node and the `volcanic-highlands-trail` corridor node are existing regional/corridor references.
+The connection to `stronghold-of-drakenvale` matches the existing topology baseline (corrected to two-way). Cinderpit is a supply village scheduled for Batch 4. The `northeastern-volcanic-highlands` regional node and the `volcanic-highlands-trail` corridor node are existing regional/corridor references.
 
 Cinderpit-to-Zarkharath is an ore/coal supply route. Stonemark-to-Zarkharath indirectly routes through Cinderpit and the volcanic highlands trail.
 

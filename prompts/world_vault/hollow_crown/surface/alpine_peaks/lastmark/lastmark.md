@@ -2,10 +2,10 @@
 id: lastmark
 name: Lastmark
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: The realm's border fort and ward-controlled entry point, carved directly into the mountain face at the Hollow Crown's high approach. Walls cut from the living stone rise in tiered courses above the outer ramparts, and the single sanctioned road into the kingdom passes beneath arched wardstones that no one crosses unsanctioned. Lastmark is military first, civic second — the Dragon Guard garrisons heavily here, the Wardens coordinate anomaly response from here, and the SSTC's inbound caravans are processed through the fort's customs halls before descending into the realm proper. Its population is working and disciplined, its pace is steady, and its walls have never been taken.
 connections:
-- inner-ramparts
+- alpine-peaks
 - stonemark
 - eryndors-lair
 - stronghold-of-drakenvale
@@ -13,7 +13,7 @@ tags:
 - drakenvale
 - lastmark
 - border-fort
-- inner-ramparts
+- alpine-peaks
 - ward-controlled
 - dragon-guard
 - military
@@ -101,7 +101,7 @@ The elevator is restricted. Authorized personnel and freight movements only. Tra
 - drakenvale
 - lastmark
 - border-fort
-- inner-ramparts
+- alpine-peaks
 - ward-controlled
 - dragon-guard
 - military
@@ -111,7 +111,7 @@ The elevator is restricted. Authorized personnel and freight movements only. Tra
 
 ## Connected Nodes
 
-- `inner-ramparts`
+- `alpine-peaks`
 - `stonemark`
 - `eryndors-lair`
 - `stronghold-of-drakenvale`
@@ -132,7 +132,7 @@ The connection to `stronghold-of-drakenvale` matches the existing topology basel
 
 The connection to `stonemark` is the southeastward route — Stonemark is downslope from Lastmark in the Inner Ramparts descent, and inbound caravans pass through en route to the central basin. Two-way. This connection will be formalized when Stonemark is authored in Batch 4.
 
-The connection to `inner-ramparts` is the regional parent reference. Travel into the broader Inner Ramparts wilderness (for any reason) resolves through this node or through Stonemark.
+The connection to `alpine-peaks` is the regional parent reference. Travel into the broader Inner Ramparts wilderness (for any reason) resolves through this node or through Stonemark.
 
 Threat level 0 reflects Lastmark's heavily-defended civic status. The fort itself is among the safest settlements in the realm. Dangers at Lastmark are not civic — they are approach-path hazards (weather, terrain) or external-event hazards (incursions, which the fort is built to absorb).
 

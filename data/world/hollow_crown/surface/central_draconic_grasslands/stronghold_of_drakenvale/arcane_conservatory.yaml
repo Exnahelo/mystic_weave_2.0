@@ -1,7 +1,7 @@
 id: arcane-conservatory
 name: Arcane Conservatory
 type: location
-region_id: hollow_crown
+region_id: hollow-crown
 settlement_id: stronghold-of-drakenvale
 parent_location_id: stronghold-of-drakenvale
 description: The elite institution of advanced magical study within the Stronghold's upper reaches, occupying a cluster of tower-chambers and shielded halls above the gardens and below the Aeries. Unlike the Hall of Scales, which provides broad education across the realm, the Conservatory exists only for refined arcane practice — dangerous theory, difficult technique, and the preservation of knowledge too consequential for general instruction. Its students are rare; its standards are exact. Varethyn oversees it from above through the Arch-Scholar, who runs its daily operations.

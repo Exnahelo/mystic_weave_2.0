@@ -1,7 +1,7 @@
 id: draconic-forge
 name: Draconic Forge
 type: location
-region_id: hollow_crown
+region_id: hollow-crown
 settlement_id: stronghold-of-drakenvale
 parent_location_id: stronghold-of-drakenvale
 description: A small sacred forge beneath the Stronghold, fueled by the controlled breath of willing dragons rather than ordinary fire or volcanic heat. The Draconic Forge exists for ceremonial and symbolic work — Accord medallions, Warden investiture tokens, Trial-of-Wings ceremonial blades, sanctified sacred instruments. It is not a production forge and was never meant to be. Its heat rises through the fortress above, contributing to the Stronghold's warmth during the colder seasons, and its presence beneath the keep is itself part of the realm's quiet ritual geography.

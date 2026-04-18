@@ -1,13 +1,14 @@
 id: thornveil
 name: Thornveil
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 parent_location_id: feywood-glade
 description: The elven capital city of the Feywood Glade, grown around the Heartwood at the Glade's sacred center. Thornveil is neither a built city in the realm's sense nor a wild settlement — it is something specific to elven civilization, a place where ancient trees and centuries-old elven craftwork have grown together into a living urban whole. Homes, halls, and workshops are integrated with the forest canopy rather than clearing it; streets wind through groves rather than following geometric plans; noble family estates occupy the older growth at the city's deeper reaches; the Council of Elders' chambers hold deliberations that can last decades. Several thousand elves live here permanently, joined by rare non-elf residents whose integration has been earned over years. Thornveil exists for one reason; to protect the Heartwood at its center, and through that protection, to preserve the Glade itself.
 connections:
 - feywood-glade
 - heartwood
 - druidic-grove
+- vaelmere
 tags:
 - drakenvale
 - thornveil

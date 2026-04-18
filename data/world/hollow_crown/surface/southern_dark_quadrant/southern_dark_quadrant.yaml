@@ -1,11 +1,9 @@
----
-id: southern_dark_quadrant
+id: southern-dark-quadrant
 name: Southern Dark Quadrant
 type: region_zone
-region_id: hollow_crown
-parent_location_id: hollow_crown
-description: Corrupted southern sector of Hollow Crown containing Greymantle, the Shadowed
-  Hollows, the Rift of Discord, and the controlled Platinum Oath corridor.
+region_id: hollow-crown
+parent_location_id: hollow-crown
+description: Corrupted southern sector of Hollow Crown containing Greymantle, the Shadowed Hollows, the Rift of Discord, and the controlled Platinum Oath corridor.
 connections:
 - rift-of-discord-edge
 tags:

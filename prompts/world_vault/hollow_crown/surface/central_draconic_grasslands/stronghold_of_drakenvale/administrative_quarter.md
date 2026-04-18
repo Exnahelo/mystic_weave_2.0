@@ -2,7 +2,7 @@
 id: administrative-quarter
 name: Administrative Quarter
 type: location
-region_id: hollow_crown
+region_id: hollow-crown
 settlement_id: stronghold-of-drakenvale
 parent_location_id: stronghold-of-drakenvale
 description: The civic and bureaucratic core of the Stronghold, occupying the middle levels of the keep and handling the realm's steady flow of records, petitions, licenses, and sanctioned correspondence. Here stewards process the paperwork that keeps Drakenvale running — trade filings, guild registries, Warden duty rotations, petition scheduling for Council audience, and the long civic memory of the sanctuary. It is the least dramatic part of the fortress and the most continuously occupied. Most residents who ever enter the Stronghold enter it here.

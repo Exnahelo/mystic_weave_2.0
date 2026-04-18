@@ -2,7 +2,7 @@
 id: shadowed-hollows-proper
 name: Shadowed Hollows Proper
 type: hazard
-region_id: hollow_crown
+region_id: hollow-crown
 description: The deeper Hollows beyond the safer approach routes. This node exists as
   a stable placeholder target so migrated connections remain valid during the first
   cutover.

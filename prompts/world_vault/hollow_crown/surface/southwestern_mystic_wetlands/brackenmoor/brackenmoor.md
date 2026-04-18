@@ -2,12 +2,12 @@
 id: brackenmoor
 name: Brackenmoor
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: The realm's rare-specimen gathering village, set at the transition zone where the western temperate forest gives way to the Mystic Wetlands' upper reaches. Brackenmoor's residents are wild-harvesters — they know the transition biome intimately and spend their working days in the bogs, fen edges, and damp hardwood stands where the realm's rarest herbs, mosses, fungi, and small specimens grow. The harvest moves downstream to Mirefall for specialized preparation and onward distribution. The village itself is modest, weathered, and built to resist the wet ground that surrounds it. Its residents have the quiet competence of people whose work depends on knowing things most others do not.
 connections:
-- mystic-wetlands
+- southwestern-mystic-wetlands
 - mirefall
-- temperate-forest
+- western-temperate-forest
 tags:
 - drakenvale
 - brackenmoor
@@ -105,9 +105,9 @@ Travel beyond the village's managed paths carries real risk. The transition biom
 
 ## Connected Nodes
 
-- `mystic-wetlands`
+- `southwestern-mystic-wetlands`
 - `mirefall`
-- `temperate-forest`
+- `western-temperate-forest`
 
 ## Authoring Notes
 
@@ -123,11 +123,11 @@ The three functional zones of the transition biome (forest margin, fen, deeper p
 
 The "professional-intimate" partnerships between gatherers are deliberately described as distinct from romantic partnership. These long working partnerships are a village cultural feature. Future character creation involving Brackenmoor origin could draw on this as a narrative seam (inherited partnership relationships, working partners who are not romantic partners, etc.).
 
-The connection to `mystic-wetlands` is the regional parent reference — Brackenmoor is in the wetlands region even though it occupies the forest-transition edge of it. The administrative classification follows the Mirefall economic relationship.
+The connection to `southwestern-mystic-wetlands` is the regional parent reference — Brackenmoor is in the wetlands region even though it occupies the forest-transition edge of it. The administrative classification follows the Mirefall economic relationship.
 
 The connection to `mirefall` is two-way and canonically central. The Brackenmoor-Mirefall economic axis is the village's primary external connection.
 
-The connection to `temperate-forest` represents the westward approach from the forest region. Two-way.
+The connection to `western-temperate-forest` represents the westward approach from the forest region. Two-way.
 
 Threat level 1 reflects the transition biome's ambient hazards rather than civic threat. The village itself is safe; the surrounding terrain is not safe for unprepared visitors.
 

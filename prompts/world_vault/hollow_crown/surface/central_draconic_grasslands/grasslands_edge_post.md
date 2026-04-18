@@ -1,8 +1,8 @@
 ---
-id: grasslands_edge_post
+id: grasslands-edge-post
 name: Grasslands Edge Post
 type: settlement
-region_id: hollow_crown
+region_id: hollow-crown
 description: Frontier trade-and-watch post on the Draconic Grasslands approaches; included
   as a stable reference settlement even where canon remains thin.
 tags:
