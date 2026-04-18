@@ -43,13 +43,13 @@ Updated after post-cleanup audit — 2026-04-18.
 
 ### Nice-to-Have
 
-- [ ] Remove the lingering `Zarkeros's Fortress` display name if canon authority confirms the rename.
+- [x] Remove the lingering `Zarkeros's Fortress` display name if canon authority confirms the rename.
   - affected paths: `data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml`, `prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md`
   - size estimate: S
-- [ ] Fill or remove empty `tags` lists on canonical world nodes and mirrors.
+- [x] Fill or remove empty `tags` lists on canonical world nodes and mirrors.
   - affected paths: `data/world/hollow_crown/surface/central_draconic_grasslands/draconic_grasslands_edge.yaml`, `data/world/hollow_crown/surface/southwestern_mystic_wetlands/valley_edge_overlook.yaml`, `prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/draconic_grasslands_edge.md`, `prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/valley_edge_overlook.md`
   - size estimate: S
-- [ ] Remove the legacy `hollow-crowm` string from audit artifacts if repo-wide grep should stay at zero.
+- [x] Remove the legacy `hollow-crowm` string from audit artifacts if repo-wide grep should stay at zero.
   - affected paths: `docs/audit_convention_drift.md`
   - size estimate: S
 
