@@ -31,13 +31,13 @@ Updated after post-cleanup audit — 2026-04-18.
 
 ### Should-Do
 
-- [ ] Finish filename-stem parity cleanup for remaining world YAML and vault Markdown files.
+- [x] Finish filename-stem parity cleanup for remaining world YAML and vault Markdown files.
   - affected paths: `data/world/hollow_crown/surface/alpine_peaks/`, `data/world/hollow_crown/surface/inner_ramparts/`, `data/world/hollow_crown/surface/northeastern_volcanic_highlands/`, `data/world/hollow_crown/surface/western_temperate_forest/`, `data/world/hollow_crown/underworld/`, `prompts/world_vault/hollow_crown/surface/alpine_peaks/`, `prompts/world_vault/hollow_crown/surface/inner_ramparts/`, `prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/`, `prompts/world_vault/hollow_crown/surface/western_temperate_forest/`, `prompts/world_vault/hollow_crown/underworld/`
   - size estimate: L
-- [ ] Refresh README version strings, endpoint inventory, project-structure listing, and `/session/new` sample payload.
+- [x] Refresh README version strings, endpoint inventory, project-structure listing, and `/session/new` sample payload.
   - affected paths: `README.md`
   - size estimate: S
-- [ ] Add contract-path coverage for uncovered route handlers.
+- [x] Add contract-path coverage for uncovered route handlers.
   - affected paths: `tests/contract/test_openapi_contract.py`, `api/routes/location.py`, `api/routes/roll.py`, `api/routes/scene.py`, `api/routes/state.py`, `api/routes/tags.py`
   - size estimate: M
 
