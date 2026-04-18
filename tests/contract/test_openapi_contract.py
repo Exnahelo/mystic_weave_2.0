@@ -149,3 +149,67 @@ def test_openapi_contract_world_delta_uses_sparse_economy_schema() -> None:
     assert "wealth_tier" in economy_schema["properties"]
     assert "trade_goods" in economy_schema["properties"]
     assert "obligations" in economy_schema["properties"]
+
+
+@pytest.mark.contract
+def test_openapi_contract_roll_response_uses_roll_response_schema() -> None:
+    spec = app.openapi()
+    schema = spec["paths"]["/roll"]["post"]["responses"]["200"]["content"][
+        "application/json"
+    ]["schema"]
+    assert schema["$ref"] == "#/components/schemas/RollResponse"
+
+
+@pytest.mark.contract
+def test_openapi_contract_location_get_response_uses_location_response_schema() -> None:
+    spec = app.openapi()
+    schema = spec["paths"]["/location/{location_id}"]["get"]["responses"]["200"][
+        "content"
+    ]["application/json"]["schema"]
+    assert schema["$ref"] == "#/components/schemas/LocationResponse"
+
+
+@pytest.mark.contract
+def test_openapi_contract_location_connections_response_uses_connections_response_schema() -> None:
+    spec = app.openapi()
+    schema = spec["paths"]["/location/{location_id}/connections"]["get"]["responses"][
+        "200"
+    ]["content"]["application/json"]["schema"]
+    assert schema["$ref"] == "#/components/schemas/ConnectionsResponse"
+
+
+@pytest.mark.contract
+def test_openapi_contract_location_post_responses_use_location_response_schema() -> None:
+    spec = app.openapi()
+    responses = spec["paths"]["/location"]["post"]["responses"]
+    created_schema = responses["201"]["content"]["application/json"]["schema"]
+    updated_schema = responses["200"]["content"]["application/json"]["schema"]
+    assert created_schema["$ref"] == "#/components/schemas/LocationResponse"
+    assert updated_schema["$ref"] == "#/components/schemas/LocationResponse"
+
+
+@pytest.mark.contract
+def test_openapi_contract_scene_response_uses_scene_context_schema() -> None:
+    spec = app.openapi()
+    schema = spec["paths"]["/scene/{session_id}"]["get"]["responses"]["200"]["content"][
+        "application/json"
+    ]["schema"]
+    assert schema["$ref"] == "#/components/schemas/SceneContext"
+
+
+@pytest.mark.contract
+def test_openapi_contract_state_delta_response_uses_game_state_response_schema() -> None:
+    spec = app.openapi()
+    schema = spec["paths"]["/state/{session_id}/delta"]["post"]["responses"]["200"][
+        "content"
+    ]["application/json"]["schema"]
+    assert schema["$ref"] == "#/components/schemas/GameStateResponse"
+
+
+@pytest.mark.contract
+def test_openapi_contract_tags_response_uses_tags_response_schema() -> None:
+    spec = app.openapi()
+    schema = spec["paths"]["/tags"]["get"]["responses"]["200"]["content"][
+        "application/json"
+    ]["schema"]
+    assert schema["$ref"] == "#/components/schemas/TagsResponse"

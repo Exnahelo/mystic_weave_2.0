@@ -73,6 +73,7 @@ Reference: `WORLD_TOPOLOGY_BASELINE.md`
 | GET | `/health` | Health check |
 | GET | `/version` | Build metadata, data fingerprint, option counts |
 | GET | `/options` | Enumerate species, focus, background options |
+| GET | `/tags` | Enumerate knowledge groups, magic fields, and applications |
 | POST | `/session/new` | Create new session and character |
 | POST | `/character/create` | Re-seed character into existing session |
 | GET | `/state/{session_id}` | Load game state |
@@ -89,7 +90,7 @@ Reference: `WORLD_TOPOLOGY_BASELINE.md`
 ```
 api/
   main.py              # FastAPI app — version string here (keep in sync with openapi.yaml)
-  models.py            # Pydantic v2 models (schema/release version 3.4.0)
+  models.py            # Pydantic v2 models (schema/release version 4.1.0)
   game_data.py         # Game system data loader + seed_character
   database.py          # asyncpg pool management
   routes/
@@ -100,11 +101,13 @@ api/
     scene.py           # GET /scene/{session_id}
     session.py         # POST /session/new
     state.py           # GET/POST /state/{session_id} + POST /state/{session_id}/delta
+    tags.py            # GET /tags
 core/
   dice_roller.py       # Dice rolling logic — do not modify
 data/
   characters/
-    species.json
+    ancestry.json
+    culture.json
     focus.json
     backgrounds.json
     starting-wealth.json
@@ -121,19 +124,22 @@ data/
     notable.json
     weapons.json
   magic/
-    fields.json
-    sacred.json
-    warding.json
+    alchemy.json
     binding.json
     elemental.json
-    nature.json
     illusion.json
-    runecraft.json
-    alchemy.json
     necromancy.json
-  magic-spells.json               # legacy spell catalog retained temporarily
+    druidry.json
+    runecraft.json
+    sacred.json
+    warding.json
+  tags/
+    applications.json
+    knowledge_groups.json
+    magic_fields.json
   world/
-prompts/               # Obsidian vault — GPT knowledge files + world content
+docs/                  # Project conventions and audit notes
+prompts/               # GPT prompt corpus + markdown world-vault mirrors
   engine.md            # GPT system prompt — paste into GPT builder Instructions (<8000 chars)
   character_creation.md
   world_rules.md
@@ -144,7 +150,7 @@ prompts/               # Obsidian vault — GPT knowledge files + world content
   npcs.md
   design_notes.md      # Internal — do NOT upload to GPT builder
 schemas/
-  openapi.yaml         # OpenAPI document format 3.1.0, schema/release version 3.4.0 — upload to GPT builder Actions
+  openapi.yaml         # OpenAPI document format 3.1.0, schema/release version 4.1.0 — upload to GPT builder Actions
 scripts/
   seed_locations.py    # Seed canonical structured world data from data/world/ into DB
   verify_production_contract.py  # Validate production against repo expectations
@@ -198,7 +204,7 @@ curl http://localhost:8000/version
 curl http://localhost:8000/options
 curl -X POST http://localhost:8000/session/new \
   -H "Content-Type: application/json" \
-  -d '{"character_name":"Krath","species":"dragonborn","focus":"devoted","background":"soldier","adjustment_points":{"will":2,"endurance":3},"starting_location":"drakenvale-city"}'
+  -d '{"character_name":"Krath","ancestry":"dragonborn","culture":"drakenvale_city","focus":"devoted","background":"soldier","adjustment_points":{"will":2,"endurance":3},"starting_location":"drakenvale-city"}'
 curl -X POST http://localhost:8000/roll \
   -H "Content-Type: application/json" \
   -d '{"target":64}'
@@ -262,4 +268,4 @@ When bumping the API version, update it in **two places**:
 
 Both must stay in sync. The contract test at `tests/contract/test_openapi_contract.py` asserts the version string — update that assertion too.
 
-**Current backend/schema version:** 3.4.0
+**Current backend/schema version:** 4.1.0
