@@ -1,5 +1,5 @@
 ---
-id: alpine-peaks-outer
+id: alpine-peaks
 name: Alpine Peaks
 type: region_zone
 description: The outer face of the Alpine Peaks beyond Lastmark — the true mountain barrier

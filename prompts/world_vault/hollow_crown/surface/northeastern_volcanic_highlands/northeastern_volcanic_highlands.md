@@ -1,5 +1,5 @@
 ---
-id: volcanic-highlands-trail
+id: northeastern-volcanic-highlands
 name: Volcanic Highlands Trail
 type: route-node
 region_id: hollow-crown
@@ -11,7 +11,7 @@ connections:
 - northeastern-volcanic-highlands
 tags:
 - drakenvale
-- volcanic-highlands-trail
+- northeastern-volcanic-highlands
 - northeastern-volcanic-highlands
 - route-node
 - industrial-corridor
@@ -88,7 +88,7 @@ The highlands beyond the trail proper are genuinely hazardous. Travelers wanderi
 ## Tags
 
 - drakenvale
-- volcanic-highlands-trail
+- northeastern-volcanic-highlands
 - northeastern-volcanic-highlands
 - route-node
 - industrial-corridor
