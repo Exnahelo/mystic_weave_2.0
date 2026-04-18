@@ -1,0 +1,24 @@
+id: hall-of-scales
+name: Hall of Scales
+type: settlement
+region_id: hollow_crown
+description: The realm's broad university and its surrounding college town, set in the open Draconic Grasslands between Drakenvale City and Ashfield. The Hall itself is an academic complex of tiered lecture halls, drilling grounds, workshop annexes, and archives, built for general higher education across scholarship, civic learning, martial training, guild foundations, and the first tiers of magical study. The town that has grown around it exists to support the student population — inns, taverns, bookbinders, supply shops, and the ordinary civic trades of a place shaped by an academic calendar. Ardrynn the Measured, bronze dragon scholar, oversees the institution and makes her residence here.
+connections:
+- drakenvale-city
+- ashfield
+- draconic-grasslands-edge
+tags:
+- drakenvale
+- hall-of-scales
+- university
+- college-town
+- draconic-grasslands
+- ardrynn
+- education
+- bronze-dragon
+- civic
+known_npcs:
+- Ardrynn the Measured
+- Rector of the Hall of Scales
+threat_level: 0
+discovered: true

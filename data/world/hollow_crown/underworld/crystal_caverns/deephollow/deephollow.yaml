@@ -1,22 +1,26 @@
 id: deephollow
 name: Deephollow
-type: city
+type: settlement
 region_id: hollow_crown
-description: An underground city in the Crystal Caverns beneath the central-west / south-central
-  basin structure, with major access routes running upward toward the Stronghold and
-  outward toward western and southern corridors. Deeph…
+parent_location_id: crystal-caverns
+description: The only true underground city in the realm, carved into a vast crystal-rich cavern deep beneath the Hollow Crown's surface. Deephollow began as a mining camp when prospectors discovered a chamber veined with resonance crystals, deep metals, and subterranean magical materials; over centuries it grew into a stable underground settlement of thousands, organized around ongoing extraction and the specialized trade that moves its goods to the surface markets. The crystals catch and scatter the city's torchlight in slow shifting patterns across the walls and ceiling of the chamber, giving Deephollow a constant low luminescence that surface visitors find beautiful and unsettling in roughly equal measure.
 connections:
-- stronghold_of_drakenvale
-- inner-ramparts
+- crystal-caverns
+- stronghold-of-drakenvale
 - zarkharath
 - deephollow-lower-tunnels
 tags:
-- crystal-caverns
-- underground
-- mining
 - drakenvale
-- sstc-presence
-- psionic
-known_npcs: []
-threat_level: 2
-discovered: false
+- deephollow
+- underground
+- crystal-caverns
+- mining
+- resonance-crystals
+- subterranean
+- arcane-materials
+- dwarvish-heavy
+known_npcs:
+- Deep Marshal
+- Assay Master
+threat_level: 1
+discovered: true
