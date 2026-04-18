@@ -1,43 +1,85 @@
 ---
 id: varethyns-lair
-name: Varethyn's Cavern
+name: Varethyn's Lair
 type: lair
 region_id: hollow_crown
-description: The deepest chamber of the Crystal Caverns, accessible only through passages that seem to rearrange themselves for those Varethyn does not wish to find him. The cavern is amethyst and quartz from floor to ceiling, glowing faintly with psionic energy that has no visible source. Pools of perfectly still water dot the floor, each reflecting the crystalline ceiling with mirror precision — no ripple, no distortion, regardless of what moves nearby. The air hums with latent psychic energy. Sound is amplified and distorted; a whisper carries to the far wall, a footstep sounds like a deliberate announcement. Varethyn is almost certainly already aware of anyone who reaches this chamber. Whether he makes that known immediately is his choice.
+parent_location_id: crystal-caverns
+description: The personal sanctum of Varethyn of the Amethyst Gaze, carved into a natural amethyst-laced chamber deep within the Crystal Caverns. A hidden tunnel connects it upward to the Amethyst Vault in the Stronghold's gardens; outward, it opens into the cavern network. The lair is not a hoard in the traditional draconic sense — it is a thinking space, deliberately austere, lit by the slow internal glow of the crystal walls and furnished with what Varethyn has chosen to keep close. Few have seen it. Fewer have been invited.
 connections:
+- amethyst-vault
 - crystal-caverns
 tags:
 - drakenvale
 - varethyn
 - lair
-- amethyst-dragon
-- crystal
-- psionic
-- restricted
+- hidden
+- crystal-caverns
+- amethyst
+- sanctum
+- discovery-gated
 known_npcs:
 - Varethyn of the Amethyst Gaze
 threat_level: 1
 discovered: false
 ---
 
-# Varethyn's Cavern
+# Varethyn's Lair
 
-The deepest chamber of the Crystal Caverns, accessible only through passages that seem to rearrange themselves for those Varethyn does not wish to find him. The cavern is amethyst and quartz from floor to ceiling, glowing faintly with psionic energy that has no visible source. Pools of perfectly still water dot the floor, each reflecting the crystalline ceiling with mirror precision — no ripple, no distortion, regardless of what moves nearby. The air hums with latent psychic energy. Sound is amplified and distorted; a whisper carries to the far wall, a footstep sounds like a deliberate announcement. Varethyn is almost certainly already aware of anyone who reaches this chamber. Whether he makes that known immediately is his choice.
+The personal sanctum of Varethyn of the Amethyst Gaze, carved into a natural amethyst-laced chamber deep within the Crystal Caverns. A hidden tunnel connects it upward to the Amethyst Vault in the Stronghold's gardens; outward, it opens into the cavern network. The lair is not a hoard in the traditional draconic sense — it is a thinking space, deliberately austere, lit by the slow internal glow of the crystal walls and furnished with what Varethyn has chosen to keep close. Few have seen it. Fewer have been invited.
+
+## Scene Texture
+
+The tunnel from the Amethyst Vault descends in a long gentle spiral cut directly through the Heartmass and into the living stone beneath. The descent is not steep. It is, however, long — long enough that a visitor loses track of how far below the Stronghold they have come. The walls change character as the tunnel deepens. At the top, pale Heartmass with the familiar amethyst veining. Further down, the stone grows darker and the amethyst thicker, until the veins become seams, and the seams become walls of their own. By the time a traveler reaches the Lair, they are walking through crystal.
+
+The Lair itself is a natural chamber, irregular in shape, its ceiling lost in a slow-refracting violet shimmer. Amethyst grows from the walls in clusters the size of a dragonborn's torso. The floor is polished smooth where Varethyn moves most often and rough-natural where she does not. The light has no source one can point to — the crystal itself glows faintly from within, the same internal light as the Vault above, only deeper and slower. A visitor standing still can watch the light shift across the chamber like the surface of a very calm sea.
+
+Unlike the hoard-lairs of more acquisitive dragons, Varethyn's sanctum holds almost nothing. A low stone platform where she rests, carved from the chamber's floor. A reading ledge at dragon-height, currently holding three open volumes whose subjects change as often as she does. A cluster of long-stem standing mirrors near one wall — cousins of the ones in the Vault above, but older, and the attendant Acolytes have never been permitted to inspect them. A single piece of what appears to be a crystal music instrument, whose sound no living resident has heard. That is the whole furnishing.
+
+The air is still. The temperature is cool and unvarying. Sound travels with the same soft, non-amplifying quality as the Vault above, only more pronounced — the chamber absorbs voice the way snow absorbs light. Visitors often find themselves speaking more quietly than intended, then more slowly, then finding they have little they felt the need to say.
+
+## Outward Access
+
+The Lair opens, on its far side, into the Crystal Caverns proper. The opening is unmarked, unkeyed, and looks from the caverns like nothing in particular — one of a hundred crystal-lined alcoves indistinguishable to an ordinary eye. Varethyn uses this exit for her own movements through the Caverns. It is not sealed. It is simply not identifiable. Finding the Lair from below is effectively impossible without Varethyn's guidance or a level of crystal-reading expertise that only a handful of figures in the realm possess.
+
+## Functions
+
+- **Varethyn's personal sanctum.** She rests here, reads here, and thinks here. Her days in the Vault are her public work; her nights in the Lair are her private one.
+- **Deep mediation work.** The most consequential mediation sessions — matters too sensitive for the Vault, matters involving Council members in unresolved conflict, matters that need perfect privacy — are conducted here. The invitation list across the realm's history is short.
+- **Hidden access to the Crystal Caverns.** Varethyn's movements between the surface and the subterranean network are untracked. This is by design. A Council dragon who can reach Deephollow without being seen is a Council dragon whose political weight is heavier than the one who cannot.
+- **Preserved knowledge.** The three volumes on the reading ledge are only the ones in active use. The Lair's deeper holdings — if they exist — are not publicly documented. Varethyn has never discussed them.
+
+## Access and Discovery
+
+The Lair is hidden. Its existence is known to Varethyn, to the two other Council dragons (presumably), to Serevane at the Platinum Oath Monastery (who knew the Platinum Warden and is old enough to remember when the tunnel was cut), and to nobody else living who has not been personally invited. Rumors of a "deep Vault" circulate in the Arcane Conservatory's upper circles but are treated as apocryphal.
+
+Access requires either:
+- An explicit invitation from Varethyn, delivered in person in the Vault above, or
+- A discovery action of genuine difficulty — the tunnel's upper entrance is masked by an arrangement of standing stones in the Vault that even attuned visitors do not normally perceive.
+
+The Lair's canonical `discovered` state is `false`. If a player character is granted access, the session state for that character should reflect discovery; the canonical record does not change.
 
 ## Tags
 
 - drakenvale
 - varethyn
 - lair
-- amethyst-dragon
-- crystal
-- psionic
-- restricted
+- hidden
+- crystal-caverns
+- amethyst
+- sanctum
+- discovery-gated
 
 ## Connected Nodes
 
+- `amethyst-vault`
 - `crystal-caverns`
 
 ## Authoring Notes
 
-Expand atmosphere, scene texture, and canon detail here if stronger source material is authored later. Do not change the mirrored path or stable runtime identifier without a coordinated migration.
+This node is deliberately discovery-gated. Neither `amethyst-vault` nor `crystal-caverns` should list `varethyns-lair` in their outbound connections. The outbound connections on this node permit a visitor inside the Lair to exit via either path, but do not signal inbound reveal from the public side.
+
+Varethyn is the anchor NPC. She is effectively always present when the player is here, because an uninvited presence in her Lair would be trivially detectable by her. Scenes in this node should assume Varethyn's awareness of the visitor's presence and action from the moment of entry.
+
+The "cousins" of the Vault mirrors in this chamber are older and structurally different. If a future magical investigation arc needs deep-truth or prophetic-clarity tools, these are the mechanism. For current play, they are background texture.
+
+The crystal music instrument is a deliberate atmospheric hook. Its purpose is not canonically defined. If a later arc needs it, its meaning can be authored then.

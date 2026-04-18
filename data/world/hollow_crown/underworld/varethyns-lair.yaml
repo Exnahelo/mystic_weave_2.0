@@ -1,10 +1,22 @@
----
 id: varethyns-lair
-name: Varethyn's Cavern
+name: Varethyn's Lair
 type: lair
-description: "The deepest chamber of the Crystal Caverns, accessible only through passages that seem to rearrange themselves for those Varethyn does not wish to find him. The cavern is amethyst and quartz from floor to ceiling, glowing faintly with psionic energy that has no visible source. Pools of perfectly still water dot the floor, each reflecting the crystalline ceiling with mirror precision — no ripple, no distortion, regardless of what moves nearby. The air hums with latent psychic energy. Sound is amplified and distorted; a whisper carries to the far wall, a footstep sounds like a deliberate announcement. Varethyn is almost certainly already aware of anyone who reaches this chamber. Whether he makes that known immediately is his choice."
-tags: [drakenvale, varethyn, lair, amethyst-dragon, crystal, psionic, restricted]
-connections: [crystal-caverns]
+region_id: hollow_crown
+parent_location_id: crystal-caverns
+description: The personal sanctum of Varethyn of the Amethyst Gaze, carved into a natural amethyst-laced chamber deep within the Crystal Caverns. A hidden tunnel connects it upward to the Amethyst Vault in the Stronghold's gardens; outward, it opens into the cavern network. The lair is not a hoard in the traditional draconic sense — it is a thinking space, deliberately austere, lit by the slow internal glow of the crystal walls and furnished with what Varethyn has chosen to keep close. Few have seen it. Fewer have been invited.
+connections:
+- amethyst-vault
+- crystal-caverns
+tags:
+- drakenvale
+- varethyn
+- lair
+- hidden
+- crystal-caverns
+- amethyst
+- sanctum
+- discovery-gated
+known_npcs:
+- Varethyn of the Amethyst Gaze
 threat_level: 1
-known_npcs: [Varethyn of the Amethyst Gaze]
 discovered: false

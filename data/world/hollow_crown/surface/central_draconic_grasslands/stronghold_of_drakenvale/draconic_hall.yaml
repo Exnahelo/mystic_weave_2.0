@@ -2,11 +2,23 @@ id: draconic-hall
 name: Draconic Hall
 type: location
 region_id: hollow_crown
-description: Placeholder-safe runtime node pending fuller canon migration.
-connections: []
+settlement_id: stronghold-of-drakenvale
+parent_location_id: stronghold-of-drakenvale
+description: The great vaulted council chamber at the ceremonial core of the Stronghold, sized for three ancient dragons to convene without crowding. The floor bears a luminous mosaic depicting the balance of Bahamut and Tiamat; at the chamber's center stands the Heartstone, the platinum-veined crystal artifact that serves as a fourth and silent voice on the Council. Here the Draconic Council deliberates, formal petitions are heard, treaties are ratified, and the realm's gravest legal matters are judged. Entry is controlled. What is decided here binds the sanctuary.
+connections:
+- stronghold-of-drakenvale
 tags:
-- placeholder
-known_npcs: []
+- drakenvale
+- stronghold
+- council
+- heartstone
+- sacred
+- governance
+- mosaic
+- ceremonial
+known_npcs:
+- Eryndor the Radiant
+- Zarkeros the Inferno
+- Varethyn of the Amethyst Gaze
 threat_level: 0
 discovered: true
-settlement_id: stronghold_of_drakenvale
