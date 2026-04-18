@@ -15,7 +15,6 @@ tags:
 - fortress
 - restricted
 - hollow-crown
-- red_dragon
 known_npcs:
 - Zarkeros the Inferno
 threat_level: 1
