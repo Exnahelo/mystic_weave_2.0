@@ -5,7 +5,7 @@ type: region
 description: Canonical geography-first realm root for the Drakenvale / Hollow Crown interior
   basin, replacing the old broken region path layout.
 tags:
-- hollow-crowm
+- hollow-crown
 - drakenvale
 - hollow-crown
 - canonical-realm
@@ -17,7 +17,7 @@ Canonical realm root for the Hollow Crown interior basin. This node replaces the
 
 ## Tags
 
-- hollow-crowm
+- hollow-crown
 - drakenvale
 - hollow-crown
 - canonical-realm

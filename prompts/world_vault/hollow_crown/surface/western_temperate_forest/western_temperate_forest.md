@@ -5,7 +5,7 @@ type: region_zone
 description: Largest western surface woodland in Hollow Crown, containing Dracelune, Feywood
   Glade, and surrounding trade-facing forest settlements.
 tags:
-- hollow-crowm
+- hollow-crown
 - forest
 - surface
 - western
@@ -17,7 +17,7 @@ The western temperate forest contains old woodland, trade-facing settlements, an
 
 ## Tags
 
-- hollow-crowm
+- hollow-crown
 - forest
 - surface
 - western

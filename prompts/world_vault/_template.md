@@ -10,7 +10,7 @@ description: One or two sentence canonical description. This is the runtime-faci
 connections:
 - connected-node-id
 tags:
-- hollow-crowm
+- hollow-crown
 known_npcs: []
 threat_level: 0
 discovered: false
