@@ -278,7 +278,6 @@ L  |  A  A  A  A  A  A  A  A  A  A  A  A
 | Zarkharath | D8 | Main volcanic city in the northeastern sector |
 | Cinderpit | E9 | Ore extraction settlement on lower volcanic slopes |
 | Infernal Forge | D9 | Strategic forge complex in volcanic zone |
-| Zarkeros’s Fortress | C9 | Deep northeastern volcanic stronghold |
 | Lastmark | C3 | High approach waystation in stable Inner Rampart zone |
 | Stonemark | C4 | Quarry settlement in the Inner Ramparts / alpine foothill transition |
 | Greymantle | I9 | Edge-settlement between dark quadrant and outer basin |

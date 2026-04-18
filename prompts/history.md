@@ -35,7 +35,7 @@ Long before the sanctuary was founded, the Hollow Crown existed as a place of im
 
 During an age of destructive dragon conflict, dragons of many alignments waged wars severe enough to annihilate lesser powers caught between them. In the aftermath of one such civilizational devastation, a coalition of dragons came to believe that continued endless war would destroy not only the mortal world, but draconic legacy itself.
 
-The leading figure in this movement was an ancient gold dragon remembered as the **Platinum Warden**, a devotee of Bahamut and the principal architect of the sanctuary ideal. Under his leadership, dragons of metallic, chromatic, and gem lineages entered into what became known as the **Ptarian Pact**: a founding agreement to build a hidden sanctuary governed by justice, balance, restraint, and shared responsibility.
+The leading figure in this movement was an ancient gold dragon remembered as the **Platinum Warden — Vindrael** in his personal name, though history most often names him only by his title. A devotee of Bahamut and the principal architect of the sanctuary ideal, Vindrael is remembered in formal canon as the Warden; the name Vindrael is used in private speech, memorial inscription, and the inner liturgies of the Vigil. Under his leadership, dragons of metallic, chromatic, and gem lineages entered into what became known as the **Ptarian Pact**: a founding agreement to build a hidden sanctuary governed by justice, balance, restraint, and shared responsibility.
 
 ### Settlement of the Hollow Crown
 

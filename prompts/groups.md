@@ -167,7 +167,7 @@ Their influence is wide, even where it is not coercive. In practice, they are on
 The principal broad institution of higher learning in Drakenvale.
 
 **Type:** Academy / university  
-**Leadership:** Council-recognized academic authority  
+**Leadership:** Ardrynn the Measured, bronze dragon scholar, council-recognized
 **Status:** Canonical, active, public
 
 The Hall of Scales provides broad higher education across scholarship, civic learning, martial theory, magical foundations, trade, history, and formal intellectual development. It is the main university-level institution of the sanctuary.

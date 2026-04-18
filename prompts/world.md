@@ -99,7 +99,7 @@ A rogue faction of chromatic dragons attempted to unseal the **Temple to Tiamat*
 | Heartstone | Radiant crystal artifact of draconic unity and guidance |
 | Platinum Heart | High sanctum honoring Bahamut; houses the Platinum Flame |
 | Amethyst Vault | Reflection, wisdom, mediation, and deeper arcane study |
-| Infernal Forge | Enchanted artifact crafting; weapons, tools, and constructs |
+| Draconic Forge | Small ceremonial forge beneath the Stronghold; dragon-breath-fueled, used for sacred and symbolic crafting |
 | Aeries | Open-air dragon perches above the fortress |
 | Sacred Pools | Terraced sacred water system descending from the Stronghold into the southern lake |
 | Temple to Tiamat | Sealed temple beneath the Shadowed Hollows; heavily warded and forbidden |
