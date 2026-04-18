@@ -235,6 +235,7 @@ class CharacterModel(BaseModel):
     # Core identity
     name:           str
     ancestry:       str   # e.g. "human", "dragonborn"
+    draconic_traits: list[str] = Field(default_factory=list)
     culture:        str
     focus:          str   # e.g. "devoted", "stalker"
     background:     str   # e.g. "soldier", "acolyte"
@@ -470,6 +471,7 @@ class CharacterStateDelta(BaseModel):
     equipment: EquipmentDelta | None = None
     reputation: list[ReputationEntry] | None = None
     advancement: AdvancementState | None = None
+    draconic_traits: list[str] | None = None
 
     def has_updates(self) -> bool:
         return any(v is not None for v in self.model_dump(exclude_none=False).values())
