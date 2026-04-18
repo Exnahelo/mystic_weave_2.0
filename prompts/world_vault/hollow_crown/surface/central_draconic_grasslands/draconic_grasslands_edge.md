@@ -6,7 +6,6 @@ region_id: hollow-crown
 description: Placeholder-safe runtime node pending fuller canon migration.
 connections: []
 tags:
-- placeholder
 known_npcs: []
 threat_level: 0
 discovered: true
@@ -18,7 +17,6 @@ Placeholder-safe runtime node pending fuller canon migration.
 
 ## Tags
 
-- placeholder
 
 ## Authoring Notes
 

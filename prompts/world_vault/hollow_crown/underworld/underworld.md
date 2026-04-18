@@ -5,7 +5,7 @@ type: region_zone
 description: Subsurface layer of Hollow Crown containing the Crystal Caverns and the deep
   southern reaches beneath the dark quadrant.
 tags:
-- hollow-crowm
+- hollow-crown
 - underworld
 - subterranean
 ---
@@ -16,7 +16,7 @@ Subsurface layer of Hollow Crown containing the Crystal Caverns and the deep sou
 
 ## Tags
 
-- hollow-crowm
+- hollow-crown
 - underworld
 - subterranean
 

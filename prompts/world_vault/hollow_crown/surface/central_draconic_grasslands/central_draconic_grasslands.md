@@ -5,7 +5,7 @@ type: region_zone
 description: Open agricultural and patrol-traveled southern basin corridor linking the
   stronghold-facing settlements, highland approaches, and grassland routes.
 tags:
-- hollow-crowm
+- hollow-crown
 - grasslands
 - surface
 ---
@@ -16,7 +16,7 @@ Open agricultural and patrol-traveled southern basin corridor linking the strong
 
 ## Tags
 
-- hollow-crowm
+- hollow-crown
 - grasslands
 - surface
 

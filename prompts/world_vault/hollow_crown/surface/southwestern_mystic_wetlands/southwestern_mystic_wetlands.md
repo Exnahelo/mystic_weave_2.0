@@ -5,7 +5,7 @@ type: region_zone
 description: Southwestern low-basin wetland region where waters from the southern basin
   gather, spread, and disappear into subterranean outflow channels.
 tags:
-- hollow-crowm
+- hollow-crown
 - wetlands
 - surface
 - southwest
@@ -17,7 +17,7 @@ The southwestern mystic wetlands form the low-basin drainage region where waters
 
 ## Tags
 
-- hollow-crowm
+- hollow-crown
 - wetlands
 - surface
 - southwest

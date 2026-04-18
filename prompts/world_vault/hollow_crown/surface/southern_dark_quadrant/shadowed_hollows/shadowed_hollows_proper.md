@@ -10,7 +10,6 @@ connections:
 - shadowed-hollows-approach
 tags:
 - shadowed-hollows
-- placeholder
 - dangerous
 known_npcs: []
 threat_level: 0
@@ -24,7 +23,6 @@ The deeper Hollows beyond the safer approach routes. This node exists as a stabl
 ## Tags
 
 - shadowed-hollows
-- placeholder
 - dangerous
 
 ## Connected Nodes

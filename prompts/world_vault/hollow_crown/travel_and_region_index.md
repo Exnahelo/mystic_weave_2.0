@@ -8,7 +8,7 @@ description: Canonical travel and region routing index for Hollow Crown, summari
 connections:
 - coarse-grid-map
 tags:
-- hollow-crowm
+- hollow-crown
 - travel
 - index
 - geography
@@ -23,7 +23,7 @@ Canonical routing and region index for Hollow Crown. Use it to summarize stable 
 
 ## Tags
 
-- hollow-crowm
+- hollow-crown
 - travel
 - index
 - geography

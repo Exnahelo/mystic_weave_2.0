@@ -13,8 +13,7 @@ tags:
 - volcanic
 - fortress
 - restricted
-- hollow_crown
-- red_dragon
+- hollow-crown
 threat_level: 1
 known_npcs:
 - Zarkeros the Inferno

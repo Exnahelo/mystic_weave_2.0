@@ -8,10 +8,9 @@ description: Canonical coarse-placement map for Hollow Crown fixing the broad sp
 connections:
 - travel-and-region-index
 tags:
-- hollow-crowm
+- hollow-crown
 - map
 - geography
-- canonical
 known_npcs: []
 threat_level: 0
 discovered: true
@@ -23,10 +22,9 @@ Canonical coarse-placement map anchor for Hollow Crown. Use this file to referen
 
 ## Tags
 
-- hollow-crowm
+- hollow-crown
 - map
 - geography
-- canonical
 
 ## Connected Nodes
 
