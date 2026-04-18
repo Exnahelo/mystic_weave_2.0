@@ -8,7 +8,6 @@ connections:
 - drakenvale-city
 - hall-of-scales
 tags:
-- placeholder
 known_npcs: []
 threat_level: 0
 discovered: true

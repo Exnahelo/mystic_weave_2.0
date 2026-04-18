@@ -11,7 +11,6 @@ tags:
 - hollow-crown
 - map
 - geography
-- canonical
 known_npcs: []
 threat_level: 0
 discovered: true
@@ -26,7 +25,6 @@ Canonical coarse-placement map anchor for Hollow Crown. Use this file to referen
 - hollow-crown
 - map
 - geography
-- canonical
 
 ## Connected Nodes
 

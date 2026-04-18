@@ -8,7 +8,6 @@ tags:
 - hollow-crown
 - drakenvale
 - hollow-crown
-- canonical-realm
 ---
 
 # Hollow Crown
@@ -20,7 +19,6 @@ Canonical realm root for the Hollow Crown interior basin. This node replaces the
 - hollow-crown
 - drakenvale
 - hollow-crown
-- canonical-realm
 
 ## Authoring Notes
 
