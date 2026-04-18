@@ -1,0 +1,2023 @@
+## 1. Filename-ID mismatches — YAML
+- path: data/world/_template.yaml
+  - filename stem: _template
+  - content id: kebab-case-node-id
+- path: data/world/hollow_crown/coarse_grid_map.yaml
+  - filename stem: coarse_grid_map
+  - content id: coarse-grid-map
+- path: data/world/hollow_crown/hollow_crown.yaml
+  - filename stem: hollow_crown
+  - content id: hollow-crown
+- path: data/world/hollow_crown/surface/alpine_peaks/alpine_peaks.yaml
+  - filename stem: alpine_peaks
+  - content id: alpine-peaks
+- path: data/world/hollow_crown/surface/central_body_of_water/southern_lake.yaml
+  - filename stem: southern_lake
+  - content id: southern-lake
+- path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.yaml
+  - filename stem: ashfield_fields
+  - content id: ashfield-fields
+- path: data/world/hollow_crown/surface/central_draconic_grasslands/central_draconic_grasslands.yaml
+  - filename stem: central_draconic_grasslands
+  - content id: central-draconic-grasslands
+- path: data/world/hollow_crown/surface/central_draconic_grasslands/draconic_grasslands_edge.yaml
+  - filename stem: draconic_grasslands_edge
+  - content id: draconic-grasslands-edge
+- path: data/world/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.yaml
+  - filename stem: drakenvale_city
+  - content id: drakenvale-city
+- path: data/world/hollow_crown/surface/central_draconic_grasslands/grasslands_edge_post.yaml
+  - filename stem: grasslands_edge_post
+  - content id: grasslands-edge-post
+- path: data/world/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.yaml
+  - filename stem: hall_of_scales
+  - content id: hall-of-scales
+- path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.yaml
+  - filename stem: administrative_quarter
+  - content id: administrative-quarter
+- path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.yaml
+  - filename stem: amethyst_vault
+  - content id: amethyst-vault
+- path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.yaml
+  - filename stem: arcane_conservatory
+  - content id: arcane-conservatory
+- path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.yaml
+  - filename stem: draconic_hall
+  - content id: draconic-hall
+- path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.yaml
+  - filename stem: platinum_heart
+  - content id: platinum-heart
+- path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.yaml
+  - filename stem: sacred_pools
+  - content id: sacred-pools
+- path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.yaml
+  - filename stem: stronghold_of_drakenvale
+  - content id: stronghold-of-drakenvale
+- path: data/world/hollow_crown/surface/feywood_glade/druidic_grove.yaml
+  - filename stem: druidic_grove
+  - content id: druidic-grove
+- path: data/world/hollow_crown/surface/feywood_glade/feywood_glade.yaml
+  - filename stem: feywood_glade
+  - content id: feywood-glade
+- path: data/world/hollow_crown/surface/feywood_glade/feywood_glade_border.yaml
+  - filename stem: feywood_glade_border
+  - content id: feywood-glade-border
+- path: data/world/hollow_crown/surface/inner_ramparts/inner_ramparts.yaml
+  - filename stem: inner_ramparts
+  - content id: inner-ramparts
+- path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/northeastern_volcanic_highlands.yaml
+  - filename stem: northeastern_volcanic_highlands
+  - content id: northeastern-volcanic-highlands
+- path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.yaml
+  - filename stem: volcanic_highlands_trail
+  - content id: volcanic-highlands-trail
+- path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/infernal_forge.yaml
+  - filename stem: infernal_forge
+  - content id: infernal-forge
+- path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.yaml
+  - filename stem: platinum_oath_approach
+  - content id: platinum-oath-approach
+- path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.yaml
+  - filename stem: platinum_oath_monastery
+  - content id: platinum-oath-monastery
+- path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.yaml
+  - filename stem: rift_of_discord
+  - content id: rift-of-discord
+- path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.yaml
+  - filename stem: rift_of_discord_edge
+  - content id: rift-of-discord-edge
+- path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.yaml
+  - filename stem: shadowed_hollows
+  - content id: shadowed-hollows
+- path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.yaml
+  - filename stem: shadowed_hollows_approach
+  - content id: shadowed-hollows-approach
+- path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_proper.yaml
+  - filename stem: shadowed_hollows_proper
+  - content id: shadowed-hollows-proper
+- path: data/world/hollow_crown/surface/southern_dark_quadrant/southern_dark_quadrant.yaml
+  - filename stem: southern_dark_quadrant
+  - content id: southern-dark-quadrant
+- path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/southwestern_mystic_wetlands.yaml
+  - filename stem: southwestern_mystic_wetlands
+  - content id: southwestern-mystic-wetlands
+- path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/valley_edge_overlook.yaml
+  - filename stem: valley_edge_overlook
+  - content id: valley-edge-overlook
+- path: data/world/hollow_crown/surface/western_temperate_forest/silverwood_trail.yaml
+  - filename stem: silverwood_trail
+  - content id: silverwood-trail
+- path: data/world/hollow_crown/surface/western_temperate_forest/western_temperate_forest.yaml
+  - filename stem: western_temperate_forest
+  - content id: western-temperate-forest
+- path: data/world/hollow_crown/travel_and_region_index.yaml
+  - filename stem: travel_and_region_index
+  - content id: travel-and-region-index
+- path: data/world/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.yaml
+  - filename stem: temple_to_tiamat
+  - content id: temple-to-tiamat
+- path: data/world/hollow_crown/underworld/crystal_caverns/crystal_caverns.yaml
+  - filename stem: crystal_caverns
+  - content id: crystal-caverns
+
+## 2. Filename-ID mismatches — Markdown mirrors
+- path: prompts/world_vault/_template.md
+  - filename stem: _template
+  - content id: kebab-case-node-id
+- path: prompts/world_vault/hollow_crown/coarse_grid_map.md
+  - filename stem: coarse_grid_map
+  - content id: coarse-grid-map
+- path: prompts/world_vault/hollow_crown/hollow_crown.md
+  - filename stem: hollow_crown
+  - content id: hollow-crown
+- path: prompts/world_vault/hollow_crown/surface/alpine_peaks/alpine_peaks.md
+  - filename stem: alpine_peaks
+  - content id: alpine-peaks
+- path: prompts/world_vault/hollow_crown/surface/central_body_of_water/southern_lake.md
+  - filename stem: southern_lake
+  - content id: southern-lake
+- path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.md
+  - filename stem: ashfield_fields
+  - content id: ashfield-fields
+- path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/central_draconic_grasslands.md
+  - filename stem: central_draconic_grasslands
+  - content id: central-draconic-grasslands
+- path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/draconic_grasslands_edge.md
+  - filename stem: draconic_grasslands_edge
+  - content id: draconic-grasslands-edge
+- path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.md
+  - filename stem: drakenvale_city
+  - content id: drakenvale-city
+- path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/grasslands_edge_post.md
+  - filename stem: grasslands_edge_post
+  - content id: grasslands-edge-post
+- path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.md
+  - filename stem: hall_of_scales
+  - content id: hall-of-scales
+- path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.md
+  - filename stem: administrative_quarter
+  - content id: administrative-quarter
+- path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.md
+  - filename stem: amethyst_vault
+  - content id: amethyst-vault
+- path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.md
+  - filename stem: arcane_conservatory
+  - content id: arcane-conservatory
+- path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_forge.md
+  - filename stem: draconic_forge
+  - content id: draconic-forge
+- path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.md
+  - filename stem: draconic_hall
+  - content id: draconic-hall
+- path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.md
+  - filename stem: platinum_heart
+  - content id: platinum-heart
+- path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.md
+  - filename stem: sacred_pools
+  - content id: sacred-pools
+- path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.md
+  - filename stem: stronghold_of_drakenvale
+  - content id: stronghold-of-drakenvale
+- path: prompts/world_vault/hollow_crown/surface/feywood_glade/druidic_grove.md
+  - filename stem: druidic_grove
+  - content id: druidic-grove
+- path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade.md
+  - filename stem: feywood_glade
+  - content id: feywood-glade
+- path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade_border.md
+  - filename stem: feywood_glade_border
+  - content id: feywood-glade-border
+- path: prompts/world_vault/hollow_crown/surface/inner_ramparts/inner_ramparts.md
+  - filename stem: inner_ramparts
+  - content id: inner-ramparts
+- path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/northeastern_volcanic_highlands.md
+  - filename stem: northeastern_volcanic_highlands
+  - content id: northeastern-volcanic-highlands
+- path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.md
+  - filename stem: volcanic_highlands_trail
+  - content id: volcanic-highlands-trail
+- path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/infernal_forge.md
+  - filename stem: infernal_forge
+  - content id: infernal-forge
+- path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.md
+  - filename stem: platinum_oath_approach
+  - content id: platinum-oath-approach
+- path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.md
+  - filename stem: platinum_oath_monastery
+  - content id: platinum-oath-monastery
+- path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.md
+  - filename stem: rift_of_discord
+  - content id: rift-of-discord
+- path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.md
+  - filename stem: rift_of_discord_edge
+  - content id: rift-of-discord-edge
+- path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.md
+  - filename stem: shadowed_hollows
+  - content id: shadowed-hollows
+- path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.md
+  - filename stem: shadowed_hollows_approach
+  - content id: shadowed-hollows-approach
+- path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_proper.md
+  - filename stem: shadowed_hollows_proper
+  - content id: shadowed-hollows-proper
+- path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/southern_dark_quadrant.md
+  - filename stem: southern_dark_quadrant
+  - content id: southern-dark-quadrant
+- path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/southwestern_mystic_wetlands.md
+  - filename stem: southwestern_mystic_wetlands
+  - content id: southwestern-mystic-wetlands
+- path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/valley_edge_overlook.md
+  - filename stem: valley_edge_overlook
+  - content id: valley-edge-overlook
+- path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/lantern_and_mule.md
+  - filename stem: lantern_and_mule
+  - content id: lantern-and-mule
+- path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silverwood_trail.md
+  - filename stem: silverwood_trail
+  - content id: silverwood-trail
+- path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/western_temperate_forest.md
+  - filename stem: western_temperate_forest
+  - content id: western-temperate-forest
+- path: prompts/world_vault/hollow_crown/travel_and_region_index.md
+  - filename stem: travel_and_region_index
+  - content id: travel-and-region-index
+- path: prompts/world_vault/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.md
+  - filename stem: temple_to_tiamat
+  - content id: temple-to-tiamat
+- path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/crystal_caverns.md
+  - filename stem: crystal_caverns
+  - content id: crystal-caverns
+
+## 3. Orphaned mirrors
+- YAML files under data/world/ with no MD mirror of the same stem in prompts/world_vault/:
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic-forge.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/lantern-and-mule.yaml
+- MD mirrors with no YAML source of the same stem:
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_forge.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/lantern_and_mule.md
+
+## 4. Tag variants
+- tag: drakenvale
+  - count: 108
+  - path: data/world/hollow_crown/hollow_crown.yaml
+  - path: data/world/hollow_crown/surface/alpine_peaks/alpine_peaks.yaml
+  - path: data/world/hollow_crown/surface/alpine_peaks/eryndors-lair.yaml
+  - path: data/world/hollow_crown/surface/alpine_peaks/lastmark/lastmark.yaml
+  - path: data/world/hollow_crown/surface/central_body_of_water/southern_lake.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/grasslands_edge_post.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic-forge.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/druidic_grove.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade_border.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/heartwood.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/thornveil/thornveil.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.yaml
+  - path: data/world/hollow_crown/surface/inner_ramparts/inner_ramparts.yaml
+  - path: data/world/hollow_crown/surface/inner_ramparts/stonemark-deep-cuts.yaml
+  - path: data/world/hollow_crown/surface/inner_ramparts/stonemark/stonemark.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/northeastern_volcanic_highlands.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/infernal_forge.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.yaml
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.yaml
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silverwood_trail.yaml
+  - path: data/world/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.yaml
+  - path: data/world/hollow_crown/underworld/crystal_caverns/crystal_caverns.yaml
+  - path: data/world/hollow_crown/underworld/crystal_caverns/deephollow-lower-tunnels.yaml
+  - path: data/world/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.yaml
+  - path: data/world/hollow_crown/underworld/varethyns-lair.yaml
+  - path: prompts/world_vault/hollow_crown/hollow_crown.md
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/alpine_peaks.md
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/eryndors-lair.md
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/lastmark/lastmark.md
+  - path: prompts/world_vault/hollow_crown/surface/central_body_of_water/southern_lake.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/grasslands_edge_post.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_forge.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/druidic_grove.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade_border.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/heartwood.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/thornveil/thornveil.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.md
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/inner_ramparts.md
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark-deep-cuts.md
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark/stonemark.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/northeastern_volcanic_highlands.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/infernal_forge.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.md
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.md
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silverwood_trail.md
+  - path: prompts/world_vault/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.md
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/crystal_caverns.md
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow-lower-tunnels.md
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.md
+  - path: prompts/world_vault/hollow_crown/underworld/varethyns-lair.md
+- tag: stronghold
+  - count: 18
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic-forge.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_forge.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.md
+- tag: hollow-crowm
+  - count: 17
+  - path: data/world/hollow_crown/coarse_grid_map.yaml
+  - path: data/world/hollow_crown/hollow_crown.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/central_draconic_grasslands.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/southern_dark_quadrant.yaml
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/southwestern_mystic_wetlands.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/western_temperate_forest.yaml
+  - path: data/world/hollow_crown/travel_and_region_index.yaml
+  - path: data/world/hollow_crown/underworld/underworld.yaml
+  - path: prompts/world_vault/_template.md
+  - path: prompts/world_vault/hollow_crown/coarse_grid_map.md
+  - path: prompts/world_vault/hollow_crown/hollow_crown.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/central_draconic_grasslands.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/southern_dark_quadrant.md
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/southwestern_mystic_wetlands.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/western_temperate_forest.md
+  - path: prompts/world_vault/hollow_crown/travel_and_region_index.md
+  - path: prompts/world_vault/hollow_crown/underworld/underworld.md
+- tag: feywood-glade
+  - count: 12
+  - path: data/world/hollow_crown/surface/feywood_glade/druidic_grove.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade_border.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/heartwood.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/thornveil/thornveil.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/druidic_grove.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade_border.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/heartwood.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/thornveil/thornveil.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.md
+- tag: grasslands
+  - count: 12
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/central_draconic_grasslands.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/grasslands_edge_post.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/central_draconic_grasslands.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/grasslands_edge_post.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.md
+- tag: route-node
+  - count: 12
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade_border.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silverwood_trail.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade_border.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silverwood_trail.md
+- tag: sacred
+  - count: 12
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic-forge.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_forge.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.md
+- tag: supply-village
+  - count: 12
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.yaml
+  - path: data/world/hollow_crown/surface/inner_ramparts/stonemark/stonemark.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.yaml
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.md
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark/stonemark.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.md
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.md
+- tag: core-supply
+  - count: 10
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.yaml
+  - path: data/world/hollow_crown/surface/inner_ramparts/stonemark/stonemark.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.md
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark/stonemark.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.md
+- tag: southern-dark-quadrant
+  - count: 10
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.md
+- tag: western-forest
+  - count: 10
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade_border.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silverwood_trail.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade_border.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silverwood_trail.md
+- tag: dangerous
+  - count: 8
+  - path: data/world/hollow_crown/surface/alpine_peaks/alpine_peaks.yaml
+  - path: data/world/hollow_crown/surface/inner_ramparts/stonemark-deep-cuts.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_proper.yaml
+  - path: data/world/hollow_crown/underworld/crystal_caverns/deephollow-lower-tunnels.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/alpine_peaks.md
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark-deep-cuts.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_proper.md
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow-lower-tunnels.md
+- tag: region-zone
+  - count: 8
+  - path: data/world/hollow_crown/surface/central_body_of_water/southern_lake.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/northeastern_volcanic_highlands.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_body_of_water/southern_lake.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/northeastern_volcanic_highlands.md
+- tag: southern-lake
+  - count: 8
+  - path: data/world/hollow_crown/surface/central_body_of_water/southern_lake.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_body_of_water/southern_lake.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.md
+- tag: surface
+  - count: 8
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/central_draconic_grasslands.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/southern_dark_quadrant.yaml
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/southwestern_mystic_wetlands.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/western_temperate_forest.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/central_draconic_grasslands.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/southern_dark_quadrant.md
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/southwestern_mystic_wetlands.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/western_temperate_forest.md
+- tag: underground
+  - count: 8
+  - path: data/world/hollow_crown/surface/inner_ramparts/stonemark-deep-cuts.yaml
+  - path: data/world/hollow_crown/underworld/crystal_caverns/crystal_caverns.yaml
+  - path: data/world/hollow_crown/underworld/crystal_caverns/deephollow-lower-tunnels.yaml
+  - path: data/world/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark-deep-cuts.md
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/crystal_caverns.md
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow-lower-tunnels.md
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.md
+- tag: northeastern-volcanic-highlands
+  - count: 7
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/northeastern_volcanic_highlands.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/northeastern_volcanic_highlands.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/infernal_forge.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.md
+- tag: alpine
+  - count: 6
+  - path: data/world/hollow_crown/surface/alpine_peaks/alpine-pass.yaml
+  - path: data/world/hollow_crown/surface/inner_ramparts/glacial-stream-crossing.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/ironwood-ridge.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/alpine-pass.md
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/glacial-stream-crossing.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/ironwood-ridge.md
+- tag: alpine-peaks
+  - count: 6
+  - path: data/world/hollow_crown/surface/alpine_peaks/alpine_peaks.yaml
+  - path: data/world/hollow_crown/surface/inner_ramparts/stonemark-deep-cuts.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/alpine_peaks.md
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/eryndors-lair.md
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/lastmark/lastmark.md
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark-deep-cuts.md
+- tag: bahamut
+  - count: 6
+  - path: data/world/hollow_crown/surface/alpine_peaks/eryndors-lair.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/eryndors-lair.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.md
+- tag: civic
+  - count: 6
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.md
+- tag: crystal-caverns
+  - count: 6
+  - path: data/world/hollow_crown/underworld/crystal_caverns/deephollow-lower-tunnels.yaml
+  - path: data/world/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.yaml
+  - path: data/world/hollow_crown/underworld/varethyns-lair.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow-lower-tunnels.md
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.md
+  - path: prompts/world_vault/hollow_crown/underworld/varethyns-lair.md
+- tag: dragon-guard
+  - count: 6
+  - path: data/world/hollow_crown/surface/alpine_peaks/lastmark/lastmark.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/lastmark/lastmark.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.md
+- tag: dragonborn-heavy
+  - count: 6
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.md
+- tag: hazard
+  - count: 6
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.yaml
+  - path: data/world/hollow_crown/underworld/crystal_caverns/crystal_caverns.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.md
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/crystal_caverns.md
+- tag: hollow-crown
+  - count: 6
+  - path: data/world/_template.yaml
+  - path: data/world/hollow_crown/hollow_crown.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/lantern-and-mule.yaml
+  - path: prompts/world_vault/hollow_crown/hollow_crown.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/lantern_and_mule.md
+- tag: lair
+  - count: 6
+  - path: data/world/hollow_crown/surface/alpine_peaks/eryndors-lair.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml
+  - path: data/world/hollow_crown/underworld/varethyns-lair.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/eryndors-lair.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md
+  - path: prompts/world_vault/hollow_crown/underworld/varethyns-lair.md
+- tag: pilgrimage
+  - count: 6
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.md
+- tag: placeholder
+  - count: 6
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/draconic_grasslands_edge.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_proper.yaml
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/valley_edge_overlook.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/draconic_grasslands_edge.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_proper.md
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/valley_edge_overlook.md
+- tag: restricted
+  - count: 6
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.md
+- tag: rift-of-discord
+  - count: 6
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.md
+- tag: subterranean
+  - count: 6
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic-forge.yaml
+  - path: data/world/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.yaml
+  - path: data/world/hollow_crown/underworld/underworld.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_forge.md
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.md
+  - path: prompts/world_vault/hollow_crown/underworld/underworld.md
+- tag: varethyn
+  - count: 6
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.yaml
+  - path: data/world/hollow_crown/underworld/varethyns-lair.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.md
+  - path: prompts/world_vault/hollow_crown/underworld/varethyns-lair.md
+- tag: vigil-patrol
+  - count: 6
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.md
+- tag: agricultural
+  - count: 4
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.md
+- tag: amethyst
+  - count: 4
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.yaml
+  - path: data/world/hollow_crown/underworld/varethyns-lair.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.md
+  - path: prompts/world_vault/hollow_crown/underworld/varethyns-lair.md
+- tag: buffer-zone
+  - count: 4
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.md
+- tag: ceremonial
+  - count: 4
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic-forge.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_forge.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.md
+- tag: corruption-adjacent
+  - count: 4
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.md
+- tag: council-seat
+  - count: 4
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/thornveil/thornveil.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/thornveil/thornveil.md
+- tag: discordant-war-legacy
+  - count: 4
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.md
+- tag: discovery-gated
+  - count: 4
+  - path: data/world/hollow_crown/surface/alpine_peaks/eryndors-lair.yaml
+  - path: data/world/hollow_crown/underworld/varethyns-lair.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/eryndors-lair.md
+  - path: prompts/world_vault/hollow_crown/underworld/varethyns-lair.md
+- tag: dracelune
+  - count: 4
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/lantern-and-mule.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/lantern_and_mule.md
+- tag: elven-sacred
+  - count: 4
+  - path: data/world/hollow_crown/surface/feywood_glade/druidic_grove.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/heartwood.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/druidic_grove.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/heartwood.md
+- tag: food-belt
+  - count: 4
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.md
+- tag: forest
+  - count: 4
+  - path: data/world/hollow_crown/surface/western_temperate_forest/ironwood-ridge.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/western_temperate_forest.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/ironwood-ridge.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/western_temperate_forest.md
+- tag: forge
+  - count: 4
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic-forge.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/infernal_forge.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_forge.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/infernal_forge.md
+- tag: geography
+  - count: 4
+  - path: data/world/hollow_crown/coarse_grid_map.yaml
+  - path: data/world/hollow_crown/travel_and_region_index.yaml
+  - path: prompts/world_vault/hollow_crown/coarse_grid_map.md
+  - path: prompts/world_vault/hollow_crown/travel_and_region_index.md
+- tag: heartwood
+  - count: 4
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/heartwood.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/heartwood.md
+- tag: highlands
+  - count: 4
+  - path: data/world/hollow_crown/surface/inner_ramparts/inner_ramparts.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/northeastern_volcanic_highlands.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/inner_ramparts.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/northeastern_volcanic_highlands.md
+- tag: inner-ramparts
+  - count: 4
+  - path: data/world/hollow_crown/surface/alpine_peaks/eryndors-lair.yaml
+  - path: data/world/hollow_crown/surface/alpine_peaks/lastmark/lastmark.yaml
+  - path: data/world/hollow_crown/surface/inner_ramparts/stonemark/stonemark.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark/stonemark.md
+- tag: liminal
+  - count: 4
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade_border.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade_border.md
+- tag: living-architecture
+  - count: 4
+  - path: data/world/hollow_crown/surface/feywood_glade/thornveil/thornveil.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/thornveil/thornveil.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.md
+- tag: perimeter-corridor
+  - count: 4
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.md
+- tag: platinum-acolytes
+  - count: 4
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.md
+- tag: psionic
+  - count: 4
+  - path: data/world/hollow_crown/underworld/crystal_caverns/crystal_caverns.yaml
+  - path: data/world/hollow_crown/underworld/crystal_caverns/deephollow-lower-tunnels.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/crystal_caverns.md
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow-lower-tunnels.md
+- tag: ptarian-pact
+  - count: 4
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.yaml
+  - path: data/world/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.md
+  - path: prompts/world_vault/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.md
+- tag: sacred-site
+  - count: 4
+  - path: data/world/hollow_crown/surface/feywood_glade/druidic_grove.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/heartwood.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/druidic_grove.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/heartwood.md
+- tag: sacred-waters
+  - count: 4
+  - path: data/world/hollow_crown/surface/central_body_of_water/southern_lake.yaml
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_body_of_water/southern_lake.md
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.md
+- tag: settlement
+  - count: 4
+  - path: data/world/hollow_crown/surface/feywood_glade/thornveil/thornveil.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/thornveil/thornveil.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.md
+- tag: shadowed-hollows
+  - count: 4
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_proper.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_proper.md
+- tag: silverwood
+  - count: 4
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.yaml
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silverwood_trail.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.md
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silverwood_trail.md
+- tag: threshold
+  - count: 4
+  - path: data/world/hollow_crown/surface/alpine_peaks/wardline-threshold.yaml
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade_border.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/wardline-threshold.md
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade_border.md
+- tag: tiamat
+  - count: 4
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.yaml
+  - path: data/world/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.md
+  - path: prompts/world_vault/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.md
+- tag: volcanic
+  - count: 4
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/northeastern_volcanic_highlands.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/northeastern_volcanic_highlands.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md
+- tag: volcanic-highlands
+  - count: 4
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/infernal_forge.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.yaml
+- tag: warden-training
+  - count: 4
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.md
+- tag: wardens
+  - count: 4
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.yaml
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.md
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.md
+- tag: water
+  - count: 4
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.yaml
+  - path: data/world/hollow_crown/surface/inner_ramparts/glacial-stream-crossing.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.md
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/glacial-stream-crossing.md
+- tag: wetland-edge
+  - count: 4
+  - path: data/world/hollow_crown/surface/alpine_peaks/misty-descent.yaml
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/misty-descent.md
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.md
+- tag: wilderness
+  - count: 4
+  - path: data/world/hollow_crown/surface/alpine_peaks/alpine_peaks.yaml
+  - path: data/world/hollow_crown/underworld/crystal_caverns/deephollow-lower-tunnels.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/alpine_peaks.md
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow-lower-tunnels.md
+- tag: zarkeros
+  - count: 4
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.md
+- tag: active-corruption
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.md
+- tag: active-seal
+  - count: 2
+  - path: data/world/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.md
+- tag: administration
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.md
+- tag: aeries
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.md
+- tag: alchemy
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.md
+- tag: amplification
+  - count: 2
+  - path: data/world/hollow_crown/underworld/crystal_caverns/crystal_caverns.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/crystal_caverns.md
+- tag: ancient
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/heartwood.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/heartwood.md
+- tag: ancient-city
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/thornveil/thornveil.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/thornveil/thornveil.md
+- tag: ancient-grove
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/druidic_grove.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/druidic_grove.md
+- tag: animals-tolerated
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/lantern-and-mule.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/lantern_and_mule.md
+- tag: arcane
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.md
+- tag: arcane-materials
+  - count: 2
+  - path: data/world/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.md
+- tag: arch-scholar
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.md
+- tag: ardrynn
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.md
+- tag: ashfield
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.md
+- tag: ashfield-fields
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.md
+- tag: bayou
+  - count: 2
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.md
+- tag: beneath-hollows
+  - count: 2
+  - path: data/world/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.md
+- tag: border
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/alpine_peaks.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/alpine_peaks.md
+- tag: border-fort
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/lastmark/lastmark.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/lastmark/lastmark.md
+- tag: bottomless-pit
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.md
+- tag: brackenmoor
+  - count: 2
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.md
+- tag: bridge
+  - count: 2
+  - path: data/world/hollow_crown/surface/inner_ramparts/glacial-stream-crossing.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/glacial-stream-crossing.md
+- tag: bronze-dragon
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.md
+- tag: bureaucracy
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.md
+- tag: canonical
+  - count: 2
+  - path: data/world/hollow_crown/coarse_grid_map.yaml
+  - path: prompts/world_vault/hollow_crown/coarse_grid_map.md
+- tag: canonical-realm
+  - count: 2
+  - path: data/world/hollow_crown/hollow_crown.yaml
+  - path: prompts/world_vault/hollow_crown/hollow_crown.md
+- tag: capital
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.md
+- tag: carved-fortress
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.md
+- tag: carved-stone
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/lastmark/lastmark.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/lastmark/lastmark.md
+- tag: ceremonial-site
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/druidic_grove.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/druidic_grove.md
+- tag: chromatic-heritage
+  - count: 2
+  - path: data/world/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.md
+- tag: cinderpit
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.md
+- tag: civic-core
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.md
+- tag: coal
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.md
+- tag: college-town
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.md
+- tag: conservatory
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.md
+- tag: contemplative
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.md
+- tag: corrupted-forest
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.md
+- tag: corrupted-land
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.md
+- tag: council
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.md
+- tag: council-ceremonial
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/heartwood.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/heartwood.md
+- tag: crystal
+  - count: 2
+  - path: data/world/hollow_crown/underworld/crystal_caverns/crystal_caverns.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/crystal_caverns.md
+- tag: crystal-caverns-adjacent
+  - count: 2
+  - path: data/world/hollow_crown/surface/inner_ramparts/stonemark/stonemark.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark/stonemark.md
+- tag: crystalhaven
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.md
+- tag: cult
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.md
+- tag: cultivation
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.md
+- tag: cultural-anchor
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_body_of_water/southern_lake.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_body_of_water/southern_lake.md
+- tag: cultural-crossroads
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.md
+- tag: cut-stone
+  - count: 2
+  - path: data/world/hollow_crown/surface/inner_ramparts/stonemark/stonemark.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark/stonemark.md
+- tag: dark-quadrant
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/southern_dark_quadrant.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/southern_dark_quadrant.md
+- tag: deephollow
+  - count: 2
+  - path: data/world/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.md
+- tag: deniable
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.md
+- tag: dewhollow
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.md
+- tag: diplomacy
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/eryndors-lair.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/eryndors-lair.md
+- tag: diplomatic-buffer
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.md
+- tag: disorienting
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/misty-descent.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/misty-descent.md
+- tag: disputed
+  - count: 2
+  - path: data/world/hollow_crown/surface/inner_ramparts/stonemark-deep-cuts.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark-deep-cuts.md
+- tag: draconic-breath
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic-forge.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_forge.md
+- tag: draconic-grasslands
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.md
+- tag: dragons
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.md
+- tag: druidic-grove
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/druidic_grove.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/druidic_grove.md
+- tag: druidic-practice
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/druidic_grove.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/druidic_grove.md
+- tag: dwarvish-heavy
+  - count: 2
+  - path: data/world/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.md
+- tag: edge-settlement
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.md
+- tag: education
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.md
+- tag: elite
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.md
+- tag: elven-capital
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/thornveil/thornveil.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/thornveil/thornveil.md
+- tag: elven-homeland
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade.md
+- tag: elven-settlement
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.md
+- tag: enchanted-craft
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.md
+- tag: enchanted-mirrors
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.md
+- tag: entry-point
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/alpine-pass.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/alpine-pass.md
+- tag: eryndor
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/eryndors-lair.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/eryndors-lair.md
+- tag: escarpment
+  - count: 2
+  - path: data/world/hollow_crown/surface/inner_ramparts/inner_ramparts.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/inner_ramparts.md
+- tag: exposed
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/alpine-pass.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/alpine-pass.md
+- tag: farmland
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.md
+- tag: feywood-adjacent
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.md
+- tag: feywood-center
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/heartwood.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/heartwood.md
+- tag: feywood-glade-border
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade_border.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade_border.md
+- tag: feywood-outfitting
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.md
+- tag: feywood-threshold
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.md
+- tag: fishing-grounds
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_body_of_water/southern_lake.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_body_of_water/southern_lake.md
+- tag: fishing-village
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.md
+- tag: forbidden
+  - count: 2
+  - path: data/world/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.md
+- tag: forest-road
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silverwood_trail.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silverwood_trail.md
+- tag: fortified-corridor
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.md
+- tag: fortress
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md
+- tag: founding-dispute
+  - count: 2
+  - path: data/world/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.md
+- tag: frontier-post
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/grasslands_edge_post.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/grasslands_edge_post.md
+- tag: gardens
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.md
+- tag: gathering-village
+  - count: 2
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.md
+- tag: gold-dragon
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/eryndors-lair.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/eryndors-lair.md
+- tag: governance
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.md
+- tag: grange
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield_fields.md
+- tag: greenshield-headquarters
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/thornveil/thornveil.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/thornveil/thornveil.md
+- tag: greymantle
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.md
+- tag: guilds
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.md
+- tag: hall-of-guides
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade_border.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade_border.md
+- tag: hall-of-scales
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.md
+- tag: harvest
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.md
+- tag: healing
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.md
+- tag: heartmass
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.md
+- tag: heartstone
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.md
+- tag: heartwarden-site
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/heartwood.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/heartwood.md
+- tag: heartwarden-training
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/druidic_grove.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/druidic_grove.md
+- tag: heartwood-protector
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/thornveil/thornveil.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/thornveil/thornveil.md
+- tag: herbalism
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.md
+- tag: hidden
+  - count: 2
+  - path: data/world/hollow_crown/underworld/varethyns-lair.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/varethyns-lair.md
+- tag: high-altitude
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/alpine-pass.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/alpine-pass.md
+- tag: high-sanctum
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.md
+- tag: hunting
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.md
+- tag: index
+  - count: 2
+  - path: data/world/hollow_crown/travel_and_region_index.yaml
+  - path: prompts/world_vault/hollow_crown/travel_and_region_index.md
+- tag: industrial
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.md
+- tag: industrial-corridor
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.md
+- tag: industry
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/infernal_forge.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/infernal_forge.md
+- tag: infernal-forge
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.md
+- tag: infernal-forge-guild
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/infernal_forge.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/infernal_forge.md
+- tag: inn
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/lantern-and-mule.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/lantern_and_mule.md
+- tag: lakefront
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.md
+- tag: landing-platforms
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.md
+- tag: lastmark
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/lastmark/lastmark.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/lastmark/lastmark.md
+- tag: lava
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.md
+- tag: living-heart
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/heartwood.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/heartwood.md
+- tag: lodging
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/lantern-and-mule.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/lantern_and_mule.md
+- tag: logging
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.md
+- tag: lore-significant
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.md
+- tag: low-trust
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.md
+- tag: magical-barrier
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/wardline-threshold.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/wardline-threshold.md
+- tag: magical-ecology
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade.md
+- tag: magical-education
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.md
+- tag: magical-flora
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dewhollow/dewhollow.md
+- tag: map
+  - count: 2
+  - path: data/world/hollow_crown/coarse_grid_map.yaml
+  - path: prompts/world_vault/hollow_crown/coarse_grid_map.md
+- tag: market-town
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.md
+- tag: masonry
+  - count: 2
+  - path: data/world/hollow_crown/surface/inner_ramparts/stonemark/stonemark.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark/stonemark.md
+- tag: mediation
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.md
+- tag: meditation
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.md
+- tag: mercantile-hub
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.md
+- tag: metallurgy
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.md
+- tag: metropolitan
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.md
+- tag: military
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/lastmark/lastmark.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/lastmark/lastmark.md
+- tag: mining
+  - count: 2
+  - path: data/world/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.md
+- tag: mining-village
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.md
+- tag: mirefall
+  - count: 2
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.md
+- tag: mirefall-upstream
+  - count: 2
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.md
+- tag: mist
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/misty-descent.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/misty-descent.md
+- tag: mixed-species
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.md
+- tag: monastery
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.md
+- tag: mosaic
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_hall.md
+- tag: mountain-path
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.md
+- tag: music
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.md
+- tag: narrative-gate
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/wardline-threshold.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/wardline-threshold.md
+- tag: necrotic
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.md
+- tag: open-air
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.md
+- tag: ore
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.md
+- tag: outlaw
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.md
+- tag: panoramic
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.md
+- tag: patchwork
+  - count: 2
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.md
+- tag: petitions
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.md
+- tag: platinum-accord
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.md
+- tag: platinum-flame
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/platinum_heart.md
+- tag: platinum-oath-approach
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.md
+- tag: platinum-oath-monastery
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.md
+- tag: platinum-vein
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/stronghold_of_drakenvale.md
+- tag: pools
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.md
+- tag: predates-realm
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade.md
+- tag: ptarian-alliance
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade_border.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade_border.md
+- tag: ptarian-sovereign
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade.md
+- tag: public-access
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.md
+- tag: quarry
+  - count: 2
+  - path: data/world/hollow_crown/surface/inner_ramparts/stonemark-deep-cuts.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark-deep-cuts.md
+- tag: quarry-village
+  - count: 2
+  - path: data/world/hollow_crown/surface/inner_ramparts/stonemark/stonemark.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark/stonemark.md
+- tag: quiet
+  - count: 2
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.md
+- tag: rare-herbs
+  - count: 2
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.md
+- tag: rare-specimens
+  - count: 2
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.md
+- tag: realm-facing
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.md
+- tag: records
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.md
+- tag: red-dragon
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md
+- tag: red_dragon
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md
+- tag: reflection
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.md
+- tag: reflective-pools
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.md
+- tag: refuge
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.md
+- tag: region
+  - count: 2
+  - path: data/world/hollow_crown/surface/inner_ramparts/inner_ramparts.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/inner_ramparts.md
+- tag: resonance-crystals
+  - count: 2
+  - path: data/world/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow/deephollow.md
+- tag: rest-point
+  - count: 2
+  - path: data/world/hollow_crown/surface/inner_ramparts/glacial-stream-crossing.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/glacial-stream-crossing.md
+- tag: restoratives
+  - count: 2
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.md
+- tag: retreat
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/crystalhaven/crystalhaven.md
+- tag: rift-of-discord-edge
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord_edge.md
+- tag: ritual
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/sacred_pools.md
+- tag: ritual-craft
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic-forge.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/draconic_forge.md
+- tag: routes
+  - count: 2
+  - path: data/world/hollow_crown/surface/inner_ramparts/inner_ramparts.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/inner_ramparts.md
+- tag: ruined-keep
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.md
+- tag: sacred-land
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade.md
+- tag: sacred-pools-outflow
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_body_of_water/southern_lake.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_body_of_water/southern_lake.md
+- tag: sanctioned-access
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/eryndors-lair.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/eryndors-lair.md
+- tag: sanctioned-crossing
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/feywood_glade_border.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/feywood_glade_border.md
+- tag: sanctioned-entry
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/lastmark/lastmark.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/lastmark/lastmark.md
+- tag: sanctum
+  - count: 2
+  - path: data/world/hollow_crown/underworld/varethyns-lair.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/varethyns-lair.md
+- tag: scalemere
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.md
+- tag: sealed
+  - count: 2
+  - path: data/world/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.md
+- tag: secured-route
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.md
+- tag: shadow
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows.md
+- tag: shadow-trade
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.md
+- tag: shadowed-hollows-approach
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_approach.md
+- tag: shelter
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/ironwood-ridge.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/ironwood-ridge.md
+- tag: shrine
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/eryndors-lair.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/eryndors-lair.md
+- tag: silent-grove
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/druidic_grove.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/druidic_grove.md
+- tag: silvercut
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.md
+- tag: silverwood-trail
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silverwood_trail.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silverwood_trail.md
+- tag: southern
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/southern_dark_quadrant.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/southern_dark_quadrant.md
+- tag: southwest
+  - count: 2
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/southwestern_mystic_wetlands.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/southwestern_mystic_wetlands.md
+- tag: specialty-metals
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.md
+- tag: sstc
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.md
+- tag: sstc-customs
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/lastmark/lastmark.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/lastmark/lastmark.md
+- tag: stewards
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/administrative_quarter.md
+- tag: stilt-city
+  - count: 2
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.md
+- tag: stonemark
+  - count: 2
+  - path: data/world/hollow_crown/surface/inner_ramparts/stonemark/stonemark.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark/stonemark.md
+- tag: student-traffic
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/ashfield/ashfield.md
+- tag: supply-route
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.md
+- tag: temple-to-tiamat
+  - count: 2
+  - path: data/world/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.md
+- tag: theoretical
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/arcane_conservatory.md
+- tag: thermal-environment
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.md
+- tag: thornveil
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/thornveil/thornveil.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/thornveil/thornveil.md
+- tag: timber-village
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silvercut/silvercut.md
+- tag: trade
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/drakenvale_city/drakenvale_city.md
+- tag: trade-hub
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/dracelune.md
+- tag: trade-route
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/silverwood_trail.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/silverwood_trail.md
+- tag: trade-waypoint
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.md
+- tag: transition
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/misty-descent.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/misty-descent.md
+- tag: transition-biome
+  - count: 2
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/brackenmoor/brackenmoor.md
+- tag: transitional
+  - count: 2
+  - path: data/world/hollow_crown/surface/inner_ramparts/inner_ramparts.yaml
+  - path: prompts/world_vault/hollow_crown/surface/inner_ramparts/inner_ramparts.md
+- tag: transport-artery
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_body_of_water/southern_lake.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_body_of_water/southern_lake.md
+- tag: travel
+  - count: 2
+  - path: data/world/hollow_crown/travel_and_region_index.yaml
+  - path: prompts/world_vault/hollow_crown/travel_and_region_index.md
+- tag: travelers
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/lantern-and-mule.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/lantern_and_mule.md
+- tag: traversal
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/alpine_peaks.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/alpine_peaks.md
+- tag: underworld
+  - count: 2
+  - path: data/world/hollow_crown/underworld/underworld.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/underworld.md
+- tag: university
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/hall_of_scales/hall_of_scales.md
+- tag: vaelmere
+  - count: 2
+  - path: data/world/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.yaml
+  - path: prompts/world_vault/hollow_crown/surface/feywood_glade/vaelmere/vaelmere.md
+- tag: vigil
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_monastery.md
+- tag: vigil-maintained
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/platinum_oath_approach.md
+- tag: vigil-maintenance
+  - count: 2
+  - path: data/world/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.md
+- tag: vindrael-sacrifice-site
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/rift_of_discord.md
+- tag: ward
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/wardline-threshold.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/wardline-threshold.md
+- tag: ward-controlled
+  - count: 2
+  - path: data/world/hollow_crown/surface/alpine_peaks/lastmark/lastmark.yaml
+  - path: prompts/world_vault/hollow_crown/surface/alpine_peaks/lastmark/lastmark.md
+- tag: warden-of-greymantle
+  - count: 2
+  - path: data/world/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/greymantle/greymantle.md
+- tag: warden-patrol
+  - count: 2
+  - path: data/world/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.yaml
+  - path: prompts/world_vault/hollow_crown/underworld/beneath_southern_dark_quadrant/temple_to_tiamat.md
+- tag: wards
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/aeries.md
+- tag: water-body
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_body_of_water/southern_lake.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_body_of_water/southern_lake.md
+- tag: western
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/western_temperate_forest.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/western_temperate_forest.md
+- tag: wetland
+  - count: 2
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.md
+- tag: wetlands
+  - count: 2
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/southwestern_mystic_wetlands.yaml
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/southwestern_mystic_wetlands.md
+- tag: working-harbor
+  - count: 2
+  - path: data/world/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.yaml
+  - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/scalemere/scalemere.md
+- tag: yeti-territory
+  - count: 2
+  - path: data/world/hollow_crown/surface/western_temperate_forest/ironwood-ridge.yaml
+  - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/ironwood-ridge.md
+- tag: zarkharath
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkharath/zarkharath.md
+- tag: zarkharath-upstream
+  - count: 2
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.yaml
+  - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/cinderpit/cinderpit.md
+- tag: hollow_crown
+  - count: 1
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml
+- tag: mystic-wetlands
+  - count: 1
+  - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.yaml
+- tag: southwestern-mystic-wetlands
+  - count: 1
+  - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/mirefall/mirefall.md
+- tag: volcanic-highlands-trail
+  - count: 1
+  - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/volcanic_highlands_trail.yaml
+- Typos (Levenshtein distance 1 from a more-frequent tag):
+  - tag: hollow-crown
+    - count: 6
+    - match: hollow-crowm
+      - count: 17
+    - path: data/world/_template.yaml
+    - path: data/world/hollow_crown/hollow_crown.yaml
+    - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/lantern-and-mule.yaml
+    - path: prompts/world_vault/hollow_crown/hollow_crown.md
+    - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md
+    - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/lantern_and_mule.md
+  - tag: gardens
+    - count: 2
+    - match: wardens
+      - count: 4
+    - path: data/world/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.yaml
+    - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/stronghold_of_drakenvale/amethyst_vault.md
+- Hyphen/underscore variants of the same stem:
+  - stem: hollow_crown
+    - tag: hollow-crown
+      - count: 6
+      - path: data/world/_template.yaml
+      - path: data/world/hollow_crown/hollow_crown.yaml
+      - path: data/world/hollow_crown/surface/western_temperate_forest/dracelune/lantern-and-mule.yaml
+      - path: prompts/world_vault/hollow_crown/hollow_crown.md
+      - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md
+      - path: prompts/world_vault/hollow_crown/surface/western_temperate_forest/dracelune/lantern_and_mule.md
+    - tag: hollow_crown
+      - count: 1
+      - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml
+  - stem: red_dragon
+    - tag: red-dragon
+      - count: 2
+      - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml
+      - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md
+    - tag: red_dragon
+      - count: 2
+      - path: data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml
+      - path: prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md
+- Authoring meta tags present in canonical data:
+  - tag: placeholder
+    - count: 6
+    - path: data/world/hollow_crown/surface/central_draconic_grasslands/draconic_grasslands_edge.yaml
+    - path: data/world/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_proper.yaml
+    - path: data/world/hollow_crown/surface/southwestern_mystic_wetlands/valley_edge_overlook.yaml
+    - path: prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/draconic_grasslands_edge.md
+    - path: prompts/world_vault/hollow_crown/surface/southern_dark_quadrant/shadowed_hollows/shadowed_hollows_proper.md
+    - path: prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/valley_edge_overlook.md
+  - tag: canonical
+    - count: 2
+    - path: data/world/hollow_crown/coarse_grid_map.yaml
+    - path: prompts/world_vault/hollow_crown/coarse_grid_map.md
+  - tag: canonical-realm
+    - count: 2
+    - path: data/world/hollow_crown/hollow_crown.yaml
+    - path: prompts/world_vault/hollow_crown/hollow_crown.md
+
+## 5. ID case violations
+- none
