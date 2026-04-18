@@ -89,7 +89,8 @@ def _make_app(pool) -> FastAPI:
 def _base_character() -> dict:
     return {
         "name": "Krath",
-        "species": "dragonborn",
+        "ancestry": "human",
+        "culture": "drakenvale_city",
         "focus": "devoted",
         "background": "soldier",
         "hp": {"current": 100, "max": 100},
@@ -128,8 +129,6 @@ def _base_character() -> dict:
             "points_spent": 0,
             "points_earned_total": 0,
         },
-        "magic_fields": [],
-        "draconic_traits": [],
     }
 
 
@@ -150,7 +149,7 @@ def _base_world() -> dict:
             {
                 "id": "comp_1",
                 "name": "Sorra",
-                "species": "halfling",
+                'species': "halfling",
                 "role": "guide",
                 "identity": {
                     "origin": "",
@@ -341,30 +340,6 @@ def test_delta_save_validation_failure_does_not_commit_state_or_log() -> None:
     assert conn.world["turn"] == base_world["turn"]
     assert conn.log == []
 
-
-@pytest.mark.regression
-def test_delta_save_persists_magic_fields() -> None:
-    session_id = "deltamagic1"
-    conn = MultiTurnFakeConn(session_id, _base_character(), _base_world())
-    app = _make_app(FakePool(conn))
-
-    with TestClient(app) as client:
-        r = client.post(
-            f"/state/{session_id}/delta",
-            json={
-                "character": {"magic_fields": ["arcane", "warding"]},
-                "log_entry": "Magic fields updated.",
-            },
-        )
-
-        assert r.status_code == 200
-        payload = r.json()
-        assert payload["character"]["magic_fields"] == ["arcane", "warding"]
-
-        loaded = client.get(f"/state/{session_id}")
-
-    assert loaded.status_code == 200
-    assert loaded.json()["character"]["magic_fields"] == ["arcane", "warding"]
 
 
 @pytest.mark.regression

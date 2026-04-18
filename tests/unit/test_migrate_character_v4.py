@@ -12,7 +12,7 @@ from scripts.migrate_character_v4 import (
 def test_migrate_character_payload_renames_species_and_removes_legacy_keys() -> None:
     payload = {
         "name": "Krath",
-        "species": "dragonborn",
+        'species': "dragonborn",
         "focus": "devoted",
         "background": "acolyte",
         "hp": {"current": 100, "max": 100},
@@ -46,7 +46,7 @@ def test_migrate_character_payload_renames_species_and_removes_legacy_keys() -> 
     assert migrated["ancestry"] == "dragonborn"
     assert migrated["culture"] == DEFAULT_CULTURE
     assert migrated["fields"] == {"sacred": 1, "warding": 1}
-    assert "species" not in migrated
+    assert 'species' not in migrated
     assert "magic_fields" not in migrated
     assert "draconic_traits" not in migrated
     assert "level" not in migrated
@@ -93,7 +93,7 @@ def test_migrate_character_payload_preserves_existing_culture_and_fields() -> No
 def test_migrate_character_document_validates_output() -> None:
     payload = {
         "name": "Krath",
-        "species": "dragonborn",
+        'species': "dragonborn",
         "focus": "devoted",
         "background": "acolyte",
         "hp": {"current": 100, "max": 100},

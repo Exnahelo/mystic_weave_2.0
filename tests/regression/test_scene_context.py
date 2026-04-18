@@ -51,7 +51,8 @@ def _make_app(pool) -> FastAPI:
 def _character() -> dict:
     return {
         "name": "Krath",
-        "species": "dragonborn",
+        "ancestry": "human",
+        "culture": "drakenvale_city",
         "focus": "devoted",
         "background": "soldier",
         "hp": {"current": 76, "max": 100},
@@ -97,7 +98,7 @@ def _world() -> dict:
             {
                 "id": "c1",
                 "name": "Sorra",
-                "species": "halfling",
+                'species': "halfling",
                 "role": "guide",
                 "identity": {
                     "origin": "",

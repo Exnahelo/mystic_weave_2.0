@@ -1,0 +1,185 @@
+# Post-Cleanup Audit — 2026-04-18
+
+## 0. Play-readiness verdict
+- Verdict: No — not ready for narrator play-testing.
+- `tests/loop_test.py` against a running local API: failed.
+  - `tests/loop_test.py`
+  - `/tmp/mw_audit_uvicorn.log`
+  - `http://localhost:8000/version` returned `api_version: 4.0.0`
+  - `tests/loop_test.py` observed empty ancestry/species data from `GET /options`
+  - `tests/loop_test.py` observed `500` responses from `POST /location`
+  - `tests/loop_test.py` observed `500` responses from `POST /session/new`
+  - `tests/loop_test.py` observed `500` responses from `GET /location/{location_id}` and `GET /location/{location_id}/connections`
+  - `tests/loop_test.py` observed `500` responses from invalid-input checks for `/session/new` and `/character/create`
+- Endpoints referenced in `prompts/engine.md` exist in route files.
+  - `prompts/engine.md`
+  - `api/routes/character.py`
+  - `api/routes/location.py`
+  - `api/routes/options.py`
+  - `api/routes/roll.py`
+  - `api/routes/scene.py`
+  - `api/routes/session.py`
+  - `api/routes/state.py`
+- Production `/version` is in sync with the current `main` commit SHA.
+  - `https://mysticweave-production.up.railway.app/version` → `git_sha=6bec194c86beaa43881dc19db9d05aaad9a37810`
+  - `main` → `6bec194`
+
+## 1. API and schema
+- Version consistency scan.
+  - `api/main.py:43` → `4.1.0`
+  - `schemas/openapi.yaml:7` → `4.1.0`
+  - `tests/contract/test_openapi_contract.py:30` → `4.1.0`
+  - `README.md:92` → `3.4.0`
+  - `README.md:147` → `3.4.0`
+  - `README.md:265` → `3.4.0`
+- TODO/FIXME/XXX comments in `api/` and `core/`.
+  - _None currently._
+- Route handlers with no contract-test path coverage in `tests/contract/test_openapi_contract.py`.
+  - `api/routes/location.py` — `GET /location/{location_id}`
+  - `api/routes/location.py` — `GET /location/{location_id}/connections`
+  - `api/routes/roll.py` — `POST /roll`
+  - `api/routes/scene.py` — `GET /scene/{session_id}`
+  - `api/routes/state.py` — `POST /state/{session_id}`
+  - `api/routes/tags.py` — `GET /tags`
+
+## 2. Test health
+- Test-file counts from `pytest --collect-only tests`.
+  - `tests/conftest.py` — `0`
+  - `tests/contract/test_openapi_contract.py` — `8`
+  - `tests/loop_test.py` — `0`
+  - `tests/regression/test_endpoint_validation.py` — `18`
+  - `tests/regression/test_multi_turn_persistence.py` — `8`
+  - `tests/regression/test_scene_context.py` — `2`
+  - `tests/unit/test_migrate_character_v4.py` — `4`
+  - `tests/unit/test_pacing_model.py` — `5`
+  - `tests/unit/test_roll_logic.py` — `2`
+  - `tests/unit/test_seed_character.py` — `5`
+  - `tests/unit/test_state_delta_models.py` — `6`
+  - `tests/unit/test_state_merge.py` — `6`
+- `xfail`, `skip`, `skipif` markers.
+  - _None currently._
+- Remaining `"species"` field-name occurrences in `tests/`.
+  - `tests/unit/test_migrate_character_v4.py:15`
+  - `tests/unit/test_migrate_character_v4.py:96`
+  - `tests/loop_test.py:57`
+  - `tests/loop_test.py:268`
+  - `tests/loop_test.py:342`
+  - `tests/loop_test.py:534`
+  - `tests/loop_test.py:591`
+  - `tests/loop_test.py:600`
+  - `tests/loop_test.py:609`
+  - `tests/loop_test.py:620`
+  - `tests/loop_test.py:629`
+  - `tests/loop_test.py:639`
+  - `tests/regression/test_scene_context.py:54`
+  - `tests/regression/test_scene_context.py:100`
+  - `tests/regression/test_endpoint_validation.py:129`
+  - `tests/regression/test_endpoint_validation.py:228`
+  - `tests/regression/test_endpoint_validation.py:247`
+  - `tests/regression/test_endpoint_validation.py:687`
+  - `tests/regression/test_multi_turn_persistence.py:92`
+  - `tests/regression/test_multi_turn_persistence.py:153`
+- `TestClient` / `FakePool` POST bodies missing one or more required fields (`character_name`, `ancestry`, `culture`, `focus`, `background`).
+  - `tests/loop_test.py:531` — `/character/create` — missing `ancestry`, `character_name`, `culture`
+  - `tests/loop_test.py:589` — `/session/new` — missing `ancestry`, `culture`
+  - `tests/loop_test.py:598` — `/session/new` — missing `ancestry`, `culture`
+  - `tests/loop_test.py:607` — `/session/new` — missing `ancestry`, `culture`
+  - `tests/loop_test.py:617` — `/character/create` — missing `ancestry`, `character_name`, `culture`
+  - `tests/loop_test.py:627` — `/session/new` — missing `ancestry`, `culture`
+  - `tests/loop_test.py:637` — `/session/new` — missing `ancestry`, `culture`
+  - `tests/regression/test_endpoint_validation.py:224` — `/session/new` — missing `ancestry`, `culture`
+  - `tests/regression/test_endpoint_validation.py:243` — `/session/new` — missing `ancestry`, `culture`
+  - `tests/regression/test_endpoint_validation.py:683` — `/session/new` — missing `ancestry`, `culture`
+
+## 3. Content integrity
+- Filename-ID parity failures in `data/world/`.
+  - `data/world/hollow_crown/surface/alpine_peaks/alpine-pass.yaml`
+  - `data/world/hollow_crown/surface/alpine_peaks/eryndors-lair.yaml`
+  - `data/world/hollow_crown/surface/alpine_peaks/misty-descent.yaml`
+  - `data/world/hollow_crown/surface/alpine_peaks/wardline-threshold.yaml`
+  - `data/world/hollow_crown/surface/inner_ramparts/glacial-stream-crossing.yaml`
+  - `data/world/hollow_crown/surface/inner_ramparts/stonemark-deep-cuts.yaml`
+  - `data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml`
+  - `data/world/hollow_crown/surface/western_temperate_forest/ironwood-ridge.yaml`
+  - `data/world/hollow_crown/underworld/crystal_caverns/deephollow-lower-tunnels.yaml`
+  - `data/world/hollow_crown/underworld/varethyns-lair.yaml`
+- Filename-ID parity failures in `prompts/world_vault/`.
+  - `prompts/world_vault/hollow_crown/surface/alpine_peaks/alpine-pass.md`
+  - `prompts/world_vault/hollow_crown/surface/alpine_peaks/eryndors-lair.md`
+  - `prompts/world_vault/hollow_crown/surface/alpine_peaks/misty-descent.md`
+  - `prompts/world_vault/hollow_crown/surface/alpine_peaks/wardline-threshold.md`
+  - `prompts/world_vault/hollow_crown/surface/inner_ramparts/glacial-stream-crossing.md`
+  - `prompts/world_vault/hollow_crown/surface/inner_ramparts/stonemark-deep-cuts.md`
+  - `prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md`
+  - `prompts/world_vault/hollow_crown/surface/western_temperate_forest/ironwood-ridge.md`
+  - `prompts/world_vault/hollow_crown/underworld/crystal_caverns/deephollow-lower-tunnels.md`
+  - `prompts/world_vault/hollow_crown/underworld/varethyns-lair.md`
+- Tag-variant scan.
+  - Hyphen/underscore duplicates: _None currently._
+  - Levenshtein-1 candidates: `gardens` vs `wardens`
+- Files still containing `Zarkeros's Fortress`.
+  - `data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml`
+  - `prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md`
+- Files still containing `hollow-crowm`.
+  - `docs/audit_convention_drift.md`
+- YAML files with empty `tags` or missing `name`.
+  - `data/world/hollow_crown/surface/central_draconic_grasslands/draconic_grasslands_edge.yaml` — empty `tags`
+  - `data/world/hollow_crown/surface/southwestern_mystic_wetlands/valley_edge_overlook.yaml` — empty `tags`
+  - Missing `name`: _None currently._
+- Orphaned mirrors.
+  - Orphaned YAML mirrors: _None currently._
+  - Orphaned Markdown mirrors: _None currently._
+
+## 4. Documentation freshness
+- `README.md` endpoint list vs actual routes.
+  - `README.md` missing `GET /tags` from `api/routes/tags.py`
+  - `README.md:201` sample `POST /session/new` payload still uses `species`
+  - `README.md:201` sample `POST /session/new` payload omits `ancestry` and `culture`
+- `README.md` project-structure section vs actual tree.
+  - `README.md:107` lists `data/characters/species.json`; actual file is `data/characters/ancestry.json`
+  - `README.md:124` lists `data/magic/fields.json`; path absent
+  - `README.md:129` lists `data/magic/nature.json`; actual file is `data/magic/druidry.json`
+  - `README.md:134` lists `data/magic-spells.json`; path absent
+  - `README.md:136` treats `prompts/` as the runtime world-content authority; canonical runtime world layer is `data/world/`
+  - `README.md:92`
+  - `README.md:147`
+  - `README.md:265`
+- `TESTING.md` vs `.github/workflows/*.yml`.
+  - `TESTING.md:17-18` says pull-request CI runs regression persistence tests; `.github/workflows/ci.yml` does not invoke `tests/regression/test_endpoint_validation.py` or `tests/regression/test_multi_turn_persistence.py`
+  - `TESTING.md:25-27` says nightly includes production contract/options/version verification; `.github/workflows/nightly.yml` does not invoke `scripts/verify_production_contract.py`
+- `OPERATIONAL_RUNBOOK.md` command/path references with no target file.
+  - _None currently._
+
+## 5. CI workflows
+- `.github/workflows/ci.yml`
+  - triggers: `pull_request`, `push` to `main`
+  - jobs: `lint-unit-contract`, `integration-loop`
+  - referenced commands/scripts present: yes
+- `.github/workflows/nightly.yml`
+  - triggers: `schedule`, `workflow_dispatch`
+  - jobs: `nightly-regression`
+  - referenced commands/scripts present: yes
+- `.github/workflows/predeploy.yml`
+  - triggers: `pull_request`, `workflow_dispatch`
+  - jobs: `predeploy-bundle`
+  - referenced commands/scripts present: yes
+- `.github/workflows/production-verify.yml`
+  - triggers: `workflow_dispatch`, `schedule`
+  - jobs: `verify-production`
+  - referenced commands/scripts present: yes
+
+## 6. Deferred features sanity check
+- `TODO.md` — `Restricted Future Builds` reference section present.
+- Multi-agent orchestration.
+  - _No project-source evidence beyond `TODO.md`._
+- Combat subsystem endpoints or models beyond narrative resolution.
+  - `prompts/combat_rules.md`
+  - _No `api/` or `core/` endpoint/model evidence beyond narrative resolution._
+- NPC simulation / scheduling.
+  - _No project-source subsystem evidence beyond `TODO.md` and prose references in prompt/world files._
+- Procedural content generation.
+  - _No project-source evidence beyond `TODO.md`._
+- Vector search or embedding infrastructure.
+  - _No project-source evidence under `api/`, `core/`, `scripts/`, or `tests/`._
+- Multiplayer session coordination.
+  - _No project-source evidence beyond `TODO.md`._

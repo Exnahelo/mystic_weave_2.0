@@ -1,375 +1,57 @@
 # Mystic Weave — TODO
 
-Updated after world expansion, magic system, progression redesign, and item catalog passes.
+Updated after post-cleanup audit — 2026-04-18.
 
 ## ✅ Recently Completed
 
-- [x] Enforce model validation at persistence boundaries for:
-  - [x] `POST /session/new`
-  - [x] `GET/POST /state/{session_id}`
-  - [x] `POST /character/create`
-- [x] Preserve and validate historical v3.1.1 schema blocks end-to-end:
-  - [x] character `identity`, `equipment`, `reputation`
-  - [x] world `companions`, `economy`, `politics`
-- [x] Ensure `Economy.coin` and `Economy.wealth_tier` are enforced via model validation
-- [x] Replace mutable defaults with `Field(default_factory=...)` across affected models
-- [x] Type response models for stronger OpenAPI/schema parity:
-  - [x] `NewSessionResponse.character/world`
-  - [x] `CreateCharacterResponse.character`
-- [x] Fix `/location` UPSERT response semantics:
-  - [x] `201` on create
-  - [x] `200` on update
-  - [x] include both responses in OpenAPI metadata
-- [x] Expand contract/regression coverage:
-  - [x] endpoint schema refs in OpenAPI contract tests
-  - [x] validation regression tests for negative coin and invalid wealth tier
-- [x] Align version/docs consistency items:
-  - [x] `api/main.py` version advanced beyond the historical `3.1.1` release line
-  - [x] `scripts/verify_production_contract.py` checks the current backend release version
-  - [x] README cleanup and `.env.example` added
-- [x] Validation test run passing for hardened scope (`11 passed`)
-- [x] Add Alembic migrations for schema lifecycle (replace ad hoc/manual DB evolution)
-- [x] Add CI guard for OpenAPI drift (`app.openapi()` vs `schemas/openapi.yaml`)
-- [x] Add data/prompt validation gates:
-  - [x] schema checks for `data/*.json`
-  - [x] structural/lint checks for prompt files used in production
-- [x] Strengthen deployment pipeline checks (pre-deploy contract + smoke bundle)
-- [x] Expand end-to-end coverage for multi-turn narrative persistence edge cases
-- [x] Add lightweight operational runbook for local/Railway troubleshooting
-- [x] Add explicit await/validate checkpoints in `prompts/engine.md`
-- [x] Add explicit player-confirmation gates for irreversible outcomes in turn flow
-- [x] Add canonical precedence block in runtime prompts
-- [x] Resolve cross-file canon contradictions
-- [x] Add deterministic tie-break rules for ambiguous domain/tag adjudication
-- [x] Add deterministic state-write order for complex multi-change turns
-- [x] Add standardized handling for sparse/unknown faction reputation data
-- [x] Add global stub-handling policy for unfinished organizations/lore
-- [x] Extend `scripts/validate_prompts.py` checks
-- [x] Add optional `reason` field to `RollRequest` for roll observability
-- [x] Make `LocationResponse.data` typed (`LocationData`) instead of opaque object
-- [x] Upgrade response schemas in `schemas/openapi.yaml` to concrete `$ref` usage
-- [x] Add `required` arrays for key response schemas used by GPT branching
-- [x] Normalize updated nullable fields to OpenAPI 3.1 style (`anyOf` with `null`)
-- [x] Design and write magic system reference
-- [x] Write difficulty reference
-- [x] Write notable items reference
-- [x] Run reciprocity audit on world connections
-- [x] Document intentionally one-way connections
-- [x] Add changelog note and release checkpoint for world topology baseline
-- [x] Redesign progression system — AP-purchased domain advancement, tiered brackets, use-based tags
-- [x] Add reputation growth rules to `world_rules.md` and `engine.md`
-- [x] Coin system redesigned — copper-as-base-unit, stored as integer CD
-- [x] Weapon application tags updated to new taxonomy (Grappling, Melee, Reach, Ranged, Mechanical, Unconventional)
-- [x] Created `prompts/mundane_items_reference.md`
-- [x] Created `prompts/weapons_armor_reference.md`
-- [x] Created `prompts/sstc_operations.md`
-- [x] Created `prompts/magical_items_reference.md`
-- [x] Holy water reclassified — removed from mundane catalog, added to `prompts/magical_items_reference.md`
-- [x] Blessed water added to mundane consumables as sacred preparation at `0 CD`
-- [x] World expanded — 13 new location stubs + 7 wilderness/trail stubs authored and seeded
-- [x] Magic system redesigned — fields as knowledge tags, spells as application tags, access bands, failure model
-- [x] Created `data/magic-spells.json` baseline
-- [x] Added species traits block to dragonborn in `data/charachter-species.json`
-- [x] Add character payload compatibility support for legacy/expanded keys:
-  - [x] accept deprecated `level`
-  - [x] accept `magic_fields`
-  - [x] accept `species_traits` via alias to `draconic_traits`
-- [x] Re-sync `schemas/openapi.yaml` with runtime schema updates
-- [x] Restore OpenAPI `servers` entry in contract
-- [x] Bring OpenAPI route metadata into policy compliance:
-  - [x] shorten over-limit operation descriptions
-  - [x] restore explicit response `properties` for `/`, `/health`, `/version`
+- [x] 2026-04-18 / `6bec194` — merged naming-convention cleanup onto `main`
+- [x] 2026-04-18 / `5313168` — removed authoring meta tags from canonical world data
+- [x] 2026-04-18 / `6eb3959` — normalized underscore tag variants to kebab-case
+- [x] 2026-04-18 / `eea3826` — fixed `hollow-crowm` typo in canonical tags
+- [x] 2026-04-18 / `08c64eb` — normalized two world YAML filenames to snake_case
+- [x] 2026-04-18 / `2b8829c` — committed convention-drift audit document
+- [x] 2026-04-18 / `90f10c9` — added `docs/CONVENTIONS.md`
+- [x] 2026-04-10 to 2026-04-18 / `2231394`, `701bda2`, `2eb11fe` — reconciled topology, region IDs, and route/link hygiene
 
 ---
 
 ## 🔜 Active Work
 
-### Schema & Model Cleanup
+### Blocking
 
-- [x] Normalize `summary` → `description`
-- [x] Normalize `description` field usage across region-level YAML files that
-      currently omit it (hollow_crown.yaml, underworld.yaml, inner_ramparts.yaml, etc.)
-- [x] Decide deprecation timeline for legacy compatibility fields in `CharacterModel` (`level`, `magic_fields`, `draconic_traits` alias)
-  - [x] **v3.2.x (now):** retain compatibility fields; mark as deprecated in schema/docs.
-  - [x] **v3.3.0:** stop server-generated writes for `level`/`magic_fields`; continue read compatibility.
-  - [x] **v4.0.0:** remove `level`, `magic_fields`, and `species_traits` alias acceptance (keep canonical `draconic_traits`).
-- [x] If/when removing legacy compatibility fields, add migration + contract rollout plan for existing sessions/clients
-  - [x] Pre-v4 migration script: normalize stored `game_states.character` JSON (`species_traits` → `draconic_traits`, drop `level` + `magic_fields`).
-  - [x] Rollout gate: run migration in staging, then production, before deploying v4.0.0 schema.
-  - [x] Contract rollout: keep legacy acceptance assertions during v3.x; invert/remove those assertions at v4.0.0 cutover.
-  - [x] Client comms: publish deprecation in release notes for v3.2.x + v3.3.0 and include final removal notice in v4.0.0 notes.
-- [x] Add explicit guard test coverage for OpenAPI policy constraints:
-  - [x] route description max-length enforcement
-  - [x] required object `properties` presence for health/version/root response schemas
-  - [x] top-level `servers` URL presence
+- [x] Restore passing regression coverage for state save/delta and scene-context flows.
+  - affected paths: `tests/regression/test_endpoint_validation.py`, `tests/regression/test_multi_turn_persistence.py`, `tests/regression/test_scene_context.py`, `api/routes/state.py`, `api/routes/scene.py`, `api/models.py`
+  - size estimate: L
+- [x] Make the local narrator play-test path pass end-to-end in `tests/loop_test.py`.
+  - affected paths: `tests/loop_test.py`, `api/routes/session.py`, `api/routes/location.py`, `api/routes/character.py`, `api/game_data.py`
+  - size estimate: L
+- [x] Align remaining `/session/new` and `/character/create` test payloads to the current `ancestry` + `culture` schema.
+  - affected paths: `tests/loop_test.py`, `tests/regression/test_endpoint_validation.py`
+  - size estimate: M
 
-### Application Tag Updates
+### Should-Do
 
-- [x] Update `data/charachter-backgrounds.json` — remap old weapon tags to new taxonomy
-- [x] Update `data/charachter-focus.json` — remap old weapon tags to new taxonomy
-- [x] Update `prompts/world_rules.md` application tag table with new weapon taxonomy
-- [x] Update `prompts/character_creation.md` tag name references
-- [x] Update `schemas/openapi.yaml` if weapon tags are enumerated
-- [x] Remap X's application tags in session `74a30d9f` via SQL
+- [ ] Finish filename-stem parity cleanup for remaining world YAML and vault Markdown files.
+  - affected paths: `data/world/hollow_crown/surface/alpine_peaks/`, `data/world/hollow_crown/surface/inner_ramparts/`, `data/world/hollow_crown/surface/northeastern_volcanic_highlands/`, `data/world/hollow_crown/surface/western_temperate_forest/`, `data/world/hollow_crown/underworld/`, `prompts/world_vault/hollow_crown/surface/alpine_peaks/`, `prompts/world_vault/hollow_crown/surface/inner_ramparts/`, `prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/`, `prompts/world_vault/hollow_crown/surface/western_temperate_forest/`, `prompts/world_vault/hollow_crown/underworld/`
+  - size estimate: L
+- [ ] Refresh README version strings, endpoint inventory, project-structure listing, and `/session/new` sample payload.
+  - affected paths: `README.md`
+  - size estimate: S
+- [ ] Add contract-path coverage for uncovered route handlers.
+  - affected paths: `tests/contract/test_openapi_contract.py`, `api/routes/location.py`, `api/routes/roll.py`, `api/routes/scene.py`, `api/routes/state.py`, `api/routes/tags.py`
+  - size estimate: M
 
-### Progression System Implementation
+### Nice-to-Have
 
-- [x] Update `world_rules.md` Advancement section with final AP system:
-  - [x] Consequence scale table with one-sentence definitions
-  - [x] AP cost brackets (25–60: 1 AP, 61–70: 2 AP, 71–80: 3 AP)
-  - [x] Tag advancement rules (use-based, one per scene max, new tag introduction rule)
-  - [x] AP earning clarification (one award per resolved scene, multi-leg job counts as one Situational)
-- [x] Add progression runtime section to `prompts/engine.md`:
-  - [x] When and how to award AP
-  - [x] Consequence scale definitions
-  - [x] AP spend handling for domain raise requests
-  - [x] Mandatory state updates on each save
-
-### Magic System Implementation
-
-- [x] Update `prompts/world_rules.md` knowledge tag table with magical fields
-- [x] Add Magic section to `world_rules.md` covering:
-  - [x] Access bands (safe, risky, dangerous)
-  - [x] Field tier access ceilings
-  - [x] Failure model (minor miss, strain, backlash, catastrophic)
-- [x] Update `prompts/magic_system_reference.md` with full specification
-- [x] Update `prompts/character_creation.md` — add magical fields as valid knowledge tag choices, add dragonborn breath type establishment at creation
-- [x] Add magic roll assembly to `prompts/engine.md` Step 3
-
-### Item & Economy Cleanup
-
-- [x] Remove weapon and armor price entries from `prompts/economy_currency_reference.md` — now live in `weapons_armor_reference.md`
-- [x] Add tool sufficiency rule to `prompts/engine.md` Economy Runtime Checkpoint
-- [x] Update `prompts/character_creation.md` domain ceiling references to 80
-
-### World & Lore Updates
-
-- [x] Update `prompts/geography.md` with new settlements and travel times
-- [x] Add Vigil / Platinum Accord remnant to `prompts/groups.md`
-- [x] Add Serevane and The Warden of Greymantle to `prompts/npcs.md`
-- [x] Add Vigil faction entry to `prompts/groups.md`
-- [x] Add regional economic nodes to `prompts/economy_currency_reference.md`
-- [x] Update `prompts/sstc_operations.md` route network with new named locations
-- [x] Update `WORLD_TOPOLOGY_BASELINE.md` for all new locations and reciprocity audit
-- [x] Add `platinum-oath-approach` trail stub to `prompts/world/`
-- [x] Add `draconic-grasslands-edge` stub to `prompts/world/`
-
-### Gameplay Tracking
-
-- [x] Add a lightweight survival state block to the schema in `api/models.py`
-  - [x] Add hunger state
-  - [x] Add hydration state
-  - [x] Add fatigue state
-  - [x] Add load state
-  - [x] Keep all four as coarse enums/bands, not numeric meters
-- [x] Update `schemas/openapi.yaml` to expose the new survival/load state fields
-  - [x] Keep schema aligned with runtime models
-  - [x] Preserve current response/request shapes outside the new added block
-- [x] Add canonical survival and load rules to `prompts/world_rules.md`
-  - [x] Hunger and hydration are low-frequency maintenance states, not per-action meters
-  - [x] Hunger/hydration primarily change at rest, deprivation, or meaningful travel checkpoints
-  - [x] Fatigue is the primary exertion economy
-  - [x] Load modifies fatigue gain and physical/travel difficulty
-  - [x] Avoid exact weight/dimension simulation unless explicitly requested later
-- [x] Update `prompts/engine.md` with a Survival Runtime Checkpoint
-  - [x] Validate and persist hunger, hydration, fatigue, and load when they change
-  - [x] Only update survival states at clear triggers: rest, extended travel, deprivation, major exertion, or heavy overextension
-  - [x] Keep bookkeeping sparse and deterministic
-  - [x] Ensure survival state is included in turn-end save logic when changed
-- [x] Implement hunger tracking as a simple state rule
-  - [x] Add canonical bands such as `sated`, `hungry`, `starving`
-  - [x] Tie changes to missed food / successful resupply / rest-cycle checkpoints
-  - [x] Update item references only where needed to support food access and recovery logic
-- [x] Implement hydration tracking as a simple state rule
-  - [x] Add canonical bands such as `hydrated`, `thirsty`, `dehydrated`
-  - [x] Tie changes to missed water / exposure / successful resupply / rest-cycle checkpoints
-  - [x] Update item references only where needed to support water access and recovery logic
-- [x] Implement fatigue tracking as the main active exertion state
-  - [x] Add canonical bands such as `rested`, `tired`, `fatigued`, `exhausted`
-  - [x] Increase fatigue on major exertion, forced travel, poor recovery, and similar clear triggers
-  - [x] Reduce fatigue through proper rest, moderated by hunger/hydration state
-- [x] Add lightweight load tracking instead of full encumbrance/dimensions simulation
-  - [x] Add canonical bands such as `light`, `normal`, `burdened`, `overloaded`
-  - [x] Use load as a modifier to fatigue gain, travel difficulty, and certain physical actions
-  - [x] Do not implement exact item weight, container volume, or dimensions in this pass
-- [x] Expand and normalize service pricing in `prompts/economy_currency_reference.md`
-  - [x] Preserve existing baseline service prices already present
-  - [x] Standardize missing services such as ferriage and any other commonly used travel/stable/lodging services
-  - [x] Clarify when local scarcity, danger, or regional economy should shift baseline pricing
-  - [x] Keep weapon/armor pricing out of this file
-- [x] Update item references only where survival/load rules need canonical support
-  - [x] Confirm food, water-carry, bedding, shelter, and load-bearing items support the new rules cleanly
-  - [x] Add item-weight data only if the lightweight load approach proves insufficient
-
----
-
-## 🔧 Architectural Improvements (Buildable)
-
-These are structural improvements identified from architecture review. None require a rebuild — all are addable to the current system.
-
-### Scene Manager — High Priority
-
-- [x] Design a scene context builder that assembles a focused object for the GPT instead of sending full world state every turn
-- [x] Scene object should include: current location summary, visible entities, immediate stakes, relevant character state, recent log entries (last 5), active threats, available opportunities
-- [x] Implement as a pre-processing step before GPT turn narration — either a new endpoint or a context assembly function
-- [x] Update `prompts/engine.md` to describe what the GPT should expect in scene context vs full state
-
-### Fail-Forward Rule — Low Effort, High Value
-
-- [x] Move fail-forward from narration style note to explicit mechanical rule in `world_rules.md`
-- [x] Add three examples covering physical, social, and magical failure contexts
-- [x] Add to `prompts/engine.md` Step 4 Narrate Outcome as a mandatory consideration
-
-### NPC Relationship Propagation Rules
-
-- [x] Add explicit relationship propagation rules to the Reputation section in `prompts/world_rules.md`
-  - Define what changes when standing crosses into a new band
-  - Treat propagation as a gameplay consequence layer, not just flavor text
-  - Keep the rules lightweight and faction-agnostic unless a specific faction has authored exceptions
-- [x] Define canonical standing-band effects in `prompts/world_rules.md`
-  - `Revered` (61 to 100)
-    - privileged access, proactive help, sensitive information, reduced scrutiny, stronger benefit of the doubt
-  - `Respected` (21 to 60)
-    - easier introductions, routine cooperation, standard services/opportunities opened, moderate institutional trust
-  - `Neutral` (-20 to 20)
-    - baseline access only, no special help, no automatic hostility
-  - `Distrusted` (-21 to -60)
-    - guarded interactions, reduced access, higher scrutiny, refusals on sensitive requests
-  - `Despised` (-61 to -100)
-    - denied access, active obstruction, possible reporting/hostility depending on faction and context
-- [x] Clarify propagation scope in `prompts/world_rules.md`
-  - Propagation affects:
-    - service availability
-    - information access
-    - faction cooperation
-    - escort/sanction/authorization likelihood
-    - legal/social scrutiny
-    - which jobs, requests, or aid offers become available
-  - Propagation does not require separate subsystem math
-  - Propagation should be applied conservatively and according to the faction’s nature
-- [x] Define threshold-crossing behavior in `prompts/world_rules.md`
-  - Apply propagation when standing crosses from one band into another
-  - Do not re-trigger the same unlock/lock consequence every turn if the standing remains in the same band
-  - On crossing a threshold, update access and posture for future scenes
-  - Use `last_change` for the triggering event; use `note` only when the faction’s overall disposition meaningfully changes
-- [x] Add faction-agnostic examples to `prompts/world_rules.md`
-  - Crossing from Neutral -> Respected opens routine cooperation or trusted introductions
-  - Crossing from Respected -> Revered opens sensitive access or proactive support
-  - Crossing from Neutral -> Distrusted closes sensitive requests and increases scrutiny
-  - Crossing from Distrusted -> Despised causes denial, expulsion, reporting, or active interference depending on faction context
-- [x] Update `prompts/engine.md` turn-end save behavior
-  - Require the GPT to check whether any faction standing crossed a band threshold during the turn
-  - If a threshold was crossed, apply the appropriate propagation before save
-  - Reflect the result in scene consequences, future availability, and reputation notes where applicable
-  - Keep this as a turn-end rule, not a separate mid-scene subsystem unless the crossing itself is the scene outcome
-- [x] Keep propagation bounded and compatible with current architecture
-  - Do not add a new complex faction-simulation subsystem in this pass
-  - Do not create automatic cross-faction chain reactions unless explicitly authored later
-  - Keep propagation tied to the specific faction whose standing changed
-  - Preserve existing reputation math and standing bands
-
-### Pacing Variables
-
-- [x] Add a typed `pacing` block to world state in `api/models.py`
-  - Add a new `PacingState` model
-  - Add it to `WorldModel` as a lightweight control block
-  - Keep it small, deterministic, and GPT-readable
-- [x] Define the canonical `pacing` fields in `api/models.py`
-  - `tension` — integer 0–10
-  - `last_consequence_weight` — `local` / `situational` / `regional` / `campaign`
-  - `turns_since_social_beat` — non-negative integer
-  - `turns_since_discovery` — non-negative integer
-  - `turn_count` — non-negative integer
-  - Add validation/clamping where appropriate
-- [x] Resolve counter ownership before implementation
-  - Decide whether `pacing.turn_count` replaces `world.turn`, mirrors it, or is derived from it
-  - Prefer a single source of truth to avoid drift
-  - If both are kept for compatibility, document which one is authoritative and when the other is synchronized
-- [x] Update `schemas/openapi.yaml` to include the new `pacing` block
-  - Keep schema aligned with `api/models.py`
-  - Preserve existing request/response structure outside the added block
-- [x] Add canonical pacing rules to `prompts/world_rules.md`
-  - Define what each pacing field means in play
-  - Define how tension should rise, fall, or hold
-  - Define when `last_consequence_weight` changes
-  - Define when social beats and discovery beats reset their counters
-  - Keep pacing descriptive and directional, not a heavy subsystem
-- [x] Add pacing read rules to `prompts/engine.md`
-  - Require the GPT to check pacing before selecting scene type, pressure, and intensity
-  - Use pacing to avoid repetitive scene selection
-  - Use pacing to modulate escalation rather than override current stakes or canon
-  - Keep prompt wording short and enforceable
-- [x] Add pacing update rules to `prompts/engine.md`
-  - Update `tension` when scene outcomes materially escalate or release pressure
-  - Reset `turns_since_social_beat` when a meaningful social scene occurs; otherwise increment
-  - Reset `turns_since_discovery` when a meaningful discovery occurs; otherwise increment
-  - Update `last_consequence_weight` at scene resolution using the existing consequence scale
-  - Synchronize `turn_count` with the chosen authoritative turn counter at save time
-- [x] Keep pacing bounded and compatible with current architecture
-  - Do not introduce a separate pacing engine or scheduler in this pass
-  - Do not let pacing override dice results, location logic, or faction logic
-  - Treat pacing as scene-selection guidance for the GPT, not a replacement for state consequences
-- [x] Add tests for pacing model behavior
-  - Validate field bounds and enum values
-  - Validate default initialization
-  - Validate synchronization behavior for `turn_count`
-  - Validate that saves accept and return the new pacing block cleanly
-
-### Extraction Step Separation
-
-- [x] Design a typed state-delta contract in `api/models.py`
-  - Add a lightweight model for structured turn-end state changes
-  - Keep it additive to the current full-state save contract in the first pass
-  - Cover only fields that may change during a turn rather than resending the full stored state
-- [x] Define the extraction payload shape
-  - Include structured updates for relevant character fields
-  - Include structured updates for relevant world fields
-  - Include log entry output
-  - Keep the payload deterministic and machine-validated
-  - Do not require the extractor to regenerate unchanged state
-- [x] Decide application semantics before implementation
-  - Define how a validated delta is applied to the existing stored state
-  - Preserve current deep-merge behavior where appropriate
-  - Be explicit about which sections are merged and which sections are replaced
-  - Avoid ambiguous partial-update behavior
-- [x] Implement schema validation for extracted state deltas
-  - Validate extraction output before any save is committed
-  - Reject malformed or incomplete extraction payloads cleanly
-  - Keep error payloads short and plain
-  - Preserve current state if validation fails
-- [x] Add a delta-application layer on the backend
-  - Accept current stored state plus validated delta
-  - Produce a final full state object for persistence
-  - Reuse existing model validation before final save
-  - Keep final persistence compatible with the existing saved `CharacterModel` + `WorldModel` contract
-- [x] Define two-step turn handling in the prompt/runtime design
-  - Step 1: Narration receives scene context and produces prose only
-  - Step 2: Extraction receives scene context + narration result and produces structured state delta only
-  - Keep narration and extraction responsibilities explicitly separated
-  - Do not allow narration prose to serve as the save payload
-- [x] Update `prompts/engine.md` to reflect the split
-  - Clarify that narration is prose-only
-  - Clarify that extraction is structured-output-only
-  - Clarify that state changes are committed only after extraction validates
-  - Keep the engine file within the current size limit
-- [x] Add extraction failure handling rules
-  - If extraction validation fails, do not commit state
-  - Retry extraction with a correction prompt, not a new narration pass
-  - Preserve the original narration unless the failure proves the narration depended on invalid state assumptions
-  - Limit retries to a bounded, deterministic path
-- [x] Keep rollout additive and backward-compatible
-  - Do not remove the current full-state save path in the first pass
-  - Keep existing GPT builder / Actions flows operational while the new extraction path is introduced
-  - Treat this as a reliability upgrade layered onto current architecture, not a full rebuild
-- [x] Add tests for extraction and delta application
-  - Validate accepted delta shapes
-  - Validate rejection of malformed extraction payloads
-  - Validate merge/application behavior for character and world updates
-  - Validate no state commit occurs on failed extraction
-  - Validate final saved state still conforms to canonical models
-- [x] Implement only after scene manager is stable
-  - Scene context should be the primary input to narration and extraction before splitting the turn flow
-  - Do not build extraction separation on top of raw full-state prompting if scene manager is the next intended architecture step
+- [ ] Remove the lingering `Zarkeros's Fortress` display name if canon authority confirms the rename.
+  - affected paths: `data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml`, `prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md`
+  - size estimate: S
+- [ ] Fill or remove empty `tags` lists on canonical world nodes and mirrors.
+  - affected paths: `data/world/hollow_crown/surface/central_draconic_grasslands/draconic_grasslands_edge.yaml`, `data/world/hollow_crown/surface/southwestern_mystic_wetlands/valley_edge_overlook.yaml`, `prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/draconic_grasslands_edge.md`, `prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/valley_edge_overlook.md`
+  - size estimate: S
+- [ ] Remove the legacy `hollow-crowm` string from audit artifacts if repo-wide grep should stay at zero.
+  - affected paths: `docs/audit_convention_drift.md`
+  - size estimate: S
 
 ---
 

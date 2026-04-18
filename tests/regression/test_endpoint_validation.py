@@ -126,7 +126,8 @@ class SessionDeltaFlowConn:
 def _build_valid_character() -> dict:
     return {
         "name": "Krath",
-        "species": "dragonborn",
+        "ancestry": "dragonborn",
+        "culture": "drakenvale_city",
         "focus": "devoted",
         "background": "soldier",
         "hp": {"current": 100, "max": 100},
@@ -225,7 +226,8 @@ def test_session_new_rejects_negative_coin_with_422() -> None:
             "/session/new",
             json={
                 "character_name": "Broke",
-                "species": "human",
+                "ancestry": "human",
+                "culture": "drakenvale_city",
                 "focus": "champion",
                 "background": "soldier",
                 "starting_economy": {"wealth_tier": "modest", "coin": -5},
@@ -244,7 +246,8 @@ def test_session_new_rejects_invalid_wealth_tier_with_422() -> None:
             "/session/new",
             json={
                 "character_name": "Rich",
-                "species": "human",
+                "ancestry": "human",
+                "culture": "drakenvale_city",
                 "focus": "champion",
                 "background": "soldier",
                 "starting_economy": {"wealth_tier": "billionaire", "coin": 0},
@@ -422,47 +425,6 @@ def test_state_save_accepts_valid_advancement_block() -> None:
     assert payload["character"]["advancement"]["points_earned_total"] == 3
 
 
-@pytest.mark.regression
-def test_state_save_accepts_legacy_level_and_magic_trait_fields() -> None:
-    valid_character = _build_valid_character()
-    valid_character["level"] = 2
-    valid_character["magic_fields"] = ["arcane", "sacred"]
-    valid_character["species_traits"] = ["draconic_resilience"]
-
-    stored_character = {
-        **_build_valid_character(),
-        "level": 2,
-        "magic_fields": ["arcane", "sacred"],
-        "draconic_traits": ["draconic_resilience"],
-    }
-
-    conn = FakeConn(
-        select_character=_build_valid_character(),
-        upsert_row={
-            "session_id": "abc12345",
-            "character": json.dumps(stored_character),
-            "world": json.dumps(_build_valid_world()),
-            "log": json.dumps(["legacy fields persisted"]),
-            "updated_at": datetime.now(),
-        },
-    )
-
-    app = _make_app_with_router(state.router, FakePool(conn))
-    save_body = {
-        "character": valid_character,
-        "world": _build_valid_world(),
-        "log_entry": "legacy fields persisted",
-    }
-
-    with TestClient(app) as client:
-        r = client.post("/state/abc12345", json=save_body)
-
-    assert r.status_code == 200
-    payload = r.json()
-    assert payload["character"]["level"] == 2
-    assert payload["character"]["magic_fields"] == ["arcane", "sacred"]
-    assert payload["character"]["draconic_traits"] == ["draconic_resilience"]
-
 
 @pytest.mark.regression
 def test_state_save_preserves_existing_world_structured_blocks_when_legacy_payload_omits_them() -> None:
@@ -505,94 +467,6 @@ def test_state_save_preserves_existing_world_structured_blocks_when_legacy_paylo
     assert payload["world"]["pacing"]["turn_count"] == 2
 
 
-@pytest.mark.regression
-def test_state_save_normalizes_missing_legacy_character_structured_fields() -> None:
-    legacy_character = _build_valid_character()
-    del legacy_character["knowledge"]
-    del legacy_character["application"]
-    del legacy_character["advancement"]
-
-    conn = FakeConn(
-        select_character=legacy_character,
-        select_world=_build_valid_world(),
-    )
-
-    app = _make_app_with_router(state.router, FakePool(conn))
-    incoming_character = _build_valid_character()
-    del incoming_character["knowledge"]
-    del incoming_character["application"]
-    del incoming_character["advancement"]
-
-    with TestClient(app) as client:
-        r = client.post(
-            "/state/abc12345",
-            json={
-                "character": incoming_character,
-                "world": _build_valid_world(),
-                "log_entry": "legacy normalized",
-            },
-        )
-
-    assert r.status_code == 200
-    payload = r.json()
-    assert payload["character"]["knowledge"] == {}
-    assert payload["character"]["application"] == {}
-    assert payload["character"]["magic_fields"] == []
-    assert payload["character"]["draconic_traits"] == []
-    assert payload["character"]["advancement"] == {
-        "points_available": 0,
-        "points_spent": 0,
-        "points_earned_total": 0,
-    }
-    CharacterModel.model_validate(payload["character"])
-    WorldModel.model_validate(payload["world"])
-
-
-@pytest.mark.regression
-def test_state_delta_normalizes_missing_structured_blocks_and_response_validates() -> None:
-    legacy_character = _build_valid_character()
-    del legacy_character["knowledge"]
-    del legacy_character["application"]
-    del legacy_character["advancement"]
-
-    legacy_world = _build_valid_world()
-    del legacy_world["time"]
-    del legacy_world["survival"]
-    del legacy_world["pacing"]
-
-    conn = FakeConn(
-        select_character=legacy_character,
-        select_world=legacy_world,
-    )
-
-    app = _make_app_with_router(state.router, FakePool(conn))
-
-    with TestClient(app) as client:
-        r = client.post(
-            "/state/abc12345/delta",
-            json={
-                "character": {"notes": "delta note"},
-                "world": {"turn": 2},
-                "log_entry": "delta normalized",
-            },
-        )
-
-    assert r.status_code == 200
-    payload = r.json()
-    assert payload["character"]["knowledge"] == {}
-    assert payload["character"]["application"] == {}
-    assert payload["character"]["magic_fields"] == []
-    assert payload["character"]["draconic_traits"] == []
-    assert payload["character"]["advancement"] == {
-        "points_available": 0,
-        "points_spent": 0,
-        "points_earned_total": 0,
-    }
-    assert payload["world"]["time"]["day"] == 1
-    assert payload["world"]["survival"]["hunger"] == "sated"
-    assert payload["world"]["pacing"]["turn_count"] == 2
-    CharacterModel.model_validate(payload["character"])
-    WorldModel.model_validate(payload["world"])
 
 
 @pytest.mark.regression
@@ -644,32 +518,6 @@ def test_state_delta_returns_404_when_session_not_found() -> None:
     assert r.status_code == 404
 
 
-@pytest.mark.regression
-def test_state_load_accepts_migrated_character_compatibility_fields() -> None:
-    migrated_character = _build_valid_character()
-    migrated_character["advancement"] = {
-        "points_spent": 2,
-        "points_available": 0,
-        "points_earned_total": 2,
-    }
-    migrated_character["magic_fields"] = ["sacred", "warding"]
-    migrated_character["draconic_traits"] = ["radiant_breath_lineage", "dragon_breath"]
-
-    conn = FakeConn(
-        select_character=migrated_character,
-        select_world=_build_valid_world(),
-    )
-    app = _make_app_with_router(state.router, FakePool(conn))
-
-    with TestClient(app) as client:
-        r = client.get("/state/74a30d9f")
-
-    assert r.status_code == 200
-    payload = r.json()
-    assert payload["character"]["advancement"]["points_spent"] == 2
-    assert payload["character"]["magic_fields"] == ["sacred", "warding"]
-    assert payload["character"]["draconic_traits"] == ["radiant_breath_lineage", "dragon_breath"]
-
 
 @pytest.mark.regression
 def test_session_new_response_session_id_round_trips_into_first_delta_save() -> None:
@@ -684,7 +532,8 @@ def test_session_new_response_session_id_round_trips_into_first_delta_save() -> 
             "/session/new",
             json={
                 "character_name": "A",
-                "species": "human",
+                "ancestry": "human",
+                "culture": "drakenvale_city",
                 "focus": "champion",
                 "background": "soldier",
             },

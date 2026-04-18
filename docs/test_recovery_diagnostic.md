@@ -1,0 +1,226 @@
+## 1. Failing tests
+
+- `tests/regression/test_endpoint_validation.py::test_state_save_accepts_legacy_level_and_magic_trait_fields`
+  - failure summary: `POST /state/{session_id}` returns `422` instead of `200` when legacy compatibility fields are present in the character payload.
+  - classification: `GENUINE_REGRESSION`
+- `tests/regression/test_endpoint_validation.py::test_state_save_normalizes_missing_legacy_character_structured_fields`
+  - failure summary: response payload omits `character.magic_fields`, causing `KeyError`.
+  - classification: `GENUINE_REGRESSION`
+- `tests/regression/test_endpoint_validation.py::test_state_delta_normalizes_missing_structured_blocks_and_response_validates`
+  - failure summary: delta-save response payload omits `character.magic_fields`, causing `KeyError`.
+  - classification: `GENUINE_REGRESSION`
+- `tests/regression/test_endpoint_validation.py::test_state_load_accepts_migrated_character_compatibility_fields`
+  - failure summary: `GET /state/{session_id}` returns `500` for stored character payloads containing `magic_fields` and `draconic_traits`.
+  - classification: `GENUINE_REGRESSION`
+- `tests/regression/test_multi_turn_persistence.py::test_multi_turn_partial_updates_preserve_nested_identity_and_equipment`
+  - failure summary: `POST /state/{session_id}` returns `422` because the persisted character fixture still uses `species` instead of required character-schema fields.
+  - classification: `SCHEMA_DRIFT`
+- `tests/regression/test_multi_turn_persistence.py::test_multi_turn_companion_lifecycle_and_political_economy_progression`
+  - failure summary: `POST /state/{session_id}` returns `422` because the persisted character fixture still uses `species` instead of required character-schema fields.
+  - classification: `SCHEMA_DRIFT`
+- `tests/regression/test_multi_turn_persistence.py::test_delta_save_applies_partial_updates_and_preserves_unsent_fields`
+  - failure summary: `POST /state/{session_id}/delta` returns `422` because the stored character fixture is not valid for the current schema.
+  - classification: `SCHEMA_DRIFT`
+- `tests/regression/test_multi_turn_persistence.py::test_delta_save_persists_magic_fields`
+  - failure summary: `POST /state/{session_id}/delta` returns `422` when `character.magic_fields` is supplied in the delta payload.
+  - classification: `GENUINE_REGRESSION`
+- `tests/regression/test_multi_turn_persistence.py::test_delta_save_persists_draconic_traits`
+  - failure summary: `POST /state/{session_id}/delta` returns `422` when `character.draconic_traits` is supplied in the delta payload.
+  - classification: `GENUINE_REGRESSION`
+- `tests/regression/test_multi_turn_persistence.py::test_delta_save_updates_coin_without_overwriting_other_economy_fields`
+  - failure summary: `POST /state/{session_id}/delta` returns `422` because the stored character fixture is not valid for the current schema.
+  - classification: `SCHEMA_DRIFT`
+- `tests/regression/test_multi_turn_persistence.py::test_full_save_partial_payload_preserves_knowledge_and_application`
+  - failure summary: `POST /state/{session_id}` returns `422` because the merged stored character fixture is not valid for the current schema.
+  - classification: `SCHEMA_DRIFT`
+- `tests/regression/test_scene_context.py::test_scene_context_shape_and_log_truncation`
+  - failure summary: `GET /scene/{session_id}` returns `500` because the stored character fixture fails `CharacterModel` validation.
+  - classification: `SCHEMA_DRIFT`
+- `tests/regression/test_scene_context.py::test_scene_context_omits_full_world_payload`
+  - failure summary: `GET /scene/{session_id}` returns `500` because the stored character fixture fails `CharacterModel` validation.
+  - classification: `SCHEMA_DRIFT`
+
+## 2. Loop test status (`tests/loop_test.py`)
+
+- `tests/loop_test.py` — `GET /options`
+  - payload shape: none
+  - divergence: none
+- `tests/loop_test.py` — `POST /location` with `TEST_LOC_ALPHA`
+  - payload shape: `id`, `name`, `type`, `description`, `tags`, `connections`, `threat_level`, `known_npcs`, `discovered`
+  - compared model: `api/models.py::LocationData`
+  - divergence: none
+- `tests/loop_test.py` — `POST /location` with `TEST_LOC_BETA`
+  - payload shape: `id`, `name`, `type`, `description`, `tags`, `connections`, `threat_level`, `known_npcs`, `discovered`
+  - compared model: `api/models.py::LocationData`
+  - divergence: none
+- `tests/loop_test.py` — `POST /session/new` with `TEST_CHARACTER`
+  - payload shape: `character_name`, `ancestry`, `culture`, `focus`, `background`, `adjustment_points`, `starting_location`, `goal`, `threat`, `identity`, `starting_economy`
+  - compared model: `api/models.py::NewSessionRequest`
+  - divergence: none
+- `tests/loop_test.py` — `POST /state/{session_id}` with `save_body`
+  - payload shape: `character`, `world`, `log_entry`
+  - compared model: `api/models.py::SaveStateRequest`
+  - divergence: `character` object uses `species` instead of required `ancestry`
+  - divergence: `character` object omits required `culture`
+- `tests/loop_test.py` — `POST /roll` with `{target: 65}`
+  - payload shape: `target`
+  - compared model: `api/models.py::RollRequest`
+  - divergence: none
+- `tests/loop_test.py` — `POST /roll` with `{target: 150}`
+  - payload shape: `target`
+  - compared model: `api/models.py::RollRequest`
+  - divergence: none
+- `tests/loop_test.py` — `POST /roll` with `{target: 0}`
+  - payload shape: `target`
+  - compared model: `api/models.py::RollRequest`
+  - divergence: none
+- `tests/loop_test.py` — `POST /roll` with `{target: 50}`
+  - payload shape: `target`
+  - compared model: `api/models.py::RollRequest`
+  - divergence: none
+- `tests/loop_test.py` — `POST /character/create` in part 5
+  - payload shape: `session_id`, `name`, `ancestry`, `culture`, `focus`, `background`, `adjustment_points`, `identity`
+  - compared model: `api/models.py::CreateCharacterRequest`
+  - divergence: none
+- `tests/loop_test.py` — `POST /session/new` invalid-ancestry case
+  - payload shape: `character_name`, `ancestry`, `culture`, `focus`, `background`
+  - compared model: `api/models.py::NewSessionRequest`
+  - divergence: none
+- `tests/loop_test.py` — `POST /session/new` invalid-focus case
+  - payload shape: `character_name`, `ancestry`, `culture`, `focus`, `background`
+  - compared model: `api/models.py::NewSessionRequest`
+  - divergence: none
+- `tests/loop_test.py` — `POST /session/new` adjustment overflow case
+  - payload shape: `character_name`, `ancestry`, `culture`, `focus`, `background`, `adjustment_points`
+  - compared model: `api/models.py::NewSessionRequest`
+  - divergence: none
+- `tests/loop_test.py` — `POST /character/create` nonexistent-session case
+  - payload shape: `session_id`, `name`, `ancestry`, `culture`, `focus`, `background`
+  - compared model: `api/models.py::CreateCharacterRequest`
+  - divergence: none
+- `tests/loop_test.py` — `POST /session/new` negative-coin case
+  - payload shape: `character_name`, `ancestry`, `culture`, `focus`, `background`, `starting_economy`
+  - compared model: `api/models.py::NewSessionRequest`
+  - divergence: none
+- `tests/loop_test.py` — `POST /session/new` invalid-wealth-tier case
+  - payload shape: `character_name`, `ancestry`, `culture`, `focus`, `background`, `starting_economy`
+  - compared model: `api/models.py::NewSessionRequest`
+  - divergence: none
+
+## 3. Scene context status (`tests/regression/test_scene_context.py`)
+
+- `tests/regression/test_scene_context.py::test_scene_context_shape_and_log_truncation`
+  - assertion: `r.status_code == 200`
+  - compared route: `api/routes/scene.py::get_scene_context`
+  - divergence: `_character()` fixture uses `species` and omits `ancestry` + `culture`, causing `CharacterModel` validation failure before `build_scene_context()` runs
+- `tests/regression/test_scene_context.py::test_scene_context_shape_and_log_truncation`
+  - assertion: `payload["session_id"] == "abc12345"`
+  - compared model: `api/models.py::SceneContext.session_id`
+  - divergence: none
+- `tests/regression/test_scene_context.py::test_scene_context_shape_and_log_truncation`
+  - assertion: `payload["location_summary"]["id"] == "test-loc-alpha"`
+  - compared model: `api/models.py::SceneLocationSummary.id`
+  - divergence: none
+- `tests/regression/test_scene_context.py::test_scene_context_shape_and_log_truncation`
+  - assertion: `payload["location_summary"]["name"] == "Ashfield Gate"`
+  - compared model: `api/models.py::SceneLocationSummary.name`
+  - divergence: none
+- `tests/regression/test_scene_context.py::test_scene_context_shape_and_log_truncation`
+  - assertion: `payload["recent_log"] == ["turn 4", "turn 5", "turn 6", "turn 7", "turn 8"]`
+  - compared implementation: `api/scene_context.py::build_scene_context(..., log=...)` returns `log[-5:]`
+  - divergence: none
+- `tests/regression/test_scene_context.py::test_scene_context_shape_and_log_truncation`
+  - assertion: `"ambush risk" in " | ".join(payload["active_threats"]).lower()`
+  - compared implementation: `api/scene_context.py::build_scene_context()` seeds `active_threats` from `world.threat`, `location.threat_level`, and `world.politics.active_tensions`
+  - divergence: none
+- `tests/regression/test_scene_context.py::test_scene_context_shape_and_log_truncation`
+  - assertion: `payload["relevant_character_state"]["survival"]["load"] == "burdened"`
+  - compared model: `api/models.py::SceneRelevantCharacterState.survival`
+  - divergence: none
+- `tests/regression/test_scene_context.py::test_scene_context_omits_full_world_payload`
+  - assertion: `r.status_code == 200`
+  - compared route: `api/routes/scene.py::get_scene_context`
+  - divergence: `_character()` fixture uses `species` and omits `ancestry` + `culture`, causing `CharacterModel` validation failure before `build_scene_context()` runs
+- `tests/regression/test_scene_context.py::test_scene_context_omits_full_world_payload`
+  - assertion: `"world" not in payload`
+  - compared model: `api/models.py::SceneContext`
+  - divergence: none
+- `tests/regression/test_scene_context.py::test_scene_context_omits_full_world_payload`
+  - assertion: `"character" not in payload`
+  - compared model: `api/models.py::SceneContext`
+  - divergence: none
+- `tests/regression/test_scene_context.py::test_scene_context_omits_full_world_payload`
+  - assertion: `"politics" not in payload`
+  - compared model: `api/models.py::SceneContext`
+  - divergence: none
+- `tests/regression/test_scene_context.py::test_scene_context_omits_full_world_payload`
+  - assertion: `"economy" not in payload`
+  - compared model: `api/models.py::SceneContext`
+  - divergence: none
+- `tests/regression/test_scene_context.py`
+  - compared signature: `api/scene_context.py::build_scene_context(session_id, character, world, location, log)`
+  - divergence: none in argument ordering or expected inputs at the route boundary
+  - divergence: fixture payload shape is incompatible with `character: CharacterModel`
+
+## 4. Proposed fixes, categorized
+
+- `tests/regression/test_multi_turn_persistence.py::test_multi_turn_partial_updates_preserve_nested_identity_and_equipment`
+  - Mechanical fix: update `_base_character()` to use `ancestry` + `culture` and re-baseline any stored-character fixtures to current schema.
+- `tests/regression/test_multi_turn_persistence.py::test_multi_turn_companion_lifecycle_and_political_economy_progression`
+  - Mechanical fix: update `_base_character()` to use `ancestry` + `culture` and re-run the regression suite.
+- `tests/regression/test_multi_turn_persistence.py::test_delta_save_applies_partial_updates_and_preserves_unsent_fields`
+  - Mechanical fix: update `_base_character()` to current schema so delta tests exercise merge behavior instead of model rejection.
+- `tests/regression/test_multi_turn_persistence.py::test_delta_save_updates_coin_without_overwriting_other_economy_fields`
+  - Mechanical fix: update `_base_character()` to current schema so the test reaches economy-merge assertions.
+- `tests/regression/test_multi_turn_persistence.py::test_full_save_partial_payload_preserves_knowledge_and_application`
+  - Mechanical fix: update `_base_character()` to current schema so the test reaches partial-save assertions.
+- `tests/regression/test_scene_context.py::test_scene_context_shape_and_log_truncation`
+  - Mechanical fix: update `_character()` to use `ancestry` + `culture` so `GET /scene/{session_id}` exercises scene-context serialization instead of failing validation.
+- `tests/regression/test_scene_context.py::test_scene_context_omits_full_world_payload`
+  - Mechanical fix: update `_character()` to use `ancestry` + `culture` so the omission assertions execute.
+- `tests/regression/test_endpoint_validation.py::test_state_save_accepts_legacy_level_and_magic_trait_fields`
+  - Needs human review: decide whether `POST /state/{session_id}` should still accept legacy `level`, `magic_fields`, and `species_traits` compatibility writes or whether the test intent is obsolete.
+- `tests/regression/test_endpoint_validation.py::test_state_save_normalizes_missing_legacy_character_structured_fields`
+  - Needs human review: decide whether response payloads should still emit legacy compatibility fields (`magic_fields`, `draconic_traits`) or whether tests should stop asserting them.
+- `tests/regression/test_endpoint_validation.py::test_state_delta_normalizes_missing_structured_blocks_and_response_validates`
+  - Needs human review: decide whether delta responses should expose legacy compatibility fields (`magic_fields`, `draconic_traits`) or remain canonical-only.
+- `tests/regression/test_endpoint_validation.py::test_state_load_accepts_migrated_character_compatibility_fields`
+  - Needs human review: decide whether `GET /state/{session_id}` should tolerate stored legacy compatibility fields or fail-fast on invalid persisted payloads.
+- `tests/regression/test_multi_turn_persistence.py::test_delta_save_persists_magic_fields`
+  - Needs human review: decide whether delta endpoints should support `magic_fields` compatibility writes or whether the feature was intentionally removed.
+- `tests/regression/test_multi_turn_persistence.py::test_delta_save_persists_draconic_traits`
+  - Needs human review: decide whether delta endpoints should support `draconic_traits` compatibility writes or whether the feature was intentionally removed.
+
+## 5. draconic_traits delta investigation
+
+- test payload
+  - `tests/regression/test_multi_turn_persistence.py::test_delta_save_persists_draconic_traits`
+  - endpoint: `POST /state/{session_id}/delta`
+  - body:
+    - `character.draconic_traits = ["dragon_breath", "scaled_hide"]`
+    - `log_entry = "Draconic traits updated."`
+- response status code and body
+  - status: `422`
+  - body: `{"detail":[{"type":"extra_forbidden","loc":["body","character","draconic_traits"],"msg":"Extra inputs are not permitted","input":["dragon_breath","scaled_hide"]}]}`
+- pipeline trace
+  - `api/models.py::CharacterModel`
+    - canonical `draconic_traits` is retained on the character model
+  - `api/models.py::NewSessionRequest`
+    - not involved in this failing path
+  - `api/models.py::CharacterStateDelta`
+    - does **not** declare `draconic_traits`
+    - sets `model_config = ConfigDict(extra="forbid")`
+  - `api/models.py::ApplyStateDeltaRequest`
+    - wraps `character: CharacterStateDelta`
+  - `api/routes/state.py::apply_delta()`
+    - would deep-merge `character_delta` onto stored state if the field survived model validation
+    - does not explicitly strip `draconic_traits`
+  - `api/models.py::GameStateResponse`
+    - response serializer would include `draconic_traits` if it reached `CharacterModel`
+- exact drop point
+  - `api/models.py:461`
+  - `CharacterStateDelta.model_config = ConfigDict(extra="forbid")`
+  - combined with omission of `draconic_traits` from `api/models.py:463-472`
+- proposed minimal fix
+  - add `draconic_traits: list[str] | None = None` to `api/models.py::CharacterStateDelta`
+  - no route-handler changes required because `api/routes/state.py::apply_delta()` already deep-merges character delta fields into stored state
