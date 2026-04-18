@@ -19,13 +19,13 @@ Updated after post-cleanup audit — 2026-04-18.
 
 ### Blocking
 
-- [ ] Restore passing regression coverage for state save/delta and scene-context flows.
+- [x] Restore passing regression coverage for state save/delta and scene-context flows.
   - affected paths: `tests/regression/test_endpoint_validation.py`, `tests/regression/test_multi_turn_persistence.py`, `tests/regression/test_scene_context.py`, `api/routes/state.py`, `api/routes/scene.py`, `api/models.py`
   - size estimate: L
-- [ ] Make the local narrator play-test path pass end-to-end in `tests/loop_test.py`.
+- [x] Make the local narrator play-test path pass end-to-end in `tests/loop_test.py`.
   - affected paths: `tests/loop_test.py`, `api/routes/session.py`, `api/routes/location.py`, `api/routes/character.py`, `api/game_data.py`
   - size estimate: L
-- [ ] Align remaining `/session/new` and `/character/create` test payloads to the current `ancestry` + `culture` schema.
+- [x] Align remaining `/session/new` and `/character/create` test payloads to the current `ancestry` + `culture` schema.
   - affected paths: `tests/loop_test.py`, `tests/regression/test_endpoint_validation.py`
   - size estimate: M
 
