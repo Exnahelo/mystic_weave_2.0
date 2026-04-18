@@ -126,7 +126,8 @@ class SessionDeltaFlowConn:
 def _build_valid_character() -> dict:
     return {
         "name": "Krath",
-        "species": "dragonborn",
+        "ancestry": "dragonborn",
+        "culture": "drakenvale_city",
         "focus": "devoted",
         "background": "soldier",
         "hp": {"current": 100, "max": 100},
@@ -225,7 +226,8 @@ def test_session_new_rejects_negative_coin_with_422() -> None:
             "/session/new",
             json={
                 "character_name": "Broke",
-                "species": "human",
+                "ancestry": "human",
+                "culture": "drakenvale_city",
                 "focus": "champion",
                 "background": "soldier",
                 "starting_economy": {"wealth_tier": "modest", "coin": -5},
@@ -244,7 +246,8 @@ def test_session_new_rejects_invalid_wealth_tier_with_422() -> None:
             "/session/new",
             json={
                 "character_name": "Rich",
-                "species": "human",
+                "ancestry": "human",
+                "culture": "drakenvale_city",
                 "focus": "champion",
                 "background": "soldier",
                 "starting_economy": {"wealth_tier": "billionaire", "coin": 0},
@@ -684,7 +687,8 @@ def test_session_new_response_session_id_round_trips_into_first_delta_save() -> 
             "/session/new",
             json={
                 "character_name": "A",
-                "species": "human",
+                "ancestry": "human",
+                "culture": "drakenvale_city",
                 "focus": "champion",
                 "background": "soldier",
             },

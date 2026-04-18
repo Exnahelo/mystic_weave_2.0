@@ -89,7 +89,7 @@ def _make_app(pool) -> FastAPI:
 def _base_character() -> dict:
     return {
         "name": "Krath",
-        "species": "dragonborn",
+        'species': "dragonborn",
         "focus": "devoted",
         "background": "soldier",
         "hp": {"current": 100, "max": 100},
@@ -150,7 +150,7 @@ def _base_world() -> dict:
             {
                 "id": "comp_1",
                 "name": "Sorra",
-                "species": "halfling",
+                'species': "halfling",
                 "role": "guide",
                 "identity": {
                     "origin": "",

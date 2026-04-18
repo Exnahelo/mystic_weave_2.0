@@ -54,7 +54,8 @@ def subsection(title: str) -> None:
 
 TEST_CHARACTER = {
     "character_name": "Krath",
-    "species": "dragonborn",
+    "ancestry": "dragonborn",
+    "culture": "drakenvale_city",
     "focus": "devoted",
     "background": "soldier",
     "adjustment_points": {
@@ -124,13 +125,13 @@ def part1(client: httpx.Client) -> str | None:
     check("1.1.a", r.status_code == 200, f"GET /options → {r.status_code}")
     if r.status_code == 200:
         opts = r.json()
-        check("1.1.b", len(opts.get("species", [])) == 8, f"species count: {len(opts.get('species', []))}")
+        check("1.1.b", len(opts.get('species', [])) == 8, f"species count: {len(opts.get('species', []))}")
         check("1.1.c", len(opts.get("focus", [])) == 7, f"focus count: {len(opts.get('focus', []))}")
         check("1.1.d", len(opts.get("backgrounds", [])) == 8, f"backgrounds count: {len(opts.get('backgrounds', []))}")
         check("1.1.da", isinstance(opts.get("mundane_items"), list), "mundane_items is a list")
         check("1.1.db", isinstance(opts.get("magical_items"), list), "magical_items is a list")
         check("1.1.dc", isinstance(opts.get("apparel_items"), list), "apparel_items is a list")
-        species_indices = [s["index"] for s in opts.get("species", [])]
+        species_indices = [s["index"] for s in opts.get('species', [])]
         check("1.1.e", "dragonborn" in species_indices, f"'dragonborn' in species")
         check("1.1.f", "human" in species_indices, f"'human' in species")
         focus_indices = [f["index"] for f in opts.get("focus", [])]
@@ -164,7 +165,7 @@ def part1(client: httpx.Client) -> str | None:
 
     # Core identity fields
     check("1.3.b", char["name"] == "Krath", f"name: {char['name']}")
-    check("1.3.c", char["species"] == "dragonborn", f"species: {char['species']}")
+    check("1.3.c", char['species'] == "dragonborn", f"species: {char['species']}")
     check("1.3.d", char["focus"] == "devoted", f"focus: {char['focus']}")
     check("1.3.e", char["background"] == "soldier", f"background: {char['background']}")
     check("1.3.f", char["hp"]["current"] == 100, f"hp: {char['hp']}")
@@ -265,7 +266,7 @@ def part2(client: httpx.Client, session_id: str) -> None:
     save_body = {
         "character": {
             "name": "Krath",
-            "species": "dragonborn",
+            'species': "dragonborn",
             "focus": "devoted",
             "background": "soldier",
             "hp": {"current": 85, "max": 100},
@@ -339,7 +340,7 @@ def part2(client: httpx.Client, session_id: str) -> None:
                 {
                     "id": "companion_001",
                     "name": "Sorra",
-                    "species": "halfling",
+                    'species': "halfling",
                     "role": "guide",
                     "identity": {
                         "origin": "",
@@ -531,7 +532,8 @@ def part5(client: httpx.Client, session_id: str) -> None:
     r = client.post("/character/create", json={
         "session_id": session_id,
         "name": "Thalia",
-        "species": "elf",
+        "ancestry": "elf",
+        "culture": "drakenvale_city",
         "focus": "stalker",
         "background": "criminal",
         "adjustment_points": {"agility": 3, "perception": 2},
@@ -553,7 +555,7 @@ def part5(client: httpx.Client, session_id: str) -> None:
     if r.status_code == 200:
         char = r.json()["character"]
         check("5.1.b", char["name"] == "Thalia", f"name: {char['name']}")
-        check("5.1.c", char["species"] == "elf", f"species: {char['species']}")
+        check("5.1.c", char['species'] == "elf", f"species: {char['species']}")
         check("5.1.d", char["domains"]["agility"] == 58, f"agility: {char['domains']['agility']} (55+3)")
 
         # Stalker + Criminal both grant lockpicking_traps → stacks to T2
@@ -588,7 +590,8 @@ def part6(client: httpx.Client) -> None:
     subsection("Test 6.1 — Invalid species")
     r = client.post("/session/new", json={
         "character_name": "Bad",
-        "species": "goblin",
+        "ancestry": "goblin",
+        "culture": "drakenvale_city",
         "focus": "devoted",
         "background": "soldier",
     })
@@ -597,7 +600,8 @@ def part6(client: httpx.Client) -> None:
     subsection("Test 6.2 — Invalid focus")
     r = client.post("/session/new", json={
         "character_name": "Bad",
-        "species": "human",
+        "ancestry": "human",
+        "culture": "drakenvale_city",
         "focus": "wizard",
         "background": "soldier",
     })
@@ -606,7 +610,8 @@ def part6(client: httpx.Client) -> None:
     subsection("Test 6.3 — Adjustment points exceed 5")
     r = client.post("/session/new", json={
         "character_name": "Bad",
-        "species": "human",
+        "ancestry": "human",
+        "culture": "drakenvale_city",
         "focus": "champion",
         "background": "soldier",
         "adjustment_points": {"power": 3, "endurance": 3},
@@ -617,7 +622,8 @@ def part6(client: httpx.Client) -> None:
     r = client.post("/character/create", json={
         "session_id": "nonexistent",
         "name": "Ghost",
-        "species": "human",
+        "ancestry": "human",
+        "culture": "drakenvale_city",
         "focus": "champion",
         "background": "soldier",
     })
@@ -626,7 +632,8 @@ def part6(client: httpx.Client) -> None:
     subsection("Test 6.5 — Negative coin rejected")
     r = client.post("/session/new", json={
         "character_name": "Broke",
-        "species": "human",
+        "ancestry": "human",
+        "culture": "drakenvale_city",
         "focus": "champion",
         "background": "soldier",
         "starting_economy": {"wealth_tier": "modest", "coin": -5},
@@ -636,7 +643,8 @@ def part6(client: httpx.Client) -> None:
     subsection("Test 6.6 — Invalid wealth tier rejected")
     r = client.post("/session/new", json={
         "character_name": "Rich",
-        "species": "human",
+        "ancestry": "human",
+        "culture": "drakenvale_city",
         "focus": "champion",
         "background": "soldier",
         "starting_economy": {"wealth_tier": "billionaire", "coin": 0},
