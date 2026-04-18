@@ -93,6 +93,24 @@ He does not function as a routine present-day NPC. He functions as a historical 
 
 These characters are stable, recurring, and narratively significant, but not world-defining in the way the Council dragons are.
 
+## Ardrynn the Measured
+
+Bronze dragon scholar and overseer of the Hall of Scales.
+
+Ardrynn is an ancient bronze dragon of Lawful Neutral bearing, respected across the sanctuary for her even-handedness and her refusal to favor any philosophical faction within the academic body. She has overseen the Hall of Scales for centuries and is considered one of the realm's quieter powers — not a Council dragon, but a pillar of the civic-intellectual order. Her scales carry the faint green-bronze patina of long indoor life and unhurried decisions. She is said to take her meals in the Hall's open atrium, where students may approach her with questions if they are brave enough. Most are not.
+
+**Role in play:** academic politics, institutional arbitration, scholarly investigation, research gatekeeping at the foundational tier (the Arcane Conservatory operates one tier above her reach). Ardrynn is approachable but not easily moved. Her measured nature is a genuine trait, not a diplomatic affectation.
+
+---
+
+## Vindrael, the Platinum Warden
+
+Founding gold dragon of the Ptarian Pact. Architect of the sanctuary ideal. Bahamut's champion. Dead since the Discordant War.
+
+Vindrael remains the defining moral presence of Drakenvale despite being a century or more deceased. His sacrifice to reseal the Temple to Tiamat transformed him from a living leader into a theological touchstone. The Vigil at Platinum Oath Monastery maintains his tomb and uses the resonance of his death for Rift monitoring work. A prophecy — not officially acknowledged by the Council, but not suppressed either — holds that Vindrael's spirit will rise again in Drakenvale's greatest hour.
+
+**Role in play:** historical anchor, theological weight, motivator for Accord-aligned characters, backdrop for any Rift or Temple storyline. Not a living NPC; referenced through inscriptions, tomb-site encounters, dream visions, liturgical invocations, or the testimony of those old enough to have known him personally (Serevane at the monastery, a handful of dragons on the Council).
+
 ## Seraphine of the Still Pool
 
 High Acolyte associated with the Platinum Acolytes and the public sacred life of Drakenvale.
