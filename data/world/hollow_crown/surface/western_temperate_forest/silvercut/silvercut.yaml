@@ -1,0 +1,24 @@
+id: silvercut
+name: Silvercut
+type: settlement
+region_id: hollow_crown
+description: The realm's principal timber village, set in the western temperate forest north of Dracélune among the silverwood stands that give the settlement its name. Silvercut's economy is forest work — logging, milling, hunting, trapping, and the specialty craft of cutting and curing silverwood for the realm's finer construction and fine-craft needs. The village itself is small and compact, its buildings clustered tightly to minimize forest clearing, and its residents keep the long quiet rhythm of people whose work is done under canopy rather than under sky. Finished timber and hunting goods travel south to Dracélune for market distribution; the village feeds its own workforce and keeps a modest surplus.
+connections:
+- western-temperate-forest
+- dracelune
+- silverwood-trail
+tags:
+- drakenvale
+- silvercut
+- timber-village
+- western-forest
+- silverwood
+- logging
+- hunting
+- supply-village
+- core-supply
+known_npcs:
+- Woodwarden
+- Hunts-Master
+threat_level: 1
+discovered: true

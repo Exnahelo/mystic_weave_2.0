@@ -100,4 +100,6 @@ The Broken Plough and the Grain Dragon are named taverns mentioned in scene text
 
 Reeve and Grange Master are Tier-3 generative roles.
 
-The connection to `ashfield-fields` is two-way and represents the town'
+The connection to `ashfield-fields` is two-way and represents the town's direct physical adjacency to its own agricultural belt. The connection will reciprocate when `ashfield-fields` is authored in Batch 4.
+
+The connection to `scalemere` is southward — Scalemere is downslope toward the lake, and Ashfield is the overland route between Scalemere and the central region.
