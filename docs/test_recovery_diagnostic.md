@@ -190,3 +190,37 @@
   - Needs human review: decide whether delta endpoints should support `magic_fields` compatibility writes or whether the feature was intentionally removed.
 - `tests/regression/test_multi_turn_persistence.py::test_delta_save_persists_draconic_traits`
   - Needs human review: decide whether delta endpoints should support `draconic_traits` compatibility writes or whether the feature was intentionally removed.
+
+## 5. draconic_traits delta investigation
+
+- test payload
+  - `tests/regression/test_multi_turn_persistence.py::test_delta_save_persists_draconic_traits`
+  - endpoint: `POST /state/{session_id}/delta`
+  - body:
+    - `character.draconic_traits = ["dragon_breath", "scaled_hide"]`
+    - `log_entry = "Draconic traits updated."`
+- response status code and body
+  - status: `422`
+  - body: `{"detail":[{"type":"extra_forbidden","loc":["body","character","draconic_traits"],"msg":"Extra inputs are not permitted","input":["dragon_breath","scaled_hide"]}]}`
+- pipeline trace
+  - `api/models.py::CharacterModel`
+    - canonical `draconic_traits` is retained on the character model
+  - `api/models.py::NewSessionRequest`
+    - not involved in this failing path
+  - `api/models.py::CharacterStateDelta`
+    - does **not** declare `draconic_traits`
+    - sets `model_config = ConfigDict(extra="forbid")`
+  - `api/models.py::ApplyStateDeltaRequest`
+    - wraps `character: CharacterStateDelta`
+  - `api/routes/state.py::apply_delta()`
+    - would deep-merge `character_delta` onto stored state if the field survived model validation
+    - does not explicitly strip `draconic_traits`
+  - `api/models.py::GameStateResponse`
+    - response serializer would include `draconic_traits` if it reached `CharacterModel`
+- exact drop point
+  - `api/models.py:461`
+  - `CharacterStateDelta.model_config = ConfigDict(extra="forbid")`
+  - combined with omission of `draconic_traits` from `api/models.py:463-472`
+- proposed minimal fix
+  - add `draconic_traits: list[str] | None = None` to `api/models.py::CharacterStateDelta`
+  - no route-handler changes required because `api/routes/state.py::apply_delta()` already deep-merges character delta fields into stored state
