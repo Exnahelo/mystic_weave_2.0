@@ -1,10 +1,24 @@
-id: feywood_glade
+id: feywood-glade
 name: Feywood Glade
 type: region_zone
-description: Fixed pocket region within the western temperate forest whose interior does
-  not obey ordinary spatial logic.
+region_id: hollow_crown
+description: The liminal forest realm that exists within the Hollow Crown's geography but does not obey its ordinary rules. The Feywood Glade appears from outside as a contained patch of the western temperate forest — a pocket perhaps half a day's walk across at its widest, bordered clearly by the realm-side Feywood Glade Border. Inside, the Glade is larger than any realm-side geography can account for. Its forests extend in ways that are not measurable from outside. Its interior holds the elven city of Thornveil around the Heartwood that is the land's living center, secondary elven settlements, sacred groves, and the wild terrain between them — all occupying space that, by any ordinary reckoning, should not fit within the Glade's external footprint. The Glade is not hostile. It is not corrupted. It is magical land functioning at its own heightened logic, protected by the elves who have lived here since before the realm existed, and by the land itself in return.
+connections:
+- feywood-glade-border
+- heartwood
+- thornveil
+- druidic-grove
 tags:
-- hollow-crowm
-- feywood
-- forest
+- drakenvale
+- feywood-glade
+- region-zone
 - liminal
+- elven-homeland
+- magical-ecology
+- ptarian-sovereign
+- heartwood
+- sacred-land
+- predates-realm
+known_npcs: []
+threat_level: 3
+discovered: false

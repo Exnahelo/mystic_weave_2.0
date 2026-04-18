@@ -1,10 +1,25 @@
----
 id: platinum-oath-approach
 name: Platinum Oath Approach
-type: trail
-description: The single controlled corridor leading to the Platinum Oath Monastery. The route is narrow, exposed, and intentionally easy to defend, with layered sightlines and prepared fallback positions. Monastery-aligned traffic moves under explicit Vigil control and is treated as protected movement; attacks on this corridor are met with disproportionate response shaped by a prior elite Warden retaliation that established lasting deterrence. Greymantle passage is tolerated as an agreement of convenience, not trust.
-tags: [rift-of-discord, corridor, controlled-access, vigil, wardens, drakenvale]
-connections: [platinum-oath-monastery, greymantle, rift-of-discord-edge]
-threat_level: 4
-known_npcs: [Serevane]
-discovered: false
+type: route-node
+region_id: hollow_crown
+parent_location_id: southern-dark-quadrant
+description: The secured mountain path ascending from the southern dark quadrant's lower terrain to the Platinum Oath Monastery at the summit. The Approach is not a pilgrim's road — it is a working military-monastic access corridor maintained by the Vigil and patrolled by the elite Wardens, with walled stages, manned gatehouses, and the engineered defensive architecture of an order whose heritage as the Platinum Accord has never truly been set aside. Visitors are welcomed in principle; the journey itself is the filter. The terrain is unforgiving, the distance is substantial, the corruption-adjacent surrounding country discourages casual approach, and the Vigil's checkpoints admit or decline travelers on the basis of genuine evaluation rather than ceremony. Those who reach the summit have earned their arrival. Those who do not are not the Vigil's concern.
+connections:
+- platinum-oath-monastery
+- greymantle
+- southern-dark-quadrant
+tags:
+- drakenvale
+- platinum-oath-approach
+- platinum-oath-monastery
+- route-node
+- secured-route
+- vigil-maintained
+- fortified-corridor
+- southern-dark-quadrant
+- mountain-path
+known_npcs:
+- Approach Gate Captain
+- Vigil Sentinel
+threat_level: 2
+discovered: true
