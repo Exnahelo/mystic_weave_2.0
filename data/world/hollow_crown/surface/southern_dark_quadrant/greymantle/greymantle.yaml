@@ -1,14 +1,24 @@
 id: greymantle
 name: Greymantle
-type: city
+type: settlement
 region_id: hollow_crown
-description: Placeholder-safe runtime node pending fuller canon migration.
-connections: []
+description: The realm's outlaw edge-settlement, built where the southern dark quadrant gives way to the outer basin's rougher margins. Greymantle was founded after the Discordant War by a veteran who could not accept the kingdom's tight civic rhythms anymore and wanted somewhere his old company could exist outside its reach. The settlement grew. Misfits, the war-broken, the quietly exiled, and the simply unwanted drifted to it over the decades, until what began as a hard-drinking veterans' outpost became the only place in the realm where someone could plausibly disappear without the Council noticing. The Warden of Greymantle governs through reputation, hard boundaries, and the practical authority of a man who has earned his settlement's trust the long way. The realm tolerates the arrangement because the alternative is worse.
+connections:
+- southern-dark-quadrant
+- platinum-oath-approach
+- mirefall
 tags:
-- greymantle
-- city
-- dark-quadrant-edge
 - drakenvale
-known_npcs: []
-threat_level: 0
+- greymantle
+- outlaw
+- edge-settlement
+- southern-dark-quadrant
+- warden-of-greymantle
+- discordant-war-legacy
+- low-trust
+- deniable
+- refuge
+known_npcs:
+- The Warden of Greymantle
+threat_level: 2
 discovered: true

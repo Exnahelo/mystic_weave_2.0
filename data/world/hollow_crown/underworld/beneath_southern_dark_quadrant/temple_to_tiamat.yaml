@@ -1,18 +1,25 @@
 id: temple-to-tiamat
 name: Temple to Tiamat
-type: sealed-temple
+type: sealed-site
 region_id: hollow_crown
-description: Sealed and heavily warded temple buried beneath the southern dark quadrant,
-  treated as one of the most dangerous points in Hollow Crown.
+parent_location_id: beneath-southern-dark-quadrant
+description: The sealed temple to the five-headed dragon goddess, built deep beneath the Shadowed Hollows at the founding of the sanctuary and disputed in every age since. The chromatic dragons of the founding coalition insisted on its construction as acknowledgment of their heritage and as formal respect for the principle of balance that underlay the entire Ptarian Pact; the metallic and gem dragons accepted the insistence as the price of unity, with the clear understanding that the temple would remain sealed rather than active. That understanding has held for a thousand years, with one catastrophic interruption. The Discordant War began when a rogue chromatic faction attempted to unseal the Temple; it ended when the Platinum Warden gave his life to reseal it. The Temple has remained sealed since. The Vigil maintains its wards. The elite Wardens patrol its threshold on rotation. No one living has seen its interior, and the realm's continuing peace depends on that not changing.
 connections:
-- shadowed-hollows
-- rift-of-discord
+- beneath-southern-dark-quadrant
+- shadowed-hollows-proper
 tags:
-- tiamat
-- sealed-temple
-- underworld
-- hazard
 - drakenvale
+- temple-to-tiamat
+- sealed
+- beneath-hollows
+- founding-dispute
+- tiamat
+- chromatic-heritage
+- ptarian-pact
+- active-seal
+- vigil-maintenance
+- warden-patrol
+- forbidden
 known_npcs: []
-threat_level: 5
+threat_level: 4
 discovered: false
