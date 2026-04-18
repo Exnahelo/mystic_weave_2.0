@@ -89,7 +89,8 @@ def _make_app(pool) -> FastAPI:
 def _base_character() -> dict:
     return {
         "name": "Krath",
-        'species': "dragonborn",
+        "ancestry": "human",
+        "culture": "drakenvale_city",
         "focus": "devoted",
         "background": "soldier",
         "hp": {"current": 100, "max": 100},
@@ -128,8 +129,6 @@ def _base_character() -> dict:
             "points_spent": 0,
             "points_earned_total": 0,
         },
-        "magic_fields": [],
-        "draconic_traits": [],
     }
 
 
