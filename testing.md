@@ -84,4 +84,4 @@ alembic upgrade head
 ```
 
 Operational troubleshooting reference:
-- `OPERATIONAL_RUNBOOK.md`
+- `operational-runbook.md`

@@ -25,9 +25,9 @@ Baseline checkpoint for the post-audit prompt/world topology state.
 
 ## Reference docs
 
-- `WORLD_TOPOLOGY_BASELINE.md`
+- `world-topology-baseline.md`
 - `README.md`
-- `TODO.md`
+- `todo.md`
 
 ## Operator note
 

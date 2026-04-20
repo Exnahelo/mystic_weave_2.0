@@ -55,12 +55,27 @@ Validators enforce the `stem == id.replace("-", "_")` rule in both directions.
 
 - **Template files** use a leading underscore: `_template_ancestry.json`, `_template.yaml`. Loaders skip files starting with `_`.
 - **Pytest discovery** requires `test_*.py` — follow pytest conventions.
-- **Markdown docs at the repo root or in `/docs/`** (this file, `README.md`, `TESTING.md`, etc.) use kebab-case. They are not tied to an ID.
+- **Markdown docs at the repo root or in `/docs/`** (this file, `README.md`, `testing.md`, etc.) use kebab-case. They are not tied to an ID.
 - **Historical legacy names** may persist where renaming would break live session state or external references. Document each exception below when it occurs.
 
 ### Documented exceptions
 
-_None currently._
+The following root-level files are exempt from the kebab-case rule because
+external tooling depends on the exact uppercase filename. This exemption
+applies whether or not the file currently exists in the repo.
+
+- `README.md` — GitHub auto-render; universal package-ecosystem expectation.
+- `LICENSE.md` (and variants `LICENSE`, `LICENSE.txt`) — GitHub license
+  detection requires this exact filename.
+- `CHANGELOG.md` — Keep a Changelog / Common Changelog convention.
+- `CONTRIBUTING.md` — GitHub community health file (surfaces as the
+  "Contributing" link in repo UI).
+- `CODE_OF_CONDUCT.md` — GitHub community health file.
+- `SECURITY.md` — GitHub security policy file.
+- `SUPPORT.md` — GitHub community health file.
+
+Any future addition to this list must include the specific tooling constraint
+that justifies the exception. Convenience or habit is not sufficient.
 
 ## Enforcement
 

@@ -57,7 +57,7 @@ System reference: `prompts/world_rules.md` and `prompts/character_creation.md`
   - `dracelune` → `feywood-glade-border`
   - `volcanic-highlands` → `draconic-grasslands`
 
-Reference: `WORLD_TOPOLOGY_BASELINE.md`
+Reference: `world-topology-baseline.md`
 
 ## v4.1.0 Changelog
 
@@ -242,7 +242,7 @@ Start command (in `railway.toml`):
 uvicorn api.main:app --host 0.0.0.0 --port $PORT
 ```
 
-Operational troubleshooting guide: `OPERATIONAL_RUNBOOK.md`
+Operational troubleshooting guide: `operational-runbook.md`
 
 ### Production Verification
 
