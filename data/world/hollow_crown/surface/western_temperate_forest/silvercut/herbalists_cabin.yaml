@@ -1,0 +1,20 @@
+id: hunters-hall
+name: Hunter's Hall
+type: location
+region_id: hollow-crown
+settlement_id: silvercut
+parent_location_id: silvercut
+description: The Hunts-Master's seat and the village's hunting coordination post, set a short walk into the western temperate forest from Silvercut proper. The hall handles licensing, training, game population tracking, and fletching supply for the village's hunting and trapping work.
+connections:
+- silvercut
+tags:
+- drakenvale
+- silvercut
+- hunters-hall
+- western-forest
+- hunting
+- fletching
+known_npcs:
+- Tova Kerrin
+threat_level: 1
+discovered: true
