@@ -1,98 +1,490 @@
 # Naming Conventions
 
-Authoritative reference for naming identifiers in this repository. When a naming question arises, match the identifier's **category**, not the file it appears in.
+Authoritative reference for naming identifiers in this repository.
 
-## The table
+When a naming question arises, match the identifier's **category**, not the file it appears in.
 
-| Category | Case | Example |
+---
+
+## Core policy
+
+1. Prefer **ecosystem-native conventions** over invented project-local ones.
+2. Use **one rule per identifier category**.
+3. Use **tool-required filenames exactly as required**.
+4. If a framework or external API requires a different convention, follow that at the boundary and document the exception.
+5. Avoid unnecessary abbreviations.
+6. When in doubt, choose the most boring, widely expected name.
+
+---
+
+## Quick reference table
+
+| Category | Convention | Example |
 |---|---|---|
-| Python modules, packages, files | `snake_case` | `scene_context.py`, `api/routes/session.py` |
-| Python functions, methods, variables | `snake_case` | `build_scene_context()`, `session_id` |
-| Python classes | `PascalCase` | `CharacterModel`, `NewSessionRequest` |
-| Python constants | `UPPER_SNAKE_CASE` | `DATABASE_URL` |
-| JSON / YAML object keys | `snake_case` | `character_name`, `wealth_tier`, `parent_location_id` |
-| Directory names | `snake_case` | `stronghold_of_drakenvale/`, `hollow_crown/` |
-| Data / world filenames (`.yaml`, `.md`) | `snake_case` | `stronghold_of_drakenvale.yaml` |
-| Canonical IDs and slugs (content) | `kebab-case` | `stronghold-of-drakenvale`, `eryndors-lair` |
-| Tags | `kebab-case` | `alpine-peaks`, `dragon-guard` |
-| URL path segments | `kebab-case` | `/location/{location_id}` |
-| URL / query parameters | `snake_case` | `?session_id=abc` |
-| Environment variables | `UPPER_SNAKE_CASE` | `DATABASE_URL`, `RAILWAY_GIT_COMMIT_SHA` |
-| Database tables and columns | `snake_case` | `game_states`, `session_id` |
-| Git branches | `kebab-case` | `chore/naming-conventions`, `feat/scene-endpoint` |
-| Markdown documentation files | `kebab-case` | `operational-runbook.md` |
+| Repository meta files recognized by tooling | exact conventional name | `README.md`, `LICENSE`, `CONTRIBUTING.md` |
+| General directories | `snake_case` | `api_clients/`, `test_fixtures/` |
+| Python modules / packages / files | `snake_case` | `auth_service.py` |
+| Python functions / methods / variables | `snake_case` | `build_user_profile()`, `session_id` |
+| Python classes / exceptions | `PascalCase` | `UserProfile`, `AuthenticationError` |
+| Python constants | `UPPER_SNAKE_CASE` | `DEFAULT_TIMEOUT_SECONDS` |
+| Shell / Bash scripts | `snake_case` | `deploy_service.sh` |
+| Shell functions / local variables | `snake_case` | `load_config()`, `target_dir` |
+| Shell exported env vars / constants | `UPPER_SNAKE_CASE` | `DATABASE_URL` |
+| JSON / YAML keys (internal schemas) | `snake_case` | `user_id`, `created_at` |
+| Database tables / columns / views / indexes | `snake_case` | `user_accounts`, `created_at`, `idx_users_email` |
+| SQL constraints | `snake_case` with type prefix | `fk_orders_user_id`, `uq_users_email` |
+| Java packages | lowercase dot notation | `com.example.billing` |
+| Java classes / interfaces / enums / records | `PascalCase` | `PaymentService` |
+| Java methods / fields / local vars | `camelCase` | `findActiveSubscription()` |
+| Java constants | `UPPER_SNAKE_CASE` | `DEFAULT_TIMEOUT_MILLIS` |
+| JavaScript functions / variables | `camelCase` | `buildSessionPayload()` |
+| JavaScript classes | `PascalCase` | `SessionManager` |
+| JavaScript constants | `UPPER_SNAKE_CASE` | `MAX_RETRY_COUNT` |
+| JS/TS React component files | `PascalCase` | `UserCard.jsx` |
+| Non-component JS/TS files | `kebab-case` | `session-manager.js` |
+| HTML / CSS class names / web-facing asset names | `kebab-case` | `account-settings.html`, `user-card` |
+| URL path segments / public slugs | `kebab-case` | `/user-profiles`, `billing-events` |
+| Query params / internal API fields | `snake_case` | `?session_id=123` |
+| Environment variables | `UPPER_SNAKE_CASE` | `RAILWAY_ENVIRONMENT`, `JWT_SECRET` |
+| Git branches | `kebab-case` with prefix | `feat/add-auth-middleware` |
+| Markdown docs (general) | `kebab-case` | `deployment-runbook.md` |
+| Generated files | suffix or prefix marker | `openapi.generated.json`, `generated_schema.sql` |
+| Template files | leading underscore or `.template` marker | `_template.env`, `config.template.yaml` |
+| Test files (Python) | `test_*.py` | `test_auth_service.py` |
+| Test functions (Python) | `test_<behavior>` | `test_rejects_expired_token()` |
 
-## The core rule
+---
 
-**Filesystem paths are `snake_case`. Content identifiers are `kebab-case`.**
+## The default rule
 
-This creates a predictable, one-directional transformation between a file and its ID:
+**Use `snake_case` unless the language or platform has a strong, well-established alternative.**
 
-```
-filename stem:  stronghold_of_drakenvale
-content id:     stronghold-of-drakenvale
-transform:      stem == id.replace("-", "_")
-```
+That means:
 
-A YAML source and its Markdown mirror therefore share a stem:
+- Python internals: `snake_case`
+- SQL objects: `snake_case`
+- JSON/YAML internal schema keys: `snake_case`
+- shell internals: `snake_case`
 
-```
-data/world/.../stronghold_of_drakenvale.yaml        →  id: stronghold-of-drakenvale
-prompts/world_vault/.../stronghold_of_drakenvale.md →  id: stronghold-of-drakenvale
-```
+Use other conventions only where they are the clear industry norm:
 
-Validators enforce the `stem == id.replace("-", "_")` rule in both directions.
+- Java / JavaScript methods and variables: `camelCase`
+- classes and types: `PascalCase`
+- public slugs, branch names, CSS classes, URL segments: `kebab-case`
+- constants and environment variables: `UPPER_SNAKE_CASE`
 
-## Why this split
+---
 
-**Snake_case filesystem paths.** Python's ecosystem expects it. Directories and module files must be snake_case anyway (PEP 8). Splitting files off into kebab-case while directories stay snake_case creates visible inconsistency in every path.
+## Repository root files
 
-**Kebab-case content IDs and tags.** These are web-facing strings that appear in URLs, anchors, and search. Hyphens are URL-safe and visually survive inside underlined links; underscores do not.
+### Use exact conventional names for tooling-sensitive files
 
-**The transformation rule.** Gives you the "one identity, two surface forms" invariant without forcing either domain to compromise. Tooling that needs to bridge them does one `.replace("-", "_")` call.
+These filenames are exceptions to the lowercase rule and should be preserved exactly:
 
-## Exceptions
+- `README.md`
+- `LICENSE` or `LICENSE.md`
+- `CHANGELOG.md`
+- `CONTRIBUTING.md`
+- `CODE_OF_CONDUCT.md`
+- `SECURITY.md`
+- `SUPPORT.md`
+- `Makefile`
 
-- **Template files** use a leading underscore: `_template_ancestry.json`, `_template.yaml`. Loaders skip files starting with `_`.
-- **Pytest discovery** requires `test_*.py` — follow pytest conventions.
-- **Markdown docs at the repo root or in `/docs/`** (this file, `README.md`, `testing.md`, etc.) use kebab-case. They are not tied to an ID.
-- **Historical legacy names** may persist where renaming would break live session state or external references. Document each exception below when it occurs.
+Do not rename these for style consistency. Tooling and ecosystem expectations matter more than aesthetics.
 
-### Documented exceptions
+### All other root files
 
-The following root-level files are exempt from the kebab-case rule because
-external tooling depends on the exact uppercase filename. This exemption
-applies whether or not the file currently exists in the repo.
+Use the name required by the ecosystem or tool:
 
-- `README.md` — GitHub auto-render; universal package-ecosystem expectation.
-- `LICENSE.md` (and variants `LICENSE`, `LICENSE.txt`) — GitHub license
-  detection requires this exact filename.
-- `CHANGELOG.md` — Keep a Changelog / Common Changelog convention.
-- `CONTRIBUTING.md` — GitHub community health file (surfaces as the
-  "Contributing" link in repo UI).
-- `CODE_OF_CONDUCT.md` — GitHub community health file.
-- `SECURITY.md` — GitHub security policy file.
-- `SUPPORT.md` — GitHub community health file.
+- `pyproject.toml`
+- `package.json`
+- `railway.json`
+- `docker-compose.yml`
+- `.editorconfig`
+- `.env.example`
 
-Any future addition to this list must include the specific tooling constraint
-that justifies the exception. Convenience or habit is not sufficient.
+Do not invent alternate casing.
 
-## Enforcement
+---
 
-- `ruff` catches Python-side violations.
-- `scripts/validate_data_files.py` asserts `Path(file).stem == data["id"].replace("-", "_")` for every world YAML.
-- `scripts/validate_prompts.py` asserts the same for every vault Markdown mirror with an `id` field.
-- Tag-level hygiene: no snake_case tags, no authoring meta tags (`placeholder`, `canonical`, `canonical-realm`, `TODO`, `draft`) in canonical world data.
-- All validators run in CI on every PR (`.github/workflows/ci.yml`).
+## Python
 
-## When you find a violation
+Follow Python ecosystem conventions:
 
-1. Confirm the identifier's category in the table above.
-2. Check whether live session state in Postgres or external references depend on the current name before renaming.
-3. If safe to rename: use `git mv` to preserve history.
-4. If unsafe: add an entry to **Documented exceptions** above with the reason and a link to the blocking constraint.
-5. Run the full validation suite before committing.
+- files/modules/packages: `snake_case`
+- functions/methods/variables: `snake_case`
+- classes/exceptions: `PascalCase`
+- constants: `UPPER_SNAKE_CASE`
+- non-public functions/methods/helpers: leading underscore (`_build_payload`)
+- dunder names only for actual Python protocol methods (`__init__`, `__repr__`)
 
-## Revision policy
+Examples:
 
-This document is authoritative. If you want to change a convention, update this file first on its own commit, then land the content changes that follow. Never do both in the same commit — it destroys the audit trail of why things are named what they are.
+- `auth_service.py`
+- `build_scene_context()`
+- `user_profile`
+- `AuthenticationError`
+- `DEFAULT_PAGE_SIZE`
+
+Do not use `camelCase` in Python except when mirroring an external API exactly.
+
+---
+
+## SQL
+
+Use `snake_case` for all database objects:
+
+- tables
+- columns
+- views
+- indexes
+- constraints
+- functions/procedures where practical
+
+Examples:
+
+- `user_accounts`
+- `created_at`
+- `vw_active_subscriptions`
+- `idx_users_email`
+- `fk_orders_user_id`
+
+### Table rule
+
+Use **plural table names** by default.
+
+Examples:
+
+- `users`
+- `orders`
+- `audit_logs`
+
+### Constraint prefixes
+
+Use type-prefixed names:
+
+- `pk_<table>`
+- `fk_<from>_<to>`
+- `uq_<table>_<column>`
+- `ck_<table>_<rule>`
+- `idx_<table>_<column>`
+
+Examples:
+
+- `pk_users`
+- `fk_orders_user_id`
+- `uq_users_email`
+
+Avoid quoted mixed-case SQL identifiers.
+
+---
+
+## JSON and YAML
+
+### Internal schemas
+
+Use `snake_case` keys.
+
+Examples:
+
+- `user_id`
+- `display_name`
+- `created_at`
+- `is_active`
+
+### External schemas
+
+If an external API or framework is canonically `camelCase`, preserve that convention at the boundary instead of force-converting everything.
+
+Examples:
+
+- external JS API payload: `createdAt`
+- internal Python schema: `created_at`
+
+Document the boundary if both forms exist.
+
+---
+
+## Shell / Bash
+
+Use:
+
+- filenames: `snake_case.sh`
+- functions: `snake_case`
+- local variables: `snake_case`
+- exported variables/constants: `UPPER_SNAKE_CASE`
+
+Examples:
+
+- `sync_backups.sh`
+- `load_config()`
+- `target_dir`
+- `DATABASE_URL`
+
+Do not use hyphens in variable names.
+
+---
+
+## Java
+
+Use standard Java naming:
+
+- packages: lowercase dot notation
+- classes/interfaces/enums/records: `PascalCase`
+- methods: `camelCase`
+- fields/local vars: `camelCase`
+- constants: `UPPER_SNAKE_CASE`
+
+Examples:
+
+- `com.example.billing`
+- `PaymentService`
+- `findActiveSubscription()`
+- `retryCount`
+- `DEFAULT_TIMEOUT_MILLIS`
+
+Public class name should match the filename.
+
+---
+
+## JavaScript
+
+Use:
+
+- functions/variables: `camelCase`
+- classes: `PascalCase`
+- constants: `UPPER_SNAKE_CASE`
+
+### File naming
+
+Use:
+
+- `PascalCase` for React component files
+- `kebab-case` for non-component JS files
+
+Examples:
+
+- `UserCard.jsx`
+- `session-manager.js`
+- `buildSessionPayload()`
+- `SessionManager`
+- `MAX_RETRY_COUNT`
+
+If a framework imposes a different file naming convention, follow the framework.
+
+---
+
+## HTML / CSS / web-facing assets
+
+Use `kebab-case` for:
+
+- HTML files
+- CSS class names
+- public-facing asset names
+- `data-*` attributes
+- URL path segments
+
+Examples:
+
+- `account-settings.html`
+- `user-card`
+- `data-user-id`
+- `/api/v1/user-profiles`
+
+---
+
+## Environment variables
+
+Always use `UPPER_SNAKE_CASE`.
+
+Examples:
+
+- `DATABASE_URL`
+- `JWT_SECRET`
+- `RAILWAY_ENVIRONMENT`
+- `LOG_LEVEL`
+
+Environment variables are never `camelCase`, never `kebab-case`.
+
+---
+
+## Git branches
+
+Use:
+
+`<type>/<kebab-case-description>`
+
+Allowed prefixes:
+
+- `feat/`
+- `fix/`
+- `refactor/`
+- `docs/`
+- `test/`
+- `chore/`
+- `perf/`
+- `ci/`
+
+Examples:
+
+- `feat/add-auth-middleware`
+- `fix/handle-null-session-id`
+- `docs/update-naming-conventions`
+
+---
+
+## Documentation
+
+### Tooling-sensitive docs
+Use exact conventional names:
+
+- `README.md`
+- `CHANGELOG.md`
+- `CONTRIBUTING.md`
+- `SECURITY.md`
+
+### Other docs
+Use `kebab-case.md`.
+
+Examples:
+
+- `architecture-overview.md`
+- `deployment-runbook.md`
+- `database-migration-policy.md`
+
+---
+
+## Tests
+
+### Python
+- files: `test_<subject>.py`
+- functions: `test_<behavior>()`
+
+Examples:
+
+- `test_auth_service.py`
+- `test_rejects_expired_token()`
+
+### Other languages
+Use the dominant framework convention, but keep the stem descriptive and lowercase.
+
+Examples:
+
+- `session-manager.test.js`
+- `payment-service.spec.js`
+
+---
+
+## Generated files and templates
+
+### Generated files
+Mark generated artifacts clearly:
+
+- `*.generated.*`
+- `generated_*`
+
+Examples:
+
+- `openapi.generated.json`
+- `generated_schema.sql`
+
+### Templates
+Mark templates clearly:
+
+- leading underscore, or
+- `.template.` in name
+
+Examples:
+
+- `_template.env`
+- `config.template.yaml`
+
+---
+
+## Abbreviations
+
+Allowed when widely standard:
+
+- `id`
+- `url`
+- `html`
+- `sql`
+- `api`
+- `ui`
+- `db`
+
+Do not invent compressed names that reduce readability.
+
+Bad examples:
+
+- `usr_cfg_mgr`
+- `dt_proc_fn`
+
+Prefer full words unless the abbreviation is universal.
+
+---
+
+## Forbidden patterns
+
+Do not use:
+
+- spaces in filenames
+- mixed casing for SQL identifiers
+- `camelCase` in Python internals
+- `snake_case` for Java methods or fields
+- inconsistent singular/plural table naming
+- decorative underscores or prefixes with no semantic meaning
+- all-caps filenames except where tooling or ecosystem convention explicitly expects them
+
+---
+
+## Exception policy
+
+An exception is allowed only if one of these is true:
+
+1. A language or framework convention requires it.
+2. A tool requires an exact filename.
+3. An external API/schema must be mirrored exactly.
+4. A legacy/public interface would break if renamed.
+
+Every exception must be documented with:
+
+- the current name
+- why it is exempt
+- what tool/framework/API requires it
+
+Convenience is not a valid reason.
+
+---
+
+## Enforcement guidance
+
+Recommended enforcement:
+
+- Python: `ruff`, `flake8`, `pylint`
+- Shell: `shellcheck`
+- JavaScript: `eslint`
+- YAML/JSON: schema validation + formatter
+- SQL: SQL linter/formatter where available
+- Repo-wide: custom naming checks in CI
+
+Recommended CI checks:
+
+- disallow spaces in filenames
+- disallow mixed-case SQL migration filenames
+- require `snake_case` for Python module names
+- require `UPPER_SNAKE_CASE` for env vars in examples/templates
+- require exact names for root meta files
+- require approved branch prefixes
+
+---
+
+## Decision rule
+
+When naming something:
+
+1. Identify the category.
+2. Apply the category rule.
+3. If a tool/framework/API requires something else, use that instead.
+4. If still unclear, choose the most common convention in that language ecosystem.
+5. Document exceptions instead of improvising.
