@@ -9,7 +9,7 @@ Baseline checkpoint for the post-audit prompt/world topology state.
 - New reference docs:
   - `prompts/magic-rules.md`
   - `prompts/difficulty_rules.md`
-  - `prompts/items_rules.md`
+  - `prompts/items-rules.md`
 - World topology reciprocity audit across the legacy flat `prompts/world/*.yaml` source set (before `data/world/` cutover)
 - Corrected reciprocal route:
   - `stronghold-of-drakenvale` ↔ `volcanic-highlands`

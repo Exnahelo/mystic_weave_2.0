@@ -26,7 +26,7 @@
 | `difficulty_rules.md` | Canon runtime/support reference | Yes |
 | `economy-rules.md` | Canon runtime/support reference | Yes |
 | `engine.md` | Canon runtime system prompt | Yes |
-| `items_rules.md` | Canon runtime/support reference | Yes |
+| `items-rules.md` | Canon runtime/support reference | Yes |
 | `magic-rules.md` | Canon runtime/support reference | Yes |
 | `progression_rules.md` | Canon runtime/support reference | Yes |
 | `scene_structure.md` | Canon runtime/support reference | Yes |
