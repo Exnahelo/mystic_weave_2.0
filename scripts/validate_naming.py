@@ -112,6 +112,11 @@ def main() -> None:
                 violations.append(f"NAMING VIOLATION  {rel_str}  expected=snake_case  got={stem}")
             continue
 
+        if path.suffix in {".yaml", ".yml"}:
+            if not SNAKE.fullmatch(stem):
+                violations.append(f"NAMING VIOLATION  {rel_str}  expected=snake_case  got={stem}")
+            continue
+
         if path.suffix == ".md":
             if len(rel.parts) >= 2 and rel.parts[0] == "prompts" and rel.parts[1] == "world_vault":
                 if name == "README.md":

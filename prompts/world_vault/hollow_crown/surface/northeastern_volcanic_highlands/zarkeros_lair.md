@@ -44,6 +44,7 @@ A volcanic fortress carved deep into the northeastern crater wall, in the heart 
 - volcanic
 - fortress
 - restricted
+- hollow-crown
 
 ## Connected Nodes
 

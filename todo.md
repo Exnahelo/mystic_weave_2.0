@@ -52,6 +52,26 @@ Updated after post-cleanup audit — 2026-04-18.
 - [x] Remove the legacy `hollow-crowm` string from audit artifacts if repo-wide grep should stay at zero.
   - affected paths: `docs/audit_convention_drift.md`
   - size estimate: S
+- [ ] Confirm Alembic filename behavior remains compatible with `validate_naming.py` before the next migration lands.
+  - note: existing migration passes current regex; future non-snake revision stems should fail CI.
+  - affected paths: `alembic/versions/`, `scripts/validate_naming.py`
+  - size estimate: XS
+- [ ] Trim `prompts/engine.md` before any future content addition.
+  - note: current GPT Builder budget is effectively exhausted at 7999/8000 chars.
+  - affected paths: `prompts/engine.md`
+  - size estimate: XS
+- [ ] Remove `prompts/world/` legacy flat tree once overlap detection is no longer needed.
+  - note: `scripts/seed_locations.py` still references it for migration-safety checks.
+  - affected paths: `prompts/world/`, `scripts/seed_locations.py`
+  - size estimate: S
+- [ ] Decide whether to normalize form-level JSON naming inconsistencies if they become annoying enough to justify churn.
+  - note: stylistic wart only; not currently a `docs/conventions.md` violation.
+  - affected paths: `data/items/magical.json`, `data/items/notable.json`, `data/items/weapons.json`, `data/characters/backgrounds.json`
+  - size estimate: XS
+- [ ] Revisit a stronger `validate_naming.py` ↔ `docs/conventions.md` drift guard if documented exceptions return in a more explicit section.
+  - note: current parser cross-check exists for the present exception lists; future doc structure changes may warrant a stricter implementation.
+  - affected paths: `scripts/validate_naming.py`, `docs/conventions.md`
+  - size estimate: XS
 
 ---
 
