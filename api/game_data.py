@@ -46,6 +46,13 @@ _SPELL_DATA_FILES = (
     "magic/sacred.json",
     "magic/warding.json",
 )
+_BEAST_DATA_FILES = (
+    "beasts/creatures.json",
+    "beasts/exceptional.json",
+    "beasts/natural_abilities.json",
+    "beasts/learned_commands.json",
+    "beasts/tactical_roles.json",
+)
 _MAGIC_DIR = _DATA_DIR / "magic"
 
 
@@ -274,6 +281,49 @@ def list_all_items() -> list[dict[str, Any]]:
     return list_mundane_items() + list_magical_items() + list_apparel_items()
 
 
+# ---------------------------------------------------------------------------
+# Companion / beast catalogs
+# ---------------------------------------------------------------------------
+
+def list_creature_catalog() -> list[dict[str, Any]]:
+    """Return all starter creature entries."""
+    data = _load_json("beasts/creatures.json")
+    if not isinstance(data, list):
+        return []
+    return data
+
+
+def get_creature(subspecies: str) -> dict[str, Any]:
+    """Return a specific creature entry by subspecies ID."""
+    for entry in list_creature_catalog():
+        if entry.get("subspecies") == subspecies:
+            return entry
+    raise ValueError(f"Unknown creature subspecies: {subspecies!r}")
+
+
+def list_exceptional_catalog() -> list[dict[str, Any]]:
+    """Return all starter exceptional companion entries (may be empty)."""
+    data = _load_json("beasts/exceptional.json")
+    if not isinstance(data, list):
+        return []
+    return data
+
+
+def list_natural_abilities() -> list[dict[str, Any]]:
+    data = _load_json("beasts/natural_abilities.json")
+    return data if isinstance(data, list) else []
+
+
+def list_learned_commands() -> list[dict[str, Any]]:
+    data = _load_json("beasts/learned_commands.json")
+    return data if isinstance(data, list) else []
+
+
+def list_tactical_roles() -> list[dict[str, Any]]:
+    data = _load_json("beasts/tactical_roles.json")
+    return data if isinstance(data, list) else []
+
+
 def data_fingerprint() -> str:
     """
     Stable SHA256 fingerprint of core game data files used by /options and seeding.
@@ -281,7 +331,7 @@ def data_fingerprint() -> str:
     Exposed by GET /version for deployment/contract sanity checks.
     """
     hasher = hashlib.sha256()
-    for filename in (*_DATA_FILES, *_ITEM_DATA_FILES):
+    for filename in (*_DATA_FILES, *_ITEM_DATA_FILES, *_BEAST_DATA_FILES):
         path = _DATA_DIR / filename
         if not path.exists():
             continue

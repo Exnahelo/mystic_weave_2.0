@@ -31,6 +31,26 @@ FIELD_KEYS = {
     "alchemy",
     "necromancy",
 }
+BEAST_BIOMES = {
+    "feywood",
+    "wetlands",
+    "volcanic_highlands",
+    "alpine_peaks",
+    "draconic_grasslands",
+    "temperate_forest",
+    "crystal_caverns",
+    "shadowed_hollows",
+    "generalist",
+}
+CREATURE_DOMAIN_KEYS = {"physical", "instinct", "composure"}
+TACTICAL_ROLE_VALUES = {"mount", "pack", "scout", "guard", "hunter", "companion"}
+TRAINING_LEVEL_VALUES = {"untrained", "basic", "trained", "expert"}
+BOND_LEVEL_VALUES = {"wary", "accepting", "bonded", "devoted"}
+AGE_CATEGORY_VALUES = {"juvenile", "young_adult", "adult", "mature", "elder"}
+CREATURE_SIZE_VALUES = {"tiny", "small", "medium", "large", "huge"}
+CARRYING_CAPACITY_VALUES = {"none", "small", "medium", "large"}
+MOVEMENT_MODE_VALUES = {"walk", "fly", "swim", "climb", "burrow"}
+NATURAL_WEAPON_VALUES = {"bite", "claw", "hoof", "tail_slam", "breath", "sting", "none"}
 
 SPELL_FIELDS = FIELD_KEYS
 TRAIT_TYPES = {"passive", "conditional", "active"}
@@ -43,6 +63,7 @@ WORLD_META_TAGS = {"canonical", "canonical-realm", "placeholder", "TODO", "draft
 VALID_KNOWLEDGE_GROUPS: set[str] = set()
 VALID_MAGIC_FIELDS: set[str] = set()
 VALID_APPLICATIONS: set[str] = set()
+VALID_BEAST_NATURAL_ABILITIES: set[str] = set()
 
 
 def _failures_append(failures: list[str], condition: bool, message: str) -> None:
@@ -524,6 +545,116 @@ def _validate_items_roll_tags(path: Path, failures: list[str]) -> None:
         )
 
 
+def _validate_simple_catalog(path: Path, failures: list[str]) -> list[dict]:
+    rows = _load_json(path)
+    seen_ids: set[str] = set()
+    for i, row in enumerate(rows):
+        label = f"{path.name}[{i}]"
+        _failures_append(failures, isinstance(row, dict), f"{label}: expected object")
+        if not isinstance(row, dict):
+            continue
+        required = {"id", "display_name", "description"}
+        _failures_append(failures, required.issubset(row.keys()), f"{label}: missing one of {sorted(required)}")
+        item_id = row.get("id")
+        _validate_snake_case(f"{label}.id", item_id, failures)
+        if isinstance(item_id, str):
+            _failures_append(failures, item_id not in seen_ids, f"{label}.id duplicated: {item_id}")
+            seen_ids.add(item_id)
+        _failures_append(failures, isinstance(row.get("display_name"), str) and row.get("display_name").strip(), f"{label}.display_name must be non-empty string")
+        _failures_append(failures, isinstance(row.get("description"), str) and row.get("description").strip(), f"{label}.description must be non-empty string")
+    return rows
+
+
+def _validate_beast_creatures(path: Path, failures: list[str]) -> None:
+    rows = _load_json(path)
+    seen_subspecies: set[str] = set()
+    required_keys = {
+        "species",
+        "subspecies",
+        "display_name",
+        "biome",
+        "size",
+        "age_category",
+        "tactical_role_default",
+        "natural_abilities",
+        "natural_weapons",
+        "movement_modes",
+        "carrying_capacity",
+        "base_domains",
+        "base_hp",
+        "temperament",
+        "description",
+    }
+
+    for i, row in enumerate(rows):
+        label = f"{path.name}[{i}]"
+        _failures_append(failures, isinstance(row, dict), f"{label}: expected object")
+        if not isinstance(row, dict):
+            continue
+        _failures_append(failures, required_keys.issubset(row.keys()), f"{label}: missing required keys")
+        _validate_snake_case(f"{label}.species", row.get("species"), failures)
+        _validate_snake_case(f"{label}.subspecies", row.get("subspecies"), failures)
+        subspecies = row.get("subspecies")
+        if isinstance(subspecies, str):
+            _failures_append(failures, subspecies not in seen_subspecies, f"{label}.subspecies duplicated: {subspecies}")
+            seen_subspecies.add(subspecies)
+        _failures_append(failures, isinstance(row.get("display_name"), str) and row.get("display_name").strip(), f"{label}.display_name must be non-empty string")
+        _failures_append(failures, row.get("biome") in BEAST_BIOMES, f"{label}.biome must be one of {sorted(BEAST_BIOMES)}")
+        _failures_append(failures, row.get("size") in CREATURE_SIZE_VALUES, f"{label}.size must be one of {sorted(CREATURE_SIZE_VALUES)}")
+        _failures_append(failures, row.get("age_category") in AGE_CATEGORY_VALUES, f"{label}.age_category must be one of {sorted(AGE_CATEGORY_VALUES)}")
+        _failures_append(failures, row.get("tactical_role_default") in TACTICAL_ROLE_VALUES, f"{label}.tactical_role_default must be one of {sorted(TACTICAL_ROLE_VALUES)}")
+        _failures_append(failures, row.get("carrying_capacity") in CARRYING_CAPACITY_VALUES, f"{label}.carrying_capacity must be one of {sorted(CARRYING_CAPACITY_VALUES)}")
+
+        natural_abilities = row.get("natural_abilities")
+        _failures_append(failures, isinstance(natural_abilities, list), f"{label}.natural_abilities must be list")
+        if isinstance(natural_abilities, list):
+            for ability in natural_abilities:
+                _failures_append(failures, isinstance(ability, str) and ability in VALID_BEAST_NATURAL_ABILITIES, f"{label}.natural_abilities contains unknown id: {ability}")
+
+        natural_weapons = row.get("natural_weapons")
+        _failures_append(failures, isinstance(natural_weapons, list), f"{label}.natural_weapons must be list")
+        if isinstance(natural_weapons, list):
+            for weapon in natural_weapons:
+                _failures_append(failures, weapon in NATURAL_WEAPON_VALUES, f"{label}.natural_weapons contains invalid value: {weapon}")
+
+        movement_modes = row.get("movement_modes")
+        _failures_append(failures, isinstance(movement_modes, list), f"{label}.movement_modes must be list")
+        if isinstance(movement_modes, list):
+            for movement_mode in movement_modes:
+                _failures_append(failures, movement_mode in MOVEMENT_MODE_VALUES, f"{label}.movement_modes contains invalid value: {movement_mode}")
+
+        base_domains = row.get("base_domains")
+        _failures_append(failures, isinstance(base_domains, dict), f"{label}.base_domains must be object")
+        if isinstance(base_domains, dict):
+            _failures_append(failures, set(base_domains.keys()) == CREATURE_DOMAIN_KEYS, f"{label}.base_domains keys must be exactly {sorted(CREATURE_DOMAIN_KEYS)}")
+            for dkey, val in base_domains.items():
+                _failures_append(failures, isinstance(val, int) and 25 <= val <= 60, f"{label}.base_domains.{dkey} must be int 25-60")
+
+        base_hp = row.get("base_hp")
+        _failures_append(failures, isinstance(base_hp, dict), f"{label}.base_hp must be object")
+        if isinstance(base_hp, dict):
+            current = base_hp.get("current")
+            maximum = base_hp.get("max")
+            _failures_append(failures, isinstance(current, int), f"{label}.base_hp.current must be int")
+            _failures_append(failures, isinstance(maximum, int), f"{label}.base_hp.max must be int")
+            if isinstance(current, int) and isinstance(maximum, int):
+                _failures_append(failures, maximum >= current >= 0, f"{label}.base_hp must satisfy max >= current >= 0")
+
+        _failures_append(failures, isinstance(row.get("temperament"), str) and row.get("temperament").strip(), f"{label}.temperament must be non-empty string")
+        _failures_append(failures, isinstance(row.get("description"), str) and row.get("description").strip(), f"{label}.description must be non-empty string")
+
+
+def _validate_beast_exceptional(path: Path, failures: list[str]) -> None:
+    rows = _load_json(path)
+    for i, row in enumerate(rows):
+        label = f"{path.name}[{i}]"
+        _failures_append(failures, isinstance(row, dict), f"{label}: expected object")
+        if not isinstance(row, dict):
+            continue
+        _failures_append(failures, isinstance(row.get("species"), str) and row.get("species").strip(), f"{label}.species must be non-empty string")
+        _failures_append(failures, isinstance(row.get("subspecies"), str) and row.get("subspecies").strip(), f"{label}.subspecies must be non-empty string")
+
+
 def _validate_world_yaml(path: Path, failures: list[str]) -> None:
     data = yaml.safe_load(path.read_text(encoding="utf-8"))
     label = path.relative_to(path.parents[2]).as_posix()
@@ -562,7 +693,7 @@ def main() -> None:
     repo_root = Path(__file__).resolve().parents[1]
     data_dir = repo_root / "data"
 
-    global VALID_KNOWLEDGE_GROUPS, VALID_MAGIC_FIELDS, VALID_APPLICATIONS
+    global VALID_KNOWLEDGE_GROUPS, VALID_MAGIC_FIELDS, VALID_APPLICATIONS, VALID_BEAST_NATURAL_ABILITIES
     VALID_KNOWLEDGE_GROUPS = {g["index"] for g in _load_tag_file(data_dir / "tags" / "knowledge_groups.json")}
     VALID_MAGIC_FIELDS = {f["index"] for f in _load_tag_file(data_dir / "tags" / "magic_fields.json")}
     VALID_APPLICATIONS = {a["index"] for a in _load_tag_file(data_dir / "tags" / "applications.json")}
@@ -580,6 +711,14 @@ def main() -> None:
         if item_file.name.startswith("_"):
             continue
         _validate_items_roll_tags(item_file, failures)
+
+    beast_dir = data_dir / "beasts"
+    natural_ability_rows = _validate_simple_catalog(beast_dir / "natural_abilities.json", failures)
+    VALID_BEAST_NATURAL_ABILITIES = {row["id"] for row in natural_ability_rows if isinstance(row, dict) and isinstance(row.get("id"), str)}
+    _validate_simple_catalog(beast_dir / "learned_commands.json", failures)
+    _validate_simple_catalog(beast_dir / "tactical_roles.json", failures)
+    _validate_beast_creatures(beast_dir / "creatures.json", failures)
+    _validate_beast_exceptional(beast_dir / "exceptional.json", failures)
 
     magic_dir = data_dir / "magic"
     for spell_file in sorted(magic_dir.glob("*.json")):
