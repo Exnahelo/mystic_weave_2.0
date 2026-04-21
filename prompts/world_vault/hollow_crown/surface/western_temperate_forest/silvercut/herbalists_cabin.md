@@ -1,61 +1,64 @@
 ---
-id: hunters-hall
-name: Hunter's Hall
+id: herbalists-cabin
+name: Herbalist's Cabin
 type: location
 region_id: hollow-crown
 settlement_id: silvercut
 parent_location_id: silvercut
-description: The Hunts-Master's seat and the village's hunting coordination post, set a short walk into the western temperate forest from Silvercut proper. The hall handles licensing, training, game population tracking, and fletching supply for the village's hunting and trapping work.
+description: The village healer's workspace and residence, set on a small managed clearing at Silvercut's southern edge. The cabin holds the medicinal gardens, drying shed, tincture workroom, and a modest patient room for injury care and short convalescence.
 connections:
 - silvercut
 tags:
 - drakenvale
 - silvercut
-- hunters-hall
+- herbalists-cabin
 - western-forest
-- hunting
-- fletching
+- healer
+- medicine
+- herbalism
 known_npcs:
-- Tova Kerrin
-threat_level: 1
+- Marren Oake
+threat_level: 0
 discovered: true
 ---
 
-# Hunter's Hall
+# Herbalist's Cabin
 
-The Hunts-Master's seat and the village's hunting coordination post, set a short walk into the western temperate forest from Silvercut proper. The hall handles licensing, training, game population tracking, and fletching supply for the village's hunting and trapping work.
+The village healer's workspace and residence, set on a small managed clearing at Silvercut's southern edge. The cabin holds the medicinal gardens, drying shed, tincture workroom, and a modest patient room for injury care and short convalescence.
 
 ## Scene Texture
 
-The Hunter's Hall sits along one of the managed paths leading north from Silvercut's central clearing, where the forest thickens but has not yet closed over the trail. The building is a long low structure of silverwood beams and dark-stained plank walls, with a broad covered porch across its front and a deep overhang behind to shield the skinning frames and drying racks clustered at its rear from weather. A simple post-and-rail hitch line stands at the porch's edge; the hall sees enough daily traffic that horses, pack mules, and the occasional deer sled are regular visitors.
+The cabin stands in a small clearing a short walk south of Silvercut along its own path, close enough that an injured hunter can be carried in on a sling in a reasonable time and far enough that the village's usual noise does not reach it. The clearing is tidy without being groomed — beds of medicinal herbs laid out in long parallel rows, a low stone wall marking the garden's edge, a few older silverwood trees left standing where the original clearing was cut, and the cabin itself set at the back of the open ground with its door facing north toward the village.
 
-Inside, the hall's main room is working space — a long central table where hunting licenses are issued and game logs are entered, a map wall with the current season's quota marks and population notes, a rack of spare bows and crossbows kept for training use, and benches along the walls where hunters returning from a day's work can sit and catch their wind before the debrief. The hall's east room holds the fletching bench: arrow stock by length and wood type, fletch feathers sorted by bird, sinew, glue pot, and the hand tools that turn raw shafts into finished arrows. The village's fletcher works here, supplying the hunters' steady consumption and the occasional specialty order from Dracélune.
+The cabin is small, built in the local idiom — silverwood beams, plank walls, a steep roof with deep eaves. A covered porch holds drying racks in use during most of the growing season, and a smaller covered shed beside the cabin handles the longer-term drying of bulk herb harvests and the preparation of the rougher preserved materials.
 
-The hall's back room is the Hunts-Master's office — smaller, quieter, with a desk and a pair of chairs for difficult conversations. It holds the village's formal hunting records, the seasonal population surveys, and the correspondence trail to the Silver Scale Trading Company's game buyers and to Dracélune's civic offices.
+Inside, the cabin is divided into three functional spaces. The front room is the workroom: a long bench along one wall with the tools of tincture-making (mortars, pestles, glass and ceramic vessels, a small distillation setup, scales, notebooks, the careful record-keeping of a practitioner who has been at this work for a long time), a wall of shelved jars and labeled bundles, and a small fire for low-heat preparations. The middle room is the patient room: two narrow beds, a washing basin, clean linens, and the sparse efficient fittings of a space that sees regular use but does not hold patients long. The back room is the healer's own — sleeping quarters, a reading chair, a small personal garden bed visible through the back window.
 
-Outside, the rear yard handles processing work that does not need to go all the way to the village's central smokehouses — quick cleaning, hide stretching, and the first stages of the work that larger operations finish elsewhere.
+The garden itself is the cabin's working heart. Silvercut's forest ecology supplies a substantial pharmacopeia, and Marren Oake's beds hold the cultivated varieties of the species the forest provides in less concentrated form: common herbs for simple infusions, the more demanding species that require careful soil and attention, and a few rare varieties that have taken years to establish. Beekeeping is incidental but real; two small hives at the garden's edge provide honey for preparations and, by coincidence, a minor tie-in to the village's apiary economy.
 
 ## Functions
 
-- **Hunting licenses and coordination.** All hunting in the Silvercut range is licensed through the Hunts-Master's office here. The seasonal quotas are set, adjusted, and enforced from this hall.
-- **Training.** New hunters — village-born and occasional outside apprentices — train at the Hunter's Hall under the Hunts-Master's direction and through assignments with senior hunters.
-- **Game population monitoring.** The map wall holds the current season's working model of the surrounding forest's game populations. Returning hunters contribute sightings, kills, and observed sign; the model is updated continuously.
-- **Fletching supply.** The village's fletcher keeps the hall's east-room bench stocked with arrows, bolts, and specialty shafts. Hunters resupply here; larger orders flow out to Dracélune or elsewhere as directed.
+- **Village medicine.** The cabin is the village's primary care point for injuries and illness arising from the working life — axe cuts, fall injuries, hunting wounds, infections, seasonal fevers, exposure. Treatment follows what the cabin's pharmacopeia and skill can handle.
+- **Medicinal gardens.** The cultivated beds supply herbs, roots, and preparations used in the cabin's treatments and in the modest remedies the village keeps on hand. Surplus occasionally moves to Dracélune but the cabin is not production-scale.
+- **Tincture, salve, and remedy preparation.** The workroom produces the village's working stock of preserved medicines — tinctures, salves, teas, and the simpler compounded remedies.
+- **Short convalescence.** Patients not severe enough to require Dracélune's larger facilities but too hurt or sick to recover well at home can use the cabin's patient room for a few days. The arrangement is informal; payment is usually in work or kind rather than coin.
+- **Stabilization and referral.** Serious cases — severe trauma, injuries beyond the cabin's capacity, illnesses requiring deeper care — are stabilized here and sent on to Dracélune by wagon or cart, usually with a messenger running ahead.
 
 ## Character
 
-The Hunter's Hall is quieter than the village proper and keeps its own rhythm. Hunters pass through early — before dawn on most days, collecting tags and gear before moving out — and return late, bringing game, hides, and the day's intelligence back through the hall before heading home. Midday is the hall's slowest stretch, and the Hunts-Master's most useful working time.
+The cabin is a quiet place. The Healer works alone most of the time, with an occasional apprentice or temporarily assigned villager when the caseload demands it. Days in the garden alternate with days in the workroom and days with patients; the rhythm is seasonal as much as weekly.
 
-The hall's ethos mirrors the village's Forest Principle: restraint, observation, and deference to the forest as a living system. A hunter who kills carelessly, takes beyond quota, or disrespects the forest's patterns will find themselves in a quiet back-room conversation that leaves no room for misunderstanding.
+The cabin's ethos mirrors the village's broader restraint. The Healer treats what can be treated, refers what cannot, and does not oversell the pharmacopeia's range. Villagers trust the cabin specifically because it does not promise what it cannot deliver.
 
 ## Tags
 
 - drakenvale
 - silvercut
-- hunters-hall
+- herbalists-cabin
 - western-forest
-- hunting
-- fletching
+- healer
+- medicine
+- herbalism
 
 ## Connected Nodes
 
@@ -63,14 +66,14 @@ The hall's ethos mirrors the village's Forest Principle: restraint, observation,
 
 ## Authoring Notes
 
-The **Hunts-Master** is anchored here as named Tier-1 NPC **Tova Kerrin**. Personality, voice, and specific temperament are intentionally left loose so they can vary from session to session within the role's constraints (forest expertise, careful adherence to the Forest Principle, direct manner with apprentices and outsiders).
+The **Healer** is anchored here as named Tier-1 NPC **Marren Oake**. Personality, voice, and specific temperament are intentionally left loose so they can vary from session to session within the role's constraints (careful practitioner, long experience with forest-ecology medicine, direct about what the cabin can and cannot treat, quiet authority).
 
-The **Fletcher** is a Tier-3 generative role. The fletching bench is a feature of the hall, not a separate node. Generate per session.
+The Herbalist's Cabin is a sibling child of Silvercut, not a part of the village proper. Separate node because it sits outside the main village clearing, generates its own scenes, and anchors a named NPC.
 
-The Hunter's Hall is a sibling child of Silvercut, not a district or quarter. Separate node because it sits outside the main village clearing, generates its own scenes, and anchors a named NPC.
+Threat level 0 reflects the cabin's placement within the village's safe perimeter and its intrinsic civic safety. Injured or sick patients arrive here; danger happens elsewhere.
 
-Threat level 1 reflects the managed forest edge around the hall. The hall itself is civically safe; the risk is the forest that begins at its back door.
+The cabin is **not a full infirmary**. Serious cases escalate narratively to Dracélune. This is a deliberate scope limit: the cabin handles village-scale medicine, not realm-scale medical infrastructure.
 
-Connections are intentionally limited to `silvercut`. Deeper forest movement routes through Silvercut's regional hookup to `western-temperate-forest`, not through this hall.
+Any structured mechanics around healing (potion pricing, treatment cost, recovery time, what the pharmacopeia can resolve) should be authored into `data/economy/` or a future medical-system module if gameplay routes characters through the cabin for mechanical effect. Prose-texture healing is narration-only.
 
-Any structured inventory for fletching supplies (arrow cost, bolt stock, specialty shafts) should live in `data/economy/` if gameplay routes purchases through the hall. Prose-texture pricing is narration-only.
+The apiary detail is soft-authored — two garden hives at the cabin, not a full village-economy hook. If a later storyline needs cabin-honey to be distinct from Silvercut's main apiary output, that can be committed then.
