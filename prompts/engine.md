@@ -74,7 +74,7 @@ Extraction must emit changed fields only (no full-state regeneration).
 - Save `character.advancement` and all settled progression outcomes only after the full reward package is resolved.
 - Do not commit AP awards/spend, tag tier changes, or new tags until adjudication is final; new tags still require player confirmation.
 - If a ruling is disputed, preserve current stored progression values.
-- Progression adjudication is canonical in `prompts/progression_rules.md`.
+- Progression adjudication is canonical in `prompts/progression-rules.md`.
 - Scene-boundary vocabulary is canonical in `prompts/scene_structure.md`.
 - Evaluate AP and tag advancement separately.
 - Do not treat beat, encounter, scene, job, and consequence chain as interchangeable.
@@ -90,7 +90,7 @@ If extraction validation fails: do not commit state; retry extraction with corre
 - Maintain `world.survival`; update only at deterministic triggers (travel leg, major exertion, deprivation, resupply, long rest/recovery stop); do not tick routine low-impact actions; persist whenever any band changes.
 
 ### Progression Runtime Checkpoint
-- Apply progression per `prompts/progression_rules.md`.
+- Apply progression per `prompts/progression-rules.md`.
 - Adjudicate AP by resolved consequence chain and tag advancement by resolved scene.
 - Require player confirmation before saving newly added tags.
 - If reward interpretation is disputed, do not commit disputed progression changes.
