@@ -131,11 +131,11 @@ Updated after post-cleanup audit — 2026-04-18.
   - [ ] Re-upload trimmed `prompts/engine.md` as the system prompt
   - [ ] Re-upload current `schemas/openapi.yaml` as the Actions
     definition (version 4.1.0)
-- [ ] Decide on companion `species` asymmetry — player characters use
-  `ancestry` + `culture`; `CompanionModel` still uses a single
-  `species` field. Intentional (companion modeling is simpler by
-  design) or forgotten refactor? Decision affects OpenAPI schema +
-  companion seeding.
+- [x] Decide on companion `species` asymmetry — resolved. Three-tier
+  companion schema designed (see `prompts/design-notes.md` §Companion
+  Schema Design 2026-04). Current `CompanionModel` will be replaced
+  by `SapientCompanion` + `CreatureCompanion` + `ExceptionalCompanion`
+  when the companion implementation arc is prioritized.
 - [ ] Decide on magical/notable item schema — currently two separate
   JSON files filed by precedence rule in `items-rules.md`. The two
   attributes are orthogonal (an item can be magical, notable, both,
