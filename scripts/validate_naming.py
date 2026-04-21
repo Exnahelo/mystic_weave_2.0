@@ -26,6 +26,7 @@ ALEMBIC_SNAKE = re.compile(r"^[a-z0-9_]+$")
 KEBAB = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 ENV_KEY = re.compile(r"^[A-Z][A-Z0-9_]*=")
 SAFE_ENV_SUFFIXES = (".example", ".template", ".sample", ".dist")
+DATA_SCHEMA_DIRS = {"schemas"}
 
 
 def _tracked_files(repo_root: Path) -> list[Path]:
@@ -123,6 +124,21 @@ def main() -> None:
         if path.suffix == ".sh":
             if not SNAKE.fullmatch(stem):
                 violations.append(f"NAMING VIOLATION  {rel_str}  expected=snake_case  got={stem}")
+            continue
+
+        if (
+            rel.parts
+            and rel.parts[0] == "data"
+            and path.suffix in (".json", ".yaml")
+        ):
+            if path.name.startswith("_"):
+                continue
+            if any(part in DATA_SCHEMA_DIRS for part in rel.parts):
+                continue
+            if not SNAKE.match(path.stem):
+                violations.append(
+                    f"NAMING VIOLATION  {rel_str}  data file stem not snake_case: {path.stem}"
+                )
             continue
 
         if path.suffix in {".yaml", ".yml"}:

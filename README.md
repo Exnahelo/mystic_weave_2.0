@@ -110,11 +110,11 @@ data/
     culture.json
     focus.json
     backgrounds.json
-    starting-wealth.json
+    starting_wealth.json
   economy/
     currency.json
     prices.json
-    regional-nodes.json
+    regional_nodes.json
   items/
     ammunition.json
     apparel.json
