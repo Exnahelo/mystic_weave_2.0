@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from typing import TYPE_CHECKING, Literal, Optional, Union
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -68,6 +69,21 @@ class CreatureNarrative(BaseModel):
     flaws: list[str] = Field(default_factory=list)
     bonds: list[str] = Field(default_factory=list)
     drives: list[str] = Field(default_factory=list)
+
+
+class CompanionEnvelope(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    id: str
+    companion: "Companion"
+
+
+class ArchivedCompanionEnvelope(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    id: str
+    companion: "Companion"
+    archived_at: str
 
 
 class ExceptionalProfile(BaseModel):
@@ -220,10 +236,39 @@ class ExceptionalCompanion(BaseModel):
 Companion = Union[SapientCompanion, CreatureCompanion, ExceptionalCompanion]
 
 
+def generate_companion_id(
+    handler_id: str,
+    subspecies: str,
+    existing_ids: set[str],
+) -> str:
+    """
+    Generate a readable slug ID for a new companion.
+
+    Format: <handler_id>_<subspecies>, with _2, _3, etc. suffix on
+    collision against existing_ids in the same session.
+    """
+    base = f"{handler_id}_{subspecies}"
+    if base not in existing_ids:
+        return base
+    n = 2
+    while f"{base}_{n}" in existing_ids:
+        n += 1
+    return f"{base}_{n}"
+
+
+def derive_sapient_slug(name: str) -> str:
+    """Derive a snake_case slug from a sapient companion name."""
+    slug = re.sub(r"[^a-z0-9]+", "_", name.lower()).strip("_")
+    slug = re.sub(r"_+", "_", slug)
+    return slug
+
+
 from api import models as core_models
 
 _CORE_TYPES = {
+    "ArchivedCompanionEnvelope": ArchivedCompanionEnvelope,
     "Alignment": core_models.Alignment,
+    "CompanionEnvelope": CompanionEnvelope,
     "DomainScores": core_models.DomainScores,
     "Equipment": core_models.Equipment,
     "HP": core_models.HP,
@@ -235,7 +280,27 @@ _CORE_TYPES = {
 SapientCompanion.model_rebuild(_types_namespace=_CORE_TYPES)
 CreatureCompanion.model_rebuild(_types_namespace=_CORE_TYPES)
 ExceptionalCompanion.model_rebuild(_types_namespace=_CORE_TYPES)
+CompanionEnvelope.model_rebuild(_types_namespace=_CORE_TYPES)
+ArchivedCompanionEnvelope.model_rebuild(_types_namespace=_CORE_TYPES)
 
-core_models.WorldModel.model_rebuild(_types_namespace={"Companion": Companion})
-core_models.WorldStateDelta.model_rebuild(_types_namespace={"Companion": Companion})
-core_models.NewSessionRequest.model_rebuild(_types_namespace={"Companion": Companion})
+core_models.WorldModel.model_rebuild(
+    _types_namespace={
+        "ArchivedCompanionEnvelope": ArchivedCompanionEnvelope,
+        "Companion": Companion,
+        "CompanionEnvelope": CompanionEnvelope,
+    }
+)
+core_models.WorldStateDelta.model_rebuild(
+    _types_namespace={
+        "ArchivedCompanionEnvelope": ArchivedCompanionEnvelope,
+        "Companion": Companion,
+        "CompanionEnvelope": CompanionEnvelope,
+    }
+)
+core_models.NewSessionRequest.model_rebuild(
+    _types_namespace={
+        "ArchivedCompanionEnvelope": ArchivedCompanionEnvelope,
+        "Companion": Companion,
+        "CompanionEnvelope": CompanionEnvelope,
+    }
+)

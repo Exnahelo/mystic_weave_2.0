@@ -23,7 +23,7 @@ from typing import TYPE_CHECKING
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 if TYPE_CHECKING:
-    from api.companions import Companion
+    from api.companions import ArchivedCompanionEnvelope, CompanionEnvelope
 
 
 # ---------------------------------------------------------------------------
@@ -386,7 +386,8 @@ class WorldModel(BaseModel):
     turn:       int = 1
 
     # New in v3.1.0
-    companions: list["Companion"] = Field(default_factory=list)
+    companions: list["CompanionEnvelope"] = Field(default_factory=list)
+    companion_archive: list["ArchivedCompanionEnvelope"] = Field(default_factory=list)
     economy:    Economy              = Field(default_factory=Economy)
     politics:   Politics             = Field(default_factory=Politics)
 
@@ -445,7 +446,8 @@ class WorldStateDelta(BaseModel):
     threat: str | None = None
     goal: str | None = None
     turn: int | None = None
-    companions: list["Companion"] | None = None
+    companions: list["CompanionEnvelope"] | None = None
+    companion_archive: list["ArchivedCompanionEnvelope"] | None = None
     economy: EconomyDelta | None = None
     politics: Politics | None = None
     time: TimeState | None = None
@@ -536,7 +538,7 @@ class NewSessionRequest(BaseModel):
     # New in v3.1.0 — all optional; GPT gathers these during character creation
     identity:         Identity          = Field(default_factory=Identity)
     starting_economy: Economy           = Field(default_factory=Economy)
-    companions:       list["Companion"] | None = None
+    companions:       list["CompanionEnvelope"] | None = None
     equipment:        Equipment | None = None
 
 
