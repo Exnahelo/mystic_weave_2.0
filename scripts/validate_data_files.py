@@ -374,7 +374,7 @@ def _validate_tag_rows(path: Path, failures: list[str], expected_count: int) -> 
     rows = _load_json(path)
     seen_indices: set[str] = set()
     is_focus = path.name == "focus.json"
-    is_background = path.name == "backgrounds.json"
+    is_background = path.name == "background.json"
 
     _failures_append(failures, len(rows) == expected_count, f"{path.name}: expected {expected_count} entries")
 
@@ -574,7 +574,7 @@ def main() -> None:
     _validate_ancestries(data_dir / "characters" / "ancestry.json", failures)
     _validate_cultures(data_dir / "characters" / "culture.json", failures)
     _validate_tag_rows(data_dir / "characters" / "focus.json", failures, expected_count=7)
-    _validate_tag_rows(data_dir / "characters" / "backgrounds.json", failures, expected_count=8)
+    _validate_tag_rows(data_dir / "characters" / "background.json", failures, expected_count=8)
     _validate_apparel(data_dir / "items" / "apparel.json", failures)
     for item_file in (data_dir / "items").glob("*.json"):
         if item_file.name.startswith("_"):

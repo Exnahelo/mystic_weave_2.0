@@ -17,9 +17,9 @@ Use this file together with:
 * `data/items/apparel.json`
 * `data/items/armor.json`
 * `data/items/gear.json`
-* `data/items/magical.json`
-* `data/items/notable.json`
-* `data/items/weapons.json`
+* `data/items/magical_item.json`
+* `data/items/notable_item.json`
+* `data/items/weapon.json`
 * `combat-rules.md`
 * `economy-rules.md`
 * `world-rules.md`
@@ -86,7 +86,7 @@ Use `data/items/armor.json` for:
 
 ### Magical
 
-Use `data/items/magical.json` for:
+Use `data/items/magical_item.json` for:
 
 * standard magical items
 * reusable arcane, sacred, or utility magic gear
@@ -106,7 +106,7 @@ Use `data/items/gear.json` for:
 
 ### Notable
 
-Use `data/items/notable.json` for:
+Use `data/items/notable_item.json` for:
 
 * named or setting-significant items
 * rarer gear with stronger narrative identity
@@ -114,7 +114,7 @@ Use `data/items/notable.json` for:
 
 ### Weapons
 
-Use `data/items/weapons.json` for:
+Use `data/items/weapon.json` for:
 
 * weapon knowledge/application handling
 * primary combat family matching
@@ -339,9 +339,9 @@ This section will eventually define how the GPT should reason about:
 * `data/items/apparel.json` — clothing, footwear, handwear, and outerwear catalog
 * `data/items/armor.json` — armor and shield catalog
 * `data/items/gear.json` — ordinary gear, tools, storage, camp items, and cordage catalog
-* `data/items/magical.json` — standard magical item catalog
-* `data/items/notable.json` — named and setting-significant item catalog
-* `data/items/weapons.json` — weapon catalog and combat-family item data
+* `data/items/magical_item.json` — standard magical item catalog
+* `data/items/notable_item.json` — named and setting-significant item catalog
+* `data/items/weapon.json` — weapon catalog and combat-family item data
 * `combat-rules.md` — combat-facing handling of weapons, armor, and ammunition
 * `economy-rules.md` — buying, barter, pricing pressure, and transaction state rules
 * `world-rules.md` — broader world/system-facing rules

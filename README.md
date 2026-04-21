@@ -109,7 +109,7 @@ data/
     ancestry.json
     culture.json
     focus.json
-    backgrounds.json
+    background.json
     starting_wealth.json
   economy/
     currency.json
@@ -120,9 +120,9 @@ data/
     apparel.json
     armor.json
     gear.json
-    magical.json
-    notable.json
-    weapons.json
+    magical_item.json
+    notable_item.json
+    weapon.json
   magic/
     alchemy.json
     binding.json

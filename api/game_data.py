@@ -19,7 +19,7 @@ _DATA_FILES = (
     "characters/ancestry.json",
     "characters/culture.json",
     "characters/focus.json",
-    "characters/backgrounds.json",
+    "characters/background.json",
 )
 _TAG_REGISTRY_FILES = (
     "tags/knowledge_groups.json",
@@ -28,12 +28,12 @@ _TAG_REGISTRY_FILES = (
 )
 _ITEM_DATA_FILES = (
     "items/gear.json",
-    "items/magical.json",
+    "items/magical_item.json",
     "items/apparel.json",
     "items/armor.json",
-    "items/weapons.json",
+    "items/weapon.json",
     "items/ammunition.json",
-    "items/notable.json",
+    "items/notable_item.json",
 )
 _SPELL_DATA_FILES = (
     "magic/alchemy.json",
@@ -163,7 +163,7 @@ def list_focus() -> list[dict[str, Any]]:
 
 def get_background(index: str) -> dict[str, Any]:
     """Return background data for the given index (e.g. 'soldier')."""
-    data = _load_json("characters/backgrounds.json")
+    data = _load_json("characters/background.json")
     if index not in data:
         raise ValueError(f"Unknown background: {index!r}. Valid: {sorted(data.keys())}")
     return data[index]
@@ -171,7 +171,7 @@ def get_background(index: str) -> dict[str, Any]:
 
 def list_backgrounds() -> list[dict[str, Any]]:
     """Return all backgrounds as a list of summary dicts."""
-    data = _load_json("characters/backgrounds.json")
+    data = _load_json("characters/background.json")
     return [
         {
             "index": k,
@@ -255,7 +255,7 @@ def list_mundane_items() -> list[dict[str, Any]]:
 
 def list_magical_items() -> list[dict[str, Any]]:
     """Return all magical catalog items."""
-    data = _load_json("items/magical.json")
+    data = _load_json("items/magical_item.json")
     if not isinstance(data, list):
         return []
     return data
