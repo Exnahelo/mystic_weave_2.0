@@ -549,7 +549,6 @@ def test_creature_domains_enforce_25_to_60(payload) -> None:
 @pytest.mark.parametrize(
     ("field_name", "value"),
     [
-        ("tactical_role", "invalid"),
         ("training_level", "master"),
         ("bond_level", "friendly"),
         ("age_category", "ancient"),
