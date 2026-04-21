@@ -10,7 +10,7 @@ Updated after post-cleanup audit — 2026-04-18.
 - [x] 2026-04-18 / `eea3826` — fixed `hollow-crowm` typo in canonical tags
 - [x] 2026-04-18 / `08c64eb` — normalized two world YAML filenames to snake_case
 - [x] 2026-04-18 / `2b8829c` — committed convention-drift audit document
-- [x] 2026-04-18 / `90f10c9` — added `docs/CONVENTIONS.md`
+- [x] 2026-04-18 / `90f10c9` — added `docs/conventions.md`
 - [x] 2026-04-10 to 2026-04-18 / `2231394`, `701bda2`, `2eb11fe` — reconciled topology, region IDs, and route/link hygiene
 
 ---

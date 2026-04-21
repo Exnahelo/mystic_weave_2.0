@@ -2,7 +2,7 @@
 
 Authoritative policy for canonical world content: structured YAML under
 `data/world/` and its Obsidian-friendly markdown mirror under
-`prompts/world_vault/`. Paired with `docs/CONVENTIONS.md` (naming) and
+`prompts/world_vault/`. Paired with `docs/conventions.md` (naming) and
 enforced in CI.
 
 ## Scope
@@ -51,7 +51,7 @@ the `## Tags` markdown section.
 
 | Validator | Owns |
 |---|---|
-| `scripts/validate_naming.py` | filesystem path case rules (delegated to `docs/CONVENTIONS.md`) |
+| `scripts/validate_naming.py` | filesystem path case rules (delegated to `docs/conventions.md`) |
 | `scripts/validate_data_files.py` | stem↔id for world YAML, tag hygiene for world YAML |
 | `scripts/validate_prompts.py` | stem↔id for vault MD, tag hygiene for vault MD, frontmatter↔body sync |
 
