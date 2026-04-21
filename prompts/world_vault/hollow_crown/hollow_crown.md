@@ -7,7 +7,6 @@ description: Canonical geography-first realm root for the Drakenvale / Hollow Cr
 tags:
 - hollow-crown
 - drakenvale
-- hollow-crown
 ---
 
 # Hollow Crown
@@ -18,7 +17,6 @@ Canonical realm root for the Hollow Crown interior basin. This node replaces the
 
 - hollow-crown
 - drakenvale
-- hollow-crown
 
 ## Authoring Notes
 
