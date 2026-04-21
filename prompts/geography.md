@@ -214,7 +214,7 @@ These nodes should be treated as the basin’s practical anchors for trade, trav
 - `history.md` — chronology, founding, Discordant War, and major historical consequences
 - `groups.md` — institutions, covert networks, cults, trade bodies, and organized power structures
 - `npcs.md` — major characters, Council dragons, and anchor NPCs
-- `world_rules.md` — operational assumptions and system-facing world logic
+- `world-rules.md` — operational assumptions and system-facing world logic
 
 ---
 

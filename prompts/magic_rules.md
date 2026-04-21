@@ -24,7 +24,7 @@ Structured spell catalogs belong in JSON data files under `data/magic/`, not her
 Use this file together with:
 - per-field spell files under `data/magic/`
 - `data/tags/magic_fields.json`
-- `world_rules.md`
+- `world-rules.md`
 - `engine.md`
 - `combat_rules.md` when magic is used during conflict
 - `progression_rules.md` for tag advancement adjudication
@@ -353,7 +353,7 @@ This section will eventually define:
 
 - `data/tags/magic_fields.json` — canonical field definitions
 - `data/magic/{field}.json` — per-field spell catalogs (sacred, warding, binding, elemental, druidry, illusion, runecraft, alchemy, necromancy)
-- `world_rules.md` — broader world/system-facing rules (contains a summarized magic section that must stay in sync with this file)
+- `world-rules.md` — broader world/system-facing rules (contains a summarized magic section that must stay in sync with this file)
 - `combat_rules.md` — combat-facing interpretation when magic enters conflict
 - `engine.md` — runtime system logic and adjudication guidance
 - `progression_rules.md` — tag advancement adjudication rules

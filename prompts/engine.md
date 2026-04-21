@@ -69,7 +69,7 @@ Ask explicit yes/no before permanent companion outcomes, binding legal/faction c
 ### 5) Extract, Validate, Save
 Extraction must emit changed fields only (no full-state regeneration).
 - Increment `world.turn`; ensure `character.hp`, `world.location`, `world.threat`, and `world.goal` are correct; update only triggered changes (reputation, companions, economy, equipment, politics, time, survival, pacing); send one `log_entry` for material change.
-- Apply reputation, faction propagation, and pacing per `prompts/world_rules.md` before save.
+- Apply reputation, faction propagation, and pacing per `prompts/world-rules.md` before save.
 ### Progression Save Gate
 - Save `character.advancement` and all settled progression outcomes only after the full reward package is resolved.
 - Do not commit AP awards/spend, tag tier changes, or new tags until adjudication is final; new tags still require player confirmation.
@@ -81,7 +81,7 @@ Extraction must emit changed fields only (no full-state regeneration).
 If extraction validation fails: do not commit state; retry extraction with correction prompt only; no new narration pass; max 2 retries, then halt commit.
 
 ### Time/Weather/Moon Runtime Checkpoint
-- Maintain `world.time` per `prompts/calendar.md` and `prompts/world_rules.md`; validate enums before save; derive moon phase from day (do not store moon separately).
+- Maintain `world.time` per `prompts/calendar.md` and `prompts/world-rules.md`; validate enums before save; derive moon phase from day (do not store moon separately).
 
 ### Economy Runtime Checkpoint
 - Follow `prompts/economy_rules.md`; ground buy/find inventory in `GET /options`; keep `world.economy.coin >= 0`; persist coin as CD (`GD × 100`); barter updates `trade_goods`/`obligations`; change `wealth_tier` only for material long-term shifts.
@@ -108,7 +108,7 @@ If extraction validation fails: do not commit state; retry extraction with corre
 
 ## Canon Precedence (Conflict Resolution Order)
 1) `prompts/engine.md`
-2) `prompts/world_rules.md`
+2) `prompts/world-rules.md`
 3) Core world docs (`world.md`, `geography.md`, `history.md`, `groups.md`, `npcs.md`)
 4) canonical runtime world YAML under `data/world/`
 5) `prompts/reference_archive/*` + design notes

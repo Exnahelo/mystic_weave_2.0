@@ -338,7 +338,7 @@ This category includes hardline chromatic resentment, anti-outsider paranoia, an
 - `geography.md` — physical structure, terrain regions, and settlement placement
 - `history.md` — chronology, founding, the Discordant War, and major historical consequences
 - `npcs.md` — Council dragons, anchor NPCs, and generative role definitions
-- `world_rules.md` — operational assumptions and system-facing world logic
+- `world-rules.md` — operational assumptions and system-facing world logic
 
 ---
 

@@ -10,7 +10,7 @@ from pathlib import Path
 REQUIRED_PROMPTS = {
     "prompts/engine.md": ["# Mystic Weave", "## Turn Loop", "## API Reference"],
     "prompts/character_creation.md": ["# Mystic Weave", "## Character Creation Flow", "## API Fields for Character Creation"],
-    "prompts/world_rules.md": ["#", "##"],
+    "prompts/world-rules.md": ["#", "##"],
     "prompts/economy_rules.md": ["# Mystic Weave — Economy Rules", "## Coin Economy Rules", "## Barter Economy Rules"],
     "prompts/world.md": ["# Drakenvale", "## Governance", "## Reference Files"],
     "prompts/geography.md": ["# Drakenvale — Geography", "## Formation", "## Major Regions"],

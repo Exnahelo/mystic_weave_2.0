@@ -39,7 +39,7 @@ Python 3.13 · FastAPI · uvicorn · asyncpg · Pydantic v2 · Postgres on Railw
 - **Economy** — wealth tier (universal) + raw coin (currency regions); trade goods and obligations
 - **Politics** — faction memberships, active obligations, legal standing, leverage, tensions, Conclave status
 
-System reference: `prompts/world_rules.md` and `prompts/character_creation.md`
+System reference: `prompts/world-rules.md` and `prompts/character_creation.md`
 
 ## 2026-04-10 Content / World Topology Notes
 
@@ -142,7 +142,7 @@ docs/                  # Project conventions and audit notes
 prompts/               # GPT prompt corpus + markdown world-vault mirrors
   engine.md            # GPT system prompt — paste into GPT builder Instructions (<8000 chars)
   character_creation.md
-  world_rules.md
+  world-rules.md
   world.md
   geography.md
   history.md

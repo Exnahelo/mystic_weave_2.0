@@ -22,7 +22,7 @@ Use this file together with:
 * `data/items/weapons.json`
 * `combat_rules.md`
 * `economy_rules.md`
-* `world_rules.md`
+* `world-rules.md`
 * `engine.md`
 
 ---
@@ -344,7 +344,7 @@ This section will eventually define how the GPT should reason about:
 * `data/items/weapons.json` — weapon catalog and combat-family item data
 * `combat_rules.md` — combat-facing handling of weapons, armor, and ammunition
 * `economy_rules.md` — buying, barter, pricing pressure, and transaction state rules
-* `world_rules.md` — broader world/system-facing rules
+* `world-rules.md` — broader world/system-facing rules
 * `engine.md` — runtime adjudication and system logic
 
 ---

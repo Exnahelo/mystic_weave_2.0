@@ -30,7 +30,7 @@
 | `magic_rules.md` | Canon runtime/support reference | Yes |
 | `progression_rules.md` | Canon runtime/support reference | Yes |
 | `scene_structure.md` | Canon runtime/support reference | Yes |
-| `world_rules.md` | Canon source of truth | Yes |
+| `world-rules.md` | Canon source of truth | Yes |
 | `design_notes.md` | Living author document | No |
 
 **Design Notes Policy:** This file is author-facing only and is not part of runtime canon upload.

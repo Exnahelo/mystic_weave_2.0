@@ -19,7 +19,7 @@ Use this file together with:
 - `data/items/ammunition.json`
 - `data/items/gear.json`
 - `data/items/notable.json`
-- `world_rules.md`
+- `world-rules.md`
 - `engine.md`
 
 ---
@@ -190,7 +190,7 @@ Until fuller combat rules are finalized, follow these principles:
 - `data/items/ammunition.json` — authoritative ammunition catalog
 - `data/items/gear.json` — broader gear and mundane equipment catalog
 - `data/items/notable.json` — notable item catalog
-- `world_rules.md` — world/system-facing rules outside combat-specific handling
+- `world-rules.md` — world/system-facing rules outside combat-specific handling
 - `engine.md` — broader runtime logic and system interpretation
 
 ---
