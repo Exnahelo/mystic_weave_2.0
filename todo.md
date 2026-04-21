@@ -13,6 +13,64 @@ Updated after post-cleanup audit — 2026-04-18.
 - [x] 2026-04-18 / `90f10c9` — added `docs/conventions.md`
 - [x] 2026-04-10 to 2026-04-18 / `2231394`, `701bda2`, `2eb11fe` — reconciled topology, region IDs, and route/link hygiene
 
+### Naming Conventions Cleanup Arc (2026-04)
+
+- [x] Split naming policy into `docs/conventions.md` (naming) and
+  `docs/world-data-policy.md` (invariants + validator ownership)
+- [x] Rename root-level markdown docs to kebab-case:
+  - [x] `OPERATIONAL_RUNBOOK.md` → `operational-runbook.md`
+  - [x] `TESTING.md` → `testing.md`
+  - [x] `TODO.md` → `todo.md`
+  - [x] `WORLD_TOPOLOGY_BASELINE.md` → `world-topology-baseline.md`
+  - [x] `RELEASE_CHECKPOINT_2026-04-10.md` → `release-checkpoint-2026-04-10.md`
+  - [x] `DRAKENVALE_CONTENT_LICENSE.md` → `drakenvale-content-license.md`
+  - [x] `docs/CONVENTIONS.md` → `docs/conventions.md`
+  - [x] `tests/gpt_test_template.md` → `tests/gpt-test-template.md`
+- [x] Document `README.md`, `LICENSE`, `CHANGELOG.md`, `CONTRIBUTING.md`,
+  `CODE_OF_CONDUCT.md`, `SECURITY.md`, `SUPPORT.md`, `Makefile` as
+  tooling-sensitive exceptions in `conventions.md`
+- [x] Rename 10 multi-word `prompts/*.md` rule/reference files to
+  kebab-case (world-rules, magic-rules, economy-rules, items-rules,
+  difficulty-rules, combat-rules, progression-rules, character-creation,
+  scene-structure, design-notes)
+- [x] Fix tag hygiene across `data/world/**` and
+  `prompts/world_vault/**`: dedup `hollow-crown`, reconcile
+  volcanic_highlands_trail YAML↔MD mirror via union
+- [x] Quote vault MD frontmatter `description:` fields for YAML
+  parseability (7 files)
+- [x] Rename 10 world YAML↔MD mirror pairs to snake_case stems to
+  satisfy the stem↔id invariant
+- [x] Ship `scripts/validate_naming.py` (new) with filesystem path
+  case rules, `data/**/*.{json,yaml}` snake_case enforcement, `.env`
+  leak guard (`SAFE_ENV_SUFFIXES`), UPPER_SNAKE_CASE env-key check
+- [x] Extend `scripts/validate_data_files.py` with stem↔id and tag
+  hygiene assertions for `data/world/**/*.yaml`
+- [x] Extend `scripts/validate_prompts.py` with frontmatter
+  parseability, stem↔id for vault MD, frontmatter↔body tag sync
+- [x] Wire `validate_naming.py` into `.github/workflows/ci.yml`
+- [x] Update `tests/loop_test.py` and
+  `scripts/predeploy_smoke_bundle.py` for the `species` →
+  `ancestry`/`culture` split
+- [x] Skip leading-underscore template files in
+  `scripts/seed_locations.py` (canonical + legacy paths)
+- [x] Retire `prompts/world/` legacy flat YAML tree and its
+  overlap-check code in `seed_locations.py`
+- [x] Normalize data filename forms:
+  - [x] `data/characters/starting-wealth.json` →
+    `data/characters/starting_wealth.json`
+  - [x] `data/economy/regional-nodes.json` →
+    `data/economy/regional_nodes.json`
+  - [x] `data/characters/backgrounds.json` →
+    `data/characters/background.json`
+  - [x] `data/items/weapons.json` → `data/items/weapon.json`
+  - [x] `data/items/magical.json` → `data/items/magical_item.json`
+  - [x] `data/items/notable.json` → `data/items/notable_item.json`
+- [x] Trim `prompts/engine.md` from 7999 → 7812 bytes (187 bytes
+  headroom recovered)
+- [x] Audit `schemas/openapi.yaml` for prose drift after the arc —
+  confirmed clean (no stale terminology, no stale filename references,
+  version locked at 4.1.0)
+
 ---
 
 ## 🔜 Active Work
@@ -64,6 +122,29 @@ Updated after post-cleanup audit — 2026-04-18.
   - note: current parser cross-check exists for the present exception lists; future doc structure changes may warrant a stricter implementation.
   - affected paths: `scripts/validate_naming.py`, `docs/conventions.md`
   - size estimate: XS
+
+### Post-Naming-Cleanup Open Items
+
+- [ ] Re-upload to GPT builder:
+  - [ ] Re-upload the 10 renamed `prompts/*.md` knowledge files under
+    their new kebab-case names; remove old entries
+  - [ ] Re-upload trimmed `prompts/engine.md` as the system prompt
+  - [ ] Re-upload current `schemas/openapi.yaml` as the Actions
+    definition (version 4.1.0)
+- [ ] Decide on companion `species` asymmetry — player characters use
+  `ancestry` + `culture`; `CompanionModel` still uses a single
+  `species` field. Intentional (companion modeling is simpler by
+  design) or forgotten refactor? Decision affects OpenAPI schema +
+  companion seeding.
+- [ ] Decide on magical/notable item schema — currently two separate
+  JSON files filed by precedence rule in `items-rules.md`. The two
+  attributes are orthogonal (an item can be magical, notable, both,
+  or neither), so a unified item list with boolean flags is an
+  alternative. Either path is valid; current split is stylistically
+  normalized but the design question is open.
+- [ ] Confirm Alembic migration filenames pass
+  `scripts/validate_naming.py`'s Python rule the next time a
+  migration lands (was flagged but never reproduced as a failure).
 
 ---
 
