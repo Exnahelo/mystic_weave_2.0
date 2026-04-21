@@ -4,6 +4,8 @@ Authoritative reference for naming identifiers in this repository.
 
 When a naming question arises, match the identifier's **category**, not the file it appears in.
 
+This file covers naming only. Structural, schema, validation, and content-integrity rules belong in a separate policy document.
+
 ---
 
 ## Core policy
@@ -48,6 +50,7 @@ When a naming question arises, match the identifier's **category**, not the file
 | Environment variables | `UPPER_SNAKE_CASE` | `RAILWAY_ENVIRONMENT`, `JWT_SECRET` |
 | Git branches | `kebab-case` with prefix | `feat/add-auth-middleware` |
 | Markdown docs (general) | `kebab-case` | `deployment-runbook.md` |
+| Mirrored artifacts | preserve canonical filename stem | `customer_profile.yaml` ↔ `customer_profile.md` |
 | Generated files | suffix or prefix marker | `openapi.generated.json`, `generated_schema.sql` |
 | Template files | leading underscore or `.template` marker | `_template.env`, `config.template.yaml` |
 | Test files (Python) | `test_*.py` | `test_auth_service.py` |
@@ -336,6 +339,7 @@ Examples:
 ## Documentation
 
 ### Tooling-sensitive docs
+
 Use exact conventional names:
 
 - `README.md`
@@ -343,7 +347,8 @@ Use exact conventional names:
 - `CONTRIBUTING.md`
 - `SECURITY.md`
 
-### Other docs
+### General docs
+
 Use `kebab-case.md`.
 
 Examples:
@@ -352,11 +357,36 @@ Examples:
 - `deployment-runbook.md`
 - `database-migration-policy.md`
 
+### Mirrored markdown artifacts
+
+If a markdown file is a maintained mirror of a canonical non-markdown artifact, follow the mirrored-artifact rule instead of the general docs rule.
+
+---
+
+## Mirrored artifacts
+
+When one artifact is a maintained mirror, derivative, or parallel representation of another canonical artifact, preserve a predictable filename-stem relationship between them unless tooling explicitly requires otherwise.
+
+Default rule:
+
+- the mirrored artifact should use the same filename stem as the canonical artifact
+- only the extension or required platform-specific wrapper should differ
+
+Examples:
+
+- `customer_profile.yaml` ↔ `customer_profile.md`
+- `magic_system.json` ↔ `magic_system.md`
+
+If the mirrored artifact also carries an internal ID or slug, any stem-to-ID transformation rule should be defined in a separate data or schema policy, not in this naming file.
+
+Mirrored artifacts are not treated as ad hoc exceptions when they follow the mirrored-artifact rule; they are a separate identifier category.
+
 ---
 
 ## Tests
 
 ### Python
+
 - files: `test_<subject>.py`
 - functions: `test_<behavior>()`
 
@@ -366,6 +396,7 @@ Examples:
 - `test_rejects_expired_token()`
 
 ### Other languages
+
 Use the dominant framework convention, but keep the stem descriptive and lowercase.
 
 Examples:
@@ -378,6 +409,7 @@ Examples:
 ## Generated files and templates
 
 ### Generated files
+
 Mark generated artifacts clearly:
 
 - `*.generated.*`
@@ -389,6 +421,7 @@ Examples:
 - `generated_schema.sql`
 
 ### Templates
+
 Mark templates clearly:
 
 - leading underscore, or
@@ -444,16 +477,18 @@ An exception is allowed only if one of these is true:
 
 1. A language or framework convention requires it.
 2. A tool requires an exact filename.
-3. An external API/schema must be mirrored exactly.
-4. A legacy/public interface would break if renamed.
+3. An external API or schema must be mirrored exactly.
+4. A legacy or public interface would break if renamed.
 
 Every exception must be documented with:
 
 - the current name
 - why it is exempt
-- what tool/framework/API requires it
+- what tool, framework, API, or interface requires it
 
 Convenience is not a valid reason.
+
+Mirrored artifacts that follow the mirroring rule are not ad hoc exceptions.
 
 ---
 
@@ -476,6 +511,7 @@ Recommended CI checks:
 - require `UPPER_SNAKE_CASE` for env vars in examples/templates
 - require exact names for root meta files
 - require approved branch prefixes
+- enforce mirrored-artifact stem consistency where a project defines mirrored artifacts
 
 ---
 
@@ -485,6 +521,7 @@ When naming something:
 
 1. Identify the category.
 2. Apply the category rule.
-3. If a tool/framework/API requires something else, use that instead.
-4. If still unclear, choose the most common convention in that language ecosystem.
-5. Document exceptions instead of improvising.
+3. If a tool, framework, or external API requires something else, use that instead.
+4. If the artifact is a maintained mirror of another artifact, apply the mirrored-artifact rule.
+5. If still unclear, choose the most common convention in that language ecosystem.
+6. Document exceptions instead of improvising.
