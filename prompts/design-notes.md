@@ -293,3 +293,104 @@ Estimated 4–6 Cline packages.
   explicit resolution)
 
 These are worth addressing when the implementation arc starts, not now.
+
+## Magical Item Tier Framework (2026-04)
+
+### Status
+
+Direction locked. Tier scale decided. Mechanics deferred to the
+enchantment-rules design arc.
+
+Supersedes the open TODO item "Decide on magical/notable item schema"
+from the post-naming-cleanup open items list. `notable_item.json` has
+been retired (deleted); all special items are unified under
+`data/items/magical.json`.
+
+### Tier scale
+
+Items use a T0–T5 scale. Tier describes **what the item does**
+(mechanical impact and narrative weight), not **how it was made**.
+
+| Tier | Character |
+|---|---|
+| T0 | Mundane items made from magical materials. No active magic. Baseline special without enchantment. (Silverwood bow, mithral dagger.) |
+| T1 | Minor magical effect. Utility or flavor; small situational benefit. (Lumen Charm tier.) |
+| T2 | Meaningful magical effect. Can shift an encounter. |
+| T3 | Strong magical effect. Clear strategic advantage; draws attention. |
+| T4 | Major magical effect. Named or near-named; politically or narratively significant. |
+| T5 | Legendary. One-of-a-kind outliers with mythic weight. Specific rules deferred. |
+
+Tier semantics align with the T1–T5 pattern in `magic-rules.md` (minor
+utility at T1 through apex expression at T5). T0 extends the scale
+downward for material-only items that carry narrative specialness
+without magical effect.
+
+### Why tier is impact, not input
+
+An earlier framing tied item tier to the spell or field used to make
+the item. That breaks immediately when multiple spells or fields are
+used in one item, and requires a crafting-rules system that doesn't
+exist yet. Tying tier to impact means:
+
+- Items can be tiered before crafting rules are written
+- Multi-field items don't need special-case handling
+- T0 (material-only) items fit cleanly into the same scale
+- The tier reflects what matters at the table: how much the item
+  changes what the party can do
+
+### Item data hooks
+
+Items in `data/items/magical.json` may carry:
+
+- `tier`: T0–T5
+- `magic_field`: one of the nine fields from `magic-rules.md`, optional
+  for T0 (material-only) items and T5 mythic items whose magic doesn't
+  originate in a single field
+- Existing narrative and mechanical fields (description, slot, weight,
+  price, tags, charges if applicable, etc.)
+
+Full schema formalization happens when the enchantment-rules arc
+starts.
+
+### Deferred to the enchantment-rules arc
+
+Everything about *making* items:
+
+- Who can craft T-N items and what that requires
+- Time cost per tier
+- Whether T3+ items require multiple casters or extended ritual work
+- T5 production mechanics (collaborative multi-field work, mythic
+  accrual, or both)
+- Activation rules (passive, active, triggered)
+- Stability rules (permanent, charges, degrades)
+- Whether items can be unmade, damaged, or decay
+- Tag combinations required to produce specific item types
+- Cultural-origin item mechanics (fey-tradition, infernal, sacred vs
+  secular sacred, etc.)
+
+These belong in `magic-rules.md` under the "Enchantment and Permanent
+Works" placeholder when that placeholder is filled in. They do not
+belong in item schema work.
+
+### Explicitly not created
+
+- A separate "origin" axis (fey / enchanted / mythic / cursed /
+  sacred) distinct from `magic_field` — subsumed into field tags and
+  tier
+- A parallel item-tier scale that differs from `magic-rules.md` T1–T5
+  semantics
+- New competencies for enchantment (arcana is already a knowledge
+  group; crafting is deferred; no "arcana level" or "crafting level"
+  invented as new mechanical axes)
+
+### Open threads that will surface during the enchantment arc
+
+- How mythic-accrual items (power through deeds/belief rather than
+  field magic) interact with the `magic_field` field — likely a
+  special value or a separate nullable field
+- Whether fey-tradition items need a lore-tag requirement or whether
+  Druidry coverage is sufficient
+- How item tier advances, if at all — do T2 items ever become T3
+  through use, or is tier fixed at creation like spells are?
+- Whether a single item can carry effects from multiple fields and how
+  that's represented

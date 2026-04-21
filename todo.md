@@ -136,12 +136,11 @@ Updated after post-cleanup audit — 2026-04-18.
   Schema Design 2026-04). Current `CompanionModel` will be replaced
   by `SapientCompanion` + `CreatureCompanion` + `ExceptionalCompanion`
   when the companion implementation arc is prioritized.
-- [ ] Decide on magical/notable item schema — currently two separate
-  JSON files filed by precedence rule in `items-rules.md`. The two
-  attributes are orthogonal (an item can be magical, notable, both,
-  or neither), so a unified item list with boolean flags is an
-  alternative. Either path is valid; current split is stylistically
-  normalized but the design question is open.
+- [x] Decide on magical/notable item schema — resolved.
+  `notable_item.json` retired (deleted; entries were unused). All
+  special items unified under `data/items/magical.json`. T0–T5 tier
+  framework captured (see `prompts/design-notes.md` §Magical Item Tier Framework 2026-04). Enchantment/crafting mechanics deferred to
+  `magic-rules.md` "Enchantment and Permanent Works" design arc.
 - [ ] Confirm Alembic migration filenames pass
   `scripts/validate_naming.py`'s Python rule the next time a
   migration lands (was flagged but never reproduced as a failure).
