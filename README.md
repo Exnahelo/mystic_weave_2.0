@@ -194,7 +194,6 @@ Note: Railway deploys run migrations explicitly in predeploy using `DATABASE_URL
 World content authority:
 - `data/world/` = canonical structured runtime world layer
 - `prompts/world_vault/` = markdown authoring/reference layer
-- `prompts/world/` = legacy flat YAML source for unmigrated nodes only
 
 ### Smoke Tests
 
