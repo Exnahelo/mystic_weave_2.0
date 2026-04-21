@@ -21,7 +21,7 @@
 | `groups.md` | Canon source of truth | Yes |
 | `npcs.md` | Canon source of truth | Yes |
 | `calendar.md` | Canon runtime/support reference | Yes |
-| `character_creation.md` | Canon runtime/support reference | Yes |
+| `character-creation.md` | Canon runtime/support reference | Yes |
 | `combat-rules.md` | Canon runtime/support reference | Yes |
 | `difficulty-rules.md` | Canon runtime/support reference | Yes |
 | `economy-rules.md` | Canon runtime/support reference | Yes |
