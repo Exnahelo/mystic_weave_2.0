@@ -8,6 +8,8 @@ import re
 import sys
 from pathlib import Path
 
+import yaml
+
 DOMAIN_KEYS = {
     "power",
     "agility",
@@ -35,6 +37,8 @@ TRAIT_TYPES = {"passive", "conditional", "active"}
 TRAIT_USAGES = {"always", "per_scene", "per_day"}
 TRAIT_FATIGUE = {"none", "fatiguing"}
 SNAKE_CASE_RE = re.compile(r"^[a-z0-9]+(?:_[a-z0-9]+)*$")
+KEBAB_CASE_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+WORLD_META_TAGS = {"canonical", "canonical-realm", "placeholder", "TODO", "draft"}
 
 VALID_KNOWLEDGE_GROUPS: set[str] = set()
 VALID_MAGIC_FIELDS: set[str] = set()
@@ -520,6 +524,40 @@ def _validate_items_roll_tags(path: Path, failures: list[str]) -> None:
         )
 
 
+def _validate_world_yaml(path: Path, failures: list[str]) -> None:
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    label = path.relative_to(path.parents[2]).as_posix()
+    if not isinstance(data, dict):
+        failures.append(f"{label}: expected top-level mapping")
+        return
+
+    world_id = data.get("id")
+    if not isinstance(world_id, str) or not world_id:
+        failures.append(f"{label}: id must be non-empty string")
+    else:
+        expected_stem = world_id.replace("-", "_")
+        if path.stem != expected_stem:
+            failures.append(f"{label}: stem/id mismatch stem={path.stem} id={world_id}")
+
+    tags = data.get("tags", [])
+    if not isinstance(tags, list):
+        failures.append(f"{label}: tags must be a list")
+        return
+
+    seen: set[str] = set()
+    for index, tag in enumerate(tags):
+        if not isinstance(tag, str):
+            failures.append(f"{label}: tags[{index}] must be string")
+            continue
+        if not KEBAB_CASE_RE.fullmatch(tag):
+            failures.append(f"{label}: tags[{index}] must be kebab-case (got {tag})")
+        if tag in WORLD_META_TAGS:
+            failures.append(f"{label}: forbidden meta tag {tag}")
+        if tag in seen:
+            failures.append(f"{label}: duplicate tag {tag}")
+        seen.add(tag)
+
+
 def main() -> None:
     repo_root = Path(__file__).resolve().parents[1]
     data_dir = repo_root / "data"
@@ -548,6 +586,11 @@ def main() -> None:
         if spell_file.name == "fields.json" or spell_file.name.startswith("_"):
             continue
         _validate_spells(spell_file, failures)
+
+    for world_file in sorted((data_dir / "world").rglob("*.yaml")):
+        if world_file.name.startswith("_"):
+            continue
+        _validate_world_yaml(world_file, failures)
 
     if failures:
         print("❌ Data validation failed")

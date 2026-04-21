@@ -37,6 +37,9 @@ jobs:
       - name: Validate prompt files
         run: python scripts/validate_prompts.py
 
+      - name: Validate naming conventions
+        run: python scripts/validate_naming.py
+
       - name: Unit + contract tests
         run: pytest -q tests/unit tests/contract
 
