@@ -148,7 +148,7 @@ prompts/               # GPT prompt corpus + markdown world-vault mirrors
   history.md
   groups.md
   npcs.md
-  design_notes.md      # Internal — do NOT upload to GPT builder
+  design-notes.md      # Internal — do NOT upload to GPT builder
 schemas/
   openapi.yaml         # OpenAPI document format 3.1.0, schema/release version 4.1.0 — upload to GPT builder Actions
 scripts/

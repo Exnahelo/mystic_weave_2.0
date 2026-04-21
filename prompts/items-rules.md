@@ -20,7 +20,7 @@ Use this file together with:
 * `data/items/magical.json`
 * `data/items/notable.json`
 * `data/items/weapons.json`
-* `combat_rules.md`
+* `combat-rules.md`
 * `economy-rules.md`
 * `world-rules.md`
 * `engine.md`
@@ -170,7 +170,7 @@ Use the item data to determine whether a consumable is:
 
 For non-ammunition consumables, assume that use normally reduces availability immediately unless the fiction strongly supports otherwise.
 
-For ammunition, follow ammunition-specific rules from `data/items/ammunition.json` and `combat_rules.md`.
+For ammunition, follow ammunition-specific rules from `data/items/ammunition.json` and `combat-rules.md`.
 
 ---
 
@@ -236,7 +236,7 @@ If a magical item creates a persistent world fact, update state.
 
 Weapons and armor do not resolve themselves through item data alone.
 
-For all combat-facing interpretation, use item data together with `combat_rules.md`.
+For all combat-facing interpretation, use item data together with `combat-rules.md`.
 
 Specifically:
 
@@ -342,7 +342,7 @@ This section will eventually define how the GPT should reason about:
 * `data/items/magical.json` — standard magical item catalog
 * `data/items/notable.json` — named and setting-significant item catalog
 * `data/items/weapons.json` — weapon catalog and combat-family item data
-* `combat_rules.md` — combat-facing handling of weapons, armor, and ammunition
+* `combat-rules.md` — combat-facing handling of weapons, armor, and ammunition
 * `economy-rules.md` — buying, barter, pricing pressure, and transaction state rules
 * `world-rules.md` — broader world/system-facing rules
 * `engine.md` — runtime adjudication and system logic

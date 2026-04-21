@@ -3,7 +3,7 @@
 This document is the sole canonical source for progression adjudication.
 Use it for AP earning, domain advancement, tag advancement, reward adjudication boundaries, and progression-related save timing.
 
-Scene-boundary vocabulary is canonical in `prompts/scene_structure.md`.
+Scene-boundary vocabulary is canonical in `prompts/scene-structure.md`.
 
 ---
 

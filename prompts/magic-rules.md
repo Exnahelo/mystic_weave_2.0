@@ -26,8 +26,8 @@ Use this file together with:
 - `data/tags/magic_fields.json`
 - `world-rules.md`
 - `engine.md`
-- `combat_rules.md` when magic is used during conflict
-- `progression_rules.md` for tag advancement adjudication
+- `combat-rules.md` when magic is used during conflict
+- `progression-rules.md` for tag advancement adjudication
 
 ---
 
@@ -51,7 +51,7 @@ A character's domain score determines the maximum field knowledge tier available
 
 A character with Will 53 can advance Sacred, Warding, or Binding knowledge up to T2 but not T3. Raising Will to 60 makes T3 available to unlock.
 
-Domain score gates the ceiling. It does not automatically grant the knowledge tier — the character must still earn the advancement through use per `progression_rules.md`.
+Domain score gates the ceiling. It does not automatically grant the knowledge tier — the character must still earn the advancement through use per `progression-rules.md`.
 
 ### Layer 2 — Field Knowledge (Gates Spell Access)
 
@@ -67,13 +67,13 @@ Magical fields are broad areas of magical understanding, tracked as knowledge ta
 
 Field knowledge governs what a character can safely attempt. Attempting a spell above the field tier is Dangerous Use regardless of application tier.
 
-Field knowledge tiers advance through meaningful consequential use, per `progression_rules.md`. They do not consume AP.
+Field knowledge tiers advance through meaningful consequential use, per `progression-rules.md`. They do not consume AP.
 
 ### Layer 3 — Spell Application (Determines Success)
 
 Individual spells are application tags. The application tier determines how reliably the caster succeeds when casting that specific spell.
 
-Spell application tiers advance through repeated consequential use, per `progression_rules.md`. They do not consume AP.
+Spell application tiers advance through repeated consequential use, per `progression-rules.md`. They do not consume AP.
 
 See **Spell Resolution** below for the threshold table.
 
@@ -354,9 +354,9 @@ This section will eventually define:
 - `data/tags/magic_fields.json` — canonical field definitions
 - `data/magic/{field}.json` — per-field spell catalogs (sacred, warding, binding, elemental, druidry, illusion, runecraft, alchemy, necromancy)
 - `world-rules.md` — broader world/system-facing rules (contains a summarized magic section that must stay in sync with this file)
-- `combat_rules.md` — combat-facing interpretation when magic enters conflict
+- `combat-rules.md` — combat-facing interpretation when magic enters conflict
 - `engine.md` — runtime system logic and adjudication guidance
-- `progression_rules.md` — tag advancement adjudication rules
+- `progression-rules.md` — tag advancement adjudication rules
 
 ---
 

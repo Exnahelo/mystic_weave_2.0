@@ -224,7 +224,7 @@ Applications do not replace groups; they narrow how the character expresses that
 ### Magical Fields
 
 Magical fields are parallel to knowledge groups and follow the same tier math (+1 per tier), but they additionally gate spell access.
-Canonical full specification: `prompts/magic_rules.md`.
+Canonical full specification: `prompts/magic-rules.md`.
 
 | Field | Primary Domain | Governs |
 |---|---|---|
@@ -240,7 +240,7 @@ Canonical full specification: `prompts/magic_rules.md`.
 
 Cross-domain note: some fields can roll in more than one domain depending on context. Example: Sacred may roll Will for concentration or Presence for formal invocation; Binding may roll Will for oath endurance or Presence for command recognition. If two domains are equally plausible, use the lower score. Cross-domain does not change which domain gates field knowledge — that is always the primary domain.
 
-Magical field knowledge tiers are gated by the field's primary domain score. See `prompts/magic_rules.md` for the domain-gating threshold table.
+Magical field knowledge tiers are gated by the field's primary domain score. See `prompts/magic-rules.md` for the domain-gating threshold table.
 
 Maximum competency contribution on a standard non-spell roll: Knowledge Group 5 + Application 5 = +10.
 
@@ -248,7 +248,7 @@ Maximum competency contribution on a standard non-spell roll: Knowledge Group 5 
 
 ## Magic
 
-Magic uses three linked layers. Full specification: `prompts/magic_rules.md`.
+Magic uses three linked layers. Full specification: `prompts/magic-rules.md`.
 
 ### Layer 1 — Domain Score Gates Field Knowledge
 
@@ -335,9 +335,9 @@ Draconic breath is an innate species capability, not a learned spell. It does no
 
 ## Advancement
 
-Progression adjudication is canonical in `prompts/progression_rules.md`.
+Progression adjudication is canonical in `prompts/progression-rules.md`.
 
-Scene-boundary vocabulary for progression adjudication is canonical in `prompts/scene_structure.md`.
+Scene-boundary vocabulary for progression adjudication is canonical in `prompts/scene-structure.md`.
 
 ---
 
@@ -475,7 +475,7 @@ The world is a graph of connected location nodes. Movement is along defined edge
 
 ## Economy Resolution Rules
 
-Use `prompts/economy_rules.md` as the canonical economy/currency reference.
+Use `prompts/economy-rules.md` as the canonical economy/currency reference.
 
 - Everyday purchases use coin when appropriate to context.
 - High-value magical services, rare materials, relics, and sensitive information default to barter.

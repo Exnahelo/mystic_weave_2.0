@@ -31,7 +31,7 @@
 | `progression-rules.md` | Canon runtime/support reference | Yes |
 | `scene-structure.md` | Canon runtime/support reference | Yes |
 | `world-rules.md` | Canon source of truth | Yes |
-| `design_notes.md` | Living author document | No |
+| `design-notes.md` | Living author document | No |
 
 **Design Notes Policy:** This file is author-facing only and is not part of runtime canon upload.
 
