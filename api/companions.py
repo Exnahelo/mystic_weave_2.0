@@ -66,7 +66,7 @@ class CreatureCompanion(BaseModel):
     size_note: Optional[str] = None
     age_category: AgeCategory
 
-    tactical_role: TacticalRole
+    tactical_roles: list[TacticalRole] = Field(min_length=1)
     training_level: TrainingLevel
     bond_level: BondLevel
 
@@ -128,7 +128,7 @@ class ExceptionalCompanion(BaseModel):
     size_note: Optional[str] = None
     age_category: AgeCategory
 
-    tactical_role: TacticalRole
+    tactical_roles: list[TacticalRole] = Field(min_length=1)
     training_level: TrainingLevel
     bond_level: BondLevel
 

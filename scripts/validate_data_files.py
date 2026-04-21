@@ -575,7 +575,7 @@ def _validate_beast_creatures(path: Path, failures: list[str]) -> None:
         "biome",
         "size",
         "age_category",
-        "tactical_role_default",
+        "tactical_roles_defaults",
         "natural_abilities",
         "natural_weapons",
         "movement_modes",
@@ -602,7 +602,24 @@ def _validate_beast_creatures(path: Path, failures: list[str]) -> None:
         _failures_append(failures, row.get("biome") in BEAST_BIOMES, f"{label}.biome must be one of {sorted(BEAST_BIOMES)}")
         _failures_append(failures, row.get("size") in CREATURE_SIZE_VALUES, f"{label}.size must be one of {sorted(CREATURE_SIZE_VALUES)}")
         _failures_append(failures, row.get("age_category") in AGE_CATEGORY_VALUES, f"{label}.age_category must be one of {sorted(AGE_CATEGORY_VALUES)}")
-        _failures_append(failures, row.get("tactical_role_default") in TACTICAL_ROLE_VALUES, f"{label}.tactical_role_default must be one of {sorted(TACTICAL_ROLE_VALUES)}")
+        roles = row.get("tactical_roles_defaults")
+        _failures_append(
+            failures,
+            isinstance(roles, list) and len(roles) >= 1,
+            f"{label}.tactical_roles_defaults must be a non-empty list",
+        )
+        if isinstance(roles, list):
+            for r_idx, role in enumerate(roles):
+                _failures_append(
+                    failures,
+                    role in TACTICAL_ROLE_VALUES,
+                    f"{label}.tactical_roles_defaults[{r_idx}] must be a valid tactical role (got {role!r})",
+                )
+            _failures_append(
+                failures,
+                len(roles) == len(set(roles)),
+                f"{label}.tactical_roles_defaults must not contain duplicates",
+            )
         _failures_append(failures, row.get("carrying_capacity") in CARRYING_CAPACITY_VALUES, f"{label}.carrying_capacity must be one of {sorted(CARRYING_CAPACITY_VALUES)}")
 
         natural_abilities = row.get("natural_abilities")
