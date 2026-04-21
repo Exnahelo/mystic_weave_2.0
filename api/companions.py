@@ -1,0 +1,217 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Literal, Optional, Union
+
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+
+if TYPE_CHECKING:
+    from api.models import Alignment, DomainScores, Equipment, HP, Identity, ReputationEntry
+
+
+# ---------------------------------------------------------------------------
+# Enums
+# ---------------------------------------------------------------------------
+
+TacticalRole = Literal["mount", "pack", "scout", "guard", "hunter", "companion"]
+TrainingLevel = Literal["untrained", "basic", "trained", "expert"]
+BondLevel = Literal["wary", "accepting", "bonded", "devoted"]
+AgeCategory = Literal["juvenile", "young_adult", "adult", "mature", "elder"]
+CreatureSize = Literal["tiny", "small", "medium", "large", "huge"]
+CarryingCapacity = Literal["none", "small", "medium", "large"]
+MovementMode = Literal["walk", "fly", "swim", "climb", "burrow"]
+NaturalWeapon = Literal["bite", "claw", "hoof", "tail_slam", "breath", "sting", "none"]
+
+Sapience = Literal["partial", "full"]
+Communication = Literal["instinctive", "symbolic", "speech"]
+Autonomy = Literal["limited", "moderate", "high"]
+
+
+class CreatureDomains(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    physical: int = Field(ge=25, le=60)
+    instinct: int = Field(ge=25, le=60)
+    composure: int = Field(ge=25, le=60)
+
+
+class BondLinks(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    primary: str
+    secondary: Optional[str] = None
+
+    @field_validator("primary")
+    @classmethod
+    def primary_non_empty(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("primary must be a non-empty string")
+        return value
+
+
+class ExceptionalProfile(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    sapience: Sapience
+    communication: Communication
+    autonomy: Autonomy
+
+
+class CreatureCompanion(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    name: str
+    species: str
+    subtype: Optional[str] = None
+    size: CreatureSize
+    size_note: Optional[str] = None
+    age_category: AgeCategory
+
+    tactical_role: TacticalRole
+    training_level: TrainingLevel
+    bond_level: BondLevel
+
+    natural_abilities: list[str] = Field(default_factory=list)
+    learned_commands: list[str] = Field(default_factory=list)
+    command_notes: str = ""
+
+    movement_modes: list[MovementMode] = Field(default_factory=lambda: ["walk"])
+    natural_weapons: list[NaturalWeapon] = Field(default_factory=lambda: ["none"])
+    carrying_capacity: CarryingCapacity = "none"
+
+    hp: "HP"
+    domains: CreatureDomains
+    temperament: str = ""
+
+    bond_links: BondLinks
+
+
+class SapientCompanion(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    name: str
+    ancestry: str
+    culture: str
+    background: str
+    focus: str
+
+    hp: "HP"
+    domains: "DomainScores"
+    knowledge: dict[str, int] = Field(default_factory=dict)
+    application: dict[str, int] = Field(default_factory=dict)
+
+    identity: "Identity"
+    equipment: "Equipment"
+    reputation: list["ReputationEntry"] = Field(default_factory=list)
+
+    bond_links: BondLinks
+    known_languages: list[str] = Field(default_factory=list)
+    companions: list[CreatureCompanion] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def _validate_nesting(self) -> "SapientCompanion":
+        for companion in self.companions:
+            if not isinstance(companion, CreatureCompanion):
+                raise ValueError(
+                    "SapientCompanion.companions may contain only "
+                    "CreatureCompanion instances"
+                )
+        return self
+
+
+class ExceptionalCompanion(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    name: str
+    species: str
+    subtype: Optional[str] = None
+    size: CreatureSize
+    size_note: Optional[str] = None
+    age_category: AgeCategory
+
+    tactical_role: TacticalRole
+    training_level: TrainingLevel
+    bond_level: BondLevel
+
+    natural_abilities: list[str] = Field(default_factory=list)
+    learned_commands: list[str] = Field(default_factory=list)
+    command_notes: str = ""
+
+    movement_modes: list[MovementMode] = Field(default_factory=lambda: ["walk"])
+    natural_weapons: list[NaturalWeapon] = Field(default_factory=lambda: ["none"])
+    carrying_capacity: CarryingCapacity = "none"
+
+    hp: "HP"
+    temperament: str = ""
+
+    bond_links: BondLinks
+
+    exceptional_profile: ExceptionalProfile
+    motivations: list[str]
+    domains: Union[CreatureDomains, "DomainScores"]
+    knowledge: Optional[dict[str, int]] = None
+    application: Optional[dict[str, int]] = None
+    alignment: Optional["Alignment"] = None
+    supernatural_traits: list[str] = Field(default_factory=list)
+    known_languages: list[str] = Field(default_factory=list)
+    tier_history: list[dict] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def _validate_sapience_requirements(self) -> "ExceptionalCompanion":
+        sapience = self.exceptional_profile.sapience
+
+        if sapience == "full":
+            if not isinstance(self.domains, core_models.DomainScores):
+                raise ValueError(
+                    "ExceptionalCompanion with sapience=full requires "
+                    "full DomainScores, not CreatureDomains"
+                )
+            if self.knowledge is None:
+                raise ValueError(
+                    "ExceptionalCompanion with sapience=full requires knowledge"
+                )
+            if self.application is None:
+                raise ValueError(
+                    "ExceptionalCompanion with sapience=full requires application"
+                )
+            if self.alignment is None:
+                raise ValueError(
+                    "ExceptionalCompanion with sapience=full requires alignment"
+                )
+
+        if sapience == "partial":
+            if not isinstance(self.domains, CreatureDomains):
+                raise ValueError(
+                    "ExceptionalCompanion with sapience=partial requires "
+                    "simplified CreatureDomains, not DomainScores"
+                )
+
+        if self.exceptional_profile.communication != "speech" and self.known_languages:
+            raise ValueError(
+                "known_languages should only be populated when communication=speech"
+            )
+
+        return self
+
+
+Companion = Union[SapientCompanion, CreatureCompanion, ExceptionalCompanion]
+
+
+from api import models as core_models
+
+_CORE_TYPES = {
+    "Alignment": core_models.Alignment,
+    "DomainScores": core_models.DomainScores,
+    "Equipment": core_models.Equipment,
+    "HP": core_models.HP,
+    "Identity": core_models.Identity,
+    "ReputationEntry": core_models.ReputationEntry,
+    "Companion": Companion,
+}
+
+SapientCompanion.model_rebuild(_types_namespace=_CORE_TYPES)
+CreatureCompanion.model_rebuild(_types_namespace=_CORE_TYPES)
+ExceptionalCompanion.model_rebuild(_types_namespace=_CORE_TYPES)
+
+core_models.WorldModel.model_rebuild(_types_namespace={"Companion": Companion})
+core_models.WorldStateDelta.model_rebuild(_types_namespace={"Companion": Companion})
+core_models.NewSessionRequest.model_rebuild(_types_namespace={"Companion": Companion})
