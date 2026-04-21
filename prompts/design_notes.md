@@ -23,7 +23,7 @@
 | `calendar.md` | Canon runtime/support reference | Yes |
 | `character_creation.md` | Canon runtime/support reference | Yes |
 | `combat_rules.md` | Canon runtime/support reference | Yes |
-| `difficulty_rules.md` | Canon runtime/support reference | Yes |
+| `difficulty-rules.md` | Canon runtime/support reference | Yes |
 | `economy-rules.md` | Canon runtime/support reference | Yes |
 | `engine.md` | Canon runtime system prompt | Yes |
 | `items-rules.md` | Canon runtime/support reference | Yes |

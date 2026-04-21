@@ -8,7 +8,7 @@ Baseline checkpoint for the post-audit prompt/world topology state.
 - API/OpenAPI follow-up alignment through v3.1.0
 - New reference docs:
   - `prompts/magic-rules.md`
-  - `prompts/difficulty_rules.md`
+  - `prompts/difficulty-rules.md`
   - `prompts/items-rules.md`
 - World topology reciprocity audit across the legacy flat `prompts/world/*.yaml` source set (before `data/world/` cutover)
 - Corrected reciprocal route:
