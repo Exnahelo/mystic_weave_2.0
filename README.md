@@ -156,7 +156,7 @@ scripts/
   verify_production_contract.py  # Validate production against repo expectations
 tests/
   loop_test.py         # Full API loop test (local or Railway)
-  gpt_test_template.md # Manual GPT live test script (10 blocks)
+  gpt-test-template.md # Manual GPT live test script (10 blocks)
   unit/                # Fast deterministic unit tests
   contract/            # OpenAPI contract assertions
 ```
