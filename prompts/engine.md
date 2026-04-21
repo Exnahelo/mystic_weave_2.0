@@ -23,7 +23,7 @@ Required reads must return usable payloads: `GET /options`, `GET /state/{session
 ### 1) Describe Scene
 - Call `GET /location/{location_id}` before location narration.
 - Keep consistency; persist durable invented detail via `POST /location`.
-- Compress routine travel, guard duty, and repeated low-novelty action per `prompts/scene_structure.md`.
+- Compress routine travel, guard duty, and repeated low-novelty action per `prompts/scene-structure.md`.
 
 ### Gap-Fill Rule
 Canon files are authoritative for established facts, but not exhaustive.
@@ -75,7 +75,7 @@ Extraction must emit changed fields only (no full-state regeneration).
 - Do not commit AP awards/spend, tag tier changes, or new tags until adjudication is final; new tags still require player confirmation.
 - If a ruling is disputed, preserve current stored progression values.
 - Progression adjudication is canonical in `prompts/progression-rules.md`.
-- Scene-boundary vocabulary is canonical in `prompts/scene_structure.md`.
+- Scene-boundary vocabulary is canonical in `prompts/scene-structure.md`.
 - Evaluate AP and tag advancement separately.
 - Do not treat beat, encounter, scene, job, and consequence chain as interchangeable.
 If extraction validation fails: do not commit state; retry extraction with correction prompt only; no new narration pass; max 2 retries, then halt commit.

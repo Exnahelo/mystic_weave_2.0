@@ -29,7 +29,7 @@
 | `items-rules.md` | Canon runtime/support reference | Yes |
 | `magic-rules.md` | Canon runtime/support reference | Yes |
 | `progression-rules.md` | Canon runtime/support reference | Yes |
-| `scene_structure.md` | Canon runtime/support reference | Yes |
+| `scene-structure.md` | Canon runtime/support reference | Yes |
 | `world-rules.md` | Canon source of truth | Yes |
 | `design_notes.md` | Living author document | No |
 
