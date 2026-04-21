@@ -48,6 +48,28 @@ class BondLinks(BaseModel):
         return value
 
 
+class CreatureNarrative(BaseModel):
+    """
+    Optional narrative block for creatures with individual story-weight
+    content. Nullable on the parent models. Catalog-templated creatures
+    without individual history leave this as None.
+
+    Used on CreatureCompanion and ExceptionalCompanion. For
+    ExceptionalCompanion with sapience=full, the fields here may be
+    redundant with motivations/alignment — that's a content concern,
+    not a schema one.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    origin: Optional[str] = None
+    wound: Optional[str] = None
+    quirks: list[str] = Field(default_factory=list)
+    flaws: list[str] = Field(default_factory=list)
+    bonds: list[str] = Field(default_factory=list)
+    drives: list[str] = Field(default_factory=list)
+
+
 class ExceptionalProfile(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -83,6 +105,7 @@ class CreatureCompanion(BaseModel):
     temperament: str = ""
 
     bond_links: BondLinks
+    narrative: Optional[CreatureNarrative] = None
 
 
 class SapientCompanion(BaseModel):
@@ -144,6 +167,7 @@ class ExceptionalCompanion(BaseModel):
     temperament: str = ""
 
     bond_links: BondLinks
+    narrative: Optional[CreatureNarrative] = None
 
     exceptional_profile: ExceptionalProfile
     motivations: list[str]

@@ -5,6 +5,7 @@ from api.companions import (
     BondLinks,
     CreatureCompanion,
     CreatureDomains,
+    CreatureNarrative,
     ExceptionalCompanion,
     SapientCompanion,
 )
@@ -63,12 +64,102 @@ def _creature_companion(**overrides):
     return CreatureCompanion.model_validate(payload)
 
 
+def _exceptional_companion(**overrides):
+    payload = {
+        "name": "Whisper",
+        "species": "sprite",
+        "size": "small",
+        "age_category": "adult",
+        "tactical_roles": ["scout"],
+        "training_level": "expert",
+        "bond_level": "bonded",
+        "hp": _hp(),
+        "bond_links": _bond_links(),
+        "exceptional_profile": {
+            "sapience": "full",
+            "communication": "speech",
+            "autonomy": "high",
+        },
+        "motivations": ["Observe mortals"],
+        "domains": _full_domains(),
+        "knowledge": {"lore": 2},
+        "application": {"illusion_glamour": 1},
+        "alignment": {"order": "chaotic", "intent": "good", "ethos_note": ""},
+        "known_languages": ["Common"],
+    }
+    payload.update(overrides)
+    return ExceptionalCompanion.model_validate(payload)
+
+
+@pytest.mark.unit
+def test_creature_narrative_empty_is_valid() -> None:
+    narrative = CreatureNarrative()
+    assert narrative.origin is None
+    assert narrative.quirks == []
+    assert narrative.drives == []
+
+
+@pytest.mark.unit
+def test_creature_narrative_populated_validates() -> None:
+    narrative = CreatureNarrative(
+        origin="Raised from a runt in the Feywood.",
+        wound="Old scars at shoulder.",
+        quirks=["Quiet", "Highly observant"],
+        flaws=["Slow to trust strangers"],
+        bonds=["Feywood Glade"],
+        drives=["Remain with handler", "Hunt when safe"],
+    )
+    assert narrative.origin.startswith("Raised")
+    assert "Quiet" in narrative.quirks
+
+
+@pytest.mark.unit
+def test_creature_narrative_forbids_extra() -> None:
+    with pytest.raises(ValidationError):
+        CreatureNarrative(origin="test", alignment="lawful_good")
+
+
 @pytest.mark.unit
 def test_creature_companion_minimal_validates() -> None:
     creature = _creature_companion()
     assert creature.name == "Ash"
     assert creature.movement_modes == ["walk"]
     assert creature.natural_weapons == ["none"]
+
+
+@pytest.mark.unit
+def test_creature_companion_narrative_defaults_to_none() -> None:
+    creature = _creature_companion()
+    assert creature.narrative is None
+
+
+@pytest.mark.unit
+def test_creature_companion_with_narrative_validates() -> None:
+    narrative = CreatureNarrative(
+        origin="Raised from a runt in the Feywood.",
+        quirks=["Quiet", "Observant"],
+    )
+    creature = _creature_companion(narrative=narrative)
+    assert creature.narrative is not None
+    assert creature.narrative.origin.startswith("Raised")
+
+
+@pytest.mark.unit
+def test_creature_companion_tactical_roles_list_validates() -> None:
+    creature = _creature_companion(tactical_roles=["hunter", "scout"])
+    assert creature.tactical_roles == ["hunter", "scout"]
+
+
+@pytest.mark.unit
+def test_creature_companion_empty_tactical_roles_rejected() -> None:
+    with pytest.raises(ValidationError):
+        _creature_companion(tactical_roles=[])
+
+
+@pytest.mark.unit
+def test_creature_companion_invalid_tactical_role_rejected() -> None:
+    with pytest.raises(ValidationError):
+        _creature_companion(tactical_roles=["not_a_role"])
 
 
 @pytest.mark.unit
@@ -121,32 +212,25 @@ def test_exceptional_companion_partial_validates() -> None:
 
 @pytest.mark.unit
 def test_exceptional_companion_full_validates() -> None:
-    exceptional = ExceptionalCompanion.model_validate(
-        {
-            "name": "Whisper",
-            "species": "sprite",
-            "size": "small",
-            "age_category": "adult",
-            "tactical_role": "scout",
-            "training_level": "expert",
-            "bond_level": "bonded",
-            "hp": _hp(),
-            "bond_links": _bond_links(),
-            "exceptional_profile": {
-                "sapience": "full",
-                "communication": "speech",
-                "autonomy": "high",
-            },
-            "motivations": ["Observe mortals"],
-            "domains": _full_domains(),
-            "knowledge": {"lore": 2},
-            "application": {"illusion_glamour": 1},
-            "alignment": {"order": "chaotic", "intent": "good", "ethos_note": ""},
-            "known_languages": ["Common"],
-        }
-    )
+    exceptional = _exceptional_companion()
     assert exceptional.exceptional_profile.communication == "speech"
     assert exceptional.known_languages == ["Common"]
+
+
+@pytest.mark.unit
+def test_exceptional_companion_narrative_defaults_to_none() -> None:
+    exceptional = _exceptional_companion()
+    assert exceptional.narrative is None
+
+
+@pytest.mark.unit
+def test_exceptional_companion_with_narrative_validates() -> None:
+    narrative = CreatureNarrative(
+        origin="Bound during the oath-rite in the Sacred Pools.",
+        drives=["Keep the oath", "Protect the handler"],
+    )
+    exceptional = _exceptional_companion(narrative=narrative)
+    assert exceptional.narrative is not None
 
 
 @pytest.mark.unit
