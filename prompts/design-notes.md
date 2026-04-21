@@ -124,3 +124,172 @@ Files to keep in Obsidian as reference but not GPT-upload:
 The `NEW_NEW_DRAKENVALE.docx` contains the most complete version of the Ptarian Codex as a formal charter document. If a full in-world legal text is ever needed (for roleplay, as a found document, etc.), that file is the source. It was intentionally not included in the GPT files because its length and legal prose format are not useful for the GPT's narrative function. The principles are captured in `world.md`.
 
 ---
+
+## Companion Schema Design (2026-04)
+
+### Status
+
+Schema design locked. Implementation deferred to a future arc.
+
+Supersedes the open TODO item "Decide on companion `species` asymmetry"
+from the post-naming-cleanup open items list.
+
+### Three-tier model
+
+Companions split into three distinct Pydantic models, not a single
+model with a tier field. Separate types give free compile-time
+guarantees about which fields are present for each tier and keep the
+schema clean for consumers.
+
+**SapientCompanion** — humanoid party members (halfling scout, elven
+healer, dragonborn duelist). Mirrors the PC schema.
+
+Fields:
+- `ancestry`, `culture`, `background`, `focus`
+- `domains`, `knowledge`, `application`
+- `identity`: motivations, alignment, quirks, bonds, flaws
+- `equipment`, `reputation`, `hp`
+- `known_languages` (placeholder; see Language System Deferral below)
+- `bond_links`: primary + optional secondary
+
+**CreatureCompanion** — non-sapient animals acting on instinct and
+training (wolf, hawk, horse, war hound).
+
+Fields:
+- `species`, `subtype` (subtype is narrative flavor, not mechanical)
+- `age_category`, `size`
+- `tactical_role` (enum: `mount | pack | scout | guard | hunter | companion`)
+- `training_level` (enum: `untrained | basic | trained | expert`)
+- `bond_level` (enum: `wary | accepting | bonded | devoted`)
+- `natural_abilities` (enum list — intrinsic traits)
+- `learned_commands` (controlled enum list — vocabulary TBD)
+- `command_notes` (free text — stress-behavior and edge cases)
+- `movement_modes` (enum list: walk, fly, swim, climb, burrow)
+- `natural_weapons` (enum list: bite, claw, hoof, tail-slam, breath, none)
+- `carrying_capacity` (small | medium | large | none)
+- `domains` (simplified: `physical`, `instinct`, `composure` on 25–60 scale)
+- `hp`, `temperament`
+- `bond_links`
+
+**ExceptionalCompanion** — sub-sapient or magically significant entities
+(pseudodragon familiar, bound sprite, partially-awakened wolf). Extends
+creature base with sapience and supernatural capacity.
+
+Fields (creature base):
+- all CreatureCompanion fields above
+
+Fields (exceptional extensions):
+- `exceptional_profile`:
+  - `sapience`: `partial | full`
+  - `communication`: `instinctive | symbolic | speech`
+  - `autonomy`: `limited | moderate | high`
+- `motivations` (required if any sapience)
+- `domains` (simplified if `sapience=partial`, full 7-domain if
+  `sapience=full`)
+- `knowledge`, `application` (required if `sapience=full`)
+- `alignment` (required if `sapience=full`)
+- `supernatural_traits` (enum list)
+- `known_languages` (populated only if `communication=speech`)
+
+### Enum definitions
+
+**bond_level**
+- `wary` — minimal trust, may resist or flee
+- `accepting` — tolerates handler, follows routine cues
+- `bonded` — recognizes handler as primary social anchor
+- `devoted` — prioritizes handler even under danger or conflict
+
+**training_level**
+- `untrained` — no conditioned responses
+- `basic` — sit, stay, come, reliable in calm conditions
+- `trained` — tactical commands, reliable under moderate pressure
+- `expert` — complex multi-step tasks, reliable under extreme pressure
+
+**autonomy**
+- `limited` — acts only on direct command or reflex
+- `moderate` — exercises judgment within handler's stated intent
+- `high` — may act independently when circumstances warrant
+
+`autonomy` and `bond_level` are orthogonal. A well-trained war horse is
+obedient (low autonomy) and may or may not be bonded. A sphinx
+companion is bonded and highly autonomous.
+
+### Reliability model
+
+No dedicated `reliability_under_stress` field. Reliability is adjudicated
+narratively from `composure` domain (25–60 scale) + `training_level` +
+`bond_level` + situational context. One source of truth per axis.
+
+### Tier transitions
+
+Tiers are immutable in place. A creature that transitions to exceptional
+(e.g. awakens through magical exposure) is handled by:
+
+1. Archiving the existing `CreatureCompanion` record
+2. Constructing a new `ExceptionalCompanion` record
+3. Carrying forward name, bond, and history via explicit field copies
+4. Recording the trigger in a `tier_history` field on the new entity
+
+This preserves the narrative weight of transformation (it's a real
+event, not a silent field flip) and keeps type guarantees intact
+(code reading an `ExceptionalCompanion` knows exceptional-only fields
+are populated).
+
+No schema mutation on live records. No in-place promotion.
+
+### Language system deferral
+
+`known_languages` is a placeholder field (`list[str]`, free-form strings)
+on SapientCompanion and on ExceptionalCompanion when
+`communication=speech`.
+
+A full language system — taxonomy, competency levels, comprehension
+rules, literacy, linguistic magic — is deferred to its own design arc.
+Known-languages as free strings is sufficient scaffolding until that
+arc happens. The placeholder is noted here to prevent it from being
+formalized casually inside the companion arc.
+
+### bond_links structure
+
+Replaces the earlier `handler_id` proposal. Companions belong to parties,
+not individuals.
+
+```
+bond_links:
+  primary: <character_id>
+  secondary: <character_id>    # optional
+```
+
+### Implementation deferral
+
+Not yet built. When the companion arc is prioritized, implementation
+touches:
+
+- `api/models.py` — three new Pydantic classes
+- `api/routes/options.py` — new `/options` entries for enums
+- `data/beasts/creatures.json` — seed catalog (starter set)
+- `data/beasts/exceptional.json` — seed catalog (probably empty at
+  start)
+- Seeding helpers for `CompanionModel` equivalents
+- `scripts/validate_naming.py` and `scripts/validate_data_files.py`
+  extensions
+- `schemas/openapi.yaml` regeneration + prose audit
+- `prompts/engine.md` companion handling (watch the 8000-char ceiling)
+- `prompts/character-creation.md` updates if companion selection is
+  part of creation flow
+- GPT builder re-upload of updated knowledge files
+
+Estimated 4–6 Cline packages.
+
+### Decisions explicitly not made in this capture
+
+- Exact catalog of `natural_abilities` enum values
+- Exact catalog of `learned_commands` enum values
+- Starter creature seed list (species, subtypes)
+- API surface for adding/removing companions from a session
+  (POST endpoint, state delta shape, etc.)
+- Whether sapient companions can also have their own companions
+  (nested companion graph; currently noted as "optional" — needs
+  explicit resolution)
+
+These are worth addressing when the implementation arc starts, not now.
