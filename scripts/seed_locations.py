@@ -76,10 +76,10 @@ async def seed(database_url: str) -> None:
         return
 
     canonical_files = sorted(CANONICAL_WORLD_DIR.rglob("*.yaml"))
-    canonical_files = [p for p in canonical_files if p.name not in {"region.yaml", "settlement.yaml", "district.yaml", "region_zone.yaml"} and not p.parent.name == "schemas"]
+    canonical_files = [p for p in canonical_files if not p.name.startswith("_") and p.name not in {"region.yaml", "settlement.yaml", "district.yaml", "region_zone.yaml"} and not p.parent.name == "schemas"]
 
     if LEGACY_WORLD_DIR.exists():
-        legacy_files = sorted(LEGACY_WORLD_DIR.glob("*.yaml"))
+        legacy_files = sorted(p for p in LEGACY_WORLD_DIR.glob("*.yaml") if not p.name.startswith("_"))
         legacy_ids: dict[str, Path] = {}
         for path in legacy_files:
             loc = parse_location_file(path)

@@ -8,7 +8,7 @@ Tests the full game loop against a running local (or Railway) instance:
   3. Dice resolution (d100 roll-under, degree of success, criticals)
   4. Location graph (create, retrieve, connections, discovery)
   5. Character re-seeding
-  6. Edge cases (invalid species, bad session, hp=0)
+  6. Edge cases (invalid ancestry, bad session, hp=0)
 
 Usage:
     # Against local server
@@ -125,15 +125,18 @@ def part1(client: httpx.Client) -> str | None:
     check("1.1.a", r.status_code == 200, f"GET /options → {r.status_code}")
     if r.status_code == 200:
         opts = r.json()
-        check("1.1.b", len(opts.get('species', [])) == 8, f"species count: {len(opts.get('species', []))}")
+        check("1.1.b", len(opts.get("ancestries", [])) == 8, f"ancestries count: {len(opts.get('ancestries', []))}")
+        check("1.1.ba", len(opts.get("cultures", [])) >= 1, f"cultures count: {len(opts.get('cultures', []))}")
         check("1.1.c", len(opts.get("focus", [])) == 7, f"focus count: {len(opts.get('focus', []))}")
         check("1.1.d", len(opts.get("backgrounds", [])) == 8, f"backgrounds count: {len(opts.get('backgrounds', []))}")
         check("1.1.da", isinstance(opts.get("mundane_items"), list), "mundane_items is a list")
         check("1.1.db", isinstance(opts.get("magical_items"), list), "magical_items is a list")
         check("1.1.dc", isinstance(opts.get("apparel_items"), list), "apparel_items is a list")
-        species_indices = [s["index"] for s in opts.get('species', [])]
-        check("1.1.e", "dragonborn" in species_indices, f"'dragonborn' in species")
-        check("1.1.f", "human" in species_indices, f"'human' in species")
+        ancestry_indices = [s["index"] for s in opts.get("ancestries", [])]
+        check("1.1.e", "dragonborn" in ancestry_indices, f"'dragonborn' in ancestries")
+        check("1.1.f", "human" in ancestry_indices, f"'human' in ancestries")
+        culture_indices = [c["index"] for c in opts.get("cultures", [])]
+        check("1.1.fa", "drakenvale_city" in culture_indices, f"'drakenvale_city' in cultures")
         focus_indices = [f["index"] for f in opts.get("focus", [])]
         check("1.1.g", "devoted" in focus_indices, f"'devoted' in focus")
         bg_indices = [b["index"] for b in opts.get("backgrounds", [])]
@@ -165,29 +168,30 @@ def part1(client: httpx.Client) -> str | None:
 
     # Core identity fields
     check("1.3.b", char["name"] == "Krath", f"name: {char['name']}")
-    check("1.3.c", char['species'] == "dragonborn", f"species: {char['species']}")
+    check("1.3.c", char["ancestry"] == "dragonborn", f"ancestry: {char['ancestry']}")
+    check("1.3.ca", char["culture"] == "drakenvale_city", f"culture: {char['culture']}")
     check("1.3.d", char["focus"] == "devoted", f"focus: {char['focus']}")
     check("1.3.e", char["background"] == "soldier", f"background: {char['background']}")
     check("1.3.f", char["hp"]["current"] == 100, f"hp: {char['hp']}")
     check("1.3.g", char["hp"]["max"] == 100, f"max hp: {char['hp']['max']}")
 
-    # Domain scores (dragonborn base + adjustments)
+    # Domain scores and seeded tags (current ancestry/culture/focus/background stack)
     domains = char["domains"]
-    check("1.3.h", domains["presence"] == 55, f"presence: {domains['presence']} (dragonborn primary)")
-    check("1.3.i", domains["will"] == 47, f"will: {domains['will']} (45 base + 2 adj)")
-    check("1.3.j", domains["endurance"] == 43, f"endurance: {domains['endurance']} (40 base + 3 adj)")
+    check("1.3.h", domains["presence"] == 53, f"presence: {domains['presence']}")
+    check("1.3.i", domains["will"] == 53, f"will: {domains['will']}")
+    check("1.3.j", domains["endurance"] == 46, f"endurance: {domains['endurance']}")
 
     # Competency tags
     knowledge = char.get("knowledge", {})
-    check("1.3.k", knowledge.get("discipline") == 2, f"discipline K2: {knowledge.get('discipline')}")
-    check("1.3.l", knowledge.get("courage") == 1, f"courage K1: {knowledge.get('courage')}")
-    check("1.3.m", knowledge.get("command") == 1, f"command K1: {knowledge.get('command')}")
-    check("1.3.n", knowledge.get("intimidation") == 1, f"intimidation K1: {knowledge.get('intimidation')}")
-    check("1.3.o", knowledge.get("exertion") == 1, f"exertion K1: {knowledge.get('exertion')}")
-
     application = char.get("application", {})
-    check("1.3.p", application.get("sacred_rites") == 1, f"sacred_rites A1: {application.get('sacred_rites')}")
-    check("1.3.q", application.get("shields_armor") == 1, f"shields_armor A1: {application.get('shields_armor')}")
+    check("1.3.k", knowledge.get("discipline") == 2, f"discipline K2: {knowledge.get('discipline')}")
+    check("1.3.l", knowledge.get("lore") == 1, f"lore K1: {knowledge.get('lore')}")
+    check("1.3.m", knowledge.get("influence") == 1, f"influence K1: {knowledge.get('influence')}")
+    check("1.3.n", application.get("command") == 1, f"command A1: {application.get('command')}")
+    check("1.3.o", application.get("courage") == 1, f"courage A1: {application.get('courage')}")
+
+    check("1.3.p", char.get("fields", {}).get("sacred") == 1, f"sacred field T1: {char.get('fields', {}).get('sacred')}")
+    check("1.3.q", application.get("medium_armor") == 1, f"medium_armor A1: {application.get('medium_armor')}")
     check("1.3.r", application.get("melee") == 1, f"melee A1: {application.get('melee')}")
 
     # v3.1.0 — identity block
@@ -266,7 +270,8 @@ def part2(client: httpx.Client, session_id: str) -> None:
     save_body = {
         "character": {
             "name": "Krath",
-            'species': "dragonborn",
+            "ancestry": "dragonborn",
+            "culture": "drakenvale_city",
             "focus": "devoted",
             "background": "soldier",
             "hp": {"current": 85, "max": 100},
@@ -555,8 +560,9 @@ def part5(client: httpx.Client, session_id: str) -> None:
     if r.status_code == 200:
         char = r.json()["character"]
         check("5.1.b", char["name"] == "Thalia", f"name: {char['name']}")
-        check("5.1.c", char['species'] == "elf", f"species: {char['species']}")
-        check("5.1.d", char["domains"]["agility"] == 58, f"agility: {char['domains']['agility']} (55+3)")
+        check("5.1.c", char["ancestry"] == "elf", f"ancestry: {char['ancestry']}")
+        check("5.1.ca", char["culture"] == "drakenvale_city", f"culture: {char['culture']}")
+        check("5.1.d", char["domains"]["agility"] == 62, f"agility: {char['domains']['agility']}")
 
         # Stalker + Criminal both grant lockpicking_traps → stacks to T2
         app_tags = char.get("application", {})
@@ -587,7 +593,7 @@ def part5(client: httpx.Client, session_id: str) -> None:
 def part6(client: httpx.Client) -> None:
     section("PART 6 — Edge Cases")
 
-    subsection("Test 6.1 — Invalid species")
+    subsection("Test 6.1 — Invalid ancestry")
     r = client.post("/session/new", json={
         "character_name": "Bad",
         "ancestry": "goblin",
@@ -595,7 +601,7 @@ def part6(client: httpx.Client) -> None:
         "focus": "devoted",
         "background": "soldier",
     })
-    check("6.1.a", r.status_code == 422, f"invalid species → {r.status_code}")
+    check("6.1.a", r.status_code == 422, f"invalid ancestry → {r.status_code}")
 
     subsection("Test 6.2 — Invalid focus")
     r = client.post("/session/new", json={
@@ -607,16 +613,16 @@ def part6(client: httpx.Client) -> None:
     })
     check("6.2.a", r.status_code == 422, f"invalid focus → {r.status_code}")
 
-    subsection("Test 6.3 — Adjustment points exceed 5")
+    subsection("Test 6.3 — Adjustment points exceed total pool")
     r = client.post("/session/new", json={
         "character_name": "Bad",
         "ancestry": "human",
         "culture": "drakenvale_city",
         "focus": "champion",
         "background": "soldier",
-        "adjustment_points": {"power": 3, "endurance": 3},
+        "adjustment_points": {"power": 5, "endurance": 5, "will": 1},
     })
-    check("6.3.a", r.status_code == 422, f"excess adjustment → {r.status_code}")
+    check("6.3.a", r.status_code == 422, f"excess total adjustment → {r.status_code}")
 
     subsection("Test 6.4 — Character create for nonexistent session")
     r = client.post("/character/create", json={

@@ -25,6 +25,7 @@ SNAKE = re.compile(r"^[a-z_][a-z0-9_]*$")
 ALEMBIC_SNAKE = re.compile(r"^[a-z0-9_]+$")
 KEBAB = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 ENV_KEY = re.compile(r"^[A-Z][A-Z0-9_]*=")
+SAFE_ENV_SUFFIXES = (".example", ".template", ".sample", ".dist")
 
 
 def _tracked_files(repo_root: Path) -> list[Path]:
@@ -83,21 +84,33 @@ def main() -> None:
         name = path.name
         stem = path.stem
 
+        if not path.exists():
+            continue
+
         if " " in rel_str:
             violations.append(f"NAMING VIOLATION  {rel_str}  expected=no-spaces  got={name}")
 
         if name.startswith(".") and not name.startswith(".env"):
             continue
 
-        if rel.parent == Path(".") and name.startswith(".env"):
+        if rel.parent == Path(".") and (name == ".env" or name.startswith(".env.")):
+            is_safe_template = any(name.endswith(suffix) for suffix in SAFE_ENV_SUFFIXES)
+            if name == ".env" or not is_safe_template:
+                violations.append(
+                    f"NAMING VIOLATION  {rel_str}  env file tracked in git — must be gitignored"
+                )
+                continue
             for line in path.read_text(encoding="utf-8").splitlines():
                 stripped = line.strip()
                 if not stripped or stripped.startswith("#"):
                     continue
-                if not ENV_KEY.match(stripped):
-                    key = stripped.split("=", 1)[0] if "=" in stripped else stripped
+                if "=" not in stripped:
+                    violations.append(f"NAMING VIOLATION  {rel_str}  malformed line: {stripped}")
+                    continue
+                key = stripped.split("=", 1)[0]
+                if not re.match(r"^[A-Z][A-Z0-9_]*$", key):
                     violations.append(
-                        f"NAMING VIOLATION  {rel_str}  expected=UPPER_SNAKE_CASE env key  got={key}"
+                        f"NAMING VIOLATION  {rel_str}  env key not UPPER_SNAKE_CASE: {key}"
                     )
             continue
 

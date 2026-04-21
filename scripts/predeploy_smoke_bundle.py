@@ -29,7 +29,8 @@ def main() -> None:
 
     new_session_payload: dict[str, Any] = {
         "character_name": "SmokeRunner",
-        "species": "human",
+        "ancestry": "human",
+        "culture": "drakenvale_city",
         "focus": "champion",
         "background": "soldier",
         "adjustment_points": {"power": 2, "endurance": 2, "will": 1},
@@ -64,8 +65,17 @@ def main() -> None:
         options = client.get("/options")
         expect_status(options, 200, "GET /options")
         opts = options.json()
-        if not all(k in opts for k in ("species", "focus", "backgrounds")):
-            fail("GET /options: missing one of species/focus/backgrounds")
+        expected_option_keys = {
+            "ancestries",
+            "cultures",
+            "focus",
+            "backgrounds",
+            "mundane_items",
+            "magical_items",
+            "apparel_items",
+        }
+        if set(opts.keys()) != expected_option_keys:
+            fail(f"GET /options: unexpected key set {sorted(opts.keys())}")
 
         # Location create/update semantics
         alpha = {
@@ -130,7 +140,8 @@ def main() -> None:
         char_create_payload = {
             "session_id": session_id,
             "name": "SmokeRunner",
-            "species": "human",
+            "ancestry": "human",
+            "culture": "drakenvale_city",
             "focus": "champion",
             "background": "soldier",
             "adjustment_points": {"power": 1},
