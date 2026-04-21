@@ -45,41 +45,15 @@ Also partially stubbed:
 
 ---
 
-## Continuity Gaps (From Original Analysis)
+## Unresolved Design Threads
 
-These were identified in a prior gap analysis session. Status noted for each.
-
-### 1. Integration and Inclusion of Non-Draconic Residents
-
-**Status: Resolved in world file.** Mortal/kobold political standing is now explicit. Advisory roles, petition rights, no vote. Enforcement roles available. Welfare and education access confirmed.
-
-Still thin: Specific cultural traditions unique to mortals and kobolds are not yet authored. The biomes file captures their functional roles but their cultural identity within Drakenvale is underdeveloped.
-
-**Design note:** Consider adding a short cultural section to `world.md` or a standalone `culture.md` that addresses mortal and kobold artistic traditions, festivals, and spiritual life distinct from draconic practice.
-
-### 2. Coordination and Communication During Crises
+### 2. Crisis Management Protocol
 
 **Status: Partially resolved.** The Warden/Dragon Guard dual structure is now clear. The organizations file establishes that Sapphire Sentinels and Dragon Guard coordinate on multi-front threats.
 
 Still missing: A unified Crisis Management Protocol. No explicit chain of command when all three Council members are needed simultaneously in a crisis. No named backup communication systems.
 
 **Design note:** This can remain underdeveloped until a story demands it. If a Council crisis scene arises, the GPT should default to: Zarkeros commands military response, Eryndor oversees civilian protection and Warden deployment, Varethyn manages intelligence and magical countermeasures. That's enough for narrative coherence.
-
-### 3. Resource Allocation and Sustainability
-
-**Status: Partially resolved.** Economy section in world file establishes barter system, external trade limits, and SSTC as trade interface. Infernal Forge Guild notes mithral/adamantine scarcity as an active challenge.
-
-Still missing: Explicit resource prioritization framework (sacred sites vs. military vs. civilians during shortage). Contingency plans for rare material depletion.
-
-**Design note:** This is background worldbuilding, not player-facing. Leave it underdeveloped unless a story arc directly involves resource scarcity. The scarcity of mithral and adamantine is a ready-made trade/quest hook.
-
-### 4. Alignment and Philosophical Tensions
-
-**Status: Addressed in characters file.** Council dynamics section explicitly covers where the three dragons agree and fracture. The Wardens' dual-reporting structure is a structural embodiment of this tension.
-
-Still missing: Specific rituals or mediation practices designed around alignment difference. How metallic/chromatic/gem dragons navigate philosophical disagreement in daily life below the Council level.
-
-**Design note:** The Rite of Balance (equinox ceremony, Platinum Acolytes) exists as a unity ritual. That's sufficient scaffolding. Don't over-engineer this — alignment tension is a narrative engine, not a problem to solve.
 
 ### 5. Threat Management and Countermeasures
 
@@ -88,20 +62,6 @@ Still missing: Specific rituals or mediation practices designed around alignment
 Still missing: Countermeasures against forbidden magic specifically. No authored response to magical corruption seeping from the Temple to Tiamat. The Wardens' "Vigilance Rituals" are referenced but not detailed.
 
 **Design note:** The Shadowed Hollows biome entry captures what corruption looks like when it's already spreading. The gap is the *response* — what does a Warden actually do when they detect Tiamat's influence in someone or something? This is a good thing to author before Phase 4 since it's almost certainly a story arc.
-
-### 6. Knowledge and Artifact Oversight
-
-**Status: Partially resolved.** Arcane Conservatory and Infernal Forge Guild are authored. Restricted sections of the Library of Eternity are noted.
-
-Still missing: Artifact tracking system. No mechanism for reclaiming misused artifacts or disabling ones that leave Drakenvale.
-
-**Design note:** The Amethyst Veil likely handles this covertly. Artifacts traded externally through the SSTC probably have embedded tracking mechanisms — Varethyn would insist on it. This doesn't need to be fully authored, but it's worth a GM note in the organizations file when the SSTC is expanded.
-
-### 7. Inclusivity in Cultural and Spiritual Practices
-
-**Status: Flagged, not resolved.** The Platinum Acolytes' outreach to mortals and kobolds is mentioned but thin.
-
-**Design note:** Same as gap #1 — this is a cultural authoring gap, not a structural one. Low priority for GPT function but high priority for world texture. Flag for `culture.md`.
 
 ### 8. Post-Crisis Recovery
 
