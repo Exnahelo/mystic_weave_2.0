@@ -125,11 +125,11 @@ Updated after post-cleanup audit — 2026-04-18.
 
 ### Post-Naming-Cleanup Open Items
 
-- [ ] Re-upload to GPT builder:
-  - [ ] Re-upload the 10 renamed `prompts/*.md` knowledge files under
+- [x] Re-upload to GPT builder:
+  - [x] Re-upload the 10 renamed `prompts/*.md` knowledge files under
     their new kebab-case names; remove old entries
-  - [ ] Re-upload trimmed `prompts/engine.md` as the system prompt
-  - [ ] Re-upload current `schemas/openapi.yaml` as the Actions
+  - [x] Re-upload trimmed `prompts/engine.md` as the system prompt
+  - [x] Re-upload current `schemas/openapi.yaml` as the Actions
     definition (version 4.1.0)
 - [x] Decide on companion `species` asymmetry — resolved. Three-tier
   companion schema designed (see `prompts/design-notes.md` §Companion
