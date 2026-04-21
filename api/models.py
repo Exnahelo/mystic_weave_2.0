@@ -802,6 +802,21 @@ class OptionsResponse(BaseModel):
     mundane_items: list[ItemOption] = Field(default_factory=list)
     magical_items: list[ItemOption] = Field(default_factory=list)
     apparel_items: list[ItemOption] = Field(default_factory=list)
+    creature_catalog: list[dict] = Field(default_factory=list)
+    exceptional_catalog: list[dict] = Field(default_factory=list)
+    natural_abilities: list[dict] = Field(default_factory=list)
+    learned_commands: list[dict] = Field(default_factory=list)
+    tactical_roles: list[dict] = Field(default_factory=list)
+    training_levels: list[str] = Field(default_factory=list)
+    bond_levels: list[str] = Field(default_factory=list)
+    age_categories: list[str] = Field(default_factory=list)
+    creature_sizes: list[str] = Field(default_factory=list)
+    carrying_capacities: list[str] = Field(default_factory=list)
+    movement_modes: list[str] = Field(default_factory=list)
+    natural_weapons: list[str] = Field(default_factory=list)
+    sapience_levels: list[str] = Field(default_factory=list)
+    communication_levels: list[str] = Field(default_factory=list)
+    autonomy_levels: list[str] = Field(default_factory=list)
 
 
 class TagsResponse(BaseModel):
