@@ -44,7 +44,7 @@ System reference: `prompts/world-rules.md` and `prompts/character_creation.md`
 ## 2026-04-10 Content / World Topology Notes
 
 - Added canonical rules/reference docs for magic, difficulty, and items:
-  - `prompts/magic_rules.md`
+  - `prompts/magic-rules.md`
   - `prompts/difficulty_rules.md`
   - `prompts/items_rules.md`
 - World topology audit completed for the legacy flat world YAML set that has since been reorganized under `data/world/`.

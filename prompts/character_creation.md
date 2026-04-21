@@ -30,7 +30,7 @@ This document is the authoritative, step-by-step reference for character creatio
 
 1. Present the focus archetype list from `GET /options` with descriptions and starting tags.
 2. Player chooses a focus. Any ancestry can choose any focus.
-3. Magical fields are valid field-tag choices and use the same tier math/progression rules as knowledge groups. Canonical fields: `Sacred`, `Warding`, `Binding`, `Elemental`, `Druidry`, `Illusion`, `Runecraft`, `Alchemy`, `Necromancy`. Field knowledge tiers are gated by the field's primary domain score — see `prompts/magic_rules.md`.
+3. Magical fields are valid field-tag choices and use the same tier math/progression rules as knowledge groups. Canonical fields: `Sacred`, `Warding`, `Binding`, `Elemental`, `Druidry`, `Illusion`, `Runecraft`, `Alchemy`, `Necromancy`. Field knowledge tiers are gated by the field's primary domain score — see `prompts/magic-rules.md`.
 4. If ancestry is dragonborn, confirm breath lineage type is established during creation (`radiant`, `fire`, `cold`, `lightning`, `acid`, `necrotic`) or explicitly marked as deferred to narrative discovery.
 
 ### Stage 5 — Adjustment Points

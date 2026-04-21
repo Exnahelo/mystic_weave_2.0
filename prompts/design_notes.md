@@ -27,7 +27,7 @@
 | `economy_rules.md` | Canon runtime/support reference | Yes |
 | `engine.md` | Canon runtime system prompt | Yes |
 | `items_rules.md` | Canon runtime/support reference | Yes |
-| `magic_rules.md` | Canon runtime/support reference | Yes |
+| `magic-rules.md` | Canon runtime/support reference | Yes |
 | `progression_rules.md` | Canon runtime/support reference | Yes |
 | `scene_structure.md` | Canon runtime/support reference | Yes |
 | `world-rules.md` | Canon source of truth | Yes |
@@ -64,7 +64,7 @@
 ### Runtime/system migration confirmations
 
 - Extraction step separation is complete; the structured delta contract is live in the API/runtime path.
-- `magic_rules.md` is now the authoritative source for magic difficulty and access-band handling.
+- `magic-rules.md` is now the authoritative source for magic difficulty and access-band handling.
 
 ---
 
