@@ -10,7 +10,8 @@ connections:
 - cinderpit
 tags:
 - drakenvale
-- northeastern-volcanic-highlands
+- volcanic-highlands-trail
+- volcanic-highlands
 - northeastern-volcanic-highlands
 - route-node
 - industrial-corridor
@@ -87,7 +88,8 @@ The highlands beyond the trail proper are genuinely hazardous. Travelers wanderi
 ## Tags
 
 - drakenvale
-- northeastern-volcanic-highlands
+- volcanic-highlands-trail
+- volcanic-highlands
 - northeastern-volcanic-highlands
 - route-node
 - industrial-corridor
