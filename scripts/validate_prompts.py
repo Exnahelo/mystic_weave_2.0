@@ -11,7 +11,7 @@ REQUIRED_PROMPTS = {
     "prompts/engine.md": ["# Mystic Weave", "## Turn Loop", "## API Reference"],
     "prompts/character_creation.md": ["# Mystic Weave", "## Character Creation Flow", "## API Fields for Character Creation"],
     "prompts/world-rules.md": ["#", "##"],
-    "prompts/economy_rules.md": ["# Mystic Weave — Economy Rules", "## Coin Economy Rules", "## Barter Economy Rules"],
+    "prompts/economy-rules.md": ["# Mystic Weave — Economy Rules", "## Coin Economy Rules", "## Barter Economy Rules"],
     "prompts/world.md": ["# Drakenvale", "## Governance", "## Reference Files"],
     "prompts/geography.md": ["# Drakenvale — Geography", "## Formation", "## Major Regions"],
     "prompts/history.md": ["#", "##"],
@@ -38,7 +38,7 @@ CALENDAR_REQUIRED_MARKERS = [
 KNOWN_CONTRADICTION_WARNING_MARKERS = {
     "economy_structure": [
         ("prompts/world.md", "## Economy"),
-        ("prompts/economy_rules.md", "## Barter Economy Rules"),
+        ("prompts/economy-rules.md", "## Barter Economy Rules"),
     ],
     "group_canon_merge": [
         ("prompts/world.md", "Drakenvale is sustained by a small number of major institutions whose detailed structure belongs in `groups.md`."),

@@ -21,7 +21,7 @@ Use this file together with:
 * `data/items/notable.json`
 * `data/items/weapons.json`
 * `combat_rules.md`
-* `economy_rules.md`
+* `economy-rules.md`
 * `world-rules.md`
 * `engine.md`
 
@@ -255,7 +255,7 @@ Item prices are data, but transaction handling is governed elsewhere.
 Use:
 
 * item JSON files for item-level value fields
-* `economy_rules.md` for transaction logic, barter, price pressure, and state updates
+* `economy-rules.md` for transaction logic, barter, price pressure, and state updates
 
 Do not narrate item purchase, sale, barter, or trade without following economy rules.
 
@@ -343,7 +343,7 @@ This section will eventually define how the GPT should reason about:
 * `data/items/notable.json` — named and setting-significant item catalog
 * `data/items/weapons.json` — weapon catalog and combat-family item data
 * `combat_rules.md` — combat-facing handling of weapons, armor, and ammunition
-* `economy_rules.md` — buying, barter, pricing pressure, and transaction state rules
+* `economy-rules.md` — buying, barter, pricing pressure, and transaction state rules
 * `world-rules.md` — broader world/system-facing rules
 * `engine.md` — runtime adjudication and system logic
 

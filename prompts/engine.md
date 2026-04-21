@@ -84,7 +84,7 @@ If extraction validation fails: do not commit state; retry extraction with corre
 - Maintain `world.time` per `prompts/calendar.md` and `prompts/world-rules.md`; validate enums before save; derive moon phase from day (do not store moon separately).
 
 ### Economy Runtime Checkpoint
-- Follow `prompts/economy_rules.md`; ground buy/find inventory in `GET /options`; keep `world.economy.coin >= 0`; persist coin as CD (`GD × 100`); barter updates `trade_goods`/`obligations`; change `wealth_tier` only for material long-term shifts.
+- Follow `prompts/economy-rules.md`; ground buy/find inventory in `GET /options`; keep `world.economy.coin >= 0`; persist coin as CD (`GD × 100`); barter updates `trade_goods`/`obligations`; change `wealth_tier` only for material long-term shifts.
 
 ### Survival Runtime Checkpoint
 - Maintain `world.survival`; update only at deterministic triggers (travel leg, major exertion, deprivation, resupply, long rest/recovery stop); do not tick routine low-impact actions; persist whenever any band changes.

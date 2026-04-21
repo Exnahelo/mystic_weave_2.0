@@ -24,7 +24,7 @@
 | `character_creation.md` | Canon runtime/support reference | Yes |
 | `combat_rules.md` | Canon runtime/support reference | Yes |
 | `difficulty_rules.md` | Canon runtime/support reference | Yes |
-| `economy_rules.md` | Canon runtime/support reference | Yes |
+| `economy-rules.md` | Canon runtime/support reference | Yes |
 | `engine.md` | Canon runtime system prompt | Yes |
 | `items_rules.md` | Canon runtime/support reference | Yes |
 | `magic-rules.md` | Canon runtime/support reference | Yes |
