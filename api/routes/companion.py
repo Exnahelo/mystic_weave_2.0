@@ -34,6 +34,25 @@ class CreateCompanionRequest(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
+    @model_validator(mode="before")
+    @classmethod
+    def normalize_companion_payload(cls, data: Any) -> Any:
+        if not isinstance(data, dict):
+            return data
+
+        companion = data.get("companion")
+        tier = data.get("tier")
+        if not isinstance(companion, dict):
+            return data
+
+        normalized = dict(companion)
+        if tier is not None and "tier" not in normalized:
+            normalized["tier"] = tier
+        if "subspecies" not in normalized and "subtype" in normalized:
+            normalized["subspecies"] = normalized["subtype"]
+
+        return {**data, "companion": normalized}
+
     @model_validator(mode="after")
     def validate_tier_matches_companion(self) -> "CreateCompanionRequest":
         tier_map = {
@@ -177,7 +196,7 @@ async def transition_companion(
         transition_entry = {
             "from_tier": "creature",
             "to_tier": "exceptional",
-            "from_subspecies": existing_envelope.companion.subtype,
+            "from_subspecies": existing_envelope.companion.subspecies,
             "trigger": body.trigger,
             "transitioned_at": datetime.now(UTC).isoformat(),
         }
