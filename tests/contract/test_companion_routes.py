@@ -151,8 +151,10 @@ def _world() -> dict:
 
 def _creature_payload(name: str = "Ash") -> dict:
     return {
+        "tier": "creature",
         "name": name,
         "species": "wolf",
+        "subspecies": "moonthorn_wolf",
         "subtype": "moonthorn_wolf",
         "size": "medium",
         "age_category": "adult",
@@ -173,8 +175,10 @@ def _creature_payload(name: str = "Ash") -> dict:
 
 def _exceptional_payload() -> dict:
     return {
+        "tier": "exceptional",
         "name": "Ash",
         "species": "wolf",
+        "subspecies": "moonthorn_wolf",
         "subtype": "moonthorn_wolf",
         "size": "medium",
         "age_category": "adult",
