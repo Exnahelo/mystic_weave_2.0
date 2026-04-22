@@ -31,6 +31,7 @@ from api.models import (
     SaveStateRequest,
     SurvivalState,
     TimeState,
+    TimeDriftWarning,
     WorldModel,
 )
 
@@ -110,6 +111,42 @@ def _merge_equipment_slots(base: dict[str, Any], incoming: dict[str, Any]) -> di
         if slot in incoming and incoming[slot] is not None:
             result[slot] = incoming[slot]
     return result
+
+
+def _detect_time_drift(
+    previous_turn: int,
+    previous_time: TimeState,
+    current_turn: int,
+    current_time: TimeState,
+) -> TimeDriftWarning | None:
+    """
+    Return a warning if turn advanced but time did not.
+
+    Time is considered advanced if day, month, year, or time_of_day changed.
+    """
+    if current_turn <= previous_turn:
+        return None
+
+    time_changed = (
+        current_time.day != previous_time.day
+        or current_time.month != previous_time.month
+        or current_time.year != previous_time.year
+        or current_time.time_of_day != previous_time.time_of_day
+    )
+    if time_changed:
+        return None
+
+    return TimeDriftWarning(
+        previous_turn=previous_turn,
+        current_turn=current_turn,
+        previous_time=previous_time,
+        current_time=current_time,
+        message=(
+            f"Turn advanced from {previous_turn} to {current_turn} but world.time did not "
+            f"change. Review the Ptarian calendar travel table and advance time_of_day, "
+            f"day, or both in your next save if the scene consumed in-world time."
+        ),
+    )
 
 
 def validate_delta(delta: ApplyStateDeltaRequest) -> None:
@@ -233,12 +270,17 @@ async def save_state(
             "SELECT character, world FROM game_states WHERE session_id = $1",
             session_id,
         )
+        previous_turn: int | None = None
+        previous_time: TimeState | None = None
 
         if existing_row is not None:
             existing_character: dict[str, Any] = json.loads(existing_row["character"])
             existing_world: dict[str, Any] = json.loads(existing_row["world"])
             merged_character = _deep_merge(existing_character, incoming_character)
             merged_world = _deep_merge(existing_world, world_json)
+            normalized_existing_world = _normalize_world_state(existing_world)
+            previous_turn = int(normalized_existing_world.get("turn", 1))
+            previous_time = TimeState.model_validate(normalized_existing_world["time"])
         else:
             merged_character = incoming_character
             merged_world = world_json
@@ -257,6 +299,14 @@ async def save_state(
 
         merged_character_json = validated_character.model_dump(by_alias=True)
         validated_world_json = validated_world.model_dump()
+        drift_warning = None
+        if previous_turn is not None and previous_time is not None:
+            drift_warning = _detect_time_drift(
+                previous_turn=previous_turn,
+                previous_time=previous_time,
+                current_turn=validated_world.turn,
+                current_time=validated_world.time,
+            )
 
         row = await conn.fetchrow(
             """
@@ -288,6 +338,7 @@ async def save_state(
         world=response_world,
         log=json.loads(row["log"]),
         updated_at=row["updated_at"],
+        time_drift_warning=drift_warning,
     )
 
 
@@ -306,6 +357,7 @@ async def save_state_delta(
 ) -> GameStateResponse:
     """Apply partial typed state updates and persist validated full state."""
     log_entry_json = json.dumps([body.log_entry])
+    drift_warning = None
 
     async with pool.acquire() as conn:
         existing_row = await conn.fetchrow(
@@ -318,6 +370,9 @@ async def save_state_delta(
 
         try:
             validate_delta(body)
+            normalized_existing_world = _normalize_world_state(json.loads(existing_row["world"]))
+            previous_turn = int(normalized_existing_world.get("turn", 1))
+            previous_time = TimeState.model_validate(normalized_existing_world["time"])
             applied = apply_delta(
                 {
                     "character": existing_row["character"],
@@ -329,6 +384,14 @@ async def save_state_delta(
             raise HTTPException(status_code=422, detail=str(e))
         except ValidationError as e:
             raise HTTPException(status_code=422, detail=_plain_validation_errors(e))
+
+        applied_world = WorldModel.model_validate(applied["world"])
+        drift_warning = _detect_time_drift(
+            previous_turn=previous_turn,
+            previous_time=previous_time,
+            current_turn=applied_world.turn,
+            current_time=applied_world.time,
+        )
 
         row = await conn.fetchrow(
             """
@@ -360,4 +423,5 @@ async def save_state_delta(
         world=response_world,
         log=json.loads(row["log"]),
         updated_at=row["updated_at"],
+        time_drift_warning=drift_warning,
     )
