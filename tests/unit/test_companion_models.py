@@ -3,6 +3,7 @@ from pydantic import ValidationError
 
 from api.companions import (
     BondLinks,
+    CompanionEnvelope,
     CreatureCompanion,
     CreatureDomains,
     CreatureNarrative,
@@ -51,6 +52,7 @@ def _creature_companion(**overrides):
     payload = {
         "name": "Ash",
         "species": "wolf",
+        "subspecies": "moonthorn_wolf",
         "size": "medium",
         "age_category": "adult",
         "tactical_roles": ["guard"],
@@ -68,6 +70,7 @@ def _exceptional_companion(**overrides):
     payload = {
         "name": "Whisper",
         "species": "sprite",
+        "subspecies": None,
         "size": "small",
         "age_category": "adult",
         "tactical_roles": ["scout"],
@@ -123,6 +126,8 @@ def test_creature_narrative_forbids_extra() -> None:
 def test_creature_companion_minimal_validates() -> None:
     creature = _creature_companion()
     assert creature.name == "Ash"
+    assert creature.tier == "creature"
+    assert creature.subspecies == "moonthorn_wolf"
     assert creature.movement_modes == ["walk"]
     assert creature.natural_weapons == ["none"]
 
@@ -181,6 +186,7 @@ def test_sapient_companion_minimal_validates() -> None:
         }
     )
     assert sapient.name == "Lark"
+    assert sapient.tier == "sapient"
     assert len(sapient.companions) == 1
 
 
@@ -190,6 +196,7 @@ def test_exceptional_companion_partial_validates() -> None:
         {
             "name": "Glimmer",
             "species": "pseudodragon",
+            "subspecies": None,
             "size": "tiny",
             "age_category": "young_adult",
             "tactical_roles": ["companion"],
@@ -207,14 +214,127 @@ def test_exceptional_companion_partial_validates() -> None:
             "domains": _creature_domains(),
         }
     )
+    assert exceptional.tier == "exceptional"
     assert exceptional.exceptional_profile.sapience == "partial"
 
 
 @pytest.mark.unit
 def test_exceptional_companion_full_validates() -> None:
     exceptional = _exceptional_companion()
+    assert exceptional.tier == "exceptional"
     assert exceptional.exceptional_profile.communication == "speech"
     assert exceptional.known_languages == ["Common"]
+
+
+@pytest.mark.unit
+def test_creature_companion_rejects_wrong_tier() -> None:
+    with pytest.raises(ValidationError):
+        _creature_companion(tier="sapient")
+
+
+@pytest.mark.unit
+def test_envelope_dispatches_by_tier() -> None:
+    sapient_env = CompanionEnvelope.model_validate(
+        {
+            "id": "guide_halfling",
+            "companion": {
+                "tier": "sapient",
+                "name": "Guide",
+                "ancestry": "halfling",
+                "culture": "riverfolk",
+                "background": "scout",
+                "focus": "wanderer",
+                "hp": {"current": 10, "max": 10},
+                "domains": _full_domains().model_dump(),
+                "identity": _identity().model_dump(),
+                "equipment": _equipment().model_dump(),
+                "bond_links": {"primary": "char_sylvara"},
+            },
+        }
+    )
+    assert isinstance(sapient_env.companion, SapientCompanion)
+
+    creature_env = CompanionEnvelope.model_validate(
+        {
+            "id": "test_creature",
+            "companion": {
+                "tier": "creature",
+                "name": "Ash",
+                "species": "wolf",
+                "subspecies": "moonthorn_wolf",
+                "size": "medium",
+                "age_category": "adult",
+                "tactical_roles": ["guard"],
+                "training_level": "trained",
+                "bond_level": "bonded",
+                "hp": {"current": 10, "max": 10},
+                "domains": {"physical": 40, "instinct": 38, "composure": 35},
+                "bond_links": {"primary": "char_sylvara"},
+            },
+        }
+    )
+    assert isinstance(creature_env.companion, CreatureCompanion)
+
+
+@pytest.mark.unit
+def test_regression_stored_creature_envelopes_validate_with_tier() -> None:
+    ash = CompanionEnvelope.model_validate(
+        {
+            "id": "sylvara_heartwood_moonthorn_wolf",
+            "companion": {
+                "tier": "creature",
+                "name": "Ash",
+                "species": "wolf",
+                "subspecies": "moonthorn_wolf",
+                "subtype": "moonthorn_wolf",
+                "size": "medium",
+                "age_category": "adult",
+                "tactical_roles": ["hunter", "scout"],
+                "training_level": "trained",
+                "bond_level": "bonded",
+                "natural_abilities": ["keen_senses"],
+                "learned_commands": ["heel"],
+                "movement_modes": ["walk"],
+                "natural_weapons": ["bite"],
+                "carrying_capacity": "small",
+                "hp": {"current": 10, "max": 10},
+                "domains": {"physical": 40, "instinct": 42, "composure": 38},
+                "temperament": "Alert",
+                "bond_links": {"primary": "sylvara_heartwood"},
+            },
+        }
+    )
+    ember = CompanionEnvelope.model_validate(
+        {
+            "id": "sylvara_heartwood_bloom_hound",
+            "companion": {
+                "tier": "creature",
+                "name": "Ember",
+                "species": "hound",
+                "subspecies": "bloom_hound",
+                "subtype": "bloom_hound",
+                "size": "medium",
+                "age_category": "adult",
+                "tactical_roles": ["scout", "companion"],
+                "training_level": "trained",
+                "bond_level": "bonded",
+                "natural_abilities": ["keen_senses"],
+                "learned_commands": ["heel"],
+                "movement_modes": ["walk", "swim"],
+                "natural_weapons": ["bite"],
+                "carrying_capacity": "small",
+                "hp": {"current": 10, "max": 10},
+                "domains": {"physical": 35, "instinct": 45, "composure": 42},
+                "temperament": "Gentle",
+                "bond_links": {"primary": "sylvara_heartwood"},
+            },
+        }
+    )
+
+    assert isinstance(ash.companion, CreatureCompanion)
+    assert ash.companion.subspecies == "moonthorn_wolf"
+    assert isinstance(ember.companion, CreatureCompanion)
+    assert ember.companion.subspecies == "bloom_hound"
 
 
 @pytest.mark.unit
@@ -242,6 +362,7 @@ def test_exceptional_companion_with_narrative_validates() -> None:
             {
                 "name": "Ash",
                 "species": "wolf",
+                "subspecies": "moonthorn_wolf",
                 "size": "medium",
                 "age_category": "adult",
                 "tactical_roles": ["guard"],
@@ -274,6 +395,7 @@ def test_exceptional_companion_with_narrative_validates() -> None:
             {
                 "name": "Whisper",
                 "species": "sprite",
+                "subspecies": None,
                 "size": "small",
                 "age_category": "adult",
                 "tactical_roles": ["scout"],
@@ -488,6 +610,7 @@ def test_exceptional_partial_rejects_full_domain_scores() -> None:
             {
                 "name": "Glimmer",
                 "species": "pseudodragon",
+                "subspecies": None,
                 "size": "tiny",
                 "age_category": "young_adult",
                 "tactical_roles": ["companion"],
@@ -560,6 +683,7 @@ def test_literal_enums_reject_invalid_values(field_name, value) -> None:
     payload = {
         "name": "Ash",
         "species": "wolf",
+        "subspecies": "moonthorn_wolf",
         "size": "medium",
         "age_category": "adult",
         "tactical_roles": ["guard"],
@@ -586,6 +710,7 @@ def test_literal_list_enums_reject_invalid_values(field_name, value) -> None:
     payload = {
         "name": "Ash",
         "species": "wolf",
+        "subspecies": "moonthorn_wolf",
         "size": "medium",
         "age_category": "adult",
         "tactical_roles": ["guard"],
