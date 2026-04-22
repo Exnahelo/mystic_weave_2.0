@@ -34,6 +34,10 @@ The following terms are **not interchangeable**:
 - The GPT selects the tag most central to the action. If multiple tags contributed equally, the player chooses.
 - Tag tier cap is **T5**.
 
+**Parent-cap rule for applications.** An application tag may not exceed the tier of its parent knowledge group. Exception: if an application was seeded above its parent at character creation (for example, a Focus granted the application at T2 while the parent knowledge is T1), the application does not regress, but it cannot advance further until the parent knowledge catches up or exceeds it.
+
+This rule applies at adjudication time. Before advancing an application, verify that the parent would still be at or above the proposed application tier. If not, either advance the parent first (if the scene supports that) or select a different candidate.
+
 Tags are not limited to those acquired at character creation. If a character demonstrates repeated meaningful use of a skill or technique not covered by an existing tag, the GPT may propose adding it at Tier 1.
 
 - Newly proposed tags require **player confirmation before saving**.
