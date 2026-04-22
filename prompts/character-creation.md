@@ -80,18 +80,55 @@ Gather the following in natural conversation, not as a form. Let the player's an
 ### Stage 7 — Companions and Party
 
 1. Ask: "Are you traveling alone, or does anyone travel with you?"
-2. If the player has companions:
-   - Gather for each: name, species (optional), role in the party (optional).
-   - Ask the same narrative questions from Stage 5 — briefly, not exhaustively. A companion needs at minimum: one motivation and one quirk to feel present.
-   - Ask disposition toward the player character: how does this companion feel about them? (Map to a rough disposition: devoted, loyal, friendly, cautious, wary, or hostile.)
-   - Store each companion in `world.companions` with `status: active`, and submit them with the `POST /session/new` call.
-3. If alone, `world.companions` stays empty.
+2. If the player has companions, gather them one at a time.
 
-**Companion rule — party reputation:** When the party approaches a faction, compute party reputation as:
-- `known_avg` = mean standing of party members who have a reputation entry for that faction (missing entry = unknown, excluded from average).
-- `ratio` = number of known members / total party size.
-- `party_rep` = `known_avg × ratio`.
-- Apply this result when selecting difficulty modifiers for social or political actions with that faction.
+For the current character creation flow, companions introduced at
+creation are **Sapient Companions** only — people traveling with
+the player character. Creature and Exceptional companions (animal
+bonds, magical allies) are acquired through play, not character
+creation.
+
+For each Sapient Companion:
+
+- **Name.**
+- **Ancestry, culture, background, focus.** Use the same
+  `GET /options` vocabularies as the player character. Any
+  ancestry/culture/background/focus combination is valid.
+- **Brief identity.** At minimum: one motivation and one quirk.
+  Additional identity fields (bonds, flaws, wound, alignment) are
+  optional — surface them through play if the player doesn't offer
+  them at creation.
+- **Bond to the player character.** Set `bond_links.primary` to the
+  player character's ID. Add a `secondary` bond only if the player
+  explicitly describes one.
+- **Starting HP.** Default 100/100 unless the player specifies a
+  wounded or weakened companion at creation.
+- **Starting domain scores.** Use ancestry base + culture bonus +
+  background bonus, the same math as the player character. Skip
+  adjustment points for companions; creation-time companions do
+  not get player-allocated adjustment points.
+- **Equipment and reputation.** Skip at creation unless the player
+  volunteers details. These develop through play.
+
+Store each Sapient Companion as a `CompanionEnvelope` in
+`world.companions`. The envelope's `id` is generated server-side
+from the player's character_id plus a slug derived from the
+companion's name.
+
+If the player is traveling alone, `world.companions` stays empty.
+
+**Party reputation rule (sapient companions only):** When the
+party approaches a faction, compute party reputation as:
+
+- `known_avg` = mean standing of sapient party members who have a
+  reputation entry for that faction (missing entry = unknown,
+  excluded from average)
+- `ratio` = number of known sapient members / total sapient party size
+- `party_rep` = `known_avg × ratio`
+
+Creature and Exceptional companions do not contribute to party
+reputation. Apply `party_rep` when selecting difficulty modifiers
+for social or political actions with that faction.
 
 ### Stage 8 — Starting Resources
 
@@ -226,7 +263,7 @@ Do not introduce legacy/alternate weapon tag names during character creation.
 | `starting_economy.wealth_tier` | 8 | Default: modest |
 | `starting_economy.coin` | 8 | Default: 0 |
 | `equipment.worn` / `equipment.carried` | 8 | From player description |
-| `companions` | 9 | Optional on `POST /session/new` |
+| `companions` | 7 | Sapient only at creation; list of CompanionEnvelope; optional on `POST /session/new` |
 | `equipment` | 9 | Optional on `POST /session/new` |
 | `economy.obligations` | 8 | Debts, favors, sworn duties |
 | `starting_location` | 9 | Set by GPT from world context |
