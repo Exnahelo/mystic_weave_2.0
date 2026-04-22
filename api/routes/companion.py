@@ -14,9 +14,13 @@ from api.companions import (
     ArchivedCompanionEnvelope,
     Companion,
     CompanionEnvelope,
+    CompanionRecord,
     CreatureCompanion,
+    CreatureCompanionRecord,
     ExceptionalCompanion,
+    ExceptionalCompanionRecord,
     SapientCompanion,
+    SapientCompanionRecord,
     derive_sapient_slug,
     generate_companion_id,
 )
@@ -153,6 +157,24 @@ def _derive_companion_slug(companion: Companion) -> str:
     return companion.species
 
 
+def _companion_to_record(companion_id: str, companion: Companion) -> CompanionRecord:
+    payload = {"id": companion_id, **companion.model_dump()}
+    if isinstance(companion, SapientCompanion):
+        return SapientCompanionRecord.model_validate(payload)
+    if isinstance(companion, ExceptionalCompanion):
+        return ExceptionalCompanionRecord.model_validate(payload)
+    return CreatureCompanionRecord.model_validate(payload)
+
+
+def _record_to_companion(record: CompanionRecord) -> Companion:
+    payload = record.model_dump(exclude={"id"})
+    if isinstance(record, SapientCompanionRecord):
+        return SapientCompanion.model_validate(payload)
+    if isinstance(record, ExceptionalCompanionRecord):
+        return ExceptionalCompanion.model_validate(payload)
+    return CreatureCompanion.model_validate(payload)
+
+
 @router.post("/companion/new", response_model=CompanionResponse, status_code=201)
 async def create_companion(
     body: CreateCompanionRequest,
@@ -171,8 +193,7 @@ async def create_companion(
 
         existing_ids = {entry.id for entry in world.companions}
         companion_id = generate_companion_id(body.handler_id, derived_slug, existing_ids)
-        envelope = CompanionEnvelope(id=companion_id, companion=body.companion)
-        world.companions.append(envelope)
+        world.companions.append(_companion_to_record(companion_id, body.companion))
         await _persist_world_update(conn, body.session_id, character, world, f"Companion added: {companion_id}")
 
     return CompanionResponse(companion_id=companion_id, companion=body.companion, archived=False)
@@ -191,14 +212,14 @@ async def transition_companion(
         if target_index is None:
             raise HTTPException(status_code=404, detail="companion not found")
 
-        existing_envelope = world.companions[target_index]
-        if not isinstance(existing_envelope.companion, CreatureCompanion):
+        existing_companion = world.companions[target_index]
+        if not isinstance(existing_companion, CreatureCompanionRecord):
             raise HTTPException(status_code=422, detail="only CreatureCompanion records can transition")
 
         transition_entry = {
             "from_tier": "creature",
             "to_tier": "exceptional",
-            "from_subspecies": existing_envelope.companion.subspecies,
+            "from_subspecies": existing_companion.subspecies,
             "trigger": body.trigger,
             "transitioned_at": datetime.now(UTC).isoformat(),
         }
@@ -207,21 +228,21 @@ async def transition_companion(
 
         world.companion_archive.append(
             ArchivedCompanionEnvelope(
-                id=existing_envelope.id,
-                companion=existing_envelope.companion,
+                id=existing_companion.id,
+                companion=_record_to_companion(existing_companion),
                 archived_at=datetime.now(UTC).isoformat(),
             )
         )
-        world.companions[target_index] = CompanionEnvelope(id=existing_envelope.id, companion=new_companion)
+        world.companions[target_index] = _companion_to_record(existing_companion.id, new_companion)
         await _persist_world_update(
             conn,
             body.session_id,
             character,
             world,
-            f"Companion transitioned: {existing_envelope.id}",
+            f"Companion transitioned: {existing_companion.id}",
         )
 
-    return CompanionResponse(companion_id=existing_envelope.id, companion=new_companion, archived=False)
+    return CompanionResponse(companion_id=existing_companion.id, companion=new_companion, archived=False)
 
 
 @router.get("/companion/{companion_id}", response_model=CompanionResponse)
@@ -236,7 +257,7 @@ async def get_companion(
 
     for entry in world.companions:
         if entry.id == companion_id:
-            return CompanionResponse(companion_id=entry.id, companion=entry.companion, archived=False)
+            return CompanionResponse(companion_id=entry.id, companion=_record_to_companion(entry), archived=False)
 
     if include_archived:
         for entry in world.companion_archive:

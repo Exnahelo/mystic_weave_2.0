@@ -256,7 +256,7 @@ def test_post_companion_new_invalid_handler_returns_409() -> None:
 @pytest.mark.contract
 def test_post_companion_new_second_same_subspecies_gets_suffix() -> None:
     world = _world()
-    world["companions"] = [{"id": "sylvara_heartwood_moonthorn_wolf", "companion": _creature_payload()}]
+    world["companions"] = [{"id": "sylvara_heartwood_moonthorn_wolf", **_creature_payload()}]
     app = _make_app(FakePool(CompanionRouteConn("sess1", _character(), world)))
     with TestClient(app) as client:
         response = client.post(
@@ -275,7 +275,7 @@ def test_post_companion_new_second_same_subspecies_gets_suffix() -> None:
 @pytest.mark.contract
 def test_get_companion_returns_envelope() -> None:
     world = _world()
-    world["companions"] = [{"id": "sylvara_heartwood_moonthorn_wolf", "companion": _creature_payload()}]
+    world["companions"] = [{"id": "sylvara_heartwood_moonthorn_wolf", **_creature_payload()}]
     app = _make_app(FakePool(CompanionRouteConn("sess1", _character(), world)))
     with TestClient(app) as client:
         response = client.get("/companion/sylvara_heartwood_moonthorn_wolf", params={"session_id": "sess1"})
@@ -294,7 +294,7 @@ def test_get_companion_nonexistent_returns_404() -> None:
 @pytest.mark.contract
 def test_post_companion_transition_creature_to_exceptional_archives_old_record() -> None:
     world = _world()
-    world["companions"] = [{"id": "sylvara_heartwood_moonthorn_wolf", "companion": _creature_payload()}]
+    world["companions"] = [{"id": "sylvara_heartwood_moonthorn_wolf", **_creature_payload()}]
     conn = CompanionRouteConn("sess1", _character(), world)
     app = _make_app(FakePool(conn))
     with TestClient(app) as client:
@@ -312,7 +312,7 @@ def test_post_companion_transition_creature_to_exceptional_archives_old_record()
     archived = conn.world["companion_archive"]
     assert len(archived) == 1
     assert archived[0]["id"] == "sylvara_heartwood_moonthorn_wolf"
-    tier_history = conn.world["companions"][0]["companion"]["tier_history"]
+    tier_history = conn.world["companions"][0]["tier_history"]
     assert len(tier_history) == 1
     assert tier_history[0]["from_tier"] == "creature"
 
@@ -320,7 +320,7 @@ def test_post_companion_transition_creature_to_exceptional_archives_old_record()
 @pytest.mark.contract
 def test_post_companion_transition_non_creature_returns_422() -> None:
     world = _world()
-    world["companions"] = [{"id": "sylvara_heartwood_whisper", "companion": _exceptional_payload()}]
+    world["companions"] = [{"id": "sylvara_heartwood_whisper", **_exceptional_payload()}]
     app = _make_app(FakePool(CompanionRouteConn("sess1", _character(), world)))
     with TestClient(app) as client:
         response = client.post(

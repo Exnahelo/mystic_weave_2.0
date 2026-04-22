@@ -355,7 +355,7 @@ def part2(client: httpx.Client, session_id: str) -> None:
                 updated_companions = state_payload["world"]["companions"]
                 target = next((entry for entry in updated_companions if entry["id"] == companion_id), None)
                 if target is not None:
-                    target["companion"]["hp"]["current"] = target["companion"]["hp"]["current"] - 2
+                    target["hp"]["current"] = target["hp"]["current"] - 2
                 delta_resp = client.post(
                     f"/state/{session_id}/delta",
                     json={
@@ -369,8 +369,8 @@ def part2(client: httpx.Client, session_id: str) -> None:
                     updated = next((entry for entry in delta_world["companions"] if entry["id"] == companion_id), None)
                     check("2.1b.m", updated is not None, "updated companion still present after delta")
                     if updated is not None:
-                        check("2.1b.n", updated["companion"]["hp"]["current"] == wolf_template["base_hp"] - 2,
-                              f"companion hp updated via delta: {updated['companion']['hp']['current']}")
+                        check("2.1b.n", updated["hp"]["current"] == wolf_template["base_hp"] - 2,
+                              f"companion hp updated via delta: {updated['hp']['current']}")
 
             transition_payload = {
                 "name": "Shadowmere",

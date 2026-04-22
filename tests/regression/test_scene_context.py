@@ -97,9 +97,12 @@ def _world() -> dict:
         "companions": [
             {
                 "id": "c1",
+                "tier": "sapient",
                 "name": "Sorra",
-                'species': "halfling",
-                "role": "guide",
+                "ancestry": "halfling",
+                "culture": "riverfolk",
+                "background": "scout",
+                "focus": "wanderer",
                 "identity": {
                     "origin": "",
                     "motivations": [],
@@ -110,11 +113,19 @@ def _world() -> dict:
                     "alignment": {"order": "neutral", "intent": "neutral", "ethos_note": ""},
                 },
                 "hp": {"current": 100, "max": 100},
-                "domains": None,
+                "domains": {
+                    "power": 35,
+                    "agility": 40,
+                    "perception": 45,
+                    "endurance": 35,
+                    "intellect": 38,
+                    "will": 37,
+                    "presence": 42,
+                },
                 "knowledge": {},
                 "application": {},
-                "status": "active",
-                "disposition": 0,
+                "equipment": {"worn": [], "carried": [], "stashed": []},
+                "bond_links": {"primary": "krath"},
                 "reputation": [],
             }
         ],

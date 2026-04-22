@@ -148,9 +148,12 @@ def _base_world() -> dict:
         "companions": [
             {
                 "id": "comp_1",
+                "tier": "sapient",
                 "name": "Sorra",
-                'species': "halfling",
-                "role": "guide",
+                "ancestry": "halfling",
+                "culture": "riverfolk",
+                "background": "scout",
+                "focus": "wanderer",
                 "identity": {
                     "origin": "",
                     "motivations": ["Stay alive"],
@@ -161,11 +164,19 @@ def _base_world() -> dict:
                     "alignment": {"order": "neutral", "intent": "neutral", "ethos_note": ""},
                 },
                 "hp": {"current": 100, "max": 100},
-                "domains": None,
+                "domains": {
+                    "power": 35,
+                    "agility": 40,
+                    "perception": 45,
+                    "endurance": 35,
+                    "intellect": 38,
+                    "will": 37,
+                    "presence": 42,
+                },
                 "knowledge": {},
                 "application": {},
-                "status": "active",
-                "disposition": 25,
+                "equipment": {"worn": [], "carried": [], "stashed": []},
+                "bond_links": {"primary": "krath"},
                 "reputation": [],
             }
         ],
@@ -247,7 +258,6 @@ def test_multi_turn_companion_lifecycle_and_political_economy_progression() -> N
         world2 = deepcopy(_base_world())
         world2["turn"] = 2
         world2["companions"][0]["hp"]["current"] = 0
-        world2["companions"][0]["status"] = "incapacitated"
         world2["economy"]["coin"] = 300
         world2["economy"]["obligations"].append("owes healer")
         world2["politics"]["legal_standing"] = "wanted"
@@ -266,7 +276,6 @@ def test_multi_turn_companion_lifecycle_and_political_economy_progression() -> N
 
         world3 = deepcopy(r2.json()["world"])
         world3["turn"] = 3
-        world3["companions"][0]["status"] = "departed"
         world3["politics"]["known_leverage"] = ["captain bribery ledger"]
         world3["economy"]["wealth_tier"] = "destitute"
 
@@ -278,7 +287,6 @@ def test_multi_turn_companion_lifecycle_and_political_economy_progression() -> N
         body = r3.json()
 
         comp = body["world"]["companions"][0]
-        assert comp["status"] == "departed"
         assert comp["hp"]["current"] == 0
         assert body["world"]["economy"]["coin"] == 300
         assert body["world"]["economy"]["wealth_tier"] == "destitute"

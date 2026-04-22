@@ -238,8 +238,25 @@ class ExceptionalCompanion(BaseModel):
         return self
 
 
+class CreatureCompanionRecord(CreatureCompanion):
+    id: str
+
+
+class SapientCompanionRecord(SapientCompanion):
+    id: str
+
+
+class ExceptionalCompanionRecord(ExceptionalCompanion):
+    id: str
+
+
 Companion = Annotated[
     Union[SapientCompanion, CreatureCompanion, ExceptionalCompanion],
+    Field(discriminator="tier"),
+]
+
+CompanionRecord = Annotated[
+    Union[SapientCompanionRecord, CreatureCompanionRecord, ExceptionalCompanionRecord],
     Field(discriminator="tier"),
 ]
 
@@ -276,6 +293,7 @@ from api import models as core_models
 _CORE_TYPES = {
     "ArchivedCompanionEnvelope": ArchivedCompanionEnvelope,
     "Alignment": core_models.Alignment,
+    "CompanionRecord": CompanionRecord,
     "CompanionEnvelope": CompanionEnvelope,
     "DomainScores": core_models.DomainScores,
     "Equipment": core_models.Equipment,
@@ -288,6 +306,9 @@ _CORE_TYPES = {
 SapientCompanion.model_rebuild(_types_namespace=_CORE_TYPES)
 CreatureCompanion.model_rebuild(_types_namespace=_CORE_TYPES)
 ExceptionalCompanion.model_rebuild(_types_namespace=_CORE_TYPES)
+SapientCompanionRecord.model_rebuild(_types_namespace=_CORE_TYPES)
+CreatureCompanionRecord.model_rebuild(_types_namespace=_CORE_TYPES)
+ExceptionalCompanionRecord.model_rebuild(_types_namespace=_CORE_TYPES)
 CompanionEnvelope.model_rebuild(_types_namespace=_CORE_TYPES)
 ArchivedCompanionEnvelope.model_rebuild(_types_namespace=_CORE_TYPES)
 
@@ -295,6 +316,7 @@ core_models.WorldModel.model_rebuild(
     _types_namespace={
         "ArchivedCompanionEnvelope": ArchivedCompanionEnvelope,
         "Companion": Companion,
+        "CompanionRecord": CompanionRecord,
         "CompanionEnvelope": CompanionEnvelope,
     }
 )
@@ -302,6 +324,7 @@ core_models.WorldStateDelta.model_rebuild(
     _types_namespace={
         "ArchivedCompanionEnvelope": ArchivedCompanionEnvelope,
         "Companion": Companion,
+        "CompanionRecord": CompanionRecord,
         "CompanionEnvelope": CompanionEnvelope,
     }
 )
@@ -309,6 +332,7 @@ core_models.NewSessionRequest.model_rebuild(
     _types_namespace={
         "ArchivedCompanionEnvelope": ArchivedCompanionEnvelope,
         "Companion": Companion,
+        "CompanionRecord": CompanionRecord,
         "CompanionEnvelope": CompanionEnvelope,
     }
 )
