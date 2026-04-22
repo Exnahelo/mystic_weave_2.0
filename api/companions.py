@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import re
-from typing import TYPE_CHECKING, Literal, Optional, Union
+from typing import TYPE_CHECKING, Annotated, Literal, Optional, Union
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
@@ -97,8 +97,10 @@ class ExceptionalProfile(BaseModel):
 class CreatureCompanion(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
+    tier: Literal["creature"] = "creature"
     name: str
     species: str
+    subspecies: str
     subtype: Optional[str] = None
     size: CreatureSize
     size_note: Optional[str] = None
@@ -127,6 +129,7 @@ class CreatureCompanion(BaseModel):
 class SapientCompanion(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
+    tier: Literal["sapient"] = "sapient"
     name: str
     ancestry: str
     culture: str
@@ -160,8 +163,10 @@ class SapientCompanion(BaseModel):
 class ExceptionalCompanion(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
+    tier: Literal["exceptional"] = "exceptional"
     name: str
     species: str
+    subspecies: Optional[str] = None
     subtype: Optional[str] = None
     size: CreatureSize
     size_note: Optional[str] = None
@@ -233,7 +238,10 @@ class ExceptionalCompanion(BaseModel):
         return self
 
 
-Companion = Union[SapientCompanion, CreatureCompanion, ExceptionalCompanion]
+Companion = Annotated[
+    Union[SapientCompanion, CreatureCompanion, ExceptionalCompanion],
+    Field(discriminator="tier"),
+]
 
 
 def generate_companion_id(
