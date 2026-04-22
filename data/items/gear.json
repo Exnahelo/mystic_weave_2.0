@@ -109,6 +109,50 @@
     ]
   },
   {
+    "id": "bird-trap",
+    "name": "Bird Trap",
+    "category": "survival",
+    "subcategory": "trapping",
+    "description": "A lightweight trigger trap for catching roosting or ground-feeding birds in camp-adjacent or foraging conditions.",
+    "tags": [
+      "survival",
+      "camp",
+      "trapping",
+      "hunting"
+    ],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 20,
+    "narrative_effects": [
+      "Supports proper bird trapping where terrain, bait, and species behavior make the attempt plausible."
+    ]
+  },
+  {
+    "id": "animal-bedroll",
+    "name": "Animal Bedroll",
+    "category": "survival",
+    "subcategory": "animal_rest",
+    "description": "A padded roll sized for a bonded beast, hunting animal, or other travel companion to rest off bare ground.",
+    "tags": [
+      "survival",
+      "camp",
+      "rest",
+      "animal_gear"
+    ],
+    "roll_tag": null,
+    "tool_role": "difficulty_shift",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 40,
+    "narrative_effects": [
+      "Counts as adequate rest support for an animal companion in field conditions and helps reduce exposure-related discomfort."
+    ]
+  },
+  {
     "id": "mundane_bedroll_01",
     "name": "Bedroll",
     "category": "survival",
@@ -212,6 +256,29 @@
     "value_cd": 1,
     "narrative_effects": [
       "Supports probing, reaching, and testing unsafe spaces without direct contact."
+    ]
+  },
+  {
+    "id": "folding-entrenching-tool",
+    "name": "Folding Entrenching Tool",
+    "category": "survival",
+    "subcategory": "digging_tool",
+    "description": "A compact folding field shovel for scraping trenches, burying refuse, cutting drainage lines, and light excavation on the move.",
+    "tags": [
+      "survival",
+      "camp",
+      "tool",
+      "labor",
+      "portable"
+    ],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 120,
+    "narrative_effects": [
+      "Supports efficient field digging, drainage work, and hasty camp fortification without requiring a full shovel."
     ]
   },
   {
@@ -382,6 +449,28 @@
     ]
   },
   {
+    "id": "rain-dew-catch",
+    "name": "Rain / Dew Catch",
+    "category": "survival",
+    "subcategory": "water_collection",
+    "description": "A lightweight collection sheet and line kit for gathering rainwater or condensing overnight moisture into a usable vessel.",
+    "tags": [
+      "survival",
+      "camp",
+      "water",
+      "tool"
+    ],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 35,
+    "narrative_effects": [
+      "Supports passive water collection in wet, misted, or dew-heavy environments without relying entirely on open sources."
+    ]
+  },
+  {
     "id": "mundane_waterskin_01",
     "name": "Waterskin",
     "category": "movement_load",
@@ -505,6 +594,28 @@
     "value_cd": 50,
     "narrative_effects": [
       "Required to carry a full gear load on a mount without improvised burden issues."
+    ]
+  },
+  {
+    "id": "horse-care-kit",
+    "name": "Horse Care Kit",
+    "category": "movement_load",
+    "subcategory": "mount_support",
+    "description": "A grooming and care kit with brush, hoof pick, cloths, and basic supplies for maintaining a ridden or pack animal in the field.",
+    "tags": [
+      "mount",
+      "travel",
+      "animal_gear",
+      "tool"
+    ],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 90,
+    "narrative_effects": [
+      "Supports proper field care, inspection, and maintenance of horses and similar travel animals over sustained journeys."
     ]
   },
   {
@@ -1130,6 +1241,50 @@
     ]
   },
   {
+    "id": "climbing-harness",
+    "name": "Climbing Harness",
+    "category": "movement_load",
+    "subcategory": "climbing_gear",
+    "description": "A fitted harness designed to secure a climber to rope systems during vertical ascent, descent, or exposed traverses.",
+    "tags": [
+      "travel",
+      "climbing",
+      "safety",
+      "tool"
+    ],
+    "roll_tag": null,
+    "tool_role": "difficulty_shift",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 250,
+    "narrative_effects": [
+      "Supports safer rope-assisted climbing and reduces consequence severity where secure rigging is plausible."
+    ]
+  },
+  {
+    "id": "piton-set-6",
+    "name": "Piton Set (6)",
+    "category": "movement_load",
+    "subcategory": "climbing_gear",
+    "description": "Six iron pitons for anchoring rope, securing traverses, or establishing stable climbing points on rock and worked stone.",
+    "tags": [
+      "travel",
+      "climbing",
+      "anchor",
+      "tool"
+    ],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": 6,
+    "rarity": "common",
+    "value_cd": 60,
+    "narrative_effects": [
+      "Required for reliable fixed anchors in climbing or descent scenes where natural anchor points are insufficient."
+    ]
+  },
+  {
     "id": "mundane_rope_50ft_01",
     "name": "Rope (50 ft)",
     "category": "tactical",
@@ -1149,6 +1304,28 @@
     "value_cd": 10,
     "narrative_effects": [
       "Required for climbing assists, binding, hauling, and basic rigging work."
+    ]
+  },
+  {
+    "id": "small-game-snare",
+    "name": "Small-Game Snare",
+    "category": "survival",
+    "subcategory": "trapping",
+    "description": "A compact wire-and-trigger snare intended for rabbits, hares, and similarly sized game when set with care.",
+    "tags": [
+      "survival",
+      "camp",
+      "trapping",
+      "hunting"
+    ],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 15,
+    "narrative_effects": [
+      "Supports proper small-game trapping where bait, sign, and placement are plausible."
     ]
   },
   {
