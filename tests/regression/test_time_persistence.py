@@ -172,3 +172,33 @@ def test_world_time_round_trip_persistence_across_save_and_delta() -> None:
         assert final_reread.status_code == 200
         assert final_reread.json()["world"]["time"]["day"] == 7
         assert final_reread.json()["world"]["time"]["month"] == "Verdantrise"
+
+
+@pytest.mark.regression
+def test_delta_rejects_invalid_time_of_day_enum() -> None:
+    app = _make_app(FakePool(SessionStateFlowConn()))
+
+    with TestClient(app) as client:
+        created = client.post(
+            "/session/new",
+            json={
+                "character_name": "A",
+                "ancestry": "human",
+                "culture": "drakenvale_city",
+                "focus": "champion",
+                "background": "soldier",
+            },
+        )
+        assert created.status_code == 201
+        session_id = created.json()["session_id"]
+
+        bad_delta = client.post(
+            f"/state/{session_id}/delta",
+            json={
+                "world": {"time": {"time_of_day": "evening"}},
+                "log_entry": "Bad time_of_day.",
+            },
+        )
+
+    assert bad_delta.status_code == 422
+    assert "evening" in bad_delta.text
