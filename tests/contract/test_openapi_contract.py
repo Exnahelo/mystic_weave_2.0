@@ -47,6 +47,7 @@ def test_openapi_contract_has_expected_core_shapes() -> None:
         "age_categories",
         "ancestries",
         "apparel_items",
+        "armor",
         "autonomy_levels",
         "backgrounds",
         "bond_levels",
@@ -66,6 +67,7 @@ def test_openapi_contract_has_expected_core_shapes() -> None:
         "sapience_levels",
         "tactical_roles",
         "training_levels",
+        "weapons",
     ]
 
     session_new_201 = spec["paths"]["/session/new"]["post"]["responses"]["201"][
