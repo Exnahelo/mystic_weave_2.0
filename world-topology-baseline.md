@@ -1,10 +1,10 @@
 # World Topology Baseline — 2026-04-12
 
-Post-audit baseline for the legacy flat `prompts/world/*.yaml` connection reciprocity before hierarchical cutover into `data/world/`.
+Post-audit baseline for the legacy flat world YAML connection reciprocity before hierarchical cutover into `data/world/`.
 
 ## Scope
 
-Audit performed against the legacy flat world location files that originally lived under `prompts/world/`.
+Audit performed against the retired legacy flat world location files used before hierarchical cutover.
 
 Current scan totals:
 - 48 location files with `id` + `connections`

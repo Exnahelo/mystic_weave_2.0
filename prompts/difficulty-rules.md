@@ -1,6 +1,6 @@
 # Mystic Weave — Difficulty Reference
 
-This reference standardizes challenge calibration for narration and `POST /roll` target assembly. Use with `prompts/world_rules.md` and `prompts/engine.md`.
+This reference standardizes challenge calibration for narration and `POST /roll` target assembly. Use with `prompts/world-rules.md` and `prompts/engine.md`.
 
 ## Canonical Difficulty Ladder
 

@@ -5,7 +5,6 @@ type: landmark
 region_id: hollow-crown
 description: Placeholder-safe runtime node pending fuller canon migration.
 connections: []
-tags:
 known_npcs: []
 threat_level: 0
 discovered: true
@@ -14,9 +13,6 @@ discovered: true
 # Valley Edge Overlook
 
 Placeholder-safe runtime node pending fuller canon migration.
-
-## Tags
-
 
 ## Authoring Notes
 

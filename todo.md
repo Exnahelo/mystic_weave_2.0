@@ -10,8 +10,66 @@ Updated after post-cleanup audit — 2026-04-18.
 - [x] 2026-04-18 / `eea3826` — fixed `hollow-crowm` typo in canonical tags
 - [x] 2026-04-18 / `08c64eb` — normalized two world YAML filenames to snake_case
 - [x] 2026-04-18 / `2b8829c` — committed convention-drift audit document
-- [x] 2026-04-18 / `90f10c9` — added `docs/CONVENTIONS.md`
+- [x] 2026-04-18 / `90f10c9` — added `docs/conventions.md`
 - [x] 2026-04-10 to 2026-04-18 / `2231394`, `701bda2`, `2eb11fe` — reconciled topology, region IDs, and route/link hygiene
+
+### Naming Conventions Cleanup Arc (2026-04)
+
+- [x] Split naming policy into `docs/conventions.md` (naming) and
+  `docs/world-data-policy.md` (invariants + validator ownership)
+- [x] Rename root-level markdown docs to kebab-case:
+  - [x] `OPERATIONAL_RUNBOOK.md` → `operational-runbook.md`
+  - [x] `TESTING.md` → `testing.md`
+  - [x] `TODO.md` → `todo.md`
+  - [x] `WORLD_TOPOLOGY_BASELINE.md` → `world-topology-baseline.md`
+  - [x] `RELEASE_CHECKPOINT_2026-04-10.md` → `release-checkpoint-2026-04-10.md`
+  - [x] `DRAKENVALE_CONTENT_LICENSE.md` → `drakenvale-content-license.md`
+  - [x] `docs/CONVENTIONS.md` → `docs/conventions.md`
+  - [x] `tests/gpt_test_template.md` → `tests/gpt-test-template.md`
+- [x] Document `README.md`, `LICENSE`, `CHANGELOG.md`, `CONTRIBUTING.md`,
+  `CODE_OF_CONDUCT.md`, `SECURITY.md`, `SUPPORT.md`, `Makefile` as
+  tooling-sensitive exceptions in `conventions.md`
+- [x] Rename 10 multi-word `prompts/*.md` rule/reference files to
+  kebab-case (world-rules, magic-rules, economy-rules, items-rules,
+  difficulty-rules, combat-rules, progression-rules, character-creation,
+  scene-structure, design-notes)
+- [x] Fix tag hygiene across `data/world/**` and
+  `prompts/world_vault/**`: dedup `hollow-crown`, reconcile
+  volcanic_highlands_trail YAML↔MD mirror via union
+- [x] Quote vault MD frontmatter `description:` fields for YAML
+  parseability (7 files)
+- [x] Rename 10 world YAML↔MD mirror pairs to snake_case stems to
+  satisfy the stem↔id invariant
+- [x] Ship `scripts/validate_naming.py` (new) with filesystem path
+  case rules, `data/**/*.{json,yaml}` snake_case enforcement, `.env`
+  leak guard (`SAFE_ENV_SUFFIXES`), UPPER_SNAKE_CASE env-key check
+- [x] Extend `scripts/validate_data_files.py` with stem↔id and tag
+  hygiene assertions for `data/world/**/*.yaml`
+- [x] Extend `scripts/validate_prompts.py` with frontmatter
+  parseability, stem↔id for vault MD, frontmatter↔body tag sync
+- [x] Wire `validate_naming.py` into `.github/workflows/ci.yml`
+- [x] Update `tests/loop_test.py` and
+  `scripts/predeploy_smoke_bundle.py` for the `species` →
+  `ancestry`/`culture` split
+- [x] Skip leading-underscore template files in
+  `scripts/seed_locations.py` (canonical + legacy paths)
+- [x] Retire `prompts/world/` legacy flat YAML tree and its
+  overlap-check code in `seed_locations.py`
+- [x] Normalize data filename forms:
+  - [x] `data/characters/starting-wealth.json` →
+    `data/characters/starting_wealth.json`
+  - [x] `data/economy/regional-nodes.json` →
+    `data/economy/regional_nodes.json`
+  - [x] `data/characters/backgrounds.json` →
+    `data/characters/background.json`
+  - [x] `data/items/weapons.json` → `data/items/weapon.json`
+  - [x] `data/items/magical.json` → `data/items/magical_item.json`
+  - [x] `data/items/notable.json` → `data/items/notable_item.json`
+- [x] Trim `prompts/engine.md` from 7999 → 7812 bytes (187 bytes
+  headroom recovered)
+- [x] Audit `schemas/openapi.yaml` for prose drift after the arc —
+  confirmed clean (no stale terminology, no stale filename references,
+  version locked at 4.1.0)
 
 ---
 
@@ -43,15 +101,49 @@ Updated after post-cleanup audit — 2026-04-18.
 
 ### Nice-to-Have
 
-- [ ] Remove the lingering `Zarkeros's Fortress` display name if canon authority confirms the rename.
-  - affected paths: `data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.yaml`, `prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros-lair.md`
+- [x] Remove the lingering `Zarkeros's Fortress` display name if canon authority confirms the rename.
+  - affected paths: `data/world/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros_lair.yaml`, `prompts/world_vault/hollow_crown/surface/northeastern_volcanic_highlands/zarkeros_lair.md`
   - size estimate: S
-- [ ] Fill or remove empty `tags` lists on canonical world nodes and mirrors.
+- [x] Fill or remove empty `tags` lists on canonical world nodes and mirrors.
   - affected paths: `data/world/hollow_crown/surface/central_draconic_grasslands/draconic_grasslands_edge.yaml`, `data/world/hollow_crown/surface/southwestern_mystic_wetlands/valley_edge_overlook.yaml`, `prompts/world_vault/hollow_crown/surface/central_draconic_grasslands/draconic_grasslands_edge.md`, `prompts/world_vault/hollow_crown/surface/southwestern_mystic_wetlands/valley_edge_overlook.md`
   - size estimate: S
-- [ ] Remove the legacy `hollow-crowm` string from audit artifacts if repo-wide grep should stay at zero.
+- [x] Remove the legacy `hollow-crowm` string from audit artifacts if repo-wide grep should stay at zero.
   - affected paths: `docs/audit_convention_drift.md`
   - size estimate: S
+- [ ] Confirm Alembic filename behavior remains compatible with `validate_naming.py` before the next migration lands.
+  - note: existing migration passes current regex; future non-snake revision stems should fail CI.
+  - affected paths: `alembic/versions/`, `scripts/validate_naming.py`
+  - size estimate: XS
+- [ ] Trim `prompts/engine.md` before any future content addition.
+  - note: current GPT Builder budget is effectively exhausted at 7999/8000 chars.
+  - affected paths: `prompts/engine.md`
+  - size estimate: XS
+- [ ] Revisit a stronger `validate_naming.py` ↔ `docs/conventions.md` drift guard if documented exceptions return in a more explicit section.
+  - note: current parser cross-check exists for the present exception lists; future doc structure changes may warrant a stricter implementation.
+  - affected paths: `scripts/validate_naming.py`, `docs/conventions.md`
+  - size estimate: XS
+
+### Post-Naming-Cleanup Open Items
+
+- [x] Re-upload to GPT builder:
+  - [x] Re-upload the 10 renamed `prompts/*.md` knowledge files under
+    their new kebab-case names; remove old entries
+  - [x] Re-upload trimmed `prompts/engine.md` as the system prompt
+  - [x] Re-upload current `schemas/openapi.yaml` as the Actions
+    definition (version 4.1.0)
+- [x] Decide on companion `species` asymmetry — resolved. Three-tier
+  companion schema designed (see `prompts/design-notes.md` §Companion
+  Schema Design 2026-04). Current `CompanionModel` will be replaced
+  by `SapientCompanion` + `CreatureCompanion` + `ExceptionalCompanion`
+  when the companion implementation arc is prioritized.
+- [x] Decide on magical/notable item schema — resolved.
+  `notable_item.json` retired (deleted; entries were unused). All
+  special items unified under `data/items/magical.json`. T0–T5 tier
+  framework captured (see `prompts/design-notes.md` §Magical Item Tier Framework 2026-04). Enchantment/crafting mechanics deferred to
+  `magic-rules.md` "Enchantment and Permanent Works" design arc.
+- [ ] Confirm Alembic migration filenames pass
+  `scripts/validate_naming.py`'s Python rule the next time a
+  migration lands (was flagged but never reproduced as a failure).
 
 ---
 

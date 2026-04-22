@@ -42,6 +42,32 @@ def test_openapi_contract_has_expected_core_shapes() -> None:
     ]["application/json"]["schema"]
     assert options_schema["$ref"] == "#/components/schemas/OptionsResponse"
 
+    options_props = spec["components"]["schemas"]["OptionsResponse"]["properties"]
+    assert sorted(options_props) == [
+        "age_categories",
+        "ancestries",
+        "apparel_items",
+        "autonomy_levels",
+        "backgrounds",
+        "bond_levels",
+        "carrying_capacities",
+        "communication_levels",
+        "creature_catalog",
+        "creature_sizes",
+        "cultures",
+        "exceptional_catalog",
+        "focus",
+        "learned_commands",
+        "magical_items",
+        "movement_modes",
+        "mundane_items",
+        "natural_abilities",
+        "natural_weapons",
+        "sapience_levels",
+        "tactical_roles",
+        "training_levels",
+    ]
+
     session_new_201 = spec["paths"]["/session/new"]["post"]["responses"]["201"][
         "content"
     ]["application/json"]["schema"]

@@ -17,12 +17,12 @@ Use this file together with:
 * `data/items/apparel.json`
 * `data/items/armor.json`
 * `data/items/gear.json`
-* `data/items/magical.json`
-* `data/items/notable.json`
-* `data/items/weapons.json`
-* `combat_rules.md`
-* `economy_rules.md`
-* `world_rules.md`
+* `data/items/magical_item.json`
+* `data/items/notable_item.json`
+* `data/items/weapon.json`
+* `combat-rules.md`
+* `economy-rules.md`
+* `world-rules.md`
 * `engine.md`
 
 ---
@@ -86,7 +86,7 @@ Use `data/items/armor.json` for:
 
 ### Magical
 
-Use `data/items/magical.json` for:
+Use `data/items/magical_item.json` for:
 
 * standard magical items
 * reusable arcane, sacred, or utility magic gear
@@ -106,7 +106,7 @@ Use `data/items/gear.json` for:
 
 ### Notable
 
-Use `data/items/notable.json` for:
+Use `data/items/notable_item.json` for:
 
 * named or setting-significant items
 * rarer gear with stronger narrative identity
@@ -114,7 +114,7 @@ Use `data/items/notable.json` for:
 
 ### Weapons
 
-Use `data/items/weapons.json` for:
+Use `data/items/weapon.json` for:
 
 * weapon knowledge/application handling
 * primary combat family matching
@@ -170,7 +170,7 @@ Use the item data to determine whether a consumable is:
 
 For non-ammunition consumables, assume that use normally reduces availability immediately unless the fiction strongly supports otherwise.
 
-For ammunition, follow ammunition-specific rules from `data/items/ammunition.json` and `combat_rules.md`.
+For ammunition, follow ammunition-specific rules from `data/items/ammunition.json` and `combat-rules.md`.
 
 ---
 
@@ -236,7 +236,7 @@ If a magical item creates a persistent world fact, update state.
 
 Weapons and armor do not resolve themselves through item data alone.
 
-For all combat-facing interpretation, use item data together with `combat_rules.md`.
+For all combat-facing interpretation, use item data together with `combat-rules.md`.
 
 Specifically:
 
@@ -255,7 +255,7 @@ Item prices are data, but transaction handling is governed elsewhere.
 Use:
 
 * item JSON files for item-level value fields
-* `economy_rules.md` for transaction logic, barter, price pressure, and state updates
+* `economy-rules.md` for transaction logic, barter, price pressure, and state updates
 
 Do not narrate item purchase, sale, barter, or trade without following economy rules.
 
@@ -339,12 +339,12 @@ This section will eventually define how the GPT should reason about:
 * `data/items/apparel.json` — clothing, footwear, handwear, and outerwear catalog
 * `data/items/armor.json` — armor and shield catalog
 * `data/items/gear.json` — ordinary gear, tools, storage, camp items, and cordage catalog
-* `data/items/magical.json` — standard magical item catalog
-* `data/items/notable.json` — named and setting-significant item catalog
-* `data/items/weapons.json` — weapon catalog and combat-family item data
-* `combat_rules.md` — combat-facing handling of weapons, armor, and ammunition
-* `economy_rules.md` — buying, barter, pricing pressure, and transaction state rules
-* `world_rules.md` — broader world/system-facing rules
+* `data/items/magical_item.json` — standard magical item catalog
+* `data/items/notable_item.json` — named and setting-significant item catalog
+* `data/items/weapon.json` — weapon catalog and combat-family item data
+* `combat-rules.md` — combat-facing handling of weapons, armor, and ammunition
+* `economy-rules.md` — buying, barter, pricing pressure, and transaction state rules
+* `world-rules.md` — broader world/system-facing rules
 * `engine.md` — runtime adjudication and system logic
 
 ---

@@ -1,6 +1,6 @@
 # Drakenvale — Geography
 
-Version 1.0 — April 2026  
+Version 1.1 — April 2026  
 Status: Canonical. This is the source of truth for the physical structure of Drakenvale and the Hollow Crown.
 
 ---
@@ -28,6 +28,7 @@ Magical wards woven into the mountain and basin during the sanctuary’s foundin
 | Wall-to-wall on horseback | 3–4.5 days |
 | Stronghold to nearest crater wall | ~145–175 km / 3–4 days on foot |
 | Typical major region width | 25–70 km with transition zones |
+| Map cell (Maps A–D) | ~16 km per cell |
 
 Off-path travel, wet ground, alpine ascent, dark-quadrant movement, night travel, or poorly mapped transition zones: add 50–100% to all travel times.
 
@@ -213,99 +214,330 @@ These nodes should be treated as the basin’s practical anchors for trade, trav
 - `history.md` — chronology, founding, Discordant War, and major historical consequences
 - `groups.md` — institutions, covert networks, cults, trade bodies, and organized power structures
 - `npcs.md` — major characters, Council dragons, and anchor NPCs
-- `world_rules.md` — operational assumptions and system-facing world logic
+- `world-rules.md` — operational assumptions and system-facing world logic
 
 ---
 
-## Coarse Grid Map
+## Canonical Maps
 
-The following grid is a canonical coarse-placement map for the Hollow Crown. It is not a tactical map and does not replace detailed settlement or route data, but it fixes the broad spatial relationships of regions, corridors, and major anchors.
+The Hollow Crown's spatial structure is represented by five aligned grids: three surface overlays (terrain, settlements, routes), one subterranean overlay sharing the surface coordinate system, and one Feywood interior grid with its own non-Euclidean coordinate system. These grids supersede the prior 12×12 coarse map.
 
-### Grid Key
+All surface and subterranean grids use the same 24×24 coordinate system — rows `A`–`X`, columns `01`–`24`. At the canonical 350 km basin diameter, each cell is approximately 16 km. The Feywood Glade interior is a separate 12×12 grid using rows `α`–`μ` (Greek letters, to avoid ambiguity with surface rows) and columns `01`–`12`. The Feywood's cell scale is narrative rather than physical; its interior is non-Euclidean and responds to visitor disposition and sanction.
 
-- `A` = Alpine Peaks
-- `I` = Inner Ramparts
-- `F` = Temperate Forest
-- `V` = Volcanic Highlands
-- `G` = Draconic Grasslands
-- `S` = Sacred Pools descent
-- `L` = Southern Lake
-- `M` = Mystic Wetlands
-- `H` = Shadowed Hollows
-- `R` = Rift of Discord zone
-- `C` = Crystal Caverns beneath all regions
+Multi-cell settlement footprints indicate physical size: a single-cell marker is a village or hamlet (~16 km scale feature), a 2×1 or 1×2 is a larger town, and 2×2 or larger is a city. The Drakenvale urban core spans 14 cells to reflect the Stronghold plus surrounding terraced city and lakefront districts.
 
-### Canonical Coarse Grid
+### Legend
 
-```text
-      01 02 03 04 05 06 07 08 09 10 11 12
-A  |  A  A  A  A  A  A  A  A  A  A  A  A
-B  |  A  I  I  I  I  I  I  I  I  I  I  A
-C  |  A  I  I  I  I  I  I  V  V  V  I  A
-D  |  A  I  F  F  F  G  G  V  V  V  I  A
-E  |  A  I  F  F  G  G  G  G  V  V  I  A
-F  |  A  I  F  F  G  X  X  G  G  I  I  A
-G  |  A  I  F  F  G  X  X  S  G  I  I  A
-H  |  A  I  F  F  G  L  L  L  G  H  I  A
-I  |  A  I  F  M  M  L  L  L  H  H  R  A
-J  |  A  I  M  M  M  M  L  H  H  R  R  A
-K  |  A  I  M  M  M  M  M  H  H  R  I  A
-L  |  A  A  A  A  A  A  A  A  A  A  A  A
+```
+TERRAIN (Map A, Map E)          SETTLEMENTS (Map B)             ROUTES (Map C)
+  A  Alpine Peaks                 1  Drakenvale city+Stronghold    =  primary trade road (SSTC)
+  I  Inner Ramparts               2  Dracélune                     -  secondary road / trail
+  F  Temperate Forest             3  Zarkharath + Infernal Forge   .  patrol / controlled route
+  W  Feywood external footprint   4  Cinderpit                     ·  no route
+  V  Volcanic Highlands           5  Mirefall
+  G  Draconic Grasslands          6  Brackenmoor                 SUBTERRANEAN (Map D)
+  X  Heartmass / Stronghold       7  Ashfield + Ashfield Fields    c  Crystal Caverns (active)
+  S  Sacred Pools descent         8  Greymantle                    C  Crystal Caverns (dense)
+  L  Southern Lake                9  Platinum Oath Monastery       n  Deephollow (subterranean city)
+  M  Mystic Wetlands              a  Lastmark                      t  Temple to Tiamat (sealed)
+  E  Dark Quadrant Approach       b  Stonemark                     s  Stonemark Deep Cuts
+  H  Shadowed Hollows             c  Silvercut                     ·  solid rock / unmapped
+  R  Rift of Discord              d  Dewhollow
+  ·  not applicable               e  Scalemere                   FEYWOOD INTERIOR (Map E)
+                                  f  Crystalhaven                  Y  Heartwood (sacred central grove)
+                                  h  Feywood Glade Border          T  Thornveil (elven city, rings Y)
+                                  i  Platinum Oath Approach        U  outer elven settlement
+                                  j  Shadowed Hollows Approach     D  Druidic Grove
+                                  k  Rift of Discord Edge          B  Glade Boundary (realm threshold)
+                                  o  Hall of Scales                F  undifferentiated Feywood forest
 ```
 
-`X` = Heartmass / Stronghold / central Drakenvale urban core.
+---
+
+### Map A — Surface Terrain (24×24)
+
+```text
+       01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+A  |   A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A
+B  |   A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A
+C  |   A  A  I  I  I  I  I  I  I  I  I  I  I  I  I  I  I  I  I  I  I  I  A  A
+D  |   A  I  I  I  I  I  I  I  I  I  I  I  I  I  I  I  I  I  I  I  I  I  I  A
+E  |   A  I  I  F  F  F  F  F  F  G  G  G  G  G  G  V  V  V  V  V  I  I  I  A
+F  |   A  I  F  F  F  F  F  F  G  G  G  G  G  G  G  V  V  V  V  V  I  I  I  A
+G  |   A  I  F  F  F  F  F  F  G  G  G  G  G  G  V  V  V  V  V  V  I  I  I  A
+H  |   A  I  F  F  W  W  F  F  G  G  G  G  G  G  G  V  V  V  V  I  I  I  A  A
+I  |   A  I  F  W  W  W  F  F  F  G  G  G  G  G  G  V  V  V  V  I  I  A  A  A
+J  |   A  I  F  W  W  W  F  F  F  G  G  G  G  G  G  G  V  V  V  I  I  A  A  A
+K  |   A  I  F  F  W  W  F  F  F  G  G  G  G  G  G  G  V  V  I  I  I  A  A  A
+L  |   A  I  F  F  F  F  F  F  F  G  G  X  X  G  G  G  V  I  I  I  A  A  A  A
+M  |   A  I  I  F  F  F  F  F  G  G  G  X  X  G  G  G  I  I  I  A  A  A  A  A
+N  |   A  I  I  F  F  F  F  G  G  G  S  S  S  S  G  G  I  I  I  A  A  A  A  A
+O  |   A  I  I  F  F  F  G  G  G  L  L  L  L  L  G  G  G  I  I  A  A  A  A  A
+P  |   A  I  I  I  F  G  G  G  L  L  L  L  L  L  L  G  G  I  I  A  A  A  A  A
+Q  |   A  I  I  M  M  G  G  G  L  L  L  L  L  L  G  G  G  I  I  A  A  A  A  A
+R  |   A  I  I  M  M  M  G  G  G  L  L  L  L  G  G  G  G  I  I  A  A  A  A  A
+S  |   A  I  I  M  M  M  M  G  G  G  G  G  G  G  G  E  E  I  I  A  A  A  A  A
+T  |   A  I  M  M  M  M  M  M  G  G  G  G  G  G  E  H  H  E  I  A  A  A  A  A
+U  |   A  I  M  M  M  M  M  M  G  G  G  G  E  E  H  H  H  E  I  A  A  A  A  A
+V  |   A  I  I  M  M  M  M  G  G  G  G  E  E  E  H  H  R  E  I  A  A  A  A  A
+W  |   A  A  I  I  I  I  I  I  I  I  I  E  E  E  E  E  R  I  I  A  A  A  A  A
+X  |   A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A  A
+```
+
+**Terrain notes**. Heartmass/Stronghold footprint at `L12–M13` (`X`). Sacred Pools descent at `N11–N14` (`S`). Southern Lake at `O10–R14` with its widest reach at rows `P` and `Q` (`L`). Feywood external pocket at `H5–K6` (`W`). Volcanic Highlands core at `E16–L19` (`V`). Mystic Wetlands lobe at `Q4–V8` (`M`). Shadowed Hollows interior at `T16–V16` with the Dark Quadrant Approach buffer (`E`) wrapping it from `S16` through `W16`. Rift of Discord at `V17–W17` (`R`).
+
+---
+
+### Map B — Surface Settlements (24×24, aligned to Map A)
+
+```text
+       01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+A  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+B  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+C  |   ·  ·  ·  ·  a  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+D  |   ·  ·  ·  ·  b  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+E  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+F  |   ·  ·  ·  c  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+G  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+H  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  3  3  ·  ·  ·  ·  ·  ·
+I  |   ·  ·  2  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  3  3  ·  ·  ·  ·  ·  ·
+J  |   ·  ·  ·  h  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+K  |   ·  ·  ·  ·  ·  ·  d  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  4  ·  ·  ·  ·  ·  ·
+L  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  1  1  1  1  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+M  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  1  1  1  1  1  1  ·  ·  ·  ·  ·  ·  ·  ·  ·
+N  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  1  1  1  1  1  1  ·  ·  ·  ·  ·  ·  ·  ·  ·
+O  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+P  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+Q  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  o  7  7  ·  ·  ·  ·  ·  ·  ·
+R  |   ·  ·  ·  ·  ·  6  ·  ·  ·  ·  ·  ·  ·  e  ·  7  7  ·  ·  ·  ·  ·  ·  ·
+S  |   ·  ·  ·  5  5  ·  ·  ·  ·  ·  ·  f  ·  ·  ·  j  ·  ·  ·  ·  ·  ·  ·  ·
+T  |   ·  ·  ·  5  5  ·  ·  ·  ·  ·  ·  ·  ·  ·  j  ·  ·  ·  ·  ·  ·  ·  ·  ·
+U  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  i  ·  ·  ·  ·  ·  ·
+V  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  9  ·  ·  ·  ·  ·  ·
+W  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  k  ·  8  ·  ·  ·  ·  ·  ·
+X  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+```
+
+**Settlement footprint notes**.
+- **`1` Drakenvale + Stronghold** — 14 cells at `L11–N15`. The Stronghold core (Heartmass, Draconic Hall, Platinum Heart, Arcane Conservatory, Amethyst Vault, Aeries) occupies `L12–M13`; the surrounding cells are the terraced city, with concentration on the southern and lake-facing edges.
+- **`3` Zarkharath + Infernal Forge** — 4 cells at `H17–I18`. The Infernal Forge is an industrial district within Zarkharath, not a separate settlement.
+- **`5` Mirefall** — 4 cells at `S4–T5`. Stilt-city spread across wetland platforms and high-ground islets.
+- **`7` Ashfield + Ashfield Fields** — 4 cells at `Q16–R17`. Village proper anchored at `Q16`; agricultural fields sprawl across the remaining three cells.
+- **`k` Rift of Discord Edge** at `W16` is a route-node (Vigil-patrolled buffer corridor), not a settlement. The Rift core itself at `W17` remains uninhabited.
+- **All other settlements are single-cell** (villages, outposts, or route nodes).
+
+---
+
+### Map C — Surface Routes (24×24, aligned to Maps A and B)
+
+Settlement markers appear on this map for reference, indicating where routes terminate.
+
+```text
+       01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+A  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+B  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+C  |   ·  ·  ·  ·  a  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+D  |   ·  ·  ·  ·  -  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+E  |   ·  ·  ·  ·  -  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+F  |   ·  ·  ·  c  -  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+G  |   ·  ·  -  -  -  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+H  |   ·  ·  -  ·  ·  ·  -  ·  ·  ·  ·  ·  ·  ·  ·  ·  3  3  ·  ·  ·  ·  ·  ·
+I  |   ·  ·  2  ·  ·  ·  -  ·  ·  ·  ·  ·  ·  ·  ·  ·  3  3  ·  ·  ·  ·  ·  ·
+J  |   ·  ·  =  h  ·  ·  -  ·  ·  ·  ·  ·  ·  ·  ·  -  ·  ·  ·  ·  ·  ·  ·  ·
+K  |   ·  ·  =  ·  ·  ·  d  ·  ·  -  ·  ·  ·  ·  -  -  ·  4  ·  ·  ·  ·  ·  ·
+L  |   ·  ·  =  =  =  =  =  =  =  =  1  1  1  1  -  -  -  ·  ·  ·  ·  ·  ·  ·
+M  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  1  1  1  1  1  1  -  ·  ·  ·  ·  ·  ·  ·  ·
+N  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  1  1  1  1  1  1  ·  ·  ·  ·  ·  ·  ·  ·  ·
+O  |   ·  ·  ·  ·  ·  ·  ·  -  -  ·  ·  ·  ·  ·  =  =  ·  ·  ·  ·  ·  ·  ·  ·
+P  |   ·  ·  ·  ·  ·  ·  ·  -  ·  ·  ·  ·  ·  ·  ·  =  ·  ·  ·  ·  ·  ·  ·  ·
+Q  |   ·  ·  ·  ·  ·  ·  -  ·  ·  ·  ·  ·  ·  ·  o  7  7  ·  ·  ·  ·  ·  ·  ·
+R  |   ·  ·  ·  ·  ·  6  ·  ·  ·  ·  ·  ·  =  e  =  7  7  ·  ·  ·  ·  ·  ·  ·
+S  |   ·  ·  ·  5  -  -  ·  ·  ·  ·  ·  f  =  =  =  .  ·  ·  ·  ·  ·  ·  ·  ·
+T  |   ·  ·  ·  5  5  ·  ·  ·  ·  ·  ·  ·  ·  ·  .  ·  ·  ·  ·  ·  ·  ·  ·  ·
+U  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  i  ·  ·  ·  ·  ·  ·
+V  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  9  ·  ·  ·  ·  ·  ·
+W  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  k  .  8  ·  ·  ·  ·  ·  ·
+X  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+```
+
+---
+
+### Map D — Subterranean (24×24, aligned to surface)
+
+This map shows what lies *beneath* each surface cell. Base Crystal Caverns `c` run under every surface cell inside the Alpine rim. Dense `C` zones mark sacred-resonance / psionic-amplification regions. Named subterranean anchors are indicated by their marker. Cells outside the rim (`·`) are solid mountain stone or unmapped.
+
+```text
+       01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+A  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+B  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+C  |   ·  ·  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  ·  ·
+D  |   ·  c  c  c  s  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  ·
+E  |   ·  c  c  c  s  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  ·
+F  |   ·  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  ·
+G  |   ·  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  ·
+H  |   ·  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  ·  ·
+I  |   ·  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  ·  ·  ·
+J  |   ·  c  c  c  c  c  c  c  c  c  c  n  n  c  c  c  c  c  c  c  c  ·  ·  ·
+K  |   ·  c  c  c  c  c  c  c  c  c  C  n  n  C  c  c  c  c  c  c  c  ·  ·  ·
+L  |   ·  c  c  c  c  c  c  c  c  C  C  C  C  C  c  c  c  c  c  c  ·  ·  ·  ·
+M  |   ·  c  c  c  c  c  c  c  c  C  C  C  C  C  C  c  c  c  c  c  ·  ·  ·  ·
+N  |   ·  c  c  c  c  c  c  c  c  C  C  C  C  C  C  c  c  c  c  c  ·  ·  ·  ·
+O  |   ·  c  c  c  c  c  c  c  c  C  C  C  C  C  c  c  c  c  c  c  ·  ·  ·  ·
+P  |   ·  c  c  c  c  c  c  c  c  c  C  C  C  c  c  c  c  c  c  c  ·  ·  ·  ·
+Q  |   ·  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  ·  ·  ·  ·
+R  |   ·  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  ·  ·  ·  ·
+S  |   ·  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  ·  ·  ·  ·
+T  |   ·  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  ·  ·  ·  ·
+U  |   ·  c  c  c  c  c  c  c  c  c  c  c  c  c  c  c  t  t  c  c  ·  ·  ·  ·
+V  |   ·  c  c  c  c  c  c  c  c  c  c  c  c  c  c  t  t  t  c  c  ·  ·  ·  ·
+W  |   ·  ·  c  c  c  c  c  c  c  c  c  c  c  c  c  c  t  c  c  c  ·  ·  ·  ·
+X  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·
+```
+
+**Subterranean notes**.
+- **Deephollow `n` at `J12–K13`** — the main subterranean city, positioned beneath the northern Draconic Grasslands where no surface settlement lies above. This placement keeps Deephollow's 4-cell footprint clear of the Stronghold, the city, and the lake — a clean gap above. Deephollow connects upward through the Crystal Caverns to the Stronghold and northeast through tunnels to Zarkharath (canonical two-way routes).
+- **Dense Crystal Caverns `C` at `K11–P13`** — the sacred-resonance and psionic-amplification core of the cavern network, sitting directly beneath the Heartmass (`L12–M13`) and its Sacred Pools descent (`N11–N14`). Confirms the canonical note that the Heartmass's platinum veins extend downward into the stone.
+- **Stonemark Deep Cuts `s` at `D5–E5`** — shafts descending from the surface quarry at Stonemark (`b`/`D5`) into the upper Crystal Caverns. Guild of Underdelvers coordinates geological boundary work here with Deephollow.
+- **Temple to Tiamat `t` at `U16–V17` (with extension to `W17`)** — sealed, heavily warded, positioned directly beneath the Shadowed Hollows / Rift of Discord surface corruption core. The temple is the origin of the necrotic seepage that produces the Hollows' surface corruption.
+- **Unmapped `·`** — cells outside the Alpine rim and the very outer edge. These represent solid mountain stone or territory beneath the Peaks themselves, not traversable.
+
+---
+
+### Map E — Feywood Glade Interior (12×12, non-Euclidean)
+
+Separate coordinate system. Rows `α`–`μ` (Greek, to avoid confusion with surface rows), columns `01`–`12`. The Feywood's external footprint on Map A is `H5–K6` (~60 km outer, corresponding to the Glade Boundary `h` at surface cell `J4`); internally, the space is much larger and travel-responsive. Distances and the path between two points shift based on visitor disposition, guide sanction, and the Glade's will. With sanctioned elven guidance, travel is predictable. Without sanction, the Glade redirects.
+
+Heartwood `Y` at the dead center. Thornveil `T` forms a complete ring around the Heartwood — the elven city is built in a defensive circle protecting the sacred grove.
+
+```text
+         01 02 03 04 05 06 07 08 09 10 11 12
+α    |   F  F  F  F  F  F  F  F  F  F  F  F
+β    |   F  F  F  F  F  F  F  F  F  F  F  F
+γ    |   F  F  F  F  F  F  F  F  F  F  F  F
+δ    |   F  F  F  F  F  F  F  F  F  F  D  F
+ε    |   F  F  F  F  T  T  T  T  F  F  F  F
+ζ    |   F  B  F  F  T  Y  Y  T  F  F  F  F
+η    |   F  F  F  F  T  Y  Y  T  F  F  F  F
+θ    |   F  F  F  F  T  T  T  T  F  F  F  F
+ι    |   F  F  F  F  F  F  F  F  F  U  F  F
+κ    |   F  F  F  F  F  F  F  F  F  F  F  F
+λ    |   F  F  F  F  F  F  F  F  F  F  F  F
+μ    |   F  F  F  F  F  F  F  F  F  F  F  F
+```
+
+**Feywood anchors**.
+- **`Y` Heartwood** at `ζ6–η7` — the sacred central grove, 2×2 footprint. Protected by the Heartwarden order. Unreachable except by sanctioned approach through Thornveil or Heartwarden escort.
+- **`T` Thornveil** — the elven city, forming a complete ring around the Heartwood at `ε5–ε8, ζ5, ζ8, η5, η8, θ5–θ8` (12 cells). The ring is a deliberate defensive and spiritual arrangement: the city exists to protect and tend the Heartwood.
+- **`D` Druidic Grove** at `δ11` — outer grove, separate from Thornveil, in the upper-east quadrant.
+- **`U` outer elven settlement** at `ι10` — smaller, secondary settlement in the lower-east quadrant.
+- **`B` Glade Boundary** at `ζ2` — the realm-side threshold. Corresponds to surface cell `J4` (`h` on Map B). This is the one stable entry and exit point for travelers; the Glade routes unsanctioned visitors back here or to an alternate realm-side exit of its own choosing.
+
+**Non-Euclidean behavior for the narrator**.
+- Exit from the Glade always returns the traveler to the surface at or near `h` (`J4`), or to an alternate realm-side point of the Glade's choosing. **The Glade cannot deposit travelers outside the Hollow Crown.**
+- Straight-line interior travel can shift cells underfoot. Distance between two points is determined by narrative weight: with a sanctioned guide, travel is predictable; without, the Glade is hostile and distances stretch.
+- Heartwood `Y` is not reachable by direct approach. Unsanctioned travelers attempting to enter the Thornveil ring toward the Heartwood will find the Glade rerouting them back to the forest or to the Boundary.
+
+---
 
 ### Major Anchor Placement
 
-| Anchor | Grid | Notes |
-| --- | --- | --- |
-| Stronghold of Drakenvale / Heartmass | F6–G7 | Basin center; political, sacred, and symbolic core |
-| Draconic Hall / Heartstone | F6 | Within the Stronghold |
-| Platinum Heart | F6 | High central spire within the Stronghold |
-| Amethyst Vault | G6 | Ground level beside the central rise |
-| Aeries | F7 | Upper stronghold reaches and open-air heights |
-| Drakenvale city core | F5–H8 | Concentrated most heavily south and southwest of the Stronghold |
-| Sacred Pools | G8–H8 | Descending southern face of the Stronghold |
-| Southern Lake | H6–J7 | Great south-facing lake at city base |
-| Ashfield / Ashfield Fields | H5–J6 | Southern grassland-agricultural belt |
-| Dracélune | E3 | Western forest threshold settlement at Feywood edge |
-| Feywood Glade / Thornveil | D2–F3 | Forest pocket with fixed exterior location and non-Euclidean interior |
-| Silvercut | D3 | Forest timber settlement north of Dracélune |
-| Dewhollow | F3 | Forest herbal and magical-flora settlement |
-| Scalemere | G4 | River and fish settlement in western-southern forest transition |
-| Brackenmoor | I4 | Rough edge settlement at forest-wetland transition |
-| Mirefall | J4 | Wetland town in the southwestern low basin |
-| Zarkharath | D8 | Main volcanic city in the northeastern sector |
-| Cinderpit | E9 | Ore extraction settlement on lower volcanic slopes |
-| Infernal Forge | D9 | Strategic forge complex in volcanic zone |
-| Lastmark | C3 | High approach waystation in stable Inner Rampart zone |
-| Stonemark | C4 | Quarry settlement in the Inner Ramparts / alpine foothill transition |
-| Greymantle | I9 | Edge-settlement between dark quadrant and outer basin |
-| Shadowed Hollows core | H10–K9 | Corrupted southern dark quadrant above the Temple |
-| Temple to Tiamat | J8–K8 (below) | Deep beneath the Hollows |
-| Rift of Discord | I11–K10 | Adjacent to, but distinct from, the Hollows |
-| Platinum Oath Monastery | J10 | Defensible edge-position overlooking Rift approaches |
-| Deephollow | beneath G5–I6 | Main subterranean city in the Crystal Caverns |
+| Anchor | Marker | Cell(s) | Notes |
+| --- | --- | --- | --- |
+| Drakenvale city + Stronghold | `1` | `L11–N15` | Stronghold core (`X`) at `L12–M13`; surrounding cells are the terraced city |
+| Draconic Hall / Heartstone | — | within `L12–M13` | Inside the Stronghold |
+| Platinum Heart | — | within `L12–M13` | High central spire of the Stronghold |
+| Amethyst Vault | — | within `L12–M13` | Ground level beside the central rise |
+| Aeries | — | within `L12–M13` | Upper Stronghold reaches |
+| Arcane Conservatory | — | within `L12–M13` | Upper Stronghold tower cluster |
+| Sacred Pools descent | — | `N11–N14` | Southern face of the Stronghold; sacred waters descend here |
+| Southern Lake | — | `O10–R14` | Great south-facing lake at city base |
+| Dracélune | `2` | `I3` | Western forest trade capital; Feywood-adjacent |
+| Feywood Glade Border | `h` | `J4` | Realm-side threshold to the Feywood interior |
+| Feywood Glade (external) | — | `H5–K6` | External surface footprint of the non-Euclidean interior |
+| Silvercut | `c` | `F4` | Forest timber settlement, northwestern forest |
+| Dewhollow | `d` | `K7` | Forest magical-flora cultivation village, east of Feywood |
+| Scalemere | `e` | `R14` | Fishing village on the southeastern lake shore |
+| Crystalhaven | `f` | `S12` | Contemplative shoreline village, south lake shore |
+| Hall of Scales | `o` | `Q15` | The realm's broad-education institution, between Drakenvale, Scalemere, and Ashfield |
+| Ashfield + Ashfield Fields | `7` | `Q16–R17` | Southern agricultural belt |
+| Brackenmoor | `6` | `R6` | Gathering village at the forest-wetland transition |
+| Mirefall | `5` | `S4–T5` | Stilt-city of the Mystic Wetlands |
+| Zarkharath + Infernal Forge | `3` | `H17–I18` | Northeastern volcanic city; Infernal Forge is an internal industrial district |
+| Cinderpit | `4` | `K18` | Mining village on the volcanic slopes, south of Zarkharath |
+| Lastmark | `a` | `C5` | High Inner Rampart waystation near alpine approach |
+| Stonemark | `b` | `D5` | Quarry village directly below Lastmark on the rampart descent |
+| Shadowed Hollows Approach | `j` | `S16, T15` | Vigil-patrolled buffer corridor; Hollows-facing |
+| Shadowed Hollows core | — | `T16–V16` cluster | Corrupted southern dark quadrant (7 cells) |
+| Rift of Discord Edge | `k` | `W16` | Vigil-patrolled buffer corridor; Rift-facing |
+| Rift of Discord | — | `V17–W17` | Active corruption scar, distinct from the Hollows |
+| Platinum Oath Approach | `i` | `U18` | Controlled access corridor to the Monastery |
+| Platinum Oath Monastery | `9` | `V18` | Defensible edge-position; adjacent to Rift at `V17` |
+| Greymantle | `8` | `W18` | Outlaw edge-settlement on rampart margin; one cell from Monastery |
+| Deephollow (subterranean) | `n` | `J12–K13` (under grasslands) | Main subterranean city in the Crystal Caverns |
+| Temple to Tiamat (subterranean) | `t` | `U16–V17` (under Hollows/Rift) | Sealed, warded; origin of the Hollows' corruption |
+| Stonemark Deep Cuts (subterranean) | `s` | `D5–E5` (under Stonemark) | Shafts descending from the Stonemark quarry into upper caverns |
+
+---
+
+### Named Routes
+
+Routes are given as explicit cell sequences for narrator and systems reference.
+
+**SSTC Western Trade Road** (primary `=`)  
+Drakenvale ↔ Dracélune. Main trade artery.  
+Path: `L11 (Drakenvale)` → `L10` → `L9` → `L8` → `L7` → `L6` → `L5` → `L4` → `L3` → `K3` → `J3` → `I3 (Dracélune)`.
+
+**Silverwood Trail** (secondary `-`)  
+Dracélune branches through the western forest.  
+- To Silvercut: `I3 (Dracélune)` → `H3` → `G3` → `G4` → `F4 (Silvercut)`.
+- To Dewhollow: branches from the SSTC road at `L7` → `K7 (Dewhollow)`. Travelers from Dracélune take the SSTC south to `L7`, then the spur north to `K7`. Direct forest travel east of Dracélune is obstructed by the Feywood external footprint (`H5–K6`).
+
+**Alpine Approach** (secondary `-`)  
+Drakenvale ↔ Stonemark ↔ Lastmark. Diagonal northwest route through grassland, forest, and Inner Ramparts.  
+Path: `L11 (Drakenvale)` → `K10` → `J7` → `I7` → `H7` → `G7`... the route traverses open grassland and forest to `F5` → `E5` → `D5 (Stonemark)` → `C5 (Lastmark)`. Exact cells through the forest middle section are narrator-discretion; the route is well-maintained to Stonemark and narrower above.
+
+**Volcanic Highlands Trail** (secondary `-`)  
+Drakenvale ↔ Zarkharath ↔ Cinderpit. The realm's most heavily trafficked supply corridor due to continuous material flow.  
+Path: `N15 (Drakenvale)` → `M16` → `L15` → `L16` → `L17` → `K15` → `K16` → `J16` → `J17` → `I17 (Zarkharath)` → `J18` → `K18 (Cinderpit)`. The Zarkharath–Cinderpit segment (`I18` → `J18` → `K18`) is the primary ore/coal supply route.
+
+**Southern Agricultural Road** (primary `=`)  
+Drakenvale ↔ Hall of Scales ↔ Ashfield. Runs southeast from the city along the lake's east margin.  
+Path: `N15 (Drakenvale)` → `O15` → `P16` → `Q15 (Hall of Scales)` → `Q16 (Ashfield)` → `R16 (Ashfield)`.
+
+**South Lake Shore Road** (primary `=`)  
+Connects the agricultural belt to Scalemere and Crystalhaven along the southern lake shore.  
+Path: `Q15 (Hall of Scales)` → `R15` → `R14 (Scalemere)` → `R13` → `S13` → `S12 (Crystalhaven)`.
+
+**Wetlands Drainage Road** (secondary `-`)  
+Drakenvale ↔ Brackenmoor ↔ Mirefall. Southwestward into the wetland basin.  
+Path: `M10 (Drakenvale)` → `O8` → `P8` → `Q7` → `R6 (Brackenmoor)` → `S5` → `S4 (Mirefall)`. The route descends from the grasslands into the transition biome before reaching Mirefall's platform network.
+
+**Dark Quadrant Corridor** (patrol `.`, restricted access)  
+Vigil-patrolled route connecting Greymantle, Platinum Oath Monastery, and the Hollows/Rift edge corridors. Access is limited to authorized traffic (Vigil patrols, Warden rotations, Council-sanctioned investigators, monastery couriers).  
+- Monastery corridor: `W18 (Greymantle)` → `W17` → `V18 (Monastery)` → `U18 (Platinum Oath Approach)`.
+- Hollows/Rift perimeter: `S16 (Hollows Approach)` → `T15 (Hollows Approach)` → `W16 (Rift Edge)`. Patrol paths connect these edge-nodes but are not open roads; they are managed threshold corridors.
+
+---
 
 ### Regional Read
 
-- **North and northeast** are harsher, steeper, and more geothermally active.
-- **West** is forest-heavy, liminal, and trade-facing through Dracélune.
-- **Center** is dominated by the Heartmass, Stronghold, city, and Draconic Grasslands.
-- **South** is shaped by the lake, agricultural belt, and wider basin descent.
-- **Southwest** holds the wetlands and major drainage system.
-- **Southeast / south-central east** holds the dark quadrant: the Hollows, the Temple below, and the Rift beside them.
-- **Below all regions** run the Crystal Caverns, with Deephollow occupying one of the most important subterranean nodes.
+- **North and northeast** are harsher, steeper, and more geothermally active. The Inner Ramparts crown the basin; the Volcanic Highlands dominate the upper-right quadrant.
+- **West** is forest-heavy, liminal, and trade-facing through Dracélune. The Feywood pocket sits centrally in the western forest.
+- **Center** is dominated by the Heartmass, Stronghold, city, and Draconic Grasslands. The Draconic Grasslands form a broad ring outward in all directions.
+- **South** is shaped by the lake, the Sacred Pools descent, Hall of Scales, and the agricultural belt.
+- **Southwest** holds the Mystic Wetlands and the basin's primary drainage system.
+- **Southeast** holds the dark quadrant: the Shadowed Hollows interior, the Rift of Discord, the buffer corridors (`E`), and the Platinum Oath Monastery with Greymantle on the rampart margin.
+- **Below all regions** run the Crystal Caverns. Deephollow sits in the northern sector; Temple to Tiamat lies deep beneath the southeastern dark quadrant.
 
 ### Route Logic
 
 Major travel flows follow a few repeatable patterns:
 
-- **Central routes** radiate from Drakenvale city and the Stronghold into the Grasslands, then outward into forest, highland, and southern roads.
-- **Western routes** move through the Temperate Forest toward Dracélune, Feywood-adjacent traffic, and the wetland transition.
-- **Northeastern routes** climb toward Zarkharath, Cinderpit, and the Infernal Forge by hardened volcanic approaches.
-- **Southern routes** pass through agricultural lands around Ashfield and along the lake margins before splitting toward the wetlands or toward the dark quadrant.
-- **Dark quadrant routes** are controlled, limited, or dangerous by default; Greymantle and the Platinum Oath corridor form the most stable edge-access pattern.
+- **Central routes** radiate from Drakenvale and the Stronghold into the Grasslands, then outward into forest, highland, and southern roads.
+- **Western routes** move through the Temperate Forest toward Dracélune, Feywood-adjacent traffic, and the wetland transition via Brackenmoor.
+- **Northeastern routes** climb toward Zarkharath, Cinderpit, and the Infernal Forge by the Volcanic Highlands Trail.
+- **Southern routes** pass through the Hall of Scales and agricultural lands around Ashfield, along the lake margins to Scalemere and Crystalhaven, and split toward the wetlands or the dark quadrant.
+- **Dark quadrant routes** are controlled, limited, or Vigil-patrolled by default. Greymantle and the Platinum Oath corridor form the most stable edge-access pattern.
 - **High approach routes** into the Hollow Crown pass through stable segments of the Inner Ramparts, especially near Lastmark and Stonemark.
 
 ---
@@ -315,4 +547,3 @@ Major travel flows follow a few repeatable patterns:
 The Hollow Crown is a hidden interior world organized in rings, sectors, and layered depths. At its center stands the Heartmass, the fused celestial-platinum impact core from which the Stronghold of Drakenvale was carved. Within the Stronghold lies the Heartstone, the realm’s living crystal center. Around the Stronghold spreads the city of Drakenvale, then the Draconic Grasslands, then the larger natural and hazardous regions of forest, wetland, caverns, volcanic highland, corrupted southern quadrant, and enclosing alpine walls. Between the outer crown and lower basin runs the broken escarpment zone of the Inner Ramparts. The Temple to Tiamat remains beneath the Shadowed Hollows. The Rift of Discord remains nearby but separate. The wetlands drain the basin through hidden underground channels. The Feywood Glade is fixed in place but internally lawless. The Crystal Caverns run beneath all of it.
 
 This is the canonical geographic structure of Drakenvale.
-

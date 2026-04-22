@@ -23,10 +23,14 @@ Use this character consistently across all blocks so state accumulates meaningfu
    - Bonds: *"The Platinum Flame"*
    - Flaws: *"Distrusts mercy in others"*
    - Alignment: Lawful / Good
-7. When asked about companions, say: *"A halfling guide named Sorra travels with me. She just wants to stay alive and never walks in straight lines. She's cautiously friendly."*
-8. When asked about starting resources, say: *"I have a little coin — modest circumstances. I owe a debt to the caravan master who got me out."*
-9. Confirm the build. The GPT should call `POST /session/new`.
-10. Note the session ID.
+7. When asked about companions, say: *"A halfling wayfinder named Sorra travels with me. She's from wetlands stock, raised as an outlander, and signed on as a guide because she wants to stay alive — she never walks in straight lines."*
+8. When the GPT walks through Sorra's ancestry/culture/background/focus, confirm:
+   - halfling / wetlands / outlander / wayfinder
+   - Motivation: "Stay alive"
+   - Quirk: "Never walks in straight lines"
+9. When asked about starting resources, say: *"I have a little coin — modest circumstances. I owe a debt to the caravan master who got me out."*
+10. Confirm the build. The GPT should call `POST /session/new`.
+11. Note the session ID.
 
 ### Pass Criteria
 - [ ] GPT called `GET /options` before presenting any choices
@@ -36,7 +40,10 @@ Use this character consistently across all blocks so state accumulates meaningfu
 - [ ] GPT asked about origin, motivations, quirks, bonds, flaws, and alignment — conversationally, not as a form
 - [ ] GPT asked about companions before confirming the build
 - [ ] GPT asked about starting resources
-- [ ] Character summary includes identity highlights, Sorra as a companion, and wealth tier
+- [ ] GPT walked through Sorra's ancestry, culture, background, and focus from /options — not invented
+- [ ] Sorra is stored as a CompanionEnvelope in world.companions
+- [ ] Sorra's bond_links.primary references the player character
+- [ ] No old disposition/status fields appear in the stored companion record
 - [ ] Domain scores match: Pow 45, Agi 35, Per 35, End 43, Int 25, Wil 47, Pre 55
 - [ ] Knowledge tags: discipline 2, command 2 (stacked — Devoted + Noble both grant Command K1), courage 1, diplomacy 1
 - [ ] Application tags: sacred_rites 1, shields_armor 1, musical_instruments 1
@@ -73,7 +80,7 @@ Use this character consistently across all blocks so state accumulates meaningfu
 ### Pass Criteria
 - [ ] GPT acknowledged Sorra's presence when presenting choices
 - [ ] When Sorra participated in a risky action, the GPT applied the same outcome degree to her
-- [ ] GPT updated Sorra's HP or status in the saved state if she was harmed
+- [ ] GPT updated Sorra's envelope companion.hp in the saved state if she was harmed
 - [ ] In the social interaction, GPT either applied companion reputation to the party calculation or noted Sorra as unknown to that faction
 - [ ] GPT did not treat Sorra as a nameless extra — she had narrative presence
 
@@ -149,7 +156,7 @@ Use this character consistently across all blocks so state accumulates meaningfu
 - [ ] GPT called `GET /state/{session_id}`
 - [ ] Character state matches where Block 4 ended (HP, location, turn number)
 - [ ] Identity fields are present and unchanged
-- [ ] Sorra appears in companions with correct status and disposition
+- [ ] Sorra appears in world.companions as a CompanionEnvelope with matching id, name, and bond_links
 - [ ] Reputation entries are present for any factions interacted with
 - [ ] Economy state (coin, wealth_tier, obligations) matches last saved values
 - [ ] Log entries from previous blocks are present
@@ -186,7 +193,7 @@ Use this character consistently across all blocks so state accumulates meaningfu
 - [ ] GPT saved state with `hp.current = 0`
 - [ ] Game did not continue as if nothing happened
 - [ ] No "death saving throws" or D&D mechanics appeared
-- [ ] If Sorra was also present and harmed, her status was updated in `world.companions`
+- [ ] If Sorra was also present and harmed, her envelope's `companion.hp` was updated via state delta
 
 ---
 

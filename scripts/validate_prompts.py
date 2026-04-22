@@ -3,15 +3,19 @@
 
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
+
+import yaml
 
 
 REQUIRED_PROMPTS = {
     "prompts/engine.md": ["# Mystic Weave", "## Turn Loop", "## API Reference"],
-    "prompts/character_creation.md": ["# Mystic Weave", "## Character Creation Flow", "## API Fields for Character Creation"],
-    "prompts/world_rules.md": ["#", "##"],
-    "prompts/economy_rules.md": ["# Mystic Weave — Economy Rules", "## Coin Economy Rules", "## Barter Economy Rules"],
+    "prompts/character-creation.md": ["# Mystic Weave", "## Character Creation Flow", "## API Fields for Character Creation"],
+    "prompts/companion-rules.md": ["# Mystic Weave — Companion Rules", "## Three-Tier Model", "## GPT Conduct Rules"],
+    "prompts/world-rules.md": ["#", "##"],
+    "prompts/economy-rules.md": ["# Mystic Weave — Economy Rules", "## Coin Economy Rules", "## Barter Economy Rules"],
     "prompts/world.md": ["# Drakenvale", "## Governance", "## Reference Files"],
     "prompts/geography.md": ["# Drakenvale — Geography", "## Formation", "## Major Regions"],
     "prompts/history.md": ["#", "##"],
@@ -38,7 +42,7 @@ CALENDAR_REQUIRED_MARKERS = [
 KNOWN_CONTRADICTION_WARNING_MARKERS = {
     "economy_structure": [
         ("prompts/world.md", "## Economy"),
-        ("prompts/economy_rules.md", "## Barter Economy Rules"),
+        ("prompts/economy-rules.md", "## Barter Economy Rules"),
     ],
     "group_canon_merge": [
         ("prompts/world.md", "Drakenvale is sustained by a small number of major institutions whose detailed structure belongs in `groups.md`."),
@@ -49,6 +53,71 @@ KNOWN_CONTRADICTION_WARNING_MARKERS = {
         ("prompts/groups.md", "### Arcane Conservatory"),
     ],
 }
+
+KEBAB_CASE_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+WORLD_META_TAGS = {"canonical", "canonical-realm", "placeholder", "TODO", "draft"}
+FRONTMATTER_RE = re.compile(r"^---\n(.*?)\n---\n", re.DOTALL)
+TAG_SECTION_RE = re.compile(r"^## Tags\n\n((?:- .+\n)+)", re.MULTILINE)
+
+
+def _validate_vault_markdown(repo_root: Path, failures: list[str]) -> None:
+    vault_root = repo_root / "prompts" / "world_vault"
+    for path in sorted(vault_root.rglob("*.md")):
+        if path.name.startswith("_"):
+            continue
+        rel_path = path.relative_to(repo_root).as_posix()
+        text = path.read_text(encoding="utf-8")
+        frontmatter_match = FRONTMATTER_RE.search(text)
+        if not frontmatter_match:
+            continue
+
+        frontmatter_text = frontmatter_match.group(1)
+        try:
+            frontmatter = yaml.safe_load(frontmatter_text) or {}
+        except yaml.YAMLError as exc:
+            first_line = str(exc).splitlines()[0]
+            failures.append(f"{rel_path} frontmatter YAML error: {first_line}")
+            continue
+
+        if not isinstance(frontmatter, dict):
+            failures.append(f"{rel_path} frontmatter must parse to mapping")
+            continue
+
+        world_id = frontmatter.get("id")
+        if world_id is None:
+            continue
+        if not isinstance(world_id, str) or not world_id:
+            failures.append(f"{rel_path} frontmatter id must be non-empty string")
+            continue
+
+        expected_stem = world_id.replace("-", "_")
+        if path.stem != expected_stem:
+            failures.append(f"{rel_path} stem/id mismatch stem={path.stem} id={world_id}")
+
+        frontmatter_tags = frontmatter.get("tags", [])
+        if not isinstance(frontmatter_tags, list):
+            failures.append(f"{rel_path} frontmatter tags must be a list")
+            frontmatter_tags = []
+
+        body_match = TAG_SECTION_RE.search(text)
+        body_tags = [line[2:].strip() for line in body_match.group(1).splitlines()] if body_match else []
+
+        for source_name, tags in (("frontmatter", frontmatter_tags), ("## Tags", body_tags)):
+            seen: set[str] = set()
+            for index, tag in enumerate(tags):
+                if not isinstance(tag, str):
+                    failures.append(f"{rel_path} {source_name}[{index}] tag must be string")
+                    continue
+                if not KEBAB_CASE_RE.fullmatch(tag):
+                    failures.append(f"{rel_path} {source_name}[{index}] must be kebab-case (got {tag})")
+                if tag in WORLD_META_TAGS:
+                    failures.append(f"{rel_path} {source_name}[{index}] forbidden meta tag {tag}")
+                if tag in seen:
+                    failures.append(f"{rel_path} {source_name}[{index}] duplicate tag {tag}")
+                seen.add(tag)
+
+        if set(frontmatter_tags) != set(body_tags):
+            failures.append(f"{rel_path} frontmatter/body tag sets differ")
 
 
 def main() -> None:
@@ -102,6 +171,8 @@ def main() -> None:
                 warnings.append(
                     f"[{check_name}] missing marker in {rel_path}: {marker}"
                 )
+
+    _validate_vault_markdown(repo_root, failures)
 
     if failures:
         print("❌ Prompt validation failed")

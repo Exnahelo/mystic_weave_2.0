@@ -69,6 +69,7 @@ async def new_session(
         "goal":       body.goal,
         "turn":       1,
         "companions": [c.model_dump() for c in body.companions] if body.companions else [],
+        "companion_archive": [],
         "economy":    body.starting_economy.model_dump(),
         "politics": {
             "faction_memberships":  [],

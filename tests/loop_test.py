@@ -8,7 +8,7 @@ Tests the full game loop against a running local (or Railway) instance:
   3. Dice resolution (d100 roll-under, degree of success, criticals)
   4. Location graph (create, retrieve, connections, discovery)
   5. Character re-seeding
-  6. Edge cases (invalid species, bad session, hp=0)
+  6. Edge cases (invalid ancestry, bad session, hp=0)
 
 Usage:
     # Against local server
@@ -125,15 +125,18 @@ def part1(client: httpx.Client) -> str | None:
     check("1.1.a", r.status_code == 200, f"GET /options → {r.status_code}")
     if r.status_code == 200:
         opts = r.json()
-        check("1.1.b", len(opts.get('species', [])) == 8, f"species count: {len(opts.get('species', []))}")
+        check("1.1.b", len(opts.get("ancestries", [])) == 8, f"ancestries count: {len(opts.get('ancestries', []))}")
+        check("1.1.ba", len(opts.get("cultures", [])) >= 1, f"cultures count: {len(opts.get('cultures', []))}")
         check("1.1.c", len(opts.get("focus", [])) == 7, f"focus count: {len(opts.get('focus', []))}")
         check("1.1.d", len(opts.get("backgrounds", [])) == 8, f"backgrounds count: {len(opts.get('backgrounds', []))}")
         check("1.1.da", isinstance(opts.get("mundane_items"), list), "mundane_items is a list")
         check("1.1.db", isinstance(opts.get("magical_items"), list), "magical_items is a list")
         check("1.1.dc", isinstance(opts.get("apparel_items"), list), "apparel_items is a list")
-        species_indices = [s["index"] for s in opts.get('species', [])]
-        check("1.1.e", "dragonborn" in species_indices, f"'dragonborn' in species")
-        check("1.1.f", "human" in species_indices, f"'human' in species")
+        ancestry_indices = [s["index"] for s in opts.get("ancestries", [])]
+        check("1.1.e", "dragonborn" in ancestry_indices, f"'dragonborn' in ancestries")
+        check("1.1.f", "human" in ancestry_indices, f"'human' in ancestries")
+        culture_indices = [c["index"] for c in opts.get("cultures", [])]
+        check("1.1.fa", "drakenvale_city" in culture_indices, f"'drakenvale_city' in cultures")
         focus_indices = [f["index"] for f in opts.get("focus", [])]
         check("1.1.g", "devoted" in focus_indices, f"'devoted' in focus")
         bg_indices = [b["index"] for b in opts.get("backgrounds", [])]
@@ -165,29 +168,30 @@ def part1(client: httpx.Client) -> str | None:
 
     # Core identity fields
     check("1.3.b", char["name"] == "Krath", f"name: {char['name']}")
-    check("1.3.c", char['species'] == "dragonborn", f"species: {char['species']}")
+    check("1.3.c", char["ancestry"] == "dragonborn", f"ancestry: {char['ancestry']}")
+    check("1.3.ca", char["culture"] == "drakenvale_city", f"culture: {char['culture']}")
     check("1.3.d", char["focus"] == "devoted", f"focus: {char['focus']}")
     check("1.3.e", char["background"] == "soldier", f"background: {char['background']}")
     check("1.3.f", char["hp"]["current"] == 100, f"hp: {char['hp']}")
     check("1.3.g", char["hp"]["max"] == 100, f"max hp: {char['hp']['max']}")
 
-    # Domain scores (dragonborn base + adjustments)
+    # Domain scores and seeded tags (current ancestry/culture/focus/background stack)
     domains = char["domains"]
-    check("1.3.h", domains["presence"] == 55, f"presence: {domains['presence']} (dragonborn primary)")
-    check("1.3.i", domains["will"] == 47, f"will: {domains['will']} (45 base + 2 adj)")
-    check("1.3.j", domains["endurance"] == 43, f"endurance: {domains['endurance']} (40 base + 3 adj)")
+    check("1.3.h", domains["presence"] == 53, f"presence: {domains['presence']}")
+    check("1.3.i", domains["will"] == 53, f"will: {domains['will']}")
+    check("1.3.j", domains["endurance"] == 46, f"endurance: {domains['endurance']}")
 
     # Competency tags
     knowledge = char.get("knowledge", {})
-    check("1.3.k", knowledge.get("discipline") == 2, f"discipline K2: {knowledge.get('discipline')}")
-    check("1.3.l", knowledge.get("courage") == 1, f"courage K1: {knowledge.get('courage')}")
-    check("1.3.m", knowledge.get("command") == 1, f"command K1: {knowledge.get('command')}")
-    check("1.3.n", knowledge.get("intimidation") == 1, f"intimidation K1: {knowledge.get('intimidation')}")
-    check("1.3.o", knowledge.get("exertion") == 1, f"exertion K1: {knowledge.get('exertion')}")
-
     application = char.get("application", {})
-    check("1.3.p", application.get("sacred_rites") == 1, f"sacred_rites A1: {application.get('sacred_rites')}")
-    check("1.3.q", application.get("shields_armor") == 1, f"shields_armor A1: {application.get('shields_armor')}")
+    check("1.3.k", knowledge.get("discipline") == 2, f"discipline K2: {knowledge.get('discipline')}")
+    check("1.3.l", knowledge.get("lore") == 1, f"lore K1: {knowledge.get('lore')}")
+    check("1.3.m", knowledge.get("influence") == 1, f"influence K1: {knowledge.get('influence')}")
+    check("1.3.n", application.get("command") == 1, f"command A1: {application.get('command')}")
+    check("1.3.o", application.get("courage") == 1, f"courage A1: {application.get('courage')}")
+
+    check("1.3.p", char.get("fields", {}).get("sacred") == 1, f"sacred field T1: {char.get('fields', {}).get('sacred')}")
+    check("1.3.q", application.get("medium_armor") == 1, f"medium_armor A1: {application.get('medium_armor')}")
     check("1.3.r", application.get("melee") == 1, f"melee A1: {application.get('melee')}")
 
     # v3.1.0 — identity block
@@ -244,6 +248,10 @@ def part1(client: httpx.Client) -> str | None:
 
 def part2(client: httpx.Client, session_id: str) -> None:
     section("PART 2 — State Persistence")
+    companion_id: str | None = None
+    second_companion_id: str | None = None
+    handler_id = "krath"
+    wolf_template: dict | None = None
 
     subsection("Test 2.1 — GET /state/{session_id}")
     r = client.get(f"/state/{session_id}")
@@ -262,11 +270,195 @@ def part2(client: httpx.Client, session_id: str) -> None:
         check("2.1.j", isinstance(state["world"].get("economy"), dict), f"economy persisted")
         check("2.1.k", isinstance(state["world"].get("politics"), dict), f"politics persisted")
 
+    subsection("Test 2.1b — Companion lifecycle")
+    options_resp = client.get("/options")
+    check("2.1b.a", options_resp.status_code == 200, f"GET /options for companion catalog → {options_resp.status_code}")
+    if options_resp.status_code == 200:
+        creature_catalog = options_resp.json().get("creature_catalog", [])
+        wolf_template = next((c for c in creature_catalog if c.get("subspecies") == "moonthorn_wolf"), None)
+        check("2.1b.b", wolf_template is not None, "moonthorn_wolf present in /options creature_catalog")
+
+    if wolf_template is not None:
+        creature_payload = {
+            "name": "Shadowmere",
+            "species": wolf_template["species"],
+            "subtype": wolf_template["subspecies"],
+            "size": wolf_template["size"],
+            "age_category": wolf_template["age_category"],
+            "tactical_roles": wolf_template["tactical_roles_defaults"],
+            "training_level": "trained",
+            "bond_level": "bonded",
+            "natural_abilities": wolf_template["natural_abilities"],
+            "learned_commands": ["heel"],
+            "command_notes": "Reliable on familiar roads.",
+            "movement_modes": wolf_template["movement_modes"],
+            "natural_weapons": wolf_template["natural_weapons"],
+            "carrying_capacity": wolf_template["carrying_capacity"],
+            "hp": {"current": wolf_template["base_hp"], "max": wolf_template["base_hp"]},
+            "domains": wolf_template["base_domains"],
+            "temperament": wolf_template["temperament"],
+            "bond_links": {"primary": handler_id},
+        }
+
+        create_resp = client.post(
+            "/companion/new",
+            json={
+                "session_id": session_id,
+                "handler_id": handler_id,
+                "tier": "creature",
+                "companion": creature_payload,
+            },
+        )
+        check("2.1b.c", create_resp.status_code == 201, f"POST /companion/new → {create_resp.status_code}")
+        if create_resp.status_code == 201:
+            created = create_resp.json()
+            companion_id = created["companion_id"]
+            check("2.1b.d", companion_id == f"{handler_id}_moonthorn_wolf", f"companion_id format: {companion_id}")
+
+        invalid_handler_resp = client.post(
+            "/companion/new",
+            json={
+                "session_id": session_id,
+                "handler_id": "not_krath",
+                "tier": "creature",
+                "companion": creature_payload,
+            },
+        )
+        check("2.1b.e", invalid_handler_resp.status_code == 409, f"invalid handler_id rejected → {invalid_handler_resp.status_code}")
+
+        second_resp = client.post(
+            "/companion/new",
+            json={
+                "session_id": session_id,
+                "handler_id": handler_id,
+                "tier": "creature",
+                "companion": {**creature_payload, "name": "Shadowmere II"},
+            },
+        )
+        check("2.1b.f", second_resp.status_code == 201, f"second same-subspecies companion → {second_resp.status_code}")
+        if second_resp.status_code == 201:
+            second_companion_id = second_resp.json()["companion_id"]
+            check("2.1b.g", second_companion_id == f"{handler_id}_moonthorn_wolf_2", f"collision suffix id: {second_companion_id}")
+
+        if companion_id is not None:
+            get_resp = client.get(f"/companion/{companion_id}", params={"session_id": session_id})
+            check("2.1b.h", get_resp.status_code == 200, f"GET /companion/{{id}} → {get_resp.status_code}")
+            if get_resp.status_code == 200:
+                got = get_resp.json()
+                check("2.1b.i", got["companion_id"] == companion_id, f"fetched companion_id matches: {got['companion_id']}")
+                check("2.1b.j", got["archived"] is False, f"include_archived=false returns active record")
+
+            state_for_delta = client.get(f"/state/{session_id}")
+            check("2.1b.k", state_for_delta.status_code == 200, f"GET /state before companion delta → {state_for_delta.status_code}")
+            if state_for_delta.status_code == 200:
+                state_payload = state_for_delta.json()
+                updated_companions = state_payload["world"]["companions"]
+                target = next((entry for entry in updated_companions if entry["id"] == companion_id), None)
+                if target is not None:
+                    target["companion"]["hp"]["current"] = target["companion"]["hp"]["current"] - 2
+                delta_resp = client.post(
+                    f"/state/{session_id}/delta",
+                    json={
+                        "world": {"companions": updated_companions},
+                        "log_entry": "Shadowmere took 2 damage in a scouting mishap.",
+                    },
+                )
+                check("2.1b.l", delta_resp.status_code == 200, f"POST /state/{{session_id}}/delta companion update → {delta_resp.status_code}")
+                if delta_resp.status_code == 200:
+                    delta_world = delta_resp.json()["world"]
+                    updated = next((entry for entry in delta_world["companions"] if entry["id"] == companion_id), None)
+                    check("2.1b.m", updated is not None, "updated companion still present after delta")
+                    if updated is not None:
+                        check("2.1b.n", updated["companion"]["hp"]["current"] == wolf_template["base_hp"] - 2,
+                              f"companion hp updated via delta: {updated['companion']['hp']['current']}")
+
+            transition_payload = {
+                "name": "Shadowmere",
+                "species": wolf_template["species"],
+                "subtype": wolf_template["subspecies"],
+                "size": wolf_template["size"],
+                "age_category": wolf_template["age_category"],
+                "tactical_roles": wolf_template["tactical_roles_defaults"],
+                "training_level": "trained",
+                "bond_level": "bonded",
+                "natural_abilities": wolf_template["natural_abilities"],
+                "learned_commands": ["heel"],
+                "command_notes": "Now reacts to strange light.",
+                "movement_modes": wolf_template["movement_modes"],
+                "natural_weapons": wolf_template["natural_weapons"],
+                "carrying_capacity": wolf_template["carrying_capacity"],
+                "hp": {"current": wolf_template["base_hp"] - 2, "max": wolf_template["base_hp"]},
+                "domains": wolf_template["base_domains"],
+                "temperament": wolf_template["temperament"],
+                "bond_links": {"primary": handler_id},
+                "exceptional_profile": {
+                    "sapience": "partial",
+                    "communication": "instinctive",
+                    "autonomy": "moderate",
+                },
+                "motivations": ["Protect Krath"],
+                "supernatural_traits": ["heartstone_awakened"],
+                "tier_history": [],
+            }
+            transition_resp = client.post(
+                f"/companion/{companion_id}/transition",
+                json={
+                    "session_id": session_id,
+                    "new_companion": transition_payload,
+                    "trigger": "Awakened during contact with the Heartstone",
+                },
+            )
+            check("2.1b.o", transition_resp.status_code == 200, f"POST /companion/{{id}}/transition → {transition_resp.status_code}")
+            if transition_resp.status_code == 200:
+                transitioned = transition_resp.json()
+                check("2.1b.p", transitioned["companion_id"] == companion_id, f"transition preserves companion_id: {transitioned['companion_id']}")
+
+            post_transition_get = client.get(f"/companion/{companion_id}", params={"session_id": session_id})
+            check("2.1b.q", post_transition_get.status_code == 200, f"GET transitioned companion → {post_transition_get.status_code}")
+            if post_transition_get.status_code == 200:
+                exceptional = post_transition_get.json()
+                tier_history = exceptional["companion"].get("tier_history", [])
+                check("2.1b.r", len(tier_history) == 1, f"tier_history entry count: {len(tier_history)}")
+                if tier_history:
+                    check("2.1b.s", tier_history[0]["from_tier"] == "creature", f"from_tier: {tier_history[0]['from_tier']}")
+                    check("2.1b.t", tier_history[0]["to_tier"] == "exceptional", f"to_tier: {tier_history[0]['to_tier']}")
+                    check("2.1b.u", bool(tier_history[0].get("trigger")), f"transition trigger recorded")
+
+            state_after_transition = client.get(f"/state/{session_id}")
+            check("2.1b.v", state_after_transition.status_code == 200, f"GET /state after transition → {state_after_transition.status_code}")
+            if state_after_transition.status_code == 200:
+                world_after = state_after_transition.json()["world"]
+                archive = world_after.get("companion_archive", [])
+                check("2.1b.w", len(archive) == 1, f"world.companion_archive count: {len(archive)}")
+                if archive:
+                    check("2.1b.x", archive[0]["id"] == companion_id, f"archived record id matches transitioned companion")
+
+            already_exceptional_resp = client.post(
+                f"/companion/{companion_id}/transition",
+                json={
+                    "session_id": session_id,
+                    "new_companion": transition_payload,
+                    "trigger": "Second invalid transition",
+                },
+            )
+            check("2.1b.y", already_exceptional_resp.status_code == 422, f"transition on exceptional rejected → {already_exceptional_resp.status_code}")
+
+            missing_transition_resp = client.post(
+                "/companion/nonexistent_id/transition",
+                json={
+                    "session_id": session_id,
+                    "new_companion": transition_payload,
+                    "trigger": "Missing companion",
+                },
+            )
+            check("2.1b.z", missing_transition_resp.status_code == 404, f"transition nonexistent companion → {missing_transition_resp.status_code}")
+
     subsection("Test 2.2 — POST /state/{session_id} (save + log)")
     save_body = {
         "character": {
             "name": "Krath",
-            'species': "dragonborn",
+            "ancestry": "dragonborn",
+            "culture": "drakenvale_city",
             "focus": "devoted",
             "background": "soldier",
             "hp": {"current": 85, "max": 100},
@@ -336,34 +528,8 @@ def part2(client: httpx.Client, session_id: str) -> None:
             "goal": "test the loop",
             "turn": 2,
             # v3.1.0 fields
-            "companions": [
-                {
-                    "id": "companion_001",
-                    "name": "Sorra",
-                    'species': "halfling",
-                    "role": "guide",
-                    "identity": {
-                        "origin": "",
-                        "motivations": ["Stay alive"],
-                        "quirks": ["Never walks in straight lines"],
-                        "bonds": [],
-                        "flaws": [],
-                        "wound": "",
-                        "alignment": {
-                            "order": "neutral",
-                            "intent": "neutral",
-                            "ethos_note": "",
-                        },
-                    },
-                    "hp": {"current": 100, "max": 100},
-                    "domains": None,
-                    "knowledge": {},
-                    "application": {},
-                    "status": "active",
-                    "disposition": 30,
-                    "reputation": [],
-                }
-            ],
+                "companions": [],
+                "companion_archive": [],
             "economy": {
                 "wealth_tier": "modest",
                 "coin": 700,
@@ -422,11 +588,8 @@ def part2(client: httpx.Client, session_id: str) -> None:
 
         # v3.1.0 — companions round-trip
         companions = world.get("companions", [])
-        check("2.2.o", len(companions) == 1, f"companion count: {len(companions)}")
-        sorra = companions[0]
-        check("2.2.p", sorra["name"] == "Sorra", f"companion name: {sorra['name']}")
-        check("2.2.q", sorra["status"] == "active", f"companion status: {sorra['status']}")
-        check("2.2.r", sorra["disposition"] == 30, f"companion disposition: {sorra['disposition']}")
+        check("2.2.o", len(companions) == 0, f"full save can carry empty companions list: {len(companions)}")
+        check("2.2.p", isinstance(world.get("companion_archive"), list), "companion_archive round-trips as a list")
 
         # v3.1.0 — economy round-trip
         economy = world.get("economy", {})
@@ -555,8 +718,9 @@ def part5(client: httpx.Client, session_id: str) -> None:
     if r.status_code == 200:
         char = r.json()["character"]
         check("5.1.b", char["name"] == "Thalia", f"name: {char['name']}")
-        check("5.1.c", char['species'] == "elf", f"species: {char['species']}")
-        check("5.1.d", char["domains"]["agility"] == 58, f"agility: {char['domains']['agility']} (55+3)")
+        check("5.1.c", char["ancestry"] == "elf", f"ancestry: {char['ancestry']}")
+        check("5.1.ca", char["culture"] == "drakenvale_city", f"culture: {char['culture']}")
+        check("5.1.d", char["domains"]["agility"] == 62, f"agility: {char['domains']['agility']}")
 
         # Stalker + Criminal both grant lockpicking_traps → stacks to T2
         app_tags = char.get("application", {})
@@ -587,7 +751,7 @@ def part5(client: httpx.Client, session_id: str) -> None:
 def part6(client: httpx.Client) -> None:
     section("PART 6 — Edge Cases")
 
-    subsection("Test 6.1 — Invalid species")
+    subsection("Test 6.1 — Invalid ancestry")
     r = client.post("/session/new", json={
         "character_name": "Bad",
         "ancestry": "goblin",
@@ -595,7 +759,7 @@ def part6(client: httpx.Client) -> None:
         "focus": "devoted",
         "background": "soldier",
     })
-    check("6.1.a", r.status_code == 422, f"invalid species → {r.status_code}")
+    check("6.1.a", r.status_code == 422, f"invalid ancestry → {r.status_code}")
 
     subsection("Test 6.2 — Invalid focus")
     r = client.post("/session/new", json={
@@ -607,16 +771,16 @@ def part6(client: httpx.Client) -> None:
     })
     check("6.2.a", r.status_code == 422, f"invalid focus → {r.status_code}")
 
-    subsection("Test 6.3 — Adjustment points exceed 5")
+    subsection("Test 6.3 — Adjustment points exceed total pool")
     r = client.post("/session/new", json={
         "character_name": "Bad",
         "ancestry": "human",
         "culture": "drakenvale_city",
         "focus": "champion",
         "background": "soldier",
-        "adjustment_points": {"power": 3, "endurance": 3},
+        "adjustment_points": {"power": 5, "endurance": 5, "will": 1},
     })
-    check("6.3.a", r.status_code == 422, f"excess adjustment → {r.status_code}")
+    check("6.3.a", r.status_code == 422, f"excess total adjustment → {r.status_code}")
 
     subsection("Test 6.4 — Character create for nonexistent session")
     r = client.post("/character/create", json={

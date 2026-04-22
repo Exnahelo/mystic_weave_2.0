@@ -7,7 +7,6 @@ connections:
 - ashfield
 - drakenvale-city
 - hall-of-scales
-tags:
 known_npcs: []
 threat_level: 0
 discovered: true

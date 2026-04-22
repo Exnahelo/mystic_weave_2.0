@@ -39,14 +39,14 @@ Python 3.13 · FastAPI · uvicorn · asyncpg · Pydantic v2 · Postgres on Railw
 - **Economy** — wealth tier (universal) + raw coin (currency regions); trade goods and obligations
 - **Politics** — faction memberships, active obligations, legal standing, leverage, tensions, Conclave status
 
-System reference: `prompts/world_rules.md` and `prompts/character_creation.md`
+System reference: `prompts/world-rules.md` and `prompts/character-creation.md`
 
 ## 2026-04-10 Content / World Topology Notes
 
 - Added canonical rules/reference docs for magic, difficulty, and items:
-  - `prompts/magic_rules.md`
-  - `prompts/difficulty_rules.md`
-  - `prompts/items_rules.md`
+  - `prompts/magic-rules.md`
+  - `prompts/difficulty-rules.md`
+  - `prompts/items-rules.md`
 - World topology audit completed for the legacy flat world YAML set that has since been reorganized under `data/world/`.
 - Corrected one in-map reciprocity gap:
   - `stronghold-of-drakenvale` ↔ `volcanic-highlands`
@@ -57,7 +57,7 @@ System reference: `prompts/world_rules.md` and `prompts/character_creation.md`
   - `dracelune` → `feywood-glade-border`
   - `volcanic-highlands` → `draconic-grasslands`
 
-Reference: `WORLD_TOPOLOGY_BASELINE.md`
+Reference: `world-topology-baseline.md`
 
 ## v4.1.0 Changelog
 
@@ -109,20 +109,20 @@ data/
     ancestry.json
     culture.json
     focus.json
-    backgrounds.json
-    starting-wealth.json
+    background.json
+    starting_wealth.json
   economy/
     currency.json
     prices.json
-    regional-nodes.json
+    regional_nodes.json
   items/
     ammunition.json
     apparel.json
     armor.json
     gear.json
-    magical.json
-    notable.json
-    weapons.json
+    magical_item.json
+    notable_item.json
+    weapon.json
   magic/
     alchemy.json
     binding.json
@@ -141,14 +141,14 @@ data/
 docs/                  # Project conventions and audit notes
 prompts/               # GPT prompt corpus + markdown world-vault mirrors
   engine.md            # GPT system prompt — paste into GPT builder Instructions (<8000 chars)
-  character_creation.md
-  world_rules.md
+  character-creation.md
+  world-rules.md
   world.md
   geography.md
   history.md
   groups.md
   npcs.md
-  design_notes.md      # Internal — do NOT upload to GPT builder
+  design-notes.md      # Internal — do NOT upload to GPT builder
 schemas/
   openapi.yaml         # OpenAPI document format 3.1.0, schema/release version 4.1.0 — upload to GPT builder Actions
 scripts/
@@ -156,7 +156,7 @@ scripts/
   verify_production_contract.py  # Validate production against repo expectations
 tests/
   loop_test.py         # Full API loop test (local or Railway)
-  gpt_test_template.md # Manual GPT live test script (10 blocks)
+  gpt-test-template.md # Manual GPT live test script (10 blocks)
   unit/                # Fast deterministic unit tests
   contract/            # OpenAPI contract assertions
 ```
@@ -194,7 +194,6 @@ Note: Railway deploys run migrations explicitly in predeploy using `DATABASE_URL
 World content authority:
 - `data/world/` = canonical structured runtime world layer
 - `prompts/world_vault/` = markdown authoring/reference layer
-- `prompts/world/` = legacy flat YAML source for unmigrated nodes only
 
 ### Smoke Tests
 
@@ -242,7 +241,7 @@ Start command (in `railway.toml`):
 uvicorn api.main:app --host 0.0.0.0 --port $PORT
 ```
 
-Operational troubleshooting guide: `OPERATIONAL_RUNBOOK.md`
+Operational troubleshooting guide: `operational-runbook.md`
 
 ### Production Verification
 

@@ -32,7 +32,7 @@ def _load_expected_indices(repo_root: Path) -> tuple[set[str], set[str], set[str
         load_indices("characters/ancestry.json"),
         load_indices("characters/culture.json"),
         load_indices("characters/focus.json"),
-        load_indices("characters/backgrounds.json"),
+        load_indices("characters/background.json"),
     )
 
 

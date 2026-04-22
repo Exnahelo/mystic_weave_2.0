@@ -1,5 +1,5 @@
 """
-models.py — Pydantic v2 models for all game entities.
+models.py — Pydantic v2 models for core game entities.
 
 All models use Pydantic v2 syntax. Designed for Mystic Weave 4.0:
 d100 roll-under, domain scores, knowledge/application competency tiers,
@@ -8,7 +8,6 @@ background, and focus.
 
 v3.1.0 additions:
   CharacterModel — identity, equipment, reputation blocks
-  CompanionModel — lightweight companion schema
   WorldModel     — economy, politics blocks
 
 v4.0.0 additions:
@@ -20,7 +19,11 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
+from typing import TYPE_CHECKING
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+
+if TYPE_CHECKING:
+    from api.companions import ArchivedCompanionEnvelope, CompanionEnvelope
 
 
 # ---------------------------------------------------------------------------
@@ -45,12 +48,6 @@ class WealthTier(str, Enum):
     comfortable = "comfortable"
     wealthy     = "wealthy"
     affluent    = "affluent"
-
-
-class CompanionStatus(str, Enum):
-    active        = "active"
-    incapacitated = "incapacitated"
-    departed      = "departed"
 
 
 class EquipmentTag(str, Enum):
@@ -185,43 +182,6 @@ class ReputationEntry(BaseModel):
     @field_validator("standing")
     @classmethod
     def clamp_standing(cls, v: int) -> int:
-        return max(-100, min(100, v))
-
-
-# ---------------------------------------------------------------------------
-# Companion model
-# ---------------------------------------------------------------------------
-
-class CompanionModel(BaseModel):
-    """
-    Lightweight companion schema. Not a full PC — no focus/background mechanics.
-    Domains and tags are optional; include only if the companion participates
-    in rolls. Status defaults to active.
-
-    Party reputation formula (computed by GPT at resolution time, not stored):
-      known_avg  = mean(standing for members with an entry for the faction)
-      ratio      = known_count / total_party_size
-      party_rep  = known_avg × ratio
-    """
-    model_config = ConfigDict(extra="forbid")
-
-    id:          str
-    name:        str
-    species:     str              = "unknown"
-    role:        str              = ""        # narrative role, e.g. "scout", "healer"
-    identity:    Identity         = Field(default_factory=Identity)
-    hp:          HP               = Field(default_factory=lambda: HP(current=100, max=100))
-    domains:     DomainScores | None = None  # omit for purely narrative companions
-    knowledge:   dict[str, int]   = Field(default_factory=dict)
-    application: dict[str, int]   = Field(default_factory=dict)
-    status:      CompanionStatus  = CompanionStatus.active
-    # Disposition toward the player character (-100 to +100)
-    disposition: int              = 0
-    reputation:  list[ReputationEntry] = Field(default_factory=list)
-
-    @field_validator("disposition")
-    @classmethod
-    def clamp_disposition(cls, v: int) -> int:
         return max(-100, min(100, v))
 
 
@@ -426,7 +386,8 @@ class WorldModel(BaseModel):
     turn:       int = 1
 
     # New in v3.1.0
-    companions: list[CompanionModel] = Field(default_factory=list)
+    companions: list["CompanionEnvelope"] = Field(default_factory=list)
+    companion_archive: list["ArchivedCompanionEnvelope"] = Field(default_factory=list)
     economy:    Economy              = Field(default_factory=Economy)
     politics:   Politics             = Field(default_factory=Politics)
 
@@ -485,7 +446,8 @@ class WorldStateDelta(BaseModel):
     threat: str | None = None
     goal: str | None = None
     turn: int | None = None
-    companions: list[CompanionModel] | None = None
+    companions: list["CompanionEnvelope"] | None = None
+    companion_archive: list["ArchivedCompanionEnvelope"] | None = None
     economy: EconomyDelta | None = None
     politics: Politics | None = None
     time: TimeState | None = None
@@ -576,7 +538,7 @@ class NewSessionRequest(BaseModel):
     # New in v3.1.0 — all optional; GPT gathers these during character creation
     identity:         Identity          = Field(default_factory=Identity)
     starting_economy: Economy           = Field(default_factory=Economy)
-    companions:       list[CompanionModel] | None = None
+    companions:       list["CompanionEnvelope"] | None = None
     equipment:        Equipment | None = None
 
 
@@ -840,6 +802,21 @@ class OptionsResponse(BaseModel):
     mundane_items: list[ItemOption] = Field(default_factory=list)
     magical_items: list[ItemOption] = Field(default_factory=list)
     apparel_items: list[ItemOption] = Field(default_factory=list)
+    creature_catalog: list[dict] = Field(default_factory=list)
+    exceptional_catalog: list[dict] = Field(default_factory=list)
+    natural_abilities: list[dict] = Field(default_factory=list)
+    learned_commands: list[dict] = Field(default_factory=list)
+    tactical_roles: list[dict] = Field(default_factory=list)
+    training_levels: list[str] = Field(default_factory=list)
+    bond_levels: list[str] = Field(default_factory=list)
+    age_categories: list[str] = Field(default_factory=list)
+    creature_sizes: list[str] = Field(default_factory=list)
+    carrying_capacities: list[str] = Field(default_factory=list)
+    movement_modes: list[str] = Field(default_factory=list)
+    natural_weapons: list[str] = Field(default_factory=list)
+    sapience_levels: list[str] = Field(default_factory=list)
+    communication_levels: list[str] = Field(default_factory=list)
+    autonomy_levels: list[str] = Field(default_factory=list)
 
 
 class TagsResponse(BaseModel):

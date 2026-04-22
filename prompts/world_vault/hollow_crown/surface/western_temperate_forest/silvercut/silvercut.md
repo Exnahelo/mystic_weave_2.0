@@ -130,4 +130,5 @@ Threat level 1 reflects the ambient hazards of deep forest life (logging acciden
 
 The "western-forest predators" reference is deliberately vague. The forest holds dangerous game — the realm canonically includes various species adapted to the different regions — but specific beast types are not committed here. Future wilderness authoring or bestiary work can establish specifics.
 
+
 The silverwood trees' "subtle luminous quality when polished" is a canonical aesthetic feature that may have future narrative relevance (identifying silverwood-origin artifacts, distinguishing genuine silverwood from substitutes, etc.). Left soft for future development.

@@ -277,10 +277,16 @@ paths:
       tags:
       - options
       summary: Get Options
-      description: "Return all supported ancestries, cultures, focus archetypes, and\
-        \ backgrounds.\n\nCall this before asking the player to choose ancestry, culture,\
-        \ focus, or background.\nOnly present options returned by this endpoint \u2014\
-        \ do not offer any options\nnot listed here. Never enumerate from memory."
+      description: 'Return all supported ancestries, cultures, focus archetypes, and
+        backgrounds.
+
+
+        Call this before asking the player to choose ancestry, culture, focus, or
+        background.
+
+        Only present options returned by this endpoint — do not offer any options
+
+        not listed here. Never enumerate from memory.'
       operationId: get_options_options_get
       responses:
         '200':
@@ -330,12 +336,102 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TagsResponse'
+  /companion/new:
+    post:
+      summary: Create Companion
+      operationId: create_companion_companion_new_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCompanionRequest'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /companion/{companion_id}/transition:
+    post:
+      summary: Transition Companion
+      operationId: transition_companion_companion__companion_id__transition_post
+      parameters:
+      - name: companion_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Companion Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransitionCompanionRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /companion/{companion_id}:
+    get:
+      summary: Get Companion
+      operationId: get_companion_companion__companion_id__get
+      parameters:
+      - name: companion_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Companion Id
+      - name: session_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Session Id
+      - name: include_archived
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Include Archived
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompanionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /:
     get:
       tags:
       - health
       summary: Root
-      description: "Root \u2014 confirms the API is running."
+      description: Root — confirms the API is running.
       operationId: root__get
       responses:
         '200':
@@ -349,7 +445,7 @@ paths:
       tags:
       - health
       summary: Health Check
-      description: "Health check endpoint \u2014 used by Railway and uptime monitors."
+      description: Health check endpoint — used by Railway and uptime monitors.
       operationId: health_check_health_get
       responses:
         '200':
@@ -576,6 +672,48 @@ components:
       - log_entry
       title: ApplyStateDeltaRequest
       description: Body for POST /state/{session_id}/delta
+    ArchivedCompanionEnvelope-Input:
+      properties:
+        id:
+          type: string
+          title: Id
+        companion:
+          anyOf:
+          - $ref: '#/components/schemas/SapientCompanion-Input'
+          - $ref: '#/components/schemas/CreatureCompanion'
+          - $ref: '#/components/schemas/ExceptionalCompanion-Input'
+          title: Companion
+        archived_at:
+          type: string
+          title: Archived At
+      additionalProperties: false
+      type: object
+      required:
+      - id
+      - companion
+      - archived_at
+      title: ArchivedCompanionEnvelope
+    ArchivedCompanionEnvelope-Output:
+      properties:
+        id:
+          type: string
+          title: Id
+        companion:
+          anyOf:
+          - $ref: '#/components/schemas/SapientCompanion-Output'
+          - $ref: '#/components/schemas/CreatureCompanion'
+          - $ref: '#/components/schemas/ExceptionalCompanion-Output'
+          title: Companion
+        archived_at:
+          type: string
+          title: Archived At
+      additionalProperties: false
+      type: object
+      required:
+      - id
+      - companion
+      - archived_at
+      title: ArchivedCompanionEnvelope
     BackgroundOption:
       properties:
         index:
@@ -613,6 +751,21 @@ components:
       - index
       - name
       title: BackgroundOption
+    BondLinks:
+      properties:
+        primary:
+          type: string
+          title: Primary
+        secondary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Secondary
+      additionalProperties: false
+      type: object
+      required:
+      - primary
+      title: BondLinks
     CharacterModel-Input:
       properties:
         name:
@@ -621,6 +774,11 @@ components:
         ancestry:
           type: string
           title: Ancestry
+        draconic_traits:
+          items:
+            type: string
+          type: array
+          title: Draconic Traits
         culture:
           type: string
           title: Culture
@@ -688,6 +846,11 @@ components:
         ancestry:
           type: string
           title: Ancestry
+        draconic_traits:
+          items:
+            type: string
+          type: array
+          title: Draconic Traits
         culture:
           type: string
           title: Culture
@@ -808,133 +971,72 @@ components:
           anyOf:
           - $ref: '#/components/schemas/AdvancementState'
           - type: 'null'
+        draconic_traits:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Draconic Traits
       additionalProperties: false
       type: object
       title: CharacterStateDelta
       description: Typed partial character update for extraction-driven turn commits.
-    CompanionModel-Input:
+    CompanionEnvelope-Input:
       properties:
         id:
           type: string
           title: Id
-        name:
-          type: string
-          title: Name
-        species:
-          type: string
-          title: Species
-          default: unknown
-        role:
-          type: string
-          title: Role
-          default: ''
-        identity:
-          $ref: '#/components/schemas/Identity-Input'
-        hp:
-          $ref: '#/components/schemas/HP'
-        domains:
+        companion:
           anyOf:
-          - $ref: '#/components/schemas/DomainScores'
-          - type: 'null'
-        knowledge:
-          additionalProperties:
-            type: integer
-          type: object
-          title: Knowledge
-        application:
-          additionalProperties:
-            type: integer
-          type: object
-          title: Application
-        status:
-          $ref: '#/components/schemas/CompanionStatus'
-          default: active
-        disposition:
-          type: integer
-          title: Disposition
-          default: 0
-        reputation:
-          items:
-            $ref: '#/components/schemas/ReputationEntry'
-          type: array
-          title: Reputation
+          - $ref: '#/components/schemas/SapientCompanion-Input'
+          - $ref: '#/components/schemas/CreatureCompanion'
+          - $ref: '#/components/schemas/ExceptionalCompanion-Input'
+          title: Companion
       additionalProperties: false
       type: object
       required:
       - id
-      - name
-      title: CompanionModel
-      description: "Lightweight companion schema. Not a full PC \u2014 no focus/background\
-        \ mechanics.\nDomains and tags are optional; include only if the companion\
-        \ participates\nin rolls. Status defaults to active.\n\nParty reputation formula\
-        \ (computed by GPT at resolution time, not stored):\n  known_avg  = mean(standing\
-        \ for members with an entry for the faction)\n  ratio      = known_count /\
-        \ total_party_size\n  party_rep  = known_avg \xD7 ratio"
-    CompanionModel-Output:
+      - companion
+      title: CompanionEnvelope
+    CompanionEnvelope-Output:
       properties:
         id:
           type: string
           title: Id
-        name:
-          type: string
-          title: Name
-        species:
-          type: string
-          title: Species
-          default: unknown
-        role:
-          type: string
-          title: Role
-          default: ''
-        identity:
-          $ref: '#/components/schemas/Identity-Output'
-        hp:
-          $ref: '#/components/schemas/HP'
-        domains:
+        companion:
           anyOf:
-          - $ref: '#/components/schemas/DomainScores'
-          - type: 'null'
-        knowledge:
-          additionalProperties:
-            type: integer
-          type: object
-          title: Knowledge
-        application:
-          additionalProperties:
-            type: integer
-          type: object
-          title: Application
-        status:
-          $ref: '#/components/schemas/CompanionStatus'
-          default: active
-        disposition:
-          type: integer
-          title: Disposition
-          default: 0
-        reputation:
-          items:
-            $ref: '#/components/schemas/ReputationEntry'
-          type: array
-          title: Reputation
+          - $ref: '#/components/schemas/SapientCompanion-Output'
+          - $ref: '#/components/schemas/CreatureCompanion'
+          - $ref: '#/components/schemas/ExceptionalCompanion-Output'
+          title: Companion
       additionalProperties: false
       type: object
       required:
       - id
-      - name
-      title: CompanionModel
-      description: "Lightweight companion schema. Not a full PC \u2014 no focus/background\
-        \ mechanics.\nDomains and tags are optional; include only if the companion\
-        \ participates\nin rolls. Status defaults to active.\n\nParty reputation formula\
-        \ (computed by GPT at resolution time, not stored):\n  known_avg  = mean(standing\
-        \ for members with an entry for the faction)\n  ratio      = known_count /\
-        \ total_party_size\n  party_rep  = known_avg \xD7 ratio"
-    CompanionStatus:
-      type: string
-      enum:
-      - active
-      - incapacitated
-      - departed
-      title: CompanionStatus
+      - companion
+      title: CompanionEnvelope
+    CompanionResponse:
+      properties:
+        companion_id:
+          type: string
+          title: Companion Id
+        companion:
+          anyOf:
+          - $ref: '#/components/schemas/SapientCompanion-Output'
+          - $ref: '#/components/schemas/CreatureCompanion'
+          - $ref: '#/components/schemas/ExceptionalCompanion-Output'
+          title: Companion
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+      additionalProperties: false
+      type: object
+      required:
+      - companion_id
+      - companion
+      title: CompanionResponse
     ConnectionInfo:
       properties:
         to_id:
@@ -1010,8 +1112,8 @@ components:
       - focus
       - background
       title: CreateCharacterRequest
-      description: "Body for POST /character/create \u2014 seeds character from game\
-        \ system data."
+      description: Body for POST /character/create — seeds character from game system
+        data.
     CreateCharacterResponse:
       properties:
         session_id:
@@ -1024,6 +1126,248 @@ components:
       - session_id
       - character
       title: CreateCharacterResponse
+    CreateCompanionRequest:
+      properties:
+        session_id:
+          type: string
+          title: Session Id
+        handler_id:
+          type: string
+          title: Handler Id
+        tier:
+          type: string
+          enum:
+          - sapient
+          - creature
+          - exceptional
+          title: Tier
+        companion:
+          anyOf:
+          - $ref: '#/components/schemas/SapientCompanion-Input'
+          - $ref: '#/components/schemas/CreatureCompanion'
+          - $ref: '#/components/schemas/ExceptionalCompanion-Input'
+          title: Companion
+      additionalProperties: false
+      type: object
+      required:
+      - session_id
+      - handler_id
+      - tier
+      - companion
+      title: CreateCompanionRequest
+    CreatureCompanion:
+      properties:
+        name:
+          type: string
+          title: Name
+        species:
+          type: string
+          title: Species
+        subtype:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subtype
+        size:
+          type: string
+          enum:
+          - tiny
+          - small
+          - medium
+          - large
+          - huge
+          title: Size
+        size_note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Size Note
+        age_category:
+          type: string
+          enum:
+          - juvenile
+          - young_adult
+          - adult
+          - mature
+          - elder
+          title: Age Category
+        tactical_roles:
+          items:
+            type: string
+            enum:
+            - mount
+            - pack
+            - scout
+            - guard
+            - hunter
+            - companion
+          type: array
+          minItems: 1
+          title: Tactical Roles
+        training_level:
+          type: string
+          enum:
+          - untrained
+          - basic
+          - trained
+          - expert
+          title: Training Level
+        bond_level:
+          type: string
+          enum:
+          - wary
+          - accepting
+          - bonded
+          - devoted
+          title: Bond Level
+        natural_abilities:
+          items:
+            type: string
+          type: array
+          title: Natural Abilities
+        learned_commands:
+          items:
+            type: string
+          type: array
+          title: Learned Commands
+        command_notes:
+          type: string
+          title: Command Notes
+          default: ''
+        movement_modes:
+          items:
+            type: string
+            enum:
+            - walk
+            - fly
+            - swim
+            - climb
+            - burrow
+          type: array
+          title: Movement Modes
+        natural_weapons:
+          items:
+            type: string
+            enum:
+            - bite
+            - claw
+            - hoof
+            - tail_slam
+            - breath
+            - sting
+            - none
+          type: array
+          title: Natural Weapons
+        carrying_capacity:
+          type: string
+          enum:
+          - none
+          - small
+          - medium
+          - large
+          title: Carrying Capacity
+          default: none
+        hp:
+          $ref: '#/components/schemas/HP'
+        domains:
+          $ref: '#/components/schemas/CreatureDomains'
+        temperament:
+          type: string
+          title: Temperament
+          default: ''
+        bond_links:
+          $ref: '#/components/schemas/BondLinks'
+        narrative:
+          anyOf:
+          - $ref: '#/components/schemas/CreatureNarrative'
+          - type: 'null'
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - species
+      - size
+      - age_category
+      - tactical_roles
+      - training_level
+      - bond_level
+      - hp
+      - domains
+      - bond_links
+      title: CreatureCompanion
+    CreatureDomains:
+      properties:
+        physical:
+          type: integer
+          maximum: 60.0
+          minimum: 25.0
+          title: Physical
+        instinct:
+          type: integer
+          maximum: 60.0
+          minimum: 25.0
+          title: Instinct
+        composure:
+          type: integer
+          maximum: 60.0
+          minimum: 25.0
+          title: Composure
+      additionalProperties: false
+      type: object
+      required:
+      - physical
+      - instinct
+      - composure
+      title: CreatureDomains
+    CreatureNarrative:
+      properties:
+        origin:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Origin
+        wound:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Wound
+        quirks:
+          items:
+            type: string
+          type: array
+          title: Quirks
+        flaws:
+          items:
+            type: string
+          type: array
+          title: Flaws
+        bonds:
+          items:
+            type: string
+          type: array
+          title: Bonds
+        drives:
+          items:
+            type: string
+          type: array
+          title: Drives
+      additionalProperties: false
+      type: object
+      title: CreatureNarrative
+      description: 'Optional narrative block for creatures with individual story-weight
+
+        content. Nullable on the parent models. Catalog-templated creatures
+
+        without individual history leave this as None.
+
+
+        Used on CreatureCompanion and ExceptionalCompanion. For
+
+        ExceptionalCompanion with sapience=full, the fields here may be
+
+        redundant with motivations/alignment — that''s a content concern,
+
+        not a schema one.'
     CultureOption:
       properties:
         index:
@@ -1260,6 +1604,407 @@ components:
       - trade_good
       - special
       title: EquipmentTag
+    ExceptionalCompanion-Input:
+      properties:
+        name:
+          type: string
+          title: Name
+        species:
+          type: string
+          title: Species
+        subtype:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subtype
+        size:
+          type: string
+          enum:
+          - tiny
+          - small
+          - medium
+          - large
+          - huge
+          title: Size
+        size_note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Size Note
+        age_category:
+          type: string
+          enum:
+          - juvenile
+          - young_adult
+          - adult
+          - mature
+          - elder
+          title: Age Category
+        tactical_roles:
+          items:
+            type: string
+            enum:
+            - mount
+            - pack
+            - scout
+            - guard
+            - hunter
+            - companion
+          type: array
+          minItems: 1
+          title: Tactical Roles
+        training_level:
+          type: string
+          enum:
+          - untrained
+          - basic
+          - trained
+          - expert
+          title: Training Level
+        bond_level:
+          type: string
+          enum:
+          - wary
+          - accepting
+          - bonded
+          - devoted
+          title: Bond Level
+        natural_abilities:
+          items:
+            type: string
+          type: array
+          title: Natural Abilities
+        learned_commands:
+          items:
+            type: string
+          type: array
+          title: Learned Commands
+        command_notes:
+          type: string
+          title: Command Notes
+          default: ''
+        movement_modes:
+          items:
+            type: string
+            enum:
+            - walk
+            - fly
+            - swim
+            - climb
+            - burrow
+          type: array
+          title: Movement Modes
+        natural_weapons:
+          items:
+            type: string
+            enum:
+            - bite
+            - claw
+            - hoof
+            - tail_slam
+            - breath
+            - sting
+            - none
+          type: array
+          title: Natural Weapons
+        carrying_capacity:
+          type: string
+          enum:
+          - none
+          - small
+          - medium
+          - large
+          title: Carrying Capacity
+          default: none
+        hp:
+          $ref: '#/components/schemas/HP'
+        temperament:
+          type: string
+          title: Temperament
+          default: ''
+        bond_links:
+          $ref: '#/components/schemas/BondLinks'
+        narrative:
+          anyOf:
+          - $ref: '#/components/schemas/CreatureNarrative'
+          - type: 'null'
+        exceptional_profile:
+          $ref: '#/components/schemas/ExceptionalProfile'
+        motivations:
+          items:
+            type: string
+          type: array
+          title: Motivations
+        domains:
+          anyOf:
+          - $ref: '#/components/schemas/CreatureDomains'
+          - $ref: '#/components/schemas/DomainScores'
+          title: Domains
+        knowledge:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Knowledge
+        application:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Application
+        alignment:
+          anyOf:
+          - $ref: '#/components/schemas/Alignment'
+          - type: 'null'
+        supernatural_traits:
+          items:
+            type: string
+          type: array
+          title: Supernatural Traits
+        known_languages:
+          items:
+            type: string
+          type: array
+          title: Known Languages
+        tier_history:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Tier History
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - species
+      - size
+      - age_category
+      - tactical_roles
+      - training_level
+      - bond_level
+      - hp
+      - bond_links
+      - exceptional_profile
+      - motivations
+      - domains
+      title: ExceptionalCompanion
+    ExceptionalCompanion-Output:
+      properties:
+        name:
+          type: string
+          title: Name
+        species:
+          type: string
+          title: Species
+        subtype:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subtype
+        size:
+          type: string
+          enum:
+          - tiny
+          - small
+          - medium
+          - large
+          - huge
+          title: Size
+        size_note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Size Note
+        age_category:
+          type: string
+          enum:
+          - juvenile
+          - young_adult
+          - adult
+          - mature
+          - elder
+          title: Age Category
+        tactical_roles:
+          items:
+            type: string
+            enum:
+            - mount
+            - pack
+            - scout
+            - guard
+            - hunter
+            - companion
+          type: array
+          minItems: 1
+          title: Tactical Roles
+        training_level:
+          type: string
+          enum:
+          - untrained
+          - basic
+          - trained
+          - expert
+          title: Training Level
+        bond_level:
+          type: string
+          enum:
+          - wary
+          - accepting
+          - bonded
+          - devoted
+          title: Bond Level
+        natural_abilities:
+          items:
+            type: string
+          type: array
+          title: Natural Abilities
+        learned_commands:
+          items:
+            type: string
+          type: array
+          title: Learned Commands
+        command_notes:
+          type: string
+          title: Command Notes
+          default: ''
+        movement_modes:
+          items:
+            type: string
+            enum:
+            - walk
+            - fly
+            - swim
+            - climb
+            - burrow
+          type: array
+          title: Movement Modes
+        natural_weapons:
+          items:
+            type: string
+            enum:
+            - bite
+            - claw
+            - hoof
+            - tail_slam
+            - breath
+            - sting
+            - none
+          type: array
+          title: Natural Weapons
+        carrying_capacity:
+          type: string
+          enum:
+          - none
+          - small
+          - medium
+          - large
+          title: Carrying Capacity
+          default: none
+        hp:
+          $ref: '#/components/schemas/HP'
+        temperament:
+          type: string
+          title: Temperament
+          default: ''
+        bond_links:
+          $ref: '#/components/schemas/BondLinks'
+        narrative:
+          anyOf:
+          - $ref: '#/components/schemas/CreatureNarrative'
+          - type: 'null'
+        exceptional_profile:
+          $ref: '#/components/schemas/ExceptionalProfile'
+        motivations:
+          items:
+            type: string
+          type: array
+          title: Motivations
+        domains:
+          anyOf:
+          - $ref: '#/components/schemas/CreatureDomains'
+          - $ref: '#/components/schemas/DomainScores'
+          title: Domains
+        knowledge:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Knowledge
+        application:
+          anyOf:
+          - additionalProperties:
+              type: integer
+            type: object
+          - type: 'null'
+          title: Application
+        alignment:
+          anyOf:
+          - $ref: '#/components/schemas/Alignment'
+          - type: 'null'
+        supernatural_traits:
+          items:
+            type: string
+          type: array
+          title: Supernatural Traits
+        known_languages:
+          items:
+            type: string
+          type: array
+          title: Known Languages
+        tier_history:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Tier History
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - species
+      - size
+      - age_category
+      - tactical_roles
+      - training_level
+      - bond_level
+      - hp
+      - bond_links
+      - exceptional_profile
+      - motivations
+      - domains
+      title: ExceptionalCompanion
+    ExceptionalProfile:
+      properties:
+        sapience:
+          type: string
+          enum:
+          - partial
+          - full
+          title: Sapience
+        communication:
+          type: string
+          enum:
+          - instinctive
+          - symbolic
+          - speech
+          title: Communication
+        autonomy:
+          type: string
+          enum:
+          - limited
+          - moderate
+          - high
+          title: Autonomy
+      additionalProperties: false
+      type: object
+      required:
+      - sapience
+      - communication
+      - autonomy
+      title: ExceptionalProfile
     FatigueState:
       type: string
       enum:
@@ -1416,9 +2161,10 @@ components:
           $ref: '#/components/schemas/Alignment'
       type: object
       title: Identity
-      description: "Narrative character block. Captured at creation, GPT-readable\
-        \ every session.\nAll fields optional at creation \u2014 can be filled in\
-        \ as play reveals them."
+      description: 'Narrative character block. Captured at creation, GPT-readable
+        every session.
+
+        All fields optional at creation — can be filled in as play reveals them.'
     Identity-Output:
       properties:
         origin:
@@ -1453,9 +2199,10 @@ components:
           $ref: '#/components/schemas/Alignment'
       type: object
       title: Identity
-      description: "Narrative character block. Captured at creation, GPT-readable\
-        \ every session.\nAll fields optional at creation \u2014 can be filled in\
-        \ as play reveals them."
+      description: 'Narrative character block. Captured at creation, GPT-readable
+        every session.
+
+        All fields optional at creation — can be filled in as play reveals them.'
     ItemOption:
       properties:
         id:
@@ -1702,7 +2449,7 @@ components:
         companions:
           anyOf:
           - items:
-              $ref: '#/components/schemas/CompanionModel-Input'
+              $ref: '#/components/schemas/CompanionEnvelope-Input'
             type: array
           - type: 'null'
           title: Companions
@@ -1771,6 +2518,86 @@ components:
             $ref: '#/components/schemas/ItemOption'
           type: array
           title: Apparel Items
+        creature_catalog:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Creature Catalog
+        exceptional_catalog:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Exceptional Catalog
+        natural_abilities:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Natural Abilities
+        learned_commands:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Learned Commands
+        tactical_roles:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Tactical Roles
+        training_levels:
+          items:
+            type: string
+          type: array
+          title: Training Levels
+        bond_levels:
+          items:
+            type: string
+          type: array
+          title: Bond Levels
+        age_categories:
+          items:
+            type: string
+          type: array
+          title: Age Categories
+        creature_sizes:
+          items:
+            type: string
+          type: array
+          title: Creature Sizes
+        carrying_capacities:
+          items:
+            type: string
+          type: array
+          title: Carrying Capacities
+        movement_modes:
+          items:
+            type: string
+          type: array
+          title: Movement Modes
+        natural_weapons:
+          items:
+            type: string
+          type: array
+          title: Natural Weapons
+        sapience_levels:
+          items:
+            type: string
+          type: array
+          title: Sapience Levels
+        communication_levels:
+          items:
+            type: string
+          type: array
+          title: Communication Levels
+        autonomy_levels:
+          items:
+            type: string
+          type: array
+          title: Autonomy Levels
       type: object
       required:
       - ancestries
@@ -1778,8 +2605,8 @@ components:
       - focus
       - backgrounds
       title: OptionsResponse
-      description: "Response for GET /options \u2014 all supported ancestries, cultures,\
-        \ focus archetypes, and backgrounds."
+      description: Response for GET /options — all supported ancestries, cultures,
+        focus archetypes, and backgrounds.
     PacingState:
       properties:
         tension:
@@ -1836,8 +2663,9 @@ components:
           default: unknown
       type: object
       title: Politics
-      description: "World-level relational and political state.\nNot a subsystem \u2014\
-        \ a lightweight store for the GPT to track active context."
+      description: 'World-level relational and political state.
+
+        Not a subsystem — a lightweight store for the GPT to track active context.'
     ReputationEntry:
       properties:
         faction:
@@ -1879,7 +2707,7 @@ components:
       required:
       - target
       title: RollRequest
-      description: "Body for POST /roll \u2014 d100 roll-under resolution."
+      description: Body for POST /roll — d100 roll-under resolution.
     RollResponse:
       properties:
         roll:
@@ -1913,6 +2741,138 @@ components:
       - margin
       - degree
       title: RollResponse
+    SapientCompanion-Input:
+      properties:
+        name:
+          type: string
+          title: Name
+        ancestry:
+          type: string
+          title: Ancestry
+        culture:
+          type: string
+          title: Culture
+        background:
+          type: string
+          title: Background
+        focus:
+          type: string
+          title: Focus
+        hp:
+          $ref: '#/components/schemas/HP'
+        domains:
+          $ref: '#/components/schemas/DomainScores'
+        knowledge:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Knowledge
+        application:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Application
+        identity:
+          $ref: '#/components/schemas/Identity-Input'
+        equipment:
+          $ref: '#/components/schemas/Equipment-Input'
+        reputation:
+          items:
+            $ref: '#/components/schemas/ReputationEntry'
+          type: array
+          title: Reputation
+        bond_links:
+          $ref: '#/components/schemas/BondLinks'
+        known_languages:
+          items:
+            type: string
+          type: array
+          title: Known Languages
+        companions:
+          items:
+            $ref: '#/components/schemas/CreatureCompanion'
+          type: array
+          title: Companions
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - ancestry
+      - culture
+      - background
+      - focus
+      - hp
+      - domains
+      - identity
+      - equipment
+      - bond_links
+      title: SapientCompanion
+    SapientCompanion-Output:
+      properties:
+        name:
+          type: string
+          title: Name
+        ancestry:
+          type: string
+          title: Ancestry
+        culture:
+          type: string
+          title: Culture
+        background:
+          type: string
+          title: Background
+        focus:
+          type: string
+          title: Focus
+        hp:
+          $ref: '#/components/schemas/HP'
+        domains:
+          $ref: '#/components/schemas/DomainScores'
+        knowledge:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Knowledge
+        application:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Application
+        identity:
+          $ref: '#/components/schemas/Identity-Output'
+        equipment:
+          $ref: '#/components/schemas/Equipment-Output'
+        reputation:
+          items:
+            $ref: '#/components/schemas/ReputationEntry'
+          type: array
+          title: Reputation
+        bond_links:
+          $ref: '#/components/schemas/BondLinks'
+        known_languages:
+          items:
+            type: string
+          type: array
+          title: Known Languages
+        companions:
+          items:
+            $ref: '#/components/schemas/CreatureCompanion'
+          type: array
+          title: Companions
+      additionalProperties: false
+      type: object
+      required:
+      - name
+      - ancestry
+      - culture
+      - background
+      - focus
+      - hp
+      - domains
+      - identity
+      - equipment
+      - bond_links
+      title: SapientCompanion
     SaveStateRequest:
       properties:
         character:
@@ -2114,6 +3074,23 @@ components:
       type: object
       title: TimeState
       description: In-world time, calendar, and weather state.
+    TransitionCompanionRequest:
+      properties:
+        session_id:
+          type: string
+          title: Session Id
+        new_companion:
+          $ref: '#/components/schemas/ExceptionalCompanion-Input'
+        trigger:
+          type: string
+          title: Trigger
+      additionalProperties: false
+      type: object
+      required:
+      - session_id
+      - new_companion
+      - trigger
+      title: TransitionCompanionRequest
     ValidationError:
       properties:
         loc:
@@ -2207,9 +3184,14 @@ components:
           default: 1
         companions:
           items:
-            $ref: '#/components/schemas/CompanionModel-Input'
+            $ref: '#/components/schemas/CompanionEnvelope-Input'
           type: array
           title: Companions
+        companion_archive:
+          items:
+            $ref: '#/components/schemas/ArchivedCompanionEnvelope-Input'
+          type: array
+          title: Companion Archive
         economy:
           $ref: '#/components/schemas/Economy'
         politics:
@@ -2244,9 +3226,14 @@ components:
           default: 1
         companions:
           items:
-            $ref: '#/components/schemas/CompanionModel-Output'
+            $ref: '#/components/schemas/CompanionEnvelope-Output'
           type: array
           title: Companions
+        companion_archive:
+          items:
+            $ref: '#/components/schemas/ArchivedCompanionEnvelope-Output'
+          type: array
+          title: Companion Archive
         economy:
           $ref: '#/components/schemas/Economy'
         politics:
@@ -2289,10 +3276,17 @@ components:
         companions:
           anyOf:
           - items:
-              $ref: '#/components/schemas/CompanionModel-Input'
+              $ref: '#/components/schemas/CompanionEnvelope-Input'
             type: array
           - type: 'null'
           title: Companions
+        companion_archive:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ArchivedCompanionEnvelope-Input'
+            type: array
+          - type: 'null'
+          title: Companion Archive
         economy:
           anyOf:
           - $ref: '#/components/schemas/EconomyDelta'

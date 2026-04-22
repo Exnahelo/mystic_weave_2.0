@@ -4,13 +4,26 @@ name: Volcanic Highlands Trail
 type: route-node
 region_id: hollow-crown
 parent_location_id: northeastern-volcanic-highlands
-description: The realm's primary industrial supply corridor, running eastward from Zarkharath's Infernal Forge causeway to Cinderpit's mining operations through the open volcanic highlands. The trail is wider and more heavily built than most of the realm's routes — a constant flow of loaded ore and coal wagons westbound, empty haulers and provisioning supplies eastbound, and the specialized thermal-gear caravans that service the deep-shaft operations all demand the infrastructure. The terrain is unforgiving: dark volcanic stone underfoot, sparse vegetation, ambient heat from active vents along the route, and the particular ashy horizon that marks all northeastern-volcanic-highlands travel. Dragonborn-heavy hauler crews work the trail continuously. A traveler unaccustomed to the thermal environment finds the journey exhausting; experienced travelers simply find it ordinary.
+description: >
+  The realm's primary industrial supply corridor, running eastward from
+  Zarkharath's Infernal Forge causeway to Cinderpit's mining operations
+  through the open volcanic highlands. The trail is wider and more heavily
+  built than most of the realm's routes — a constant flow of loaded ore and
+  coal wagons westbound, empty haulers and provisioning supplies eastbound,
+  and the specialized thermal-gear caravans that service the deep-shaft
+  operations all demand the infrastructure. The terrain is unforgiving: dark
+  volcanic stone underfoot, sparse vegetation, ambient heat from active vents
+  along the route, and the particular ashy horizon that marks all
+  northeastern-volcanic-highlands travel. Dragonborn-heavy hauler crews work
+  the trail continuously. A traveler unaccustomed to the thermal environment
+  finds the journey exhausting; experienced travelers simply find it ordinary.
 connections:
 - zarkharath
 - cinderpit
 tags:
 - drakenvale
-- northeastern-volcanic-highlands
+- volcanic-highlands-trail
+- volcanic-highlands
 - northeastern-volcanic-highlands
 - route-node
 - industrial-corridor
@@ -87,7 +100,8 @@ The highlands beyond the trail proper are genuinely hazardous. Travelers wanderi
 ## Tags
 
 - drakenvale
-- northeastern-volcanic-highlands
+- volcanic-highlands-trail
+- volcanic-highlands
 - northeastern-volcanic-highlands
 - route-node
 - industrial-corridor

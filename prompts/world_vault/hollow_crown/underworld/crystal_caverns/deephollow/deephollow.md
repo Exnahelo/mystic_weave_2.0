@@ -84,6 +84,18 @@ The role is Tier-3 generative. Typically the Deep Marshal is a dwarvish senior g
 
 The current Deep Marshal is not named here. Specific incumbents can be introduced during play.
 
+## Tags
+
+- drakenvale
+- deephollow
+- underground
+- crystal-caverns
+- mining
+- resonance-crystals
+- subterranean
+- arcane-materials
+- dwarvish-heavy
+
 ## The Assay Master
 
 The Assay Master oversees the Assay Office and is the realm-recognized authority on underground material authentication. Tier-3 generative role. Typically a senior gnome or dwarf specialist with decades of work in material identification. The Assay Master's certification is accepted across the realm's institutional buyers without question.

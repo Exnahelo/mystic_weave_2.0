@@ -265,7 +265,7 @@ A non-Council dragon whose role is tied to protection of a region, route, lair-z
 - `geography.md` — physical structure, terrain regions, and settlement placement
 - `history.md` — chronology, founding, the Discordant War, and major historical consequences
 - `groups.md` — institutions, covert networks, cults, trade bodies, and organized power structures
-- `world_rules.md` — operational assumptions and system-facing world logic
+- `world-rules.md` — operational assumptions and system-facing world logic
 
 ---
 

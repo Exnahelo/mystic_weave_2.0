@@ -35,11 +35,7 @@ def build_scene_context(
     location: LocationData,
     log: list[str],
 ) -> SceneContext:
-    companion_labels = [
-        f"{c.name} ({c.status.value})"
-        for c in world.companions
-        if c.status.value != "departed"
-    ]
+    companion_labels = [entry.companion.name for entry in world.companions]
 
     visible_entities = _uniq_limit(location.known_npcs + companion_labels)
 
@@ -85,7 +81,7 @@ def build_scene_context(
             hp=character.hp,
             status_effects=character.status_effects,
             survival=world.survival,
-            active_companions=[c.name for c in world.companions if c.status.value == "active"],
+            active_companions=[entry.companion.name for entry in world.companions],
         ),
         recent_log=log[-5:],
         active_threats=active_threats,

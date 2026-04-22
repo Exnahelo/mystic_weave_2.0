@@ -225,7 +225,7 @@ Advancement in Drakenvale is accessible to anyone who can prove talent, discipli
 - `history.md` — chronology, founding, the Discordant War, and major traditions
 - `groups.md` — institutions, covert networks, cults, trade bodies, and other organized power structures
 - `npcs.md` — Council dragons, anchor NPCs, and generative role definitions
-- `world_rules.md` — operational rules, assumptions, and system-facing world logic
+- `world-rules.md` — operational rules, assumptions, and system-facing world logic
 
 ---
 

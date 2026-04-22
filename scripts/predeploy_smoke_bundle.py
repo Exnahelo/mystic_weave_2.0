@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import sys
 from typing import Any
+import re
 
 import httpx
 
@@ -29,7 +30,8 @@ def main() -> None:
 
     new_session_payload: dict[str, Any] = {
         "character_name": "SmokeRunner",
-        "species": "human",
+        "ancestry": "human",
+        "culture": "drakenvale_city",
         "focus": "champion",
         "background": "soldier",
         "adjustment_points": {"power": 2, "endurance": 2, "will": 1},
@@ -64,8 +66,36 @@ def main() -> None:
         options = client.get("/options")
         expect_status(options, 200, "GET /options")
         opts = options.json()
-        if not all(k in opts for k in ("species", "focus", "backgrounds")):
-            fail("GET /options: missing one of species/focus/backgrounds")
+        expected_option_keys = {
+            "ancestries",
+            "cultures",
+            "focus",
+            "backgrounds",
+            "mundane_items",
+            "magical_items",
+            "apparel_items",
+            "creature_catalog",
+            "exceptional_catalog",
+            "natural_abilities",
+            "learned_commands",
+            "tactical_roles",
+            "training_levels",
+            "bond_levels",
+            "age_categories",
+            "creature_sizes",
+            "carrying_capacities",
+            "movement_modes",
+            "natural_weapons",
+            "sapience_levels",
+            "communication_levels",
+            "autonomy_levels",
+        }
+        if set(opts.keys()) != expected_option_keys:
+            fail(f"GET /options: unexpected key set {sorted(opts.keys())}")
+
+        wolf_template = next((c for c in opts.get("creature_catalog", []) if c.get("subspecies") == "moonthorn_wolf"), None)
+        if wolf_template is None:
+            fail("GET /options: moonthorn_wolf missing from creature_catalog")
 
         # Location create/update semantics
         alpha = {
@@ -116,6 +146,48 @@ def main() -> None:
         state_get = client.get(f"/state/{session_id}")
         expect_status(state_get, 200, "GET /state/{session_id}")
 
+        companion_payload = {
+            "name": "Smokefang",
+            "species": wolf_template["species"],
+            "subtype": wolf_template["subspecies"],
+            "size": wolf_template["size"],
+            "age_category": wolf_template["age_category"],
+            "tactical_roles": wolf_template["tactical_roles_defaults"],
+            "training_level": "trained",
+            "bond_level": "bonded",
+            "natural_abilities": wolf_template["natural_abilities"],
+            "learned_commands": ["heel"],
+            "command_notes": "Smoke sanity companion",
+            "movement_modes": wolf_template["movement_modes"],
+            "natural_weapons": wolf_template["natural_weapons"],
+            "carrying_capacity": wolf_template["carrying_capacity"],
+            "hp": {"current": wolf_template["base_hp"], "max": wolf_template["base_hp"]},
+            "domains": wolf_template["base_domains"],
+            "temperament": wolf_template["temperament"],
+            "bond_links": {"primary": "smokerunner"},
+        }
+        companion_create = client.post(
+            "/companion/new",
+            json={
+                "session_id": session_id,
+                "handler_id": "smokerunner",
+                "tier": "creature",
+                "companion": companion_payload,
+            },
+        )
+        expect_status(companion_create, 201, "POST /companion/new")
+        companion_id = companion_create.json()["companion_id"]
+        if not re.fullmatch(r"smokerunner_moonthorn_wolf(?:_\d+)?", companion_id):
+            fail(f"companion_id format unexpected: {companion_id}")
+
+        companion_get = client.get(f"/companion/{companion_id}", params={"session_id": session_id})
+        expect_status(companion_get, 200, "GET /companion/{id}")
+        companion_data = companion_get.json()
+        if companion_data.get("companion_id") != companion_id:
+            fail("GET /companion/{id}: returned companion_id mismatch")
+        if companion_data.get("companion", {}).get("name") != "Smokefang":
+            fail("GET /companion/{id}: returned wrong companion payload")
+
         world["turn"] = int(world.get("turn", 1)) + 1
         world["threat"] = "smoke-check-in-progress"
         save_payload = {
@@ -130,7 +202,8 @@ def main() -> None:
         char_create_payload = {
             "session_id": session_id,
             "name": "SmokeRunner",
-            "species": "human",
+            "ancestry": "human",
+            "culture": "drakenvale_city",
             "focus": "champion",
             "background": "soldier",
             "adjustment_points": {"power": 1},
