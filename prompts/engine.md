@@ -22,18 +22,18 @@ Every turn: **await context → narrate prose → extract structured delta → v
 
 Required reads must return payloads: `GET /options`, `GET /state/{session_id}`, `GET /scene/{session_id}`, `GET /location/{location_id}`, `GET /location/{location_id}/connections` when used.
 
-- Before ending the turn, used writes/resolution calls must succeed: especially `POST /roll`, state save, and `POST /location` if canon changed.
+- Before ending the turn, writes must succeed: `POST /roll`, state save, and `POST /location` if canon changed.
 - If retry fails: pause irreversible progression; do not invent canon.
 
 ### 1) Describe Scene
 
-- Call `GET /location/{location_id}` before location narration; keep consistency; persist durable invented detail via `POST /location`.
+- Call `GET /location/{location_id}` before narration; persist durable invented detail via `POST /location`.
 - Compress routine travel, guard duty, and repeated low-novelty action per `prompts/scene-structure.md`.
 
 ### Gap-Fill Rule
 
 Canon files are authoritative for established facts, but not exhaustive.
-If an NPC, place, shop, business, contact, item, rumor, or custom is absent, create one that fits established world logic.
+If an NPC, place, shop, contact, item, rumor, or custom is absent, create one that fits established world logic.
 
 - Do not duplicate, rename, or contradict existing canon.
 - Prefer small, local additions over major structural inventions.
@@ -50,7 +50,7 @@ Narration is prose-only. Extraction is structured state delta + `log_entry` only
 ### 2) Present Choices
 
 - Offer 2–4 choices. Movement options must come from `GET /location/{location_id}/connections`.
-- Reflect tags, identity, companions, and scene state.
+- Reflect tags, identity, companions, and state.
 
 ### 3) Resolve Risk
 
@@ -106,6 +106,13 @@ If extraction validation fails: do not commit state; retry extraction with corre
 - Adjudicate AP by resolved consequence chain and tag advancement by resolved scene; require player confirmation before saving newly added tags; if reward interpretation is disputed, do not commit disputed progression changes.
 - For magical field knowledge, require domain gate (40/50/60/70/80→T1–T5) before advancement.
 
+## Companions
+
+See `prompts/companion-rules.md`. Use `/companion/new` to create,
+`/companion/{id}/transition` to change tiers, and
+`/state/{session_id}/delta` for updates. Reliability = composure +
+training_level + bond_level + context.
+
 ## Narrative Constraints
 
 - Failure advances the world; no resets. Movement only along graph edges. Identity is persistent.
@@ -113,7 +120,7 @@ If extraction validation fails: do not commit state; retry extraction with corre
 - Temple to Tiamat + Platinum Oath Monastery are restricted-access (authorization/escort/risk framing required).
 - Persist named NPCs that become relevant, recurring, or continuity-bearing.
 - Companion incapacitation/departure is permanent unless explicitly earned.
-- For unknown or stubbed major lore, state uncertainty and avoid unsupported major canon invention; when canon is silent on minor local scene support, create fitting details consistent with setting.
+- For unknown or stubbed major lore, state uncertainty and avoid unsupported major canon invention; for minor local gaps, create fitting details consistent with setting.
 
 ## Canon Precedence (Conflict Resolution Order)
 
