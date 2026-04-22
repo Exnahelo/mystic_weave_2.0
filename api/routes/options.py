@@ -28,6 +28,7 @@ from api.companions import (
     TrainingLevel,
 )
 from api.game_data import (
+    list_armor,
     list_apparel_items,
     list_ancestries,
     list_backgrounds,
@@ -40,6 +41,7 @@ from api.game_data import (
     list_mundane_items,
     list_natural_abilities,
     list_tactical_roles,
+    list_weapons,
 )
 from api.models import (
     AncestryOption,
@@ -73,6 +75,8 @@ async def get_options() -> OptionsResponse:
     mundane_items = [ItemOption(**item) for item in list_mundane_items()]
     magical_items = [ItemOption(**item) for item in list_magical_items()]
     apparel_items = [ItemOption(**item) for item in list_apparel_items()]
+    weapons = [ItemOption(**item) for item in list_weapons()]
+    armor = [ItemOption(**item) for item in list_armor()]
     creature_catalog = list_creature_catalog()
     exceptional_catalog = list_exceptional_catalog()
     natural_abilities = list_natural_abilities()
@@ -87,6 +91,8 @@ async def get_options() -> OptionsResponse:
         mundane_items=mundane_items,
         magical_items=magical_items,
         apparel_items=apparel_items,
+        weapons=weapons,
+        armor=armor,
         creature_catalog=creature_catalog,
         exceptional_catalog=exceptional_catalog,
         natural_abilities=natural_abilities,

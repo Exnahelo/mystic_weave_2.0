@@ -260,6 +260,52 @@ def list_mundane_items() -> list[dict[str, Any]]:
     return data
 
 
+def list_weapons() -> list[dict[str, Any]]:
+    """Return weapon catalog entries projected to ItemOption shape."""
+    data = _load_json("items/weapon.json")
+    if not isinstance(data, list):
+        return []
+    return [
+        {
+            "id": item["id"],
+            "name": item["name"],
+            "category": item["category"],
+            "description": item.get("description", ""),
+            "tags": item.get("tags", []),
+            "roll_tag": item.get("application_tag"),
+            "consumable": item.get("consumable", False),
+            "charges": item.get("charges"),
+            "rarity": item.get("rarity", "common"),
+            "value_cd": item.get("value_cd", 0),
+            "effects": item.get("effects", []),
+        }
+        for item in data
+    ]
+
+
+def list_armor() -> list[dict[str, Any]]:
+    """Return armor catalog entries projected to ItemOption shape."""
+    data = _load_json("items/armor.json")
+    if not isinstance(data, list):
+        return []
+    return [
+        {
+            "id": item["id"],
+            "name": item["name"],
+            "category": item["category"],
+            "description": item.get("description", ""),
+            "tags": item.get("tags", []),
+            "roll_tag": None,
+            "consumable": item.get("consumable", False),
+            "charges": item.get("charges"),
+            "rarity": item.get("rarity", "common"),
+            "value_cd": item.get("value_cd", 0),
+            "effects": item.get("effects", []),
+        }
+        for item in data
+    ]
+
+
 def list_magical_items() -> list[dict[str, Any]]:
     """Return all magical catalog items."""
     data = _load_json("items/magical_item.json")
@@ -278,7 +324,7 @@ def list_apparel_items() -> list[dict[str, Any]]:
 
 def list_all_items() -> list[dict[str, Any]]:
     """Return concatenated mundane + magical + apparel item catalogs."""
-    return list_mundane_items() + list_magical_items() + list_apparel_items()
+    return list_mundane_items() + list_magical_items() + list_apparel_items() + list_weapons() + list_armor()
 
 
 # ---------------------------------------------------------------------------

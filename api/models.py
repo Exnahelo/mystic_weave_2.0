@@ -819,6 +819,8 @@ class OptionsResponse(BaseModel):
     mundane_items: list[ItemOption] = Field(default_factory=list)
     magical_items: list[ItemOption] = Field(default_factory=list)
     apparel_items: list[ItemOption] = Field(default_factory=list)
+    weapons: list[ItemOption] = Field(default_factory=list)
+    armor: list[ItemOption] = Field(default_factory=list)
     creature_catalog: list[dict] = Field(default_factory=list)
     exceptional_catalog: list[dict] = Field(default_factory=list)
     natural_abilities: list[dict] = Field(default_factory=list)

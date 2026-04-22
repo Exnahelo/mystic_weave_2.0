@@ -2518,6 +2518,16 @@ components:
             $ref: '#/components/schemas/ItemOption'
           type: array
           title: Apparel Items
+        weapons:
+          items:
+            $ref: '#/components/schemas/ItemOption'
+          type: array
+          title: Weapons
+        armor:
+          items:
+            $ref: '#/components/schemas/ItemOption'
+          type: array
+          title: Armor
         creature_catalog:
           items:
             additionalProperties: true
