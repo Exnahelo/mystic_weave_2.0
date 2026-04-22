@@ -146,6 +146,8 @@ async def _persist_world_update(
 def _derive_companion_slug(companion: Companion) -> str:
     if isinstance(companion, SapientCompanion):
         return derive_sapient_slug(companion.name)
+    if companion.subspecies:
+        return companion.subspecies
     if companion.subtype:
         return companion.subtype
     return companion.species
