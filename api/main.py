@@ -15,6 +15,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from api.database import close_pool, create_pool
 from api.game_data import (
+    combat_rules_fingerprint,
     data_fingerprint,
     list_ancestries,
     list_backgrounds,
@@ -22,7 +23,7 @@ from api.game_data import (
     list_focus,
 )
 from api.models import HealthResponse, VersionResponse
-from api.routes import character, companion, location, options, roll, scene, session, state, tags
+from api.routes import character, combat, companion, location, options, roll, scene, session, state, tags
 
 
 @asynccontextmanager
@@ -40,7 +41,7 @@ app = FastAPI(
         "The GPT is the narrator; this API is the memory. "
         "d100 roll-under resolution with domain scores and competency tiers."
     ),
-    version="4.1.0",
+    version="4.2.0",
     servers=[
         {
             "url": "https://mysticweave-production.up.railway.app",
@@ -64,6 +65,7 @@ app.include_router(state.router)
 app.include_router(session.router)
 app.include_router(character.router)
 app.include_router(roll.router)
+app.include_router(combat.router)
 app.include_router(location.router)
 app.include_router(options.router)
 app.include_router(scene.router)
@@ -96,6 +98,7 @@ async def version() -> VersionResponse:
         "api_version": app.version,
         "git_sha": git_sha,
         "data_fingerprint": data_fingerprint(),
+        "combat_rules_fingerprint": combat_rules_fingerprint(),
         "ancestry_count": ancestry_count,
         "culture_count": culture_count,
         "focus_count": focus_count,
