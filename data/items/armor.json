@@ -11,6 +11,8 @@
       "baseline"
     ],
     "value_cd": 0,
+    "armor_floor": 0,
+    "armor_ceiling": 0,
     "rarity": "common",
     "description": "No armor worn. Some characters intentionally build around speed, mobility, or skill without protective gear.",
     "narrative_effects": [
@@ -29,6 +31,8 @@
       "padded"
     ],
     "value_cd": 500,
+    "armor_floor": 20,
+    "armor_ceiling": 50,
     "rarity": "common",
     "description": "Layered quilted protection that offers basic defense without materially hindering mobility under ordinary conditions.",
     "narrative_effects": [
@@ -47,6 +51,8 @@
       "leather"
     ],
     "value_cd": 1000,
+    "armor_floor": 20,
+    "armor_ceiling": 50,
     "rarity": "common",
     "description": "Flexible leather armor that balances protection and movement, common among scouts, hunters, and lightly equipped fighters.",
     "narrative_effects": [
@@ -65,6 +71,8 @@
       "hide"
     ],
     "value_cd": 800,
+    "armor_floor": 20,
+    "armor_ceiling": 50,
     "rarity": "common",
     "description": "Thicker hide armor offering rugged protection while remaining within the light armor category.",
     "narrative_effects": [
@@ -83,6 +91,8 @@
       "chain"
     ],
     "value_cd": 3000,
+    "armor_floor": 20,
+    "armor_ceiling": 75,
     "rarity": "common",
     "description": "A lighter chain-based armor that offers stronger coverage than light gear while preserving more mobility than heavier battlefield harnesses.",
     "narrative_effects": [
@@ -101,6 +111,8 @@
       "scale"
     ],
     "value_cd": 4000,
+    "armor_floor": 20,
+    "armor_ceiling": 75,
     "rarity": "common",
     "description": "Overlapping scale armor built for practical battlefield defense with moderate bulk and movement cost.",
     "narrative_effects": [
@@ -119,6 +131,8 @@
       "plate"
     ],
     "value_cd": 5000,
+    "armor_floor": 20,
+    "armor_ceiling": 75,
     "rarity": "common",
     "description": "A shaped torso plate paired with lighter supporting materials, offering strong core protection without the full burden of heavy armor.",
     "narrative_effects": [
@@ -137,6 +151,8 @@
       "chain"
     ],
     "value_cd": 7500,
+    "armor_floor": 20,
+    "armor_ceiling": 100,
     "rarity": "common",
     "description": "A full battlefield chain harness that provides serious protection at the cost of agility and physical ease.",
     "narrative_effects": [
@@ -155,6 +171,8 @@
       "splint"
     ],
     "value_cd": 10000,
+    "armor_floor": 20,
+    "armor_ceiling": 100,
     "rarity": "common",
     "description": "A heavy segmented armor built for strong defense and battlefield durability with substantial movement cost.",
     "narrative_effects": [
@@ -173,6 +191,8 @@
       "plate"
     ],
     "value_cd": 150000,
+    "armor_floor": 20,
+    "armor_ceiling": 100,
     "rarity": "rare",
     "description": "The heaviest common battlefield armor, offering maximum conventional protection with major mobility burden outside trained use.",
     "narrative_effects": [
@@ -191,6 +211,8 @@
       "equipment"
     ],
     "value_cd": 100,
+    "armor_floor": 5,
+    "armor_ceiling": 30,
     "rarity": "common",
     "description": "A general shield entry. Specific size and type are handled narratively at runtime rather than as separate catalog items.",
     "narrative_effects": [
@@ -266,6 +288,8 @@
       "reinforced"
     ],
     "value_cd": 4500,
+    "armor_floor": 20,
+    "armor_ceiling": 50,
     "rarity": "common",
     "description": "Leather armor reinforced with metal studs or rivets for improved protection while maintaining light armor mobility.",
     "narrative_effects": [
