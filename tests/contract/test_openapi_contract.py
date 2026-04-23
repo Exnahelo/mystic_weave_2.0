@@ -27,7 +27,7 @@ def _resolve_schema(spec: dict, schema: dict) -> dict:
 def test_openapi_contract_has_expected_core_shapes() -> None:
     # Avoid startup/lifespan side effects (DB pool creation) for pure contract checks.
     spec = app.openapi()
-    assert spec["info"]["version"] == "4.1.0"
+    assert spec["info"]["version"] == "4.2.0"
 
     new_session_required = spec["components"]["schemas"]["NewSessionRequest"][
         "required"
@@ -95,6 +95,10 @@ def test_openapi_contract_has_expected_core_shapes() -> None:
 
     create_character_props = spec["components"]["schemas"]["CreateCharacterResponse"]["properties"]
     assert "$ref" in create_character_props["character"]
+
+    assert spec["paths"]["/combat/compute_max_hp"]["post"]["responses"]["200"]["content"]["application/json"]["schema"]["$ref"] == "#/components/schemas/ComputeMaxHpResponse"
+    assert spec["paths"]["/combat/resolve_attack"]["post"]["responses"]["200"]["content"]["application/json"]["schema"]["$ref"] == "#/components/schemas/ResolveAttackResponse"
+    assert "combat_rules_fingerprint" in spec["components"]["schemas"]["VersionResponse"]["properties"]
 
 
 @pytest.mark.contract

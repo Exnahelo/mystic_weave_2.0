@@ -817,6 +817,44 @@ def part6(client: httpx.Client) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Part 7 — Combat Resolution
+# ---------------------------------------------------------------------------
+
+def part7(client: httpx.Client) -> None:
+    section("PART 7 — Combat Resolution")
+
+    subsection("Test 7.1 — POST /combat/compute_max_hp")
+    r = client.post("/combat/compute_max_hp", json={
+        "armor_id": "armor_plate_01",
+        "armor_tier": 3,
+        "shield_id": "shield_01",
+        "shield_tier": 2,
+    })
+    check("7.1.a", r.status_code == 200, f"POST /combat/compute_max_hp → {r.status_code}")
+    if r.status_code == 200:
+        payload = r.json()
+        check("7.1.b", "max_hp" in payload and "armor_contribution" in payload and "shield_contribution" in payload, "compute_max_hp response structure present")
+
+    subsection("Test 7.2 — POST /combat/resolve_attack")
+    r = client.post("/combat/resolve_attack", json={
+        "weapon_id": "weapon_sword_01",
+        "weapon_tier": 2,
+        "defender_is_unarmored": False,
+    })
+    check("7.2.a", r.status_code == 200, f"POST /combat/resolve_attack → {r.status_code}")
+    if r.status_code == 200:
+        payload = r.json()
+        check("7.2.b", "roll_1" in payload and "damage" in payload and "events" in payload, "resolve_attack response structure present")
+
+    subsection("Test 7.3 — GET /version includes combat_rules_fingerprint")
+    r = client.get("/version")
+    check("7.3.a", r.status_code == 200, f"GET /version → {r.status_code}")
+    if r.status_code == 200:
+        payload = r.json()
+        check("7.3.b", "combat_rules_fingerprint" in payload, "combat_rules_fingerprint present")
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -839,6 +877,7 @@ def main() -> None:
         if session_id:
             part5(client, session_id)
         part6(client)
+        part7(client)
 
     print(f"\n{'='*60}")
     print(f"RESULTS: {_pass} passed, {_fail} failed, {_pass + _fail} total")
