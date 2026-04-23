@@ -8,6 +8,7 @@
     "primary_domain": "agility",
     "tags": ["weapon", "grappling", "light", "concealable", "utility"],
     "value_cd": 20,
+    "base_damage": 10,
     "rarity": "common",
     "description": "A compact close-quarters blade suited to tight spaces, quick draws, and general utility use.",
     "narrative_effects": [
@@ -23,6 +24,7 @@
     "primary_domain": "agility",
     "tags": ["weapon", "grappling", "light", "concealable", "thrusting"],
     "value_cd": 50,
+    "base_damage": 10,
     "rarity": "common",
     "description": "A balanced short blade designed for close fighting, fast strikes, and easy carry.",
     "narrative_effects": [
@@ -38,6 +40,7 @@
     "primary_domain": "agility",
     "tags": ["weapon", "grappling", "light", "chopping", "throwable_candidate"],
     "value_cd": 80,
+    "base_damage": 10,
     "rarity": "common",
     "description": "A compact axe suited to close fighting, harsh utility work, and brutal short-range strikes.",
     "narrative_effects": [
@@ -53,6 +56,7 @@
     "primary_domain": "agility",
     "tags": ["weapon", "grappling", "concealable", "unarmed_adjacent"],
     "value_cd": 30,
+    "base_damage": 5,
     "rarity": "common",
     "description": "A compact fist reinforcement favored in brawls and dirty close combat.",
     "narrative_effects": [
@@ -68,6 +72,7 @@
     "primary_domain": "agility",
     "tags": ["weapon", "grappling", "gauntlet", "slashing", "intimidating"],
     "value_cd": 60,
+    "base_damage": 5,
     "rarity": "common",
     "description": "A fitted gauntlet with hardened claw-like projections for tearing strikes and vicious clinch fighting.",
     "narrative_effects": [
@@ -83,6 +88,7 @@
     "primary_domain": "power",
     "tags": ["weapon", "melee", "bludgeoning", "simple"],
     "value_cd": 10,
+    "base_damage": 15,
     "rarity": "common",
     "description": "A basic striking weapon that relies on force and simplicity rather than refinement.",
     "narrative_effects": [
@@ -98,6 +104,7 @@
     "primary_domain": "power",
     "tags": ["weapon", "melee", "bludgeoning", "armored_opponent"],
     "value_cd": 150,
+    "base_damage": 15,
     "rarity": "common",
     "description": "A one-handed crushing weapon built to deliver punishing impact through armor and guard.",
     "narrative_effects": [
@@ -113,6 +120,7 @@
     "primary_domain": "power",
     "tags": ["weapon", "melee", "bludgeoning", "armor_breaking"],
     "value_cd": 150,
+    "base_damage": 15,
     "rarity": "common",
     "description": "A compact battlefield hammer designed for focused, forceful impact.",
     "narrative_effects": [
@@ -128,6 +136,7 @@
     "primary_domain": "power",
     "tags": ["weapon", "melee", "blade", "military"],
     "value_cd": 500,
+    "base_damage": 15,
     "rarity": "common",
     "description": "A shorter battlefield sword suited to disciplined close combat and compact fighting lines.",
     "narrative_effects": [
@@ -143,6 +152,7 @@
     "primary_domain": "power",
     "tags": ["weapon", "melee", "blade", "martial"],
     "value_cd": 800,
+    "base_damage": 15,
     "rarity": "common",
     "description": "A standard full-length sword built for decisive battlefield or dueling use.",
     "narrative_effects": [
@@ -158,6 +168,7 @@
     "primary_domain": "power",
     "tags": ["weapon", "melee", "chopping", "martial"],
     "value_cd": 300,
+    "base_damage": 15,
     "rarity": "common",
     "description": "A full-sized combat axe built for committed chopping strikes and heavy momentum.",
     "narrative_effects": [
@@ -173,6 +184,7 @@
     "primary_domain": "power",
     "tags": ["weapon", "melee", "heavy", "chopping", "two_handed"],
     "value_cd": 500,
+    "base_damage": 25,
     "rarity": "common",
     "description": "A heavy two-handed axe built for devastating committed swings.",
     "narrative_effects": [
@@ -188,6 +200,7 @@
     "primary_domain": "power",
     "tags": ["weapon", "melee", "heavy", "blade", "two_handed"],
     "value_cd": 1500,
+    "base_damage": 25,
     "rarity": "common",
     "description": "A large two-handed sword meant for powerful sweeping offense and battlefield dominance.",
     "narrative_effects": [
@@ -203,6 +216,7 @@
     "primary_domain": "power",
     "tags": ["weapon", "reach", "piercing", "versatile"],
     "value_cd": 100,
+    "base_damage": 15,
     "rarity": "common",
     "description": "A versatile pole weapon built for thrusting, spacing, and disciplined line fighting.",
     "narrative_effects": [
@@ -218,6 +232,7 @@
     "primary_domain": "power",
     "tags": ["weapon", "reach", "bludgeoning", "staff"],
     "value_cd": 50,
+    "base_damage": 20,
     "rarity": "common",
     "description": "A reinforced fighting staff suited to spacing, leverage, and defensive control.",
     "narrative_effects": [
@@ -233,6 +248,7 @@
     "primary_domain": "power",
     "tags": ["weapon", "reach", "polearm", "martial"],
     "value_cd": 400,
+    "base_damage": 20,
     "rarity": "common",
     "description": "A general battlefield polearm designed for line control, distance, and leverage.",
     "narrative_effects": [
@@ -248,6 +264,7 @@
     "primary_domain": "power",
     "tags": ["weapon", "reach", "polearm", "hooking", "chopping"],
     "value_cd": 500,
+    "base_damage": 25,
     "rarity": "common",
     "description": "A complex polearm combining thrusting reach with chopping and hooking threat.",
     "narrative_effects": [
@@ -263,6 +280,7 @@
     "primary_domain": "power",
     "tags": ["weapon", "reach", "piercing", "formation"],
     "value_cd": 300,
+    "base_damage": 20,
     "rarity": "common",
     "description": "A long formation spear meant to keep enemies at distance and punish frontal advance.",
     "narrative_effects": [
@@ -278,6 +296,7 @@
     "primary_domain": "perception",
     "tags": ["weapon", "ranged", "bow", "mobile"],
     "value_cd": 300,
+    "base_damage": 10,
     "rarity": "common",
     "description": "A compact bow suited to mobile shooting and practical field use.",
     "narrative_effects": [
@@ -293,6 +312,7 @@
     "primary_domain": "perception",
     "tags": ["weapon", "ranged", "bow", "long_range"],
     "value_cd": 1500,
+    "base_damage": 20,
     "rarity": "common",
     "description": "A powerful bow built for distance, discipline, and precision at range.",
     "narrative_effects": [
@@ -308,6 +328,7 @@
     "primary_domain": "perception",
     "tags": ["weapon", "ranged", "sling", "simple"],
     "value_cd": 20,
+    "base_damage": 10,
     "rarity": "common",
     "description": "A simple ranged weapon using stones or similar projectiles through practiced release.",
     "narrative_effects": [
@@ -323,6 +344,7 @@
     "primary_domain": "perception",
     "tags": ["weapon", "ranged", "thrown", "light", "concealable"],
     "value_cd": 30,
+    "base_damage": 10,
     "rarity": "common",
     "description": "A balanced knife intended for short-range thrown attacks.",
     "narrative_effects": [
@@ -338,6 +360,7 @@
     "primary_domain": "perception",
     "tags": ["weapon", "ranged", "thrown", "piercing"],
     "value_cd": 50,
+    "base_damage": 15,
     "rarity": "common",
     "description": "A light throwing spear designed for forceful ranged delivery.",
     "narrative_effects": [
@@ -353,6 +376,7 @@
     "primary_domain": "perception",
     "tags": ["weapon", "mechanical", "crossbow", "projectile"],
     "value_cd": 500,
+    "base_damage": 15,
     "rarity": "common",
     "description": "A mechanically assisted ranged weapon that favors stability over rate of fire.",
     "narrative_effects": [
@@ -368,6 +392,7 @@
     "primary_domain": "perception",
     "tags": ["weapon", "mechanical", "crossbow", "heavy", "projectile"],
     "value_cd": 1000,
+    "base_damage": 25,
     "rarity": "common",
     "description": "A heavier mechanically assisted ranged weapon built for punishing power at the cost of speed.",
     "narrative_effects": [
@@ -383,6 +408,7 @@
     "primary_domain": "varies",
     "tags": ["weapon", "unconventional", "flexible", "control"],
     "value_cd": 100,
+    "base_damage": 10,
     "rarity": "common",
     "description": "A flexible weapon used more for control, reach tricks, and intimidation than straightforward damage.",
     "narrative_effects": [
@@ -398,6 +424,7 @@
     "primary_domain": "varies",
     "tags": ["weapon", "unconventional", "restraint", "control"],
     "value_cd": 10,
+    "base_damage": 5,
     "rarity": "common",
     "description": "A thrown restraint tool used in combat to entangle and control rather than injure.",
     "narrative_effects": [
@@ -413,6 +440,7 @@
     "primary_domain": "varies",
     "tags": ["weapon", "unconventional", "projectile", "stealth"],
     "value_cd": 80,
+    "base_damage": 10,
     "rarity": "common",
     "description": "A subtle projectile weapon suited to quiet delivery over force.",
     "narrative_effects": [
@@ -428,6 +456,7 @@
     "primary_domain": "varies",
     "tags": ["weapon", "unconventional", "flexible", "improvised_adjacent"],
     "value_cd": 50,
+    "base_damage": 15,
     "rarity": "common",
     "description": "A weighted chain used offensively through momentum, entanglement, and difficult angles of attack.",
     "narrative_effects": [
