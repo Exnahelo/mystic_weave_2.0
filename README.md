@@ -59,6 +59,12 @@ System reference: `prompts/world-rules.md` and `prompts/character-creation.md`
 
 Reference: `world-topology-baseline.md`
 
+## v4.2.0 Changelog
+
+- Added `POST /combat/compute_max_hp` for pre-combat HP calculation from armor + shield
+- Added `POST /combat/resolve_attack` for atomic Combat v1.0 attack resolution
+- Added `combat_rules_fingerprint` to `GET /version` for combat-rules drift detection
+
 ## v4.1.0 Changelog
 
 - Added canonical tag registry files under `data/tags/`
@@ -71,7 +77,7 @@ Reference: `world-topology-baseline.md`
 | Method | Path | Purpose |
 |---|---|---|
 | GET | `/health` | Health check |
-| GET | `/version` | Build metadata, data fingerprint, option counts |
+| GET | `/version` | Build metadata, data fingerprint, combat rules fingerprint, option counts |
 | GET | `/options` | Enumerate species, focus, background options |
 | GET | `/tags` | Enumerate knowledge groups, magic fields, and applications |
 | POST | `/session/new` | Create new session and character |
@@ -80,6 +86,8 @@ Reference: `world-topology-baseline.md`
 | POST | `/state/{session_id}` | Save game state (UPSERT) |
 | POST | `/state/{session_id}/delta` | Apply structured state delta |
 | POST | `/roll` | Authoritative d100 dice resolution |
+| POST | `/combat/compute_max_hp` | Pre-combat HP calculation from armor + shield |
+| POST | `/combat/resolve_attack` | Atomic d100 attack resolution |
 | GET | `/scene/{session_id}` | Build compact scene context |
 | GET | `/location/{location_id}` | Load location data |
 | GET | `/location/{location_id}/connections` | Get valid movement options |
@@ -90,11 +98,12 @@ Reference: `world-topology-baseline.md`
 ```
 api/
   main.py              # FastAPI app — version string here (keep in sync with openapi.yaml)
-  models.py            # Pydantic v2 models (schema/release version 4.1.0)
+  models.py            # Pydantic v2 models (schema/release version 4.2.0)
   game_data.py         # Game system data loader + seed_character
   database.py          # asyncpg pool management
   routes/
     character.py       # POST /character/create
+    combat.py          # POST /combat/compute_max_hp + POST /combat/resolve_attack
     location.py        # GET/POST /location
     options.py         # GET /options
     roll.py            # POST /roll (d100 roll-under)
@@ -121,7 +130,6 @@ data/
     armor.json
     gear.json
     magical_item.json
-    notable_item.json
     weapon.json
   magic/
     alchemy.json
@@ -150,7 +158,7 @@ prompts/               # GPT prompt corpus + markdown world-vault mirrors
   npcs.md
   design-notes.md      # Internal — do NOT upload to GPT builder
 schemas/
-  openapi.yaml         # OpenAPI document format 3.1.0, schema/release version 4.1.0 — upload to GPT builder Actions
+  openapi.yaml         # OpenAPI document format 3.1.0, schema/release version 4.2.0 — upload to GPT builder Actions
 scripts/
   seed_locations.py    # Seed canonical structured world data from data/world/ into DB
   verify_production_contract.py  # Validate production against repo expectations
@@ -267,4 +275,4 @@ When bumping the API version, update it in **two places**:
 
 Both must stay in sync. The contract test at `tests/contract/test_openapi_contract.py` asserts the version string — update that assertion too.
 
-**Current backend/schema version:** 4.1.0
+**Current backend/schema version:** 4.2.0
