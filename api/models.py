@@ -600,6 +600,7 @@ class VersionResponse(BaseModel):
     api_version: str
     git_sha: str
     data_fingerprint: str
+    combat_rules_fingerprint: str
     ancestry_count: int
     culture_count: int
     focus_count: int
@@ -639,6 +640,72 @@ class RollResponse(BaseModel):
                              # "partial_failure" | "failure" | "critical_failure"
     critical_success: bool = False   # roll == 1
     critical_failure: bool = False   # roll == 100
+
+
+class ComputeMaxHpRequest(BaseModel):
+    armor_id: str
+    armor_tier: int = Field(..., ge=0, le=5)
+    shield_id: str | None = None
+    shield_tier: int = Field(default=0, ge=0, le=5)
+
+
+class ComputeMaxHpResponse(BaseModel):
+    max_hp: int
+    base: int
+    armor_contribution: int
+    shield_contribution: int
+    armor_id: str
+    armor_tier: int
+    shield_id: str | None
+    shield_tier: int
+
+
+class CombatRoll1Result(BaseModel):
+    value: int
+    target: int
+    base_target: int
+
+
+class CombatRoll2Result(BaseModel):
+    attacker: int
+    defender: int
+    margin: int
+
+
+class CombatDamageResult(BaseModel):
+    weapon_base: int
+    effective_base: int
+    ammo_modifier: int
+    margin_multiplier: float
+    agility_reduction_multiplier: float
+    pre_reduction: int
+    final: int
+
+
+class CombatReboundResult(BaseModel):
+    attacker_damage: int
+
+
+class ResolveAttackRequest(BaseModel):
+    weapon_id: str
+    weapon_tier: int = Field(..., ge=0, le=5)
+    ammo_id: str | None = None
+    use_off_hand: bool = False
+    defender_is_unarmored: bool
+    defender_unarmored_tier: int = Field(default=0, ge=0, le=5)
+    defender_agility_tier: int = Field(default=0, ge=0, le=5)
+
+
+class ResolveAttackResponse(BaseModel):
+    hit: bool
+    critical_hit: bool
+    fumble: bool
+    tied: bool
+    roll_1: CombatRoll1Result
+    roll_2: CombatRoll2Result | None
+    damage: CombatDamageResult
+    rebound: CombatReboundResult | None = None
+    events: list[str]
 
 
 # ---------------------------------------------------------------------------

@@ -12,7 +12,9 @@ import hashlib
 import json
 from functools import lru_cache
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
+
+from core.dice_roller import roll
 
 _DATA_DIR = Path(__file__).parent.parent / "data"
 _DATA_FILES = (
@@ -54,6 +56,17 @@ _BEAST_DATA_FILES = (
     "beasts/tactical_roles.json",
 )
 _MAGIC_DIR = _DATA_DIR / "magic"
+_PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
+
+
+_WEAPON_TIER_TARGETS = {
+    0: 45,
+    1: 55,
+    2: 65,
+    3: 75,
+    4: 85,
+    5: 95,
+}
 
 
 @lru_cache(maxsize=None)
@@ -325,6 +338,220 @@ def list_apparel_items() -> list[dict[str, Any]]:
 def list_all_items() -> list[dict[str, Any]]:
     """Return concatenated mundane + magical + apparel item catalogs."""
     return list_mundane_items() + list_magical_items() + list_apparel_items() + list_weapons() + list_armor()
+
+
+def get_weapon(weapon_id: str) -> dict[str, Any]:
+    """Return a weapon catalog entry by ID."""
+    data = _load_json("items/weapon.json")
+    if not isinstance(data, list):
+        raise ValueError("weapon catalog unavailable")
+    for item in data:
+        if item.get("id") == weapon_id:
+            if item.get("category") != "weapon":
+                raise ValueError(f"Invalid weapon entry: {weapon_id!r}")
+            return item
+    raise ValueError(f"Unknown weapon: {weapon_id!r}")
+
+
+def get_armor(armor_id: str) -> dict[str, Any]:
+    """Return an armor catalog entry by ID."""
+    data = _load_json("items/armor.json")
+    if not isinstance(data, list):
+        raise ValueError("armor catalog unavailable")
+    for item in data:
+        if item.get("id") == armor_id:
+            if item.get("category") != "armor":
+                raise ValueError(f"Invalid armor entry: {armor_id!r}")
+            return item
+    raise ValueError(f"Unknown armor: {armor_id!r}")
+
+
+def get_shield(shield_id: str) -> dict[str, Any]:
+    """Return a shield catalog entry by ID."""
+    data = _load_json("items/armor.json")
+    if not isinstance(data, list):
+        raise ValueError("shield catalog unavailable")
+    for item in data:
+        if item.get("id") == shield_id:
+            if item.get("category") != "shield":
+                raise ValueError(f"Invalid shield entry: {shield_id!r}")
+            return item
+    raise ValueError(f"Unknown shield: {shield_id!r}")
+
+
+def get_ammunition(ammo_id: str) -> dict[str, Any]:
+    """Return an ammunition catalog entry by ID."""
+    data = _load_json("items/ammunition.json")
+    if not isinstance(data, list):
+        raise ValueError("ammunition catalog unavailable")
+    for item in data:
+        if item.get("id") == ammo_id:
+            if item.get("category") != "ammunition":
+                raise ValueError(f"Invalid ammunition entry: {ammo_id!r}")
+            return item
+    raise ValueError(f"Unknown ammunition: {ammo_id!r}")
+
+
+def compute_max_hp(
+    armor_entry: dict[str, Any],
+    armor_tier: int,
+    shield_entry: dict[str, Any] | None,
+    shield_tier: int,
+) -> dict[str, int]:
+    """Compute pre-combat max HP from armor and shield contributions."""
+    base = 100
+    armor_floor = int(armor_entry["armor_floor"])
+    armor_ceiling = int(armor_entry["armor_ceiling"])
+    armor_contribution = int(
+        armor_floor + (armor_ceiling - armor_floor) * (armor_tier / 5)
+    )
+
+    shield_contribution = 0
+    if shield_entry is not None:
+        shield_floor = int(shield_entry["armor_floor"])
+        shield_ceiling = int(shield_entry["armor_ceiling"])
+        shield_contribution = int(
+            shield_floor + (shield_ceiling - shield_floor) * (shield_tier / 5)
+        )
+
+    return {
+        "max_hp": base + armor_contribution + shield_contribution,
+        "base": base,
+        "armor_contribution": armor_contribution,
+        "shield_contribution": shield_contribution,
+    }
+
+
+def resolve_attack(
+    *,
+    weapon_id: str,
+    weapon_tier: int,
+    ammo_id: str | None = None,
+    use_off_hand: bool = False,
+    defender_is_unarmored: bool,
+    defender_unarmored_tier: int = 0,
+    defender_agility_tier: int = 0,
+    dice: Callable[[str], int] = roll,
+) -> dict[str, Any]:
+    """Resolve a single combat attack using Combat v1.0 rules."""
+    weapon_entry = get_weapon(weapon_id)
+    if "base_damage" not in weapon_entry:
+        raise ValueError(f"Weapon missing base_damage: {weapon_id!r}")
+    weapon_base = int(weapon_entry["base_damage"])
+
+    ammo_modifier = 0
+    if ammo_id is not None:
+        ammo_entry = get_ammunition(ammo_id)
+        if "damage_modifier" not in ammo_entry:
+            raise ValueError(f"Ammunition missing damage_modifier: {ammo_id!r}")
+        ammo_modifier = int(ammo_entry["damage_modifier"])
+
+    if weapon_tier not in _WEAPON_TIER_TARGETS:
+        raise ValueError("weapon_tier must be between 0 and 5")
+    if not 0 <= defender_unarmored_tier <= 5:
+        raise ValueError("defender_unarmored_tier must be between 0 and 5")
+    if not 0 <= defender_agility_tier <= 5:
+        raise ValueError("defender_agility_tier must be between 0 and 5")
+
+    effective_base = weapon_base // 2 if use_off_hand else weapon_base
+    base_target = _WEAPON_TIER_TARGETS[weapon_tier]
+    target = base_target
+    if defender_is_unarmored:
+        target = max(1, base_target - (defender_unarmored_tier * 5))
+
+    agility_reduction_multiplier = 1 - (defender_agility_tier * 0.10)
+    roll_1_value = dice("1d100")
+    events = ["roll_1"]
+
+    damage = {
+        "weapon_base": weapon_base,
+        "effective_base": effective_base,
+        "ammo_modifier": ammo_modifier,
+        "margin_multiplier": 0.0,
+        "agility_reduction_multiplier": agility_reduction_multiplier,
+        "pre_reduction": 0,
+        "final": 0,
+    }
+
+    result: dict[str, Any] = {
+        "hit": False,
+        "critical_hit": False,
+        "fumble": False,
+        "tied": False,
+        "roll_1": {
+            "value": roll_1_value,
+            "target": target,
+            "base_target": base_target,
+        },
+        "roll_2": None,
+        "damage": damage,
+        "rebound": None,
+        "events": events,
+    }
+
+    if roll_1_value == 1:
+        pre_reduction = (effective_base * 3) + ammo_modifier
+        final = max(0, int(pre_reduction * agility_reduction_multiplier))
+        damage.update(
+            {
+                "margin_multiplier": 3.0,
+                "pre_reduction": pre_reduction,
+                "final": final,
+            }
+        )
+        events.extend(["critical_hit", "damage_computed", "agility_reduction"])
+        result["hit"] = True
+        result["critical_hit"] = True
+        return result
+
+    if roll_1_value == 100:
+        rebound_damage = dice("1d6") + 4
+        events.append("fumble")
+        result["fumble"] = True
+        result["rebound"] = {"attacker_damage": rebound_damage}
+        return result
+
+    if roll_1_value > target:
+        events.append("miss")
+        return result
+
+    events.append("hit")
+    attacker_r2 = dice("1d100")
+    defender_r2 = dice("1d100")
+    margin = attacker_r2 - defender_r2
+    result["roll_2"] = {
+        "attacker": attacker_r2,
+        "defender": defender_r2,
+        "margin": margin,
+    }
+    events.append("roll_2")
+
+    if margin == 0:
+        result["tied"] = True
+        events.append("tied")
+        return result
+
+    margin_multiplier = 1 + (margin / 100)
+    pre_reduction = max(0, int(effective_base * margin_multiplier)) + ammo_modifier
+    final = max(0, int(pre_reduction * agility_reduction_multiplier))
+    damage.update(
+        {
+            "margin_multiplier": margin_multiplier,
+            "pre_reduction": pre_reduction,
+            "final": final,
+        }
+    )
+    events.extend(["damage_computed", "agility_reduction"])
+    result["hit"] = final > 0
+    return result
+
+
+def combat_rules_fingerprint() -> str:
+    """Stable SHA256 fingerprint of prompts/combat-rules.md."""
+    hasher = hashlib.sha256()
+    with open(_PROMPTS_DIR / "combat-rules.md", "rb") as f:
+        hasher.update(f.read())
+    return hasher.hexdigest()
 
 
 # ---------------------------------------------------------------------------
