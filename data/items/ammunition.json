@@ -12,6 +12,7 @@
     "consumption_model": "narrative",
     "rarity": "common",
     "value_cd": 20,
+    "damage_modifier": 0,
     "description": "Standard arrows used with shortbows and longbows for ordinary ranged combat.",
     "narrative_effects": [
       "Required to use compatible bows for ordinary ranged attacks.",
@@ -31,6 +32,7 @@
     "consumption_model": "narrative",
     "rarity": "common",
     "value_cd": 30,
+    "damage_modifier": 0,
     "description": "Standard crossbow bolts used with light and heavy crossbows.",
     "narrative_effects": [
       "Required to use compatible crossbows for ordinary ranged attacks.",
@@ -50,6 +52,7 @@
     "consumption_model": "narrative",
     "rarity": "common",
     "value_cd": 5,
+    "damage_modifier": 0,
     "description": "Smooth stone ammunition sized for practical sling use.",
     "narrative_effects": [
       "Required to use a sling effectively at range.",
@@ -69,6 +72,7 @@
     "consumption_model": "narrative",
     "rarity": "common",
     "value_cd": 10,
+    "damage_modifier": 0,
     "description": "Light blowgun needles intended for quiet projectile use.",
     "narrative_effects": [
       "Required to use a blowgun effectively.",
@@ -84,10 +88,11 @@
     "bundle_size": 10,
     "tags": ["ammo", "bow", "broadhead", "hunting"],
     "special_effect_tag": "bleed_pressure",
-    "recoverable": true,
+    "recoverable": false,
     "consumption_model": "narrative",
     "rarity": "common",
     "value_cd": 35,
+    "damage_modifier": 5,
     "description": "Wide-bladed arrows built for hunting and soft-target lethality rather than armor penetration.",
     "narrative_effects": [
       "Supports stronger bleeding or flesh-wound framing against unarmored or lightly protected targets.",
@@ -103,10 +108,11 @@
     "bundle_size": 10,
     "tags": ["ammo", "bow", "bodkin", "armor_piercing"],
     "special_effect_tag": "armor_pressure",
-    "recoverable": true,
+    "recoverable": false,
     "consumption_model": "narrative",
     "rarity": "uncommon",
     "value_cd": 45,
+    "damage_modifier": 5,
     "description": "Narrow hardened arrows designed to better threaten armor gaps and tougher targets.",
     "narrative_effects": [
       "Supports armor-pressuring or armor-gap attack framing where shot placement is credible.",
@@ -126,6 +132,7 @@
     "consumption_model": "expended",
     "rarity": "uncommon",
     "value_cd": 120,
+    "damage_modifier": 5,
     "description": "Prepared arrows intended to carry flame into vulnerable materials, structures, or exposed targets.",
     "narrative_effects": [
       "Supports ignition and fire-delivery framing through compatible bows.",
@@ -145,6 +152,7 @@
     "consumption_model": "expended",
     "rarity": "uncommon",
     "value_cd": 140,
+    "damage_modifier": 5,
     "description": "Arrows prepared with alchemical or magical frost charge for chilling impact effects.",
     "narrative_effects": [
       "Supports chill, brittle-surface, or slowing-impact framing where frost effects are plausible.",
@@ -164,6 +172,7 @@
     "consumption_model": "expended",
     "rarity": "common",
     "value_cd": 60,
+    "damage_modifier": 5,
     "description": "Specialized arrows designed for visible signaling, noise, or marking rather than battlefield lethality.",
     "narrative_effects": [
       "Supports signaling, marking, or long-distance nonverbal coordination.",
@@ -179,10 +188,11 @@
     "bundle_size": 3,
     "tags": ["ammo", "bow", "utility", "climbing"],
     "special_effect_tag": "anchoring",
-    "recoverable": true,
+    "recoverable": false,
     "consumption_model": "narrative",
     "rarity": "uncommon",
     "value_cd": 90,
+    "damage_modifier": 5,
     "description": "Heavy arrowheads designed to carry and anchor light climbing line or signaling cord.",
     "narrative_effects": [
       "Supports line-placement or difficult elevated anchoring where conditions allow.",
@@ -198,10 +208,11 @@
     "bundle_size": 10,
     "tags": ["ammo", "crossbow", "broadhead", "hunting"],
     "special_effect_tag": "bleed_pressure",
-    "recoverable": true,
+    "recoverable": false,
     "consumption_model": "narrative",
     "rarity": "common",
     "value_cd": 45,
+    "damage_modifier": 5,
     "description": "Heavy broadhead bolts intended for hunting and soft-target lethality.",
     "narrative_effects": [
       "Supports stronger bleeding or flesh-wound framing against unarmored or lightly protected targets.",
@@ -217,10 +228,11 @@
     "bundle_size": 10,
     "tags": ["ammo", "crossbow", "bodkin", "armor_piercing"],
     "special_effect_tag": "armor_pressure",
-    "recoverable": true,
+    "recoverable": false,
     "consumption_model": "narrative",
     "rarity": "uncommon",
     "value_cd": 60,
+    "damage_modifier": 5,
     "description": "Narrow reinforced bolts built to better threaten armor seams and tougher defensive targets.",
     "narrative_effects": [
       "Supports armor-pressure framing where a heavy penetrating shot is plausible.",
@@ -240,6 +252,7 @@
     "consumption_model": "expended",
     "rarity": "uncommon",
     "value_cd": 130,
+    "damage_modifier": 5,
     "description": "Prepared crossbow bolts carrying incendiary charge for controlled ignition or destructive strike delivery.",
     "narrative_effects": [
       "Supports ignition and fire-delivery framing through compatible crossbows.",
@@ -259,6 +272,7 @@
     "consumption_model": "expended",
     "rarity": "uncommon",
     "value_cd": 150,
+    "damage_modifier": 5,
     "description": "Charged bolts intended to deliver chilling force or brittle-impact pressure on contact.",
     "narrative_effects": [
       "Supports frost-infused impact, chilling pressure, or brittle-material framing.",
@@ -278,6 +292,7 @@
     "consumption_model": "expended",
     "rarity": "rare",
     "value_cd": 180,
+    "damage_modifier": 5,
     "description": "Consecrated bolts prepared for use in rites of sanctioned violence against profane or corrupted threats.",
     "narrative_effects": [
       "Supports sacred-pressure framing where holy authority is recognized and relevant.",
@@ -297,6 +312,7 @@
     "consumption_model": "narrative",
     "rarity": "common",
     "value_cd": 12,
+    "damage_modifier": 5,
     "description": "Dense selected stones or shaped pellets intended to hit harder than ordinary sling ammunition.",
     "narrative_effects": [
       "Supports stronger blunt-impact framing than ordinary sling stones.",
@@ -316,6 +332,7 @@
     "consumption_model": "expended",
     "rarity": "uncommon",
     "value_cd": 90,
+    "damage_modifier": 5,
     "description": "Fragile sling-fired incendiary capsules intended to shatter and ignite on impact.",
     "narrative_effects": [
       "Supports small-scale ignition, distraction, or fire-setting through sling delivery.",
@@ -335,6 +352,7 @@
     "consumption_model": "expended",
     "rarity": "uncommon",
     "value_cd": 85,
+    "damage_modifier": 5,
     "description": "Prepared blowgun needles carrying toxin for quiet delivery where subtle harm matters more than force.",
     "narrative_effects": [
       "Supports toxin-delivery framing through stealth-oriented ranged attacks.",
@@ -354,6 +372,7 @@
     "consumption_model": "expended",
     "rarity": "uncommon",
     "value_cd": 95,
+    "damage_modifier": 5,
     "description": "Specialized sedative-treated needles meant for subdual, capture, or quiet takedown attempts.",
     "narrative_effects": [
       "Supports sleep, sedation, or subdual framing where delivery and dosage are plausible.",
@@ -373,6 +392,7 @@
     "consumption_model": "expended",
     "rarity": "common",
     "value_cd": 40,
+    "damage_modifier": 5,
     "description": "Special needles designed to deliver dye, scent marker, or similar tagging payloads rather than direct harm.",
     "narrative_effects": [
       "Supports marking, tracking, or identification framing against unaware or fleeing targets.",
