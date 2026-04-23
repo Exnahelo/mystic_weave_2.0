@@ -4,7 +4,7 @@ info:
   description: Persistent game state backend for a text-based RPG powered by a custom
     GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution
     with domain scores and competency tiers.
-  version: 4.1.0
+  version: 4.2.0
 servers:
 - url: https://mysticweave-production.up.railway.app
   description: Production (Railway)
@@ -177,6 +177,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RollResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /combat/compute_max_hp:
+    post:
+      tags:
+      - combat
+      summary: Compute Max Hp Endpoint
+      description: Compute pre-combat HP from armor and shield catalog values plus skill tiers.
+      operationId: compute_max_hp_endpoint_combat_compute_max_hp_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComputeMaxHpRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComputeMaxHpResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /combat/resolve_attack:
+    post:
+      tags:
+      - combat
+      summary: Resolve Attack Endpoint
+      description: Resolve a single Combat v1.0 attack atomically using backend-authoritative dice.
+      operationId: resolve_attack_endpoint_combat_resolve_attack_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResolveAttackRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResolveAttackResponse'
         '422':
           description: Validation Error
           content:
@@ -1037,6 +1089,147 @@ components:
       - companion_id
       - companion
       title: CompanionResponse
+    CombatDamageResult:
+      properties:
+        weapon_base:
+          type: integer
+          title: Weapon Base
+        effective_base:
+          type: integer
+          title: Effective Base
+        ammo_modifier:
+          type: integer
+          title: Ammo Modifier
+        margin_multiplier:
+          type: number
+          title: Margin Multiplier
+        agility_reduction_multiplier:
+          type: number
+          title: Agility Reduction Multiplier
+        pre_reduction:
+          type: integer
+          title: Pre Reduction
+        final:
+          type: integer
+          title: Final
+      type: object
+      required:
+      - weapon_base
+      - effective_base
+      - ammo_modifier
+      - margin_multiplier
+      - agility_reduction_multiplier
+      - pre_reduction
+      - final
+      title: CombatDamageResult
+    CombatReboundResult:
+      properties:
+        attacker_damage:
+          type: integer
+          title: Attacker Damage
+      type: object
+      required:
+      - attacker_damage
+      title: CombatReboundResult
+    CombatRoll1Result:
+      properties:
+        value:
+          type: integer
+          title: Value
+        target:
+          type: integer
+          title: Target
+        base_target:
+          type: integer
+          title: Base Target
+      type: object
+      required:
+      - value
+      - target
+      - base_target
+      title: CombatRoll1Result
+    CombatRoll2Result:
+      properties:
+        attacker:
+          type: integer
+          title: Attacker
+        defender:
+          type: integer
+          title: Defender
+        margin:
+          type: integer
+          title: Margin
+      type: object
+      required:
+      - attacker
+      - defender
+      - margin
+      title: CombatRoll2Result
+    ComputeMaxHpRequest:
+      properties:
+        armor_id:
+          type: string
+          title: Armor Id
+        armor_tier:
+          type: integer
+          maximum: 5.0
+          minimum: 0.0
+          title: Armor Tier
+        shield_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Shield Id
+        shield_tier:
+          type: integer
+          maximum: 5.0
+          minimum: 0.0
+          title: Shield Tier
+          default: 0
+      type: object
+      required:
+      - armor_id
+      - armor_tier
+      title: ComputeMaxHpRequest
+    ComputeMaxHpResponse:
+      properties:
+        max_hp:
+          type: integer
+          title: Max Hp
+        base:
+          type: integer
+          title: Base
+        armor_contribution:
+          type: integer
+          title: Armor Contribution
+        shield_contribution:
+          type: integer
+          title: Shield Contribution
+        armor_id:
+          type: string
+          title: Armor Id
+        armor_tier:
+          type: integer
+          title: Armor Tier
+        shield_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Shield Id
+        shield_tier:
+          type: integer
+          title: Shield Tier
+      type: object
+      required:
+      - max_hp
+      - base
+      - armor_contribution
+      - shield_contribution
+      - armor_id
+      - armor_tier
+      - shield_id
+      - shield_tier
+      title: ComputeMaxHpResponse
     ConnectionInfo:
       properties:
         to_id:
@@ -2903,6 +3096,88 @@ components:
       required:
       - log_entry
       title: SaveStateRequest
+    ResolveAttackRequest:
+      properties:
+        weapon_id:
+          type: string
+          title: Weapon Id
+        weapon_tier:
+          type: integer
+          maximum: 5.0
+          minimum: 0.0
+          title: Weapon Tier
+        ammo_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ammo Id
+        use_off_hand:
+          type: boolean
+          title: Use Off Hand
+          default: false
+        defender_is_unarmored:
+          type: boolean
+          title: Defender Is Unarmored
+        defender_unarmored_tier:
+          type: integer
+          maximum: 5.0
+          minimum: 0.0
+          title: Defender Unarmored Tier
+          default: 0
+        defender_agility_tier:
+          type: integer
+          maximum: 5.0
+          minimum: 0.0
+          title: Defender Agility Tier
+          default: 0
+      type: object
+      required:
+      - weapon_id
+      - weapon_tier
+      - defender_is_unarmored
+      title: ResolveAttackRequest
+    ResolveAttackResponse:
+      properties:
+        hit:
+          type: boolean
+          title: Hit
+        critical_hit:
+          type: boolean
+          title: Critical Hit
+        fumble:
+          type: boolean
+          title: Fumble
+        tied:
+          type: boolean
+          title: Tied
+        roll_1:
+          $ref: '#/components/schemas/CombatRoll1Result'
+        roll_2:
+          anyOf:
+          - $ref: '#/components/schemas/CombatRoll2Result'
+          - type: 'null'
+        damage:
+          $ref: '#/components/schemas/CombatDamageResult'
+        rebound:
+          anyOf:
+          - $ref: '#/components/schemas/CombatReboundResult'
+          - type: 'null'
+        events:
+          items:
+            type: string
+          type: array
+          title: Events
+      type: object
+      required:
+      - hit
+      - critical_hit
+      - fumble
+      - tied
+      - roll_1
+      - roll_2
+      - damage
+      - events
+      title: ResolveAttackResponse
       description: Body for POST /state/{session_id}
     SceneContext:
       properties:
@@ -3136,6 +3411,9 @@ components:
         data_fingerprint:
           type: string
           title: Data Fingerprint
+        combat_rules_fingerprint:
+          type: string
+          title: Combat Rules Fingerprint
         ancestry_count:
           type: integer
           title: Ancestry Count
@@ -3154,6 +3432,7 @@ components:
       - api_version
       - git_sha
       - data_fingerprint
+      - combat_rules_fingerprint
       - ancestry_count
       - culture_count
       - focus_count
