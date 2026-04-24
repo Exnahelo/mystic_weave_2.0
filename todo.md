@@ -64,7 +64,6 @@ Updated after post-cleanup audit — 2026-04-18.
     `data/characters/background.json`
   - [x] `data/items/weapons.json` → `data/items/weapon.json`
   - [x] `data/items/magical.json` → `data/items/magical_item.json`
-  - [x] `data/items/notable.json` → `data/items/notable_item.json`
 - [x] Trim `prompts/engine.md` from 7999 → 7812 bytes (187 bytes
   headroom recovered)
 - [x] Audit `schemas/openapi.yaml` for prose drift after the arc —
@@ -137,7 +136,7 @@ Updated after post-cleanup audit — 2026-04-18.
   by `SapientCompanion` + `CreatureCompanion` + `ExceptionalCompanion`
   when the companion implementation arc is prioritized.
 - [x] Decide on magical/notable item schema — resolved.
-  `notable_item.json` retired (deleted; entries were unused). All
+  [removed] retired (deleted; entries were unused). All
   special items unified under `data/items/magical.json`. T0–T5 tier
   framework captured (see `prompts/design-notes.md` §Magical Item Tier Framework 2026-04). Enchantment/crafting mechanics deferred to
   `magic-rules.md` "Enchantment and Permanent Works" design arc.

@@ -18,7 +18,6 @@ Use this file together with:
 * `data/items/armor.json`
 * `data/items/gear.json`
 * `data/items/magical_item.json`
-* `data/items/notable_item.json`
 * `data/items/weapon.json`
 * `combat-rules.md`
 * `economy-rules.md`
@@ -103,14 +102,6 @@ Use `data/items/gear.json` for:
 * travel equipment
 * common tactical and social equipment
 * cordage (twine, waxed line, cord) alongside rope and rigging utility
-
-### Notable
-
-Use `data/items/notable_item.json` for:
-
-* named or setting-significant items
-* rarer gear with stronger narrative identity
-* items whose use may attract visibility, consequence, or political interest
 
 ### Weapons
 
@@ -340,7 +331,6 @@ This section will eventually define how the GPT should reason about:
 * `data/items/armor.json` — armor and shield catalog
 * `data/items/gear.json` — ordinary gear, tools, storage, camp items, and cordage catalog
 * `data/items/magical_item.json` — standard magical item catalog
-* `data/items/notable_item.json` — named and setting-significant item catalog
 * `data/items/weapon.json` — weapon catalog and combat-family item data
 * `combat-rules.md` — combat-facing handling of weapons, armor, and ammunition
 * `economy-rules.md` — buying, barter, pricing pressure, and transaction state rules

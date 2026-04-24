@@ -301,11 +301,6 @@ These are worth addressing when the implementation arc starts, not now.
 Direction locked. Tier scale decided. Mechanics deferred to the
 enchantment-rules design arc.
 
-Supersedes the open TODO item "Decide on magical/notable item schema"
-from the post-naming-cleanup open items list. `notable_item.json` has
-been retired (deleted); all special items are unified under
-`data/items/magical.json`.
-
 ### Tier scale
 
 Items use a T0–T5 scale. Tier describes **what the item does**

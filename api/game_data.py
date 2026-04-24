@@ -35,7 +35,6 @@ _ITEM_DATA_FILES = (
     "items/armor.json",
     "items/weapon.json",
     "items/ammunition.json",
-    "items/notable_item.json",
 )
 _SPELL_DATA_FILES = (
     "magic/alchemy.json",
