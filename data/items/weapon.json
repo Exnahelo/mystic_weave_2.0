@@ -26,7 +26,7 @@
     "name": "Dagger",
     "category": "weapon",
     "knowledge_tag": "close_combat",
-    "knowledge_tag": "mechanical",
+    "application_tag": "dagger",
     "primary_domain": "agility",
     "tags": [
       "weapon",
@@ -579,7 +579,7 @@
     "id": "weapon_blowgun_01",
     "name": "Blowgun",
     "category": "weapon",
-    "knowledge_tag": "unconventional",
+    "knowledge_tag": "mechanical",
     "application_tag": "blowgun",
     "primary_domain": "varies",
     "tags": [
