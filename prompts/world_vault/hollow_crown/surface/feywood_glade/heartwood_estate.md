@@ -14,14 +14,14 @@ description: >
   fortified manor or monumental hall; it is a cluster of grown-in dwellings and
   tended spaces integrated with the surrounding old-growth, sized for roughly
   forty to seventy residents drawn from House Heartwood family, in-laws, bonded
-  staff, and house-raised children across their successive life stages. The
-  Estate currently houses Lethariel Heartwood and her daughter Sylvara, now 80
-  and past her wild-upbringing years, in the preparation phase ahead of her
-  Proving at 90. The Heartwood bow is kept here between Lethariel's active
-  Captaincy rotations; she resumes the Captaincy when Sylvara departs for the
-  Proving. The estate's character is anti-monumental — the same
-  organic-integration aesthetic as Thornveil, carried to a smaller and more
-  wild-adjacent register.
+  staff, and house-raised children across their successive life stages.
+  Lethariel Heartwood is currently in residence in Captain-emeritus standing;
+  the house's current Proving candidate resides here through the preparation
+  phase ahead of the Proving. The Heartwood bow is kept here between
+  Lethariel's active Captaincy rotations; she resumes the Captaincy when the
+  current Proving candidate departs for the Proving. The estate's character is
+  anti-monumental — the same organic-integration aesthetic as Thornveil,
+  carried to a smaller and more wild-adjacent register.
 connections:
 - feywood-glade
 - thornveil
@@ -39,8 +39,6 @@ tags:
 - heartwood-bow
 known_npcs:
 - Lethariel Heartwood
-- Sylvara Heartwood
-- Ash (bonded moonthorn wolf)
 threat_level: 1
 discovered: false
 ---
@@ -71,19 +69,19 @@ The Heartwood bow itself is kept on a simple wooden stand. It is not in a displa
 
 ## The Wild-Upbringing and the Proving
 
-House Heartwood's specific tradition runs in two distinct phases. Children of the house are first raised close to the land — they spend their earliest decades at the Estate and the surrounding Outer Wild, learning from the Glade directly before they learn from the family's civic life. They return to the Estate for significant events but otherwise move through the Outer Wild with their bonded kin, hunting with Longbough and living with the land the house is named for. This wild-upbringing period runs through young adulthood; Sylvara, now 80, completed hers recently.
+House Heartwood's specific tradition runs in two distinct phases. Children of the house are first raised close to the land — they spend their earliest decades at the Estate and the surrounding Outer Wild, learning from the Glade directly before they learn from the family's civic life. They return to the Estate for significant events but otherwise move through the Outer Wild with their bonded kin, hunting with Longbough and living with the land the house is named for. This wild-upbringing period runs through young adulthood.
 
 The second phase is the Proving itself, which for House Heartwood candidates commences at 90. The Proving requires the candidate to demonstrate capability and character without wielding the family name — operating under an alternate identity, joining a Greenshield rotation where the house is unknown, traveling realm-side under discretion, or some comparable arrangement negotiated with the house elders. The candidate must earn what they will later carry.
 
-The ten years between wild-upbringing and the Proving are a preparation phase. The candidate lives primarily at the Estate, consolidating what the wild-upbringing taught them, developing the skills and contextual knowledge their planned Proving route will require, and working alongside family elders on the formal aspects of house tradition. Sylvara is currently in this phase — ten years in, ten years ahead.
+The ten years between wild-upbringing and the Proving are a preparation phase. The candidate lives primarily at the Estate, consolidating what the wild-upbringing taught them, developing the skills and contextual knowledge their planned Proving route will require, and working alongside family elders on the formal aspects of house tradition.
 
-The Estate supports both phases. The working hall includes a tanning-and-processing space that served Sylvara's hunting years and still sees occasional use. The weapons room holds training gear from her wild-upbringing — including the small bow she used before graduating to her current Longbough — alongside the heirloom pieces. Family members in residence rotate through informal support of the preparation phase, offering specific expertise as Sylvara's Proving design takes shape.
+The Estate supports both phases. The working hall includes a tanning-and-processing space for game the wild-upbringing children bring in and for the current candidate's continuing Outer Wild work. The weapons room holds training gear from the wild-upbringing years — including the small bow used before graduating to a current Longbough — alongside the heirloom pieces. Family members in residence rotate through informal support of the preparation phase, offering specific expertise as the candidate's Proving design takes shape.
 
 ## Household and Daily Life
 
 The Estate's resident population sits in the forty-to-seventy range, varying with who is in residence. This includes:
 
-- **Immediate family:** Lethariel, Sylvara (in residence through her preparation phase), other Heartwood blood relatives currently in residence.
+- **Immediate family:** Lethariel, the current Proving candidate in residence through the preparation phase, other Heartwood blood relatives currently in residence.
 - **In-laws and extended house:** Caelthir Vaelaryn visits the Estate occasionally in his role as father of Sylvara and Aelarion, though his own primary residence is at Vaelaryn's estate. Other in-laws and cousin figures move through on their own patterns.
 - **Bonded staff:** long-resident families who have served the house across generations. These are not servants in the realm sense; they are part of the household in the deeper elven way, with their own dwellings in the Estate cluster.
 - **Occasional non-elven residents:** House Heartwood's non-elf integration is lower than House Vaelaryn's but present. Long-term non-elven residents who have earned a place at the Estate live in the cluster alongside bonded families.
@@ -119,13 +117,13 @@ Unsanctioned travelers do not reach the Estate. The approach path does not exten
 
 Heartwood Estate is canonically located in the Outer Old-Growth Wild (Phase 5 §XII). It is not adjacent to Thornveil; reaching it requires an Outer Wild transit. Scenes at the Estate should reflect the deeper-forest character of that context rather than a civic-capital one.
 
-The Heartwood bow is canonically kept here between Lethariel's active Captaincy rotations. Any scene involving the bow should place it here in the weapons room unless Lethariel is actively deployed. When Sylvara departs for her Proving at 90, Lethariel resumes the Captaincy and the bow returns to active service; that transition is approximately ten years from the current narrative present.
+The Heartwood bow is canonically kept here between Lethariel's active Captaincy rotations. Any scene involving the bow should place it here in the weapons room unless Lethariel is actively deployed. When the current Proving candidate (Sylvara) departs for her Proving at 90, Lethariel resumes the Captaincy and the bow returns to active service; that transition timing depends on the PC's actual current state and is narratively significant when it occurs.
 
 Lethariel is in residence and accessible for significant plot business involving House Heartwood, Discordant War legacy, or the Heartwood itself. Scenes with Lethariel should preserve her canonical presence: ~300–600 years old, Discordant War commander, direct witness to the Platinum Warden's sacrifice, Captain-emeritus currently, supporting Sylvara through the preparation phase ahead of the Proving.
 
-Sylvara is currently 80, past her wild-upbringing phase, and in the preparation phase at the Estate ahead of her Proving at 90. She is in residence most of the time during this phase; encountering her at the Estate is now routine in a way it was not during her wild-upbringing years. The transition into the Proving is approximately ten years from the current narrative present and is a narratively significant future event.
+The current House Heartwood Proving candidate — Sylvara Heartwood, the player's PC — is in the preparation phase at the Estate ahead of her Proving at 90. The specific lifecycle state (exact current age, specific residence arrangement, day-to-day activities, companion status) is managed through the Postgres character system, not through world data. World narration may reference Sylvara by name and describe her as the current Proving candidate in residence; scenes should read the PC's current state from character-system context rather than from this node's static description.
 
-Ash (bonded moonthorn wolf) remains with Sylvara through both phases. During Sylvara's wild-upbringing years Ash roamed the Outer Wild with her; during the preparation phase Ash is at the Estate with her. Ash is canonically pack with Sylvara, not trained by her.
+Ash (bonded moonthorn wolf) is canonically Sylvara's bonded companion. As a PC companion, Ash is tracked through the PC's character record rather than through world NPC data; Ash's location and presence follow Sylvara. World narration may reference Ash by name in scenes at the Estate when Sylvara is present; do not treat Ash as a location-persistent NPC.
 
 The Estate is anti-monumental by design. GPT narration should resist any realm-noble register — no banners, no heraldic display, no guards-at-the-door. The house's legitimacy is relational and ancient, not performative.
 

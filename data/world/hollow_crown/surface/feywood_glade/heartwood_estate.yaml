@@ -13,14 +13,14 @@ description: >
   fortified manor or monumental hall; it is a cluster of grown-in dwellings and
   tended spaces integrated with the surrounding old-growth, sized for roughly
   forty to seventy residents drawn from House Heartwood family, in-laws, bonded
-  staff, and house-raised children across their successive life stages. The
-  Estate currently houses Lethariel Heartwood and her daughter Sylvara, now 80
-  and past her wild-upbringing years, in the preparation phase ahead of her
-  Proving at 90. The Heartwood bow is kept here between Lethariel's active
-  Captaincy rotations; she resumes the Captaincy when Sylvara departs for the
-  Proving. The estate's character is anti-monumental — the same
-  organic-integration aesthetic as Thornveil, carried to a smaller and more
-  wild-adjacent register.
+  staff, and house-raised children across their successive life stages.
+  Lethariel Heartwood is currently in residence in Captain-emeritus standing;
+  the house's current Proving candidate resides here through the preparation
+  phase ahead of the Proving. The Heartwood bow is kept here between
+  Lethariel's active Captaincy rotations; she resumes the Captaincy when the
+  current Proving candidate departs for the Proving. The estate's character is
+  anti-monumental — the same organic-integration aesthetic as Thornveil,
+  carried to a smaller and more wild-adjacent register.
 connections:
 - feywood-glade
 - thornveil
@@ -38,7 +38,5 @@ tags:
 - heartwood-bow
 known_npcs:
 - Lethariel Heartwood
-- Sylvara Heartwood
-- Ash (bonded moonthorn wolf)
 threat_level: 1
 discovered: false
