@@ -832,6 +832,8 @@ class BackgroundOption(BaseModel):
 
 
 class ItemOption(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
     id: str
     name: str
     category: str
@@ -930,6 +932,9 @@ class ItemCatalogResponse(BaseModel):
     mundane_items: list[ItemOption] = Field(default_factory=list)
     magical_items: list[ItemOption] = Field(default_factory=list)
     apparel_items: list[ItemOption] = Field(default_factory=list)
+    weapon_items: list[ItemOption] = Field(default_factory=list)
+    armor_items: list[ItemOption] = Field(default_factory=list)
+    ammunition_items: list[ItemOption] = Field(default_factory=list)
 
 
 class CreatureCatalogResponse(BaseModel):

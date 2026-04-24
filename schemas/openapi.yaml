@@ -353,7 +353,8 @@ paths:
       description: 'Return runtime item catalogs.
 
 
-        Omit `kind` for all three lists, or pass mundane, magical, or apparel.'
+        Omit `kind` for all lists, or pass mundane, magical, apparel, weapon, armor,
+        or ammunition.'
       operationId: get_item_catalog_catalog_items_get
       parameters:
       - name: kind
@@ -365,13 +366,16 @@ paths:
             - mundane
             - magical
             - apparel
+            - weapon
+            - armor
+            - ammunition
             type: string
           - type: 'null'
-          description: 'Filter to a single catalog: mundane, magical, or apparel.
-            Omit to return all three.'
+          description: 'Filter to a single catalog: mundane, magical, apparel, weapon,
+            armor, or ammunition. Omit to return all catalogs.'
           title: Kind
-        description: 'Filter to a single catalog: mundane, magical, or apparel. Omit
-          to return all three.'
+        description: 'Filter to a single catalog: mundane, magical, apparel, weapon,
+          armor, or ammunition. Omit to return all catalogs.'
       responses:
         '200':
           description: Successful Response
@@ -3179,6 +3183,21 @@ components:
             $ref: '#/components/schemas/ItemOption'
           type: array
           title: Apparel Items
+        weapon_items:
+          items:
+            $ref: '#/components/schemas/ItemOption'
+          type: array
+          title: Weapon Items
+        armor_items:
+          items:
+            $ref: '#/components/schemas/ItemOption'
+          type: array
+          title: Armor Items
+        ammunition_items:
+          items:
+            $ref: '#/components/schemas/ItemOption'
+          type: array
+          title: Ammunition Items
       type: object
       title: ItemCatalogResponse
       description: Response for GET /catalog/items.
@@ -3229,6 +3248,7 @@ components:
             type: string
           type: array
           title: Effects
+      additionalProperties: true
       type: object
       required:
       - id

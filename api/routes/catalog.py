@@ -26,7 +26,9 @@ from api.companions import (
     TrainingLevel,
 )
 from api.game_data import (
+    list_ammunition,
     list_apparel_items,
+    list_armor,
     list_creature_catalog,
     list_exceptional_catalog,
     list_learned_commands,
@@ -34,6 +36,7 @@ from api.game_data import (
     list_mundane_items,
     list_natural_abilities,
     list_tactical_roles,
+    list_weapons,
 )
 from api.models import (
     CompanionVocabResponse,
@@ -45,7 +48,7 @@ from api.models import (
 router = APIRouter()
 
 
-ItemKind = Literal["mundane", "magical", "apparel"]
+ItemKind = Literal["mundane", "magical", "apparel", "weapon", "armor", "ammunition"]
 
 
 def _literal_values(literal_type: Any) -> list[str]:
@@ -60,17 +63,20 @@ def _literal_values(literal_type: Any) -> list[str]:
 async def get_item_catalog(
     kind: ItemKind | None = Query(
         default=None,
-        description="Filter to a single catalog: mundane, magical, or apparel. Omit to return all three.",
+        description="Filter to a single catalog: mundane, magical, apparel, weapon, armor, or ammunition. Omit to return all catalogs.",
     ),
 ) -> ItemCatalogResponse:
     """
     Return runtime item catalogs.
 
-    Omit `kind` for all three lists, or pass mundane, magical, or apparel.
+    Omit `kind` for all lists, or pass mundane, magical, apparel, weapon, armor, or ammunition.
     """
     mundane: list[ItemOption] = []
     magical: list[ItemOption] = []
     apparel: list[ItemOption] = []
+    weapons: list[ItemOption] = []
+    armor: list[ItemOption] = []
+    ammunition: list[ItemOption] = []
 
     if kind in (None, "mundane"):
         mundane = [ItemOption(**item) for item in list_mundane_items()]
@@ -78,11 +84,20 @@ async def get_item_catalog(
         magical = [ItemOption(**item) for item in list_magical_items()]
     if kind in (None, "apparel"):
         apparel = [ItemOption(**item) for item in list_apparel_items()]
+    if kind in (None, "weapon"):
+        weapons = [ItemOption(**item) for item in list_weapons()]
+    if kind in (None, "armor"):
+        armor = [ItemOption(**item) for item in list_armor()]
+    if kind in (None, "ammunition"):
+        ammunition = [ItemOption(**item) for item in list_ammunition()]
 
     return ItemCatalogResponse(
         mundane_items=mundane,
         magical_items=magical,
         apparel_items=apparel,
+        weapon_items=weapons,
+        armor_items=armor,
+        ammunition_items=ammunition,
     )
 
 

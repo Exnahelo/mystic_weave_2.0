@@ -35,7 +35,14 @@ def test_get_catalog_items_returns_expected_groups() -> None:
 
     assert response.status_code == 200
     payload = response.json()
-    assert set(payload.keys()) == {"mundane_items", "magical_items", "apparel_items"}
+    assert set(payload.keys()) == {
+        "mundane_items",
+        "magical_items",
+        "apparel_items",
+        "weapon_items",
+        "armor_items",
+        "ammunition_items",
+    }
 
     mundane_ids = {item["id"] for item in payload["mundane_items"]}
     assert {
@@ -50,6 +57,9 @@ def test_get_catalog_items_returns_expected_groups() -> None:
     }.issubset(mundane_ids)
     assert any(item["name"] in {"Blessed Water", "Holy Water"} for item in payload["magical_items"])
     assert any(item["name"] == "Common Clothes" for item in payload["apparel_items"])
+    assert any(item["name"] == "Knife" for item in payload["weapon_items"])
+    assert any(item["name"] == "Unarmored" for item in payload["armor_items"])
+    assert any(item["name"] == "Arrows" for item in payload["ammunition_items"])
 
 
 @pytest.mark.contract
@@ -59,25 +69,65 @@ def test_get_catalog_items_kind_filter_returns_only_requested_group() -> None:
         mundane_response = client.get("/catalog/items", params={"kind": "mundane"})
         magical_response = client.get("/catalog/items", params={"kind": "magical"})
         apparel_response = client.get("/catalog/items", params={"kind": "apparel"})
+        weapon_response = client.get("/catalog/items", params={"kind": "weapon"})
+        armor_response = client.get("/catalog/items", params={"kind": "armor"})
+        ammunition_response = client.get("/catalog/items", params={"kind": "ammunition"})
 
     assert mundane_response.status_code == 200
     assert magical_response.status_code == 200
     assert apparel_response.status_code == 200
+    assert weapon_response.status_code == 200
+    assert armor_response.status_code == 200
+    assert ammunition_response.status_code == 200
 
     mundane_payload = mundane_response.json()
     assert mundane_payload["mundane_items"]
     assert mundane_payload["magical_items"] == []
     assert mundane_payload["apparel_items"] == []
+    assert mundane_payload["weapon_items"] == []
+    assert mundane_payload["armor_items"] == []
+    assert mundane_payload["ammunition_items"] == []
 
     magical_payload = magical_response.json()
     assert magical_payload["mundane_items"] == []
     assert magical_payload["magical_items"]
     assert magical_payload["apparel_items"] == []
+    assert magical_payload["weapon_items"] == []
+    assert magical_payload["armor_items"] == []
+    assert magical_payload["ammunition_items"] == []
 
     apparel_payload = apparel_response.json()
     assert apparel_payload["mundane_items"] == []
     assert apparel_payload["magical_items"] == []
     assert apparel_payload["apparel_items"]
+
+    assert apparel_payload["weapon_items"] == []
+    assert apparel_payload["armor_items"] == []
+    assert apparel_payload["ammunition_items"] == []
+
+    weapon_payload = weapon_response.json()
+    assert weapon_payload["mundane_items"] == []
+    assert weapon_payload["magical_items"] == []
+    assert weapon_payload["apparel_items"] == []
+    assert weapon_payload["weapon_items"]
+    assert weapon_payload["armor_items"] == []
+    assert weapon_payload["ammunition_items"] == []
+
+    armor_payload = armor_response.json()
+    assert armor_payload["mundane_items"] == []
+    assert armor_payload["magical_items"] == []
+    assert armor_payload["apparel_items"] == []
+    assert armor_payload["weapon_items"] == []
+    assert armor_payload["armor_items"]
+    assert armor_payload["ammunition_items"] == []
+
+    ammunition_payload = ammunition_response.json()
+    assert ammunition_payload["mundane_items"] == []
+    assert ammunition_payload["magical_items"] == []
+    assert ammunition_payload["apparel_items"] == []
+    assert ammunition_payload["weapon_items"] == []
+    assert ammunition_payload["armor_items"] == []
+    assert ammunition_payload["ammunition_items"]
 
 
 @pytest.mark.contract

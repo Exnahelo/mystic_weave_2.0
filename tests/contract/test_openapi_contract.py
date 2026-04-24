@@ -61,7 +61,27 @@ def test_openapi_contract_has_expected_core_shapes() -> None:
     assert vocab_schema["$ref"] == "#/components/schemas/CompanionVocabResponse"
 
     item_catalog_props = spec["components"]["schemas"]["ItemCatalogResponse"]["properties"]
-    assert sorted(item_catalog_props) == ["apparel_items", "magical_items", "mundane_items"]
+    assert sorted(item_catalog_props) == [
+        "ammunition_items",
+        "apparel_items",
+        "armor_items",
+        "magical_items",
+        "mundane_items",
+        "weapon_items",
+    ]
+
+    kind_parameter = next(
+        parameter for parameter in spec["paths"]["/catalog/items"]["get"]["parameters"]
+        if parameter["name"] == "kind"
+    )
+    assert kind_parameter["schema"]["anyOf"][0]["enum"] == [
+        "mundane",
+        "magical",
+        "apparel",
+        "weapon",
+        "armor",
+        "ammunition",
+    ]
 
     creature_catalog_props = spec["components"]["schemas"]["CreatureCatalogResponse"]["properties"]
     assert sorted(creature_catalog_props) == ["creature_catalog", "exceptional_catalog"]

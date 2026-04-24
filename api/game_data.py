@@ -274,49 +274,27 @@ def list_mundane_items() -> list[dict[str, Any]]:
 
 
 def list_weapons() -> list[dict[str, Any]]:
-    """Return weapon catalog entries projected to ItemOption shape."""
+    """Return all weapon catalog items."""
     data = _load_json("items/weapon.json")
     if not isinstance(data, list):
         return []
-    return [
-        {
-            "id": item["id"],
-            "name": item["name"],
-            "category": item["category"],
-            "description": item.get("description", ""),
-            "tags": item.get("tags", []),
-            "roll_tag": item.get("application_tag"),
-            "consumable": item.get("consumable", False),
-            "charges": item.get("charges"),
-            "rarity": item.get("rarity", "common"),
-            "value_cd": item.get("value_cd", 0),
-            "effects": item.get("effects", []),
-        }
-        for item in data
-    ]
+    return data
 
 
 def list_armor() -> list[dict[str, Any]]:
-    """Return armor catalog entries projected to ItemOption shape."""
+    """Return all armor catalog items."""
     data = _load_json("items/armor.json")
     if not isinstance(data, list):
         return []
-    return [
-        {
-            "id": item["id"],
-            "name": item["name"],
-            "category": item["category"],
-            "description": item.get("description", ""),
-            "tags": item.get("tags", []),
-            "roll_tag": None,
-            "consumable": item.get("consumable", False),
-            "charges": item.get("charges"),
-            "rarity": item.get("rarity", "common"),
-            "value_cd": item.get("value_cd", 0),
-            "effects": item.get("effects", []),
-        }
-        for item in data
-    ]
+    return data
+
+
+def list_ammunition() -> list[dict[str, Any]]:
+    """Return all ammunition catalog items."""
+    data = _load_json("items/ammunition.json")
+    if not isinstance(data, list):
+        return []
+    return data
 
 
 def list_magical_items() -> list[dict[str, Any]]:
@@ -336,8 +314,15 @@ def list_apparel_items() -> list[dict[str, Any]]:
 
 
 def list_all_items() -> list[dict[str, Any]]:
-    """Return concatenated mundane + magical + apparel item catalogs."""
-    return list_mundane_items() + list_magical_items() + list_apparel_items() + list_weapons() + list_armor()
+    """Return concatenated runtime item catalogs."""
+    return (
+        list_mundane_items()
+        + list_magical_items()
+        + list_apparel_items()
+        + list_weapons()
+        + list_armor()
+        + list_ammunition()
+    )
 
 
 def get_weapon(weapon_id: str) -> dict[str, Any]:
