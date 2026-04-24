@@ -1,0 +1,48 @@
+[
+  {
+    "id": "armor_example_01",
+    "name": "Example Armor",
+    "category": "armor",
+    "knowledge_tag": "light",
+    "application_tag": "example_armor",
+    "tags": ["armor", "light", "example"],
+    "value_cd": 1000,
+    "armor_floor": 20,
+    "armor_ceiling": 50,
+    "rarity": "common",
+    "description": "One-sentence catalog description.",
+    "narrative_effects": [
+      "Narration-facing movement or protection guidance."
+    ]
+  },
+  {
+    "id": "shield_example_01",
+    "name": "Example Shield",
+    "category": "shield",
+    "knowledge_tag": "shield",
+    "application_tag": "shield",
+    "tags": ["shield", "defensive", "equipment"],
+    "value_cd": 100,
+    "armor_floor": 5,
+    "armor_ceiling": 30,
+    "rarity": "common",
+    "description": "General shield entry.",
+    "narrative_effects": [
+      "Supports active defensive framing."
+    ]
+  },
+  {
+    "id": "armor_accessory_example_01",
+    "name": "Example Bracers",
+    "category": "armor",
+    "knowledge_tag": "light",
+    "application_tag": "example_bracers",
+    "tags": ["armor", "light", "forearm_protection"],
+    "value_cd": 100,
+    "rarity": "common",
+    "description": "Partial-coverage accessory example.",
+    "narrative_effects": [
+      "Accessory entries omit armor_floor and armor_ceiling."
+    ]
+  }
+]

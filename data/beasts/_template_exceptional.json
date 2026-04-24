@@ -1,0 +1,22 @@
+[
+  {
+    "species": "wolf",
+    "subspecies": "example_exceptional_wolf",
+    "display_name": "Example Exceptional Wolf",
+    "size": "medium",
+    "age_category": "adult",
+    "tactical_roles_defaults": ["companion", "scout"],
+    "natural_abilities": ["keen_senses"],
+    "movement_modes": ["walk"],
+    "natural_weapons": ["bite"],
+    "carrying_capacity": "small",
+    "base_domains": {"physical": 40, "instinct": 42, "composure": 44},
+    "base_hp": {"current": 24, "max": 24},
+    "exceptional_profile": {
+      "sapience": "partial",
+      "communication": "symbolic",
+      "autonomy": "moderate"
+    },
+    "description": "One-paragraph exceptional companion description."
+  }
+]

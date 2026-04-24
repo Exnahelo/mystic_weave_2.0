@@ -1,0 +1,10 @@
+[
+  {
+    "id": "price_example_01",
+    "name": "Example Good or Service",
+    "category": "example_category",
+    "price_cd": 100,
+    "availability": "common",
+    "description": "One-sentence pricing note."
+  }
+]

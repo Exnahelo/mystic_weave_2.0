@@ -1,0 +1,18 @@
+[
+  {
+    "id": "weapon_example_01",
+    "name": "Example Weapon",
+    "category": "weapon",
+    "knowledge_tag": "melee",
+    "application_tag": "example_weapon",
+    "primary_domain": "power",
+    "tags": ["weapon", "melee", "example"],
+    "value_cd": 100,
+    "base_damage": 15,
+    "rarity": "common",
+    "description": "One-sentence catalog description.",
+    "narrative_effects": [
+      "Short narration-facing effect guidance."
+    ]
+  }
+]

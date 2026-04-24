@@ -1,0 +1,9 @@
+[
+  {
+    "id": "wealth_tier_example",
+    "wealth_tier": "modest",
+    "starting_coin_target_gd": 5.0,
+    "starting_coin_cd": 500,
+    "description": "One-sentence wealth-tier summary."
+  }
+]

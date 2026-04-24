@@ -1,0 +1,11 @@
+[
+  {
+    "id": "currency_example_coin",
+    "name": "Example Coin",
+    "abbreviation": "EC",
+    "tier": "example",
+    "value_in_gd": 1.0,
+    "value_in_cd": 100,
+    "shorthand": "Short equivalency note."
+  }
+]

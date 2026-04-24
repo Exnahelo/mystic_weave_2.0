@@ -1,0 +1,12 @@
+[
+  {
+    "id": "regional_node_example_01",
+    "name": "Example Regional Node",
+    "region": "example_region",
+    "node_type": "settlement",
+    "primary_exports": ["timber"],
+    "primary_imports": ["iron"],
+    "currency_profile": "coin",
+    "description": "One-sentence trade summary."
+  }
+]

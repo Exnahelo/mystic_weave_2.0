@@ -1,0 +1,16 @@
+[
+  {
+    "id": "magic_item_example_01",
+    "name": "Example Magical Item",
+    "category": "magical_item",
+    "tags": ["arcane", "special"],
+    "roll_tag": null,
+    "value_cd": 500,
+    "rarity": "rare",
+    "description": "One-sentence description.",
+    "effects": [
+      "Primary magical effect.",
+      "Any important limit or caution."
+    ]
+  }
+]

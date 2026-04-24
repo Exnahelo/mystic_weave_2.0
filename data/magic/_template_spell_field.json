@@ -1,0 +1,11 @@
+[
+  {
+    "index": "example_spell",
+    "name": "Example Spell",
+    "field": "alchemy",
+    "tier": 1,
+    "primary_domain": "intellect",
+    "alternate_domain": null,
+    "description": "One-sentence spell description."
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "id": "item_gear_example_01",
+    "name": "Example Gear",
+    "category": "gear",
+    "tags": ["utility"],
+    "roll_tag": null,
+    "value_cd": 25,
+    "rarity": "common",
+    "description": "One-sentence description.",
+    "effects": [
+      "Optional narration-facing utility effect."
+    ]
+  }
+]

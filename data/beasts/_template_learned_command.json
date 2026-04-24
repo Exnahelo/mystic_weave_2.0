@@ -1,0 +1,9 @@
+[
+  {
+    "id": "heel",
+    "name": "Heel",
+    "tier": "basic",
+    "description": "One-sentence command description.",
+    "effect_note": "Expected trained behavior."
+  }
+]
