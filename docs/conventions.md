@@ -58,6 +58,32 @@ This file covers naming only. Structural, schema, validation, and content-integr
 
 ---
 
+## Region-scoped NPC files
+
+Region-scoped NPC runtime data lives at `data/npcs/<region_path>/` mirroring the `data/world/<region_path>/` hierarchy. Each region directory contains two files:
+
+- `named.json` — NPCs with stable identity, persistent across scenes and conversations
+- `roles.json` — generative role templates that can be instantiated into specific scene-level characters as needed
+
+The scene generator loads only the current region's NPC files per scene. Named NPCs are referenced by ID; generative roles are instantiated with scene-specific names and details following the role's `generation_guidance`.
+
+Prose narrative canon for major named NPCs continues to live in `prompts/npcs.md` as design reference. The region-scoped JSON files are runtime-facing; `npcs.md` is design-facing. If the two diverge, the JSON is authoritative for runtime behavior and `npcs.md` updates should follow.
+
+Directory pattern example:
+
+```
+data/npcs/hollow_crown/feywood_glade/named.json
+data/npcs/hollow_crown/feywood_glade/roles.json
+data/npcs/hollow_crown/dracelune/named.json   (future)
+data/npcs/hollow_crown/dracelune/roles.json   (future)
+```
+
+When a region's `named.json` grows beyond approximately 30 entries, it may be split by sub-region (e.g., `feywood_glade/thornveil/named.json`) to keep individual files manageable. Do not pre-split; wait until the file is actually crowded.
+
+Player characters are not stored in this tree. PC data lives in the Postgres character system and the player's personal records.
+
+---
+
 ## The default rule
 
 **Use `snake_case` unless the language or platform has a strong, well-established alternative.**
