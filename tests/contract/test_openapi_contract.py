@@ -74,14 +74,15 @@ def test_openapi_contract_has_expected_core_shapes() -> None:
         parameter for parameter in spec["paths"]["/catalog/items"]["get"]["parameters"]
         if parameter["name"] == "kind"
     )
-    assert kind_parameter["schema"]["anyOf"][0]["enum"] == [
+    assert kind_parameter["required"] is True
+    assert set(kind_parameter["schema"]["enum"]) == {
         "mundane",
         "magical",
         "apparel",
         "weapon",
         "armor",
         "ammunition",
-    ]
+    }
 
     creature_catalog_props = spec["components"]["schemas"]["CreatureCatalogResponse"]["properties"]
     assert sorted(creature_catalog_props) == ["creature_catalog", "exceptional_catalog"]

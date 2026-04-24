@@ -61,43 +61,24 @@ def _literal_values(literal_type: Any) -> list[str]:
     tags=["catalog"],
 )
 async def get_item_catalog(
-    kind: ItemKind | None = Query(
-        default=None,
-        description="Filter to a single catalog: mundane, magical, apparel, weapon, armor, or ammunition. Omit to return all catalogs.",
+    kind: ItemKind = Query(
+        ...,
+        description="Required. Which item catalog to return: mundane, magical, apparel, weapon, armor, or ammunition.",
     ),
 ) -> ItemCatalogResponse:
     """
-    Return runtime item catalogs.
+    Return one runtime item catalog.
 
-    Omit `kind` for all lists, or pass mundane, magical, apparel, weapon, armor, or ammunition.
+    `kind` is required so clients cannot accidentally request the full combined
+    catalog and exceed response-size caps.
     """
-    mundane: list[ItemOption] = []
-    magical: list[ItemOption] = []
-    apparel: list[ItemOption] = []
-    weapons: list[ItemOption] = []
-    armor: list[ItemOption] = []
-    ammunition: list[ItemOption] = []
-
-    if kind in (None, "mundane"):
-        mundane = [ItemOption(**item) for item in list_mundane_items()]
-    if kind in (None, "magical"):
-        magical = [ItemOption(**item) for item in list_magical_items()]
-    if kind in (None, "apparel"):
-        apparel = [ItemOption(**item) for item in list_apparel_items()]
-    if kind in (None, "weapon"):
-        weapons = [ItemOption(**item) for item in list_weapons()]
-    if kind in (None, "armor"):
-        armor = [ItemOption(**item) for item in list_armor()]
-    if kind in (None, "ammunition"):
-        ammunition = [ItemOption(**item) for item in list_ammunition()]
-
     return ItemCatalogResponse(
-        mundane_items=mundane,
-        magical_items=magical,
-        apparel_items=apparel,
-        weapon_items=weapons,
-        armor_items=armor,
-        ammunition_items=ammunition,
+        mundane_items=[ItemOption(**item) for item in list_mundane_items()] if kind == "mundane" else [],
+        magical_items=[ItemOption(**item) for item in list_magical_items()] if kind == "magical" else [],
+        apparel_items=[ItemOption(**item) for item in list_apparel_items()] if kind == "apparel" else [],
+        weapon_items=[ItemOption(**item) for item in list_weapons()] if kind == "weapon" else [],
+        armor_items=[ItemOption(**item) for item in list_armor()] if kind == "armor" else [],
+        ammunition_items=[ItemOption(**item) for item in list_ammunition()] if kind == "ammunition" else [],
     )
 
 

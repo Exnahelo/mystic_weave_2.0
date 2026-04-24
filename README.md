@@ -64,6 +64,9 @@ Reference: `world-topology-baseline.md`
 - Split `/options` into creation-scope data + three runtime catalog endpoints
   (`/catalog/items`, `/catalog/creatures`, `/catalog/vocab`). Resolves
   ChatGPT Action response-size cap hit on character creation.
+- Made `/catalog/items` require a `kind` query param (`mundane`, `magical`,
+  `apparel`, `weapon`, `armor`, `ammunition`) so callers cannot accidentally
+  request the oversized combined catalog response.
 - `OptionsResponse` is now a breaking shape change: only
   `ancestries, cultures, focus, backgrounds` remain.
 
@@ -81,7 +84,7 @@ Reference: `world-topology-baseline.md`
 | GET | `/health` | Health check |
 | GET | `/version` | Build metadata, data fingerprint, combat rules fingerprint, option counts |
 | GET | `/options` | Enumerate ancestries, cultures, focus, backgrounds (creation scope) |
-| GET | `/catalog/items` | Item catalogs (mundane, magical, apparel) |
+| GET | `/catalog/items` | Required kind-filtered item catalogs (mundane, magical, apparel, weapon, armor, ammunition) |
 | GET | `/catalog/creatures` | Creature + exceptional companion catalogs |
 | GET | `/catalog/vocab` | Companion vocab and enum literals |
 | GET | `/tags` | Enumerate knowledge groups, magic fields, and applications |

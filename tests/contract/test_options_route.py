@@ -28,13 +28,33 @@ def test_get_options_returns_only_character_creation_fields() -> None:
 
 
 @pytest.mark.contract
-def test_get_catalog_items_returns_expected_groups() -> None:
+def test_get_catalog_items_requires_kind() -> None:
     app = _make_app()
     with TestClient(app) as client:
         response = client.get("/catalog/items")
 
-    assert response.status_code == 200
-    payload = response.json()
+    assert response.status_code == 422
+
+
+@pytest.mark.contract
+def test_get_catalog_items_returns_expected_groups() -> None:
+    app = _make_app()
+    with TestClient(app) as client:
+        mundane_response = client.get("/catalog/items", params={"kind": "mundane"})
+        magical_response = client.get("/catalog/items", params={"kind": "magical"})
+        apparel_response = client.get("/catalog/items", params={"kind": "apparel"})
+        weapon_response = client.get("/catalog/items", params={"kind": "weapon"})
+        armor_response = client.get("/catalog/items", params={"kind": "armor"})
+        ammunition_response = client.get("/catalog/items", params={"kind": "ammunition"})
+
+    assert mundane_response.status_code == 200
+    assert magical_response.status_code == 200
+    assert apparel_response.status_code == 200
+    assert weapon_response.status_code == 200
+    assert armor_response.status_code == 200
+    assert ammunition_response.status_code == 200
+
+    payload = mundane_response.json()
     assert set(payload.keys()) == {
         "mundane_items",
         "magical_items",
@@ -55,11 +75,17 @@ def test_get_catalog_items_returns_expected_groups() -> None:
         "small-game-snare",
         "bird-trap",
     }.issubset(mundane_ids)
-    assert any(item["name"] in {"Blessed Water", "Holy Water"} for item in payload["magical_items"])
-    assert any(item["name"] == "Common Clothes" for item in payload["apparel_items"])
-    assert any(item["name"] == "Knife" for item in payload["weapon_items"])
-    assert any(item["name"] == "Unarmored" for item in payload["armor_items"])
-    assert any(item["name"] == "Arrows" for item in payload["ammunition_items"])
+    assert mundane_response.json()["magical_items"] == []
+    assert mundane_response.json()["apparel_items"] == []
+    assert mundane_response.json()["weapon_items"] == []
+    assert mundane_response.json()["armor_items"] == []
+    assert mundane_response.json()["ammunition_items"] == []
+
+    assert any(item["name"] in {"Blessed Water", "Holy Water"} for item in magical_response.json()["magical_items"])
+    assert any(item["name"] == "Common Clothes" for item in apparel_response.json()["apparel_items"])
+    assert any(item["name"] == "Knife" for item in weapon_response.json()["weapon_items"])
+    assert any(item["name"] == "Unarmored" for item in armor_response.json()["armor_items"])
+    assert any(item["name"] == "Arrows" for item in ammunition_response.json()["ammunition_items"])
 
 
 @pytest.mark.contract

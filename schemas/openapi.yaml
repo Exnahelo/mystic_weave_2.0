@@ -350,32 +350,31 @@ paths:
       tags:
       - catalog
       summary: Get Item Catalog
-      description: 'Return runtime item catalogs.
+      description: 'Return one runtime item catalog.
 
 
-        Omit `kind` for all lists, or pass mundane, magical, apparel, weapon, armor,
-        or ammunition.'
+        `kind` is required so clients cannot accidentally request the full combined
+
+        catalog and exceed response-size caps.'
       operationId: get_item_catalog_catalog_items_get
       parameters:
       - name: kind
         in: query
-        required: false
+        required: true
         schema:
-          anyOf:
-          - enum:
-            - mundane
-            - magical
-            - apparel
-            - weapon
-            - armor
-            - ammunition
-            type: string
-          - type: 'null'
-          description: 'Filter to a single catalog: mundane, magical, apparel, weapon,
-            armor, or ammunition. Omit to return all catalogs.'
+          enum:
+          - mundane
+          - magical
+          - apparel
+          - weapon
+          - armor
+          - ammunition
+          type: string
+          description: 'Required. Which item catalog to return: mundane, magical,
+            apparel, weapon, armor, or ammunition.'
           title: Kind
-        description: 'Filter to a single catalog: mundane, magical, apparel, weapon,
-          armor, or ammunition. Omit to return all catalogs.'
+        description: 'Required. Which item catalog to return: mundane, magical, apparel,
+          weapon, armor, or ammunition.'
       responses:
         '200':
           description: Successful Response
