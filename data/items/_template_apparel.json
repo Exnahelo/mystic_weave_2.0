@@ -3,12 +3,12 @@
     "id": "apparel_example_01",
     "name": "Example Apparel",
     "category": "apparel",
-    "tags": ["utility"],
-    "roll_tag": null,
+    "subcategory": "footwear",
+    "tags": ["apparel", "utility"],
     "value_cd": 50,
     "rarity": "common",
     "description": "One-sentence description.",
-    "effects": [
+    "narrative_effects": [
       "Optional clothing or presentation effect."
     ]
   }

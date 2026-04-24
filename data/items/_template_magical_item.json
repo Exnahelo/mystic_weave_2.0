@@ -1,12 +1,14 @@
 [
   {
-    "id": "magic_item_example_01",
+    "id": "item_magical_example_01",
     "name": "Example Magical Item",
-    "category": "magical_item",
+    "category": "sacred",
     "tags": ["arcane", "special"],
     "roll_tag": null,
+    "consumable": false,
+    "charges": null,
     "value_cd": 500,
-    "rarity": "rare",
+    "rarity": "uncommon",
     "description": "One-sentence description.",
     "effects": [
       "Primary magical effect.",
