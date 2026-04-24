@@ -127,11 +127,9 @@ def part1(client: httpx.Client) -> str | None:
         opts = r.json()
         check("1.1.b", len(opts.get("ancestries", [])) == 8, f"ancestries count: {len(opts.get('ancestries', []))}")
         check("1.1.ba", len(opts.get("cultures", [])) >= 1, f"cultures count: {len(opts.get('cultures', []))}")
-        check("1.1.c", len(opts.get("focus", [])) == 7, f"focus count: {len(opts.get('focus', []))}")
+        check("1.1.c", len(opts.get("focus", [])) == 9, f"focus count: {len(opts.get('focus', []))}")
         check("1.1.d", len(opts.get("backgrounds", [])) == 8, f"backgrounds count: {len(opts.get('backgrounds', []))}")
-        check("1.1.da", isinstance(opts.get("mundane_items"), list), "mundane_items is a list")
-        check("1.1.db", isinstance(opts.get("magical_items"), list), "magical_items is a list")
-        check("1.1.dc", isinstance(opts.get("apparel_items"), list), "apparel_items is a list")
+        check("1.1.da", set(opts.keys()) == {"ancestries", "cultures", "focus", "backgrounds"}, f"/options keys: {sorted(opts.keys())}")
         ancestry_indices = [s["index"] for s in opts.get("ancestries", [])]
         check("1.1.e", "dragonborn" in ancestry_indices, f"'dragonborn' in ancestries")
         check("1.1.f", "human" in ancestry_indices, f"'human' in ancestries")
@@ -141,14 +139,17 @@ def part1(client: httpx.Client) -> str | None:
         check("1.1.g", "devoted" in focus_indices, f"'devoted' in focus")
         bg_indices = [b["index"] for b in opts.get("backgrounds", [])]
         check("1.1.h", "soldier" in bg_indices, f"'soldier' in backgrounds")
-        magical_item_names = [item.get("name") for item in opts.get("magical_items", [])]
-        check(
-            "1.1.i",
-            ("Blessed Water" in magical_item_names) or ("Holy Water" in magical_item_names),
-            "Blessed Water or Holy Water present in magical_items",
-        )
-        apparel_item_names = [item.get("name") for item in opts.get("apparel_items", [])]
-        check("1.1.j", "Common Clothes" in apparel_item_names, "Common Clothes present in apparel_items")
+
+    subsection("Test 1.1b — GET /catalog/items")
+    r = client.get("/catalog/items")
+    check("1.1b.a", r.status_code == 200, f"GET /catalog/items → {r.status_code}")
+    if r.status_code == 200:
+        payload = r.json()
+        check("1.1b.b", set(payload.keys()) == {"mundane", "magical", "apparel", "weapons", "armor"}, f"catalog/items keys: {sorted(payload.keys())}")
+        magical_item_names = [item.get("name") for item in payload.get("magical", [])]
+        check("1.1b.c", ("Blessed Water" in magical_item_names) or ("Holy Water" in magical_item_names), "Blessed Water or Holy Water present in catalog magical")
+        apparel_item_names = [item.get("name") for item in payload.get("apparel", [])]
+        check("1.1b.d", "Common Clothes" in apparel_item_names, "Common Clothes present in catalog apparel")
 
     subsection("Test 1.2 — Seed test locations")
     r = client.post("/location", json=TEST_LOC_ALPHA)
@@ -271,12 +272,12 @@ def part2(client: httpx.Client, session_id: str) -> None:
         check("2.1.k", isinstance(state["world"].get("politics"), dict), f"politics persisted")
 
     subsection("Test 2.1b — Companion lifecycle")
-    options_resp = client.get("/options")
-    check("2.1b.a", options_resp.status_code == 200, f"GET /options for companion catalog → {options_resp.status_code}")
+    options_resp = client.get("/catalog/creatures")
+    check("2.1b.a", options_resp.status_code == 200, f"GET /catalog/creatures for companion catalog → {options_resp.status_code}")
     if options_resp.status_code == 200:
-        creature_catalog = options_resp.json().get("creature_catalog", [])
+        creature_catalog = options_resp.json().get("creatures", [])
         wolf_template = next((c for c in creature_catalog if c.get("subspecies") == "moonthorn_wolf"), None)
-        check("2.1b.b", wolf_template is not None, "moonthorn_wolf present in /options creature_catalog")
+        check("2.1b.b", wolf_template is not None, "moonthorn_wolf present in /catalog/creatures")
 
     if wolf_template is not None:
         creature_payload = {

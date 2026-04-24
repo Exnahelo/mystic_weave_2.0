@@ -878,21 +878,33 @@ class ApplicationEntry(BaseModel):
 
 
 class OptionsResponse(BaseModel):
-    """Response for GET /options — all supported ancestries, cultures, focus archetypes, and backgrounds."""
+    """Response for GET /options — character creation reference only."""
     ancestries:  list[AncestryOption]
     cultures:    list[CultureOption]
     focus:       list[FocusOption]
     backgrounds: list[BackgroundOption]
-    mundane_items: list[ItemOption] = Field(default_factory=list)
-    magical_items: list[ItemOption] = Field(default_factory=list)
-    apparel_items: list[ItemOption] = Field(default_factory=list)
+
+
+class ItemCatalogResponse(BaseModel):
+    """Response for GET /catalog/items — all item reference data."""
+    mundane: list[ItemOption] = Field(default_factory=list)
+    magical: list[ItemOption] = Field(default_factory=list)
+    apparel: list[ItemOption] = Field(default_factory=list)
     weapons: list[ItemOption] = Field(default_factory=list)
     armor: list[ItemOption] = Field(default_factory=list)
-    creature_catalog: list[dict] = Field(default_factory=list)
-    exceptional_catalog: list[dict] = Field(default_factory=list)
+
+
+class CreatureCatalogResponse(BaseModel):
+    """Response for GET /catalog/creatures — creature and companion reference data."""
+    creatures: list[dict] = Field(default_factory=list)
+    exceptional: list[dict] = Field(default_factory=list)
     natural_abilities: list[dict] = Field(default_factory=list)
     learned_commands: list[dict] = Field(default_factory=list)
     tactical_roles: list[dict] = Field(default_factory=list)
+
+
+class EnumsResponse(BaseModel):
+    """Response for GET /catalog/enums — literal enum vocabularies."""
     training_levels: list[str] = Field(default_factory=list)
     bond_levels: list[str] = Field(default_factory=list)
     age_categories: list[str] = Field(default_factory=list)

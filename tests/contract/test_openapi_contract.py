@@ -43,32 +43,16 @@ def test_openapi_contract_has_expected_core_shapes() -> None:
     assert options_schema["$ref"] == "#/components/schemas/OptionsResponse"
 
     options_props = spec["components"]["schemas"]["OptionsResponse"]["properties"]
-    assert sorted(options_props) == [
-        "age_categories",
-        "ancestries",
-        "apparel_items",
-        "armor",
-        "autonomy_levels",
-        "backgrounds",
-        "bond_levels",
-        "carrying_capacities",
-        "communication_levels",
-        "creature_catalog",
-        "creature_sizes",
-        "cultures",
-        "exceptional_catalog",
-        "focus",
-        "learned_commands",
-        "magical_items",
-        "movement_modes",
-        "mundane_items",
-        "natural_abilities",
-        "natural_weapons",
-        "sapience_levels",
-        "tactical_roles",
-        "training_levels",
-        "weapons",
-    ]
+    assert sorted(options_props) == ["ancestries", "backgrounds", "cultures", "focus"]
+
+    assert spec["paths"]["/catalog/items"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["$ref"] == "#/components/schemas/ItemCatalogResponse"
+    assert spec["paths"]["/catalog/creatures"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["$ref"] == "#/components/schemas/CreatureCatalogResponse"
+    assert spec["paths"]["/catalog/enums"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["$ref"] == "#/components/schemas/EnumsResponse"
+
+    schemas = spec["components"]["schemas"]
+    assert "ItemCatalogResponse" in schemas
+    assert "CreatureCatalogResponse" in schemas
+    assert "EnumsResponse" in schemas
 
     session_new_201 = spec["paths"]["/session/new"]["post"]["responses"]["201"][
         "content"

@@ -180,65 +180,27 @@ Example: Devoted + Acolyte + Draconic Grasslands all support sacred practice, so
 
 ### Weapon Application Taxonomy (Canonical)
 
-When discussing or assigning weapon-related application tags, use canonical names only:
-`grappling`, `melee`, `reach`, `ranged`, `mechanical`, `unconventional`.
+When discussing or assigning weapon-related knowledge groups, use canonical names only:
+`close_combat`, `melee`, `reach`, `ranged`, `mechanical`, `unconventional`, `martial_arts`.
 
-Do not introduce legacy/alternate weapon tag names during character creation.
+The `grappling` knowledge group was removed; grappling applications now live under
+`athletics` as `martial_grappling`. Armor knowledge groups are separate:
+`light_armor`, `medium_armor`, `heavy_armor`, `shields`, `unarmored`.
+
+Do not introduce legacy or alternate weapon tag names during character creation.
 
 ---
 
-## Ancestry Reference (verify against GET /options)
+## Fallback Policy
 
-| Ancestry | Primary | Pow | Agi | Per | End | Int | Wil | Pre |
-|---|---|---|---|---|---|---|---|---|
-| Human | — | 40 | 40 | 40 | 40 | 40 | 40 | 40 |
-| Orc | Power | 55 | 35 | 30 | 50 | 30 | 45 | 35 |
-| Elf | Agility | 30 | 55 | 45 | 30 | 40 | 35 | 45 |
-| Halfling | Perception | 30 | 45 | 55 | 35 | 35 | 45 | 35 |
-| Dwarf | Endurance | 50 | 30 | 35 | 55 | 40 | 40 | 30 |
-| Gnome | Intellect | 30 | 40 | 45 | 30 | 55 | 45 | 35 |
-| Tiefling | Will | 35 | 40 | 35 | 35 | 45 | 55 | 35 |
-| Dragonborn | Presence | 45 | 35 | 35 | 40 | 30 | 45 | 50 |
+If `GET /options` fails with an error, an oversized response, or a timeout:
 
-## Culture Reference (verify against GET /options)
+- **Do not** enumerate ancestries, cultures, focus archetypes, or backgrounds from memory.
+- **Do not** substitute option indices that the user provided if they appear unfamiliar — the user may be correct and the schema may have been extended.
+- **Report the failure to the player directly.** Example: "I can't reach the character options endpoint right now. Please try again in a moment, or check the backend service."
+- **Do not** proceed with creation using guessed values.
 
-| Culture | Domain Bonuses | Signature Tag Types |
-|---|---|---|
-| Alpine Peaks | Per +3, End +4, Wil +3 | survival, tracking, privation_endurance |
-| Inner Ramparts | Pow +2, Agi +3, Per +2, End +3 | mobility, awareness, acrobatics, scan |
-| Draconic Grasslands | Int +3, Wil +3, Pre +4 | influence, lore, diplomacy, command, sacred |
-| Drakenvale | Int +4, Wil +3, Pre +3 | lore, influence, persuasion, history, linguistics |
-| Volcanic Highlands | Pow +4, End +4, Wil +2 | combat, survival, hauling, intimidation_posture, elemental |
-| Temperate Forest | Agi +3, Per +4, End +3 | tracking, stealth, ecology |
-| Mystic Wetlands | Per +4, Int +3, Wil +3 | investigation, medicine, ecology, pharmacology |
-| Feywood Glade | Int +3, Wil +3, Pre +4 | arcana, deception, tell_reading, illusion |
-| Crystal Caverns | Per +3, Int +4, Wil +3 | arcana, investigation, meditation, runecraft |
-| Platinum Oath Monastery | End +3, Wil +5, Pre +2 | discipline, meditation, courage, Warding field |
-
-## Focus Reference (verify against GET /options)
-
-| Focus | Signature Tag | Description |
-|---|---|---|
-| Champion | Athletics K2 | Front-line fighter, direct combat |
-| Sentinel | Discipline K2 | Protector, holds the line |
-| Stalker | Stealth K2 | Ambush, infiltration, precision |
-| Wayfinder | Survival K2 | Explorer, survivalist, tracker |
-| Arcanist | Arcana K2 | Arcane scholar, magical power |
-| Devoted | Discipline K2 | Spiritual warrior, faith and authority |
-| Speaker | Influence K2 | Social operator, inspirer, manipulator |
-
-## Background Reference (verify against GET /options)
-
-| Background | Description |
-|---|---|
-| Soldier | Military service, structured discipline |
-| Scholar | Academic upbringing, libraries and labs |
-| Criminal | Street life, underground economy |
-| Noble | Privilege, courts, political education |
-| Outlander | Wilderness upbringing, self-reliance |
-| Artisan | Trade skills, craftsmanship, practical knowledge |
-| Acolyte | Temple-raised, spiritual foundation |
-| Performer | Entertainer, traveler, social chameleon |
+The backend is the sole source of truth for valid ancestry, culture, focus, and background indices.
 
 ---
 
