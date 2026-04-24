@@ -51,7 +51,7 @@ Several dozen noble families hold recognized groves here. Prominent ones include
 - **Greybranch** — oral law, memory-keeping, Council process.
 - **Ironsap** — sanctioned deadfall, tools, woodcraft, material restraint.
 
-(House Heartwood's primary seat is Heartwood Estate in the Outer Wild, not a Noble Grove estate.) Several dozen minor houses hold groves of their own, each with its own specialization and tradition but without the distinctive public ethos of the seven majors.
+(House Heartwood does not hold a Noble Groves estate. Its two canonical seats are its Thornveil seat in the Heartwood Approach — the house's political-ceremonial center — and Heartwood Estate in the Outer Old-Growth Wild — the wild-heritage ancestral seat.) Several dozen minor houses hold groves of their own, each with its own specialization and tradition but without the distinctive public ethos of the seven majors.
 
 The system of grove-holding is fluid over elven timescales. Families rise, decline, reform, occasionally lose their grove, occasionally receive one through Council decision. The current configuration reflects roughly the last few centuries of this process.
 
@@ -109,6 +109,6 @@ Specific noble estates within this district are not yet authored as separate nod
 
 The Greenshield headquarters is canonically here but is not authored as its own node. Military business scenes occur at the headquarters as a specified location within the district.
 
-House Heartwood explicitly does NOT have a Noble Groves estate — its seat is Heartwood Estate in the Outer Wild. Scenes referencing House Heartwood business at Thornveil should place them at Heartwood Approach residences or at the Greenshield headquarters (for Captain business), not in the Noble Groves as a house seat.
+House Heartwood explicitly does NOT have a Noble Groves estate. Its two properties are Heartwood Estate in the Outer Old-Growth Wild and its civic-facing Thornveil seat in the Heartwood Approach. Scenes referencing House Heartwood business at Thornveil should place them at the Approach seat or at the Greenshield headquarters (for Captain business), not in the Noble Groves as a house seat.
 
 Threat level 0 reflects the district's safety. Social register is high; physical risk is negligible.

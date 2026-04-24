@@ -4,7 +4,19 @@ name: The Heartwood Approach
 type: district
 region_id: hollow-crown
 parent_location_id: thornveil
-description: Thornveil's innermost district, wrapping the Heartwood's clearing at the city's sacred center. The Approach holds the Council of Elders' primary chambers, the residences of the oldest noble families, and the approach-walks that lead in toward the Heartwood itself. Structures here are the oldest in Thornveil — grown over multiple elven lifetimes, incorporating trees centuries old, carrying house-records in their growth that only trained elven readers parse. Casual traffic through the Approach is discouraged out of respect for both the Council's work and the sacred center it surrounds. This is not a district where one wanders; it is a district where one arrives with purpose.
+description: >
+  Thornveil's innermost district, wrapping the Heartwood's clearing at the
+  city's sacred center. The Approach holds the Council of Elders' primary
+  chambers, the residences of the oldest noble families (including the
+  substantial Thornveil seat of House Heartwood, the house's
+  political-ceremonial center in the city, complementing Heartwood Estate in
+  the Outer Wild), and the approach-walks that lead in toward the Heartwood
+  itself. Structures here are the oldest in Thornveil — grown over multiple
+  elven lifetimes, incorporating trees centuries old, carrying house-records in
+  their growth that only trained elven readers parse. Casual traffic through
+  the Approach is discouraged out of respect for both the Council's work and
+  the sacred center it surrounds. This is not a district where one wanders; it
+  is a district where one arrives with purpose.
 connections:
 - thornveil
 - heartwood
@@ -46,7 +58,7 @@ Councilors enter through specific paths; sanctioned visitors through others; cas
 
 ## Noble Residences
 
-The residences in the Approach belong to the oldest noble families. Not all seven major houses have Approach residences — House Heartwood's seat is in the Outer Wild (the Estate), and several other houses maintain their primary seats elsewhere in the Glade with Approach residences that function more as civic presences than as family homes. Resident families include those whose civic work most closely involves the Council's business and the Heartwood's direct stewardship.
+The residences in the Approach belong to the oldest noble families. House Heartwood's Thornveil seat is canonically here — a substantial grove-compound serving as the house's political-ceremonial center in the city. Council-facing business, formal observances (including third-moon rites and the oath-marking events House Heartwood hosts for its members and witnesses), and the maintenance of Oathvine at the house's Thornveil oath-plot all happen here; family members reside at the Thornveil seat when their work requires sustained presence in the civic-political register. The Thornveil seat is distinct from Heartwood Estate in the Outer Old-Growth Wild, which is the ancestral woodland seat of wild-heritage and proving-wild tradition where Lethariel and Sylvara currently reside. The two seats serve complementary functions: the Estate carries the house's wild-connected family life; the Thornveil seat carries its political-ceremonial authority. Other noble houses similarly hold Approach residences of varying scale and function; resident families include those whose civic work most closely involves the Council's business and the Heartwood's direct stewardship.
 
 Each noble residence is a grown complex of several dwellings, working halls, and garden spaces, held by the family across the relevant span of elven generations. The architectural idiom varies slightly by house — each family carries its own aesthetic tradition — but all work within the district's shared register of restraint, age, and integration.
 
@@ -96,4 +108,4 @@ The Heartwood itself remains its own node (`heartwood`). The Approach is the dis
 
 Council deliberations are canonically slow (weeks to years for decisions of weight). GPT scenes involving Council business should reflect this pace rather than realm-political urgency.
 
-The Approach's noble residences are deliberately unspecified as to which houses hold them. This allows narrative flexibility; specific house residences can be invented in scene as needed, consistent with the seven major houses' canonical characters.
+Most of the Approach's noble residences are deliberately unspecified as to which houses hold them, preserving narrative flexibility. House Heartwood canonically holds a substantial seat here — a grove-compound that serves as the house's political-ceremonial center, distinct from Heartwood Estate in the Outer Wild (the wild-heritage ancestral seat). Scenes involving House Heartwood civic business, formal observances, oath-marking events, third-moon rites hosted by the house, or Council-adjacent political activity occur at the Thornveil seat. Scenes involving family life, proving-wild tradition, or Lethariel's and Sylvara's current residence occur at the Estate. The Thornveil seat is not authored as its own node at this time (future phases may elevate it); treat it as a scene-destination within the Heartwood Approach district. Other specific house residences in the Approach can be invented in scene as needed, consistent with the seven major houses' canonical characters.

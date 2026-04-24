@@ -5,19 +5,23 @@ type: location
 region_id: hollow-crown
 parent_location_id: feywood-glade
 description: >
-  The ancestral woodland home of House Heartwood, set in the Outer Old-Growth
-  Wild at a distance from Thornveil that reflects the family's sustained
-  relationship with deeper Glade ecology. The Estate is not a fortified manor or
-  monumental hall; it is a cluster of grown-in dwellings and tended spaces
-  integrated with the surrounding old-growth, sized for roughly forty to seventy
-  residents drawn from House Heartwood family, in-laws, bonded staff, and
-  house-raised children across their successive life stages. The Estate
-  currently houses Lethariel Heartwood and her daughter Sylvara, now 80 and past
-  her wild-upbringing years, in the preparation phase ahead of her Proving at
-  90. The Heartwood bow is kept here between Lethariel's active Captaincy
-  rotations; she resumes the Captaincy when Sylvara departs for the Proving. The
-  estate's character is anti-monumental — the same organic-integration aesthetic
-  as Thornveil, carried to a smaller and more wild-adjacent register.
+  The ancestral woodland seat of House Heartwood — one of two substantial seats
+  the house maintains, complementing the house's Thornveil seat in the
+  Heartwood Approach. Set in the Outer Old-Growth Wild at a distance from
+  Thornveil that reflects the family's sustained relationship with deeper Glade
+  ecology, the Estate carries the house's wild-connected family life while the
+  Thornveil seat carries its political-ceremonial authority. The Estate is not a
+  fortified manor or monumental hall; it is a cluster of grown-in dwellings and
+  tended spaces integrated with the surrounding old-growth, sized for roughly
+  forty to seventy residents drawn from House Heartwood family, in-laws, bonded
+  staff, and house-raised children across their successive life stages. The
+  Estate currently houses Lethariel Heartwood and her daughter Sylvara, now 80
+  and past her wild-upbringing years, in the preparation phase ahead of her
+  Proving at 90. The Heartwood bow is kept here between Lethariel's active
+  Captaincy rotations; she resumes the Captaincy when Sylvara departs for the
+  Proving. The estate's character is anti-monumental — the same
+  organic-integration aesthetic as Thornveil, carried to a smaller and more
+  wild-adjacent register.
 connections:
 - feywood-glade
 - thornveil
@@ -43,7 +47,7 @@ discovered: false
 
 # Heartwood Estate
 
-The seat of House Heartwood. Ancient, integrated, small by human measure and substantial by elven. Lethariel Heartwood is in residence. The Heartwood bow she crafted during the Discordant War is here with her.
+The ancestral woodland seat of House Heartwood. Ancient, integrated, small by human measure and substantial by elven. The Estate is one of two substantial seats the house maintains — the wild-heritage residence where the family's deepest roots sit and where the proving-wild tradition operates. The house's political-ceremonial authority is exercised at its Thornveil seat in the Heartwood Approach; the Estate is where its wild-connected family life resides. Lethariel Heartwood is in residence. The Heartwood bow she crafted during the Discordant War is here with her.
 
 ## Scene Texture
 
