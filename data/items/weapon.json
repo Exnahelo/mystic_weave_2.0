@@ -8,7 +8,7 @@
     "primary_domain": "agility",
     "tags": [
       "weapon",
-      "grappling",
+      "close-combat",
       "light",
       "concealable",
       "utility"
@@ -30,7 +30,7 @@
     "primary_domain": "agility",
     "tags": [
       "weapon",
-      "grappling",
+      "close-combat",
       "light",
       "concealable",
       "thrusting"
@@ -52,7 +52,7 @@
     "primary_domain": "agility",
     "tags": [
       "weapon",
-      "grappling",
+      "close-combat",
       "light",
       "chopping",
       "throwable_candidate"
@@ -74,7 +74,7 @@
     "primary_domain": "agility",
     "tags": [
       "weapon",
-      "grappling",
+      "close-combat",
       "concealable",
       "unarmed_adjacent"
     ],
@@ -95,7 +95,7 @@
     "primary_domain": "agility",
     "tags": [
       "weapon",
-      "grappling",
+      "close-combat",
       "gauntlet",
       "slashing",
       "intimidating"
@@ -699,7 +699,7 @@
     "primary_domain": "agility",
     "tags": [
       "weapon",
-      "grappling",
+      "close-combat",
       "knife",
       "moonthorn",
       "ceremonial",
