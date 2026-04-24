@@ -55,6 +55,7 @@ _BEAST_DATA_FILES = (
     "beasts/learned_commands.json",
     "beasts/tactical_roles.json",
 )
+_NPC_DATA_DIR = _DATA_DIR / "npcs"
 _MAGIC_DIR = _DATA_DIR / "magic"
 _PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
 
@@ -597,6 +598,74 @@ def list_tactical_roles() -> list[dict[str, Any]]:
     return data if isinstance(data, list) else []
 
 
+# ---------------------------------------------------------------------------
+# NPC registry
+# ---------------------------------------------------------------------------
+
+def _discover_npc_files() -> list[Path]:
+    """Return all NPC JSON files under data/npcs/, recursively, excluding _ prefixed."""
+    if not _NPC_DATA_DIR.exists():
+        return []
+    return sorted(
+        p for p in _NPC_DATA_DIR.rglob("*.json")
+        if not p.name.startswith("_")
+    )
+
+
+@lru_cache(maxsize=None)
+def _load_npc_catalogs() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """
+    Load all NPC files recursively, partitioned by file stem.
+
+    Returns (named, roles) tuple:
+      - named: entries from any file stemmed 'named.json' (tier 1-2 individuals)
+      - roles: entries from any file stemmed 'roles.json' (tier 3 role templates)
+
+    Files whose stem is neither 'named' nor 'roles' are silently skipped.
+    Entries with ids starting with '_' are excluded (scaffold/template rows).
+    """
+    named: list[dict[str, Any]] = []
+    roles: list[dict[str, Any]] = []
+    for path in _discover_npc_files():
+        with open(path, "r", encoding="utf-8") as f:
+            payload = json.load(f)
+        if not isinstance(payload, list):
+            continue
+        entries = [
+            e for e in payload
+            if isinstance(e, dict) and not str(e.get("id", "")).startswith("_")
+        ]
+        if path.stem == "named":
+            named.extend(entries)
+        elif path.stem == "roles":
+            roles.extend(entries)
+    return named, roles
+
+
+def list_npcs_named() -> list[dict[str, Any]]:
+    """Return all tier 1-2 named NPC entries across all regions."""
+    return list(_load_npc_catalogs()[0])
+
+
+def list_npc_roles() -> list[dict[str, Any]]:
+    """Return all tier 3 generative role template entries across all regions."""
+    return list(_load_npc_catalogs()[1])
+
+
+def list_npcs() -> list[dict[str, Any]]:
+    """Return all NPC entries (named + roles) as a single flat list."""
+    named, roles = _load_npc_catalogs()
+    return named + roles
+
+
+def get_npc(npc_id: str) -> dict[str, Any]:
+    """Return a specific NPC entry by id, searching both named and role catalogs."""
+    for entry in list_npcs():
+        if entry.get("id") == npc_id:
+            return entry
+    raise ValueError(f"Unknown npc: {npc_id!r}")
+
+
 def data_fingerprint() -> str:
     """
     Stable SHA256 fingerprint of core game data files used by /options and seeding.
@@ -620,6 +689,12 @@ def data_fingerprint() -> str:
 
     for filename in _SPELL_DATA_FILES:
         path = _DATA_DIR / filename
+        if not path.exists():
+            continue
+        with open(path, "rb") as f:
+            hasher.update(f.read())
+
+    for path in _discover_npc_files():
         if not path.exists():
             continue
         with open(path, "rb") as f:

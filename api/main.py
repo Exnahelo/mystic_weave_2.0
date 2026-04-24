@@ -23,7 +23,7 @@ from api.game_data import (
     list_focus,
 )
 from api.models import HealthResponse, VersionResponse
-from api.routes import character, combat, companion, location, options, roll, scene, session, state, tags
+from api.routes import character, combat, companion, location, npcs, options, roll, scene, session, state, tags
 
 
 @asynccontextmanager
@@ -71,6 +71,7 @@ app.include_router(options.router)
 app.include_router(scene.router)
 app.include_router(tags.router)
 app.include_router(companion.router)
+app.include_router(npcs.router)
 
 
 @app.get("/", tags=["health"], response_model=HealthResponse)
