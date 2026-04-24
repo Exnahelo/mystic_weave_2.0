@@ -306,13 +306,13 @@ def test_regression_stored_creature_envelopes_validate_with_tier() -> None:
     )
     ember = CompanionEnvelope.model_validate(
         {
-            "id": "sylvara_heartwood_bloom_hound",
+            "id": "sylvara_heartwood_mist_hound",
             "companion": {
                 "tier": "creature",
                 "name": "Ember",
                 "species": "hound",
-                "subspecies": "bloom_hound",
-                "subtype": "bloom_hound",
+                "subspecies": "mist_hound",
+                "subtype": "mist_hound",
                 "size": "medium",
                 "age_category": "adult",
                 "tactical_roles": ["scout", "companion"],
@@ -334,7 +334,7 @@ def test_regression_stored_creature_envelopes_validate_with_tier() -> None:
     assert isinstance(ash.companion, CreatureCompanion)
     assert ash.companion.subspecies == "moonthorn_wolf"
     assert isinstance(ember.companion, CreatureCompanion)
-    assert ember.companion.subspecies == "bloom_hound"
+    assert ember.companion.subspecies == "mist_hound"
 
 
 @pytest.mark.unit

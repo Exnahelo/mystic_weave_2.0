@@ -18,24 +18,6 @@
     "description": "A liminal forest wolf touched by the enchanted stillness of the Feywood. Slightly larger than a common wolf but far leaner and more elegant than a dire wolf, it moves with deliberate control rather than brute force. Its eyes are bright in low light, its senses are exceptionally sharp, and its coat naturally breaks up its outline among moss, bark, and shadow. Feywood wolves are known for their restraint, uncanny awareness, and unusual resistance to enchantment, illusion, and panic. They are not hulking predators, but intelligent woodland hunters shaped by old magic and the quiet discipline of enchanted places."
   },
   {
-    "species": "hound",
-    "subspecies": "bloom_hound",
-    "display_name": "Bloom Hound",
-    "biome": "feywood",
-    "size": "medium",
-    "size_note": null,
-    "age_category": "adult",
-    "tactical_roles_defaults": ["scout", "companion"],
-    "natural_abilities": ["scent_tracking", "keen_senses", "nature_blending", "fey_resilience", "observant_cognition"],
-    "natural_weapons": ["bite"],
-    "movement_modes": ["walk", "swim"],
-    "carrying_capacity": "small",
-    "base_domains": { "physical": 35, "instinct": 45, "composure": 42 },
-    "base_hp": { "current": 24, "max": 24 },
-    "temperament": "Gentle, attentive, unusually calm. Prefers to work alongside a bonded handler rather than under command. Slow to anger; difficult to startle.",
-    "description": "A slender, long-limbed hound whose coat carries faint traces of petal-like patterning — pale greens and soft silvers that shift with the seasons. Bloom hounds are valued as tracking companions and travel partners across the Feywood. They bond deeply with a single handler and tend to remember faces and scents over extraordinary spans of time. Their natural restraint makes them poor pack animals but excellent companions for scholars, envoys, and lone rangers."
-  },
-  {
     "species": "hawk",
     "subspecies": "mistwing_hawk",
     "display_name": "Mistwing Hawk",

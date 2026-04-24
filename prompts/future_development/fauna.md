@@ -15,7 +15,6 @@ Naming palette: poetic / ancient world / fey / botanical
 
 - moonthorn wolf
 - briarmane courser
-- bloom hound
 - mistwing hawk
 - oldroot bear
 - silverbough hart
