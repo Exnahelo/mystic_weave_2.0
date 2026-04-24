@@ -1,0 +1,26 @@
+id: crafthall
+name: The Crafthall
+type: district
+region_id: hollow-crown
+parent_location_id: thornveil
+description: Thornveil's district of institutional craft — weaving, metalwork, elven-method woodcraft (coaxed rather than cut), Glade-specific alchemy, and the specialty trades that feed the Feywood's export economy. Workshops here are larger than in the Common Hearth; masters and apprentices work together in sustained multi-year lineages; specific craft traditions are preserved through formal training rather than informal household transmission. Craft goods from this district eventually reach the Border's exchange windows through Vaelmere's trade flow, and the Crafthall's senior figures coordinate with the Council-appointed Trade Envoys on quality standards and output planning.
+connections:
+- thornveil
+- noble-groves
+- common-hearth
+- outer-bounds
+tags:
+- drakenvale
+- feywood-glade
+- thornveil
+- crafthall
+- district
+- institutional-craft
+- workshops
+- trade-origination
+- craft-lineages
+- export-quality
+known_npcs:
+- Trade Envoy (Crafthall Liaison)
+threat_level: 0
+discovered: false

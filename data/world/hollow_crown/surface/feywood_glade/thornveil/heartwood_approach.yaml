@@ -1,0 +1,25 @@
+id: heartwood-approach
+name: The Heartwood Approach
+type: district
+region_id: hollow-crown
+parent_location_id: thornveil
+description: Thornveil's innermost district, wrapping the Heartwood's clearing at the city's sacred center. The Approach holds the Council of Elders' primary chambers, the residences of the oldest noble families, and the approach-walks that lead in toward the Heartwood itself. Structures here are the oldest in Thornveil — grown over multiple elven lifetimes, incorporating trees centuries old, carrying house-records in their growth that only trained elven readers parse. Casual traffic through the Approach is discouraged out of respect for both the Council's work and the sacred center it surrounds. This is not a district where one wanders; it is a district where one arrives with purpose.
+connections:
+- thornveil
+- heartwood
+- noble-groves
+tags:
+- drakenvale
+- feywood-glade
+- thornveil
+- heartwood-approach
+- district
+- council-seat
+- ancient-groves
+- noble-residence
+- heartwood-adjacent
+known_npcs:
+- Council of Elders
+- Heartwarden on Watch
+threat_level: 0
+discovered: false

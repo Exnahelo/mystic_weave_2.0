@@ -1,0 +1,40 @@
+id: heartwood-estate
+name: Heartwood Estate
+type: location
+region_id: hollow-crown
+parent_location_id: feywood-glade
+description: >
+  The ancestral woodland home of House Heartwood, set in the Outer Old-Growth
+  Wild at a distance from Thornveil that reflects the family's sustained
+  relationship with deeper Glade ecology. The Estate is not a fortified manor or
+  monumental hall; it is a cluster of grown-in dwellings and tended spaces
+  integrated with the surrounding old-growth, sized for roughly forty to seventy
+  residents drawn from House Heartwood family, in-laws, bonded staff, and
+  house-raised children across their successive life stages. The Estate
+  currently houses Lethariel Heartwood and her daughter Sylvara, now 80 and past
+  her wild-upbringing years, in the preparation phase ahead of her Proving at
+  90. The Heartwood bow is kept here between Lethariel's active Captaincy
+  rotations; she resumes the Captaincy when Sylvara departs for the Proving. The
+  estate's character is anti-monumental — the same organic-integration aesthetic
+  as Thornveil, carried to a smaller and more wild-adjacent register.
+connections:
+- feywood-glade
+- thornveil
+- heartwater-basin
+tags:
+- drakenvale
+- feywood-glade
+- heartwood-estate
+- noble-estate
+- house-heartwood
+- outer-wild
+- wild-upbringing
+- anti-monumental
+- lethariel-residence
+- heartwood-bow
+known_npcs:
+- Lethariel Heartwood
+- Sylvara Heartwood
+- Ash (bonded moonthorn wolf)
+threat_level: 1
+discovered: false

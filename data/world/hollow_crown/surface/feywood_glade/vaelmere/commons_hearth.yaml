@@ -1,0 +1,25 @@
+id: commons-hearth
+name: The Commons Hearth
+type: location
+region_id: hollow-crown
+parent_location_id: vaelmere
+description: Vaelmere's shared kitchen and dining space, the settlement's primary social anchor. Not mandatory — residents eat at home as well — but a significant daily-life institution where the community's social fabric concentrates and sustains itself. The Commons Hearth provides meals at communal scale for those who choose to eat here, hosts observance gatherings, serves as an informal civic common-space where residents mix across cluster and occupational lines, and offers realm visitors a more accessible point of social contact with Vaelmere than the Trade Hall or Warden's Hall provide.
+connections:
+- vaelmere
+- wardens-hall
+- guest-house
+- trade-hall
+tags:
+- drakenvale
+- feywood-glade
+- vaelmere
+- commons-hearth
+- location
+- social-anchor
+- shared-dining
+- civic-commons
+- community-space
+known_npcs:
+- Commons Keeper
+threat_level: 0
+discovered: false
