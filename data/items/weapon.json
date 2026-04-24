@@ -462,5 +462,90 @@
     "narrative_effects": [
       "Supports entangling, whipping, and otherwise irregular attacks that depend on context and handling."
     ]
+  },
+  {
+    "id": "weapon_longbow_longbough_01",
+    "name": "Longbough Longbow",
+    "category": "weapon",
+    "knowledge_tag": "ranged",
+    "application_tag": "longbow",
+    "primary_domain": "perception",
+    "tags": ["weapon", "ranged", "longbow", "longbough", "elven", "feywood"],
+    "value_cd": 300,
+    "base_damage": 20,
+    "rarity": "uncommon",
+    "description": "The canonical elven longbow — shaped over years or decades from Longbough wood offered by a naturally fallen limb or through druidic sign, rather than cut from living timber.",
+    "narrative_effects": [
+      "Supports precise long-range archery with the restraint and reverence elven bowyery demands.",
+      "Longbough material carries a faint ambient-field responsiveness that practiced archers can feel in the draw."
+    ]
+  },
+  {
+    "id": "weapon_spear_silverbark_ash_01",
+    "name": "Silverbark Ash Spear",
+    "category": "weapon",
+    "knowledge_tag": "reach",
+    "application_tag": "spear",
+    "primary_domain": "power",
+    "tags": ["weapon", "reach", "spear", "silverbark-ash", "elven", "feywood"],
+    "value_cd": 75,
+    "base_damage": 15,
+    "rarity": "common",
+    "description": "An elven spear with Silverbark Ash shaft — straighter, more flexible, and more durable than realm-side ash equivalents.",
+    "narrative_effects": [
+      "Supports elven polearm technique with standard reach-weapon mechanics.",
+      "The shaft's flex allows slightly more forgiving thrust angles than a rigid shaft would permit."
+    ]
+  },
+  {
+    "id": "weapon_war_staff_silverbark_01",
+    "name": "Silverbark War Staff",
+    "category": "weapon",
+    "knowledge_tag": "reach",
+    "application_tag": "war_staff",
+    "primary_domain": "power",
+    "tags": ["weapon", "reach", "war-staff", "silverbark-ash", "elven", "feywood", "dual-use"],
+    "value_cd": 60,
+    "base_damage": 15,
+    "rarity": "common",
+    "description": "A Silverbark Ash war staff favored by Greenshield rangers and druidic practitioners — a weapon, a walking staff, and a focusing tool for attentional practice.",
+    "narrative_effects": [
+      "Supports quarterstaff technique with dual-end striking and blocking.",
+      "Common carry piece; unusual on realm roads in a way that elven users do not signal."
+    ]
+  },
+  {
+    "id": "weapon_knife_moonthorn_01",
+    "name": "Moonthorn Hunting Knife",
+    "category": "weapon",
+    "knowledge_tag": "grappling",
+    "application_tag": "knife",
+    "primary_domain": "agility",
+    "tags": ["weapon", "grappling", "knife", "moonthorn", "ceremonial", "rare", "feywood"],
+    "value_cd": 200,
+    "base_damage": 10,
+    "rarity": "rare",
+    "description": "A small hunting knife with a handle worked from a moonthorn wolf's shed canine — given rather than bought, typically to an elf who has earned a specific relationship with a wolf or pack.",
+    "narrative_effects": [
+      "Carries the same mechanics as a standard knife.",
+      "Provenance matters more than form — wearing a Moonthorn knife signals a relationship to other elves who understand the craft; the knife itself does nothing extraordinary."
+    ]
+  },
+  {
+    "id": "weapon_sword_greenshield_pattern_01",
+    "name": "Greenshield-Pattern Sword",
+    "category": "weapon",
+    "knowledge_tag": "melee",
+    "application_tag": "sword",
+    "primary_domain": "power",
+    "tags": ["weapon", "melee", "sword", "greenshield", "elven-military", "feywood"],
+    "value_cd": 500,
+    "base_damage": 15,
+    "rarity": "uncommon",
+    "description": "The elven Greenshield's standard military sword — a straight double-edged blade of refined elven metallurgy, balanced for the cut-and-thrust technique Greenshield doctrine emphasizes.",
+    "narrative_effects": [
+      "Supports standard sword technique with the specific balance elven military training favors.",
+      "Rare in realm-side hands; its presence on a non-elf signals either long-term elven relationship or a trophy whose provenance is worth asking about."
+    ]
   }
 ]

@@ -295,5 +295,74 @@
     "narrative_effects": [
       "Supports light protection framing with no baseline Agility difficulty impact under normal conditions."
     ]
+  },
+  {
+    "id": "armor_vinework_thornmere_01",
+    "name": "Thornmere Vinework Armor",
+    "category": "armor",
+    "knowledge_tag": "light",
+    "application_tag": "vinework",
+    "tags": ["armor", "light", "vinework", "thornmere", "living", "feywood"],
+    "value_cd": 2000,
+    "armor_floor": 15,
+    "armor_ceiling": 35,
+    "rarity": "rare",
+    "description": "Living vine-woven light armor produced by House Thornmere's defensive vinework tradition — grown to the wearer's measurements over weeks and tended through the wearer's life.",
+    "narrative_effects": [
+      "Provides flexible light-armor protection without the movement restriction of fitted plate or scale.",
+      "Is tended rather than repaired — Thornmere armorers maintain continuity of the living material across the wearer's working life.",
+      "Non-elf bearers are rare; the armor is given in the context of sustained relationship with the house rather than sold."
+    ]
+  },
+  {
+    "id": "armor_ranger_leathers_01",
+    "name": "Feywood Ranger's Leathers",
+    "category": "armor",
+    "knowledge_tag": "medium",
+    "application_tag": "leather",
+    "tags": ["armor", "medium", "leather", "ranger", "elven", "feywood"],
+    "value_cd": 600,
+    "armor_floor": 20,
+    "armor_ceiling": 40,
+    "rarity": "uncommon",
+    "description": "A Feywood ranger's layered leather armor — tanned from sanctioned hides (silverbough hart, gladehorn stag, rootback elk) using elven processes that preserve flexibility across long service.",
+    "narrative_effects": [
+      "Provides medium-armor protection with the quieter motion elven field operation demands.",
+      "Often bears subtle house-marks or personal identifiers recognizable only to trained elven observers."
+    ]
+  },
+  {
+    "id": "armor_heartwarden_vestments_01",
+    "name": "Heartwarden Vestments",
+    "category": "armor",
+    "knowledge_tag": "light",
+    "application_tag": "vestments",
+    "tags": ["armor", "light", "heartwarden", "vestments", "ceremonial-combat", "feywood"],
+    "value_cd": 3000,
+    "armor_floor": 18,
+    "armor_ceiling": 38,
+    "rarity": "rare",
+    "description": "The sworn Heartwarden's combat vestments — layered elven textile-and-leather construction integrating woven Thornveil Vine elements at reinforcement points, worn during Watch rotations and formal duties.",
+    "narrative_effects": [
+      "Provides light-armor protection with exceptional mobility appropriate to Heartwarden protective doctrine.",
+      "Not issued to non-Heartwardens; unsanctioned possession by a non-Heartwarden is a significant breach of elven sacred order."
+    ]
+  },
+  {
+    "id": "shield_ironroot_01",
+    "name": "Ironroot Shield",
+    "category": "shield",
+    "knowledge_tag": "shield",
+    "application_tag": "shield",
+    "tags": ["shield", "defensive", "ironroot", "elven", "feywood"],
+    "value_cd": 400,
+    "armor_floor": 10,
+    "armor_ceiling": 30,
+    "rarity": "uncommon",
+    "description": "An elven shield with Ironroot hardwood core and elven metalwork rim — lighter than realm steel shields of equivalent protection, harvested from sanctioned deadfall and coordinated with House Ironsap.",
+    "narrative_effects": [
+      "Supports standard active defense with lighter carry weight than steel equivalents.",
+      "Ironroot material does not warp or split under long service; shields serve across generations."
+    ]
   }
 ]

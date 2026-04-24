@@ -331,5 +331,90 @@
     "narrative_effects": [
       "Supports sacred and ceremonial framing where devotional attire carries institutional weight."
     ]
+  },
+  {
+    "id": "apparel_outerwear_hearthwool_cloak_01",
+    "name": "Hearthwool Cloak",
+    "category": "apparel",
+    "subcategory": "outerwear",
+    "tags": ["apparel", "outerwear", "hearthwool", "elven", "feywood", "travel", "daily"],
+    "value_cd": 80,
+    "rarity": "common",
+    "description": "A warm traveling cloak of Hearthgoat wool — the Feywood's standard cold-weather outerwear, durable across decades of ordinary use.",
+    "narrative_effects": [
+      "Maintains warmth in cold and damp conditions appropriate to extended Glade and western-forest travel.",
+      "Recognizable at a glance to elves; its presence signals Feywood origin or long elven-contact."
+    ]
+  },
+  {
+    "id": "apparel_ceremonial_elven_robe_01",
+    "name": "Ceremonial Elven Robe",
+    "category": "apparel",
+    "subcategory": "clothing",
+    "tags": ["apparel", "ceremonial", "elven", "feywood", "formal", "observance"],
+    "value_cd": 250,
+    "rarity": "uncommon",
+    "description": "A formal robe worn by elves for observances, oath-marking events, and Council-facing business — woven from fine elven plant-fiber textiles with subtle house-identifying weave patterns.",
+    "narrative_effects": [
+      "Signals ceremonial presence at observances and formal civic occasions.",
+      "Specific weave patterns encode house affiliation readable by trained elven eyes."
+    ]
+  },
+  {
+    "id": "apparel_outerwear_moonthorn_pelt_01",
+    "name": "Moonthorn Pelt Cloak",
+    "category": "apparel",
+    "subcategory": "outerwear",
+    "tags": ["apparel", "outerwear", "moonthorn", "ceremonial", "rare", "feywood"],
+    "value_cd": 1200,
+    "rarity": "rare",
+    "description": "A cloak of moonthorn wolf pelt — made only from a wolf's natural death, never from a hunted pelt; the pelt's origin is known to all who understand the Glade's relational ethics.",
+    "narrative_effects": [
+      "Provides significant cold-weather protection.",
+      "Earned rather than purchased — appearing in realm trade is essentially impossible; a moonthorn pelt cloak on a non-elf is a question in itself.",
+      "Elves reading the cloak's origin correctly treat the wearer with specific attention regardless of their other signals."
+    ]
+  },
+  {
+    "id": "apparel_outerwear_vaelmere_trader_01",
+    "name": "Vaelmere Trader's Overcoat",
+    "category": "apparel",
+    "subcategory": "outerwear",
+    "tags": ["apparel", "outerwear", "trader", "vaelmere", "practical", "realm-facing"],
+    "value_cd": 150,
+    "rarity": "common",
+    "description": "The Vaelmere-standard trader's overcoat — a practical blend of elven tailoring and realm-trader utility, designed for long Border transit and sustained cross-cultural work.",
+    "narrative_effects": [
+      "Maintains warmth across Border crossings and realm-side travel.",
+      "Cut signals Vaelmere origin to realm traders who work regularly with the Feywood; a visual shortcut that smooths negotiations."
+    ]
+  },
+  {
+    "id": "apparel_footwear_elven_forest_01",
+    "name": "Elven Forest Boots",
+    "category": "apparel",
+    "subcategory": "footwear",
+    "tags": ["apparel", "footwear", "elven", "forest", "feywood", "quiet-step"],
+    "value_cd": 120,
+    "rarity": "common",
+    "description": "Soft-soled high-laced boots of elven construction — quiet on forest floor, durable across long travel, shaped for the specific terrain elves cross routinely.",
+    "narrative_effects": [
+      "Supports quiet movement on forest terrain; noticeably less noise than realm-standard boots on leaf litter and undergrowth.",
+      "Common carry for elves traveling realm-side; their soft tread is often the first nonvisual indicator an elf has entered a space."
+    ]
+  },
+  {
+    "id": "apparel_belt_thornfiber_pouches_01",
+    "name": "Thornfiber Belt with Pouches",
+    "category": "apparel",
+    "subcategory": "clothing",
+    "tags": ["apparel", "belt", "thornfiber", "utility", "feywood"],
+    "value_cd": 40,
+    "rarity": "common",
+    "description": "A sturdy belt of woven Thornfiber Cane with fitted pouches for field gear — the Feywood's standard traveling belt, widely worn by rangers, gatherers, and Vaelmere residents.",
+    "narrative_effects": [
+      "Carries small gear (Silverleaf Balm, fire kit, small tools, field notes) in organized fashion.",
+      "Thornfiber weave is weather-resistant and maintains shape across long service."
+    ]
   }
 ]

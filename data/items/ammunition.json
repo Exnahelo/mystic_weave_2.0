@@ -398,5 +398,65 @@
       "Supports marking, tracking, or identification framing against unaware or fleeing targets.",
       "Treated as expended once delivered."
     ]
+  },
+  {
+    "id": "ammo_arrows_longbough_01",
+    "name": "Longbough Arrows",
+    "category": "ammunition",
+    "ammo_class": "standard",
+    "used_with": ["longbow"],
+    "bundle_size": 20,
+    "tags": ["ammo", "bow", "standard", "longbough", "elven", "feywood"],
+    "special_effect_tag": null,
+    "recoverable": true,
+    "consumption_model": "narrative",
+    "rarity": "uncommon",
+    "value_cd": 40,
+    "damage_modifier": 0,
+    "description": "Elven-crafted arrows with Longbough-matched shafts, fletched with standard bird feathers — the canonical ammunition elven longbowmen pair with their Longbough bows.",
+    "narrative_effects": [
+      "Standard longbow ammunition with the specific balance Longbough draws favor.",
+      "Minor Vaelmere export; realm archers who have acquired the pairing rarely give it up."
+    ]
+  },
+  {
+    "id": "ammo_arrows_silverbark_01",
+    "name": "Silverbark-Shafted Arrows",
+    "category": "ammunition",
+    "ammo_class": "standard",
+    "used_with": ["shortbow", "longbow"],
+    "bundle_size": 20,
+    "tags": ["ammo", "bow", "standard", "silverbark-ash", "elven", "feywood"],
+    "special_effect_tag": null,
+    "recoverable": true,
+    "consumption_model": "narrative",
+    "rarity": "common",
+    "value_cd": 25,
+    "damage_modifier": 0,
+    "description": "Standard elven-crafted arrows with Silverbark Ash shafts — straighter and more resilient than realm-side equivalents, suitable for shortbows or lighter longbow draws.",
+    "narrative_effects": [
+      "Everyday elven arrows; the most common Feywood arrow seen realm-side.",
+      "Reliable across long field use."
+    ]
+  },
+  {
+    "id": "ammo_arrows_witheroak_tipped_01",
+    "name": "Witheroak-Tipped Ritual Arrows",
+    "category": "ammunition",
+    "ammo_class": "special",
+    "used_with": ["longbow"],
+    "bundle_size": 3,
+    "tags": ["ammo", "bow", "special", "witheroak", "ritual", "rare", "feywood"],
+    "special_effect_tag": "ritual_marking",
+    "recoverable": false,
+    "consumption_model": "expended",
+    "rarity": "rare",
+    "value_cd": 300,
+    "damage_modifier": 0,
+    "description": "Ritual arrows with heads worked from Witheroak — used only for specific druidic and Heartwarden ceremonial purposes during Glade strain, not for combat.",
+    "narrative_effects": [
+      "Ritual-use only; loosing these arrows in ordinary combat is a significant transgression elves would remark on.",
+      "Each arrow's provenance is known to the druid who sanctioned its material; non-elves do not receive these through ordinary trade."
+    ]
   }
 ]

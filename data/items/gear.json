@@ -1882,5 +1882,185 @@
     "narrative_effects": [
       "Supports load-bearing tasks, climbing support, and sustained outdoor rigging."
     ]
+  },
+  {
+    "id": "mundane_silverleaf_balm_01",
+    "name": "Silverleaf Balm",
+    "category": "consumable",
+    "subcategory": "medical_alchemical",
+    "description": "A prepared jar of Silverleaf Balm — the canonical Feywood healer's salve for wounds, bruises, and minor burns. Cool on contact, mild-scented.",
+    "tags": ["consumable", "medical", "salve", "silverleaf", "feywood", "healer"],
+    "roll_tag": "field_triage",
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 30,
+    "narrative_effects": [
+      "Supports field triage rolls for cuts, bruises, and burns.",
+      "A standard Vaelmere trade export; appears routinely in realm healers' kits through elven supply chains."
+    ]
+  },
+  {
+    "id": "mundane_dawnmint_infusion_01",
+    "name": "Dawnmint Infusion",
+    "category": "consumable",
+    "subcategory": "medical_alchemical",
+    "description": "A prepared jar of dried Dawnmint leaves for hot-water infusion — culinary, gently medicinal, widely carried by Feywood travelers for tea and minor household medicine.",
+    "tags": ["consumable", "medical", "infusion", "dawnmint", "feywood", "mild-medicine"],
+    "roll_tag": "pharmacology",
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 20,
+    "narrative_effects": [
+      "Supports pharmacology rolls for mild digestive or calming preparation.",
+      "Comfortably familiar to both Feywood and realm users; Vaelmere exports these in quantity."
+    ]
+  },
+  {
+    "id": "mundane_redveil_preparation_01",
+    "name": "Redveil Shelf Preparation",
+    "category": "consumable",
+    "subcategory": "medical_alchemical",
+    "description": "A prepared pouch of dried and ground Redveil Shelf fungus — the Feywood's canonical fever remedy and serious-wound preparation.",
+    "tags": ["consumable", "medical", "fungus", "redveil", "feywood", "fever-remedy"],
+    "roll_tag": "field_triage",
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "uncommon",
+    "value_cd": 60,
+    "narrative_effects": [
+      "Supports field triage rolls for fever management and wound preparations beyond Silverleaf's lighter register.",
+      "Limited export quantities; not every realm healer carries it."
+    ]
+  },
+  {
+    "id": "mundane_thornfiber_rope_01",
+    "name": "Thornfiber Rope",
+    "category": "craft_trade",
+    "subcategory": "cordage",
+    "description": "Elven-woven rope of Thornfiber Cane — lighter and more flexible than hemp of equivalent strength, durable across wet conditions.",
+    "tags": ["cordage", "rope", "thornfiber", "elven", "feywood"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 25,
+    "narrative_effects": [
+      "Standard utility rope with the distinctive slight green-grey tone of Thornfiber.",
+      "Trade export; readily available at Vaelmere and at realm-side traders with Feywood relationships."
+    ]
+  },
+  {
+    "id": "mundane_thornfiber_basket_01",
+    "name": "Thornfiber Basket",
+    "category": "movement_load",
+    "subcategory": "open_storage",
+    "description": "A Thornfiber-woven basket of the pattern common throughout Thornveil and Vaelmere — lightweight, durable, serviceable for gathering and household use.",
+    "tags": ["container", "thornfiber", "elven", "feywood", "gathering"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": false,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 15,
+    "narrative_effects": [
+      "Standard gathering and storage container.",
+      "Recognizable elven craft; often retained as a household piece rather than discarded when it wears."
+    ]
+  },
+  {
+    "id": "mundane_resinheart_sealant_01",
+    "name": "Resinheart Sealant",
+    "category": "consumable",
+    "subcategory": "craft_supply",
+    "description": "A small jar of refined Resinheart Pine resin — the Feywood's canonical waterproofing and wood-sealing compound, also used for incense and as a light adhesive.",
+    "tags": ["consumable", "sealant", "resinheart", "feywood", "waterproofing"],
+    "roll_tag": null,
+    "tool_role": "consumable",
+    "consumable": true,
+    "charges": 1,
+    "rarity": "common",
+    "value_cd": 35,
+    "narrative_effects": [
+      "Seals leather, wood, and textile against moisture for sustained periods.",
+      "A minor Vaelmere trade export; realm travelers with Feywood connections often keep a jar for field use."
+    ]
+  },
+  {
+    "id": "mundane_glade_honey_01",
+    "name": "Glade Honey",
+    "category": "consumable",
+    "subcategory": "food",
+    "description": "A sealed jar of honey from Honeybound bees — distinctly floral, slightly field-reactive to sensitive attunements, prized both as food and as a preserve base.",
+    "tags": ["consumable", "food", "honey", "honeybound", "feywood", "preserve"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": true,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 40,
+    "narrative_effects": [
+      "Standard food and preserve ingredient with notably long shelf life.",
+      "Vaelmere trade export in modest quantities; realm connoisseurs distinguish Glade honey by its specific floral character."
+    ]
+  },
+  {
+    "id": "mundane_hearthgoat_cheese_ration_01",
+    "name": "Hearthgoat Cheese Ration",
+    "category": "consumable",
+    "subcategory": "food",
+    "description": "A block of aged Hearthgoat cheese wrapped in waxed leaves for travel — the Feywood's standard travel protein, durable across weeks of carry.",
+    "tags": ["consumable", "food", "ration", "hearthgoat", "feywood", "travel"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": true,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 15,
+    "narrative_effects": [
+      "Standard field ration, calorically dense, travels well in cool conditions.",
+      "Less common realm-side; hearthgoat dairy doesn't export widely beyond border settlements."
+    ]
+  },
+  {
+    "id": "mundane_forest_wine_01",
+    "name": "Feywood Forest Wine",
+    "category": "consumable",
+    "subcategory": "drink",
+    "description": "A bottle of Feywood forest wine — base blend of Summerpear, Dewberry, and seasonal flowers; lighter and more floral than realm grape wines.",
+    "tags": ["consumable", "drink", "wine", "feywood", "summerpear", "dewberry"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": true,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 50,
+    "narrative_effects": [
+      "Standard drink; a modest Vaelmere trade export with loyal realm clientele.",
+      "Not interchangeable with realm wines at formal occasions; appears in its own category on sophisticated tables."
+    ]
+  },
+  {
+    "id": "mundane_goldcap_cider_01",
+    "name": "Goldcap Cider",
+    "category": "consumable",
+    "subcategory": "drink",
+    "description": "A flask of Goldcap cider from Vaelmere and Thornveil orchards — one of the Feywood's canonical trade exports, familiar enough to reach realm taverns via Vaelmere's flow.",
+    "tags": ["consumable", "drink", "cider", "goldcap", "feywood", "trade-export"],
+    "roll_tag": null,
+    "tool_role": "permission",
+    "consumable": true,
+    "charges": null,
+    "rarity": "common",
+    "value_cd": 30,
+    "narrative_effects": [
+      "Standard alcoholic drink; its specific tartness is recognized by regular realm drinkers of Feywood exports.",
+      "Consistent quality across vintages owing to the Goldcap apple's reliable character."
+    ]
   }
 ]
