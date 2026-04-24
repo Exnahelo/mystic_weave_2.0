@@ -6,7 +6,11 @@
     "secondary_domain": "endurance",
     "domain_note": "Gross motor under load. GPT selects Power for burst effort, Endurance for sustained effort.",
     "description": "Whole-body physical capability under pressure: hauling, climbing, swimming, forced movement, raw grappling. The gross-motor execution side of physicality, distinct from the fine-motor control of Mobility.",
-    "examples": ["Dragging an ally from a collapsing building", "Forcing a stuck door open", "Swimming against a hard current"],
+    "examples": [
+      "Dragging an ally from a collapsing building",
+      "Forcing a stuck door open",
+      "Swimming against a hard current"
+    ],
     "kind": "mundane"
   },
   {
@@ -16,7 +20,11 @@
     "secondary_domain": null,
     "domain_note": null,
     "description": "Controlled movement, balance, and reactive footwork. Fine-motor body control distinct from Athletics' raw effort. Covers acrobatics, terrain traversal, evasion, riding balance, and recovery from falls.",
-    "examples": ["Rooftop chase across broken tile", "Tumbling clear of a collapsing ceiling", "Keeping your seat when the horse rears"],
+    "examples": [
+      "Rooftop chase across broken tile",
+      "Tumbling clear of a collapsing ceiling",
+      "Keeping your seat when the horse rears"
+    ],
     "kind": "mundane"
   },
   {
@@ -26,7 +34,11 @@
     "secondary_domain": null,
     "domain_note": null,
     "description": "Remaining unnoticed: quiet movement, concealment, shadowing, infiltration, and exfiltration. The discipline of not being seen, heard, or remembered.",
-    "examples": ["Slipping past guards in a lit corridor", "Tailing a target through a market without being made", "Finding a hiding place under pressure"],
+    "examples": [
+      "Slipping past guards in a lit corridor",
+      "Tailing a target through a market without being made",
+      "Finding a hiding place under pressure"
+    ],
     "kind": "mundane"
   },
   {
@@ -36,7 +48,11 @@
     "secondary_domain": null,
     "domain_note": null,
     "description": "Precision illicit technique: sleight of hand, lockwork, trap handling, document forgery, disguise prep, sabotage. The technical side of dirty work, distinct from Stealth's remaining unseen.",
-    "examples": ["Picking a pocket in a crowded market", "Bypassing a trapped lock", "Forging a travel writ"],
+    "examples": [
+      "Picking a pocket in a crowded market",
+      "Bypassing a trapped lock",
+      "Forging a travel writ"
+    ],
     "kind": "mundane"
   },
   {
@@ -46,7 +62,11 @@
     "secondary_domain": null,
     "domain_note": null,
     "description": "Reading the immediate environment: noticing danger, spotting changes, scanning crowds, detecting ambushes, sensing tension. Active watchfulness in the moment, distinct from Investigation's structured inquiry.",
-    "examples": ["Spotting the assassin in a diplomatic reception", "Feeling the room shift before violence breaks out", "Catching the tell on a liar"],
+    "examples": [
+      "Spotting the assassin in a diplomatic reception",
+      "Feeling the room shift before violence breaks out",
+      "Catching the tell on a liar"
+    ],
     "kind": "mundane"
   },
   {
@@ -56,7 +76,11 @@
     "secondary_domain": "intellect",
     "domain_note": "Perception for physical evidence work; Intellect for analytical synthesis and deduction.",
     "description": "Structured inquiry: evidence reading, deduction, scene reconstruction, anomaly analysis, interrogation, document examination. The retrospective and analytical counterpart to Awareness's immediate noticing.",
-    "examples": ["Reconstructing a murder from blood spatter", "Finding the forgery in a stack of legitimate contracts", "Cross-examining a witness"],
+    "examples": [
+      "Reconstructing a murder from blood spatter",
+      "Finding the forgery in a stack of legitimate contracts",
+      "Cross-examining a witness"
+    ],
     "kind": "mundane"
   },
   {
@@ -66,7 +90,11 @@
     "secondary_domain": null,
     "domain_note": null,
     "description": "Following movement through the world: spoor reading, passage-time estimation, route inference, quarry habits, urban shadowing at the physical trail level, and counter-tracking.",
-    "examples": ["Dating tracks through a forest floor", "Predicting where the fleeing target will emerge", "Erasing your own trail through pursuit terrain"],
+    "examples": [
+      "Dating tracks through a forest floor",
+      "Predicting where the fleeing target will emerge",
+      "Erasing your own trail through pursuit terrain"
+    ],
     "kind": "mundane"
   },
   {
@@ -76,7 +104,11 @@
     "secondary_domain": null,
     "domain_note": null,
     "description": "Living through hostile conditions: shelter, firecraft, weather reading, camp selection, hazard response, navigation, and endurance under field privation. The active discipline of not dying in conditions, distinct from Nature's understanding of living systems.",
-    "examples": ["Building shelter in a freezing storm", "Starting a fire with damp wood", "Navigating by stars through unfamiliar terrain"],
+    "examples": [
+      "Building shelter in a freezing storm",
+      "Starting a fire with damp wood",
+      "Navigating by stars through unfamiliar terrain"
+    ],
     "kind": "mundane"
   },
   {
@@ -86,7 +118,11 @@
     "secondary_domain": null,
     "domain_note": null,
     "description": "Understanding living systems: animals, plants, agriculture, ecology. The knowledge of how living things work, distinct from Survival's hostile-conditions response. A botanist has high Nature and zero Survival.",
-    "examples": ["Identifying a poisonous plant on sight", "Calming a panicked herd", "Diagnosing why an orchard is failing"],
+    "examples": [
+      "Identifying a poisonous plant on sight",
+      "Calming a panicked herd",
+      "Diagnosing why an orchard is failing"
+    ],
     "kind": "mundane"
   },
   {
@@ -96,17 +132,11 @@
     "secondary_domain": null,
     "domain_note": null,
     "description": "Diagnosis, treatment, wound care, pharmacology, surgery, and mental care. The medical discipline focused on humanoid bodies and minds. Veterinary work lives under Nature.",
-    "examples": ["Stabilizing a gut wound in the field", "Identifying a poison from its symptoms", "Treating shock after violence"],
-    "kind": "mundane"
-  },
-  {
-    "index": "combat",
-    "name": "Combat",
-    "primary_domain": "power",
-    "secondary_domain": null,
-    "domain_note": "Ranged and mechanical combat applications use Perception instead of Power.",
-    "description": "Active execution of violence: weapon use, unarmed technique, armor wearing, shield work. The doing side of fighting, distinct from Warfare's tactical understanding.",
-    "examples": ["A sword thrust through a gap in enemy armor", "Loosing a bow at a moving target", "Pinning an opponent in a joint lock"],
+    "examples": [
+      "Stabilizing a gut wound in the field",
+      "Identifying a poison from its symptoms",
+      "Treating shock after violence"
+    ],
     "kind": "mundane"
   },
   {
@@ -116,7 +146,11 @@
     "secondary_domain": "intellect",
     "domain_note": "Will for presence and nerve on the battlefield; Intellect for tactical analysis.",
     "description": "Understanding violence: battlefield reading, threat assessment, formation logic, command presence, martial intimidation. The knowing side of combat. A general has Warfare; a gladiator has Combat.",
-    "examples": ["Reading an ambush before it closes", "Holding a unit's discipline under artillery", "Spotting the weakness in an enemy formation"],
+    "examples": [
+      "Reading an ambush before it closes",
+      "Holding a unit's discipline under artillery",
+      "Spotting the weakness in an enemy formation"
+    ],
     "kind": "mundane"
   },
   {
@@ -126,7 +160,11 @@
     "secondary_domain": null,
     "domain_note": null,
     "description": "Making and repairing practical things: smithing, carpentry, masonry, leatherwork, textiles, cooking, pottery, maintenance. The trades of physical production.",
-    "examples": ["Forging a blade that holds edge", "Repairing a collapsed roof beam", "Preparing a feast for a visiting noble"],
+    "examples": [
+      "Forging a blade that holds edge",
+      "Repairing a collapsed roof beam",
+      "Preparing a feast for a visiting noble"
+    ],
     "kind": "mundane"
   },
   {
@@ -136,7 +174,11 @@
     "secondary_domain": null,
     "domain_note": null,
     "description": "Mechanisms, structures, load paths, siege logic, lockworks, and the material preparation of substrates that can hold magic. More systemic than Craft — engineering is about how and why things hold together.",
-    "examples": ["Designing a working trap", "Analyzing bridge failure before collapse", "Preparing a stone foundation to receive enchantment"],
+    "examples": [
+      "Designing a working trap",
+      "Analyzing bridge failure before collapse",
+      "Preparing a stone foundation to receive enchantment"
+    ],
     "kind": "mundane"
   },
   {
@@ -146,7 +188,11 @@
     "secondary_domain": null,
     "domain_note": null,
     "description": "Academic and civic memory: history, linguistics, law, religion (as study), politics, genealogy, cartography, economics. The world's accumulated knowledge. Distinct from Arcana's magical theory.",
-    "examples": ["Recalling a century-old treaty clause", "Translating an archaic inscription", "Tracing a family's hidden lineage"],
+    "examples": [
+      "Recalling a century-old treaty clause",
+      "Translating an archaic inscription",
+      "Tracing a family's hidden lineage"
+    ],
     "kind": "mundane"
   },
   {
@@ -156,7 +202,11 @@
     "secondary_domain": null,
     "domain_note": null,
     "description": "Social leverage: persuasion, deception, diplomacy, command, pressure, seduction, etiquette. The full spectrum of shaping other people's behavior.",
-    "examples": ["Talking a guard into letting you pass", "Negotiating terms with a hostile faction", "Applying pressure to extract a favor"],
+    "examples": [
+      "Talking a guard into letting you pass",
+      "Negotiating terms with a hostile faction",
+      "Applying pressure to extract a favor"
+    ],
     "kind": "mundane"
   },
   {
@@ -166,7 +216,11 @@
     "secondary_domain": null,
     "domain_note": null,
     "description": "Performative expression: singing, instruments, dance, oratory, theatrical work, storytelling. Distinct from Influence — a performance isn't trying to change someone's mind, it's being witnessed.",
-    "examples": ["Holding a tavern rapt with a long ballad", "Delivering a funeral oration", "Dancing at a high noble's wedding"],
+    "examples": [
+      "Holding a tavern rapt with a long ballad",
+      "Delivering a funeral oration",
+      "Dancing at a high noble's wedding"
+    ],
     "kind": "mundane"
   },
   {
@@ -176,7 +230,11 @@
     "secondary_domain": null,
     "domain_note": null,
     "description": "Self-mastery: focus, courage, resolve, composure, meditation, fear mastery, oath endurance. The inner regulation of attention, emotion, and commitment.",
-    "examples": ["Maintaining concentration during a long ritual", "Holding ground against a charging terror", "Keeping an oath that costs everything"],
+    "examples": [
+      "Maintaining concentration during a long ritual",
+      "Holding ground against a charging terror",
+      "Keeping an oath that costs everything"
+    ],
     "kind": "mundane"
   },
   {
@@ -186,7 +244,179 @@
     "secondary_domain": null,
     "domain_note": null,
     "description": "Non-spell magical understanding: theoretical knowledge, ritual structure analysis, field recognition, enchantment reading, risk assessment. Knowing magic without casting it. Required for identifying what a magical working is, what it does, and how dangerous it might be.",
-    "examples": ["Identifying the field behind an unknown spell", "Reading a ward without activating it", "Analyzing an enchanted object's function"],
+    "examples": [
+      "Identifying the field behind an unknown spell",
+      "Reading a ward without activating it",
+      "Analyzing an enchanted object's function"
+    ],
+    "kind": "mundane"
+  },
+  {
+    "index": "close_combat",
+    "name": "Close Combat",
+    "primary_domain": "agility",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Fighting with small, fast, close-range weapons — knives, daggers, throwing blades, brass knuckles, and similar. Distinct from Martial Arts (unarmed), Melee (sword-length weapons), and Martial Grappling (wrestling without weapons).",
+    "examples": [
+      "Trade knife-work in a tavern brawl",
+      "Press a dagger into clinch range",
+      "Throw a knife at a fleeing target"
+    ],
+    "kind": "mundane"
+  },
+  {
+    "index": "melee",
+    "name": "Melee",
+    "primary_domain": "power",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Fighting with one-handed and two-handed sword-length and blunt weapons — swords, clubs, maces, axes, war hammers, and the larger two-handed variants. The standard category of hand-to-hand weapon combat.",
+    "examples": [
+      "Trade blows with a swordsman",
+      "Bring a war hammer down on a shield",
+      "Swing a greataxe at a charging opponent"
+    ],
+    "kind": "mundane"
+  },
+  {
+    "index": "reach",
+    "name": "Reach",
+    "primary_domain": "power",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Fighting with long-shafted weapons that extend reach — spears, pikes, polearms, halberds, war staves. Controls distance and leverage rather than trading hits at arm's length.",
+    "examples": [
+      "Keep foes back with a spear",
+      "Hook a rider from the saddle with a halberd",
+      "Thrust a pike through a shield wall"
+    ],
+    "kind": "mundane"
+  },
+  {
+    "index": "ranged",
+    "name": "Ranged",
+    "primary_domain": "perception",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Attacking at distance with hand-powered projectile weapons — bows, slings, thrown weapons. Draws on perception and steady hand rather than raw force.",
+    "examples": [
+      "Put an arrow through a gap in cover",
+      "Sling stones at pursuers",
+      "Loose a Longbough longbow on a moving target"
+    ],
+    "kind": "mundane"
+  },
+  {
+    "index": "mechanical",
+    "name": "Mechanical",
+    "primary_domain": "perception",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Operating mechanical projectile weapons — crossbows, blowguns, and similar devices that use stored or channeled mechanical force rather than direct bodily power. Loading, maintaining, and firing is distinct from bow technique.",
+    "examples": [
+      "Reload a heavy crossbow under fire",
+      "Aim a light crossbow through cover",
+      "Steady a blowgun for a precise dart"
+    ],
+    "kind": "mundane"
+  },
+  {
+    "index": "unconventional",
+    "name": "Unconventional",
+    "primary_domain": "agility",
+    "secondary_domain": null,
+    "domain_note": "GPT judges per specific weapon; domain may vary by application.",
+    "description": "Fighting with weapons that do not fit standard melee, reach, ranged, or mechanical categories — nets, chains, whips, improvised or exotic weapons used in non-standard ways. Emphasizes control, restraint, and unconventional application over standard damage output.",
+    "examples": [
+      "Ensnare a target with a thrown net",
+      "Use a chain to wrap and pull an opponent's weapon",
+      "Snap a whip to disarm or distract"
+    ],
+    "kind": "mundane"
+  },
+  {
+    "index": "martial_arts",
+    "name": "Martial Arts",
+    "primary_domain": "agility",
+    "secondary_domain": "power",
+    "domain_note": "Agility for precise technique, Power for force-driven striking.",
+    "description": "Unarmed fighting — trained striking, kicking, blocking, and hand-to-hand technique without weapons. Distinct from Close Combat (small weapons), Martial Grappling (wrestling), and brawling-as-improvised-violence.",
+    "examples": [
+      "Drop a guard with a trained elbow strike",
+      "Block an incoming knife with a forearm",
+      "Kick a charging opponent back into cover"
+    ],
+    "kind": "mundane"
+  },
+  {
+    "index": "light_armor",
+    "name": "Light Armor",
+    "primary_domain": "agility",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Wearing and fighting effectively in flexible light protective gear — padded, leather, studded leather, hide. Preserves agility and movement while providing basic protection.",
+    "examples": [
+      "Move at speed in padded armor",
+      "Keep light-armor flexibility in close combat",
+      "Shed studded leather for a swim if needed"
+    ],
+    "kind": "mundane"
+  },
+  {
+    "index": "medium_armor",
+    "name": "Medium Armor",
+    "primary_domain": "power",
+    "secondary_domain": "endurance",
+    "domain_note": "Power for managing weight, Endurance for sustained wear.",
+    "description": "Wearing and fighting in moderate weight-and-coverage armor — chain shirts, scale mail, breastplates, chain mail. Balances protection with mobility cost.",
+    "examples": [
+      "Advance steadily in chain mail",
+      "Hold a position in scale",
+      "Stand through repeated impacts in a breastplate"
+    ],
+    "kind": "mundane"
+  },
+  {
+    "index": "heavy_armor",
+    "name": "Heavy Armor",
+    "primary_domain": "power",
+    "secondary_domain": "endurance",
+    "domain_note": "Power for movement under load, Endurance for sustained wear.",
+    "description": "Wearing and fighting in high-protection, high-weight armor — splint, plate. Trades mobility for near-maximal protection; requires conditioning to operate effectively.",
+    "examples": [
+      "Hold a choke point in plate",
+      "Walk a long road in splint without breaking down",
+      "Turn weight into unstoppable pressure in a charge"
+    ],
+    "kind": "mundane"
+  },
+  {
+    "index": "shields",
+    "name": "Shields",
+    "primary_domain": "power",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Using shields defensively and offensively — blocking, parrying, bashing, line-holding. Distinct from armor; shields are active defensive equipment that require their own technique.",
+    "examples": [
+      "Catch an arrow on the shield's edge",
+      "Shield-rush someone off a staircase",
+      "Hold a shield wall against heavy pressure"
+    ],
+    "kind": "mundane"
+  },
+  {
+    "index": "unarmored",
+    "name": "Unarmored",
+    "primary_domain": "agility",
+    "secondary_domain": null,
+    "domain_note": null,
+    "description": "Fighting without armor — relying on mobility, evasion, and body awareness in place of protective gear. Some characters canonically build around this state.",
+    "examples": [
+      "Fight unarmored through reflex and read",
+      "Rely on speed and positioning instead of armor",
+      "Shed armor before a water crossing or climb"
+    ],
     "kind": "mundane"
   }
 ]

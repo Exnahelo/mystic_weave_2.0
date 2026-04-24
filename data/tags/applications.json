@@ -48,12 +48,12 @@
     ]
   },
   {
-    "index": "grappling",
-    "name": "Grappling",
+    "index": "martial_grappling",
+    "name": "Martial Grappling",
     "group": "athletics",
     "primary_domain": "power",
     "domain_note": null,
-    "description": "Applying raw holds, clinches, and body control through strength and leverage.",
+    "description": "Applying raw wrestling holds, clinches, pins, and body control through strength and leverage without weapons. Distinct from Close Combat (with small weapons) and Martial Arts (striking).",
     "examples": [
       "Pin a struggling opponent",
       "Hold someone in place long enough to flee"
@@ -344,7 +344,7 @@
     "description": "Pressing, sequencing, and steering questions to extract usable truth.",
     "examples": [
       "Corner a suspect with timeline gaps",
-      "Break a witness\u2019s rehearsed story"
+      "Break a witness’s rehearsed story"
     ]
   },
   {
@@ -511,7 +511,7 @@
     "domain_note": null,
     "description": "Recognizing wild species, habits, signs, and risk behaviors.",
     "examples": [
-      "Identify a nesting drake\u2019s warning signs",
+      "Identify a nesting drake’s warning signs",
       "Know when a boar is about to charge"
     ]
   },
@@ -559,7 +559,7 @@
     "domain_note": null,
     "description": "Treating the health, injury, and stress of non-humanoid animals.",
     "examples": [
-      "Set a dog\u2019s broken leg",
+      "Set a dog’s broken leg",
       "Treat rot in a draft horse hoof"
     ]
   },
@@ -624,129 +624,9 @@
     ]
   },
   {
-    "index": "melee",
-    "name": "Melee",
-    "group": "combat",
-    "primary_domain": "power",
-    "domain_note": null,
-    "description": "Using hand weapons effectively at close range in active combat.",
-    "examples": [
-      "Trade blows with a swordsman",
-      "Drive a dagger into clinch range"
-    ]
-  },
-  {
-    "index": "reach",
-    "name": "Reach",
-    "group": "combat",
-    "primary_domain": "power",
-    "domain_note": null,
-    "description": "Controlling distance and leverage with polearms, spears, and long weapons.",
-    "examples": [
-      "Keep foes back with a spear",
-      "Hook a rider from the saddle"
-    ]
-  },
-  {
-    "index": "ranged",
-    "name": "Ranged",
-    "group": "combat",
-    "primary_domain": "perception",
-    "domain_note": null,
-    "description": "Delivering accurate attacks with thrown or launched weapons at distance.",
-    "examples": [
-      "Put an arrow through a gap",
-      "Hit a runner with a javelin"
-    ]
-  },
-  {
-    "index": "mechanical",
-    "name": "Mechanical",
-    "group": "combat",
-    "primary_domain": "perception",
-    "domain_note": null,
-    "description": "Operating crossbows and similar mechanical launchers under combat pressure.",
-    "examples": [
-      "Reload a heavy crossbow quickly",
-      "Pick a target through cover with a crank bow"
-    ]
-  },
-  {
-    "index": "brawling",
-    "name": "Brawling",
-    "group": "combat",
-    "primary_domain": "power",
-    "domain_note": null,
-    "description": "Applying trained unarmed strikes, clinches, and dirty fighting at close quarters.",
-    "examples": [
-      "Drop a guard with an elbow strike",
-      "Fight in a tavern crush without a weapon"
-    ]
-  },
-  {
-    "index": "unconventional",
-    "name": "Unconventional",
-    "group": "combat",
-    "primary_domain": "varies",
-    "domain_note": "GPT judges per weapon.",
-    "description": "Using improvised, exotic, or unfamiliar weapons outside standard forms.",
-    "examples": [
-      "Fight with a chair leg",
-      "Turn a chain into a battlefield weapon"
-    ]
-  },
-  {
-    "index": "shields",
-    "name": "Shields",
-    "group": "combat",
-    "primary_domain": "power",
-    "domain_note": null,
-    "description": "Using shields for defense, control, bashing, and line holding.",
-    "examples": [
-      "Catch a blow on the rim",
-      "Shield-rush someone off a stair"
-    ]
-  },
-  {
-    "index": "light_armor",
-    "name": "Light Armor",
-    "group": "combat",
-    "primary_domain": "power",
-    "domain_note": null,
-    "description": "Fighting effectively while wearing flexible light protective gear.",
-    "examples": [
-      "Move freely in padded armor",
-      "Keep speed while armored lightly"
-    ]
-  },
-  {
-    "index": "medium_armor",
-    "name": "Medium Armor",
-    "group": "combat",
-    "primary_domain": "power",
-    "domain_note": null,
-    "description": "Managing weight, coverage, and movement in moderate battlefield armor.",
-    "examples": [
-      "Advance in mail without overcommitting",
-      "Fight through repeated impacts in scale"
-    ]
-  },
-  {
-    "index": "heavy_armor",
-    "name": "Heavy Armor",
-    "group": "combat",
-    "primary_domain": "power",
-    "domain_note": null,
-    "description": "Operating in heavy protective armor without losing combat function.",
-    "examples": [
-      "Hold a choke point in plate",
-      "Turn weight into unstoppable pressure"
-    ]
-  },
-  {
     "index": "dragon_breath",
     "name": "Dragon Breath",
-    "group": "combat",
+    "group": "ranged",
     "primary_domain": "will",
     "domain_note": "Will for controlled channeling, Power for raw output.",
     "description": "Channeling innate draconic breath with control rather than pure force.",
@@ -1016,7 +896,7 @@
     "description": "Analyzing languages, scripts, dialects, and how meaning shifts across them.",
     "examples": [
       "Translate an archaic oath",
-      "Identify a speaker\u2019s regional dialect"
+      "Identify a speaker’s regional dialect"
     ]
   },
   {
@@ -1315,7 +1195,7 @@
     "domain_note": null,
     "description": "Regulating terror responses so fear does not control action.",
     "examples": [
-      "Stand fast before a dragon\u2019s roar",
+      "Stand fast before a dragon’s roar",
       "Walk into the haunted vault without freezing"
     ]
   },
@@ -1404,55 +1284,495 @@
     ]
   },
   {
-    "index": "field_reading",
-    "name": "Field Reading",
-    "group": "nature",
+    "index": "knife",
+    "name": "Knife",
+    "group": "close_combat",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Fighting with a compact close-quarters blade suited to tight spaces, quick draws, and general utility use.",
+    "examples": [
+      "Open a defender's guard with a quick knife slash",
+      "Conceal and draw a knife unexpectedly"
+    ]
+  },
+  {
+    "index": "dagger",
+    "name": "Dagger",
+    "group": "close_combat",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Fighting with a balanced short blade designed for close fighting, fast strikes, and easy carry.",
+    "examples": [
+      "Drive a dagger through an armor gap",
+      "Parry with an off-hand dagger"
+    ]
+  },
+  {
+    "index": "shortsword",
+    "name": "Shortsword",
+    "group": "close_combat",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Fighting with a short sword suited to tight-quarters bladework — shorter, lighter, and faster than a standard sword.",
+    "examples": [
+      "Thrust a shortsword in close formation",
+      "Use a shortsword's speed in a narrow corridor"
+    ]
+  },
+  {
+    "index": "throwing_knife",
+    "name": "Throwing Knife",
+    "group": "close_combat",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Fighting with knives intended for throwing — balanced blades thrown at close-to-medium range.",
+    "examples": [
+      "Throw a knife at a retreating target",
+      "Palm and throw in a single motion"
+    ]
+  },
+  {
+    "index": "handaxe",
+    "name": "Handaxe",
+    "group": "close_combat",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Fighting with a compact axe suited to close fighting, harsh utility work, and brutal short-range strikes.",
+    "examples": [
+      "Chop through a shield's rim",
+      "Throw a handaxe at short distance"
+    ]
+  },
+  {
+    "index": "javelin",
+    "name": "Javelin",
+    "group": "close_combat",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Throwing or close-range thrusting with a javelin — a thrown spear designed for short-to-medium throwing distance.",
+    "examples": [
+      "Loose a javelin at a charging rider",
+      "Brace a javelin to receive a charge"
+    ]
+  },
+  {
+    "index": "brass_knuckles",
+    "name": "Brass Knuckles",
+    "group": "close_combat",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Fighting with compact fist reinforcements favored in brawls and dirty close combat.",
+    "examples": [
+      "Drop a guard with brass knuckles",
+      "Break a hold with a knuckle strike"
+    ]
+  },
+  {
+    "index": "clawed_gauntlet",
+    "name": "Clawed Gauntlet",
+    "group": "close_combat",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Fighting with a fitted gauntlet with hardened claw-like projections for tearing strikes and vicious clinch fighting.",
+    "examples": [
+      "Rake an opponent's face in a clinch",
+      "Tear at an enemy's grip on a weapon"
+    ]
+  },
+  {
+    "index": "sword",
+    "name": "Sword",
+    "group": "melee",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Fighting with a standard one-handed sword — the baseline elven and human martial blade for cut-and-thrust technique.",
+    "examples": [
+      "Trade blows with another swordsman",
+      "Parry, bind, and riposte"
+    ]
+  },
+  {
+    "index": "greatsword",
+    "name": "Greatsword",
+    "group": "melee",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Fighting with a two-handed greatsword — long reach, heavy cutting force, demanding space to wield.",
+    "examples": [
+      "Clear space with a two-handed sweep",
+      "Bring a greatsword down through a shield"
+    ]
+  },
+  {
+    "index": "club",
+    "name": "Club",
+    "group": "melee",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Fighting with a basic striking weapon that relies on force and simplicity rather than refinement.",
+    "examples": [
+      "Club a target senseless in a brawl",
+      "Smash through a door with a heavy club"
+    ]
+  },
+  {
+    "index": "mace",
+    "name": "Mace",
+    "group": "melee",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Fighting with a one-handed weighted striking weapon — effective against armor that resists blades.",
+    "examples": [
+      "Crack a breastplate with a mace",
+      "Shatter a shield's rim"
+    ]
+  },
+  {
+    "index": "war_hammer",
+    "name": "War Hammer",
+    "group": "melee",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Fighting with a two-handed war hammer — concentrated striking force for armor-breaking work.",
+    "examples": [
+      "Drive a war hammer through plate",
+      "Break a line with heavy blows"
+    ]
+  },
+  {
+    "index": "axe",
+    "name": "Axe",
+    "group": "melee",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Fighting with a one-handed battle axe — cutting power greater than a sword at the cost of thrust utility.",
+    "examples": [
+      "Chop through a shield with an axe",
+      "Hook a shield aside with an axe's beard"
+    ]
+  },
+  {
+    "index": "greataxe",
+    "name": "Greataxe",
+    "group": "melee",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Fighting with a two-handed greataxe — devastating cutting power requiring space and commitment to wield.",
+    "examples": [
+      "Cleave a line open with a greataxe",
+      "Hold attackers back with wide swings"
+    ]
+  },
+  {
+    "index": "spear",
+    "name": "Spear",
+    "group": "reach",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Fighting with a spear — the oldest and most common reach weapon, versatile in thrust and throw.",
+    "examples": [
+      "Keep foes at spear's length",
+      "Thrust a spear through a gap in formation"
+    ]
+  },
+  {
+    "index": "pike",
+    "name": "Pike",
+    "group": "reach",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Fighting with a long pike — a formation weapon requiring discipline and space, dominant against cavalry.",
+    "examples": [
+      "Hold a pike line against a charge",
+      "Thrust a pike at a rider's chest"
+    ]
+  },
+  {
+    "index": "halberd",
+    "name": "Halberd",
+    "group": "reach",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Fighting with a halberd — a pole weapon combining spear thrust, axe cut, and hook. Versatile and demanding.",
+    "examples": [
+      "Hook a rider from horseback with a halberd",
+      "Use halberd reach in close formation"
+    ]
+  },
+  {
+    "index": "polearm",
+    "name": "Polearm",
+    "group": "reach",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Fighting with a long-shafted polearm — general category for long pole weapons that don't fit specific named types.",
+    "examples": [
+      "Control distance with polearm sweeps",
+      "Brace a polearm against a charging foe"
+    ]
+  },
+  {
+    "index": "war_staff",
+    "name": "War Staff",
+    "group": "reach",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Fighting with a reinforced staff — used as a weapon, a walking staff, and a focusing tool for attentional practice. Common elven choice.",
+    "examples": [
+      "Block and strike with a war staff",
+      "Use a war staff's reach in close quarters"
+    ]
+  },
+  {
+    "index": "shortbow",
+    "name": "Shortbow",
+    "group": "ranged",
     "primary_domain": "perception",
     "domain_note": null,
-    "description": "Reading the ambient magical field of a liminal or magically-dense environment — changes in air, sound, light, and living-signal species that indicate land health, disturbance, or approach.",
+    "description": "Firing a shortbow — lighter, faster, and shorter-ranged than a longbow; favored where mobility matters.",
     "examples": [
-      "Judging the Heartwood's current register (Standing Green, Turning, or Stillfall)",
-      "Noticing Hearthlight dimming before broader decline is visible",
-      "Reading approach through greymantle crow behavior"
+      "Fire a shortbow from horseback",
+      "Draw and loose a shortbow in close quarters"
     ]
   },
   {
-    "index": "living_records",
-    "name": "Living Records",
-    "group": "lore",
-    "primary_domain": "intellect",
+    "index": "longbow",
+    "name": "Longbow",
+    "group": "ranged",
+    "primary_domain": "perception",
     "domain_note": null,
-    "description": "Reading memory and history held in living form — grove landscapes, oathvine plantings, path-wear, house-tended trees, and other non-written records that long-memoried cultures use as archive.",
+    "description": "Firing a longbow — the primary elven and human long-range hand-powered bow, including the specialized Longbough variant.",
     "examples": [
-      "Reading the age and lineage of a noble house estate from its tended grove",
-      "Interpreting an oathvine's growth pattern as a record of family oaths",
-      "Recognizing a path's relational history from how its wear sits"
+      "Loose a longbow arrow at extreme range",
+      "Fire a Longbough bow in the Heartwood's defense"
     ]
   },
   {
-    "index": "kin_planting",
-    "name": "Kin-Planting",
-    "group": "craft",
-    "primary_domain": "intellect",
-    "domain_note": "May use will when the working is long-horizon rather than immediate.",
-    "description": "Cultivation practice based on mutual-support plant selection — canopy gardens, fungal-managed beds, companion pairings, and riparian patches — designed to strengthen the ecology rather than extract from it.",
+    "index": "sling",
+    "name": "Sling",
+    "group": "ranged",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Firing a sling — simple, cheap, effective at short-to-medium range with stones or lead bullets.",
     "examples": [
-      "Establishing a new canopy garden using companion pairings",
-      "Restoring a damaged bed by introducing a fungal partner",
-      "Selecting understory for a noble family's tended grove"
+      "Fire a sling stone at a charging target",
+      "Hunt small game with a sling"
     ]
   },
   {
-    "index": "oathwork",
-    "name": "Oathwork",
-    "group": "lore",
-    "primary_domain": "will",
-    "domain_note": "Presence may apply when the oath is public-facing rather than private.",
-    "description": "Ceremonial knowledge of oath-marking, witnessing, and release — the forms, timing, and relational structure by which binding commitments are made in oral cultures that treat the oath itself as the archive.",
+    "index": "light_crossbow",
+    "name": "Light Crossbow",
+    "group": "mechanical",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Firing a light crossbow — easier to draw and reload than a heavy crossbow, still delivering significant force.",
     "examples": [
-      "Preparing and administering an Oathbloom ceremony",
-      "Witnessing a Heartwarden oath in formal standing",
-      "Recognizing an oath's release conditions and when they are met"
+      "Fire and reload a light crossbow under pressure",
+      "Use a light crossbow from cover"
+    ]
+  },
+  {
+    "index": "heavy_crossbow",
+    "name": "Heavy Crossbow",
+    "group": "mechanical",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Firing a heavy crossbow — greater force and range than a light crossbow, but slower to reload and more cumbersome.",
+    "examples": [
+      "Loose a heavy crossbow bolt through plate",
+      "Brace a heavy crossbow for a long-range shot"
+    ]
+  },
+  {
+    "index": "blowgun",
+    "name": "Blowgun",
+    "group": "mechanical",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Firing a blowgun — a quiet, short-ranged mechanical projectile weapon, often used with specialized or poisoned darts.",
+    "examples": [
+      "Blow a poisoned dart at a sentry",
+      "Use a blowgun for silent hunting"
+    ]
+  },
+  {
+    "index": "net",
+    "name": "Net",
+    "group": "unconventional",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Fighting with a thrown or wielded net — primarily a restraint weapon, used to entangle and control rather than harm.",
+    "examples": [
+      "Cast a net over a fleeing target",
+      "Tangle a combatant's weapon with a net"
+    ]
+  },
+  {
+    "index": "chain",
+    "name": "Chain",
+    "group": "unconventional",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Fighting with a chain — an improvised or specialized weapon for striking, wrapping, and controlling an opponent's weapon or limbs.",
+    "examples": [
+      "Wrap a chain around an opponent's sword",
+      "Strike with a chain in a tight space"
+    ]
+  },
+  {
+    "index": "whip",
+    "name": "Whip",
+    "group": "unconventional",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Fighting with a whip — long-reach flexible striking weapon, useful for disarming, distracting, and applying targeted pain.",
+    "examples": [
+      "Disarm with a whip crack",
+      "Drive back a beast with a whip"
+    ]
+  },
+  {
+    "index": "padded",
+    "name": "Padded Armor",
+    "group": "light_armor",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Wearing padded armor — the lightest protective layer, providing minimal protection while preserving mobility.",
+    "examples": [
+      "Run and dodge in padded armor",
+      "Wear padded armor under other gear"
+    ]
+  },
+  {
+    "index": "leather",
+    "name": "Leather Armor",
+    "group": "light_armor",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Wearing leather armor — flexible, quiet, moderately protective; favored by rangers and scouts.",
+    "examples": [
+      "Move silently in leather",
+      "Shed leather armor quickly if swimming"
+    ]
+  },
+  {
+    "index": "studded_leather",
+    "name": "Studded Leather",
+    "group": "light_armor",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Wearing studded leather armor — reinforced with metal studs for greater protection at a small mobility cost.",
+    "examples": [
+      "Take a glancing blow on studded leather",
+      "Move through rough terrain in studded leather"
+    ]
+  },
+  {
+    "index": "hide",
+    "name": "Hide Armor",
+    "group": "light_armor",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Wearing hide armor — thick animal hides treated for protection; favored in wilderness cultures and primitive contexts.",
+    "examples": [
+      "Absorb a weapon strike on hide armor",
+      "Wear hide in cold weather for warmth and protection"
+    ]
+  },
+  {
+    "index": "chain_shirt",
+    "name": "Chain Shirt",
+    "group": "medium_armor",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Wearing a chain shirt — upper-body mail providing solid protection without full weight of chain mail.",
+    "examples": [
+      "Take a slash on chain shirt links",
+      "Advance in a chain shirt at moderate pace"
+    ]
+  },
+  {
+    "index": "scale_mail",
+    "name": "Scale Mail",
+    "group": "medium_armor",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Wearing scale mail — overlapping metal scales on backing, solid protection with acceptable mobility.",
+    "examples": [
+      "Hold a line in scale mail",
+      "Take repeated impacts on scale mail"
+    ]
+  },
+  {
+    "index": "breastplate",
+    "name": "Breastplate",
+    "group": "medium_armor",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Wearing a breastplate — rigid chest protection combined with lighter limb coverage.",
+    "examples": [
+      "Turn a sword thrust on a breastplate",
+      "Fight mounted in a breastplate"
+    ]
+  },
+  {
+    "index": "chain_mail",
+    "name": "Chain Mail",
+    "group": "medium_armor",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Wearing full chain mail — interlocking metal rings providing comprehensive protection at significant weight.",
+    "examples": [
+      "Advance in chain mail at battle pace",
+      "Take a slash on chain mail links"
+    ]
+  },
+  {
+    "index": "splint",
+    "name": "Splint Armor",
+    "group": "heavy_armor",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Wearing splint armor — vertical metal strips riveted to leather backing, strong protection approaching plate.",
+    "examples": [
+      "Hold a choke point in splint",
+      "Turn a heavy blow on splint armor"
+    ]
+  },
+  {
+    "index": "plate",
+    "name": "Plate Armor",
+    "group": "heavy_armor",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Wearing full plate armor — articulated metal plates covering the entire body, maximal protection at maximum weight.",
+    "examples": [
+      "Charge in plate armor",
+      "Absorb a mace blow on a plate cuirass"
+    ]
+  },
+  {
+    "index": "shield",
+    "name": "Shield",
+    "group": "shields",
+    "primary_domain": "power",
+    "domain_note": null,
+    "description": "Using a shield — blocking, parrying, bashing, and line-holding with any shield type. Specific size and type are narrative descriptors.",
+    "examples": [
+      "Catch an arrow on a shield",
+      "Shield-bash an opponent off balance"
+    ]
+  },
+  {
+    "index": "unarmored",
+    "name": "Unarmored",
+    "group": "unarmored",
+    "primary_domain": "agility",
+    "domain_note": null,
+    "description": "Fighting without armor — relying on mobility, evasion, and body awareness in place of protective gear.",
+    "examples": [
+      "Slip a strike by movement rather than protection",
+      "Fight freely without the burden of worn armor"
     ]
   }
 ]
