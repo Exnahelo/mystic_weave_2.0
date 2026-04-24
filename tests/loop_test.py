@@ -145,10 +145,10 @@ def part1(client: httpx.Client) -> str | None:
     check("1.1b.a", r.status_code == 200, f"GET /catalog/items → {r.status_code}")
     if r.status_code == 200:
         payload = r.json()
-        check("1.1b.b", set(payload.keys()) == {"mundane", "magical", "apparel", "weapons", "armor"}, f"catalog/items keys: {sorted(payload.keys())}")
-        magical_item_names = [item.get("name") for item in payload.get("magical", [])]
+        check("1.1b.b", set(payload.keys()) == {"mundane_items", "magical_items", "apparel_items"}, f"catalog/items keys: {sorted(payload.keys())}")
+        magical_item_names = [item.get("name") for item in payload.get("magical_items", [])]
         check("1.1b.c", ("Blessed Water" in magical_item_names) or ("Holy Water" in magical_item_names), "Blessed Water or Holy Water present in catalog magical")
-        apparel_item_names = [item.get("name") for item in payload.get("apparel", [])]
+        apparel_item_names = [item.get("name") for item in payload.get("apparel_items", [])]
         check("1.1b.d", "Common Clothes" in apparel_item_names, "Common Clothes present in catalog apparel")
 
     subsection("Test 1.2 — Seed test locations")
@@ -270,12 +270,11 @@ def part2(client: httpx.Client, session_id: str) -> None:
         check("2.1.i", isinstance(state["world"].get("companions"), list), f"companions persisted")
         check("2.1.j", isinstance(state["world"].get("economy"), dict), f"economy persisted")
         check("2.1.k", isinstance(state["world"].get("politics"), dict), f"politics persisted")
-
     subsection("Test 2.1b — Companion lifecycle")
-    options_resp = client.get("/catalog/creatures")
-    check("2.1b.a", options_resp.status_code == 200, f"GET /catalog/creatures for companion catalog → {options_resp.status_code}")
-    if options_resp.status_code == 200:
-        creature_catalog = options_resp.json().get("creatures", [])
+    catalog_resp = client.get("/catalog/creatures")
+    check("2.1b.a", catalog_resp.status_code == 200, f"GET /catalog/creatures → {catalog_resp.status_code}")
+    if catalog_resp.status_code == 200:
+        creature_catalog = catalog_resp.json().get("creature_catalog", [])
         wolf_template = next((c for c in creature_catalog if c.get("subspecies") == "moonthorn_wolf"), None)
         check("2.1b.b", wolf_template is not None, "moonthorn_wolf present in /catalog/creatures")
 

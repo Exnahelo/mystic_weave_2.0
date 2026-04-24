@@ -1,20 +1,17 @@
 """
-routes/catalog.py — Bulk reference data endpoints
+routes/catalog.py — GET /catalog/items, /catalog/creatures, /catalog/vocab
 
-GET /catalog/items     — item catalogs (mundane, magical, apparel, weapons, armor)
-GET /catalog/creatures — creature data and companion vocabulary
-GET /catalog/enums     — literal enum vocabularies for companion profiles
-
-These were previously bundled into /options but have been split out because
-/options is called at character creation and the catalog data was pushing
-the response past GPT tool-response size limits.
+Runtime lookup endpoints split out of /options. /options is reserved for
+character creation data (ancestries, cultures, focus, backgrounds). Catalog
+endpoints serve everything the GPT needs at runtime: item shops, creature
+references, companion vocab and enum literals.
 """
 
 from __future__ import annotations
 
-from typing import Any, get_args
+from typing import Any, Literal, get_args
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 
 from api.companions import (
     AgeCategory,
@@ -30,7 +27,6 @@ from api.companions import (
 )
 from api.game_data import (
     list_apparel_items,
-    list_armor,
     list_creature_catalog,
     list_exceptional_catalog,
     list_learned_commands,
@@ -38,11 +34,10 @@ from api.game_data import (
     list_mundane_items,
     list_natural_abilities,
     list_tactical_roles,
-    list_weapons,
 )
 from api.models import (
+    CompanionVocabResponse,
     CreatureCatalogResponse,
-    EnumsResponse,
     ItemCatalogResponse,
     ItemOption,
 )
@@ -50,38 +45,75 @@ from api.models import (
 router = APIRouter()
 
 
+ItemKind = Literal["mundane", "magical", "apparel"]
+
+
 def _literal_values(literal_type: Any) -> list[str]:
     return list(get_args(literal_type))
 
 
-@router.get("/catalog/items", response_model=ItemCatalogResponse, tags=["catalog"])
-async def get_items_catalog() -> ItemCatalogResponse:
-    """Return all item reference data grouped by category."""
+@router.get(
+    "/catalog/items",
+    response_model=ItemCatalogResponse,
+    tags=["catalog"],
+)
+async def get_item_catalog(
+    kind: ItemKind | None = Query(
+        default=None,
+        description="Filter to a single catalog: mundane, magical, or apparel. Omit to return all three.",
+    ),
+) -> ItemCatalogResponse:
+    """
+    Return runtime item catalogs.
+
+    Omit `kind` for all three lists, or pass mundane, magical, or apparel.
+    """
+    mundane: list[ItemOption] = []
+    magical: list[ItemOption] = []
+    apparel: list[ItemOption] = []
+
+    if kind in (None, "mundane"):
+        mundane = [ItemOption(**item) for item in list_mundane_items()]
+    if kind in (None, "magical"):
+        magical = [ItemOption(**item) for item in list_magical_items()]
+    if kind in (None, "apparel"):
+        apparel = [ItemOption(**item) for item in list_apparel_items()]
+
     return ItemCatalogResponse(
-        mundane=[ItemOption(**item) for item in list_mundane_items()],
-        magical=[ItemOption(**item) for item in list_magical_items()],
-        apparel=[ItemOption(**item) for item in list_apparel_items()],
-        weapons=[ItemOption(**item) for item in list_weapons()],
-        armor=[ItemOption(**item) for item in list_armor()],
+        mundane_items=mundane,
+        magical_items=magical,
+        apparel_items=apparel,
     )
 
 
-@router.get("/catalog/creatures", response_model=CreatureCatalogResponse, tags=["catalog"])
-async def get_creatures_catalog() -> CreatureCatalogResponse:
-    """Return creature catalog, exceptional catalog, and companion vocabulary."""
+@router.get(
+    "/catalog/creatures",
+    response_model=CreatureCatalogResponse,
+    tags=["catalog"],
+)
+async def get_creature_catalog() -> CreatureCatalogResponse:
+    """
+    Return creature and exceptional companion catalogs.
+    """
     return CreatureCatalogResponse(
-        creatures=list_creature_catalog(),
-        exceptional=list_exceptional_catalog(),
+        creature_catalog=list_creature_catalog(),
+        exceptional_catalog=list_exceptional_catalog(),
+    )
+
+
+@router.get(
+    "/catalog/vocab",
+    response_model=CompanionVocabResponse,
+    tags=["catalog"],
+)
+async def get_companion_vocab() -> CompanionVocabResponse:
+    """
+    Return companion vocab lists and enum literals.
+    """
+    return CompanionVocabResponse(
         natural_abilities=list_natural_abilities(),
         learned_commands=list_learned_commands(),
         tactical_roles=list_tactical_roles(),
-    )
-
-
-@router.get("/catalog/enums", response_model=EnumsResponse, tags=["catalog"])
-async def get_enums() -> EnumsResponse:
-    """Return literal enum vocabularies used in companion and creature profiles."""
-    return EnumsResponse(
         training_levels=_literal_values(TrainingLevel),
         bond_levels=_literal_values(BondLevel),
         age_categories=_literal_values(AgeCategory),

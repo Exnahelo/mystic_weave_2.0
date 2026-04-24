@@ -89,7 +89,7 @@ Extraction must emit changed fields only (no full-state regeneration).
 
 ### Economy Runtime Checkpoint
 
-- Follow `prompts/economy-rules.md`; ground buy/find inventory in `GET /options`; keep `world.economy.coin >= 0`; persist coin as CD (`GD × 100`); barter updates `trade_goods`/`obligations`; change `wealth_tier` only for material shifts.
+- Follow `prompts/economy-rules.md`; ground buy/find inventory in `GET /catalog/items`; keep `world.economy.coin >= 0`; persist coin as CD (`GD × 100`); barter updates `trade_goods`/`obligations`; change `wealth_tier` only for material shifts.
 
 ### Survival Runtime Checkpoint
 
@@ -133,5 +133,5 @@ Never list options from memory; call `GET /options` and present returned values 
 
 ## API Reference
 
-- GET `/options`, `/state/{session_id}`, `/scene/{session_id}`, `/location/{location_id}`, `/location/{location_id}/connections`
+- GET `/options`, `/catalog/items`, `/catalog/creatures`, `/catalog/vocab`, `/state/{session_id}`, `/scene/{session_id}`, `/location/{location_id}`, `/location/{location_id}/connections`
 - POST `/state/{session_id}`, `/state/{session_id}/delta`, `/roll`, `/location`, `/session/new`, `/character/create`

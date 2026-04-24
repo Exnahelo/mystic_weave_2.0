@@ -45,14 +45,43 @@ def test_openapi_contract_has_expected_core_shapes() -> None:
     options_props = spec["components"]["schemas"]["OptionsResponse"]["properties"]
     assert sorted(options_props) == ["ancestries", "backgrounds", "cultures", "focus"]
 
-    assert spec["paths"]["/catalog/items"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["$ref"] == "#/components/schemas/ItemCatalogResponse"
-    assert spec["paths"]["/catalog/creatures"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["$ref"] == "#/components/schemas/CreatureCatalogResponse"
-    assert spec["paths"]["/catalog/enums"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["$ref"] == "#/components/schemas/EnumsResponse"
+    item_catalog_schema = spec["paths"]["/catalog/items"]["get"]["responses"]["200"][
+        "content"
+    ]["application/json"]["schema"]
+    assert item_catalog_schema["$ref"] == "#/components/schemas/ItemCatalogResponse"
 
-    schemas = spec["components"]["schemas"]
-    assert "ItemCatalogResponse" in schemas
-    assert "CreatureCatalogResponse" in schemas
-    assert "EnumsResponse" in schemas
+    creature_catalog_schema = spec["paths"]["/catalog/creatures"]["get"]["responses"][
+        "200"
+    ]["content"]["application/json"]["schema"]
+    assert creature_catalog_schema["$ref"] == "#/components/schemas/CreatureCatalogResponse"
+
+    vocab_schema = spec["paths"]["/catalog/vocab"]["get"]["responses"]["200"][
+        "content"
+    ]["application/json"]["schema"]
+    assert vocab_schema["$ref"] == "#/components/schemas/CompanionVocabResponse"
+
+    item_catalog_props = spec["components"]["schemas"]["ItemCatalogResponse"]["properties"]
+    assert sorted(item_catalog_props) == ["apparel_items", "magical_items", "mundane_items"]
+
+    creature_catalog_props = spec["components"]["schemas"]["CreatureCatalogResponse"]["properties"]
+    assert sorted(creature_catalog_props) == ["creature_catalog", "exceptional_catalog"]
+
+    vocab_props = spec["components"]["schemas"]["CompanionVocabResponse"]["properties"]
+    assert sorted(vocab_props) == [
+        "age_categories",
+        "autonomy_levels",
+        "bond_levels",
+        "carrying_capacities",
+        "communication_levels",
+        "creature_sizes",
+        "learned_commands",
+        "movement_modes",
+        "natural_abilities",
+        "natural_weapons",
+        "sapience_levels",
+        "tactical_roles",
+        "training_levels",
+    ]
 
     session_new_201 = spec["paths"]["/session/new"]["post"]["responses"]["201"][
         "content"

@@ -331,15 +331,12 @@ paths:
       tags:
       - options
       summary: Get Options
-      description: 'Return character creation options: ancestries, cultures, focus,
-        backgrounds.
+      description: 'Return creation options only: ancestries, cultures, focus, backgrounds.
 
 
-        Call this before asking the player to choose ancestry, culture, focus, or
+        Use this at character creation. Do not invent or enumerate choices from
 
-        background. Only present options returned by this endpoint — never
-
-        enumerate from memory or from prompt files.'
+        memory. Runtime catalogs live under /catalog/*.'
       operationId: get_options_options_get
       responses:
         '200':
@@ -352,9 +349,29 @@ paths:
     get:
       tags:
       - catalog
-      summary: Get Items Catalog
-      description: Return all item reference data grouped by category.
-      operationId: get_items_catalog_catalog_items_get
+      summary: Get Item Catalog
+      description: 'Return runtime item catalogs.
+
+
+        Omit `kind` for all three lists, or pass mundane, magical, or apparel.'
+      operationId: get_item_catalog_catalog_items_get
+      parameters:
+      - name: kind
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - enum:
+            - mundane
+            - magical
+            - apparel
+            type: string
+          - type: 'null'
+          description: 'Filter to a single catalog: mundane, magical, or apparel.
+            Omit to return all three.'
+          title: Kind
+        description: 'Filter to a single catalog: mundane, magical, or apparel. Omit
+          to return all three.'
       responses:
         '200':
           description: Successful Response
@@ -362,13 +379,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ItemCatalogResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /catalog/creatures:
     get:
       tags:
       - catalog
-      summary: Get Creatures Catalog
-      description: Return creature catalog, exceptional catalog, and companion vocabulary.
-      operationId: get_creatures_catalog_catalog_creatures_get
+      summary: Get Creature Catalog
+      description: Return creature and exceptional companion catalogs.
+      operationId: get_creature_catalog_catalog_creatures_get
       responses:
         '200':
           description: Successful Response
@@ -376,21 +399,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreatureCatalogResponse'
-  /catalog/enums:
+  /catalog/vocab:
     get:
       tags:
       - catalog
-      summary: Get Enums
-      description: Return literal enum vocabularies used in companion and creature
-        profiles.
-      operationId: get_enums_catalog_enums_get
+      summary: Get Companion Vocab
+      description: Return companion vocab lists and enum literals.
+      operationId: get_companion_vocab_catalog_vocab_get
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EnumsResponse'
+                $ref: '#/components/schemas/CompanionVocabResponse'
   /scene/{session_id}:
     get:
       summary: Get Scene Context
@@ -1229,6 +1251,79 @@ components:
       - companion_id
       - companion
       title: CompanionResponse
+    CompanionVocabResponse:
+      properties:
+        natural_abilities:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Natural Abilities
+        learned_commands:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Learned Commands
+        tactical_roles:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Tactical Roles
+        training_levels:
+          items:
+            type: string
+          type: array
+          title: Training Levels
+        bond_levels:
+          items:
+            type: string
+          type: array
+          title: Bond Levels
+        age_categories:
+          items:
+            type: string
+          type: array
+          title: Age Categories
+        creature_sizes:
+          items:
+            type: string
+          type: array
+          title: Creature Sizes
+        carrying_capacities:
+          items:
+            type: string
+          type: array
+          title: Carrying Capacities
+        movement_modes:
+          items:
+            type: string
+          type: array
+          title: Movement Modes
+        natural_weapons:
+          items:
+            type: string
+          type: array
+          title: Natural Weapons
+        sapience_levels:
+          items:
+            type: string
+          type: array
+          title: Sapience Levels
+        communication_levels:
+          items:
+            type: string
+          type: array
+          title: Communication Levels
+        autonomy_levels:
+          items:
+            type: string
+          type: array
+          title: Autonomy Levels
+      type: object
+      title: CompanionVocabResponse
+      description: Response for GET /catalog/vocab.
     ComputeMaxHpRequest:
       properties:
         armor_id:
@@ -1420,40 +1515,21 @@ components:
       title: CreateCompanionRequest
     CreatureCatalogResponse:
       properties:
-        creatures:
+        creature_catalog:
           items:
             additionalProperties: true
             type: object
           type: array
-          title: Creatures
-        exceptional:
+          title: Creature Catalog
+        exceptional_catalog:
           items:
             additionalProperties: true
             type: object
           type: array
-          title: Exceptional
-        natural_abilities:
-          items:
-            additionalProperties: true
-            type: object
-          type: array
-          title: Natural Abilities
-        learned_commands:
-          items:
-            additionalProperties: true
-            type: object
-          type: array
-          title: Learned Commands
-        tactical_roles:
-          items:
-            additionalProperties: true
-            type: object
-          type: array
-          title: Tactical Roles
+          title: Exceptional Catalog
       type: object
       title: CreatureCatalogResponse
-      description: Response for GET /catalog/creatures — creature and companion reference
-        data.
+      description: Response for GET /catalog/creatures.
     CreatureCompanion:
       properties:
         tier:
@@ -1957,61 +2033,6 @@ components:
       type: object
       title: EconomyDelta
       description: Sparse economy update for delta application.
-    EnumsResponse:
-      properties:
-        training_levels:
-          items:
-            type: string
-          type: array
-          title: Training Levels
-        bond_levels:
-          items:
-            type: string
-          type: array
-          title: Bond Levels
-        age_categories:
-          items:
-            type: string
-          type: array
-          title: Age Categories
-        creature_sizes:
-          items:
-            type: string
-          type: array
-          title: Creature Sizes
-        carrying_capacities:
-          items:
-            type: string
-          type: array
-          title: Carrying Capacities
-        movement_modes:
-          items:
-            type: string
-          type: array
-          title: Movement Modes
-        natural_weapons:
-          items:
-            type: string
-          type: array
-          title: Natural Weapons
-        sapience_levels:
-          items:
-            type: string
-          type: array
-          title: Sapience Levels
-        communication_levels:
-          items:
-            type: string
-          type: array
-          title: Communication Levels
-        autonomy_levels:
-          items:
-            type: string
-          type: array
-          title: Autonomy Levels
-      type: object
-      title: EnumsResponse
-      description: Response for GET /catalog/enums — literal enum vocabularies.
     Equipment-Input:
       properties:
         worn:
@@ -3145,34 +3166,24 @@ components:
         All fields optional at creation — can be filled in as play reveals them.'
     ItemCatalogResponse:
       properties:
-        mundane:
+        mundane_items:
           items:
             $ref: '#/components/schemas/ItemOption'
           type: array
-          title: Mundane
-        magical:
+          title: Mundane Items
+        magical_items:
           items:
             $ref: '#/components/schemas/ItemOption'
           type: array
-          title: Magical
-        apparel:
+          title: Magical Items
+        apparel_items:
           items:
             $ref: '#/components/schemas/ItemOption'
           type: array
-          title: Apparel
-        weapons:
-          items:
-            $ref: '#/components/schemas/ItemOption'
-          type: array
-          title: Weapons
-        armor:
-          items:
-            $ref: '#/components/schemas/ItemOption'
-          type: array
-          title: Armor
+          title: Apparel Items
       type: object
       title: ItemCatalogResponse
-      description: Response for GET /catalog/items — all item reference data.
+      description: Response for GET /catalog/items.
     ItemOption:
       properties:
         id:
@@ -3489,7 +3500,14 @@ components:
       - focus
       - backgrounds
       title: OptionsResponse
-      description: Response for GET /options — character creation reference only.
+      description: 'Response for GET /options — creation-scope enumeration.
+
+
+        Only ancestries, cultures, focus archetypes, and backgrounds live here.
+
+        Runtime catalogs are served by /catalog/items, /catalog/creatures,
+
+        /catalog/vocab.'
     PacingState:
       properties:
         tension:

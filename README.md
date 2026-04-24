@@ -61,9 +61,11 @@ Reference: `world-topology-baseline.md`
 
 ## v4.2.0 Changelog
 
-- Added `POST /combat/compute_max_hp` for pre-combat HP calculation from armor + shield
-- Added `POST /combat/resolve_attack` for atomic Combat v1.0 attack resolution
-- Added `combat_rules_fingerprint` to `GET /version` for combat-rules drift detection
+- Split `/options` into creation-scope data + three runtime catalog endpoints
+  (`/catalog/items`, `/catalog/creatures`, `/catalog/vocab`). Resolves
+  ChatGPT Action response-size cap hit on character creation.
+- `OptionsResponse` is now a breaking shape change: only
+  `ancestries, cultures, focus, backgrounds` remain.
 
 ## v4.1.0 Changelog
 
@@ -78,7 +80,10 @@ Reference: `world-topology-baseline.md`
 |---|---|---|
 | GET | `/health` | Health check |
 | GET | `/version` | Build metadata, data fingerprint, combat rules fingerprint, option counts |
-| GET | `/options` | Enumerate species, focus, background options |
+| GET | `/options` | Enumerate ancestries, cultures, focus, backgrounds (creation scope) |
+| GET | `/catalog/items` | Item catalogs (mundane, magical, apparel) |
+| GET | `/catalog/creatures` | Creature + exceptional companion catalogs |
+| GET | `/catalog/vocab` | Companion vocab and enum literals |
 | GET | `/tags` | Enumerate knowledge groups, magic fields, and applications |
 | POST | `/session/new` | Create new session and character |
 | POST | `/character/create` | Re-seed character into existing session |
@@ -102,6 +107,7 @@ api/
   game_data.py         # Game system data loader + seed_character
   database.py          # asyncpg pool management
   routes/
+    catalog.py         # GET /catalog/items + /catalog/creatures + /catalog/vocab
     character.py       # POST /character/create
     combat.py          # POST /combat/compute_max_hp + POST /combat/resolve_attack
     location.py        # GET/POST /location

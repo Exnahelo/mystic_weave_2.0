@@ -66,36 +66,28 @@ def main() -> None:
         options = client.get("/options")
         expect_status(options, 200, "GET /options")
         opts = options.json()
-        expected_option_keys = {
-            "ancestries",
-            "cultures",
-            "focus",
-            "backgrounds",
-            "mundane_items",
-            "magical_items",
-            "apparel_items",
-            "creature_catalog",
-            "exceptional_catalog",
-            "natural_abilities",
-            "learned_commands",
-            "tactical_roles",
-            "training_levels",
-            "bond_levels",
-            "age_categories",
-            "creature_sizes",
-            "carrying_capacities",
-            "movement_modes",
-            "natural_weapons",
-            "sapience_levels",
-            "communication_levels",
-            "autonomy_levels",
-        }
+        expected_option_keys = {"ancestries", "cultures", "focus", "backgrounds"}
         if set(opts.keys()) != expected_option_keys:
             fail(f"GET /options: unexpected key set {sorted(opts.keys())}")
 
-        wolf_template = next((c for c in opts.get("creature_catalog", []) if c.get("subspecies") == "moonthorn_wolf"), None)
+        creatures = client.get("/catalog/creatures")
+        expect_status(creatures, 200, "GET /catalog/creatures")
+        catalog = creatures.json()
+        wolf_template = next(
+            (c for c in catalog.get("creature_catalog", []) if c.get("subspecies") == "moonthorn_wolf"),
+            None,
+        )
         if wolf_template is None:
-            fail("GET /options: moonthorn_wolf missing from creature_catalog")
+            fail("GET /catalog/creatures: moonthorn_wolf missing from creature_catalog")
+
+        items = client.get("/catalog/items")
+        expect_status(items, 200, "GET /catalog/items")
+        item_keys = set(items.json().keys())
+        if item_keys != {"mundane_items", "magical_items", "apparel_items"}:
+            fail(f"GET /catalog/items: unexpected key set {sorted(item_keys)}")
+
+        vocab = client.get("/catalog/vocab")
+        expect_status(vocab, 200, "GET /catalog/vocab")
 
         # Location create/update semantics
         alpha = {

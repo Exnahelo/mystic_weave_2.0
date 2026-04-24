@@ -282,7 +282,7 @@ One level of nesting. No deeper.
    confirm its tier. The tier dictates which fields exist and how
    the companion should be narrated.
 2. **Do not fabricate catalog content.** Reference
-   `data/beasts/creatures.json` via `GET /options` for creature
+   `data/beasts/creatures.json` via `GET /catalog/creatures` for creature
    species and subspecies. Do not invent subspecies that are not
    in the catalog.
 3. **Do not fabricate natural abilities or learned commands.** Use
