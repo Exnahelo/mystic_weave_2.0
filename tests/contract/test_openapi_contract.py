@@ -83,6 +83,19 @@ def test_openapi_contract_has_expected_core_shapes() -> None:
         "training_levels",
     ]
 
+    npcs_schema = spec["paths"]["/npcs"]["get"]["responses"]["200"][
+        "content"
+    ]["application/json"]["schema"]
+    assert npcs_schema["$ref"] == "#/components/schemas/NpcRegistryResponse"
+
+    npcs_response_props = spec["components"]["schemas"]["NpcRegistryResponse"]["properties"]
+    assert "entries" in npcs_response_props
+    assert "count" in npcs_response_props
+
+    npcs_entry_props = spec["components"]["schemas"]["NpcRegistryEntry"]["properties"]
+    assert "id" in npcs_entry_props
+    assert "name" in npcs_entry_props
+
     session_new_201 = spec["paths"]["/session/new"]["post"]["responses"]["201"][
         "content"
     ]["application/json"]["schema"]

@@ -571,9 +571,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties: true
-                title: Response Get Npcs Npcs Get
+                $ref: '#/components/schemas/NpcRegistryResponse'
         '422':
           description: Validation Error
           content:
@@ -3471,6 +3469,125 @@ components:
       - character
       - world
       title: NewSessionResponse
+    NpcRegistryEntry:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        tier:
+          type: integer
+          title: Tier
+        age:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Age
+        house_affiliation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: House Affiliation
+        current_location:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Current Location
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+        disposition:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Disposition
+        role_summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Role Summary
+        voice:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Voice
+        narrative_anchors:
+          items:
+            type: string
+          type: array
+          title: Narrative Anchors
+        tags:
+          items:
+            type: string
+          type: array
+          title: Tags
+        description:
+          type: string
+          title: Description
+          default: ''
+        scene_guidance:
+          type: string
+          title: Scene Guidance
+          default: ''
+        role_scope:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Role Scope
+        typical_context:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Typical Context
+        register:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Register
+        authority_scope:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authority Scope
+        common_scene_functions:
+          items:
+            type: string
+          type: array
+          title: Common Scene Functions
+        generation_guidance:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Generation Guidance
+      additionalProperties: true
+      type: object
+      required:
+      - id
+      - name
+      - tier
+      title: NpcRegistryEntry
+      description: A single NPC registry entry loaded from data/npcs/.
+    NpcRegistryResponse:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/NpcRegistryEntry'
+          type: array
+          title: Entries
+        count:
+          type: integer
+          title: Count
+          default: 0
+      additionalProperties: true
+      type: object
+      required:
+      - entries
+      title: NpcRegistryResponse
+      description: Response for GET /npcs.
     OptionsResponse:
       properties:
         ancestries:

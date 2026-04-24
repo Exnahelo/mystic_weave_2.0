@@ -877,6 +877,40 @@ class ApplicationEntry(BaseModel):
     examples: list[str] = Field(default_factory=list)
 
 
+class NpcRegistryEntry(BaseModel):
+    """A single NPC registry entry loaded from data/npcs/."""
+    model_config = ConfigDict(extra="allow", populate_by_name=True)
+
+    id: str
+    name: str
+    tier: int
+    age: int | None = None
+    house_affiliation: str | None = None
+    current_location: str | None = None
+    status: str | None = None
+    disposition: str | None = None
+    role_summary: str | None = None
+    voice: str | None = None
+    narrative_anchors: list[str] = Field(default_factory=list)
+    tags: list[str] = Field(default_factory=list)
+    description: str = ""
+    scene_guidance: str = ""
+    role_scope: str | None = None
+    typical_context: str | None = None
+    register_text: str | None = Field(default=None, alias="register", serialization_alias="register")
+    authority_scope: str | None = None
+    common_scene_functions: list[str] = Field(default_factory=list)
+    generation_guidance: str | None = None
+
+
+class NpcRegistryResponse(BaseModel):
+    """Response for GET /npcs."""
+    model_config = ConfigDict(extra="allow")
+
+    entries: list[NpcRegistryEntry]
+    count: int = 0
+
+
 class OptionsResponse(BaseModel):
     """
     Response for GET /options — creation-scope enumeration.
