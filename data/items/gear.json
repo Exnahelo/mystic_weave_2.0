@@ -1403,7 +1403,7 @@
       "fishing",
       "trapping"
     ],
-    "roll_tag": "grappling",
+    "roll_tag": "martial_grappling",
     "tool_role": "permission",
     "consumable": false,
     "charges": null,
@@ -1424,7 +1424,7 @@
       "restraint",
       "secure"
     ],
-    "roll_tag": "grappling",
+    "roll_tag": "martial_grappling",
     "tool_role": "permission",
     "consumable": false,
     "charges": null,
