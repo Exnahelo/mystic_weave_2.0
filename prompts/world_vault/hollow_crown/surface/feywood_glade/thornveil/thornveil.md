@@ -224,7 +224,7 @@ The Council of Elders is referenced throughout but is a distributed body rather 
 
 The Greenshield Commander and Heartwarden Captain are Tier-3 generative roles specific to this city. Both are senior institutional positions held by specific elves at any given time; specific individuals can be instantiated when narrative requires.
 
-The five functional zones (Heartwood Approach, Noble Groves, Common Hearth, Crafthall, Outer Bounds) are canonically established. GPT scenes in Thornveil should reference the appropriate zone based on what the narrative requires. The zones are NOT authored as separate location nodes; they are internal structural features of Thornveil.
+The five functional zones (Heartwood Approach, Noble Groves, Common Hearth, Crafthall, Outer Bounds) are canonically established as Thornveil's internal organization and are each authored as their own navigable location nodes under `thornveil/`. Thornveil itself remains the city-level node; scenes that stay at the city register stay in this file. Scenes that move meaningfully into a specific zone may use the district node directly for tighter framing, NPC placement, and scene logic.
 
 The coming-of-age trial tradition is canonically established here, elaborating on the framing in Feywood Glade region-zone authoring. Roughly a dozen noble families hold the tradition. Character backstory involving such trials is narratively rich for any elven character with noble-family origin.
 
