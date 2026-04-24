@@ -3,72 +3,193 @@
     "index": "soldier",
     "name": "Soldier",
     "description": "Military service, structured discipline, combat under orders.",
-    "domain_bonuses": {"power": 4, "agility": 0, "perception": 0, "endurance": 3, "intellect": 0, "will": 3, "presence": 0},
-    "knowledge_tags": {"discipline": 1},
-    "application_tags": {"intimidation_posture": 1, "privation_endurance": 1, "melee": 1},
+    "domain_bonuses": {
+      "power": 4,
+      "agility": 0,
+      "perception": 0,
+      "endurance": 3,
+      "intellect": 0,
+      "will": 3,
+      "presence": 0
+    },
+    "knowledge_tags": {
+      "discipline": 1,
+      "melee": 1
+    },
+    "application_tags": {
+      "intimidation_posture": 1,
+      "privation_endurance": 1
+    },
     "field_tags": {}
   },
   {
     "index": "scholar",
     "name": "Scholar",
     "description": "Academic upbringing — libraries, labs, formal study.",
-    "domain_bonuses": {"power": 0, "agility": 0, "perception": 2, "endurance": 0, "intellect": 5, "will": 3, "presence": 0},
-    "knowledge_tags": {"arcana": 1},
-    "application_tags": {"history": 1, "linguistics": 1, "pharmacology": 1},
+    "domain_bonuses": {
+      "power": 0,
+      "agility": 0,
+      "perception": 2,
+      "endurance": 0,
+      "intellect": 5,
+      "will": 3,
+      "presence": 0
+    },
+    "knowledge_tags": {
+      "arcana": 1
+    },
+    "application_tags": {
+      "history": 1,
+      "linguistics": 1,
+      "pharmacology": 1
+    },
     "field_tags": {}
   },
   {
     "index": "criminal",
     "name": "Criminal",
     "description": "Street life, underground economy, work unseen.",
-    "domain_bonuses": {"power": 0, "agility": 4, "perception": 3, "endurance": 0, "intellect": 0, "will": 0, "presence": 3},
-    "knowledge_tags": {"skulduggery": 1, "stealth": 1},
-    "application_tags": {"sleight_of_hand": 1, "shadowing": 1, "deception": 1, "lockpicking_traps": 1},
+    "domain_bonuses": {
+      "power": 0,
+      "agility": 4,
+      "perception": 3,
+      "endurance": 0,
+      "intellect": 0,
+      "will": 0,
+      "presence": 3
+    },
+    "knowledge_tags": {
+      "skulduggery": 1,
+      "stealth": 1
+    },
+    "application_tags": {
+      "sleight_of_hand": 1,
+      "shadowing": 1,
+      "deception": 1,
+      "lockpicking_traps": 1
+    },
     "field_tags": {}
   },
   {
     "index": "noble",
     "name": "Noble",
     "description": "Privilege, courts, political education, expectation of command.",
-    "domain_bonuses": {"power": 0, "agility": 0, "perception": 0, "endurance": 0, "intellect": 3, "will": 3, "presence": 4},
-    "knowledge_tags": {"influence": 1, "lore": 1},
-    "application_tags": {"diplomacy": 1, "command": 1, "history": 1, "musical_instruments": 1},
+    "domain_bonuses": {
+      "power": 0,
+      "agility": 0,
+      "perception": 0,
+      "endurance": 0,
+      "intellect": 3,
+      "will": 3,
+      "presence": 4
+    },
+    "knowledge_tags": {
+      "influence": 1,
+      "lore": 1
+    },
+    "application_tags": {
+      "diplomacy": 1,
+      "command": 1,
+      "history": 1,
+      "musical_instruments": 1
+    },
     "field_tags": {}
   },
   {
     "index": "outlander",
     "name": "Outlander",
     "description": "Wilderness upbringing, self-reliance, far from settled life.",
-    "domain_bonuses": {"power": 0, "agility": 3, "perception": 3, "endurance": 4, "intellect": 0, "will": 0, "presence": 0},
-    "knowledge_tags": {"survival": 1, "tracking": 1},
-    "application_tags": {"ecology": 1, "animal_handling": 1, "riding_posture": 1},
+    "domain_bonuses": {
+      "power": 0,
+      "agility": 3,
+      "perception": 3,
+      "endurance": 4,
+      "intellect": 0,
+      "will": 0,
+      "presence": 0
+    },
+    "knowledge_tags": {
+      "survival": 1,
+      "tracking": 1
+    },
+    "application_tags": {
+      "ecology": 1,
+      "animal_handling": 1,
+      "riding_posture": 1
+    },
     "field_tags": {}
   },
   {
     "index": "artisan",
     "name": "Artisan",
     "description": "Trade skills, craftsmanship, practical knowledge of making.",
-    "domain_bonuses": {"power": 0, "agility": 2, "perception": 2, "endurance": 3, "intellect": 3, "will": 0, "presence": 0},
-    "knowledge_tags": {"engineering": 1, "medicine": 1, "investigation": 1},
-    "application_tags": {"pharmacology": 1},
+    "domain_bonuses": {
+      "power": 0,
+      "agility": 2,
+      "perception": 2,
+      "endurance": 3,
+      "intellect": 3,
+      "will": 0,
+      "presence": 0
+    },
+    "knowledge_tags": {
+      "engineering": 1,
+      "medicine": 1,
+      "investigation": 1
+    },
+    "application_tags": {
+      "pharmacology": 1
+    },
     "field_tags": {}
   },
   {
     "index": "acolyte",
     "name": "Acolyte",
     "description": "Temple-raised, spiritual foundation, formal devotional practice.",
-    "domain_bonuses": {"power": 0, "agility": 0, "perception": 0, "endurance": 0, "intellect": 3, "will": 4, "presence": 3},
-    "knowledge_tags": {"discipline": 1, "lore": 1},
-    "application_tags": {"meditation": 1, "courage": 1, "history": 1, "ritual_structure": 1},
-    "field_tags": {"sacred": 1}
+    "domain_bonuses": {
+      "power": 0,
+      "agility": 0,
+      "perception": 0,
+      "endurance": 0,
+      "intellect": 3,
+      "will": 4,
+      "presence": 3
+    },
+    "knowledge_tags": {
+      "discipline": 1,
+      "lore": 1
+    },
+    "application_tags": {
+      "meditation": 1,
+      "courage": 1,
+      "history": 1,
+      "ritual_structure": 1
+    },
+    "field_tags": {
+      "sacred": 1
+    }
   },
   {
     "index": "performer",
     "name": "Performer",
     "description": "Entertainer, traveler, social chameleon, stage-polished.",
-    "domain_bonuses": {"power": 0, "agility": 3, "perception": 2, "endurance": 0, "intellect": 0, "will": 0, "presence": 5},
-    "knowledge_tags": {"performance": 1},
-    "application_tags": {"deception": 1, "tell_reading": 1, "disguise_forgery": 1},
+    "domain_bonuses": {
+      "power": 0,
+      "agility": 3,
+      "perception": 2,
+      "endurance": 0,
+      "intellect": 0,
+      "will": 0,
+      "presence": 5
+    },
+    "knowledge_tags": {
+      "performance": 1
+    },
+    "application_tags": {
+      "deception": 1,
+      "tell_reading": 1,
+      "disguise_forgery": 1
+    },
     "field_tags": {}
   }
 ]

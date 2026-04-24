@@ -4,8 +4,15 @@
     "name": "Champion",
     "description": "Front-line fighter — direct combat, physical dominance.",
     "signature_tag": "athletics",
-    "knowledge_tags": {"athletics": 2},
-    "application_tags": {"brawling": 1, "resolve": 1, "melee": 1, "grappling": 1},
+    "knowledge_tags": {
+      "athletics": 2,
+      "martial_arts": 1,
+      "melee": 1
+    },
+    "application_tags": {
+      "resolve": 1,
+      "martial_grappling": 1
+    },
     "field_tags": {}
   },
   {
@@ -13,8 +20,18 @@
     "name": "Sentinel",
     "description": "Protector — holds the line, shields allies, absorbs pressure.",
     "signature_tag": "discipline",
-    "knowledge_tags": {"discipline": 2},
-    "application_tags": {"courage": 2, "fear_mastery": 1, "resolve": 1, "shields": 1, "heavy_armor": 1, "melee": 1, "reach": 1},
+    "knowledge_tags": {
+      "discipline": 2,
+      "shields": 1,
+      "heavy_armor": 1,
+      "melee": 1,
+      "reach": 1
+    },
+    "application_tags": {
+      "courage": 2,
+      "fear_mastery": 1,
+      "resolve": 1
+    },
     "field_tags": {}
   },
   {
@@ -22,8 +39,16 @@
     "name": "Stalker",
     "description": "Ambush specialist — infiltration, precision, unseen strike.",
     "signature_tag": "stealth",
-    "knowledge_tags": {"stealth": 2, "investigation": 1},
-    "application_tags": {"evasion": 1, "brawling": 1, "lockpicking_traps": 1, "unconventional": 1},
+    "knowledge_tags": {
+      "stealth": 2,
+      "investigation": 1,
+      "martial_arts": 1,
+      "unconventional": 1
+    },
+    "application_tags": {
+      "evasion": 1,
+      "lockpicking_traps": 1
+    },
     "field_tags": {}
   },
   {
@@ -31,8 +56,16 @@
     "name": "Wayfinder",
     "description": "Explorer, survivalist, tracker — reads the land.",
     "signature_tag": "survival",
-    "knowledge_tags": {"survival": 2, "tracking": 1},
-    "application_tags": {"ecology": 1, "ranged": 1, "riding_posture": 1, "mechanical": 1},
+    "knowledge_tags": {
+      "survival": 2,
+      "tracking": 1,
+      "ranged": 1,
+      "mechanical": 1
+    },
+    "application_tags": {
+      "ecology": 1,
+      "riding_posture": 1
+    },
     "field_tags": {}
   },
   {
@@ -40,26 +73,53 @@
     "name": "Arcanist",
     "description": "Arcane scholar — magical theory applied to inscribed and researched magic.",
     "signature_tag": "arcana",
-    "knowledge_tags": {"arcana": 2, "engineering": 1},
-    "application_tags": {"history": 1, "theory": 1},
-    "field_tags": {"runecraft": 1, "alchemy": 1}
+    "knowledge_tags": {
+      "arcana": 2,
+      "engineering": 1
+    },
+    "application_tags": {
+      "history": 1,
+      "theory": 1
+    },
+    "field_tags": {
+      "runecraft": 1,
+      "alchemy": 1
+    }
   },
   {
     "index": "devoted",
     "name": "Devoted",
     "description": "Spiritual warrior — faith, authority, sacred practice made functional.",
     "signature_tag": "discipline",
-    "knowledge_tags": {"discipline": 2},
-    "application_tags": {"command": 1, "courage": 1, "ritual_structure": 1, "shields": 1, "medium_armor": 1},
-    "field_tags": {"sacred": 1}
+    "knowledge_tags": {
+      "discipline": 2,
+      "shields": 1,
+      "medium_armor": 1
+    },
+    "application_tags": {
+      "command": 1,
+      "courage": 1,
+      "ritual_structure": 1
+    },
+    "field_tags": {
+      "sacred": 1
+    }
   },
   {
     "index": "speaker",
     "name": "Speaker",
     "description": "Social operator — inspirer, manipulator, reader of rooms.",
     "signature_tag": "influence",
-    "knowledge_tags": {"influence": 2},
-    "application_tags": {"persuasion": 2, "deception": 1, "tell_reading": 1, "musical_instruments": 1, "disguise_forgery": 1},
+    "knowledge_tags": {
+      "influence": 2
+    },
+    "application_tags": {
+      "persuasion": 2,
+      "deception": 1,
+      "tell_reading": 1,
+      "musical_instruments": 1,
+      "disguise_forgery": 1
+    },
     "field_tags": {}
   },
   {
@@ -67,17 +127,36 @@
     "name": "Warden",
     "description": "A forest-bonded martial protector — fights with the wild, reads its signs, and keeps company with beast kin. Between the sentinel's discipline and the stalker's patience.",
     "signature_tag": "nature",
-    "knowledge_tags": {"nature": 2, "tracking": 1, "combat": 1},
-    "application_tags": {"ecology": 1, "ranged": 1, "command": 1},
-    "field_tags": {"druidry": 1}
+    "knowledge_tags": {
+      "nature": 2,
+      "tracking": 1,
+      "ranged": 1
+    },
+    "application_tags": {
+      "ecology": 1,
+      "command": 1
+    },
+    "field_tags": {
+      "druidry": 1
+    }
   },
   {
     "index": "druid",
     "name": "Druid",
     "description": "A practitioner of the old relational craft — reads the land, shapes with it rather than upon it, and tends its ambient field through seasonal work and ritual practice.",
     "signature_tag": "nature",
-    "knowledge_tags": {"nature": 2, "medicine": 1, "lore": 1},
-    "application_tags": {"ecology": 1, "pharmacology": 1, "ritual_structure": 1},
-    "field_tags": {"druidry": 1}
+    "knowledge_tags": {
+      "nature": 2,
+      "medicine": 1,
+      "lore": 1
+    },
+    "application_tags": {
+      "ecology": 1,
+      "pharmacology": 1,
+      "ritual_structure": 1
+    },
+    "field_tags": {
+      "druidry": 1
+    }
   }
 ]
