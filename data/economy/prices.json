@@ -926,5 +926,181 @@
     "price_cd": 5,
     "rarity": "common",
     "description": "Baseline settled-region price for local message delivery within a settlement."
+  },
+  {
+    "id": "price_silverleaf_balm_01",
+    "name": "Silverleaf Balm",
+    "price_group": "consumables",
+    "price_cd": 30,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a jar of Feywood Silverleaf Balm, Vaelmere-exported healer's salve."
+  },
+  {
+    "id": "price_dawnmint_infusion_01",
+    "name": "Dawnmint Infusion",
+    "price_group": "consumables",
+    "price_cd": 20,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a jar of Feywood Dawnmint infusion."
+  },
+  {
+    "id": "price_redveil_preparation_01",
+    "name": "Redveil Shelf Preparation",
+    "price_group": "consumables",
+    "price_cd": 60,
+    "rarity": "uncommon",
+    "description": "Baseline settled-region price for a pouch of Feywood Redveil Shelf preparation, a fever and serious-wound remedy."
+  },
+  {
+    "id": "price_glade_honey_01",
+    "name": "Glade Honey",
+    "price_group": "consumables",
+    "price_cd": 40,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a sealed jar of Feywood Honeybound-bee honey."
+  },
+  {
+    "id": "price_hearthgoat_cheese_ration_01",
+    "name": "Hearthgoat Cheese Ration",
+    "price_group": "consumables",
+    "price_cd": 15,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a travel-wrapped block of Feywood Hearthgoat cheese."
+  },
+  {
+    "id": "price_feywood_forest_wine_01",
+    "name": "Feywood Forest Wine",
+    "price_group": "consumables",
+    "price_cd": 50,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a bottle of Feywood forest wine."
+  },
+  {
+    "id": "price_goldcap_cider_01",
+    "name": "Goldcap Cider",
+    "price_group": "consumables",
+    "price_cd": 30,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a flask of Feywood Goldcap cider."
+  },
+  {
+    "id": "price_thornfiber_rope_01",
+    "name": "Thornfiber Rope",
+    "price_group": "basic_gear",
+    "price_cd": 25,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a coil of Feywood Thornfiber rope."
+  },
+  {
+    "id": "price_thornfiber_basket_01",
+    "name": "Thornfiber Basket",
+    "price_group": "basic_gear",
+    "price_cd": 15,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a woven Feywood Thornfiber basket."
+  },
+  {
+    "id": "price_resinheart_sealant_01",
+    "name": "Resinheart Sealant",
+    "price_group": "basic_gear",
+    "price_cd": 35,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a jar of Feywood Resinheart Pine sealant."
+  },
+  {
+    "id": "price_hearthwool_cloak_01",
+    "name": "Hearthwool Cloak",
+    "price_group": "apparel",
+    "price_cd": 80,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a Feywood Hearthgoat-wool traveling cloak."
+  },
+  {
+    "id": "price_ceremonial_elven_robe_01",
+    "name": "Ceremonial Elven Robe",
+    "price_group": "apparel",
+    "price_cd": 250,
+    "rarity": "uncommon",
+    "description": "Baseline settled-region price for a formal elven observance robe of Feywood weave."
+  },
+  {
+    "id": "price_vaelmere_trader_overcoat_01",
+    "name": "Vaelmere Trader's Overcoat",
+    "price_group": "apparel",
+    "price_cd": 150,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a Vaelmere-pattern trader's overcoat."
+  },
+  {
+    "id": "price_elven_forest_boots_01",
+    "name": "Elven Forest Boots",
+    "price_group": "apparel",
+    "price_cd": 120,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a pair of elven soft-soled forest boots."
+  },
+  {
+    "id": "price_thornfiber_belt_pouches_01",
+    "name": "Thornfiber Belt with Pouches",
+    "price_group": "apparel",
+    "price_cd": 40,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a Feywood Thornfiber traveling belt with fitted pouches."
+  },
+  {
+    "id": "price_silverbark_ash_spear_01",
+    "name": "Silverbark Ash Spear",
+    "price_group": "weapons_armor",
+    "price_cd": 75,
+    "rarity": "common",
+    "description": "Baseline settled-region price for an elven spear with Silverbark Ash shaft."
+  },
+  {
+    "id": "price_silverbark_war_staff_01",
+    "name": "Silverbark War Staff",
+    "price_group": "weapons_armor",
+    "price_cd": 60,
+    "rarity": "common",
+    "description": "Baseline settled-region price for an elven Silverbark Ash war staff."
+  },
+  {
+    "id": "price_greenshield_pattern_sword_01",
+    "name": "Greenshield-Pattern Sword",
+    "price_group": "weapons_armor",
+    "price_cd": 500,
+    "rarity": "uncommon",
+    "description": "Baseline settled-region price for a Greenshield-pattern elven military sword."
+  },
+  {
+    "id": "price_ironroot_shield_01",
+    "name": "Ironroot Shield",
+    "price_group": "weapons_armor",
+    "price_cd": 400,
+    "rarity": "uncommon",
+    "description": "Baseline settled-region price for an elven Ironroot hardwood shield."
+  },
+  {
+    "id": "price_feywood_ranger_leathers_01",
+    "name": "Feywood Ranger's Leathers",
+    "price_group": "weapons_armor",
+    "price_cd": 600,
+    "rarity": "uncommon",
+    "description": "Baseline settled-region price for a set of Feywood ranger's layered leather armor."
+  },
+  {
+    "id": "price_longbough_longbow_01",
+    "name": "Longbough Longbow",
+    "price_group": "weapons_armor",
+    "price_cd": 300,
+    "rarity": "uncommon",
+    "description": "Baseline settled-region price for an elven Longbough longbow; availability is limited by the rarity of offered-limb material."
+  },
+  {
+    "id": "price_silverbark_arrows_01",
+    "name": "Silverbark-Shafted Arrows (20)",
+    "price_group": "weapons_armor",
+    "price_cd": 25,
+    "rarity": "common",
+    "description": "Baseline settled-region price for a bundle of 20 standard Silverbark-shafted elven arrows."
   }
 ]
