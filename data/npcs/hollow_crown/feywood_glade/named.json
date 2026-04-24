@@ -1,0 +1,88 @@
+[
+  {
+    "id": "lethariel_heartwood",
+    "name": "Lethariel Heartwood",
+    "tier": 2,
+    "age": null,
+    "house_affiliation": "House Heartwood",
+    "current_location": "heartwood-estate",
+    "status": "emeritus",
+    "disposition": "Direct, sparse, warm beneath the reserve; what she says matters.",
+    "role_summary": "Current head of House Heartwood, former and future Heartwarden Captain, bearer of the Heartwood bow.",
+    "voice": "Sparse; words chosen deliberately; does not indulge ceremony or small talk.",
+    "narrative_anchors": [
+      "Discordant War commander who led the Feywood contingent (~200) alongside Vindrael the Platinum Warden",
+      "Direct living witness to Vindrael's sacrifice at the Temple of Tiamat resealing",
+      "Received the Heartwood branch sign before deployment; crafted the Heartwood bow from the Longbough limb offered in connection with that sign",
+      "Currently Heartwarden Captain-emeritus; resumes active Captain duty when the House Heartwood Proving candidate departs for the Proving",
+      "Known epithet: The Hammer"
+    ],
+    "tags": ["named", "tier-2", "house-heartwood", "heartwarden-captain-emeritus", "discordant-war-commander", "heartwood-bow-bearer", "feywood-glade"],
+    "description": "Lethariel Heartwood is the current head of House Heartwood, former and future Heartwarden Captain, and the living craftsperson of the Heartwood bow. She led the Feywood contingent during the Discordant War, fought beside Vindrael the Platinum Warden, and witnessed his sacrifice at the resealing of the Temple of Tiamat — a living witness whose testimony is more specific than any realm record preserves. Currently in Captain-emeritus standing at Heartwood Estate, she will resume active Captain duty when the current House Heartwood Proving candidate departs for the Proving. Anti-monumental by temperament; her standing is legible in what she doesn't perform rather than in what she displays.",
+    "scene_guidance": "Treat Lethariel as a gravity-well character. Scenes involving her run slower; she responds with silence as often as with words. The Heartwood bow is simply present with her — leaned against a tree, across her back, at hand — never displayed. Realm visitors often fail to recognize it as significant; elven visitors recognize it immediately and adjust. Love toward her daughter shows through expectation and instruction rather than demonstration. Reserve Lethariel for scenes of genuine weight; overuse flattens her."
+  },
+  {
+    "id": "caelthir_vaelaryn",
+    "name": "Caelthir Vaelaryn",
+    "tier": 2,
+    "age": null,
+    "house_affiliation": "House Vaelaryn",
+    "current_location": null,
+    "status": "active",
+    "disposition": "Careful; draws others out rather than pushing his own views; few wasted words.",
+    "role_summary": "Senior figure of House Vaelaryn; father of Sylvara and Aelarion; the diplomatic counterweight to Lethariel's martial register.",
+    "voice": "Careful; words chosen deliberately; often draws others out rather than pushing his own views.",
+    "narrative_anchors": [
+      "House Vaelaryn senior figure, specializing in diplomacy and realm-contact fluency",
+      "Father of Sylvara and Aelarion (who bear the Heartwood name per matrilineal naming convention)",
+      "House Vaelaryn maintains the highest non-elf integration rate of any elven estate",
+      "Known epithet: The Hearth"
+    ],
+    "tags": ["named", "tier-2", "house-vaelaryn", "diplomat", "feywood-glade"],
+    "description": "Caelthir Vaelaryn is the senior figure of House Vaelaryn, the most realm-facing of the noble houses. He is father to Sylvara and Aelarion and partner to Lethariel Heartwood; where Lethariel carries the house's martial and sacred gravity, Caelthir carries its diplomatic and relational weight. House Vaelaryn's high non-elf integration rate runs through his leadership. He is a listener more than a speaker, and his authority shows in the space he creates for others rather than in declarations he makes.",
+    "scene_guidance": "Caelthir is the scene's patience. He asks the question that opens the real conversation. Use him when a scene needs the house's diplomatic register, when realm-side visitors need a genuinely approachable elven contact, or when Sylvara's family context matters. His voice contrasts with Lethariel's; pair them carefully — they complement rather than overlap. His current residence is not canonically fixed to a single location; he moves between Vaelaryn lands, Thornveil, and occasionally Heartwood Estate as family or house business requires."
+  },
+  {
+    "id": "aelarion_heartwood",
+    "name": "Aelarion Heartwood",
+    "tier": 2,
+    "age": null,
+    "house_affiliation": "House Heartwood",
+    "current_location": null,
+    "status": "absent",
+    "disposition": "Unfixed; present in family and house narrative rather than in scene.",
+    "role_summary": "Son of Lethariel and Caelthir; brother of Sylvara; canonically absent from the Glade.",
+    "voice": null,
+    "narrative_anchors": [
+      "Brother of Sylvara, son of Lethariel Heartwood and Caelthir Vaelaryn",
+      "Canonically absent from the Glade in current narrative time",
+      "Bears the Heartwood name per matrilineal naming convention",
+      "Location and circumstance are deliberately unfixed; a narrative thread available for development"
+    ],
+    "tags": ["named", "tier-2", "house-heartwood", "absent", "narrative-thread", "feywood-glade"],
+    "description": "Aelarion Heartwood is Sylvara's brother and the second Heartwood child of Lethariel and Caelthir's generation. He is canonically absent from the Feywood Glade in current narrative time; specifics of where he is, what he is doing, and why are deliberately unfixed. The absence is structural — a thread available for development when narrative needs arise — and his return (or confirmation of further circumstances) is a potential major-event moment.",
+    "scene_guidance": "Aelarion should appear in narrative indirectly: mentioned by family, referenced in House Heartwood's senior figures' correspondence, hinted at through letters or inquiries reaching the Glade. Direct scenes with him should be reserved for major narrative beats — his return, a discovered location, a revealed purpose. Do not casually place him in the Glade. Do not over-specify his circumstances; the openness is the point."
+  },
+  {
+    "id": "vindrael_the_platinum_warden",
+    "name": "Vindrael, the Platinum Warden",
+    "tier": 1,
+    "age": null,
+    "house_affiliation": null,
+    "current_location": null,
+    "status": "deceased",
+    "disposition": "Historical anchor; theological weight; not a living scene-level NPC.",
+    "role_summary": "Founding gold dragon of the Ptarian Pact; architect of the sanctuary ideal; Bahamut's champion; deceased since the Discordant War.",
+    "voice": null,
+    "narrative_anchors": [
+      "Led the movement that became the Ptarian Pact and helped establish the Drakenvale sanctuary",
+      "Sacrificed himself to reseal the Temple of Tiamat during the Discordant War",
+      "The Vigil at Platinum Oath Monastery maintains his tomb and uses the resonance of his death for Rift monitoring",
+      "Unofficial prophecy holds that his spirit will rise again in Drakenvale's greatest hour",
+      "Lethariel Heartwood is a direct living witness to his sacrifice"
+    ],
+    "tags": ["named", "tier-1", "deceased", "platinum-warden", "vindrael", "discordant-war", "realm-canon", "feywood-adjacent"],
+    "description": "Vindrael, the Platinum Warden, is the defining moral presence of the Drakenvale sanctuary despite being deceased since the Discordant War. A founding Ancient Gold Dragon and Bahamut's champion, he led the movement that became the Ptarian Pact and sacrificed himself to reseal the Temple of Tiamat. He is included in the Feywood NPC registry specifically because Lethariel Heartwood is a direct living witness to his death — scenes involving Lethariel, the Heartwood bow, or Discordant War memory route through Vindrael's legacy. He does not function as a routine present-day NPC.",
+    "scene_guidance": "Vindrael appears through inscriptions, tomb-site encounters, dream visions, liturgical invocations, and the testimony of those old enough to have known him. Most commonly referenced through Lethariel's recollection — she alone among Feywood-accessible characters carries first-hand memory of his sacrifice. Use with significant narrative weight; do not casually invoke. Realm-side treatment of Vindrael is well-documented in `prompts/npcs.md`; this entry exists specifically for Feywood-adjacent reference integrity."
+  }
+]
