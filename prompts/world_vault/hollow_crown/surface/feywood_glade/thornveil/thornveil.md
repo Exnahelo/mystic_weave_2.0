@@ -21,7 +21,7 @@ description: >
 connections:
 - feywood-glade
 - heartwood
-- druidic-grove
+- silent-grove
 - vaelmere
 tags:
 - drakenvale
@@ -128,7 +128,7 @@ Thornveil hosts the operational headquarters of the Greenshield — the Feywood 
 
 **Structure.** The Greenshield maintains standing units organized along traditional elven military lines: ranger-archers, heavy-foot formations (elves in full war-gear are physically imposing), scout units, healer-wardens who move with combat formations. Ranks run from common soldier through sergeant-equivalent, captain, commander, and senior commander. The **Greenshield Commander** is the senior military officer, holding a Tier-3 generative role responsible for overall military readiness and coordination with the Council.
 
-**Training.** All Greenshield members train continuously across their very long lives. Training sites include the main city grounds (near the headquarters), outer training areas in the surrounding wilderness, and specific noble-family training groves where family traditions are preserved. The Druidic Grove serves specialized training for Heartwardens; ordinary Greenshield members train at the city grounds.
+**Training.** All Greenshield members train continuously across their very long lives. Training sites include the main city grounds (near the headquarters), outer training areas in the surrounding wilderness, and specific noble-family training groves where family traditions are preserved. The Silent Grove serves specialized training for Heartwardens; ordinary Greenshield members train at the city grounds.
 
 **Deployment.** The Greenshield has deployed to active combat exactly once in recorded history: the Discordant War. The deployment was not large in numerical terms but was decisive in quality. Elven fighters are individually formidable in ways realm species find difficult to describe after witnessing them — the combination of elven longevity, continuous training, magical affinity, and Glade-fostered connection to land and movement produces warriors whose combat capability exceeds what realm standards predict.
 
@@ -136,7 +136,7 @@ Ordinary Greenshield activity in Thornveil involves: regular training exercises,
 
 ## The Heartwardens in the City
 
-The Heartwarden order trains at the Druidic Grove. They return to Thornveil regularly — for rotations at the Heartwood, for Council appearances when requested, for personal life (most Heartwardens have families and dwellings in Thornveil), and for the broader social reality of being recognized members of the elven community.
+The Heartwarden order trains at the Silent Grove. They return to Thornveil regularly — for rotations at the Heartwood, for Council appearances when requested, for personal life (most Heartwardens have families and dwellings in Thornveil), and for the broader social reality of being recognized members of the elven community.
 
 The **Heartwarden Captain** is the senior Heartwarden figure, holding a Tier-3 generative role. Unlike the Greenshield Commander, whose authority is military-institutional, the Heartwarden Captain's authority is honor-based — they are the first among the order's elders, selected by internal consensus among active Heartwardens.
 
@@ -212,13 +212,13 @@ Thornveil is accessible only through the Feywood Glade interior, typically with 
 
 - `feywood-glade`
 - `heartwood`
-- `druidic-grove`
+- `silent-grove`
 - `vaelmere`
 ## Authoring Notes
 
 Thornveil is the Feywood Glade's capital city. Its primary canonical function is to protect the Heartwood at its center; its secondary functions are to serve as the elven civilization's civic, cultural, and military center.
 
-The replacement of the existing placeholder is substantial. The placeholder's existing connections list was sparse; this authoring establishes canonical connections to the Heartwood, Druidic Grove, and Feywood Glade region-zone. The placeholder's connection to Feywood Glade Border is specifically NOT preserved, because direct Border-to-Thornveil travel contradicts the Glade's liminal geometry. Topology reconciliation should confirm this correction.
+The replacement of the existing placeholder is substantial. The placeholder's existing connections list was sparse; this authoring establishes canonical connections to the Heartwood, Silent Grove, and Feywood Glade region-zone. The placeholder's connection to Feywood Glade Border is specifically NOT preserved, because direct Border-to-Thornveil travel contradicts the Glade's liminal geometry. Topology reconciliation should confirm this correction.
 
 The Council of Elders is referenced throughout but is a distributed body rather than a single NPC. The Council's representatives can be instantiated as scene-specific characters for any narrative requiring Council interaction.
 

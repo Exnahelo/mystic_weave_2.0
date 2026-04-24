@@ -247,7 +247,7 @@ TERRAIN (Map A, Map E)          SETTLEMENTS (Map B)             ROUTES (Map C)
                                   f  Crystalhaven                  Y  Heartwood (sacred central grove)
                                   h  Feywood Glade Border          T  Thornveil (elven city, rings Y)
                                   i  Platinum Oath Approach        U  outer elven settlement
-                                  j  Shadowed Hollows Approach     D  Druidic Grove
+                                  j  Shadowed Hollows Approach     D  Silent Grove
                                   k  Rift of Discord Edge          B  Glade Boundary (realm threshold)
                                   o  Hall of Scales                F  undifferentiated Feywood forest
 ```
@@ -428,7 +428,7 @@ Heartwood `Y` at the dead center. Thornveil `T` forms a complete ring around the
 **Feywood anchors**.
 - **`Y` Heartwood** at `ζ6–η7` — the sacred central grove, 2×2 footprint. Protected by the Heartwarden order. Unreachable except by sanctioned approach through Thornveil or Heartwarden escort.
 - **`T` Thornveil** — the elven city, forming a complete ring around the Heartwood at `ε5–ε8, ζ5, ζ8, η5, η8, θ5–θ8` (12 cells). The ring is a deliberate defensive and spiritual arrangement: the city exists to protect and tend the Heartwood.
-- **`D` Druidic Grove** at `δ11` — outer grove, separate from Thornveil, in the upper-east quadrant.
+- **`D` Silent Grove** at `δ11` — outer grove, separate from Thornveil, in the upper-east quadrant.
 - **`U` outer elven settlement** at `ι10` — smaller, secondary settlement in the lower-east quadrant.
 - **`B` Glade Boundary** at `ζ2` — the realm-side threshold. Corresponds to surface cell `J4` (`h` on Map B). This is the one stable entry and exit point for travelers; the Glade routes unsanctioned visitors back here or to an alternate realm-side exit of its own choosing.
 

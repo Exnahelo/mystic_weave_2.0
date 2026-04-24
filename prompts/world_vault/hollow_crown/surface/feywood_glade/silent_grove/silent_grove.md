@@ -1,5 +1,5 @@
 ---
-id: druidic-grove
+id: silent-grove
 name: The Silent Grove
 type: sacred-site
 region_id: hollow-crown
@@ -12,7 +12,6 @@ connections:
 tags:
 - drakenvale
 - silent-grove
-- druidic-grove
 - sacred-site
 - feywood-glade
 - heartwarden-training
@@ -21,7 +20,7 @@ tags:
 - ancient-grove
 - elven-sacred
 known_npcs:
-- Druid Master of the Grove
+- Druid Master of the Silent Grove
 - Heartwarden Instructor
 threat_level: 1
 discovered: false
@@ -110,7 +109,7 @@ The Silent Grove's population varies but typically includes:
 
 - **Heartwarden candidates:** Roughly twenty to forty at any given time, at various stages of the seven-year cycle. Numbers fluctuate based on recent selections, completions, and washouts.
 - **Heartwarden instructors:** Five to eight senior Heartwardens teaching active trainees. These are rotating positions — senior Heartwardens take instruction rotations rather than holding permanent teaching roles. The rotation enriches both the instructors (who benefit from returning to training work) and the trainees (who learn from varied teachers across their cycle).
-- **Druid Master of the Grove:** The senior druidic figure with ongoing institutional responsibility for the Grove's druidic work. Tier-3 generative role. This is a specific individual with long tenure at the Grove, typically among the oldest druids in the Glade.
+- **Druid Master of the Silent Grove:** The senior druidic figure with ongoing institutional responsibility for the Grove's druidic work. Tier-3 generative role. This is a specific individual with long tenure at the Grove, typically among the oldest druids in the Glade.
 - **Resident druids:** Ten to twenty druids present at any time, ranging from long-term residents to short-term retreatants to senior masters conducting extended work.
 - **Support staff:** Elven cooks, gardeners, maintenance workers, and others who keep the Grove's physical operation running. Perhaps ten to fifteen individuals in these roles, most with multi-decade tenure.
 
@@ -147,7 +146,6 @@ The Silent Grove is accessible from Thornveil by its managed path. Travel time i
 
 - drakenvale
 - silent-grove
-- druidic-grove
 - sacred-site
 - feywood-glade
 - heartwarden-training
@@ -166,11 +164,11 @@ The Silent Grove is accessible from Thornveil by its managed path. Travel time i
 
 The Silent Grove uses `sacred-site` type, consistent with the Heartwood's type and distinct from `sealed-site` (Temple to Tiamat) and ordinary `settlement` types. Like the Heartwood, this location is canonically central and accessible with specific protocols rather than unreachable.
 
-The canonical name "The Silent Grove" is established here. Prior references to "druidic grove" or "Heartwarden training site" should be reconciled to this name in topology review.
+The canonical name "The Silent Grove" is established here. Prior references to the grove's older naming or to "Heartwarden training site" should be reconciled to this name in topology review.
 
 The seven-year Heartwarden training cycle is canonically established. This provides narrative anchor for any storyline involving Heartwarden candidates, completed Heartwardens, or the order's institutional structure. Candidates typically begin in their equivalent-of-adolescent years and complete training at an age roughly comparable to elven young adulthood.
 
-The Druid Master of the Grove and Heartwarden Instructor are Tier-3 generative roles specific to this location. The Druid Master is a singular role (one individual at a time); Heartwarden Instructors rotate through the role as noted.
+The Druid Master of the Silent Grove and Heartwarden Instructor are Tier-3 generative roles specific to this location. The Druid Master is a singular role (one individual at a time); Heartwarden Instructors rotate through the role as noted.
 
 The four functional areas (Central Common, Training Grounds, Observation Circles, Reading Glade, Quiet Paths) plus residential cabins and common kitchen/dining hall are canonical internal features. None are authored as separate location nodes.
 

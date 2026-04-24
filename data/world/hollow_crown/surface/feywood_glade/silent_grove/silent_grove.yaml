@@ -1,4 +1,4 @@
-id: druidic-grove
+id: silent-grove
 name: The Silent Grove
 type: sacred-site
 region_id: hollow-crown
@@ -12,7 +12,6 @@ connections:
 tags:
 - drakenvale
 - silent-grove
-- druidic-grove
 - sacred-site
 - feywood-glade
 - heartwarden-training
@@ -21,7 +20,7 @@ tags:
 - ancient-grove
 - elven-sacred
 known_npcs:
-- Druid Master of the Grove
+- Druid Master of the Silent Grove
 - Heartwarden Instructor
 threat_level: 1
 discovered: false

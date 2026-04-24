@@ -8,7 +8,7 @@ connections:
 - feywood-glade-border
 - heartwood
 - thornveil
-- druidic-grove
+- silent-grove
 - vaelmere
 tags:
 - drakenvale
@@ -50,7 +50,7 @@ Wildlife is abundant and varied. Deer, boar, smaller game — many species share
 
 The Glade's most distinctive feature is its internal geometry. Understood properly, this is not a trick or a hazard but a simple fact of the place: the Glade's interior contains more space than its external footprint should allow, and the space responds to travelers.
 
-**Internal scale.** The Glade contains the city of Thornveil, the Heartwood at its sacred center, at least one secondary elven settlement in its outer reaches, a dedicated druidic grove and Heartwarden training site, elven noble family estates scattered through the old forest, and wild terrain extending between these locations. Travel between major Glade locations — Thornveil to the outer settlement, the Heartwood to the druidic grove, any location to the Border — takes hours or days depending on the journey and the traveler's relationship with the land. None of this fits within the Glade's external dimensions as observed from the realm side. This is simply how the Glade is.
+**Internal scale.** The Glade contains the city of Thornveil, the Heartwood at its sacred center, at least one secondary elven settlement in its outer reaches, a dedicated Silent Grove and Heartwarden training site, elven noble family estates scattered through the old forest, and wild terrain extending between these locations. Travel between major Glade locations — Thornveil to the outer settlement, the Heartwood to the Silent Grove, any location to the Border — takes hours or days depending on the journey and the traveler's relationship with the land. None of this fits within the Glade's external dimensions as observed from the realm side. This is simply how the Glade is.
 
 **Path-finding.** Travelers moving through the Glade with clear intent and appropriate disposition find their way. The land accommodates them. Paths appear where paths are needed. Distances become traversable. Landmarks orient. This is not magical guidance in a sense that can be deliberately invoked; it is the land's natural cooperation with respectful movement. Elves experience this as ordinary. Hall of Guides members experience this through their professional training. Inexperienced travelers experience it as lucky wayfinding.
 
@@ -92,7 +92,7 @@ The Feywood Glade maintains a formal military structure, though you would not kn
 
 The **formal military** bears an organizational name in elven tradition — the **Greenshield** — and maintains standing units, ranks, and traditional structure drawn from elven noble warrior traditions. Every adult elf of certain noble families undergoes formal military training; many non-noble elves do as well. Training begins in childhood and continues across the elf's full lifespan. The result is a civilian population that is, by realm standards, unusually combat-capable.
 
-The **Heartwarden order** is the prestige formation within the broader military. Heartwardens are selected warriors who take a sworn role as direct protectors of the Heartwood. Selection is by honor — noble families sometimes send their children through specific coming-of-age trials with the aim of Heartwarden service, and some non-noble elves earn selection through distinguished conduct. Heartwardens train at the Druidic Grove (the Glade's ceremonial training site separate from the Heartwood itself) and serve rotations at the Heartwood proper as its near-guard.
+The **Heartwarden order** is the prestige formation within the broader military. Heartwardens are selected warriors who take a sworn role as direct protectors of the Heartwood. Selection is by honor — noble families sometimes send their children through specific coming-of-age trials with the aim of Heartwarden service, and some non-noble elves earn selection through distinguished conduct. Heartwardens train at the Silent Grove (the Glade's ceremonial training site separate from the Heartwood itself) and serve rotations at the Heartwood proper as its near-guard.
 
 The Heartwarden order's prestige is real but not arrogant. Heartwardens are respected throughout the Glade but do not hold themselves above other military members; the distinction is honor rather than rank in the ordinary sense. A Heartwarden and a Greenshield regular may have equivalent formal rank, but the Heartwarden's sworn protector role carries weight no rank confers.
 
@@ -102,7 +102,7 @@ The Glade's warrior tradition includes a coming-of-age practice in certain famil
 
 The elves' religious practice is not centered on deities. It is a practice of respect for the land, the animals, the trees, the Heartwood, and the deeper life the Glade itself represents. The practice is druidic in form — seasonal observances, ceremonies tied to natural cycles, meditative and ritual practices performed at specific sites, the deep study of the Glade's ecology and magical character as spiritual knowledge rather than mere biology.
 
-The Heartwood is the central sacred site. All other sacred practice ultimately references or proceeds from the Heartwood's presence. The Druidic Grove is the primary training and ceremonial site for druidic practice. Smaller sacred groves and shrines exist throughout the Glade, often associated with specific elven noble family traditions or with particular natural features.
+The Heartwood is the central sacred site. All other sacred practice ultimately references or proceeds from the Heartwood's presence. The Silent Grove is the primary training and ceremonial site for druidic practice. Smaller sacred groves and shrines exist throughout the Glade, often associated with specific elven noble family traditions or with particular natural features.
 
 Elves speak of the land as a relationship rather than as a resource. The practice of respect — giving back what is taken, leaving what should be left, attending to what requires attention — is not a religious obligation in the ordinary sense. It is the ecological reality of living in a place that responds. Disrespect is not a religious sin; it is a practical error that the Glade corrects.
 
@@ -134,7 +134,7 @@ The Feywood Glade is accessible through the Feywood Glade Border. Sanctioned ent
 
 **Navigation within the Glade.** Sanctioned visitors are guided by their Hall of Guides companion or their elven host. Experienced solo visitors (rare — typically scholars with Glade-specific expertise) navigate through established personal relationships with the land and with specific elven contacts. Unsanctioned entrants navigate on their own and typically do not navigate successfully.
 
-**Lodging.** Visitors do not lodge "in the Glade" in any general sense; they lodge at specific Glade locations (Thornveil, the outer elven settlement, occasionally noble family estates, very rarely at the druidic grove for specific purposes). Arrangements are made through elven hosts or through the Council's administrative infrastructure.
+**Lodging.** Visitors do not lodge "in the Glade" in any general sense; they lodge at specific Glade locations (Thornveil, the outer elven settlement, occasionally noble family estates, very rarely at the Silent Grove for specific purposes). Arrangements are made through elven hosts or through the Council's administrative infrastructure.
 
 **Rights and protections.** The Glade's laws and customs apply within Glade territory. Realm law does not apply in the Glade. Realm visitors agree to this when they cross the Border, though the realm's population understands this with varying degrees of depth. The realm does not intervene if a realm visitor runs into trouble within the Glade; the Glade handles its own affairs.
 
@@ -158,7 +158,7 @@ The Feywood Glade is accessible through the Feywood Glade Border. Sanctioned ent
 - `feywood-glade-border`
 - `heartwood`
 - `thornveil`
-- `druidic-grove`
+- `silent-grove`
 - `vaelmere`
 ## Authoring Notes
 
@@ -166,7 +166,7 @@ The Feywood Glade is a region-zone type, consistent with Southern Lake and Ashfi
 
 `known_npcs` is empty. Named NPCs live at specific settlements within the Glade (Thornveil, outer settlement, etc.) rather than at the Glade region-zone level. Scene-instantiated characters appear as needed.
 
-The placement in a new directory `surface/feywood_glade/` is deliberate. The Glade is a sovereign realm-adjacent space, not an administrative subzone of the western temperate forest. Subsequent Feywood locations (Heartwood, Thornveil, Druidic Grove, outer elven settlement) will be organized under this directory.
+The placement in a new directory `surface/feywood_glade/` is deliberate. The Glade is a sovereign realm-adjacent space, not an administrative subzone of the western temperate forest. Subsequent Feywood locations (Heartwood, Thornveil, Silent Grove, outer elven settlement) will be organized under this directory.
 
 The Glade's liminal geometry — external-small, internal-massive, travel-responsive — is canonically established here. GPT scenes set in the Glade should reflect this as baseline environmental reality rather than as magical emergencies.
 
@@ -184,7 +184,7 @@ The ancient alliance and mercantile relationship with the realm are canonically 
 
 The Glade's spiritual framework — non-deistic, land-relationship-centered, druidic-in-form — is canonically established. Compatible with realm Bahamutic monotheism in practice despite philosophical incompatibility.
 
-The forward references to `heartwood`, `thornveil`, and `druidic-grove` are expected placeholders pending their authoring in subsequent Batch 5 locations. The secondary elven settlement connection is not yet listed; it will be added when that location is authored.
+The forward references to `heartwood`, `thornveil`, and `silent-grove` are expected placeholders pending their authoring in subsequent Batch 5 locations. The secondary elven settlement connection is not yet listed; it will be added when that location is authored.
 
 Threat level 3 reflects the Glade's genuine consequences for disrespectful or unprepared visitors. This matches the Rift of Discord's threat level but for different reasons — the Rift is corrupted, the Glade is simply a magical environment operating at intensity that punishes disrespect. Respectful visitors with proper sanction experience much reduced hazard.
 

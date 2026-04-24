@@ -8,7 +8,7 @@ description: The living heart of the Feywood Glade and the land it sustains. The
 connections:
 - feywood-glade
 - thornveil
-- druidic-grove
+- silent-grove
 tags:
 - drakenvale
 - heartwood
@@ -66,7 +66,7 @@ The Heartwood is the center of Glade religious life. Functions include:
 
 The Heartwood is protected continuously by the Heartwarden order. The specific protection structure:
 
-- **Heartwarden on Watch.** At least one Heartwarden is always present at the Heartwood clearing. The watch rotates among the order's active members on continuously-scheduled rotations managed from the Druidic Grove training site. The Heartwarden on Watch is a canonical position occupied at all times.
+- **Heartwarden on Watch.** At least one Heartwarden is always present at the Heartwood clearing. The watch rotates among the order's active members on continuously-scheduled rotations managed from the Silent Grove training site. The Heartwarden on Watch is a canonical position occupied at all times.
 - **Elder Druid of the Heartwood.** The senior druid responsible for direct ongoing stewardship of the Heartwood. Tier-3 generative role. The Elder Druid is not a Heartwarden — their role is contemplative and interpretive rather than martial — but they work closely with the Heartwardens on all matters concerning the tree's health, its responses to the land's condition, and the ceremonies that maintain the elven community's relationship with it.
 - **Additional rotational presence.** Beyond the constant Heartwarden on Watch, additional Heartwardens and druids are present throughout daylight hours for the various functions the Heartwood serves. Nighttime presence is lighter but never absent — the night-watch Heartwarden is accompanied by at least one other active member of the order.
 
@@ -138,7 +138,7 @@ The Heartwood is technically accessible within the Feywood Glade — physically 
 
 - `feywood-glade`
 - `thornveil`
-- `druidic-grove`
+- `silent-grove`
 
 ## Authoring Notes
 
@@ -162,7 +162,7 @@ The elven relationship with the Heartwood — daily familiarity rather than cere
 
 The canonical connection to `thornveil` represents the surrounding city. Thornveil's authoring will elaborate the city's relationship with the Heartwood at its center.
 
-The canonical connection to `druidic-grove` represents the training and ceremonial site where Heartwardens train and druids practice. Heartwardens serve rotations at the Heartwood from their training home at the grove.
+The canonical connection to `silent-grove` represents the training and ceremonial site where Heartwardens train and druids practice. Heartwardens serve rotations at the Heartwood from their training home at the grove.
 
 The connection to `feywood-glade` is the regional parent reference.
 
@@ -170,6 +170,6 @@ Threat level 1 is deceptively low. The Heartwood itself is benign; the consequen
 
 `discovered: false` at the canonical level. Even sanctioned realm visitors rarely see the Heartwood; unsanctioned visitors almost never do. Characters who have physically stood in the Heartwood's clearing have had a remarkable experience by realm standards.
 
-The forward-reference to Thornveil's surrounding-civic-structure and to the Druidic Grove's training function is acknowledged and will be filled in through those nodes' authoring. The Heartwood's authoring has deliberately emphasized what is true at the Heartwood itself rather than speculating about what those other locations will hold.
+The forward-reference to Thornveil's surrounding-civic-structure and to the Silent Grove's training function is acknowledged and will be filled in through those nodes' authoring. The Heartwood's authoring has deliberately emphasized what is true at the Heartwood itself rather than speculating about what those other locations will hold.
 
 The "Heartwood is known, not worshipped" distinction is important canonical cultural character. Elven religious practice is relational rather than cultic. This preserves the Glade's distinctiveness from both realm Bahamutic monotheism and any ordinary fantasy nature-spirit worship tradition.
