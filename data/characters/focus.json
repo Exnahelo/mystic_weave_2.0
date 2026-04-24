@@ -61,5 +61,23 @@
     "knowledge_tags": {"influence": 2},
     "application_tags": {"persuasion": 2, "deception": 1, "tell_reading": 1, "musical_instruments": 1, "disguise_forgery": 1},
     "field_tags": {}
+  },
+  {
+    "index": "warden",
+    "name": "Warden",
+    "description": "A forest-bonded martial protector — fights with the wild, reads its signs, and keeps company with beast kin. Between the sentinel's discipline and the stalker's patience.",
+    "signature_tag": "nature",
+    "knowledge_tags": {"nature": 2, "tracking": 1, "combat": 1},
+    "application_tags": {"ecology": 1, "ranged": 1, "command": 1},
+    "field_tags": {"druidry": 1}
+  },
+  {
+    "index": "druid",
+    "name": "Druid",
+    "description": "A practitioner of the old relational craft — reads the land, shapes with it rather than upon it, and tends its ambient field through seasonal work and ritual practice.",
+    "signature_tag": "nature",
+    "knowledge_tags": {"nature": 2, "medicine": 1, "lore": 1},
+    "application_tags": {"ecology": 1, "pharmacology": 1, "ritual_structure": 1},
+    "field_tags": {"druidry": 1}
   }
 ]

@@ -64,8 +64,8 @@ def _character() -> dict:
     return {
         "name": "Sylvara Heartwood",
         "ancestry": "elf",
-        "culture": "feywood_glade",
-        "focus": "wanderer",
+        "culture": "feywood_wilds",
+        "focus": "wayfinder",
         "background": "scout",
         "hp": {"current": 100, "max": 100},
         "domains": {
@@ -103,7 +103,7 @@ def _character() -> dict:
 
 def _world() -> dict:
     return {
-        "location": "feywood_glade",
+        "location": "feywood-glade",
         "threat": "none",
         "goal": "explore",
         "turn": 1,

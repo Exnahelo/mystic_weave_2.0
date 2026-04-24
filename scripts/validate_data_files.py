@@ -366,7 +366,7 @@ def _validate_ancestries(path: Path, failures: list[str]) -> None:
 def _validate_cultures(path: Path, failures: list[str]) -> None:
     cultures = _load_json(path)
     seen_indices: set[str] = set()
-    _failures_append(failures, len(cultures) == 10, f"{path.name}: expected 10 culture entries")
+    _failures_append(failures, len(cultures) == 11, f"{path.name}: expected 11 culture entries")
 
     for i, row in enumerate(cultures):
         label = f"{path.name}[{i}]"
@@ -721,7 +721,7 @@ def main() -> None:
     _validate_applications(data_dir / "tags" / "applications.json", failures)
     _validate_ancestries(data_dir / "characters" / "ancestry.json", failures)
     _validate_cultures(data_dir / "characters" / "culture.json", failures)
-    _validate_tag_rows(data_dir / "characters" / "focus.json", failures, expected_count=7)
+    _validate_tag_rows(data_dir / "characters" / "focus.json", failures, expected_count=9)
     _validate_tag_rows(data_dir / "characters" / "background.json", failures, expected_count=8)
     _validate_apparel(data_dir / "items" / "apparel.json", failures)
     for item_file in (data_dir / "items").glob("*.json"):

@@ -63,13 +63,22 @@
     "field_tags": {}
   },
   {
-    "index": "feywood_glade",
-    "name": "Feywood Glade",
-    "description": "Raised in the fixed forest pocket — Feywild-touched, non-Euclidean, fey-shaped childhood.",
+    "index": "feywood_wilds",
+    "name": "Feywood Wilds",
+    "description": "Raised in the Feywood's deeper forest — attuned to wild paths, ancient trees, animal kin, and the Heartwood's ambient field.",
+    "domain_bonuses": {"power": 0, "agility": 3, "perception": 4, "endurance": 3, "intellect": 0, "will": 0, "presence": 0},
+    "knowledge_tags": {"tracking": 1, "survival": 1},
+    "application_tags": {"ecology": 1, "ranged": 1, "scan": 1},
+    "field_tags": {"druidry": 1}
+  },
+  {
+    "index": "thornveil",
+    "name": "Thornveil",
+    "description": "Raised in the elven capital — living architecture, noble courts, long memory, and the civic sphere around the Heartwood.",
     "domain_bonuses": {"power": 0, "agility": 0, "perception": 0, "endurance": 0, "intellect": 3, "will": 3, "presence": 4},
-    "knowledge_tags": {"arcana": 1},
-    "application_tags": {"deception": 1, "tell_reading": 1, "theory": 1},
-    "field_tags": {"illusion": 1}
+    "knowledge_tags": {"lore": 1, "influence": 1},
+    "application_tags": {"diplomacy": 1, "history": 1, "ritual_structure": 1, "linguistics": 1},
+    "field_tags": {"illusion": 1, "druidry": 1}
   },
   {
     "index": "crystal_caverns",
