@@ -391,5 +391,58 @@
       "Supports standard active defense with lighter carry weight than steel equivalents.",
       "Ironroot material does not warp or split under long service; shields serve across generations."
     ]
+  },
+  {
+    "id": "armor_studded_leather_feywood_ranger_01",
+    "name": "Feywood Ranger's Studded Leather",
+    "category": "armor",
+    "knowledge_tag": "light_armor",
+    "application_tag": "studded_leather",
+    "tags": [
+      "armor",
+      "light",
+      "studded",
+      "leather",
+      "ranger",
+      "elven",
+      "feywood"
+    ],
+    "value_cd": 3500,
+    "armor_floor": 20,
+    "armor_ceiling": 50,
+    "rarity": "uncommon",
+    "description": "Studded leather produced to elven ranger specification — sanctioned hides (silverbough hart, gladehorn stag, rootback elk) tanned with elven processes, reinforced with small elven-forged studs set flush to reduce catch-snag on brush and deadfall. Lighter than realm studded leather of equivalent protection and noticeably quieter in motion.",
+    "narrative_effects": [
+      "Provides light-armor protection with the quieter motion elven field operation demands.",
+      "Studs are placed for flexibility rather than visual bulk; rangers and ranger-adjacent roles prefer this pattern.",
+      "House identifiers may be subtly worked into the stud pattern, readable to trained elven observers but not obvious to outsiders."
+    ]
+  },
+  {
+    "id": "armor_cloak_stalkerhide_01",
+    "name": "Stalkerhide Cloak",
+    "category": "armor",
+    "knowledge_tag": "light_armor",
+    "application_tag": "leather",
+    "tags": [
+      "armor",
+      "light",
+      "cloak",
+      "thornroot-stalker",
+      "field-illegible-trace",
+      "rare",
+      "feywood"
+    ],
+    "value_cd": 20000,
+    "armor_floor": 18,
+    "armor_ceiling": 40,
+    "rarity": "rare",
+    "description": "A hooded cloak tanned from a single Thornroot Stalker hide using elven processes that preserve the stalker's field-illegibility trace. Functions as supplementary light armor layered over existing light or medium armor; does not stack with heavier armor torso protection.",
+    "narrative_effects": [
+      "Provides light-armor protection consistent with a worn-over-clothing field cloak; layers on existing light or medium armor without agility penalty.",
+      "The hide's field-illegibility trace softens ambient magical awareness of the wearer when the hood is up and the wearer is still — attuned sentries and bound wards register the wearer less reliably. Does not confer invisibility to ordinary sight, scent, or hearing.",
+      "Stalkerhide is not traded. A cloak of this kind comes from a hunt the wearer was present for, or from a house that owes the wearer a specific debt.",
+      "Inside the Feywood it marks the wearer as someone who has either taken a stalker, inherited from one who did, or been gifted by a house that has. Outside the Feywood it draws attention from any elf who recognizes the material."
+    ]
   }
 ]

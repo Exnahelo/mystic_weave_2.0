@@ -738,5 +738,58 @@
       "Supports standard sword technique with the specific balance elven military training favors.",
       "Rare in realm-side hands; its presence on a non-elf signals either long-term elven relationship or a trophy whose provenance is worth asking about."
     ]
+  },
+  {
+    "id": "weapon_moon_blade_01",
+    "name": "Moon Blade",
+    "category": "weapon",
+    "knowledge_tag": "close_combat",
+    "application_tag": "shortsword",
+    "primary_domain": "power",
+    "tags": [
+      "weapon",
+      "melee",
+      "blade",
+      "shortsword",
+      "moon-blade",
+      "elven",
+      "feywood"
+    ],
+    "value_cd": 350,
+    "base_damage": 15,
+    "rarity": "uncommon",
+    "description": "A compact elven blade carried alongside the longer Greenshield-pattern sword for close-line work and dense-terrain engagements. Forged to elven metallurgy standards and balanced for the cut-and-thrust technique Greenshield doctrine emphasizes at shorter reach. The name reflects the pale sheen the blade takes under moonlight — a property of the forging rather than an enchantment.",
+    "narrative_effects": [
+      "Supports disciplined cutting and thrusting in close melee with elven Greenshield balance.",
+      "Rare in realm-side hands; its presence on a non-elf signals either long-term elven relationship or a trophy whose provenance is worth asking about."
+    ]
+  },
+  {
+    "id": "weapon_proven_handaxe_01",
+    "name": "Proven Handaxe",
+    "category": "weapon",
+    "knowledge_tag": "close_combat",
+    "application_tag": "handaxe",
+    "primary_domain": "agility",
+    "tags": [
+      "weapon",
+      "close-combat",
+      "light",
+      "handaxe",
+      "silverbark-ash",
+      "elven",
+      "feywood",
+      "proving-gift",
+      "throwable_candidate"
+    ],
+    "value_cd": 120,
+    "base_damage": 10,
+    "rarity": "uncommon",
+    "description": "A close-fighting axe with an elven-forged head and a Silverbark Ash haft, given to those who survive a wild proving. The haft absorbs impact shock more cleanly than realm hardwoods, reducing hand fatigue across a long day's work. Each axe is marked discreetly on the underside of the haft with a sigil recognizable to the giver's house.",
+    "narrative_effects": [
+      "Carries the same mechanics as a standard handaxe.",
+      "The Silverbark haft absorbs impact shock more cleanly than dense realm hardwoods, reducing hand fatigue across a long day's work.",
+      "Not bought. A Proven Handaxe is given by a house or elder to an elf who has survived a formal or informal proving; the axe itself carries no magical property, but its presence on a person's belt is a visible statement of proving-status recognized across Feywood culture."
+    ]
   }
 ]
