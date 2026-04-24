@@ -1402,5 +1402,57 @@
       "Estimate how close a ritual is to collapse",
       "Warn whether handling the relic is safe"
     ]
+  },
+  {
+    "index": "field_reading",
+    "name": "Field Reading",
+    "group": "nature",
+    "primary_domain": "perception",
+    "domain_note": null,
+    "description": "Reading the ambient magical field of a liminal or magically-dense environment — changes in air, sound, light, and living-signal species that indicate land health, disturbance, or approach.",
+    "examples": [
+      "Judging the Heartwood's current register (Standing Green, Turning, or Stillfall)",
+      "Noticing Hearthlight dimming before broader decline is visible",
+      "Reading approach through greymantle crow behavior"
+    ]
+  },
+  {
+    "index": "living_records",
+    "name": "Living Records",
+    "group": "lore",
+    "primary_domain": "intellect",
+    "domain_note": null,
+    "description": "Reading memory and history held in living form — grove landscapes, oathvine plantings, path-wear, house-tended trees, and other non-written records that long-memoried cultures use as archive.",
+    "examples": [
+      "Reading the age and lineage of a noble house estate from its tended grove",
+      "Interpreting an oathvine's growth pattern as a record of family oaths",
+      "Recognizing a path's relational history from how its wear sits"
+    ]
+  },
+  {
+    "index": "kin_planting",
+    "name": "Kin-Planting",
+    "group": "craft",
+    "primary_domain": "intellect",
+    "domain_note": "May use will when the working is long-horizon rather than immediate.",
+    "description": "Cultivation practice based on mutual-support plant selection — canopy gardens, fungal-managed beds, companion pairings, and riparian patches — designed to strengthen the ecology rather than extract from it.",
+    "examples": [
+      "Establishing a new canopy garden using companion pairings",
+      "Restoring a damaged bed by introducing a fungal partner",
+      "Selecting understory for a noble family's tended grove"
+    ]
+  },
+  {
+    "index": "oathwork",
+    "name": "Oathwork",
+    "group": "lore",
+    "primary_domain": "will",
+    "domain_note": "Presence may apply when the oath is public-facing rather than private.",
+    "description": "Ceremonial knowledge of oath-marking, witnessing, and release — the forms, timing, and relational structure by which binding commitments are made in oral cultures that treat the oath itself as the archive.",
+    "examples": [
+      "Preparing and administering an Oathbloom ceremony",
+      "Witnessing a Heartwarden oath in formal standing",
+      "Recognizing an oath's release conditions and when they are met"
+    ]
   }
 ]
