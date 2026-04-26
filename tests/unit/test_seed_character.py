@@ -1,6 +1,7 @@
 import pytest
 
 from api.game_data import seed_character
+from tests.helpers import zero_advancement
 
 
 @pytest.mark.unit
@@ -74,3 +75,16 @@ def test_seed_character_rejects_adjustment_over_5_per_domain() -> None:
             background_index="soldier",
             adjustment_points={"power": 6},
         )
+
+
+@pytest.mark.unit
+def test_seed_character_uses_new_advancement_shape() -> None:
+    character = seed_character(
+        name="Krath",
+        ancestry_index="human",
+        culture_index="drakenvale_city",
+        focus_index="champion",
+        background_index="soldier",
+    )
+
+    assert character["advancement"] == zero_advancement()

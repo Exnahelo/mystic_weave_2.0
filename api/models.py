@@ -26,6 +26,16 @@ if TYPE_CHECKING:
     from api.companions import ArchivedCompanionEnvelope, CompanionEnvelope, CompanionRecord
 
 
+DOMAIN_KEYS: tuple[str, ...] = (
+    "power", "agility", "perception", "endurance",
+    "intellect", "will", "presence",
+)
+
+
+def _zero_per_domain() -> dict[str, int]:
+    return {d: 0 for d in DOMAIN_KEYS}
+
+
 # ---------------------------------------------------------------------------
 # Enums
 # ---------------------------------------------------------------------------
@@ -103,16 +113,44 @@ class DomainScores(BaseModel):
 
 
 class AdvancementState(BaseModel):
-    points_available: int = 0
+    """
+    Per-domain earned AP pools, single awarded AP pool, lifetime totals,
+    and per-domain tag advancement counters.
+
+    Earned AP is locked to its source domain (each domain has its own pool).
+    Awarded AP is free-allocation across any domain (single pool).
+    Counters track tag advances per domain; every 3 advances in a domain
+    converts to +1 earned AP in that domain.
+    """
+
+    points_available_earned: dict[str, int] = Field(
+        default_factory=lambda: _zero_per_domain(),
+        description="Per-domain earned AP pools. Keys: power, agility, perception, endurance, intellect, will, presence.",
+    )
+    points_available_awarded: int = 0
     points_spent: int = 0
     points_earned_total: int = 0
+    tag_advance_counters: dict[str, int] = Field(
+        default_factory=lambda: _zero_per_domain(),
+        description="Per-domain counters; tag advances increment these. At 3, convert to +1 earned AP in that domain.",
+    )
 
-    @field_validator("points_available", "points_spent", "points_earned_total")
+    @field_validator("points_available_awarded", "points_spent", "points_earned_total")
     @classmethod
-    def non_negative_points(cls, v: int) -> int:
+    def non_negative_int(cls, v: int) -> int:
         if v < 0:
             raise ValueError("advancement points cannot be negative")
         return v
+
+    @field_validator("points_available_earned", "tag_advance_counters")
+    @classmethod
+    def non_negative_per_domain(cls, v: dict[str, int]) -> dict[str, int]:
+        for domain, val in v.items():
+            if domain not in DOMAIN_KEYS:
+                raise ValueError(f"unknown domain: {domain!r}")
+            if val < 0:
+                raise ValueError(f"advancement value for {domain!r} cannot be negative")
+        return {d: v.get(d, 0) for d in DOMAIN_KEYS}
 
 
 class Alignment(BaseModel):
@@ -506,6 +544,47 @@ class GameStateResponse(BaseModel):
     log:        list[str]
     updated_at: datetime | None = None
     time_drift_warning: TimeDriftWarning | None = None
+
+
+class SpendAPRequest(BaseModel):
+    """Body for POST /character/{session_id}/spend_ap"""
+    model_config = ConfigDict(extra="forbid")
+
+    target_domain: str = Field(
+        description="Domain to advance. Must be one of the seven domains."
+    )
+    points: int = Field(
+        gt=0,
+        description="Number of domain points to purchase. Must be positive.",
+    )
+    use_earned: int = Field(
+        default=0,
+        ge=0,
+        description="AP to draw from earned pool of target_domain. Must not exceed points_available_earned[target_domain].",
+    )
+    use_awarded: int = Field(
+        default=0,
+        ge=0,
+        description="AP to draw from awarded pool. Must not exceed points_available_awarded.",
+    )
+
+    @field_validator("target_domain")
+    @classmethod
+    def domain_valid(cls, v: str) -> str:
+        if v not in DOMAIN_KEYS:
+            raise ValueError(f"unknown domain: {v!r}")
+        return v
+
+
+class SpendAPResponse(BaseModel):
+    session_id: str
+    target_domain: str
+    points_purchased: int
+    ap_cost_total: int
+    ap_drawn_earned: int
+    ap_drawn_awarded: int
+    new_domain_score: int
+    advancement: AdvancementState
 
 
 # ---------------------------------------------------------------------------

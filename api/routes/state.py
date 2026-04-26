@@ -21,8 +21,10 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import ValidationError
 
 from api.database import get_pool
+from api.game_data import validate_application_parent_cap
 from api.models import (
     AdvancementState,
+    DOMAIN_KEYS,
     ApplyStateDeltaRequest,
     CharacterModel,
     Equipment,
@@ -86,9 +88,83 @@ def _normalize_character_state(payload: dict[str, Any]) -> dict[str, Any]:
         normalized["application"] = {}
     if not isinstance(normalized.get("fields"), dict):
         normalized["fields"] = {}
-    if not isinstance(normalized.get("advancement"), dict):
+    advancement = normalized.get("advancement")
+    if not isinstance(advancement, dict):
         normalized["advancement"] = AdvancementState().model_dump()
+    else:
+        adv = dict(advancement)
+        adv.setdefault("points_available_earned", {d: 0 for d in DOMAIN_KEYS})
+        adv.setdefault("points_available_awarded", 0)
+        adv.setdefault("points_spent", 0)
+        adv.setdefault("points_earned_total", 0)
+        adv.setdefault("tag_advance_counters", {d: 0 for d in DOMAIN_KEYS})
+        adv.pop("points_available", None)
+        normalized["advancement"] = adv
     return normalized
+
+
+def _apply_tag_advancement_counters(
+    existing_character: dict[str, Any],
+    delta_character: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Detect tag tier increases in the delta vs. the existing character and
+    update the advancement.tag_advance_counters and points_available_earned
+    accordingly. Returns the updated advancement dict to be merged.
+
+    Counters increment by (new_tier - old_tier). Every 3 in a domain
+    converts to +1 earned AP in that domain.
+
+    Caller is responsible for merging the returned advancement dict back
+    onto the character.
+    """
+    from api.game_data import get_tag_primary_domain
+
+    advancement = dict(existing_character.get("advancement") or {})
+    counters = dict(advancement.get("tag_advance_counters") or {})
+    earned = dict(advancement.get("points_available_earned") or {})
+
+    for domain in DOMAIN_KEYS:
+        counters.setdefault(domain, 0)
+        earned.setdefault(domain, 0)
+
+    earned_total_delta = 0
+
+    for tag_kind in ("knowledge", "application", "fields"):
+        delta_block = delta_character.get(tag_kind) or {}
+        existing_block = existing_character.get(tag_kind) or {}
+        if not isinstance(delta_block, dict) or not isinstance(existing_block, dict):
+            continue
+
+        kind_for_lookup = "field" if tag_kind == "fields" else tag_kind
+
+        for tag_index, new_tier in delta_block.items():
+            if not isinstance(new_tier, int):
+                continue
+            old_tier = existing_block.get(tag_index, 0) or 0
+            if new_tier <= old_tier:
+                continue
+            steps = new_tier - old_tier
+
+            domain = get_tag_primary_domain(tag_index, kind_for_lookup)
+            if domain is None or domain not in counters:
+                continue
+
+            counters[domain] += steps
+            while counters[domain] >= 3:
+                counters[domain] -= 3
+                earned[domain] += 1
+                earned_total_delta += 1
+
+    advancement["tag_advance_counters"] = counters
+    advancement["points_available_earned"] = earned
+    advancement["points_earned_total"] = (
+        (advancement.get("points_earned_total") or 0) + earned_total_delta
+    )
+    advancement.setdefault("points_available_awarded", 0)
+    advancement.setdefault("points_spent", 0)
+
+    return advancement
 
 
 def _normalize_world_state(payload: dict[str, Any]) -> dict[str, Any]:
@@ -183,6 +259,19 @@ def apply_delta(current_state: dict[str, Any], delta: ApplyStateDeltaRequest) ->
     existing_character = json.loads(current_state["character"])
     existing_world = json.loads(current_state["world"])
 
+    new_advancement = _apply_tag_advancement_counters(existing_character, character_delta)
+    character_delta["advancement"] = new_advancement
+
+    application_delta = character_delta.get("application")
+    if isinstance(application_delta, dict) and application_delta:
+        try:
+            validate_application_parent_cap(existing_character, application_delta)
+        except ValueError as exc:
+            raise HTTPException(
+                status_code=422,
+                detail={"message": "parent-cap violation", "error": str(exc)},
+            )
+
     equipment_delta = character_delta.pop("equipment", None)
     merged_character = _deep_merge(existing_character, character_delta)
     if equipment_delta is not None:
@@ -222,7 +311,9 @@ async def load_state(
         raise HTTPException(status_code=404, detail="session not found")
 
     try:
-        character = CharacterModel.model_validate(json.loads(row["character"]))
+        character = CharacterModel.model_validate(
+            _normalize_character_state(json.loads(row["character"]))
+        )
         world = WorldModel.model_validate(json.loads(row["world"]))
     except ValidationError as e:
         raise HTTPException(status_code=500, detail={"message": "stored game state is invalid", "errors": e.errors()})
@@ -327,7 +418,9 @@ async def save_state(
         )
 
     try:
-        response_character = CharacterModel.model_validate(json.loads(row["character"]))
+        response_character = CharacterModel.model_validate(
+            _normalize_character_state(json.loads(row["character"]))
+        )
         response_world = WorldModel.model_validate(json.loads(row["world"]))
     except ValidationError as e:
         raise HTTPException(status_code=500, detail={"message": "stored game state is invalid", "errors": e.errors()})
@@ -412,7 +505,9 @@ async def save_state_delta(
         )
 
     try:
-        response_character = CharacterModel.model_validate(json.loads(row["character"]))
+        response_character = CharacterModel.model_validate(
+            _normalize_character_state(json.loads(row["character"]))
+        )
         response_world = WorldModel.model_validate(json.loads(row["world"]))
     except ValidationError as e:
         raise HTTPException(status_code=500, detail={"message": "stored game state is invalid", "errors": e.errors()})

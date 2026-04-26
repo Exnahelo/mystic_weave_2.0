@@ -26,6 +26,7 @@ from api.companions import (
 )
 from api.database import get_pool
 from api.models import CharacterModel, WorldModel
+from api.routes.state import _normalize_character_state
 
 router = APIRouter()
 
@@ -110,7 +111,9 @@ async def _load_session_state(conn: asyncpg.Connection, session_id: str) -> tupl
         raise HTTPException(status_code=404, detail="session not found")
 
     try:
-        character = CharacterModel.model_validate(json.loads(row["character"]))
+        character = CharacterModel.model_validate(
+            _normalize_character_state(json.loads(row["character"]))
+        )
         world = WorldModel.model_validate(json.loads(row["world"]))
     except ValidationError as err:
         raise HTTPException(
