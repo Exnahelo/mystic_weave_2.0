@@ -5,3 +5,8 @@ __pycache__/
 *.db
 reports/
 .env
+
+# Editor and workspace state — local only, not tracked
+.vscode/settings.json
+prompts/.obsidian/graph.json
+prompts/.obsidian/workspace.json
