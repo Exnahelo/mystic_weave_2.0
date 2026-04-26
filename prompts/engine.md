@@ -76,10 +76,11 @@ Extraction must emit changed fields only (no full-state regeneration).
 
 ### Progression Save Gate
 
-- Save `character.advancement` and progression outcomes only after the reward package resolves.
-- Do not commit AP, tag tiers, or new tags before adjudication is final; new tags still need player confirmation; if disputed, preserve stored values.
-- Follow `prompts/progression-rules.md`; scene vocabulary is canonical in `prompts/scene-structure.md`.
-- Evaluate AP and tag advancement separately; beat, encounter, scene, job, and consequence chain are not interchangeable.
+- Save `character.advancement` and all settled progression outcomes only after the full reward package is resolved.
+- Do not commit tag tier changes, AP pool changes, advancement counter changes, domain push outcomes, or new tags until adjudication is final; new tags still require player confirmation; if a ruling is disputed, preserve current stored progression values.
+- Progression adjudication is canonical in `prompts/progression-rules.md`.
+- Scene-boundary vocabulary is canonical in `prompts/scene-structure.md`.
+- Treat tag advancement, earned AP, awarded AP, and domain push as distinct triggers; do not conflate them.
 - If extraction validation fails: do not commit state; retry with correction prompt only; no narration pass; max 2 retries, then halt.
 
 ### Time/Weather/Moon Runtime Checkpoint
@@ -98,11 +99,10 @@ Extraction must emit changed fields only (no full-state regeneration).
 ### Progression Runtime Checkpoint
 
 - Apply progression per `prompts/progression-rules.md`.
-- At every resolved scene, explicitly state either (a) tag candidate(s) proposed for advancement with one-line reasoning, or (b) no advancement this scene with one-line reasoning.
-- At every resolved consequence chain, explicitly state the AP award with its scale (Local / Situational / Regional / Campaign), and process any immediate player AP spend in the same adjudication.
-- No soft-language tiers for tracked state. Reputation, AP, knowledge tiers, application tiers, and coin are integers. Do not invent "informal goodwill," "soft standing," or "stage one/two" to defer a ruling. If a tracked value changes, commit the integer; if not, say so and cite the reason.
-- Require player confirmation before saving newly added tags; if reward interpretation is disputed, do not commit disputed progression changes.
+- Adjudicate tag advancement per resolved scene using layer-matched triggers (application, knowledge, field, domain push); at most one tag advances per scene; require player confirmation before saving newly added tags.
+- Earned AP, awarded AP, parent-cap enforcement, and domain spend bracket math are handled by the backend; the GPT submits triggered changes and player choices.
 - For magical field knowledge, require domain gate (40/50/60/70/80→T1–T5) before advancement.
+- If reward interpretation is disputed, do not commit disputed progression changes.
 
 ## Companions
 
