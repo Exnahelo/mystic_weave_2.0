@@ -358,7 +358,7 @@ Pacing is descriptive scene-cadence guidance, not a separate subsystem. It does 
 - Tension rises when outcomes escalate danger, urgency, or strategic pressure.
 - Tension falls when outcomes materially stabilize safety, leverage, or immediate risk.
 - Tension holds when pressure profile is broadly unchanged.
-- Update `last_consequence_weight` at scene resolution using the existing consequence scale.
+- Update `last_consequence_weight` at scene resolution using the existing scale vocabulary.
 - Reset `turns_since_social_beat` to 0 when a meaningful social beat occurs; otherwise increment.
 - Reset `turns_since_discovery` to 0 when a meaningful discovery beat occurs; otherwise increment.
 - Synchronize `turn_count` with `world.turn` at save time.
@@ -369,24 +369,46 @@ Use pacing conservatively to avoid repetitive scene selection and to modulate ca
 
 ## Reputation
 
-Reputation represents standing with a specific faction and ranges from **-100 to +100**.
+Reputation represents standing with a specific faction and ranges from **−100 to +100**.
+
+Reputation is its own track. It does not depend on AP rules. It triggers on faction-relevant outcomes regardless of whether those outcomes earned AP or tag advancement.
 
 ### What Triggers a Reputation Change
 
-- Direct interaction with a faction member that has a meaningful outcome.
-- Completing or failing an action that a faction has clear stake in.
-- A **Regional** or **Campaign** scale world consequence that involves the faction.
-- **Local** consequences do not change reputation.
+Reputation can change in three ways:
+
+1. **Drift** — small, repeated faction-relevant beats that accumulate over time
+2. **Direct change** — meaningful interactions or completed/failed actions with faction stake
+3. **World-consequence change** — outcomes whose consequence reshapes the faction's situation directly
+
+### Consequence Scale (Reputation Use)
+
+Reputation uses the following consequence vocabulary, defined here for self-contained use. This vocabulary is scoped to reputation in this file; other tracks define their own triggers.
+
+| Scale | One-sentence definition |
+|---|---|
+| Local | The outcome affects only the immediate scene and creates no durable downstream pressure beyond the participants present. |
+| Situational | The outcome creates a meaningful short-term shift for the current objective, encounter, or nearby node. |
+| Regional | The outcome reshapes conditions across multiple locations, factions, or travel paths in the active region. |
+| Campaign | The outcome materially redirects major-arc stakes, long-horizon faction posture, or world-state trajectory. |
 
 ### Reputation Change by Action Scale
 
-| Action Scale | Standing Change |
+| Trigger | Standing Change |
 |---|---|
-| Situational | ±5 |
-| Regional | ±15 |
-| Campaign | ±30 |
+| Drift (faction-relevant beat without higher-scale stake) | ±1 to ±2 |
+| Local outcome with direct faction relevance | ±2 to ±3 |
+| Situational outcome | ±5 |
+| Regional outcome | ±15 |
+| Campaign outcome | ±30 |
 
 Use **positive** change when the outcome materially aligns with faction interests, and **negative** change when it materially undermines faction interests.
+
+### Drift Cap Rule
+
+Drift (±1 to ±2) and Local-scale changes (±2 to ±3) **cannot cross a band boundary on their own**. They cap at one point inside the current band's nearer boundary. Crossing a band boundary requires an outcome of Situational scale or higher.
+
+This prevents standing from drifting into Respected, Distrusted, or any further band purely through small repeated beats. Band crossings remain meaningful events.
 
 ### Standing Bands and Roll Modifiers
 
@@ -394,11 +416,11 @@ Use **positive** change when the outcome materially aligns with faction interest
 |---|---|---|
 | Revered | 61 to 100 | +10 |
 | Respected | 21 to 60 | +5 |
-| Neutral | -20 to 20 | +0 |
-| Distrusted | -21 to -60 | -10 |
-| Despised | -61 to -100 | -20 |
+| Neutral | −20 to 20 | +0 |
+| Distrusted | −21 to −60 | −10 |
+| Despised | −61 to −100 | −20 |
 
-Always clamp standing to the valid range: **-100 to +100**.
+Always clamp standing to the valid range: **−100 to +100**.
 
 ### Relationship Propagation Rules (Band Crossings)
 
@@ -410,9 +432,9 @@ Apply propagation conservatively and faction-agnostically unless a faction has a
 
 - **Revered (61 to 100):** privileged access, proactive help, sensitive information access, reduced scrutiny, strong benefit of the doubt.
 - **Respected (21 to 60):** easier introductions, routine cooperation, standard services/opportunities opened, moderate institutional trust.
-- **Neutral (-20 to 20):** baseline access only, no special help, no automatic hostility.
-- **Distrusted (-21 to -60):** guarded interactions, reduced access, higher scrutiny, refusals on sensitive requests.
-- **Despised (-61 to -100):** denied access, active obstruction, and possible reporting/hostility depending on faction and context.
+- **Neutral (−20 to 20):** baseline access only, no special help, no automatic hostility.
+- **Distrusted (−21 to −60):** guarded interactions, reduced access, higher scrutiny, refusals on sensitive requests.
+- **Despised (−61 to −100):** denied access, active obstruction, and possible reporting/hostility depending on faction and context.
 
 ### Propagation Scope and Boundaries
 
@@ -424,25 +446,7 @@ Propagation may affect:
 - legal/social scrutiny
 - which jobs, requests, or aid offers are available
 
-Propagation does not require separate subsystem math. Do not create automatic cross-faction chain reactions unless explicitly authored.
-
-### Threshold-Crossing Behavior
-
-- Apply propagation when standing crosses from one band into another.
-- Do not re-trigger the same unlock/lock consequence every turn while standing remains in the same band.
-- On threshold crossing, update access and posture for future scenes.
-
-### Faction-Agnostic Threshold Examples
-
-- **Neutral -> Respected:** routine cooperation opens; trusted introductions become available.
-- **Respected -> Revered:** sensitive access and proactive support become available.
-- **Neutral -> Distrusted:** sensitive requests close; scrutiny and friction increase.
-- **Distrusted -> Despised:** denial, expulsion, reporting, or active interference becomes likely by faction context.
-
-### Write Rules for `last_change` and `note`
-
-- Update `last_change` every time standing changes, using a one-sentence description of the triggering event.
-- Update `note` only when the faction's disposition toward the character has fundamentally shifted in nature.
+Propagation does not require separate subsystem math.
 
 ---
 
