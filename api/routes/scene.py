@@ -10,6 +10,7 @@ from pydantic import ValidationError
 
 from api.database import get_pool
 from api.models import CharacterModel, LocationData, SceneContext, WorldModel
+from api.routes.state import _normalize_character_state
 from api.scene_context import build_scene_context
 
 router = APIRouter()
@@ -37,7 +38,9 @@ async def get_scene_context(
             raise HTTPException(status_code=404, detail="session not found")
 
         try:
-            character = CharacterModel.model_validate(json.loads(state_row["character"]))
+            character = CharacterModel.model_validate(
+                _normalize_character_state(json.loads(state_row["character"]))
+            )
             world = WorldModel.model_validate(json.loads(state_row["world"]))
         except ValidationError as e:
             raise HTTPException(

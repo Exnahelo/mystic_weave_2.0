@@ -6,6 +6,7 @@ from scripts.migrate_character_v4 import (
     migrate_character_document,
     migrate_character_payload,
 )
+from tests.helpers import zero_advancement
 
 
 @pytest.mark.unit
@@ -32,7 +33,7 @@ def test_migrate_character_payload_renames_species_and_removes_legacy_keys() -> 
         "identity": {},
         "equipment": {"worn": [], "carried": [], "stashed": []},
         "reputation": [],
-        "advancement": {"points_available": 0, "points_spent": 0, "points_earned_total": 0},
+        "advancement": zero_advancement(),
         "magic_fields": ["sacred", "warding"],
         "draconic_traits": ["dragon_breath"],
         "level": 1,
@@ -79,7 +80,7 @@ def test_migrate_character_payload_preserves_existing_culture_and_fields() -> No
         "identity": {},
         "equipment": {"worn": [], "carried": [], "stashed": []},
         "reputation": [],
-        "advancement": {"points_available": 0, "points_spent": 0, "points_earned_total": 0},
+        "advancement": zero_advancement(),
     }
 
     migrated, changed, used_default = migrate_character_payload(payload)
@@ -113,7 +114,7 @@ def test_migrate_character_document_validates_output() -> None:
         "identity": {},
         "equipment": {"worn": [], "carried": [], "stashed": []},
         "reputation": [],
-        "advancement": {"points_available": 0, "points_spent": 0, "points_earned_total": 0},
+        "advancement": zero_advancement(),
     }
 
     migrated, changed, used_default, validated = migrate_character_document(payload)

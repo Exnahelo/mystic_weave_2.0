@@ -24,6 +24,8 @@ import sys
 
 import httpx
 
+from tests.helpers import zero_advancement
+
 BASE_URL = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8000"
 
 _pass = 0
@@ -221,9 +223,11 @@ def part1(client: httpx.Client) -> str | None:
     # v3.2.0 — advancement block
     advancement = char.get("advancement", {})
     check("1.3.ab", isinstance(advancement, dict), f"advancement block present: {type(advancement)}")
-    check("1.3.ac", advancement.get("points_available") == 0, f"points_available: {advancement.get('points_available')}")
+    check("1.3.ac", advancement.get("points_available_earned") == zero_advancement()["points_available_earned"], f"points_available_earned: {advancement.get('points_available_earned')}")
     check("1.3.ad", advancement.get("points_spent") == 0, f"points_spent: {advancement.get('points_spent')}")
     check("1.3.ae", advancement.get("points_earned_total") == 0, f"points_earned_total: {advancement.get('points_earned_total')}")
+    check("1.3.af0", advancement.get("points_available_awarded") == 0, f"points_available_awarded: {advancement.get('points_available_awarded')}")
+    check("1.3.af1", advancement.get("tag_advance_counters") == zero_advancement()["tag_advance_counters"], f"tag_advance_counters: {advancement.get('tag_advance_counters')}")
 
     # v3.1.0 — world blocks
     world = data["world"]
@@ -517,9 +521,14 @@ def part2(client: httpx.Client, session_id: str) -> None:
                 },
             ],
             "advancement": {
-                "points_available": 1,
+                "points_available_earned": {
+                    **zero_advancement()["points_available_earned"],
+                    "power": 1,
+                },
+                "points_available_awarded": 0,
                 "points_spent": 0,
                 "points_earned_total": 1,
+                "tag_advance_counters": zero_advancement()["tag_advance_counters"],
             },
         },
         "world": {
@@ -579,12 +588,14 @@ def part2(client: httpx.Client, session_id: str) -> None:
 
         # v3.2.0 — advancement round-trip
         advancement = char.get("advancement", {})
-        check("2.2.l", advancement.get("points_available") == 1,
-              f"points_available: {advancement.get('points_available')}")
+        check("2.2.l", advancement.get("points_available_earned", {}).get("power") == 1,
+              f"points_available_earned.power: {advancement.get('points_available_earned', {}).get('power')}")
         check("2.2.m", advancement.get("points_spent") == 0,
               f"points_spent: {advancement.get('points_spent')}")
         check("2.2.n", advancement.get("points_earned_total") == 1,
               f"points_earned_total: {advancement.get('points_earned_total')}")
+        check("2.2.na", advancement.get("points_available_awarded") == 0,
+              f"points_available_awarded: {advancement.get('points_available_awarded')}")
 
         # v3.1.0 — companions round-trip
         companions = world.get("companions", [])
@@ -740,7 +751,7 @@ def part5(client: httpx.Client, session_id: str) -> None:
               f"equipment empty on re-seed")
         check("5.1.j", char.get("reputation") == [],
               f"reputation empty on re-seed")
-        check("5.1.k", char.get("advancement") == {"points_available": 0, "points_spent": 0, "points_earned_total": 0},
+        check("5.1.k", char.get("advancement") == zero_advancement(),
               f"advancement initialized on re-seed")
 
 

@@ -4,7 +4,7 @@ info:
   description: Persistent game state backend for a text-based RPG powered by a custom
     GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution
     with domain scores and competency tiers.
-  version: 4.2.0
+  version: 4.3.0
 servers:
 - url: https://mysticweave-production.up.railway.app
   description: Production (Railway)
@@ -152,6 +152,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateCharacterResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /character/{session_id}/spend_ap:
+    post:
+      summary: Spend Ap
+      description: 'Spend AP to raise a domain score. Earned AP can only be drawn
+        from the target domain''s pool; awarded AP can be drawn for any domain. The
+        two sources may be combined. Bracket costs apply point-by-point: 1 AP per
+        point at scores 25-60, 2 AP at 61-70, 3 AP at 71-80.'
+      operationId: spend_ap_character__session_id__spend_ap_post
+      parameters:
+      - name: session_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Session Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpendAPRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpendAPResponse'
         '422':
           description: Validation Error
           content:
@@ -586,7 +620,7 @@ paths:
       tags:
       - health
       summary: Root
-      description: Root — confirms the API is running.
+      description: "Root \u2014 confirms the API is running."
       operationId: root__get
       responses:
         '200':
@@ -600,7 +634,7 @@ paths:
       tags:
       - health
       summary: Health Check
-      description: Health check endpoint — used by Railway and uptime monitors.
+      description: "Health check endpoint \u2014 used by Railway and uptime monitors."
       operationId: health_check_health_get
       responses:
         '200':
@@ -660,9 +694,16 @@ components:
       description: Player's +10 domain adjustment pool at creation. Max +5 per domain.
     AdvancementState:
       properties:
-        points_available:
+        points_available_earned:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Points Available Earned
+          description: 'Per-domain earned AP pools. Keys: power, agility, perception,
+            endurance, intellect, will, presence.'
+        points_available_awarded:
           type: integer
-          title: Points Available
+          title: Points Available Awarded
           default: 0
         points_spent:
           type: integer
@@ -672,8 +713,27 @@ components:
           type: integer
           title: Points Earned Total
           default: 0
+        tag_advance_counters:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Tag Advance Counters
+          description: Per-domain counters; tag advances increment these. At 3, convert
+            to +1 earned AP in that domain.
       type: object
       title: AdvancementState
+      description: 'Per-domain earned AP pools, single awarded AP pool, lifetime totals,
+
+        and per-domain tag advancement counters.
+
+
+        Earned AP is locked to its source domain (each domain has its own pool).
+
+        Awarded AP is free-allocation across any domain (single pool).
+
+        Counters track tag advances per domain; every 3 advances in a domain
+
+        converts to +1 earned AP in that domain.'
     Alignment:
       properties:
         order:
@@ -1465,8 +1525,8 @@ components:
       - focus
       - background
       title: CreateCharacterRequest
-      description: Body for POST /character/create — seeds character from game system
-        data.
+      description: "Body for POST /character/create \u2014 seeds character from game\
+        \ system data."
     CreateCharacterResponse:
       properties:
         session_id:
@@ -1892,20 +1952,12 @@ components:
       additionalProperties: false
       type: object
       title: CreatureNarrative
-      description: 'Optional narrative block for creatures with individual story-weight
-
-        content. Nullable on the parent models. Catalog-templated creatures
-
-        without individual history leave this as None.
-
-
-        Used on CreatureCompanion and ExceptionalCompanion. For
-
-        ExceptionalCompanion with sapience=full, the fields here may be
-
-        redundant with motivations/alignment — that''s a content concern,
-
-        not a schema one.'
+      description: "Optional narrative block for creatures with individual story-weight\n\
+        content. Nullable on the parent models. Catalog-templated creatures\nwithout\
+        \ individual history leave this as None.\n\nUsed on CreatureCompanion and\
+        \ ExceptionalCompanion. For\nExceptionalCompanion with sapience=full, the\
+        \ fields here may be\nredundant with motivations/alignment \u2014 that's a\
+        \ content concern,\nnot a schema one."
     CultureOption:
       properties:
         index:
@@ -3123,10 +3175,9 @@ components:
           $ref: '#/components/schemas/Alignment'
       type: object
       title: Identity
-      description: 'Narrative character block. Captured at creation, GPT-readable
-        every session.
-
-        All fields optional at creation — can be filled in as play reveals them.'
+      description: "Narrative character block. Captured at creation, GPT-readable\
+        \ every session.\nAll fields optional at creation \u2014 can be filled in\
+        \ as play reveals them."
     Identity-Output:
       properties:
         origin:
@@ -3161,10 +3212,9 @@ components:
           $ref: '#/components/schemas/Alignment'
       type: object
       title: Identity
-      description: 'Narrative character block. Captured at creation, GPT-readable
-        every session.
-
-        All fields optional at creation — can be filled in as play reveals them.'
+      description: "Narrative character block. Captured at creation, GPT-readable\
+        \ every session.\nAll fields optional at creation \u2014 can be filled in\
+        \ as play reveals them."
     ItemCatalogResponse:
       properties:
         mundane_items:
@@ -3636,14 +3686,9 @@ components:
       - focus
       - backgrounds
       title: OptionsResponse
-      description: 'Response for GET /options — creation-scope enumeration.
-
-
-        Only ancestries, cultures, focus archetypes, and backgrounds live here.
-
-        Runtime catalogs are served by /catalog/items, /catalog/creatures,
-
-        /catalog/vocab.'
+      description: "Response for GET /options \u2014 creation-scope enumeration.\n\
+        \nOnly ancestries, cultures, focus archetypes, and backgrounds live here.\n\
+        Runtime catalogs are served by /catalog/items, /catalog/creatures,\n/catalog/vocab."
     PacingState:
       properties:
         tension:
@@ -3700,9 +3745,8 @@ components:
           default: unknown
       type: object
       title: Politics
-      description: 'World-level relational and political state.
-
-        Not a subsystem — a lightweight store for the GPT to track active context.'
+      description: "World-level relational and political state.\nNot a subsystem \u2014\
+        \ a lightweight store for the GPT to track active context."
     ReputationEntry:
       properties:
         faction:
@@ -3826,7 +3870,7 @@ components:
       required:
       - target
       title: RollRequest
-      description: Body for POST /roll — d100 roll-under resolution.
+      description: "Body for POST /roll \u2014 d100 roll-under resolution."
     RollResponse:
       properties:
         roll:
@@ -4267,6 +4311,73 @@ components:
       - hp
       title: SceneRelevantCharacterState
       description: Narration-relevant subset of character/world state.
+    SpendAPRequest:
+      properties:
+        target_domain:
+          type: string
+          title: Target Domain
+          description: Domain to advance. Must be one of the seven domains.
+        points:
+          type: integer
+          exclusiveMinimum: 0.0
+          title: Points
+          description: Number of domain points to purchase. Must be positive.
+        use_earned:
+          type: integer
+          minimum: 0.0
+          title: Use Earned
+          description: AP to draw from earned pool of target_domain. Must not exceed
+            points_available_earned[target_domain].
+          default: 0
+        use_awarded:
+          type: integer
+          minimum: 0.0
+          title: Use Awarded
+          description: AP to draw from awarded pool. Must not exceed points_available_awarded.
+          default: 0
+      additionalProperties: false
+      type: object
+      required:
+      - target_domain
+      - points
+      title: SpendAPRequest
+      description: Body for POST /character/{session_id}/spend_ap
+    SpendAPResponse:
+      properties:
+        session_id:
+          type: string
+          title: Session Id
+        target_domain:
+          type: string
+          title: Target Domain
+        points_purchased:
+          type: integer
+          title: Points Purchased
+        ap_cost_total:
+          type: integer
+          title: Ap Cost Total
+        ap_drawn_earned:
+          type: integer
+          title: Ap Drawn Earned
+        ap_drawn_awarded:
+          type: integer
+          title: Ap Drawn Awarded
+        new_domain_score:
+          type: integer
+          title: New Domain Score
+        advancement:
+          $ref: '#/components/schemas/AdvancementState'
+      type: object
+      required:
+      - session_id
+      - target_domain
+      - points_purchased
+      - ap_cost_total
+      - ap_drawn_earned
+      - ap_drawn_awarded
+      - new_domain_score
+      - advancement
+      title: SpendAPResponse
     SurvivalState:
       properties:
         hunger:

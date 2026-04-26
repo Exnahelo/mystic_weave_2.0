@@ -7,6 +7,7 @@ from fastapi.testclient import TestClient
 
 from api.database import get_pool
 from api.routes import companion
+from tests.helpers import zero_advancement
 
 
 class _AcquireCtx:
@@ -93,11 +94,7 @@ def _character() -> dict:
         },
         "equipment": {"worn": [], "carried": [], "stashed": []},
         "reputation": [],
-        "advancement": {
-            "points_available": 0,
-            "points_spent": 0,
-            "points_earned_total": 0,
-        },
+        "advancement": zero_advancement(),
     }
 
 

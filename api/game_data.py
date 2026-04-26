@@ -14,6 +14,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, Callable
 
+from api.models import DOMAIN_KEYS
 from core.dice_roller import roll
 
 _DATA_DIR = Path(__file__).parent.parent / "data"
@@ -264,6 +265,84 @@ def get_application_group(app_index: str) -> str | None:
     if app_index not in data:
         return None
     return data[app_index].get("group")
+
+
+def get_tag_primary_domain(tag_index: str, tag_kind: str) -> str | None:
+    """
+    Return the primary_domain of a tag by its index and kind.
+
+    tag_kind: 'knowledge' | 'application' | 'field'
+
+    For applications, primary_domain comes directly from the application entry.
+    For knowledge groups and magic fields, it comes from the group/field entry.
+
+    Returns None if the tag is not found in the registry. Callers should
+    treat None as "skip counter increment for this tag" — defensive, not fatal.
+    """
+    if tag_kind == "knowledge":
+        data = _load_json("tags/knowledge_groups.json")
+    elif tag_kind == "application":
+        data = _load_json("tags/applications.json")
+    elif tag_kind == "field":
+        data = _load_json("tags/magic_fields.json")
+    else:
+        return None
+
+    if isinstance(data, list):
+        for entry in data:
+            if isinstance(entry, dict) and entry.get("index") == tag_index:
+                return entry.get("primary_domain")
+        return None
+
+    if isinstance(data, dict):
+        entry = data.get(tag_index)
+        if isinstance(entry, dict):
+            return entry.get("primary_domain")
+        return None
+
+    return None
+
+
+def validate_application_parent_cap(
+    character: dict[str, Any],
+    delta_application: dict[str, int],
+) -> None:
+    """
+    Enforce: an application tag may not exceed the tier of its parent knowledge group.
+
+    Exception: if the application is already above its parent (seeded above at creation),
+    it does not regress, but cannot advance further until the parent catches up.
+
+    Raises ValueError with a descriptive message on violation.
+    """
+    knowledge = character.get("knowledge") or {}
+    existing_application = character.get("application") or {}
+
+    for app_index, new_tier in delta_application.items():
+        if not isinstance(new_tier, int):
+            continue
+
+        parent_group = get_application_group(app_index)
+        if parent_group is None:
+            continue
+
+        parent_tier = knowledge.get(parent_group, 0) or 0
+        old_tier = existing_application.get(app_index, 0) or 0
+
+        if old_tier > parent_tier:
+            if new_tier > old_tier:
+                raise ValueError(
+                    f"application {app_index!r} is at T{old_tier} (seeded above "
+                    f"parent {parent_group!r} at T{parent_tier}); cannot advance "
+                    f"to T{new_tier} until parent catches up"
+                )
+            continue
+
+        if new_tier > parent_tier:
+            raise ValueError(
+                f"application {app_index!r} cannot advance to T{new_tier}: "
+                f"parent knowledge group {parent_group!r} is at T{parent_tier}"
+            )
 
 def list_mundane_items() -> list[dict[str, Any]]:
     """Return all mundane catalog items."""
@@ -786,9 +865,11 @@ def seed_character(
         "equipment":      {"worn": [], "carried": [], "stashed": []},
         "reputation":     [],
         "advancement": {
-            "points_available": 0,
+            "points_available_earned": {d: 0 for d in DOMAIN_KEYS},
+            "points_available_awarded": 0,
             "points_spent": 0,
             "points_earned_total": 0,
+            "tag_advance_counters": {d: 0 for d in DOMAIN_KEYS},
         },
     }
 
