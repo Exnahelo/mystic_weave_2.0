@@ -41,6 +41,10 @@ load_dotenv()
 
 CANONICAL_WORLD_DIR = Path(__file__).parent.parent / "data" / "world"
 
+# Types that live under data/world/ but are not navigable location nodes.
+# Files with these types are skipped by the seeder.
+NON_LOCATION_TYPES = {"order", "civic-structure"}
+
 
 def parse_location_file(path: Path) -> dict | None:
     """Parse a location YAML file and return a location dict, or None if invalid."""
@@ -87,6 +91,9 @@ async def seed(database_url: str) -> None:
     for path in canonical_files:
         loc = parse_location_file(path)
         if loc:
+            if loc["type"] in NON_LOCATION_TYPES:
+                print(f"  SKIP {path.name} — non-location type '{loc['type']}'")
+                continue
             locations.append(loc)
             print(f"  Parsed: {loc['id']} ({loc['name']})")
 
