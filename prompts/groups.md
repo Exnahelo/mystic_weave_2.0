@@ -322,25 +322,34 @@ This category includes lingering Discordant War grievance, anti-outsider paranoi
 
 The following groups are not Drakenvale institutions. They are sovereign-equal Feywood orders documented here as reference entries so realm-side queries can find them. Authoritative content for each lives in the Feywood files.
 
+### Heartwarden
+
+The elite sacred-guardian order of the Heartwood and the Silent Grove.
+
+**Type:** Elven sacred-protection martial order (Feywood-internal)
+**Status:** Reference pointer; canon authority lies with Feywood files
+
+The Heartwarden order is sworn directly to the Heartwood and is responsible for guarding the Heartwood’s inner sanctums, the Silent Grove, and the ceremonies bound to those sites. Heartwardens are not a household order of any specific house; they are an order of the Feywood, taking their oaths at the Heartwood itself. Membership cuts across House lines and includes elves from any noble or common origin who have proven the discipline and devotion required. **Lethariel Heartwood** holds Heartwarden Captaincy in emeritus standing (see `npcs.md`); the order’s most consequential historical action in Drakenvale’s record was Lethariel’s leadership of the Feywood contingent during the Discordant War, fulfilling the Oath of the Fallen’s mutual-aid clause.
+
 ### Greenshield
 
-The Feywood’s elite border-defense and threshold-watch order.
+The Feywood’s primary defensive military order.
 
 **Type:** Elven defensive military order (Feywood-internal)
 **Status:** Reference pointer; canon authority lies with Feywood files
 
-The Greenshield maintains the Feywood’s western threshold and the elven side of the realm-to-realm border. They are the most likely Feywood institution Drakenvale residents will encounter at the Feywood Border or at Vaelmere during ordinary diplomatic and trade contact. They are not part of Drakenvale’s defense structure; coordination between Greenshield and the Dragon Guard or Wardens is conducted at the Council level under the Oath of the Fallen.
+The Greenshield is the Feywood’s main practical defense — the order responsible for settlement defense, daily security, patrols throughout the Feywood interior, and the elven side of the realm-to-realm border. Most Feywood elves serving in arms serve in the Greenshield. They are the most likely Feywood institution Drakenvale residents will encounter at the Feywood Border or at Vaelmere during ordinary diplomatic and trade contact. They are not part of Drakenvale’s defense structure; coordination between Greenshield and the Dragon Guard or Wardens is conducted at the Council level under the Oath of the Fallen.
 
-For full doctrine, structure, and present-day operations, see the Feywood `groups` files.
+### Ranger
 
-### Heartwarden
+A specialized branch of the Greenshield for outer-range fieldwork.
 
-The household martial order of House Heartwood, sworn to the Heartwood itself.
-
-**Type:** Elven house-bound martial order (Feywood-internal)
+**Type:** Elven scout and outer-range order, organizationally part of the Greenshield (Feywood-internal)
 **Status:** Reference pointer; canon authority lies with Feywood files
 
-The Heartwarden order is the martial and ceremonial order of House Heartwood, currently held in emeritus standing by Lethariel Heartwood (see `npcs.md`). The order’s most consequential historical action in Drakenvale’s record was Lethariel’s leadership of the Feywood contingent during the Discordant War, fulfilling the Oath of the Fallen’s mutual-aid clause. The Heartwarden order is otherwise internal to the Feywood and to House Heartwood specifically.
+Rangers are Greenshield personnel selected and trained for fieldwork at the Feywood’s outer ranges and along the realm-to-realm threshold — long-range patrol, scouting, threshold-watch, escort of sanctioned visitors through the Feywood’s liminal geometry, and contact with realm-side forces. They are not a separate order from the Greenshield; they are the Greenshield’s specialist arm for work that cannot be conducted from settled patrol. Realm visitors traveling through the Feywood with elven escort are most often guided by Rangers.
+
+For full doctrine, structure, and present-day operations of all three orders, see the Feywood `groups` files.
 
 ---
 

@@ -45,7 +45,7 @@ discovered: false
 
 # Heartwood Estate
 
-The ancestral woodland seat of House Heartwood. Ancient, integrated, small by human measure and substantial by elven. The Estate is one of two substantial seats the house maintains — the wild-heritage residence where the family's deepest roots sit and where the proving-wild tradition operates. The house's political-ceremonial authority is exercised at its Thornveil seat in the Heartwood Approach; the Estate is where its wild-connected family life resides. Lethariel Heartwood is in residence. The Heartwood bow she crafted during the Discordant War is here with her.
+The ancestral woodland seat of House Heartwood. Ancient, integrated, small by human measure and substantial by elven. The Estate is one of two substantial seats the house maintains — the wild-heritage residence where the family's deepest roots sit and where the proving-wild tradition operates. The house's political-ceremonial authority is exercised at its Thornveil seat in the Heartwood Approach; the Estate is where its wild-connected family life resides. Lethariel Heartwood is in residence. The Heartwood bow — cut from a branch the Heartwood dropped to her during the Discordant War — is here with her.
 
 ## Scene Texture
 
@@ -59,13 +59,13 @@ The central space is not a courtyard. It is a clearing of moderate size, kept op
 
 The main hall is where the house's formal life occurs — the Elder's seat, the decisions of weight, the reception of important visitors, the family's ceremonial observances. It is not large by the standard of any realm noble hall. It is the size of a substantial home. Elderoak pillars anchor it; the floor is worked wood over packed earth; the roof moves slightly with the wind in the way that all well-grown elven architecture moves. Inside, the walls carry family records in their growth — grown markings that trained elven eyes can read as genealogy and event-memory.
 
-The main hall's hearth is the Estate's heart in the domestic sense. The fire here is kept banked continuously, generation over generation; it has not fully gone out in living memory. The hearth is where the family gathers when one of them returns; it is where the house's children are presented on return from their wild-upbringing; it is where Lethariel received the branch sign before the Discordant War.
+The main hall's hearth is the Estate's heart in the domestic sense. The fire here is kept banked continuously, generation over generation; it has not fully gone out in living memory. The hearth is where the family gathers when one of them returns; it is where the house's children are presented on return from their wild-upbringing.
 
 ## Lethariel's Wing
 
 The current head of the house occupies a particular set of rooms that have been home to the house's matriarch for some time. Her working space includes a small library (oral primacy notwithstanding, elven matriarchs maintain written records — treaties, ledgers, genealogies, correspondence with other houses), a weapons room where the Heartwood bow is kept when not in her hand, and a private garden where she walks in the early hours.
 
-The Heartwood bow itself is kept on a simple wooden stand. It is not in a display case; it is not behind glass. It is kept where she can reach it. The bow's presence is registered by visitors with any attunement as a distinct local weight in the ambient field — it is a living artifact in the specific sense that the Longbough it was cut from came to her through Heartwood sign, and something of that sign remains with the bow.
+The Heartwood bow itself is kept on a simple wooden stand. It is not in a display case; it is not behind glass. It is kept where she can reach it. The bow's presence is registered by visitors with any attunement as a distinct local weight in the ambient field — it is a living artifact in the specific sense that the branch it was cut from was dropped by the Heartwood itself, addressed to her in the Discordant War's deadlock, and something of that working remains with the bow.
 
 ## The Wild-Upbringing and the Proving
 
