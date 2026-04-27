@@ -7,17 +7,17 @@ parent_location_id: southern-dark-quadrant
 description: >
   The realm's deepest wound, a surface fracture in the land where the final
   battle of the Discordant War ended and the Platinum Warden gave his life. At
-  the Rift's heart stands the ruined keep of the chromatic rebels — a
-  shattered dark-stone complex built on the site before the war as a focus for
-  the tapping of deep corruption. At the keep's center is the pit the rebels
-  dug: a deliberate excavation into the earth, seeking the dark energy they
-  sought to weaponize, that collapsed inward during Vindrael's sacrifice and
-  now descends to a depth no one has measured. The ground around the keep is
-  warped. The air carries a low pulsing resonance — the combined imprint of
-  the digging corruption, the slaughter of the battle, and whatever ceremonies
-  the rebels performed here in the war's closing days. It is not a place one
-  visits casually. Those who enter without preparation leave diminished. Those
-  who enter with training sometimes do not leave at all.
+  the Rift's heart stands the ruined Dark Hold — the Mordraxian Rebels'
+  shattered dark-stone complex, built on the site before the war as a focus
+  for the tapping of deep corruption. At the Hold's center is the pit the
+  rebels dug: a deliberate excavation into the earth, their channel toward
+  Mordrax's power buried far below, that collapsed inward during Vindrael's
+  sacrifice and now descends to a depth no one has measured. The ground around
+  the Hold is warped. The air carries a low pulsing resonance — the combined
+  imprint of the digging corruption, the slaughter of the battle, and whatever
+  ceremonies the rebels performed here in the war's closing days. It is not a
+  place one visits casually. Those who enter without preparation leave
+  diminished. Those who enter with training sometimes do not leave at all.
 connections:
 - rift-of-discord-edge
 - southern-dark-quadrant
@@ -29,7 +29,7 @@ tags:
 - southern-dark-quadrant
 - discordant-war-legacy
 - corrupted-land
-- ruined-keep
+- dark-hold
 - bottomless-pit
 - vindrael-sacrifice-site
 - warden-training
@@ -42,7 +42,7 @@ discovered: true
 
 # Rift of Discord
 
-The realm's deepest wound, a surface fracture in the land where the final battle of the Discordant War ended and the Platinum Warden gave his life. At the Rift's heart stands the ruined keep of the chromatic rebels — a shattered dark-stone complex built on the site before the war as a focus for the tapping of deep corruption. At the keep's center is the pit the rebels dug: a deliberate excavation into the earth, seeking the dark energy they sought to weaponize, that collapsed inward during Vindrael's sacrifice and now descends to a depth no one has measured. The ground around the keep is warped. The air carries a low pulsing resonance — the combined imprint of the digging corruption, the slaughter of the battle, and whatever ceremonies the rebels performed here in the war's closing days. It is not a place one visits casually. Those who enter without preparation leave diminished. Those who enter with training sometimes do not leave at all.
+The realm's deepest wound, a surface fracture in the land where the final battle of the Discordant War ended and the Platinum Warden gave his life. At the Rift's heart stands the ruined Dark Hold — the Mordraxian Rebels' shattered dark-stone complex, built on the site before the war as a focus for the tapping of deep corruption. At the Hold's center is the pit the rebels dug: a deliberate excavation into the earth, their channel toward Mordrax's power buried far below, that collapsed inward during Vindrael's sacrifice and now descends to a depth no one has measured. The ground around the Hold is warped. The air carries a low pulsing resonance — the combined imprint of the digging corruption, the slaughter of the battle, and whatever ceremonies the rebels performed here in the war's closing days. It is not a place one visits casually. Those who enter without preparation leave diminished. Those who enter with training sometimes do not leave at all.
 
 ## Scene Texture
 
@@ -54,17 +54,17 @@ Light behaves strangely. Shadows are slightly wrong — a shade too deep, or sli
 
 The air pulses. This is the Rift's defining sensory phenomenon. At a frequency too slow to be a sound and too present to be imagined, the atmosphere carries a rhythm — a low resonance that visitors feel in their bones, in their teeth, behind their eyes. The rhythm is not constant; it varies in intensity across the site and across time of day. It is strongest near the pit at the Rift's center. It is never absent.
 
-The **ruined keep** dominates the middle distance. A dark-stone structure, roughly rectangular, two stories and a partial third before it was broken in the war's final battle. Walls still stand in long stretches; the roof is entirely gone; interior chambers are exposed to the sky, their floors strewn with collapsed stone and the remnants of furnishings too warped or too anchored to have been removed afterward. The keep does not look abandoned in the ordinary sense. It looks like a structure that was being used intensely at the moment it was broken, and was then simply left as it was. The quality of the ruin is specific. It is a crime scene that has never been cleaned up.
+The **ruined Dark Hold** dominates the middle distance. A dark-stone structure, roughly rectangular, two stories and a partial third before it was broken in the war's final battle. Walls still stand in long stretches; the roof is entirely gone; interior chambers are exposed to the sky, their floors strewn with collapsed stone and the remnants of furnishings too warped or too anchored to have been removed afterward. The Hold does not look abandoned in the ordinary sense. It looks like a structure that was being used intensely at the moment it was broken, and was then simply left as it was. The quality of the ruin is specific. It is a crime scene that has never been cleaned up.
 
-The stone of the keep is not native to the Rift's geology. The chromatic rebels brought it in, or grew it, or summoned it — the methods are not preserved in canon record. It is dark, smooth, and runs veined with a faint violet-black material that is either a natural mineral or something the rebels introduced during construction. Visitors handling the stone report a sense of cold that is not temperature.
+The stone of the Hold is not native to the Rift's geology. The Mordraxian Rebels brought it in, or grew it, or summoned it — the methods are not preserved in canon record. It is dark, smooth, and runs veined with a faint violet-black material that is either a natural mineral or something the rebels introduced during construction. Visitors handling the stone report a sense of cold that is not temperature.
 
-At the keep's center — where the main hall once stood — is **the pit**. Its mouth is roughly twenty paces across, irregular in shape, bordered by the collapsed remains of the floor that once covered it. The excavation is a shaft, widening as it descends, with carved steps along one wall that disappear into darkness before the eye can follow them down. The rebels dug this shaft seeking deep corruption; they reached what they sought; the shaft collapsed inward at the moment of Vindrael's sacrifice, and what was below came partway up before the Platinum Flame's reassertion forced it back down.
+At the Hold's center — where the main hall once stood — is **the pit**. Its mouth is roughly twenty paces across, irregular in shape, bordered by the collapsed remains of the floor that once covered it. The excavation is a shaft, widening as it descends, with carved steps along one wall that disappear into darkness before the eye can follow them down. The rebels dug this shaft as their channel toward what the Temple of Mordrax held below. They did not reach the Temple itself — that working was beyond them — but their channeling drew on its buried power. The shaft collapsed inward at the moment of Vindrael's sacrifice, severing the channel, and what was below came partway up before the Council's restored wards forced it back down.
 
 The pit's depth is unmeasured. Expeditions into the shaft have been attempted by the elite Wardens during specific training cycles; none have descended farther than approximately two hundred paces before the environment becomes impassable even for them. What lies below that depth is not canonically documented. The Council maintains an institutional silence on the matter. The Vigil at Platinum Oath Monastery maintains a different kind of silence, which is itself documentation of a sort.
 
 ## Vindrael's Sacrifice
 
-The site is, among its other meanings, the location where the Platinum Warden gave his life. Vindrael died at the pit's edge, resealing the Temple of Mordrax below by means that canon does not fully preserve. The sacrifice collapsed the chromatic rebels' excavation, broke their keep, ended the war in the realm's favor, and saved the sanctuary. It also cost the realm its founding moral leader and left this wound on the land.
+The site is, among its other meanings, the location where the Platinum Warden gave his life. Vindrael died at the pit's edge. His sacrifice collapsed the rebels' excavation shaft, severed their channel to Mordrax's power, broke the foundation of the rebellion, and saved the sanctuary. With the channel closed, the Draconic Council restored and reinforced the wards on the Temple of Mordrax buried far below — repairing what the rebels' channeling had stressed and adding new protections to the founding seal. The Warden's act made the resealing possible; the Council's working completed it. The cost was the realm's founding moral leader, and this wound left on the land.
 
 Vindrael's body was recovered. His tomb is at Platinum Oath Monastery. The Rift is where he died — not where he is buried. But the resonance of his death persists at the pit's edge. A sensitive visitor, particularly one attuned to Solveris-aligned sacred practice, will feel it. The Vigil feels it daily. The elite Wardens learn to feel it during their training. It is not a comforting presence; it is a weighty one.
 
@@ -88,7 +88,7 @@ The Vigil — the Platinum Acolytes — represents a different relationship enti
 
 ## Functions
 
-- **Historical memorial.** The Rift is, in its deepest meaning, a monument to the Discordant War's cost. The ruined keep. The pit. The Vindrael memorial. The warped land. The realm's civic memory is layered here in ways no other site preserves.
+- **Historical memorial.** The Rift is, in its deepest meaning, a monument to the Discordant War's cost. The ruined Dark Hold. The pit. The Vindrael memorial. The warped land. The realm's civic memory is layered here in ways no other site preserves.
 - **Elite Warden training ground.** The Wardens send their most promising candidates here for the final phase of training. The Rift's environment cannot be simulated; only lived through. Candidates who complete the full training arc — including sustained exposure to the Rift — are marked with the platinum-scale tattoo and become elite Wardens of the order. Candidates who do not complete the training either wash out or do not return.
 - **Vigil patrol and monitoring.** The Platinum Oath Monastery's Vigil maintains continuous monitoring of the Rift. Patrols rotate through the site, checking for changes in the pit's resonance, for signs of external intrusion, for the subtle phenomena that precede the kind of events the realm cannot allow to develop.
 - **Containment perimeter.** The Rift's Edge corridor node is the formal perimeter zone — the space between ordinary realm terrain and the Rift proper. The perimeter exists because the realm cannot simply declare the Rift a sealed area; the corruption at the interior does not stay at the interior, and the Edge absorbs enough of it that civic settlements beyond remain unaffected. The Edge is itself a hazard zone, but a lesser one.
@@ -115,7 +115,7 @@ Visitors exiting the Rift are typically observed by Vigil patrols without engage
 - southern-dark-quadrant
 - discordant-war-legacy
 - corrupted-land
-- ruined-keep
+- dark-hold
 - bottomless-pit
 - vindrael-sacrifice-site
 - warden-training
@@ -141,7 +141,7 @@ Trained elite Wardens and Vigil members are explicitly exceptions — they can o
 
 The bottomless pit is deliberately undescribed below ~200 paces. Canon does not document what is there. If a storyline requires deeper descent, it should be authored as a major event with Council and Vigil involvement.
 
-The ruined chromatic-rebel keep is a distinctive architectural feature. Its stone is dark, smooth, violet-veined, and not native to the region. Any storyline involving the keep's materials or construction methods should treat them as canonically opaque — the rebels' methods did not survive the war, and the Vigil has not investigated in ways that would be formally shared.
+The ruined Dark Hold is a distinctive architectural feature. Its stone is dark, smooth, violet-veined, and not native to the region. Any storyline involving the keep's materials or construction methods should treat them as canonically opaque — the rebels' methods did not survive the war, and the Vigil has not investigated in ways that would be formally shared.
 
 Vindrael's sacrifice is the site's defining historical event. His memorial stone — uninscribed, single cut stone at the approximate spot of his death — is a canonical feature. Visits to it with Vigil guidance are possible for characters with appropriate cause.
 
