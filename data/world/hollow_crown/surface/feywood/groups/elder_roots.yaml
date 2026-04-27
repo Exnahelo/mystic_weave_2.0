@@ -1,0 +1,37 @@
+id: elder-roots
+name: The Elder Roots
+type: order
+region_id: hollow-crown
+parent_location_id: silent-grove
+description: >
+  The druidic community of the Feywood. The Elder Roots are the elves and
+  the rare integrated non-elven residents whose practice attends directly
+  to the Feywood as a living system — reading the Heartwood's signals,
+  interpreting the broader land's communications, conducting the
+  ceremonies that maintain the elven community's relationship with the
+  land, and coordinating responses to ecological and magical change.
+  Leadership runs Elder Druid of the Heartwood at the head, with the
+  Druid Master as second; the two run the Silent Grove together as the
+  community's organizational center. Working sites span the Silent Grove,
+  the Heartwood, and the Reading Glade, with distributed presence across
+  the broader Feywood. The Elder Roots are Feywood-specific — they are
+  not connected to realm-side druidic traditions and do not assume
+  alignment with druids elsewhere. Approximately one hundred eighty
+  active druids plus twenty to thirty apprentices in training at any time.
+tags:
+  - drakenvale
+  - feywood
+  - elder-roots
+  - druidic-community
+  - silent-grove
+  - heartwood-attendance
+  - reading-glade
+  - land-reading
+  - feywood-specific
+  - cross-house
+known_npcs:
+  - Elder Druid of the Heartwood
+  - Druid Master of the Silent Grove
+  - Senior Druid
+  - Druid in Apprenticeship
+discovered: false

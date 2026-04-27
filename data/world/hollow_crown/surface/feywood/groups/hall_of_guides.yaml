@@ -1,0 +1,35 @@
+id: hall-of-guides
+name: The Hall of Guides
+type: order
+region_id: hollow-crown
+parent_location_id: vaelmere
+description: >
+  The Feywood's specialist organization for civilian-coded escort of
+  sanctioned visitors through the realm's liminal geometry. The Hall of
+  Guides operates without arms-ready posture, navigating the Feywood's
+  shifting paths through accumulated relationship with the land rather
+  than through martial vigilance. Membership is distinguished by
+  geometry-reading capability — the specialist skill of knowing when the
+  Feywood is opening for a party, when it is not, and how to move through
+  the land's cooperation. The Hall is led by the Master of Guides; House
+  Silverbough is overrepresented at all levels and disproportionately at
+  the Master role through generational Outer Wild knowledge and ecological
+  stewardship; the Hall is not house-bound. Approximately sixty active
+  Guides operate at any given time. Working sites center on Vaelmere
+  (visitor reception) and distributed presence across the Feywood for
+  active escorts; coordination work conducted at Thornveil.
+tags:
+  - drakenvale
+  - feywood
+  - hall-of-guides
+  - civilian-escort
+  - liminal-geometry
+  - feywood-navigation
+  - vaelmere-based
+  - cross-house
+known_npcs:
+  - Master of Guides
+  - Senior Guide
+  - Guide
+  - Guide Apprentice
+discovered: false
