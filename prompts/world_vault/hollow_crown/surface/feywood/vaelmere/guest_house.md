@@ -4,7 +4,7 @@ name: The Guest House
 type: location
 region_id: hollow-crown
 parent_location_id: vaelmere
-description: Accommodations for realm visitors who are sanctioned for Vaelmere access but not proceeding onward to Thornveil. Simple but comfortable lodging in the elven idiom, designed to support visits lasting from several days to several weeks. The Guest House handles most routine realm-trader visits, scholarly stays of Vaelmere-level duration, diplomatic staff on extended Vaelmere business, and other sanctioned visitors whose purpose does not require deeper-Glade access. Not a realm-style inn; a purpose-built lodging that operates on elven registers while accommodating realm-visitor patterns.
+description: Accommodations for realm visitors who are sanctioned for Vaelmere access but not proceeding onward to Thornveil. Simple but comfortable lodging in the elven idiom, designed to support visits lasting from several days to several weeks. The Guest House handles most routine realm-trader visits, scholarly stays of Vaelmere-level duration, diplomatic staff on extended Vaelmere business, and other sanctioned visitors whose purpose does not require deeper-Feywood access. Not a realm-style inn; a purpose-built lodging that operates on elven registers while accommodating realm-visitor patterns.
 connections:
 - vaelmere
 - wardens-hall
@@ -64,9 +64,9 @@ The Keeper handles:
 Typical Guest House residents include:
 
 - **Realm traders on sustained business.** Most realm traders spending days to weeks at Vaelmere stay here. Long-term repeat visitors develop genuine relationships with the Keeper and with Vaelmere regulars.
-- **Scholars.** Realm scholars with Vaelmere-level access for specific research — most commonly trade-relationship research, Vaelmere social studies, Feywood herbalism through the Glade species accessible at Vaelmere.
+- **Scholars.** Realm scholars with Vaelmere-level access for specific research — most commonly trade-relationship research, Vaelmere social studies, Feywood herbalism through the Feywood species accessible at Vaelmere.
 - **Diplomatic staff.** Non-ambassadorial diplomatic personnel on extended Vaelmere-level business stay here; full ambassadors receive Warden's-Hall-level accommodation for shorter visits.
-- **Intake visitors.** Visitors arriving for Glade-level business who are processed through Vaelmere on the way in or out sometimes spend brief nights here as part of their journey.
+- **Intake visitors.** Visitors arriving for Feywood-level business who are processed through Vaelmere on the way in or out sometimes spend brief nights here as part of their journey.
 
 Length of stay varies. Short stays of a few days are common for routine trade visits. Medium stays of several weeks are common for scholarly work. Extended stays of several months happen but are unusual and typically involve specific approval from the Warden.
 

@@ -51,7 +51,7 @@
     "base_domains": { "physical": 44, "instinct": 42, "composure": 48 },
     "base_hp": { "current": 42, "max": 42 },
     "temperament": "Steady, attentive, unusually composed. Moves through dense forest terrain without the nervousness that afflicts most horses in close country. Bonds slowly but deeply; remembers handlers over exceptional spans of time.",
-    "description": "A tall, lean courser native to the Feywood — named for the dark thorn-and-silver pattern that runs down its mane and tail. Briarmanes carry riders through the Glade with a steadiness no ordinary horse can match, threading between silverwood trunks and across ancient root paths as though the ground were an open field. Their coats shift slightly with the forest light, and their eyes carry the same bright low-light sharpness as other Feywood-touched creatures. Feywood rangers, envoys, and long-riders prize them above any other mount. They are rare outside the Glade."
+    "description": "A tall, lean courser native to the Feywood — named for the dark thorn-and-silver pattern that runs down its mane and tail. Briarmanes carry riders through the Feywood with a steadiness no ordinary horse can match, threading between silverwood trunks and across ancient root paths as though the ground were an open field. Their coats shift slightly with the forest light, and their eyes carry the same bright low-light sharpness as other Feywood-touched creatures. Feywood rangers, envoys, and long-riders prize them above any other mount. They are rare outside the Feywood."
   },
   {
     "species": "hound",

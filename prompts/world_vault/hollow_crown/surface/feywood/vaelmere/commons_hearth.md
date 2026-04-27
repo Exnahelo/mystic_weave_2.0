@@ -110,7 +110,7 @@ The Commons Keeper is a Tier-3 generative role invented here for this node. Spec
 
 Meals are plant-forward and canonically restrained. GPT should avoid realm-feast tropes when narrating Commons Hearth food. Meat appears; it is modest in proportion and comes from specific known sources.
 
-Observance schedules follow the Glade's lunar/event rhythm, not the realm calendar. GPT narration of Vaelmere events should reflect this.
+Observance schedules follow the Feywood's lunar/event rhythm, not the realm calendar. GPT narration of Vaelmere events should reflect this.
 
 The Commons Hearth is the most accessible civic institution for visitor socialization. Scenes requiring warm community contact for realm visitors work well here.
 

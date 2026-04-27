@@ -8,7 +8,7 @@ description: The Silent Grove's primary site for Heartwarden training — the fo
 connections:
 - silent-grove
 - heartwood
-- reading-glade
+- reading-Feywood
 tags:
 - drakenvale
 - feywood
@@ -33,7 +33,7 @@ Where Heartwardens are made. Seven years; sustained work; shaped by elder trees 
 
 ## Scene Texture
 
-The Training Grounds occupy a portion of the Silent Grove's working interior — a set of worked spaces integrated with the elder-tree landscape rather than carved out of it. Training happens beneath canopy that is older than any other in the Glade; the ambient field is continuously present and specifically attentive; the register is disciplined in the quality that gives the Grove its name.
+The Training Grounds occupy a portion of the Silent Grove's working interior — a set of worked spaces integrated with the elder-tree landscape rather than carved out of it. Training happens beneath canopy that is older than any other in the Feywood; the ambient field is continuously present and specifically attentive; the register is disciplined in the quality that gives the Grove its name.
 
 The Grounds are not a military compound. There are no barracks in the realm sense; trainees in residence during their cycle occupy quiet housing clusters elsewhere in the Grove. There are no parade grounds. The training spaces are integrated with the forest — a long running-path through specific terrain for endurance and mobility work; sparring circles in clearings of moderate size; archery lanes that thread through older growth at measured distances; quiet spaces for druidic instruction where movement is still and the work is interior.
 
@@ -47,11 +47,11 @@ Heartwarden training runs on a seven-year cycle. Trainees enter together in smal
 
 **Years 3-4: Integration.** Combat becomes integrated with field-reading and ambient-field awareness. Druidic practice deepens. Trainees begin extended solitary postings — weeks or months alone in specific terrain — as their judgment develops.
 
-**Years 5-6: Specialization.** Trainees develop toward specific Heartwarden roles within the order — Watch rotation work, combat coordination, liaison with specific Glade institutions, deep-wild competence. Individual instruction increases as the cohort's shape settles.
+**Years 5-6: Specialization.** Trainees develop toward specific Heartwarden roles within the order — Watch rotation work, combat coordination, liaison with specific Feywood institutions, deep-wild competence. Individual instruction increases as the cohort's shape settles.
 
 **Year 7: Sworn Preparation.** The final year integrates the cohort's work, prepares the trainees for their sworn oaths, and involves the senior Heartwardens and the Elder Druid of the Heartwood in the transition. Oaths are sworn at the Heartwood itself, not at the Training Grounds; the final work prepares the candidates for that moment.
 
-Not all candidates complete the cycle. The Glade does not moderate training to accommodate the unsuited; those whose path is elsewhere find themselves directed there, with dignity and without shame. Most who enter finish; some do not, and their other paths are respected.
+Not all candidates complete the cycle. The Feywood does not moderate training to accommodate the unsuited; those whose path is elsewhere find themselves directed there, with dignity and without shame. Most who enter finish; some do not, and their other paths are respected.
 
 ## Working Spaces
 
@@ -92,7 +92,7 @@ Observing a training session without being part of the instruction is unusual; m
 
 - `silent-grove`
 - `heartwood`
-- `reading-glade`
+- `reading-Feywood`
 
 ## Authoring Notes
 

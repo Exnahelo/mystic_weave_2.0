@@ -29,13 +29,13 @@ discovered: false
 
 # The Outer Bounds
 
-Where Thornveil thins. Newer residents begin here. Trade leaves and returns here. The boundary between the city and the Glade around it is gradient, not line; the Outer Bounds is that gradient.
+Where Thornveil thins. Newer residents begin here. Trade leaves and returns here. The boundary between the city and the Feywood around it is gradient, not line; the Outer Bounds is that gradient.
 
 ## Scene Texture
 
-The district feels less like a city district than any of Thornveil's inner zones. Canopy is managed but less dense; dwellings are set further apart; the ambient field is moderated by the mix of civic and wild. A walker moving out through the Outer Bounds experiences the city gradually releasing them into the Glade's larger forest — the change in light, the quieting of civic sound, the sense of space opening.
+The district feels less like a city district than any of Thornveil's inner zones. Canopy is managed but less dense; dwellings are set further apart; the ambient field is moderated by the mix of civic and wild. A walker moving out through the Outer Bounds experiences the city gradually releasing them into the Feywood's larger forest — the change in light, the quieting of civic sound, the sense of space opening.
 
-Paths here are better developed than in the Outer Wild but less continuous than in the inner districts. The trade-staging area has its own working infrastructure; the residential clusters have their own walks; the district's outer edge trails dissolve into Glade wild paths that lead toward Vaelmere or outward.
+Paths here are better developed than in the Outer Wild but less continuous than in the inner districts. The trade-staging area has its own working infrastructure; the residential clusters have their own walks; the district's outer edge trails dissolve into Feywood wild paths that lead toward Vaelmere or outward.
 
 The district receives more realm visitors than any other part of Thornveil. Not many — Thornveil is not an open city — but more than the inner districts. This shapes the Outer Bounds' register: slightly more accommodating, slightly more ready for outsiders, while still firmly Thornveil.
 
@@ -55,7 +55,7 @@ The Outer Bounds holds a disproportionate share of Thornveil's newer residents:
 
 **Integrated non-elves.** Humans, rare dwarves, occasional drakari, others of long-term residence in Thornveil most commonly begin and often remain in the Outer Bounds. Integration here is less socially observed than in the inner districts — the Hearth's tight cluster life or the Groves' house-inflected register can be difficult to enter; the Outer Bounds is more open.
 
-**Returning elves.** Elves returning from extended absences — realm-side work, outer-Glade postings, long study elsewhere, diplomatic service — often settle in the Outer Bounds first as they re-establish Thornveil residency. Some stay; some move inward over years.
+**Returning elves.** Elves returning from extended absences — realm-side work, outer-Feywood postings, long study elsewhere, diplomatic service — often settle in the Outer Bounds first as they re-establish Thornveil residency. Some stay; some move inward over years.
 
 **Younger elves establishing lives.** Elves in the equivalent of young adulthood sometimes establish their first independent residences in the Outer Bounds, working in the Crafthall or Common Hearth and moving inward as their own work and relationships require.
 
@@ -69,7 +69,7 @@ Visitors proceeding to deeper access pass through the Outer Bounds on their way 
 
 ## Connection to Vaelmere
 
-The path between Thornveil's Outer Bounds and Vaelmere is Thornveil's most-traveled outbound route. The journey is done by elven trader caravans, by diplomatic envoys moving between the city and the trade waypoint, by elves with Vaelmere family or working relationships, and occasionally by realm visitors moving between the two under elven escort. The route is well-established and reasonably safe under Standing Green; under Turning or Stillfall the Glade's general responsiveness adjusts, and caravans move with more care.
+The path between Thornveil's Outer Bounds and Vaelmere is Thornveil's most-traveled outbound route. The journey is done by elven trader caravans, by diplomatic envoys moving between the city and the trade waypoint, by elves with Vaelmere family or working relationships, and occasionally by realm visitors moving between the two under elven escort. The route is well-established and reasonably safe under Standing Green; under Turning or Stillfall the Feywood's general responsiveness adjusts, and caravans move with more care.
 
 ## Tags
 
@@ -101,4 +101,4 @@ Non-elven residents in Thornveil most often live here. Scenes involving non-elf 
 
 The Trade Envoy Outer Bounds Liaison is a canonical senior role, distinct from the Crafthall Liaison and the Vaelmere Trade Master. Specific Liaison NPCs can be invented at scene time.
 
-Threat level 1 reflects the slightly higher edge-condition risk — the district borders the Glade's wilder areas, trade traffic introduces more variables, and the realm-facing exposure is real. Still safe by any ordinary measure.
+Threat level 1 reflects the slightly higher edge-condition risk — the district borders the Feywood's wilder areas, trade traffic introduces more variables, and the realm-facing exposure is real. Still safe by any ordinary measure.

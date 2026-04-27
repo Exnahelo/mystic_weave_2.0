@@ -34,7 +34,7 @@ A ring district without hard boundaries. Noble family estates fold into mature o
 
 ## Scene Texture
 
-The Groves' canopy is among the highest in Thornveil — several of the trees that hold individual house estates are among the city's oldest and tallest individuals. Understory is kept open by sustained management, so walking through the district is walking through tall-trunk old-growth with sight-lines that reach some distance. Light filters in the way it does in any mature deciduous canopy but carries the Glade's characteristic warmth; ambient field intensity sits well above the city's average but below the Approach's.
+The Groves' canopy is among the highest in Thornveil — several of the trees that hold individual house estates are among the city's oldest and tallest individuals. Understory is kept open by sustained management, so walking through the district is walking through tall-trunk old-growth with sight-lines that reach some distance. Light filters in the way it does in any mature deciduous canopy but carries the Feywood's characteristic warmth; ambient field intensity sits well above the city's average but below the Approach's.
 
 Paths between estates are worn and sufficient, not formal. No paved walks, no uniform signage; the paths are where generations of feet have gone. Visitors following a path will reach the estate they are expected at; visitors wandering without purpose do not reliably find anything in particular, and eventually find themselves back where they started. The district is not inhospitable to reasonable curiosity; it simply does not volunteer more than it needs to.
 
@@ -63,7 +63,7 @@ Greenshield operations from this site include:
 
 - Training coordination for standing units.
 - Readiness and rotation scheduling.
-- Coordination with the Council on matters of Glade-wide military concern.
+- Coordination with the Council on matters of Feywood-wide military concern.
 - Heartwarden coordination with the Silent Grove and Heartwood Core.
 - Outer-rotation posting coordination with Vaelmere.
 
@@ -71,7 +71,7 @@ The Greenshield Commander holds offices here. The Heartwarden Captain (currently
 
 ## Daily Life
 
-Noble estates are active households. Residents include the family proper, extended family members, bonded staff across generations, and occasional non-elven long-term residents (rates vary by house; Vaelaryn highest). Working halls handle family-specific craftwork, training, estate maintenance. Gardens provide house food at the family-scale. Family members move between the Noble Groves estate and any other family residences the house maintains elsewhere in the Glade.
+Noble estates are active households. Residents include the family proper, extended family members, bonded staff across generations, and occasional non-elven long-term residents (rates vary by house; Vaelaryn highest). Working halls handle family-specific craftwork, training, estate maintenance. Gardens provide house food at the family-scale. Family members move between the Noble Groves estate and any other family residences the house maintains elsewhere in the Feywood.
 
 Social life between estates is continuous but discreet. Neighboring families know one another well. Joint observances — some drawn from shared house tradition, some coordinated by Council request — occur on their own schedules.
 

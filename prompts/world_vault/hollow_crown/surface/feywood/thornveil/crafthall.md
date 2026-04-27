@@ -4,7 +4,7 @@ name: The Crafthall
 type: district
 region_id: hollow-crown
 parent_location_id: thornveil
-description: Thornveil's district of institutional craft — weaving, metalwork, elven-method woodcraft (coaxed rather than cut), Glade-specific alchemy, and the specialty trades that feed the Feywood's export economy. Workshops here are larger than in the Common Hearth; masters and apprentices work together in sustained multi-year lineages; specific craft traditions are preserved through formal training rather than informal household transmission. Craft goods from this district eventually reach the Border's exchange windows through Vaelmere's trade flow, and the Crafthall's senior figures coordinate with the Council-appointed Trade Envoys on quality standards and output planning.
+description: Thornveil's district of institutional craft — weaving, metalwork, elven-method woodcraft (coaxed rather than cut), Feywood-specific alchemy, and the specialty trades that feed the Feywood's export economy. Workshops here are larger than in the Common Hearth; masters and apprentices work together in sustained multi-year lineages; specific craft traditions are preserved through formal training rather than informal household transmission. Craft goods from this district eventually reach the Border's exchange windows through Vaelmere's trade flow, and the Crafthall's senior figures coordinate with the Council-appointed Trade Envoys on quality standards and output planning.
 connections:
 - thornveil
 - noble-groves
@@ -37,25 +37,25 @@ The Crafthall district is the most visibly "worked" part of Thornveil. Workshop 
 
 The canopy is tended but less uniform than in the residential districts. Some crafts require height; some require open space; some require the specific shade of specific trees. Workshop roofing is varied, working with whatever the individual craft needs — high timbered spans for woodcraft, lower shaped-wood-and-fiber for weaving, stone-floored courts for metalwork, humidity-controlled chambers for alchemy.
 
-The district's ambient feel is purposeful rather than quiet. Crafters move with the focused attention their work requires. Apprentices move with the intensity of learning that matters. Masters move at the pace of people who know their work. The Glade's ambient field is present here as everywhere, but it sits at a working register — supporting the craft rather than hushing the visitors.
+The district's ambient feel is purposeful rather than quiet. Crafters move with the focused attention their work requires. Apprentices move with the intensity of learning that matters. Masters move at the pace of people who know their work. The Feywood's ambient field is present here as everywhere, but it sits at a working register — supporting the craft rather than hushing the visitors.
 
 ## Major Craft Lineages
 
-The Crafthall holds several distinct craft traditions, each with its own workshop complex, its own master-apprentice lineage stretching back centuries, and its own relationship to the Glade's ecology.
+The Crafthall holds several distinct craft traditions, each with its own workshop complex, its own master-apprentice lineage stretching back centuries, and its own relationship to the Feywood's ecology.
 
-**Weaving.** Textile work from Glade fibers — Thornfiber cane for coarse baskets and binding, finer plant fibers for domestic and ceremonial textiles, honeybound bee silk when it is available. Elven weaving produces goods that realm weavers study; specific patterns encode house affiliations and ceremonial meanings that require elven eyes to read.
+**Weaving.** Textile work from Feywood fibers — Thornfiber cane for coarse baskets and binding, finer plant fibers for domestic and ceremonial textiles, honeybound bee silk when it is available. Elven weaving produces goods that realm weavers study; specific patterns encode house affiliations and ceremonial meanings that require elven eyes to read.
 
-**Metalwork.** Smaller-scale than realm smithies. Glade metals come from sanctioned seams worked with restraint; imported realm metals arrive through Vaelmere's trade flow. Elven smiths produce fine work — knife blades, decorative pieces, ceremonial items, occasional weaponry at specific commission. They do not produce bulk goods.
+**Metalwork.** Smaller-scale than realm smithies. Feywood metals come from sanctioned seams worked with restraint; imported realm metals arrive through Vaelmere's trade flow. Elven smiths produce fine work — knife blades, decorative pieces, ceremonial items, occasional weaponry at specific commission. They do not produce bulk goods.
 
 **Woodcraft (coaxed).** The distinctive elven method — wood shaped while growing rather than cut and worked after felling. Elven carpenters and chair-growers and bow-makers work with living trees across years or decades, producing finished goods of remarkable quality. Longbough bows are worked through this tradition when a branch offers itself; Silverbark Ash spears and staves; Ironroot hardwood shield cores. Non-coaxed woodcraft (working with sanctioned deadfall) also happens here, in separate workshops.
 
-**Alchemy (Glade-specific).** Distinct from realm alchemy. Elven alchemy draws on Glade-specific materials — Winterglass Lichen dyes and inks, Resinheart Pine resins, Silverleaf Balm and Dawnmint and Redveil Shelf medicinals, Oathbloom cultivation for ceremonial infusion, and the several other species whose refined preparations have export value. The alchemical register is slower and more relational than realm alchemy; work happens over weeks and months rather than sessions.
+**Alchemy (Feywood-specific).** Distinct from realm alchemy. Elven alchemy draws on Feywood-specific materials — Winterglass Lichen dyes and inks, Resinheart Pine resins, Silverleaf Balm and Dawnmint and Redveil Shelf medicinals, Oathbloom cultivation for ceremonial infusion, and the several other species whose refined preparations have export value. The alchemical register is slower and more relational than realm alchemy; work happens over weeks and months rather than sessions.
 
-**Specialty trades.** Dye-work from cultivated flora, bow-string craft, honey-and-wax processing, leather work from sanctioned hides, bookbinding for the Glade's limited written-record tradition, and several smaller lineages each with their own workshop and master.
+**Specialty trades.** Dye-work from cultivated flora, bow-string craft, honey-and-wax processing, leather work from sanctioned hides, bookbinding for the Feywood's limited written-record tradition, and several smaller lineages each with their own workshop and master.
 
 ## Trade Origination
 
-The Crafthall is where most of the Feywood's export goods originate (or are finished — Vaelmere handles aggregation from across the Glade, but the Crafthall is the single largest source). Goods leaving the Crafthall for Vaelmere include:
+The Crafthall is where most of the Feywood's export goods originate (or are finished — Vaelmere handles aggregation from across the Feywood, but the Crafthall is the single largest source). Goods leaving the Crafthall for Vaelmere include:
 
 - Refined herbal preparations (Silverleaf, Dawnmint, Redveil Shelf).
 - Thornfiber basketry and fine weaving.
@@ -98,12 +98,12 @@ Visitors walking through the Crafthall without business are discouraged without 
 
 The Crafthall is Thornveil's institutional-craft district. The Common Hearth's craftwork is household/junior-scale; the Crafthall's is lineage-scale and export-quality. GPT scenes should reflect this division.
 
-Coaxed woodcraft is canonically the elven method. Cutting living timber is not done in the Glade (sanctioned deadfall excepted). Scenes involving the origin of wooden goods should reflect coaxed or sanctioned-deadfall provenance.
+Coaxed woodcraft is canonically the elven method. Cutting living timber is not done in the Feywood (sanctioned deadfall excepted). Scenes involving the origin of wooden goods should reflect coaxed or sanctioned-deadfall provenance.
 
-Glade alchemy is slower and more relational than realm alchemy. Scenes involving elven alchemy should resist realm alchemy tropes (bubbling alembics, quick explosive results). Elven alchemical workings take days, weeks, or months.
+Feywood alchemy is slower and more relational than realm alchemy. Scenes involving elven alchemy should resist realm alchemy tropes (bubbling alembics, quick explosive results). Elven alchemical workings take days, weeks, or months.
 
 The Trade Envoy Crafthall Liaison is a canonical senior role. Specific Liaison NPCs can be invented at scene time.
 
-Longbough artifact origination is canonical and rare. Scenes involving a Longbough-material good should treat the material as extraordinary; each instance is a specific event in the Glade's living record.
+Longbough artifact origination is canonical and rare. Scenes involving a Longbough-material good should treat the material as extraordinary; each instance is a specific event in the Feywood's living record.
 
 Threat level 0. The district is a working space, not a dangerous one.

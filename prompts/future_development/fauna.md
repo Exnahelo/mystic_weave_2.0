@@ -20,7 +20,7 @@ Naming palette: poetic / ancient world / fey / botanical
 - silverbough hart
 - duskpetal fox
 - thornsong owl
-- gladehorn stag
+- Feywoodhorn stag
 - mossveil cat
 
 ---

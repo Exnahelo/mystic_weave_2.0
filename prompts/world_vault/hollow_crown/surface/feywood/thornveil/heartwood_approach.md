@@ -48,7 +48,7 @@ The Approach is entered rather than entered-into. Paths from the outer districts
 
 Structures are the oldest in Thornveil. Several predate the realm. Each has been continuously occupied and continuously maintained for the full span since — a continuity that is canonical rather than unusual in elven civic life. Walls are grown rather than built; doors are shaped passages rather than hung slabs; the buildings breathe in the way the city breathes, integrated with the trees that hold them up.
 
-Sound is subdued. The Approach's daily noise is quiet conversation, the occasional Heartwarden on rotation passing through, druidic observance work at the Heartwood clearing's margin, and the distant civic sounds of the outer districts heard through intervening canopy. Councilors walking between chamber and residence move with the quality of attention the Glade generally teaches and the Approach refines. Visitors moving through the district learn quickly to match the register or find themselves uncomfortable.
+Sound is subdued. The Approach's daily noise is quiet conversation, the occasional Heartwarden on rotation passing through, druidic observance work at the Heartwood clearing's margin, and the distant civic sounds of the outer districts heard through intervening canopy. Councilors walking between chamber and residence move with the quality of attention the Feywood generally teaches and the Approach refines. Visitors moving through the district learn quickly to match the register or find themselves uncomfortable.
 
 ## The Council Chambers
 
@@ -100,7 +100,7 @@ Realm visitors do not routinely enter the Approach. Those who do are accompanied
 
 ## Authoring Notes
 
-The Approach's threat level is 0 — the district itself is among the safest places in the Glade. Social risk is high (disrespect here registers sharply) but physical risk is negligible.
+The Approach's threat level is 0 — the district itself is among the safest places in the Feywood. Social risk is high (disrespect here registers sharply) but physical risk is negligible.
 
 GPT scenes in the Approach should be weighted toward civic and ceremonial register. Combat scenes are deeply out of place here; any scene involving violence in the Approach is a narrative event of considerable significance.
 

@@ -40,7 +40,7 @@ Sound is moderate. Routine Vaelmere business produces a steady low hum; formal d
 
 ## The Warden's Office
 
-The Warden's working office is the Hall's functional center. Records, correspondence, and the administrative documentation that Vaelmere's civic life generates occupy significant space — Vaelmere runs on more written record than Thornveil's oral primacy suggests, a reflection of its realm-facing register. Maps of the Glade, the Border approaches, and the realm-side western forest hang where the Warden works with them.
+The Warden's working office is the Hall's functional center. Records, correspondence, and the administrative documentation that Vaelmere's civic life generates occupy significant space — Vaelmere runs on more written record than Thornveil's oral primacy suggests, a reflection of its realm-facing register. Maps of the Feywood, the Border approaches, and the realm-side western forest hang where the Warden works with them.
 
 The Warden meets with Vaelmere residents on civic matters through the office. Typical business:
 
@@ -53,7 +53,7 @@ The Warden meets with Vaelmere residents on civic matters through the office. Ty
 
 ## Formal Reception
 
-The Hall's formal reception spaces handle visiting dignitaries — realm envoys conducting Vaelmere-level business, Council envoys from Thornveil on specific matters, occasional visits from other Glade institutions with Vaelmere-scale needs. The Warden holds court (in the specifically elven sense, not a realm courtroom sense) for matters requiring ceremonial register; this is not frequent but it is not rare.
+The Hall's formal reception spaces handle visiting dignitaries — realm envoys conducting Vaelmere-level business, Council envoys from Thornveil on specific matters, occasional visits from other Feywood institutions with Vaelmere-scale needs. The Warden holds court (in the specifically elven sense, not a realm courtroom sense) for matters requiring ceremonial register; this is not frequent but it is not rare.
 
 Realm-side diplomatic protocol routes through the Warden for anything that does not require Council-level attention. This is substantial — the day-to-day diplomatic work of the Feywood-realm relationship largely resolves at Warden scale rather than Council scale.
 

@@ -248,7 +248,7 @@ TERRAIN (Map A, Map E)          SETTLEMENTS (Map B)             ROUTES (Map C)
                                   h  Feywood Border          T  Thornveil (elven city, rings Y)
                                   i  Platinum Oath Approach        U  outer elven settlement
                                   j  Shadowed Hollows Approach     D  Silent Grove
-                                  k  Rift of Discord Edge          B  Glade Boundary (realm threshold)
+                                  k  Rift of Discord Edge          B  Feywood Boundary (realm threshold)
                                   o  Hall of Scales                F  undifferentiated Feywood forest
 ```
 
@@ -405,7 +405,7 @@ X  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  �
 
 ### Map E — Feywood Interior (12×12, non-Euclidean)
 
-Separate coordinate system. Rows `α`–`μ` (Greek, to avoid confusion with surface rows), columns `01`–`12`. The Feywood's external footprint on Map A is `H5–K6` (~60 km outer, corresponding to the Glade Boundary `h` at surface cell `J4`); internally, the space is much larger and travel-responsive. Distances and the path between two points shift based on visitor disposition, guide sanction, and the Glade's will. With sanctioned elven guidance, travel is predictable. Without sanction, the Glade redirects.
+Separate coordinate system. Rows `α`–`μ` (Greek, to avoid confusion with surface rows), columns `01`–`12`. The Feywood's external footprint on Map A is `H5–K6` (~60 km outer, corresponding to the Feywood Boundary `h` at surface cell `J4`); internally, the space is much larger and travel-responsive. Distances and the path between two points shift based on visitor disposition, guide sanction, and the Feywood's will. With sanctioned elven guidance, travel is predictable. Without sanction, the Feywood redirects.
 
 Heartwood `Y` at the dead center. Thornveil `T` forms a complete ring around the Heartwood — the elven city is built in a defensive circle protecting the sacred grove.
 
@@ -430,12 +430,12 @@ Heartwood `Y` at the dead center. Thornveil `T` forms a complete ring around the
 - **`T` Thornveil** — the elven city, forming a complete ring around the Heartwood at `ε5–ε8, ζ5, ζ8, η5, η8, θ5–θ8` (12 cells). The ring is a deliberate defensive and spiritual arrangement: the city exists to protect and tend the Heartwood.
 - **`D` Silent Grove** at `δ11` — outer grove, separate from Thornveil, in the upper-east quadrant.
 - **`U` outer elven settlement** at `ι10` — smaller, secondary settlement in the lower-east quadrant.
-- **`B` Glade Boundary** at `ζ2` — the realm-side threshold. Corresponds to surface cell `J4` (`h` on Map B). This is the one stable entry and exit point for travelers; the Glade routes unsanctioned visitors back here or to an alternate realm-side exit of its own choosing.
+- **`B` Feywood Boundary** at `ζ2` — the realm-side threshold. Corresponds to surface cell `J4` (`h` on Map B). This is the one stable entry and exit point for travelers; the Feywood routes unsanctioned visitors back here or to an alternate realm-side exit of its own choosing.
 
 **Non-Euclidean behavior for the narrator**.
-- Exit from the Glade always returns the traveler to the surface at or near `h` (`J4`), or to an alternate realm-side point of the Glade's choosing. **The Glade cannot deposit travelers outside the Hollow Crown.**
-- Straight-line interior travel can shift cells underfoot. Distance between two points is determined by narrative weight: with a sanctioned guide, travel is predictable; without, the Glade is hostile and distances stretch.
-- Heartwood `Y` is not reachable by direct approach. Unsanctioned travelers attempting to enter the Thornveil ring toward the Heartwood will find the Glade rerouting them back to the forest or to the Boundary.
+- Exit from the Feywood always returns the traveler to the surface at or near `h` (`J4`), or to an alternate realm-side point of the Feywood's choosing. **The Feywood cannot deposit travelers outside the Hollow Crown.**
+- Straight-line interior travel can shift cells underfoot. Distance between two points is determined by narrative weight: with a sanctioned guide, travel is predictable; without, the Feywood is hostile and distances stretch.
+- Heartwood `Y` is not reachable by direct approach. Unsanctioned travelers attempting to enter the Thornveil ring toward the Heartwood will find the Feywood rerouting them back to the forest or to the Boundary.
 
 ---
 

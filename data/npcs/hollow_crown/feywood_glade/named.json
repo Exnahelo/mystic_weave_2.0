@@ -51,17 +51,17 @@
     "current_location": null,
     "status": "absent",
     "disposition": "Unfixed; present in family and house narrative rather than in scene.",
-    "role_summary": "Son of Lethariel and Caelthir; brother of Sylvara; canonically absent from the Glade.",
+    "role_summary": "Son of Lethariel and Caelthir; brother of Sylvara; canonically absent from the Feywood.",
     "voice": null,
     "narrative_anchors": [
       "Brother of Sylvara, son of Lethariel Heartwood and Caelthir Vaelaryn",
-      "Canonically absent from the Glade in current narrative time",
+      "Canonically absent from the Feywood in current narrative time",
       "Bears the Heartwood name per matrilineal naming convention",
       "Location and circumstance are deliberately unfixed; a narrative thread available for development"
     ],
     "tags": ["named", "tier-2", "house-heartwood", "absent", "narrative-thread", "feywood"],
     "description": "Aelarion Heartwood is Sylvara's brother and the second Heartwood child of Lethariel and Caelthir's generation. He is canonically absent from the Feywood in current narrative time; specifics of where he is, what he is doing, and why are deliberately unfixed. The absence is structural — a thread available for development when narrative needs arise — and his return (or confirmation of further circumstances) is a potential major-event moment.",
-    "scene_guidance": "Aelarion should appear in narrative indirectly: mentioned by family, referenced in House Heartwood's senior figures' correspondence, hinted at through letters or inquiries reaching the Glade. Direct scenes with him should be reserved for major narrative beats — his return, a discovered location, a revealed purpose. Do not casually place him in the Glade. Do not over-specify his circumstances; the openness is the point."
+    "scene_guidance": "Aelarion should appear in narrative indirectly: mentioned by family, referenced in House Heartwood's senior figures' correspondence, hinted at through letters or inquiries reaching the Feywood. Direct scenes with him should be reserved for major narrative beats — his return, a discovered location, a revealed purpose. Do not casually place him in the Feywood. Do not over-specify his circumstances; the openness is the point."
   },
   {
     "id": "vindrael_the_platinum_warden",

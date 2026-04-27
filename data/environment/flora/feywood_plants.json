@@ -4,13 +4,13 @@
     "name": "High Oak",
     "category": "canopy",
     "subcategory": "tree",
-    "zones": ["thornveil_civic_forest", "outer_old_growth_wild", "glade_edge"],
+    "zones": ["thornveil_civic_forest", "outer_old_growth_wild", "Feywood_edge"],
     "ecological_role": "major canopy tree; mast producer; habitat support",
     "cultural_role": "structural wood for sanctioned deadfall harvest",
     "harvest_status": "wild",
     "canonical_tier": "secondary",
     "tags": ["oak", "canopy", "mast-producer", "habitat"],
-    "description": "The Feywood's dominant oak lineage, basin-analog grown to older, broader proportions under the Glade's conditions. Long-lived and habitat-rich; its mast supports silverbough hart, gladehorn stag, and the canopy squirrel population across the outer wild."
+    "description": "The Feywood's dominant oak lineage, basin-analog grown to older, broader proportions under the Feywood's conditions. Long-lived and habitat-rich; its mast supports silverbough hart, Feywoodhorn stag, and the canopy squirrel population across the outer wild."
   },
   {
     "id": "elderoak",
@@ -36,7 +36,7 @@
     "harvest_status": "wild",
     "canonical_tier": "secondary",
     "tags": ["beech", "canopy", "shade", "fungal-host"],
-    "description": "A major shade-tolerant canopy species, widespread across the mature Glade. Grey Beech hosts substantial Rootlace Mycelium connection and provides the wood most favored for finishing work in interior living spaces."
+    "description": "A major shade-tolerant canopy species, widespread across the mature Feywood. Grey Beech hosts substantial Rootlace Mycelium connection and provides the wood most favored for finishing work in interior living spaces."
   },
   {
     "id": "silverbeech",
@@ -45,7 +45,7 @@
     "subcategory": "tree",
     "zones": ["thornveil_civic_forest", "outer_old_growth_wild", "silent_grove_enclave"],
     "ecological_role": "Feywood-conditioned beech; shade-favoring climax associate",
-    "cultural_role": "associated with mature Glade interiors; ceremonial connotations",
+    "cultural_role": "associated with mature Feywood interiors; ceremonial connotations",
     "harvest_status": "restricted",
     "canonical_tier": "primary",
     "tags": ["beech", "canopy", "silverbeech", "heartwood-conditioned"],
@@ -56,7 +56,7 @@
     "name": "Silverbark Ash",
     "category": "canopy",
     "subcategory": "tree",
-    "zones": ["thornveil_civic_forest", "outer_old_growth_wild", "glade_edge"],
+    "zones": ["thornveil_civic_forest", "outer_old_growth_wild", "Feywood_edge"],
     "ecological_role": "mid-canopy; edge stabilizer; flexible growth",
     "cultural_role": "spear shafts, training weapons, light frameworks",
     "harvest_status": "wild",
@@ -96,25 +96,25 @@
     "category": "canopy",
     "subcategory": "tree",
     "zones": ["outer_old_growth_wild"],
-    "ecological_role": "rare variant appearing under sustained Glade strain",
+    "ecological_role": "rare variant appearing under sustained Feywood strain",
     "cultural_role": "ritual marking; health-register indicator; specific ceremonial use",
     "harvest_status": "restricted",
     "canonical_tier": "primary",
     "tags": ["oak", "witheroak", "health-indicator", "ritual", "strain-responsive"],
-    "description": "A rare variant of High Oak that appears when the Glade is under sustained strain — dark-grained, dense, ritually significant. Its presence itself is a health-register indicator. Druids mark witheroak when it appears; living witheroak wood is never exported and is used only for specific ceremonial purposes during Glade strain."
+    "description": "A rare variant of High Oak that appears when the Feywood is under sustained strain — dark-grained, dense, ritually significant. Its presence itself is a health-register indicator. Druids mark witheroak when it appears; living witheroak wood is never exported and is used only for specific ceremonial purposes during Feywood strain."
   },
   {
     "id": "resinheart_pine",
     "name": "Resinheart Pine",
     "category": "canopy",
     "subcategory": "tree",
-    "zones": ["glade_edge", "border_threshold_woods"],
+    "zones": ["Feywood_edge", "border_threshold_woods"],
     "ecological_role": "edge and upland conifer",
     "cultural_role": "resin, sealant, incense, waterproofing",
     "harvest_status": "wild",
     "canonical_tier": "secondary",
     "tags": ["pine", "conifer", "resin-producer", "edge-species"],
-    "description": "An edge and upland conifer, more common where the ambient field is thinner and light stronger. Resinheart Pine produces the resin used across the Glade for sealant, incense, and waterproofing applications; it is a significant export category."
+    "description": "An edge and upland conifer, more common where the ambient field is thinner and light stronger. Resinheart Pine produces the resin used across the Feywood for sealant, incense, and waterproofing applications; it is a significant export category."
   },
   {
     "id": "the_heartwood",
@@ -122,12 +122,12 @@
     "category": "sacred",
     "subcategory": "unique",
     "zones": ["heartwood_core"],
-    "ecological_role": "living center and ambient-field anchor of the Glade",
+    "ecological_role": "living center and ambient-field anchor of the Feywood",
     "cultural_role": "sacred center of elven civilization",
     "harvest_status": "unharvestable",
     "canonical_tier": "primary",
     "tags": ["heartwood", "sacred", "unique", "living-center", "species-indeterminate"],
-    "description": "A singular ancient tree of deciduous form, girth beyond a dozen adults' linked reach. Species indeterminate — not identified with any realm tree lineage. The Heartwood is the living center of the Feywood and the anchor of its ambient relational field. The Glade is the Heartwood and the Heartwood is the Glade. Never harvested in any form."
+    "description": "A singular ancient tree of deciduous form, girth beyond a dozen adults' linked reach. Species indeterminate — not identified with any realm tree lineage. The Heartwood is the living center of the Feywood and the anchor of its ambient relational field. The Feywood is the Heartwood and the Heartwood is the Feywood. Never harvested in any form."
   },
   {
     "id": "elder_trees_of_the_silent_grove",
@@ -135,12 +135,12 @@
     "category": "collective",
     "subcategory": "sacred",
     "zones": ["silent_grove_enclave"],
-    "ecological_role": "foundational substrate of the Glade's root-memory network",
+    "ecological_role": "foundational substrate of the Feywood's root-memory network",
     "cultural_role": "sacred; older than any other old-growth; never harvested",
     "harvest_status": "unharvestable",
     "canonical_tier": "primary",
     "tags": ["elder-trees", "silent-grove", "sacred", "collective", "species-indeterminate"],
-    "description": "Several dozen individuals of indeterminate species, older than any other old-growth in the Glade. The Elder Trees predate the Heartwood's central role and form the foundational substrate of the Glade's root-memory network. Never harvested."
+    "description": "Several dozen individuals of indeterminate species, older than any other old-growth in the Feywood. The Elder Trees predate the Heartwood's central role and form the foundational substrate of the Feywood's root-memory network. Never harvested."
   },
   {
     "id": "thornveil_vine",
@@ -186,13 +186,13 @@
     "name": "Thornfiber Cane",
     "category": "cane",
     "subcategory": "fiber",
-    "zones": ["heartwater_basin", "glade_edge"],
+    "zones": ["heartwater_basin", "Feywood_edge"],
     "ecological_role": "fast-growing flexible cane-vine",
     "cultural_role": "basketry, binding, training apparatus, light framework",
     "harvest_status": "cultivated",
     "canonical_tier": "secondary",
     "tags": ["cane", "fiber", "thornfiber", "basketry", "binding"],
-    "description": "A fast-growing flexible cane-vine gathered from the Heartwater Basin margins and the Glade Edge. Thornfiber is the canonical elven fiber for basketry, binding, training apparatus, and light framework construction. A significant trade export in refined forms."
+    "description": "A fast-growing flexible cane-vine gathered from the Heartwater Basin margins and the Feywood Edge. Thornfiber is the canonical elven fiber for basketry, binding, training apparatus, and light framework construction. A significant trade export in refined forms."
   },
   {
     "id": "sweetbriar",
@@ -205,40 +205,40 @@
     "harvest_status": "cultivated",
     "canonical_tier": "secondary",
     "tags": ["vine", "sweetbriar", "flowering", "ornamental", "domestic"],
-    "description": "A flowering climber with faintly sweet scent, common around Thornveil residences. Sweetbriar is the Glade's domestic ornamental climber, widely planted in family gardens and cluster common spaces."
+    "description": "A flowering climber with faintly sweet scent, common around Thornveil residences. Sweetbriar is the Feywood's domestic ornamental climber, widely planted in family gardens and cluster common spaces."
   },
   {
     "id": "hearthnut_grove_tree",
     "name": "Hearthnut Grove Tree",
     "category": "food_tree",
     "subcategory": "nut",
-    "zones": ["thornveil_civic_forest", "glade_edge"],
+    "zones": ["thornveil_civic_forest", "Feywood_edge"],
     "ecological_role": "major nut producer; canopy squirrel and songbird forage",
     "cultural_role": "winter food-security staple; flour, meal, oil",
     "harvest_status": "cultivated",
     "canonical_tier": "primary",
     "tags": ["food-tree", "nut", "hearthnut", "staple", "winter-food"],
-    "description": "The quiet backbone food species of the Glade. Hearthnut produces the nuts, oil, meal, and flour-equivalent that sustain elven subsistence through winter. Hearthnut groves are tended at Thornveil, Vaelmere, noble estates, and the Glade Edge; the species is central to elven food culture in a way realm observers often underestimate."
+    "description": "The quiet backbone food species of the Feywood. Hearthnut produces the nuts, oil, meal, and flour-equivalent that sustain elven subsistence through winter. Hearthnut groves are tended at Thornveil, Vaelmere, noble estates, and the Feywood Edge; the species is central to elven food culture in a way realm observers often underestimate."
   },
   {
     "id": "summerpear_bough",
     "name": "Summerpear Bough",
     "category": "food_tree",
     "subcategory": "fruit",
-    "zones": ["thornveil_civic_forest", "glade_edge"],
+    "zones": ["thornveil_civic_forest", "Feywood_edge"],
     "ecological_role": "cultivated soft-fruit tree",
     "cultural_role": "fresh fruit, preserves, dried stores, wine base",
     "harvest_status": "cultivated",
     "canonical_tier": "secondary",
     "tags": ["food-tree", "fruit", "summerpear", "wine-base", "cultivated"],
-    "description": "A cultivated soft-fruit tree providing fresh fruit, preserves, dried stores, and wine base across the Glade. Summerpear orchards are a standard feature of elven estates and cluster gardens."
+    "description": "A cultivated soft-fruit tree providing fresh fruit, preserves, dried stores, and wine base across the Feywood. Summerpear orchards are a standard feature of elven estates and cluster gardens."
   },
   {
     "id": "goldcap_apple",
     "name": "Goldcap Apple",
     "category": "food_tree",
     "subcategory": "fruit",
-    "zones": ["thornveil_civic_forest", "glade_edge"],
+    "zones": ["thornveil_civic_forest", "Feywood_edge"],
     "ecological_role": "hardy long-keeping cultivated fruit",
     "cultural_role": "cider, vinegar, preserves, trade export",
     "harvest_status": "cultivated",
@@ -251,7 +251,7 @@
     "name": "Dewberry Bramble",
     "category": "shrub",
     "subcategory": "berry",
-    "zones": ["glade_edge", "outer_old_growth_wild"],
+    "zones": ["Feywood_edge", "outer_old_growth_wild"],
     "ecological_role": "edge berry shrub; major forage for birds, foxes, bears, gatherers",
     "cultural_role": "wine base; preserves",
     "harvest_status": "wild",
@@ -264,13 +264,13 @@
     "name": "Antlerthorn",
     "category": "shrub",
     "subcategory": "browse-thorn",
-    "zones": ["outer_old_growth_wild", "glade_edge"],
+    "zones": ["outer_old_growth_wild", "Feywood_edge"],
     "ecological_role": "thorned browse shrub; major cervid forage and cover",
     "cultural_role": "boundary hedge and hunt-lore marker in the outer wild",
     "harvest_status": "wild",
     "canonical_tier": "primary",
     "tags": ["shrub", "thorn", "browse", "cervid-forage", "outer-wild"],
-    "description": "A thorned browse shrub common in the outer wild and lighter glade-edge margins. Antlerthorn is one of the defining forage plants for silverbough hart and gladehorn stag, and its dense growth creates cover corridors along old game paths. Elven hunters read antlerthorn damage patterns as a sign of herd movement and seasonal pressure."
+    "description": "A thorned browse shrub common in the outer wild and lighter Feywood-edge margins. Antlerthorn is one of the defining forage plants for silverbough hart and Feywoodhorn stag, and its dense growth creates cover corridors along old game paths. Elven hunters read antlerthorn damage patterns as a sign of herd movement and seasonal pressure."
   },
   {
     "id": "shadefern_root",
@@ -283,7 +283,7 @@
     "harvest_status": "cultivated",
     "canonical_tier": "secondary",
     "tags": ["herb", "root", "shadefern", "starch", "travel-food"],
-    "description": "An edible root native to the Glade's low-light understory. Shadefern is cultivated in Thornveil's shaded understory plots and noble compounds; it serves as the Glade's primary starch source for soups, mash, and travel food."
+    "description": "An edible root native to the Feywood's low-light understory. Shadefern is cultivated in Thornveil's shaded understory plots and noble compounds; it serves as the Feywood's primary starch source for soups, mash, and travel food."
   },
   {
     "id": "river_reed_onion",
@@ -296,33 +296,33 @@
     "harvest_status": "cultivated",
     "canonical_tier": "secondary",
     "tags": ["herb", "culinary", "river-reed-onion", "riparian", "cultivated"],
-    "description": "A riparian culinary plant cultivated along the Heartwater Basin margins, streamside plots, and estate water margins. River Reed Onion is a Glade kitchen staple; its riparian cultivation is one of the Basin's continuous human-use activities."
+    "description": "A riparian culinary plant cultivated along the Heartwater Basin margins, streamside plots, and estate water margins. River Reed Onion is a Feywood kitchen staple; its riparian cultivation is one of the Basin's continuous human-use activities."
   },
   {
     "id": "hearthlight_fungus",
     "name": "Hearthlight Fungus",
     "category": "fungus",
     "subcategory": "bioluminescent",
-    "zones": ["border_threshold_woods", "glade_edge", "thornveil_civic_forest", "outer_old_growth_wild"],
+    "zones": ["border_threshold_woods", "Feywood_edge", "thornveil_civic_forest", "outer_old_growth_wild"],
     "ecological_role": "canonical bioluminescent understory species",
     "cultural_role": "primary visible health-register indicator; ambient illumination",
     "harvest_status": "wild",
     "canonical_tier": "primary",
     "tags": ["fungus", "bioluminescent", "hearthlight", "health-indicator", "ambient-light"],
-    "description": "The Glade's canonical bioluminescent understory fungus, visible even in daylight at the Border. Hearthlight brightness correlates with ambient-field strength and serves as the primary visible indicator of Glade health. Its dimming is one of the earliest visible Turning signals; its steady glow under Standing Green provides ambient illumination under heavy canopy."
+    "description": "The Feywood's canonical bioluminescent understory fungus, visible even in daylight at the Border. Hearthlight brightness correlates with ambient-field strength and serves as the primary visible indicator of Feywood health. Its dimming is one of the earliest visible Turning signals; its steady glow under Standing Green provides ambient illumination under heavy canopy."
   },
   {
     "id": "rootlace_mycelium",
     "name": "Rootlace Mycelium",
     "category": "fungus",
     "subcategory": "network",
-    "zones": ["heartwood_core", "thornveil_civic_forest", "heartwater_basin", "outer_old_growth_wild", "silent_grove_enclave", "glade_edge", "border_threshold_woods"],
+    "zones": ["heartwood_core", "thornveil_civic_forest", "heartwater_basin", "outer_old_growth_wild", "silent_grove_enclave", "Feywood_edge", "border_threshold_woods"],
     "ecological_role": "foundational fungal network; nutrient exchange; root-memory substrate",
     "cultural_role": "substrate through which the Heartwood's root-memory operates",
     "harvest_status": "unharvestable",
     "canonical_tier": "primary",
     "tags": ["fungus", "mycelium", "rootlace", "network", "root-memory"],
-    "description": "The foundational fungal network underlying all Feywood soils. Rootlace handles nutrient distribution between canopy trees and understory plants, carries decomposition-chain continuity, and serves as the biological substrate through which the Heartwood's root-memory network extends beyond its physical roots. Druids read Rootlace disturbance patterns to monitor Glade-wide stress from localized observation."
+    "description": "The foundational fungal network underlying all Feywood soils. Rootlace handles nutrient distribution between canopy trees and understory plants, carries decomposition-chain continuity, and serves as the biological substrate through which the Heartwood's root-memory network extends beyond its physical roots. Druids read Rootlace disturbance patterns to monitor Feywood-wide stress from localized observation."
   },
   {
     "id": "heartmorel",
@@ -331,11 +331,11 @@
     "subcategory": "edible",
     "zones": ["outer_old_growth_wild", "thornveil_civic_forest"],
     "ecological_role": "edible decomposer fungus",
-    "cultural_role": "signature Glade culinary fungus; Vaelmere trade export",
+    "cultural_role": "signature Feywood culinary fungus; Vaelmere trade export",
     "harvest_status": "wild",
     "canonical_tier": "secondary",
     "tags": ["fungus", "edible", "heartmorel", "culinary", "trade-export"],
-    "description": "An edible decomposer fungus seasonal to the Glade's mature forest. Heartmorel is the canonical Glade culinary fungus; preserved Heartmorel is a minor but recognized Vaelmere trade export."
+    "description": "An edible decomposer fungus seasonal to the Feywood's mature forest. Heartmorel is the canonical Feywood culinary fungus; preserved Heartmorel is a minor but recognized Vaelmere trade export."
   },
   {
     "id": "redveil_shelf",
@@ -348,7 +348,7 @@
     "harvest_status": "wild",
     "canonical_tier": "secondary",
     "tags": ["fungus", "medicinal", "redveil-shelf", "fever-remedy"],
-    "description": "A medicinal shelf fungus harvested from fallen timber. Redveil preparations are used in fever remedies and wound preparations across the Glade's medicinal tradition."
+    "description": "A medicinal shelf fungus harvested from fallen timber. Redveil preparations are used in fever remedies and wound preparations across the Feywood's medicinal tradition."
   },
   {
     "id": "grove_deepmoss",
@@ -361,7 +361,7 @@
     "harvest_status": "sacred",
     "canonical_tier": "primary",
     "tags": ["moss", "grove-deepmoss", "silent-grove", "sacred", "health-indicator"],
-    "description": "The signature ground cover of the Silent Grove Enclave. Grove Deepmoss changes slowly, and its shift is among the last indicators to register in the Glade's seven-stage decline order — any visible change in Grove Deepmoss signals deep instability. Druidic use only, in tiny amounts if at all."
+    "description": "The signature ground cover of the Silent Grove Enclave. Grove Deepmoss changes slowly, and its shift is among the last indicators to register in the Feywood's seven-stage decline order — any visible change in Grove Deepmoss signals deep instability. Druidic use only, in tiny amounts if at all."
   },
   {
     "id": "winterglass_lichen",
@@ -433,7 +433,7 @@
     "name": "Silverleaf Balm",
     "category": "herb",
     "subcategory": "medicinal",
-    "zones": ["thornveil_civic_forest", "outer_old_growth_wild", "glade_edge"],
+    "zones": ["thornveil_civic_forest", "outer_old_growth_wild", "Feywood_edge"],
     "ecological_role": "medicinal herb; pollinator support",
     "cultural_role": "healer's staple; salves, wound wash, calming infusions; trade export",
     "harvest_status": "cultivated",
@@ -446,25 +446,25 @@
     "name": "Dawnmint",
     "category": "herb",
     "subcategory": "culinary-medicinal",
-    "zones": ["thornveil_civic_forest", "glade_edge"],
+    "zones": ["thornveil_civic_forest", "Feywood_edge"],
     "ecological_role": "aromatic culinary herb",
     "cultural_role": "tea, scenting, cooking, household medicine",
     "harvest_status": "cultivated",
     "canonical_tier": "secondary",
     "tags": ["herb", "aromatic", "dawnmint", "culinary", "household-medicine"],
-    "description": "An aromatic culinary herb with mild medicinal properties, cultivated widely across the Glade's domestic gardens. Dawnmint supports tea, scenting, cooking, and household medicine; its preparations are a minor trade export."
+    "description": "An aromatic culinary herb with mild medicinal properties, cultivated widely across the Feywood's domestic gardens. Dawnmint supports tea, scenting, cooking, and household medicine; its preparations are a minor trade export."
   },
   {
     "id": "amberbell_flower",
     "name": "Amberbell Flower",
     "category": "herb",
     "subcategory": "pollinator",
-    "zones": ["thornveil_civic_forest", "glade_edge"],
+    "zones": ["thornveil_civic_forest", "Feywood_edge"],
     "ecological_role": "bell-flower pollinator species; seasonal bloom marker",
     "cultural_role": "common wine flavoring",
     "harvest_status": "wild",
     "canonical_tier": "secondary",
     "tags": ["flower", "amberbell", "pollinator", "wine-flavoring", "seasonal-marker"],
-    "description": "A bell-flower species supporting Honeybound bees and other pollinators. Amberbell is a seasonal bloom marker and a common flavoring in Feywood wines; its appearance through the warm season is one of the Glade's visible thresholds."
+    "description": "A bell-flower species supporting Honeybound bees and other pollinators. Amberbell is a seasonal bloom marker and a common flavoring in Feywood wines; its appearance through the warm season is one of the Feywood's visible thresholds."
   }
 ]

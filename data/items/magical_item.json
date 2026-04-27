@@ -87,7 +87,7 @@
     "value_cd": 10000,
     "effects": [
       "Unique artifact held exclusively by Lethariel Heartwood. Kept at Heartwood Estate between her active Heartwarden Captaincy rotations; returns to active service when Sylvara departs for her Proving.",
-      "Arrows loosed from the Heartwood Bow carry heightened accuracy and penetrating force in defense of the Heartwood and the Glade.",
+      "Arrows loosed from the Heartwood Bow carry heightened accuracy and penetrating force in defense of the Heartwood and the Feywood.",
       "The bow's Longbough material is Heartwood-offered and cannot pass to an unsanctioned bearer; attempts to use it by another party produce no magical effect and the bow's ambient-field register shifts in ways trained observers recognize."
     ]
   },
@@ -103,7 +103,7 @@
     "rarity": "uncommon",
     "value_cd": 400,
     "effects": [
-      "The Glade's ambient field registers the bearer as a welcome guest. Path-finding is subtly more cooperative; the Glade's geometry favors the bearer's intended destinations.",
+      "The Feywood's ambient field registers the bearer as a welcome guest. Path-finding is subtly more cooperative; the Feywood's geometry favors the bearer's intended destinations.",
       "Legitimacy derives from the specific act of giving by a recognized host — a stolen or forged token confers nothing, and attempts to forge one are recognizable to attuned elven observers.",
       "Typically carried on the person (worn at the wrist, neck, or on a belt) for the duration of a visit; returned or kept as a memento when the visit concludes."
     ]
@@ -121,7 +121,7 @@
     "value_cd": 350,
     "effects": [
       "Provides soft continuous bioluminescent light without fuel, flame, or smoke.",
-      "The fungus responds to ambient-field conditions: brightness subtly dims under Turning, cooperating with the Glade's health register rather than masking it.",
+      "The fungus responds to ambient-field conditions: brightness subtly dims under Turning, cooperating with the Feywood's health register rather than masking it.",
       "Lantern housing lasts indefinitely; the fungal colony requires periodic refreshment at Thornveil or from a trained elven keeper."
     ]
   },
@@ -129,7 +129,7 @@
     "id": "item_magical_veilvine_wayfinder_01",
     "name": "Veilvine Wayfinder",
     "category": "special",
-    "description": "A small pendant of living Veilvine tended by its bearer — whose color shift indicates seasonal thresholds and ambient-field conditions in the Glade and at the Border.",
+    "description": "A small pendant of living Veilvine tended by its bearer — whose color shift indicates seasonal thresholds and ambient-field conditions in the Feywood and at the Border.",
     "tags": ["veilvine", "wayfinder", "druidic", "elven", "feywood", "navigation"],
     "roll_tag": null,
     "consumable": false,
@@ -146,7 +146,7 @@
     "id": "item_magical_rootlace_amulet_01",
     "name": "Rootlace Amulet",
     "category": "sacred",
-    "description": "A small amulet containing living Rootlace Mycelium in a sealed chamber — given to druids and attuned elves to maintain a subtle continuous read of the Glade's root-memory network.",
+    "description": "A small amulet containing living Rootlace Mycelium in a sealed chamber — given to druids and attuned elves to maintain a subtle continuous read of the Feywood's root-memory network.",
     "tags": ["rootlace", "amulet", "druidic", "elven", "feywood", "field-sense"],
     "roll_tag": null,
     "consumable": false,
@@ -155,8 +155,8 @@
     "value_cd": 600,
     "effects": [
       "Supports attentional practice by providing a very subtle ambient-field signal the bearer learns to read over months of carry.",
-      "Not magical in a flashy sense; the effect is relational — a trained bearer notices the Glade's state shifts slightly earlier than they otherwise would.",
-      "Cannot function outside the Glade's immediate ambient-field reach; realm-side, the amulet's chamber goes dormant."
+      "Not magical in a flashy sense; the effect is relational — a trained bearer notices the Feywood's state shifts slightly earlier than they otherwise would.",
+      "Cannot function outside the Feywood's immediate ambient-field reach; realm-side, the amulet's chamber goes dormant."
     ]
   },
   {

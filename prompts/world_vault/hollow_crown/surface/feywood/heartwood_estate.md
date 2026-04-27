@@ -8,7 +8,7 @@ description: >
   The ancestral woodland seat of House Heartwood — one of two substantial seats
   the house maintains, complementing the house's Thornveil seat in the
   Heartwood Approach. Set in the Outer Old-Growth Wild at a distance from
-  Thornveil that reflects the family's sustained relationship with deeper Glade
+  Thornveil that reflects the family's sustained relationship with deeper Feywood
   ecology, the Estate carries the house's wild-connected family life while the
   Thornveil seat carries its political-ceremonial authority. The Estate is not a
   fortified manor or monumental hall; it is a cluster of grown-in dwellings and
@@ -49,7 +49,7 @@ The ancestral woodland seat of House Heartwood. Ancient, integrated, small by hu
 
 ## Scene Texture
 
-The approach to the Estate does not announce itself. There is no road. The path that leads here is the kind of path the Glade is full of — worn enough to follow if one knows what to look for, invisible enough that unsanctioned travelers will not find it. The approach traverses several miles of mature Outer Wild canopy; the first indication that a human-use site is near is the shift in understory density, the subtle markers of tended ground under heavy canopy.
+The approach to the Estate does not announce itself. There is no road. The path that leads here is the kind of path the Feywood is full of — worn enough to follow if one knows what to look for, invisible enough that unsanctioned travelers will not find it. The approach traverses several miles of mature Outer Wild canopy; the first indication that a human-use site is near is the shift in understory density, the subtle markers of tended ground under heavy canopy.
 
 The Estate itself is a cluster of dwellings set around a loose central space. The buildings are not arranged in a plan; they sit where particular trees gave them room, where terrain permitted, where centuries of family decisions accumulated. Several main structures — the main hall, the working hall, the family dwellings — are tree-integrated in the elven idiom, with living old-growth as load-bearing pillar and branches shaped over generations into roof and wall. Others are freestanding, clearly human-scaled work, woven plant wall and dressed stone. The combination is easy to the eye and harder to summarize.
 
@@ -69,7 +69,7 @@ The Heartwood bow itself is kept on a simple wooden stand. It is not in a displa
 
 ## The Wild-Upbringing and the Proving
 
-House Heartwood's specific tradition runs in two distinct phases. Children of the house are first raised close to the land — they spend their earliest decades at the Estate and the surrounding Outer Wild, learning from the Glade directly before they learn from the family's civic life. They return to the Estate for significant events but otherwise move through the Outer Wild with their bonded kin, hunting with Longbough and living with the land the house is named for. This wild-upbringing period runs through young adulthood.
+House Heartwood's specific tradition runs in two distinct phases. Children of the house are first raised close to the land — they spend their earliest decades at the Estate and the surrounding Outer Wild, learning from the Feywood directly before they learn from the family's civic life. They return to the Estate for significant events but otherwise move through the Outer Wild with their bonded kin, hunting with Longbough and living with the land the house is named for. This wild-upbringing period runs through young adulthood.
 
 The second phase is the Proving itself, which for House Heartwood candidates commences at 90. The Proving requires the candidate to demonstrate capability and character without wielding the family name — operating under an alternate identity, joining a Greenshield rotation where the house is unknown, traveling realm-side under discretion, or some comparable arrangement negotiated with the house elders. The candidate must earn what they will later carry.
 
@@ -86,13 +86,13 @@ The Estate's resident population sits in the forty-to-seventy range, varying wit
 - **Bonded staff:** long-resident families who have served the house across generations. These are not servants in the realm sense; they are part of the household in the deeper elven way, with their own dwellings in the Estate cluster.
 - **Occasional non-elven residents:** House Heartwood's non-elf integration is lower than House Vaelaryn's but present. Long-term non-elven residents who have earned a place at the Estate live in the cluster alongside bonded families.
 
-Daily life is plant-forward and self-provisioning. The Estate maintains its own modest agroforestry — Hearthnut grove at the forest margin, Summerpear and Goldcap orchards, kin-planted companion beds, a small watermeadow plot drawing from the Heartwater Basin drainage that passes nearby. Game comes from the Outer Wild around the Estate, primarily Gladehorn stag with seasonal Rootback Elk; Silverbough Hart in small numbers, Silverbough White Hart never. Fish from the drainage. Honeybound bees tended in house plots yield the Estate's own honey.
+Daily life is plant-forward and self-provisioning. The Estate maintains its own modest agroforestry — Hearthnut grove at the forest margin, Summerpear and Goldcap orchards, kin-planted companion beds, a small watermeadow plot drawing from the Heartwater Basin drainage that passes nearby. Game comes from the Outer Wild around the Estate, primarily Feywoodhorn stag with seasonal Rootback Elk; Silverbough Hart in small numbers, Silverbough White Hart never. Fish from the drainage. Honeybound bees tended in house plots yield the Estate's own honey.
 
 ## Visitors
 
 The Estate does not receive casual visitors. Realm visitors arrive only with explicit Council or House-level sanction — most commonly in the context of diplomatic business requiring Lethariel's specific attention. Sanctioned visitors are received in the main hall with warmth appropriate to their standing and a directness that realm visitors sometimes find unnerving.
 
-Unsanctioned travelers do not reach the Estate. The approach path does not extend itself for them. The surrounding Outer Wild is cooperative with the house's privacy in the way the Glade is cooperative with any sustained, earned relationship to a specific place.
+Unsanctioned travelers do not reach the Estate. The approach path does not extend itself for them. The surrounding Outer Wild is cooperative with the house's privacy in the way the Feywood is cooperative with any sustained, earned relationship to a specific place.
 
 ## Tags
 

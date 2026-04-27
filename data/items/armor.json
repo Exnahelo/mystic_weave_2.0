@@ -339,7 +339,7 @@
     "armor_floor": 20,
     "armor_ceiling": 40,
     "rarity": "uncommon",
-    "description": "A Feywood ranger's layered leather armor — tanned from sanctioned hides (silverbough hart, gladehorn stag, rootback elk) using elven processes that preserve flexibility across long service.",
+    "description": "A Feywood ranger's layered leather armor — tanned from sanctioned hides (silverbough hart, Feywoodhorn stag, rootback elk) using elven processes that preserve flexibility across long service.",
     "narrative_effects": [
       "Provides medium-armor protection with the quieter motion elven field operation demands.",
       "Often bears subtle house-marks or personal identifiers recognizable only to trained elven observers."
@@ -411,7 +411,7 @@
     "armor_floor": 20,
     "armor_ceiling": 50,
     "rarity": "uncommon",
-    "description": "Studded leather produced to elven ranger specification — sanctioned hides (silverbough hart, gladehorn stag, rootback elk) tanned with elven processes, reinforced with small elven-forged studs set flush to reduce catch-snag on brush and deadfall. Lighter than realm studded leather of equivalent protection and noticeably quieter in motion.",
+    "description": "Studded leather produced to elven ranger specification — sanctioned hides (silverbough hart, Feywoodhorn stag, rootback elk) tanned with elven processes, reinforced with small elven-forged studs set flush to reduce catch-snag on brush and deadfall. Lighter than realm studded leather of equivalent protection and noticeably quieter in motion.",
     "narrative_effects": [
       "Provides light-armor protection with the quieter motion elven field operation demands.",
       "Studs are placed for flexibility rather than visual bulk; rangers and ranger-adjacent roles prefer this pattern.",

@@ -342,7 +342,7 @@
     "rarity": "common",
     "description": "A warm traveling cloak of Hearthgoat wool — the Feywood's standard cold-weather outerwear, durable across decades of ordinary use.",
     "narrative_effects": [
-      "Maintains warmth in cold and damp conditions appropriate to extended Glade and western-forest travel.",
+      "Maintains warmth in cold and damp conditions appropriate to extended Feywood and western-forest travel.",
       "Recognizable at a glance to elves; its presence signals Feywood origin or long elven-contact."
     ]
   },
@@ -368,7 +368,7 @@
     "tags": ["apparel", "outerwear", "moonthorn", "ceremonial", "rare", "feywood"],
     "value_cd": 1200,
     "rarity": "rare",
-    "description": "A cloak of moonthorn wolf pelt — made only from a wolf's natural death, never from a hunted pelt; the pelt's origin is known to all who understand the Glade's relational ethics.",
+    "description": "A cloak of moonthorn wolf pelt — made only from a wolf's natural death, never from a hunted pelt; the pelt's origin is known to all who understand the Feywood's relational ethics.",
     "narrative_effects": [
       "Provides significant cold-weather protection.",
       "Earned rather than purchased — appearing in realm trade is essentially impossible; a moonthorn pelt cloak on a non-elf is a question in itself.",

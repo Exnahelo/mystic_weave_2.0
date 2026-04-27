@@ -1992,8 +1992,8 @@
     ]
   },
   {
-    "id": "mundane_glade_honey_01",
-    "name": "Glade Honey",
+    "id": "mundane_Feywood_honey_01",
+    "name": "Feywood Honey",
     "category": "consumable",
     "subcategory": "food",
     "description": "A sealed jar of honey from Honeybound bees — distinctly floral, slightly field-reactive to sensitive attunements, prized both as food and as a preserve base.",
@@ -2006,7 +2006,7 @@
     "value_cd": 40,
     "narrative_effects": [
       "Standard food and preserve ingredient with notably long shelf life.",
-      "Vaelmere trade export in modest quantities; realm connoisseurs distinguish Glade honey by its specific floral character."
+      "Vaelmere trade export in modest quantities; realm connoisseurs distinguish Feywood honey by its specific floral character."
     ]
   },
   {

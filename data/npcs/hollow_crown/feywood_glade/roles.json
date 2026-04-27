@@ -51,25 +51,25 @@
     ],
     "generation_guidance": "Centuries of realm-contact experience typical. Trade Envoy careers often span multiple generations of their realm-side counterparts. Voice blends elven register with practiced realm-trade vocabulary. Specific individuals can be named per scene.",
     "tags": ["generative", "tier-3", "vaelmere", "trade-envoy", "border-exchange", "feywood"],
-    "description": "Elven Trade Envoys are the specialist professional corps that handles presentation at Border exchange windows and sustained cross-Border commercial relationships. Training includes realm-language fluency, realm commercial practice, Glade production knowledge, and the relational skill set the work requires. Career spans are centuries-long; senior Envoys often have counterpart relationships tracing back through multiple generations of their realm partners."
+    "description": "Elven Trade Envoys are the specialist professional corps that handles presentation at Border exchange windows and sustained cross-Border commercial relationships. Training includes realm-language fluency, realm commercial practice, Feywood production knowledge, and the relational skill set the work requires. Career spans are centuries-long; senior Envoys often have counterpart relationships tracing back through multiple generations of their realm partners."
   },
   {
     "id": "greenshield_outer_rotation_captain",
     "name": "Greenshield Outer-Rotation Captain",
     "tier": 3,
     "role_scope": "feywood_military",
-    "typical_context": "Mid-career Greenshield officer on outer-Glade rotation, responsible for border-adjacent security and coordination with Vaelmere.",
+    "typical_context": "Mid-career Greenshield officer on outer-Feywood rotation, responsible for border-adjacent security and coordination with Vaelmere.",
     "register": "Direct but not brusque; disciplined.",
-    "authority_scope": "Operational security authority for outer-Glade rotation postings; reports to Greenshield Commander; coordinates with Warden of Vaelmere on civic-security matters.",
+    "authority_scope": "Operational security authority for outer-Feywood rotation postings; reports to Greenshield Commander; coordinates with Warden of Vaelmere on civic-security matters.",
     "common_scene_functions": [
-      "Patrol coordination in outer-Glade zones",
+      "Patrol coordination in outer-Feywood zones",
       "Security-adjacent civic matters requiring coordination with Vaelmere",
       "Escort arrangement for sanctioned realm-visitor travel",
       "Investigation of anomalous activity at borders and routes"
     ],
     "generation_guidance": "Mid-career, typically decades-into-service but not yet senior. Disciplined register without theatricality. Specific individuals named per scene; individual Captains rotate through postings over years.",
     "tags": ["generative", "tier-3", "greenshield", "military", "outer-rotation", "feywood"],
-    "description": "The Greenshield Outer-Rotation Captain is a mid-career officer on posting at the outer-Glade margins, typically headquartered near Vaelmere or at rotation points along the Thornveil-Vaelmere corridor. The role handles day-to-day security work in a register that is professional without military-theatrical affect."
+    "description": "The Greenshield Outer-Rotation Captain is a mid-career officer on posting at the outer-Feywood margins, typically headquartered near Vaelmere or at rotation points along the Thornveil-Vaelmere corridor. The role handles day-to-day security work in a register that is professional without military-theatrical affect."
   },
   {
     "id": "greenshield_commander",
@@ -78,16 +78,16 @@
     "role_scope": "feywood_military",
     "typical_context": "Senior military officer of the Greenshield, commanding the Feywood's standing military organization from headquarters in the Noble Groves district of Thornveil.",
     "register": "Authoritative, competent, professionally direct; decisive when needed, consultative otherwise.",
-    "authority_scope": "Strategic military authority for the Feywood; coordinates with Council on Glade-wide military matters; oversees Heartwarden Captain interaction on border defense and Heartwood Core security.",
+    "authority_scope": "Strategic military authority for the Feywood; coordinates with Council on Feywood-wide military matters; oversees Heartwarden Captain interaction on border defense and Heartwood Core security.",
     "common_scene_functions": [
       "Strategic military planning and readiness coordination",
-      "Council-facing briefings on Glade-wide security matters",
+      "Council-facing briefings on Feywood-wide security matters",
       "Oversight of outer-rotation postings and Heartwarden coordination",
       "Response to major Border or incursion events"
     ],
     "generation_guidance": "Senior; long military career. Specific individuals named when narrative requires; the role is institutionally stable across tenure. Voice is military-professional rather than courtly.",
     "tags": ["generative", "tier-3", "greenshield", "military-command", "thornveil", "feywood"],
-    "description": "The Greenshield Commander is the senior military officer of the Feywood's standing military organization. The Commander holds offices at Greenshield headquarters in Thornveil's Noble Groves district, coordinates with the Council on matters of Glade-wide military concern, and manages the institutional relationship between the Greenshield and the Heartwarden order."
+    "description": "The Greenshield Commander is the senior military officer of the Feywood's standing military organization. The Commander holds offices at Greenshield headquarters in Thornveil's Noble Groves district, coordinates with the Council on matters of Feywood-wide military concern, and manages the institutional relationship between the Greenshield and the Heartwarden order."
   },
   {
     "id": "heartwarden_captain_interim",
@@ -148,11 +148,11 @@
     "name": "Druid Master of the Silent Grove",
     "tier": 3,
     "role_scope": "silent_grove_druidic",
-    "typical_context": "Senior druidic figure with long tenure at the Silent Grove's Reading Glade and broader sustained practice areas.",
+    "typical_context": "Senior druidic figure with long tenure at the Silent Grove's Reading Feywood and broader sustained practice areas.",
     "register": "Measured, patient, long pauses; often speaks least when understanding most.",
     "authority_scope": "Senior practitioner authority over the Silent Grove's druidic work; not a commander but a voice whose guidance is sought and honored.",
     "common_scene_functions": [
-      "Oversight of druidic study at the Reading Glade",
+      "Oversight of druidic study at the Reading Feywood",
       "Coordination with Heartwarden Captain on integrated training",
       "Receipt of visiting Elder Druid from the Heartwood",
       "Scholarly consultation on ecological and ambient-field matters"
@@ -195,7 +195,7 @@
     ],
     "generation_guidance": "Individual Councilors vary widely by seat and house affiliation. Name and specific portfolio per scene. Council deliberations are canonically slow (weeks to years for decisions of weight); urgency-framed scenes are unusual here.",
     "tags": ["generative", "tier-3", "council", "thornveil", "heartwood-approach", "feywood"],
-    "description": "Council of Elders members hold individual seats on Thornveil's senior deliberative body. Seats vary in house affiliation, portfolio, and tenure; the Council handles matters of Glade-wide significance requiring collective decision. Council pace is deliberately slow; the register of Council business is formal but not performative."
+    "description": "Council of Elders members hold individual seats on Thornveil's senior deliberative body. Seats vary in house affiliation, portfolio, and tenure; the Council handles matters of Feywood-wide significance requiring collective decision. Council pace is deliberately slow; the register of Council business is formal but not performative."
   },
   {
     "id": "house_heartwood_family_elder",
@@ -227,7 +227,7 @@
       "Lunar-cycle and seasonal observance leadership",
       "Oathbloom cultivation oversight at Dawnvale oath-plots",
       "Consultation on Dawngold and Eveningjade Bloom lineage matters",
-      "House representation at druidic working sessions across the Glade"
+      "House representation at druidic working sessions across the Feywood"
     ],
     "generation_guidance": "Senior druidic practitioner with sustained observance work. Specific individual named per scene. Voice is ceremonially precise but not ornate; the precision is working precision, not performance.",
     "tags": ["generative", "tier-3", "house-dawnvale", "druid", "senior-druid", "lunar-cycle", "feywood"],

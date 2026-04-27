@@ -3,7 +3,7 @@ name: The Guest House
 type: location
 region_id: hollow-crown
 parent_location_id: vaelmere
-description: Accommodations for realm visitors who are sanctioned for Vaelmere access but not proceeding onward to Thornveil. Simple but comfortable lodging in the elven idiom, designed to support visits lasting from several days to several weeks. The Guest House handles most routine realm-trader visits, scholarly stays of Vaelmere-level duration, diplomatic staff on extended Vaelmere business, and other sanctioned visitors whose purpose does not require deeper-Glade access. Not a realm-style inn; a purpose-built lodging that operates on elven registers while accommodating realm-visitor patterns.
+description: Accommodations for realm visitors who are sanctioned for Vaelmere access but not proceeding onward to Thornveil. Simple but comfortable lodging in the elven idiom, designed to support visits lasting from several days to several weeks. The Guest House handles most routine realm-trader visits, scholarly stays of Vaelmere-level duration, diplomatic staff on extended Vaelmere business, and other sanctioned visitors whose purpose does not require deeper-Feywood access. Not a realm-style inn; a purpose-built lodging that operates on elven registers while accommodating realm-visitor patterns.
 connections:
 - vaelmere
 - wardens-hall

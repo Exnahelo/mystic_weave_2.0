@@ -55,7 +55,7 @@ The district holds Thornveil's primary markets — plural, because each is a clu
 Typical market goods include:
 
 - **Food.** Hearthnut products, Summerpear and Goldcap fruit and preserves, Dewberry preserves, River Reed Onion, Heartmorel in season, honey and wax, the small-scale venison and boar that local hunters bring in, Silverstream trout from the Heartwater Basin, hearthgoat dairy.
-- **Drink.** Forest wines, Goldcap cider, honey mead, herbal infusions. All produced in the Glade; some traded outward from here to Vaelmere.
+- **Drink.** Forest wines, Goldcap cider, honey mead, herbal infusions. All produced in the Feywood; some traded outward from here to Vaelmere.
 - **Daily goods.** Thornfiber basketry, Silverleaf Balm preparations, Dawnmint, candles of honey wax, domestic textiles.
 - **Exchange items.** Goods traded back from Vaelmere's realm-import flow — metal tools, specific craft materials, realm books and scrolls for those who want them.
 
@@ -65,7 +65,7 @@ Cluster life is the Common Hearth's backbone. Most residents identify first with
 
 Shared spaces bind each cluster. Every cluster has a shared hearth of some kind — a central kitchen-commons where residents cook collectively or individually in a shared space, depending on the cluster's habits. Every cluster has a shared garden. Every cluster has a gathering-space, indoor or outdoor, for observances, conversation, craft work, and the accumulated small ceremonies of daily life.
 
-Observances in the Common Hearth follow the Glade's lunar-and-event rhythm. Full-moon gatherings, every-third-moon rites, every-seventh, every-thirteenth. Births, deaths, bondings, oaths, departures, returns. These are cluster-scale and sub-district-scale, not district-wide; the Hearth's rhythm is plural and layered rather than singular.
+Observances in the Common Hearth follow the Feywood's lunar-and-event rhythm. Full-moon gatherings, every-third-moon rites, every-seventh, every-thirteenth. Births, deaths, bondings, oaths, departures, returns. These are cluster-scale and sub-district-scale, not district-wide; the Hearth's rhythm is plural and layered rather than singular.
 
 ## Work
 

@@ -952,8 +952,8 @@
     "description": "Baseline settled-region price for a pouch of Feywood Redveil Shelf preparation, a fever and serious-wound remedy."
   },
   {
-    "id": "price_glade_honey_01",
-    "name": "Glade Honey",
+    "id": "price_Feywood_honey_01",
+    "name": "Feywood Honey",
     "price_group": "consumables",
     "price_cd": 40,
     "rarity": "common",

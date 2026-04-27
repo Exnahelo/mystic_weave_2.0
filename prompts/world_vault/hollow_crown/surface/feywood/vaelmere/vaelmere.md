@@ -4,7 +4,7 @@ name: Vaelmere
 type: settlement
 region_id: hollow-crown
 parent_location_id: feywood
-description: The Feywood's outer settlement and trade waypoint, positioned in the Glade's realm-facing interior where the sanctioned path from the Feywood Border leads inward before continuing onward to Thornveil. Vaelmere is where external commerce becomes elven commerce — realm traders bringing goods through the Border meet Vaelmere's trade houses; elven goods bound for the Border are staged here before their outward journey. The settlement is also a real elven community in its own right, home to roughly six hundred residents who combine the trader, craftfolk, and civic roles a commercial waypoint requires with the continuous elven life that characterizes all Feywood settlements. Vaelmere exists to protect Thornveil from the friction of daily commercial contact with the realm while honoring the mercantile alliance that has sustained the Feywood-realm relationship for a thousand years.
+description: The Feywood's outer settlement and trade waypoint, positioned in the Feywood's realm-facing interior where the sanctioned path from the Feywood Border leads inward before continuing onward to Thornveil. Vaelmere is where external commerce becomes elven commerce — realm traders bringing goods through the Border meet Vaelmere's trade houses; elven goods bound for the Border are staged here before their outward journey. The settlement is also a real elven community in its own right, home to roughly six hundred residents who combine the trader, craftfolk, and civic roles a commercial waypoint requires with the continuous elven life that characterizes all Feywood settlements. Vaelmere exists to protect Thornveil from the friction of daily commercial contact with the realm while honoring the mercantile alliance that has sustained the Feywood-realm relationship for a thousand years.
 connections:
 - feywood
 - thornveil
@@ -30,13 +30,13 @@ discovered: false
 
 # Vaelmere
 
-The Feywood's outer settlement and trade waypoint, positioned in the Glade's realm-facing interior where the sanctioned path from the Feywood Border leads inward before continuing onward to Thornveil. Vaelmere is where external commerce becomes elven commerce — realm traders bringing goods through the Border meet Vaelmere's trade houses; elven goods bound for the Border are staged here before their outward journey. The settlement is also a real elven community in its own right, home to roughly six hundred residents who combine the trader, craftfolk, and civic roles a commercial waypoint requires with the continuous elven life that characterizes all Feywood settlements. Vaelmere exists to protect Thornveil from the friction of daily commercial contact with the realm while honoring the mercantile alliance that has sustained the Feywood-realm relationship for a thousand years.
+The Feywood's outer settlement and trade waypoint, positioned in the Feywood's realm-facing interior where the sanctioned path from the Feywood Border leads inward before continuing onward to Thornveil. Vaelmere is where external commerce becomes elven commerce — realm traders bringing goods through the Border meet Vaelmere's trade houses; elven goods bound for the Border are staged here before their outward journey. The settlement is also a real elven community in its own right, home to roughly six hundred residents who combine the trader, craftfolk, and civic roles a commercial waypoint requires with the continuous elven life that characterizes all Feywood settlements. Vaelmere exists to protect Thornveil from the friction of daily commercial contact with the realm while honoring the mercantile alliance that has sustained the Feywood-realm relationship for a thousand years.
 
 ## Scene Texture
 
-A traveler approaching Vaelmere from the Feywood Border traverses several hours of Glade interior before reaching the settlement. The path is guided for sanctioned visitors and known to returning elven traders; it passes through ordinary Glade wilderness that gradually shows signs of regular use — subtle wear on the trail, occasional waymarkers, the softened character that regular elven presence imparts to terrain over generations.
+A traveler approaching Vaelmere from the Feywood Border traverses several hours of Feywood interior before reaching the settlement. The path is guided for sanctioned visitors and known to returning elven traders; it passes through ordinary Feywood wilderness that gradually shows signs of regular use — subtle wear on the trail, occasional waymarkers, the softened character that regular elven presence imparts to terrain over generations.
 
-Vaelmere emerges from the forest with more visible structure than Thornveil does. The settlement's outermost edges are clearer-bounded, marked by a gentle transition from wild Glade terrain to cultivated margins. Gardens appear, grown in loose organic patterns that follow the land's natural contours. Paths become clearer. Buildings become visible — first scattered at the settlement's outer reaches, then increasingly dense as the traveler approaches the central commons.
+Vaelmere emerges from the forest with more visible structure than Thornveil does. The settlement's outermost edges are clearer-bounded, marked by a gentle transition from wild Feywood terrain to cultivated margins. Gardens appear, grown in loose organic patterns that follow the land's natural contours. Paths become clearer. Buildings become visible — first scattered at the settlement's outer reaches, then increasingly dense as the traveler approaches the central commons.
 
 The architecture shares Thornveil's organic-elven idiom but is markedly more modest. Vaelmere's buildings are grown-with and crafted-with the forest, incorporating living trees and using elven methods, but the buildings are smaller on average, less ambitious in their integration, and more practical in their function. Where Thornveil's older structures represent centuries of accumulated craft in single dwellings, Vaelmere's buildings reflect a more working character — structures that serve their purpose well without demanding to be architectural statements.
 
@@ -59,7 +59,7 @@ The **greenshield guardhouse** sits at the settlement's outer edge, on the path 
 
 The **ambient sound** of Vaelmere is livelier than Thornveil's but quieter than any realm city of comparable size. Trade activity produces periodic bursts of noise — cart wheels, loading sounds, conversation among arriving or departing traders — but the overall tempo is elven-quiet. Craftfolk at work produce the soft sounds of their specific crafts. The Commons holds conversation throughout the day. Seasonal birds and small wildlife add their continuous background layer.
 
-The **light** matches the Feywood's general character — dappled canopy filtering, distinctive quality compared to realm forests, the specific Feywood magical ambient register. Vaelmere's canopy is thinner than Thornveil's — this is a newer settlement in elven terms, built in terrain where the canopy has not yet grown as dense — so more direct light reaches the ground areas. Many residents appreciate this; the settlement's character includes more sun exposure than the deeper Glade interior, making it feel slightly more connected to the realm's ordinary world.
+The **light** matches the Feywood's general character — dappled canopy filtering, distinctive quality compared to realm forests, the specific Feywood magical ambient register. Vaelmere's canopy is thinner than Thornveil's — this is a newer settlement in elven terms, built in terrain where the canopy has not yet grown as dense — so more direct light reaches the ground areas. Many residents appreciate this; the settlement's character includes more sun exposure than the deeper Feywood interior, making it feel slightly more connected to the realm's ordinary world.
 
 ## Functions
 
@@ -67,8 +67,8 @@ The **light** matches the Feywood's general character — dappled canopy filteri
 
 Vaelmere's primary institutional function is mercantile coordination. The realm-Feywood exchange windows conducted at the Border are operationally supported from Vaelmere:
 
-- **Outbound side.** Elven goods bound for realm trade are aggregated at Vaelmere from across the Glade — craftwork from Thornveil's Crafthall, herbal preparations and specimens from outer Glade sites, specific magical materials, and the various rare goods that the Feywood exports. Vaelmere's Trade Hall inventories and prepares these goods for the journey to the Border.
-- **Inbound side.** Realm goods arriving through exchange windows are received at Vaelmere and processed. From here, goods are distributed onward — to Thornveil's markets for the realm-imports the capital requires, to specific noble families or institutions with standing orders, and to the Glade's broader elven community through Vaelmere's own markets.
+- **Outbound side.** Elven goods bound for realm trade are aggregated at Vaelmere from across the Feywood — craftwork from Thornveil's Crafthall, herbal preparations and specimens from outer Feywood sites, specific magical materials, and the various rare goods that the Feywood exports. Vaelmere's Trade Hall inventories and prepares these goods for the journey to the Border.
+- **Inbound side.** Realm goods arriving through exchange windows are received at Vaelmere and processed. From here, goods are distributed onward — to Thornveil's markets for the realm-imports the capital requires, to specific noble families or institutions with standing orders, and to the Feywood's broader elven community through Vaelmere's own markets.
 - **Trade staffing.** The Trade Master and their staff coordinate the full operational flow. Trade Envoys who present at Border exchanges are drawn from Vaelmere's experienced trade community — these are the elves with the most sustained exposure to realm commercial practice, selected and trained for the work over careers that span centuries.
 
 ### Diplomatic Buffer
@@ -96,9 +96,9 @@ Beyond its institutional functions, Vaelmere is a real elven community where app
 
 The community's social fabric is warm and interconnected. Residents know one another across generations; the Commons Hearth hosts continuous low-intensity social life; observance practices integrate the community in the specifically elven way.
 
-### Glade Edge Awareness
+### Feywood Edge Awareness
 
-Vaelmere's residents serve as the Feywood's informal sensor for realm-side pressure. The Greenshield Outer-Rotation Captain coordinates monitoring of Border activity — not through formal patrol but through routine information gathering from traders returning from exchanges, visitors arriving with news, and the natural attentiveness of elves living near the Glade's edge.
+Vaelmere's residents serve as the Feywood's informal sensor for realm-side pressure. The Greenshield Outer-Rotation Captain coordinates monitoring of Border activity — not through formal patrol but through routine information gathering from traders returning from exchanges, visitors arriving with news, and the natural attentiveness of elves living near the Feywood's edge.
 
 Unusual realm-side activity — shifts in trade patterns, diplomatic developments of note, rare realm-side events with potential implications — flows from Vaelmere inward to Thornveil through established reporting channels. The Council receives this information through Vaelmere's Warden as part of the settlement's standing coordination with the capital.
 
@@ -120,17 +120,17 @@ The **Greenshield Outer-Rotation Captain** commands the outer-rotation duty at V
 
 ## Character
 
-Vaelmere has a distinctive atmospheric character that differentiates it from both Thornveil and the Silent Grove while remaining clearly part of the Feywood. The settlement is **working**, in ways that neither the capital (civic/ancient/sacred-core) nor the Grove (focused/disciplined/ceremonial) quite are. Vaelmere's work is practical, commercial, outward-facing — the elves here are engaged with realm affairs in ways that the deeper Glade is not, and this engagement shapes the community's character.
+Vaelmere has a distinctive atmospheric character that differentiates it from both Thornveil and the Silent Grove while remaining clearly part of the Feywood. The settlement is **working**, in ways that neither the capital (civic/ancient/sacred-core) nor the Grove (focused/disciplined/ceremonial) quite are. Vaelmere's work is practical, commercial, outward-facing — the elves here are engaged with realm affairs in ways that the deeper Feywood is not, and this engagement shapes the community's character.
 
-The Vaelmere community is also somewhat more accustomed to external presence than Thornveil or any deeper Glade location. Residents see realm faces regularly — traders arriving for business, diplomats on specific matters, the occasional scholar or other approved visitor. This familiarity has produced a community that is comfortable with external interaction without losing its elven character. Vaelmere residents are still elves of the Feywood; they simply include realm contact in their ordinary working life in ways that deeper-Glade elves do not.
+The Vaelmere community is also somewhat more accustomed to external presence than Thornveil or any deeper Feywood location. Residents see realm faces regularly — traders arriving for business, diplomats on specific matters, the occasional scholar or other approved visitor. This familiarity has produced a community that is comfortable with external interaction without losing its elven character. Vaelmere residents are still elves of the Feywood; they simply include realm contact in their ordinary working life in ways that deeper-Feywood elves do not.
 
 Humor in Vaelmere is somewhat more accessible than in Thornveil. The layered, slow-developing elven humor is still present, but Vaelmere residents have learned to include realm visitors in simpler observational humor that realm minds can register. A realm trader who becomes a regular at Vaelmere's Commons Hearth develops, over years, genuine social relationships with Vaelmere residents — something that happens far more rarely in Thornveil.
 
-The respect principle — the Glade's continuous ecological-ethical framework — operates at Vaelmere as it does throughout the Feywood. Visitors behaving appropriately are welcomed warmly. Visitors behaving disrespectfully find the settlement's warmth cooling and, eventually, the Glade's geometry making their departure more straightforward than their continued presence. But Vaelmere's calibration toward external contact means that the threshold for disrespect is slightly more forgiving than at Thornveil — the settlement has learned patience for realm visitors who haven't yet fully learned the Feywood's way.
+The respect principle — the Feywood's continuous ecological-ethical framework — operates at Vaelmere as it does throughout the Feywood. Visitors behaving appropriately are welcomed warmly. Visitors behaving disrespectfully find the settlement's warmth cooling and, eventually, the Feywood's geometry making their departure more straightforward than their continued presence. But Vaelmere's calibration toward external contact means that the threshold for disrespect is slightly more forgiving than at Thornveil — the settlement has learned patience for realm visitors who haven't yet fully learned the Feywood's way.
 
 ## Access
 
-Vaelmere is accessible from the Feywood Border by the sanctioned path, which a guide or Hall of Guides member handles for realm visitors without personal Glade experience. Travel time is several hours. Most realm visits to the Feywood end at Vaelmere; continuation to Thornveil requires additional approvals and arrangements.
+Vaelmere is accessible from the Feywood Border by the sanctioned path, which a guide or Hall of Guides member handles for realm visitors without personal Feywood experience. Travel time is several hours. Most realm visits to the Feywood end at Vaelmere; continuation to Thornveil requires additional approvals and arrangements.
 
 **Typical sanctioned visitors:**
 - Realm traders on mercantile business (the largest visitor category)
@@ -171,7 +171,7 @@ Vaelmere is a settlement type, consistent with other elven and realm settlements
 
 The connection to `feywood-border` is canonical and represents the primary sanctioned approach route. This is the only Feywood interior location connected directly to the Border in this batch's authoring.
 
-The connection to `thornveil` represents the onward path to the capital. Vaelmere-to-Thornveil travel is internal Glade movement requiring several hours, along the path that all approved Thornveil-bound visitors traverse.
+The connection to `thornveil` represents the onward path to the capital. Vaelmere-to-Thornveil travel is internal Feywood movement requiring several hours, along the path that all approved Thornveil-bound visitors traverse.
 
 The connection to `feywood` is the regional parent reference.
 
