@@ -90,7 +90,7 @@ The Approach is technically open to any traveler. In practice, access is control
 **Typical authorized travelers:**
 - Conservatory scholars with research permissions
 - Council-sanctioned diplomatic or official visitors
-- Recognized devotees of Bahamut seeking specific consultation or retreat
+- Recognized devotees of Solveris seeking specific consultation or retreat
 - Greymantle trade couriers (limited to the First Gatehouse area)
 - Family members of monastery residents (rare but accommodated)
 - Other realm officials with legitimate monastery-related business

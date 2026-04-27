@@ -85,7 +85,7 @@ Cinderpit's relationship with Zarkharath is the defining external connection for
 
 Personal and family connections between the two settlements are extensive. Many Cinderpit families have members working at the Forge; many Zarkharath families have Cinderpit relatives. Travel along the Volcanic Highlands Trail is constant — supply wagons, crew rotations, visiting family, joint operational meetings. The two communities feel more like two districts of a single extended settlement than two separate villages, though they maintain distinct civic identities and institutional structures.
 
-Cultural exchange is substantial. Zarkharath's dragonborn religious and civic traditions (Bahamutic observance calibrated for the volcanic environment, the Forge's ceremonial practices) influence Cinderpit's own observances. Cinderpit's mining culture (the deep-shaft crews' specific traditions, the coal-pit workers' festival rhythms) shows up at Zarkharath's taverns and civic events. The shared working identity runs deeper than administrative separation suggests.
+Cultural exchange is substantial. Zarkharath's dragonborn religious and civic traditions (Solveris-aligned observance calibrated for the volcanic environment, the Forge's ceremonial practices) influence Cinderpit's own observances. Cinderpit's mining culture (the deep-shaft crews' specific traditions, the coal-pit workers' festival rhythms) shows up at Zarkharath's taverns and civic events. The shared working identity runs deeper than administrative separation suggests.
 
 ## Character
 

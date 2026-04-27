@@ -41,7 +41,6 @@ Also partially stubbed:
 - **Silver Wing Envoys** — External diplomacy. Structure not yet authored.
 - **Circle of Artisans** — Infrastructure and arts. Structure not yet authored.
 - **Sapphire Choir** — Oral traditions and culture. Structure not yet authored.
-- **Order of the Platinum Flame** — External Bahamut knightly order. Authored at summary level but no full detail on headquarters, operations, or campaign integration.
 
 ---
 
@@ -93,11 +92,11 @@ If the Temple moves toward State 2, the Rift destabilizes first — use it as an
 
 The most asymmetric character on the Council. He knows things the other two don't and acts on that information without sharing it. He is not malevolent — he genuinely believes long-term stability is served by his approach. But his definition of "stable" and Eryndor's are not the same thing.
 
-Players who discover the Amethyst Veil face a genuine dilemma: it's illegal under the spirit of the Ptarian Code (unauthorized intelligence gathering, deception of Council peers), but it may also be the only thing that has prevented several catastrophes. Varethyn knows this. He's betting you'll reach the same conclusion.
+Players who discover the Amethyst Veil face a genuine dilemma: it's illegal under the spirit of the Codex of Remembrance (unauthorized intelligence gathering, deception of Council peers), but it may also be the only thing that has prevented several catastrophes. Varethyn knows this. He's betting you'll reach the same conclusion.
 
-### Zarkeros and the Code
+### Zarkeros and the Codex
 
-Zarkeros upholds the Ptarian Code not from belief but because it is the framework within which his power operates most effectively. This means he is scrupulously compliant in observable behavior and genuinely dangerous in edge cases. He would subvert the Code if the gain were sufficient and the cost manageable. The key design constraint: what would make it worth it to him? Power isn't sufficient — he already has it. Loss of Drakenvale as a functioning power base would threaten him. An external threat that the Code's restrictions prevent him from addressing would be his breaking point.
+Zarkeros upholds the Codex of Remembrance not from belief but because it is the framework within which his power operates most effectively. This means he is scrupulously compliant in observable behavior and genuinely dangerous in edge cases. He would subvert the Codex if the gain were sufficient and the cost manageable. The key design constraint: what would make it worth it to him? Power isn't sufficient — he already has it. Loss of Drakenvale as a functioning power base would threaten him. An external threat that the Codex's restrictions prevent him from addressing would be his breaking point.
 
 ### The Draconic Conclave as Story Anchor
 
@@ -119,9 +118,9 @@ Files to keep in Obsidian as reference but not GPT-upload:
 - All Dec 9 policy notes (Apple Notes) — Superseded by this design notes file
 - Individual biome Apple Notes — Superseded by `drakenvale_biomes.md`; keep as species reference if needed
 
-### Ptarian Codex Note
+### Codex of Remembrance Note
 
-The `NEW_NEW_DRAKENVALE.docx` contains the most complete version of the Ptarian Codex as a formal charter document. If a full in-world legal text is ever needed (for roleplay, as a found document, etc.), that file is the source. It was intentionally not included in the GPT files because its length and legal prose format are not useful for the GPT's narrative function. The principles are captured in `world.md`.
+The `NEW_NEW_DRAKENVALE.docx` contains the most complete version of the Codex of Remembrance as a formal charter document. If a full in-world legal text is ever needed (for roleplay, as a found document, etc.), that file is the source. It was intentionally not included in the GPT files because its length and legal prose format are not useful for the GPT's narrative function. The principles are captured in `world.md`.
 
 ---
 

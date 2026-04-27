@@ -204,20 +204,6 @@ Its duties include monitoring Rift instability, maintaining continuity with the 
 
 ---
 
-### Order of the Platinum Flame
-
-An external Solveris-aligned knightly order aligned with Drakenvale’s sacred worldview, but not internal to its ordinary civic structure.
-
-**Type:** External religious-military order  
-**Leadership:** External  
-**Status:** Canonical, active, external
-
-The Order of the Platinum Flame operates beyond Drakenvale proper as a Solveris-aligned knightly and sacred institution. It is allied in principle and often in purpose, but it is not an internal organ of sanctuary governance.
-
-It matters because Drakenvale does not exist in complete theological or political isolation, and because external Solveris-aligned power sometimes intersects with internal sanctuary concerns.
-
----
-
 ## Trade and Economic Bodies
 
 ### Silver Scale Trading Company

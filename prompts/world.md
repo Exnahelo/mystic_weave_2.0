@@ -58,7 +58,7 @@ Drakenvale’s society is hierarchical, but not draconic in isolation.
 
 - **Drakari Stewards** serve as civic officers, mediators, military leaders, record-keepers, and direct enforcers of Council rulings.
 - **Mortals** may advise the Council, petition for redress, and hold skilled roles throughout the sanctuary, but do not possess a formal Council vote.
-- **Kobolds** are essential to maintenance, logistics, wardcraft, mining, and engineering. They are protected under the Code and integrated into education, labor, and sanctuary life.
+- **Kobolds** are essential to maintenance, logistics, wardcraft, mining, and engineering. They are protected under the Codex and integrated into education, labor, and sanctuary life.
 
 ### The Draconic Conclave
 

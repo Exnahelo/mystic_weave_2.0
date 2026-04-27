@@ -62,7 +62,7 @@ The Glade's most distinctive feature is its internal geometry. Understood proper
 
 ## The Elven Homeland
 
-The Feywood Glade is the elves' homeland and has been since before the realm existed. The founding of the Hollow Crown — the Ptarian Pact's establishment, the first dragons and the first human settlements — occurred around a pre-existing elven presence in the Glade. The elves watched the realm come into being. They have lived alongside it through every subsequent age.
+The Feywood Glade is the elves' homeland and has been since before the realm existed. The founding of the Hollow Crown — the Oath of the Fallen's establishment, the first dragons and the first human settlements — occurred around a pre-existing elven presence in the Glade. The elves watched the realm come into being. They have lived alongside it through every subsequent age.
 
 The elven population is the Glade's majority demographic. Ancient noble families trace their lineage back through generations whose total span is measured in millennia. Common families, craftfolk, druidic practitioners, warriors, traders — the full social spectrum of elven life is represented within the Glade. Elves of the Glade are generally taller and slighter of build than realm-side humans, with the specific physiology that magical ambient exposure produces over generations. Their hair and eye coloration runs across a range that includes colors realm-side species do not produce — silver-white, deep forest green, luminous amber.
 
@@ -77,7 +77,7 @@ The Feywood Glade is governed by a **Council of Elders** — a consensus-based b
 The Council's primary responsibilities are:
 
 - **Heartwood stewardship.** Protection of the Heartwood at the Glade's sacred center is the Council's foremost responsibility and the reason the Council exists.
-- **External diplomatic coordination.** Relationships with the realm, the Ptarian Pact's ongoing obligations, and the rare extra-realm contact all route through Council deliberation.
+- **External diplomatic coordination.** Relationships with the realm, the Oath of the Fallen's ongoing obligations, and the rare extra-realm contact all route through Council deliberation.
 - **Internal dispute resolution.** The Glade's settlements and noble families operate with considerable autonomy; disputes between them or matters affecting the broader elven community come to the Council.
 - **Military coordination.** The Glade's formal military answers to the Council. In ordinary times the military trains and prepares; in the rare crisis, the Council directs.
 - **Resource and mercantile oversight.** The elven end of the realm-Glade mercantile relationship is managed through Council-appointed Trade Envoys with Council-approved authority.
@@ -106,13 +106,13 @@ The Heartwood is the central sacred site. All other sacred practice ultimately r
 
 Elves speak of the land as a relationship rather than as a resource. The practice of respect — giving back what is taken, leaving what should be left, attending to what requires attention — is not a religious obligation in the ordinary sense. It is the ecological reality of living in a place that responds. Disrespect is not a religious sin; it is a practical error that the Glade corrects.
 
-This worldview is incompatible with the realm's Bahamutic monotheism in some deep philosophical senses, but the two traditions have coexisted for the full span of the realm's existence without requiring reconciliation. Elves understand that the realm's species have their own spiritual arrangements, including the dragon gods and the Ptarian religious structure. Realm species visiting the Glade are not required to adopt elven practice; they are required to behave in ways that the Glade finds acceptable, which is a different matter and does not require religious conversion.
+This worldview is incompatible with the realm's Solveris monotheism in some deep philosophical senses, but the two traditions have coexisted for the full span of the realm's existence without requiring reconciliation. Elves understand that the realm's species have their own spiritual arrangements, including the dragon gods and the Oath religious structure. Realm species visiting the Glade are not required to adopt elven practice; they are required to behave in ways that the Glade finds acceptable, which is a different matter and does not require religious conversion.
 
 ## Relationship with the Realm
 
 The realm-Glade relationship is specific, ancient, and durable:
 
-- **Ptarian Pact alliance.** The Glade swore alliance to the nascent realm during the Ptarian Pact's founding period. The alliance acknowledges the Glade's sovereignty, commits the realm to non-interference in Glade affairs, and commits the Glade to defensive cooperation if the realm faces existential threat. The alliance has been honored since. The Discordant War's Feywood contingent was a fulfillment of this alliance — the elves sent fighters because Mordrax's release would have threatened the Heartwood and the Glade by extension, and the Pact's terms justified the deployment.
+- **Oath of the Fallen alliance.** The Glade swore alliance to the nascent realm during the Oath of the Fallen's founding period. The alliance acknowledges the Glade's sovereignty, commits the realm to non-interference in Glade affairs, and commits the Glade to defensive cooperation if the realm faces existential threat. The alliance has been honored since. The Discordant War's Feywood contingent was a fulfillment of this alliance — the elves sent fighters because Mordrax's release would have threatened the Heartwood and the Glade by extension, and the Oath's terms justified the deployment.
 - **Mutual non-interference.** The realm does not send armies, officials, or formal representation into the Glade without invitation. The Glade does not send forces or formal representation into the realm beyond sanctioned diplomatic contact at the Border. Each operates in its own territory.
 - **Mercantile exchange.** The primary ongoing contact between realm and Glade is mercantile — the exchange windows conducted at the Border, where elven goods and realm goods are traded. This relationship is economically significant for both sides and provides the practical reason the Feywood tolerates occasional foolish realm visitors crossing without sanction.
 - **Diplomatic contact.** Formal diplomatic matters between realm and Glade route through the Council of Elders. The Council's diplomatic approach is patient — realm timelines feel rushed to Council members, and the Council's deliberations feel glacial to realm officials. Both sides have learned to accommodate the mismatch.
@@ -182,7 +182,7 @@ The elven physiology and long-term-human-resident effect — subtle physical cha
 
 The ancient alliance and mercantile relationship with the realm are canonically established. The Discordant War deployment's motivation (Heartwood threat from potential Mordrax release) is canonical.
 
-The Glade's spiritual framework — non-deistic, land-relationship-centered, druidic-in-form — is canonically established. Compatible with realm Bahamutic monotheism in practice despite philosophical incompatibility.
+The Glade's spiritual framework — non-deistic, land-relationship-centered, druidic-in-form — is canonically established. Compatible with realm Solveris monotheism in practice despite philosophical incompatibility.
 
 The forward references to `heartwood`, `thornveil`, and `silent-grove` are expected placeholders pending their authoring in subsequent Batch 5 locations. The secondary elven settlement connection is not yet listed; it will be added when that location is authored.
 

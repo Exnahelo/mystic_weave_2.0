@@ -4,7 +4,7 @@ name: Eryndor's Lair
 type: lair
 region_id: hollow-crown
 parent_location_id: alpine-peaks
-description: The primary residence of Eryndor the Radiant, carved into the mountain's interior near Lastmark's approach. Unlike the dark hoard-caves of lesser dragons, the Lair is bright, open, and deliberately beautiful — enchanted skylights bring real sunlight to the inner chambers, polished marble and veined gold-quartz line the floors and walls, and the whole space carries the character of a sacred Bahamutic shrine integrated with the working rooms of a practicing Council diplomat. Eryndor lives, meditates, and conducts sensitive external business here. Access is controlled; arrival is typically by sanctioned convoy from Lastmark, and foreign diplomats approved for his audience are brought in under the realm's disorienting-wagon protocol so their route cannot be traced back after the visit.
+description: The primary residence of Eryndor the Radiant, carved into the mountain's interior near Lastmark's approach. Unlike the dark hoard-caves of lesser dragons, the Lair is bright, open, and deliberately beautiful — enchanted skylights bring real sunlight to the inner chambers, polished marble and veined gold-quartz line the floors and walls, and the whole space carries the character of a sacred Solveris-aligned shrine integrated with the working rooms of a practicing Council diplomat. Eryndor lives, meditates, and conducts sensitive external business here. Access is controlled; arrival is typically by sanctioned convoy from Lastmark, and foreign diplomats approved for his audience are brought in under the realm's disorienting-wagon protocol so their route cannot be traced back after the visit.
 connections:
 - lastmark
 - alpine-peaks
@@ -28,7 +28,7 @@ discovered: false
 
 # Eryndor's Lair
 
-The primary residence of Eryndor the Radiant, carved into the mountain's interior near Lastmark's approach. Unlike the dark hoard-caves of lesser dragons, the Lair is bright, open, and deliberately beautiful — enchanted skylights bring real sunlight to the inner chambers, polished marble and veined gold-quartz line the floors and walls, and the whole space carries the character of a sacred Bahamutic shrine integrated with the working rooms of a practicing Council diplomat. Eryndor lives, meditates, and conducts sensitive external business here. Access is controlled; arrival is typically by sanctioned convoy from Lastmark, and foreign diplomats approved for his audience are brought in under the realm's disorienting-wagon protocol so their route cannot be traced back after the visit.
+The primary residence of Eryndor the Radiant, carved into the mountain's interior near Lastmark's approach. Unlike the dark hoard-caves of lesser dragons, the Lair is bright, open, and deliberately beautiful — enchanted skylights bring real sunlight to the inner chambers, polished marble and veined gold-quartz line the floors and walls, and the whole space carries the character of a sacred Solveris-aligned shrine integrated with the working rooms of a practicing Council diplomat. Eryndor lives, meditates, and conducts sensitive external business here. Access is controlled; arrival is typically by sanctioned convoy from Lastmark, and foreign diplomats approved for his audience are brought in under the realm's disorienting-wagon protocol so their route cannot be traced back after the visit.
 
 ## Scene Texture
 
@@ -42,7 +42,7 @@ Beyond the Reception Hall, the Lair branches into its functional chambers:
 
 ### The Shrine
 
-Deeper into the mountain, the **Shrine of Bahamut** occupies a circular domed chamber approached by a long corridor whose walls bear relief carvings of the Ptarian Pact's founding scenes. The Shrine itself holds a central altar of pale marble, an eternal flame (smaller than the Platinum Heart's, but tended by the same order and drawn from the same sacred source), and the realm's finest private collection of Bahamutic liturgical and meditative artifacts. Eryndor meditates here daily. The Shrine is private to Eryndor and his senior religious staff; visitors are not ordinarily admitted, though an invited diplomatic guest on a matter of unusual sacred weight may be brought here for a formal oath.
+Deeper into the mountain, the **Shrine of Solveris** occupies a circular domed chamber approached by a long corridor whose walls bear relief carvings of the Oath of the Fallen's founding scenes. The Shrine itself holds a central altar of pale marble, an eternal flame (smaller than the Platinum Heart's, but tended by the same order and drawn from the same sacred source), and the realm's finest private collection of Solveris-aligned liturgical and meditative artifacts. Eryndor meditates here daily. The Shrine is private to Eryndor and his senior religious staff; visitors are not ordinarily admitted, though an invited diplomatic guest on a matter of unusual sacred weight may be brought here for a formal oath.
 
 ### The Audience Chambers
 
@@ -84,7 +84,7 @@ The arrangement trades some distance from Council deliberations (the Draconic Ha
 
 ## Eryndor the Radiant
 
-Eryndor is the Lair's defining inhabitant. His character is established in canon: justice, moral guidance, diplomacy, Bahamut-aligned devotion. Within his own space, the qualities that define his Council role are visible in concentrated form. He is formal without being cold. He is patient with petitioners whose matters deserve patience and direct with those whose matters are simple. He takes his devotional practice seriously and does not perform it for external observers.
+Eryndor is the Lair's defining inhabitant. His character is established in canon: justice, moral guidance, diplomacy, Solveris-aligned devotion. Within his own space, the qualities that define his Council role are visible in concentrated form. He is formal without being cold. He is patient with petitioners whose matters deserve patience and direct with those whose matters are simple. He takes his devotional practice seriously and does not perform it for external observers.
 
 Audience with Eryndor at the Lair is substantial. Unlike a brief Council address or a formal ceremonial reception, a Lair audience is typically an extended engagement — the petitioner or diplomat is received in one of the audience chambers, the matter is thoroughly examined, and Eryndor's response is considered rather than quick. He values the time spent; a Lair audience is the realm's most focused engagement with this Council dragon.
 
@@ -138,7 +138,7 @@ Eryndor's primary NPC anchor is THIS location. His secondary anchor is the Draco
 
 Lair Steward is a Tier-3 generative role.
 
-The Shrine of Bahamut is a canonical sub-feature. It is described within this node's scene texture and is NOT authored as a separate location. If a major storyline requires deep Shrine interaction (formal oath-taking, sacred consultation), it resolves within this node.
+The Shrine of Solveris is a canonical sub-feature. It is described within this node's scene texture and is NOT authored as a separate location. If a major storyline requires deep Shrine interaction (formal oath-taking, sacred consultation), it resolves within this node.
 
 The connection to `lastmark` is two-way but operationally asymmetric: realm residents travel convoy-escorted, foreign diplomats travel wagon-disoriented, and unauthorized attempts do not reach.
 
@@ -146,4 +146,4 @@ The connection to `alpine-peaks` is the regional parent reference.
 
 Threat level 0 reflects the Lair's civic safety. Eryndor is not a danger to invited guests; uninvited intrusion has consequence, but the node itself is not hazardous territory.
 
-The Lair's architectural splendor (skylights, gold-quartz inlays, marble floors) is deliberate canonical character. This is not a dark cave. It is a deliberate statement — a gold dragon of Bahamut does not live in darkness, and the Lair's beauty is itself a sacred expression.
+The Lair's architectural splendor (skylights, gold-quartz inlays, marble floors) is deliberate canonical character. This is not a dark cave. It is a deliberate statement — a gold dragon of Solveris does not live in darkness, and the Lair's beauty is itself a sacred expression.

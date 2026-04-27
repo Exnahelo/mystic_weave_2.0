@@ -72,17 +72,17 @@
     "current_location": null,
     "status": "deceased",
     "disposition": "Historical anchor; theological weight; not a living scene-level NPC.",
-    "role_summary": "Founding gold dragon of the Ptarian Pact; architect of the sanctuary ideal; Bahamut's champion; deceased since the Discordant War.",
+    "role_summary": "Founding gold dragon of the Oath of the Fallen; architect of the sanctuary ideal; Solveris's champion; deceased since the Discordant War.",
     "voice": null,
     "narrative_anchors": [
-      "Led the movement that became the Ptarian Pact and helped establish the Drakenvale sanctuary",
+      "Led the movement that became the Oath of the Fallen and helped establish the Drakenvale sanctuary",
       "Sacrificed himself to reseal the Temple of Mordrax during the Discordant War",
       "The Vigil at Platinum Oath Monastery maintains his tomb and uses the resonance of his death for Rift monitoring",
       "Unofficial prophecy holds that his spirit will rise again in Drakenvale's greatest hour",
       "Lethariel Heartwood is a direct living witness to his sacrifice"
     ],
     "tags": ["named", "tier-1", "deceased", "platinum-warden", "vindrael", "discordant-war", "realm-canon", "feywood-adjacent"],
-    "description": "Vindrael, the Platinum Warden, is the defining moral presence of the Drakenvale sanctuary despite being deceased since the Discordant War. A founding Ancient Gold Dragon and Bahamut's champion, he led the movement that became the Ptarian Pact and sacrificed himself to reseal the Temple of Mordrax. He is included in the Feywood NPC registry specifically because Lethariel Heartwood is a direct living witness to his death — scenes involving Lethariel, the Heartwood bow, or Discordant War memory route through Vindrael's legacy. He does not function as a routine present-day NPC.",
+    "description": "Vindrael, the Platinum Warden, is the defining moral presence of the Drakenvale sanctuary despite being deceased since the Discordant War. A founding Ancient Gold Dragon and Solveris's champion, he led the movement that became the Oath of the Fallen and sacrificed himself to reseal the Temple of Mordrax. He is included in the Feywood NPC registry specifically because Lethariel Heartwood is a direct living witness to his death — scenes involving Lethariel, the Heartwood bow, or Discordant War memory route through Vindrael's legacy. He does not function as a routine present-day NPC.",
     "scene_guidance": "Vindrael appears through inscriptions, tomb-site encounters, dream visions, liturgical invocations, and the testimony of those old enough to have known him. Most commonly referenced through Lethariel's recollection — she alone among Feywood-accessible characters carries first-hand memory of his sacrifice. Use with significant narrative weight; do not casually invoke. Realm-side treatment of Vindrael is well-documented in `prompts/npcs.md`; this entry exists specifically for Feywood-adjacent reference integrity."
   }
 ]

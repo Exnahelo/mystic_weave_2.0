@@ -66,7 +66,7 @@ The pit's depth is unmeasured. Expeditions into the shaft have been attempted by
 
 The site is, among its other meanings, the location where the Platinum Warden gave his life. Vindrael died at the pit's edge, resealing the Temple of Mordrax below by means that canon does not fully preserve. The sacrifice collapsed the chromatic rebels' excavation, broke their keep, ended the war in the realm's favor, and saved the sanctuary. It also cost the realm its founding moral leader and left this wound on the land.
 
-Vindrael's body was recovered. His tomb is at Platinum Oath Monastery. The Rift is where he died — not where he is buried. But the resonance of his death persists at the pit's edge. A sensitive visitor, particularly one attuned to Bahamutic sacred practice, will feel it. The Vigil feels it daily. The elite Wardens learn to feel it during their training. It is not a comforting presence; it is a weighty one.
+Vindrael's body was recovered. His tomb is at Platinum Oath Monastery. The Rift is where he died — not where he is buried. But the resonance of his death persists at the pit's edge. A sensitive visitor, particularly one attuned to Solveris-aligned sacred practice, will feel it. The Vigil feels it daily. The elite Wardens learn to feel it during their training. It is not a comforting presence; it is a weighty one.
 
 The Vigil maintains a small memorial at the approximate spot of Vindrael's death, marked by a single cut stone with no inscription. Visitors with cause may approach it. Most do not.
 
@@ -92,7 +92,7 @@ The Vigil — the Platinum Acolytes — represents a different relationship enti
 - **Elite Warden training ground.** The Wardens send their most promising candidates here for the final phase of training. The Rift's environment cannot be simulated; only lived through. Candidates who complete the full training arc — including sustained exposure to the Rift — are marked with the platinum-scale tattoo and become elite Wardens of the order. Candidates who do not complete the training either wash out or do not return.
 - **Vigil patrol and monitoring.** The Platinum Oath Monastery's Vigil maintains continuous monitoring of the Rift. Patrols rotate through the site, checking for changes in the pit's resonance, for signs of external intrusion, for the subtle phenomena that precede the kind of events the realm cannot allow to develop.
 - **Containment perimeter.** The Rift's Edge corridor node is the formal perimeter zone — the space between ordinary realm terrain and the Rift proper. The perimeter exists because the realm cannot simply declare the Rift a sealed area; the corruption at the interior does not stay at the interior, and the Edge absorbs enough of it that civic settlements beyond remain unaffected. The Edge is itself a hazard zone, but a lesser one.
-- **Memorial access.** Residents of the realm with cause — family of those who died in the Discordant War, particular devotees of Bahamut, individuals carrying questions the site alone can hold — may visit the memorial stone at Vindrael's death site with Vigil guidance. Such visits are not common, but they happen. The Vigil accommodates them when circumstances permit.
+- **Memorial access.** Residents of the realm with cause — family of those who died in the Discordant War, particular devotees of Solveris, individuals carrying questions the site alone can hold — may visit the memorial stone at Vindrael's death site with Vigil guidance. Such visits are not common, but they happen. The Vigil accommodates them when circumstances permit.
 
 ## Access
 

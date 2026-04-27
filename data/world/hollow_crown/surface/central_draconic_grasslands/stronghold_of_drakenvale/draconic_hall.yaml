@@ -4,7 +4,7 @@ type: location
 region_id: hollow-crown
 settlement_id: stronghold-of-drakenvale
 parent_location_id: stronghold-of-drakenvale
-description: The great vaulted council chamber at the ceremonial core of the Stronghold, sized for three ancient dragons to convene without crowding. The floor bears a luminous mosaic depicting the balance of Bahamut and Tiamat; at the chamber's center stands the Heartstone, the platinum-veined crystal artifact that serves as a fourth and silent voice on the Council. Here the Draconic Council deliberates, formal petitions are heard, treaties are ratified, and the realm's gravest legal matters are judged. Entry is controlled. What is decided here binds the sanctuary.
+description: The great vaulted council chamber at the ceremonial core of the Stronghold, sized for three ancient dragons to convene without crowding. The floor bears a luminous mosaic depicting the balance of Solveris and Mordrax; at the chamber's center stands the Heartstone, the platinum-veined crystal artifact that serves as a fourth and silent voice on the Council. Here the Draconic Council deliberates, formal petitions are heard, treaties are ratified, and the realm's gravest legal matters are judged. Entry is controlled. What is decided here binds the sanctuary.
 connections:
 - stronghold-of-drakenvale
 tags:

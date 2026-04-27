@@ -49,7 +49,7 @@ Deephollow is organized by vertical level and radial wedge:
 
 - **The Floor** (lowest tier) — primary mining staging, ore carts, smelting and initial processing, the heavy industrial work. Loud, hot by underground standards, and constantly busy. The Deep Marshal's operational offices sit at the Floor's civic center.
 - **The Mid-Terraces** — commercial and craft districts. Markets, workshops, specialized craft guilds (lapidaries, gem cutters, resonance-crystal specialists, metalworkers working the local deep metals), the main taverns, traveler inns, and the Assay Office. This is where most daytime life happens.
-- **The Upper Terraces** — residential quarters, civic halls, schools, temples (Bahamutic observance adapted for underground life), and the homes of the wealthier merchants and Guild officials.
+- **The Upper Terraces** — residential quarters, civic halls, schools, temples (Solveris-aligned observance adapted for underground life), and the homes of the wealthier merchants and Guild officials.
 - **The Vault** — the highest accessible parts of the cavern, used for the city's administrative structures, the Deep Marshal's formal chambers, the Guild of Underdelvers' headquarters, and the few private residences that command views across the entire city.
 - **The Outflows** — the working tunnels and mine adits branching outward from the main cavern. These extend for miles in multiple directions, varying from well-worked and safe to partially-abandoned and hazardous. Active mining happens here; the Outflows are not residential.
 

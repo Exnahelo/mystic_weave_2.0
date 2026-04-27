@@ -66,7 +66,7 @@ The Stronghold stands at the center of the Hollow Crown, carved directly from th
 
 Contained within the Stronghold are:
 - the **Draconic Hall**, seat of the Council and chamber of the Heartstone
-- the **Platinum Heart**, the high sanctum of Bahamut and the Platinum Flame
+- the **Platinum Heart**, the high sanctum of Solveris and the Platinum Flame
 - the **Administrative Quarter**, steward halls, civic records, and petition spaces
 - the **Arcane Conservatory**, center of magical study and preservation
 - the **Amethyst Vault**, at ground level in garden grounds beside the central spire

@@ -3,7 +3,7 @@ id: drakenvale-city
 name: Drakenvale City
 type: settlement
 region_id: hollow-crown
-description: The realm's principal metropolitan center, built onto the southern face of the Stronghold and curving along the north shore of the Southern Lake. The city rises from the lakefront in tiered stone districts, its upper terraces blending into the Stronghold's lower approaches and its lower districts spreading along the water in market streets, plazas, workshops, and residential quarters. It is species-mixed by default, civically ordered under the Ptarian Code, and carries the daily texture of an active high-functioning capital — guilds working, markets trading, Wardens patrolling, Dragon Guard overhead, and the Sacred Pools cascading down the Stronghold's face as the city's defining visual landmark.
+description: The realm's principal metropolitan center, built onto the southern face of the Stronghold and curving along the north shore of the Southern Lake. The city rises from the lakefront in tiered stone districts, its upper terraces blending into the Stronghold's lower approaches and its lower districts spreading along the water in market streets, plazas, workshops, and residential quarters. It is species-mixed by default, civically ordered under the Codex of Remembrance, and carries the daily texture of an active high-functioning capital — guilds working, markets trading, Wardens patrolling, Dragon Guard overhead, and the Sacred Pools cascading down the Stronghold's face as the city's defining visual landmark.
 connections:
 - stronghold-of-drakenvale
 - sacred-pools
@@ -37,7 +37,7 @@ discovered: true
 
 # Drakenvale City
 
-The realm's principal metropolitan center, built onto the southern face of the Stronghold and curving along the north shore of the Southern Lake. The city rises from the lakefront in tiered stone districts, its upper terraces blending into the Stronghold's lower approaches and its lower districts spreading along the water in market streets, plazas, workshops, and residential quarters. It is species-mixed by default, civically ordered under the Ptarian Code, and carries the daily texture of an active high-functioning capital — guilds working, markets trading, Wardens patrolling, Dragon Guard overhead, and the Sacred Pools cascading down the Stronghold's face as the city's defining visual landmark.
+The realm's principal metropolitan center, built onto the southern face of the Stronghold and curving along the north shore of the Southern Lake. The city rises from the lakefront in tiered stone districts, its upper terraces blending into the Stronghold's lower approaches and its lower districts spreading along the water in market streets, plazas, workshops, and residential quarters. It is species-mixed by default, civically ordered under the Codex of Remembrance, and carries the daily texture of an active high-functioning capital — guilds working, markets trading, Wardens patrolling, Dragon Guard overhead, and the Sacred Pools cascading down the Stronghold's face as the city's defining visual landmark.
 
 ## Scene Texture
 
@@ -60,7 +60,7 @@ Drakenvale City is not a single undifferentiated urban mass. It has internal str
 - **The Stronghold Terraces** — the uppermost districts, where the city meets the fortress. Administrative and civic-adjacent residences, upscale guildhalls, and the formal ascending path to the Administrative Quarter. Higher rent, higher status, direct access to the Stronghold's services.
 - **The Middle Tiers** — the city's primary market and workshop districts. Most residents live and work in this zone. The three great market plazas sit here. The Circle of Artisans' main civic hall is here. Guild activity is densest.
 - **The Lakefront** — the shoreline districts, from the ceremonial plaza at the base of the Sacred Pools around to the western curve. Piers, fish markets, boat workshops, dockside inns, and the Silver Scale Trading Company's main warehousing. The liveliest and most trade-focused part of the city.
-- **The Lower Warrens** — the older, denser residential quarter along the western lakefront. Working residents, long-established families, and the city's more marginal populations. The warrens are not a slum — the Ptarian Code's civic discipline prevents that — but they are the part of the city where underworld activity persists most visibly. Wardens patrol here with patience rather than aggression.
+- **The Lower Warrens** — the older, denser residential quarter along the western lakefront. Working residents, long-established families, and the city's more marginal populations. The warrens are not a slum — the Codex's civic discipline prevents that — but they are the part of the city where underworld activity persists most visibly. Wardens patrol here with patience rather than aggression.
 - **The Promenade** — the ceremonial lakefront walk extending from the base of the Sacred Pools around the city's full arc. Public gardens, formal monuments, scheduled Sapphire Choir performance spaces, and the city's quiet pride. Residents walk here on festival evenings and rest days.
 
 ## Institutional Presence

@@ -60,9 +60,9 @@ The inflow site is accessible but not casually approached. The capital's ceremon
 
 ## The Annual Lake Blessing
 
-The Lake Blessing is the realm's most significant water-related ceremony. Held annually at the start of spring, on a date calibrated to the astronomical cycle by the Bahamutic order, the Blessing brings together:
+The Lake Blessing is the realm's most significant water-related ceremony. Held annually at the start of spring, on a date calibrated to the astronomical cycle by the Solveris-aligned order, the Blessing brings together:
 
-- The senior Bahamutic Acolytes from the Stronghold
+- The senior Solveris-aligned Acolytes from the Stronghold
 - Representatives from the Draconic Council (typically Eryndor or a delegated senior Council figure)
 - Civic officials from Drakenvale City's Administrative Quarter
 - Delegations from Scalemere and Crystalhaven

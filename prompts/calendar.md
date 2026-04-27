@@ -1,4 +1,4 @@
-# Mystic Weave — The Ptarian Calendar
+# Mystic Weave — The Oath Calendar
 
 Version 1.1 — April 2026
 Status: Canonical. Upload to GPT builder as a knowledge file.
@@ -7,7 +7,7 @@ Status: Canonical. Upload to GPT builder as a knowledge file.
 
 ## Overview
 
-The Ptarian Calendar marks time from the day the Ptarian Pact was sworn — the moment Drakenvale was founded. Years are reckoned in **Years of the Pact (YP)**. Year 1 begins on the day the Pact was sworn. The current campaign year is set at session start.
+The Oath Calendar marks time from the day the Oath of the Fallen was sworn — the moment Drakenvale was founded. Years are reckoned in **Years of the Oath (YO)**. Year 1 begins on the day the Oath was sworn. The current campaign year is set at session start.
 
 **Structure:** 12 months × 30 days + 6 festival days = 366 days per year.
 
@@ -40,7 +40,7 @@ Festival days fall between months at solstices and equinoxes. They are intercala
 
 | Name | Placement | Season Boundary | Observance |
 |---|---|---|---|
-| **The Day of Founding** | Between Deepwarden and Ashwake | Winter Solstice — Year's End | Honors the swearing of the Ptarian Pact. Formal ceremonies at the Platinum Heart. The Platinum Flame burns at full intensity. Solemn. The most significant day in the Drakenvale calendar. |
+| **The Day of Founding** | Between Deepwarden and Ashwake | Winter Solstice — Year's End | Honors the swearing of the Oath of the Fallen. Formal ceremonies at the Platinum Heart. The Platinum Flame burns at full intensity. Solemn. The most significant day in the Drakenvale calendar. |
 | **New Year's Dawn** | First day of Ashwake (day after Founding Day) | Winter Solstice — Year's Start | Community gatherings. Oaths renewed. New ventures announced publicly. Warm and informal counterpart to the solemn Founding Day. The two together form the winter solstice observance. |
 | **The Verdant Gate** | Between Mistbreak and Verdantrise | Spring Equinox | Marks the valley's renewal. Platinum Acolytes bless the Sacred Pools. The Draconic Grasslands ceremonially opened for dragon gatherings. The Trial of Wings season is announced. |
 | **Highscale** | Between Goldmere and Scaletide | Summer Solstice | Festival of Wings — aerial displays across all alignments. Trial of Wings season opens formally. The most festive day of the year. Commerce, competition, celebration. |

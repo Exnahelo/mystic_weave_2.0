@@ -5,7 +5,7 @@ type: location
 region_id: hollow-crown
 settlement_id: stronghold-of-drakenvale
 parent_location_id: stronghold-of-drakenvale
-description: The great vaulted council chamber at the ceremonial core of the Stronghold, sized for three ancient dragons to convene without crowding. The floor bears a luminous mosaic depicting the balance of Bahamut and Tiamat; at the chamber's center stands the Heartstone, the platinum-veined crystal artifact that serves as a fourth and silent voice on the Council. Here the Draconic Council deliberates, formal petitions are heard, treaties are ratified, and the realm's gravest legal matters are judged. Entry is controlled. What is decided here binds the sanctuary.
+description: The great vaulted council chamber at the ceremonial core of the Stronghold, sized for three ancient dragons to convene without crowding. The floor bears a luminous mosaic depicting the balance of Solveris and Mordrax; at the chamber's center stands the Heartstone, the platinum-veined crystal artifact that serves as a fourth and silent voice on the Council. Here the Draconic Council deliberates, formal petitions are heard, treaties are ratified, and the realm's gravest legal matters are judged. Entry is controlled. What is decided here binds the sanctuary.
 connections:
 - stronghold-of-drakenvale
 tags:
@@ -27,7 +27,7 @@ discovered: true
 
 # Draconic Hall
 
-The great vaulted council chamber at the ceremonial core of the Stronghold, sized for three ancient dragons to convene without crowding. The floor bears a luminous mosaic depicting the balance of Bahamut and Tiamat; at the chamber's center stands the Heartstone, the platinum-veined crystal artifact that serves as a fourth and silent voice on the Council. Here the Draconic Council deliberates, formal petitions are heard, treaties are ratified, and the realm's gravest legal matters are judged. Entry is controlled. What is decided here binds the sanctuary.
+The great vaulted council chamber at the ceremonial core of the Stronghold, sized for three ancient dragons to convene without crowding. The floor bears a luminous mosaic depicting the balance of Solveris and Mordrax; at the chamber's center stands the Heartstone, the platinum-veined crystal artifact that serves as a fourth and silent voice on the Council. Here the Draconic Council deliberates, formal petitions are heard, treaties are ratified, and the realm's gravest legal matters are judged. Entry is controlled. What is decided here binds the sanctuary.
 
 ## Scene Texture
 
@@ -44,7 +44,7 @@ Sound in the Hall behaves strangely. Ordinary conversation carries clearly to ev
 - **Council deliberation.** The three Council dragons — Eryndor, Zarkeros, and Varethyn — convene in the Hall for major governance matters. Minor decisions are handled through administrative channels; the Hall is reserved for the consequential.
 - **Formal petitions.** Residents, institutions, and foreign emissaries may petition the Council here. Petitions are scheduled, vetted by the Administrative Quarter, and heard in order. The Hall is not an open audience chamber.
 - **Legal proceedings.** Cases requiring Council judgment are heard here. Testimony, evidence, and argument are received on the mosaic floor, with the Council seated above on wing-shaped ledges cut from the chamber's walls.
-- **Treaty and covenant ratification.** External agreements are ratified in the Hall, with the Heartstone as witness. The realm's most binding oaths — formal alliances, accession to the Ptarian Code, succession of Council authority — are sworn here.
+- **Treaty and covenant ratification.** External agreements are ratified in the Hall, with the Heartstone as witness. The realm's most binding oaths — formal alliances, accession to the Codex of Remembrance, succession of Council authority — are sworn here.
 - **Heartstone consultation.** Rarely, in moments of true deadlock, the Council consults the Heartstone directly. What exactly this exchange entails is not publicly known. The result is respected without question.
 
 ## The Heartstone

@@ -88,7 +88,7 @@ The Edge is technically open to any traveler — the Vigil does not maintain for
 - Vigil members on patrol or coordination duty
 - Elite Warden candidates on training rotations, with their instructors
 - Council-sanctioned investigators or wardwork specialists
-- Realm residents with documented cause (rare but accommodated — family members making memorial visits, devotees of Bahamut conducting specific observances, scholars with legitimate research)
+- Realm residents with documented cause (rare but accommodated — family members making memorial visits, devotees of Solveris conducting specific observances, scholars with legitimate research)
 - Greymantle residents occasionally crossing the Edge on specific business (though Greymantle's own Warden figure and the settlement's dispositions mean these crossings are infrequent)
 
 **Dragon Guard presence** on the Edge is minimal — the Vigil handles operational security entirely, with realm-level coordination occurring at the Council level rather than on the ground. Dragon Guard personnel accompanying authorized realm officials may cross the Edge but are not a resident presence.
