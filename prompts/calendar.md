@@ -45,7 +45,7 @@ Festival days fall between months at solstices and equinoxes. They are intercala
 | **The Verdant Gate** | Between Mistbreak and Verdantrise | Spring Equinox | Marks the valley's renewal. Platinum Acolytes bless the Sacred Pools. The Draconic Grasslands ceremonially opened for dragon gatherings. The Trial of Wings season is announced. |
 | **Highscale** | Between Goldmere and Scaletide | Summer Solstice | Festival of Wings — aerial displays across all alignments. Trial of Wings season opens formally. The most festive day of the year. Commerce, competition, celebration. |
 | **Highharvestide** | Between Amberveil and Ashenfall | Autumn Equinox | Harvest of magical flora and forge materials assessed. The SSTC's primary coordination day for external trade. Gifts exchanged. |
-| **The Day of Remembrance** | Between Dimlight and Ironmoor | Mid-Autumn | Honors the Platinum Warden's sacrifice and all who fell in the Discordant War. Completely solemn. No commerce. No petitions. Warden vigils at the Rift of Discord and Temple to Tiamat perimeter. The Platinum Flame dims to a single point of light at dusk and is relit at dawn. |
+| **The Day of Remembrance** | Between Dimlight and Ironmoor | Mid-Autumn | Honors the Platinum Warden's sacrifice and all who fell in the Discordant War. Completely solemn. No commerce. No petitions. Warden vigils at the Rift of Discord and Temple of Mordrax perimeter. The Platinum Flame dims to a single point of light at dusk and is relit at dawn. |
 
 ---
 
@@ -81,7 +81,7 @@ Drakenvale's moon. Named from ancient Draconic — "the wandering eye." Its cycl
 
 Vaelthor's phase has mechanical weight only in specific locations. Everywhere else it is atmospheric — describe it, do not apply modifiers.
 
-**Shadowed Hollows / Temple to Tiamat perimeter**
+**Shadowed Hollows / Temple of Mordrax perimeter**
 - Full Moon (days 14–16): Cult activity and wraith presence increase. Apply −10 to difficulty modifier on stealth, avoidance, and detection rolls in this zone.
 - New Moon (days 1–2): Suppressed activity. Apply +5 to the same rolls.
 - All other phases: no modifier.

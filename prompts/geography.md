@@ -42,7 +42,7 @@ The Hollow Crown is organized around four interacting spatial logics.
 At the center of the basin stands the Heartmass, the fused celestial-platinum impact core. Carved from it is the Stronghold of Drakenvale. Around the Stronghold spreads the city of Drakenvale, then the surrounding Draconic Grasslands, then the wider basin regions.
 
 **Theological axis (high center to deep south):**  
-The Platinum Heart crowns the Stronghold’s central spire, elevated above the city and all other civic spaces. The Temple to Tiamat lies underground beneath the Shadowed Hollows in the southern dark quadrant. These are the realm’s highest sacred point and deepest forbidden point, set in deliberate opposition.
+The Platinum Heart crowns the Stronghold’s central spire, elevated above the city and all other civic spaces. The Temple of Mordrax lies underground beneath the Shadowed Hollows in the southern dark quadrant. These are the realm’s highest sacred point and deepest forbidden point, set in deliberate opposition.
 
 **Hydrological axis (center to southwest):**  
 Sacred and civic waters descend from the Stronghold’s southern face into the great southern lake. From there, streams, distributaries, marsh channels, and subsurface drainage move toward the Mystic Wetlands in the southwest, the basin’s primary low catchment. Hidden underground outflow carries water through the mountain below the basin floor.
@@ -135,15 +135,15 @@ The Crystal Caverns run beneath the entire Hollow Crown, under the Stronghold, u
 
 ### Shadowed Hollows — South, Dark Quadrant
 
-The Shadowed Hollows occupy the southern dark quadrant of the basin above the buried Temple to Tiamat. This is not a natural region but a corrupted one: necrotic seepage from the sealed temple has warped the forest, dimmed the air, blackened patches of soil, and made the region increasingly hostile to ordinary life.
+The Shadowed Hollows occupy the southern dark quadrant of the basin above the buried Temple of Mordrax. This is not a natural region but a corrupted one: necrotic seepage from the sealed temple has warped the forest, dimmed the air, blackened patches of soil, and made the region increasingly hostile to ordinary life.
 
 ### Rift of Discord — South, Adjacent to the Shadowed Hollows
 
 The Rift of Discord is a separate wound near the Shadowed Hollows, created during the Discordant War rather than by the meteor impact. It is a chaotic magical scar of fractured ground, floating rock, unstable rifts in the air, and unpredictable magical weather.
 
-### Temple to Tiamat — Underground, Beneath the Shadowed Hollows
+### Temple of Mordrax — Underground, Beneath the Shadowed Hollows
 
-The Temple to Tiamat lies beneath the Shadowed Hollows in the deep southern subsurface of the Hollow Crown. The corruption of the Hollows above originates here. The Temple is sealed, heavily warded, and treated as one of the most dangerous points in the realm.
+The Temple of Mordrax lies beneath the Shadowed Hollows in the deep southern subsurface of the Hollow Crown. The corruption of the Hollows above originates here. The Temple is sealed, heavily warded, and treated as one of the most dangerous points in the realm.
 
 ---
 
@@ -239,7 +239,7 @@ TERRAIN (Map A, Map E)          SETTLEMENTS (Map B)             ROUTES (Map C)
   X  Heartmass / Stronghold       7  Ashfield + Ashfield Fields    c  Crystal Caverns (active)
   S  Sacred Pools descent         8  Greymantle                    C  Crystal Caverns (dense)
   L  Southern Lake                9  Platinum Oath Monastery       n  Deephollow (subterranean city)
-  M  Mystic Wetlands              a  Lastmark                      t  Temple to Tiamat (sealed)
+  M  Mystic Wetlands              a  Lastmark                      t  Temple of Mordrax (sealed)
   E  Dark Quadrant Approach       b  Stonemark                     s  Stonemark Deep Cuts
   H  Shadowed Hollows             c  Silvercut                     ·  solid rock / unmapped
   R  Rift of Discord              d  Dewhollow
@@ -398,7 +398,7 @@ X  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  �
 - **Deephollow `n` at `J12–K13`** — the main subterranean city, positioned beneath the northern Draconic Grasslands where no surface settlement lies above. This placement keeps Deephollow's 4-cell footprint clear of the Stronghold, the city, and the lake — a clean gap above. Deephollow connects upward through the Crystal Caverns to the Stronghold and northeast through tunnels to Zarkharath (canonical two-way routes).
 - **Dense Crystal Caverns `C` at `K11–P13`** — the sacred-resonance and psionic-amplification core of the cavern network, sitting directly beneath the Heartmass (`L12–M13`) and its Sacred Pools descent (`N11–N14`). Confirms the canonical note that the Heartmass's platinum veins extend downward into the stone.
 - **Stonemark Deep Cuts `s` at `D5–E5`** — shafts descending from the surface quarry at Stonemark (`b`/`D5`) into the upper Crystal Caverns. Guild of Underdelvers coordinates geological boundary work here with Deephollow.
-- **Temple to Tiamat `t` at `U16–V17` (with extension to `W17`)** — sealed, heavily warded, positioned directly beneath the Shadowed Hollows / Rift of Discord surface corruption core. The temple is the origin of the necrotic seepage that produces the Hollows' surface corruption.
+- **Temple of Mordrax `t` at `U16–V17` (with extension to `W17`)** — sealed, heavily warded, positioned directly beneath the Shadowed Hollows / Rift of Discord surface corruption core. The temple is the origin of the necrotic seepage that produces the Hollows' surface corruption.
 - **Unmapped `·`** — cells outside the Alpine rim and the very outer edge. These represent solid mountain stone or territory beneath the Peaks themselves, not traversable.
 
 ---
@@ -474,7 +474,7 @@ Heartwood `Y` at the dead center. Thornveil `T` forms a complete ring around the
 | Platinum Oath Monastery | `9` | `V18` | Defensible edge-position; adjacent to Rift at `V17` |
 | Greymantle | `8` | `W18` | Outlaw edge-settlement on rampart margin; one cell from Monastery |
 | Deephollow (subterranean) | `n` | `J12–K13` (under grasslands) | Main subterranean city in the Crystal Caverns |
-| Temple to Tiamat (subterranean) | `t` | `U16–V17` (under Hollows/Rift) | Sealed, warded; origin of the Hollows' corruption |
+| Temple of Mordrax (subterranean) | `t` | `U16–V17` (under Hollows/Rift) | Sealed, warded; origin of the Hollows' corruption |
 | Stonemark Deep Cuts (subterranean) | `s` | `D5–E5` (under Stonemark) | Shafts descending from the Stonemark quarry into upper caverns |
 
 ---
@@ -527,7 +527,7 @@ Vigil-patrolled route connecting Greymantle, Platinum Oath Monastery, and the Ho
 - **South** is shaped by the lake, the Sacred Pools descent, Hall of Scales, and the agricultural belt.
 - **Southwest** holds the Mystic Wetlands and the basin's primary drainage system.
 - **Southeast** holds the dark quadrant: the Shadowed Hollows interior, the Rift of Discord, the buffer corridors (`E`), and the Platinum Oath Monastery with Greymantle on the rampart margin.
-- **Below all regions** run the Crystal Caverns. Deephollow sits in the northern sector; Temple to Tiamat lies deep beneath the southeastern dark quadrant.
+- **Below all regions** run the Crystal Caverns. Deephollow sits in the northern sector; Temple of Mordrax lies deep beneath the southeastern dark quadrant.
 
 ### Route Logic
 
@@ -544,6 +544,6 @@ Major travel flows follow a few repeatable patterns:
 
 ## Geographic Summary
 
-The Hollow Crown is a hidden interior world organized in rings, sectors, and layered depths. At its center stands the Heartmass, the fused celestial-platinum impact core from which the Stronghold of Drakenvale was carved. Within the Stronghold lies the Heartstone, the realm’s living crystal center. Around the Stronghold spreads the city of Drakenvale, then the Draconic Grasslands, then the larger natural and hazardous regions of forest, wetland, caverns, volcanic highland, corrupted southern quadrant, and enclosing alpine walls. Between the outer crown and lower basin runs the broken escarpment zone of the Inner Ramparts. The Temple to Tiamat remains beneath the Shadowed Hollows. The Rift of Discord remains nearby but separate. The wetlands drain the basin through hidden underground channels. The Feywood Glade is fixed in place but internally lawless. The Crystal Caverns run beneath all of it.
+The Hollow Crown is a hidden interior world organized in rings, sectors, and layered depths. At its center stands the Heartmass, the fused celestial-platinum impact core from which the Stronghold of Drakenvale was carved. Within the Stronghold lies the Heartstone, the realm’s living crystal center. Around the Stronghold spreads the city of Drakenvale, then the Draconic Grasslands, then the larger natural and hazardous regions of forest, wetland, caverns, volcanic highland, corrupted southern quadrant, and enclosing alpine walls. Between the outer crown and lower basin runs the broken escarpment zone of the Inner Ramparts. The Temple of Mordrax remains beneath the Shadowed Hollows. The Rift of Discord remains nearby but separate. The wetlands drain the basin through hidden underground channels. The Feywood Glade is fixed in place but internally lawless. The Crystal Caverns run beneath all of it.
 
 This is the canonical geographic structure of Drakenvale.

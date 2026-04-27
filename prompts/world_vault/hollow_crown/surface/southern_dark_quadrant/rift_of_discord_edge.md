@@ -139,6 +139,6 @@ The Edge's institutional continuity — "it has been this way for a century and 
 
 The Vigil's patrol presence and the patrol stations are canonical infrastructure. The stations are NOT authored as separate location nodes; they are internal features of this corridor and scenes involving them resolve within this node.
 
-The Edge's relationship to the Platinum Oath Monastery's operational work — specifically the Vigil's seal-maintenance duty at the Temple to Tiamat and the Rift-monitoring work — is canonically integrated. The Vigil's continuous presence on the Edge is part of the broader institutional responsibility the order carries.
+The Edge's relationship to the Platinum Oath Monastery's operational work — specifically the Vigil's seal-maintenance duty at the Temple of Mordrax and the Rift-monitoring work — is canonically integrated. The Vigil's continuous presence on the Edge is part of the broader institutional responsibility the order carries.
 
 The buffer-zone function — attenuating Rift corruption before it reaches civic terrain — is canonical environmental reality. This is not an active maintenance practice; it is geographic fact. The Vigil does not "maintain the buffer" in a ritual or magical sense; the corruption simply attenuates across distance, and the Edge is the zone where that attenuation occurs.

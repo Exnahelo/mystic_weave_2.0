@@ -59,9 +59,9 @@ Still missing: A unified Crisis Management Protocol. No explicit chain of comman
 
 **Status: Partially resolved.** Wardens handle internal magical threats. Sapphire Sentinels handle external intelligence. Dragon Guard handles external military threats.
 
-Still missing: Countermeasures against forbidden magic specifically. No authored response to magical corruption seeping from the Temple to Tiamat. The Wardens' "Vigilance Rituals" are referenced but not detailed.
+Still missing: Countermeasures against forbidden magic specifically. No authored response to magical corruption seeping from the Temple of Mordrax. The Wardens' "Vigilance Rituals" are referenced but not detailed.
 
-**Design note:** The Shadowed Hollows biome entry captures what corruption looks like when it's already spreading. The gap is the *response* — what does a Warden actually do when they detect Tiamat's influence in someone or something? This is a good thing to author before Phase 4 since it's almost certainly a story arc.
+**Design note:** The Shadowed Hollows biome entry captures what corruption looks like when it's already spreading. The gap is the *response* — what does a Warden actually do when they detect Mordrax's influence in someone or something? This is a good thing to author before Phase 4 since it's almost certainly a story arc.
 
 ### 8. Post-Crisis Recovery
 
@@ -73,13 +73,13 @@ Still missing: Countermeasures against forbidden magic specifically. No authored
 
 ## Narrative Design Notes
 
-### The Temple to Tiamat
+### The Temple of Mordrax
 
 The single highest-stakes location in Drakenvale. Its seal is the Platinum Warden's sacrifice made permanent. Three escalating states are possible:
 
 1. **Sealed (current)** — Vigilance Rituals ongoing. Shadowed Hollows slowly expanding. No active threat but ambient unease.
 2. **Partially unsealed** — A major story event. Corruption spreads faster. Alignment tensions spike. The Council fractures under pressure.
-3. **Unsealed** — Campaign-level event. Tiamat's influence is active. Existential threat to Drakenvale.
+3. **Unsealed** — Campaign-level event. Mordrax's influence is active. Existential threat to Drakenvale.
 
 The GPT should not move between these states without player-driven cause. State 1 is default. State 2 requires a significant story beat.
 

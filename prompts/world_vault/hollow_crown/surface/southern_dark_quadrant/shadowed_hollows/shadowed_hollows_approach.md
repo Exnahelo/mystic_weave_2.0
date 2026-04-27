@@ -124,7 +124,7 @@ The Approach is technically open to travelers — the Vigil maintains no formal 
 
 The Shadowed Hollows Approach is route-node type, consistent with the Rift of Discord Edge authoring pattern. Both are perimeter corridors around corrupted zones; both are Vigil-patrolled; both carry exposure-tier effects. The distinction between them is character: Rift corruption is acute and physical-adjacent; Hollows corruption is diffuse and psychological.
 
-The connection to `shadowed-hollows-proper` is a forward reference. The Hollows interior remains a placeholder in the topology baseline and is not authored in this batch. This matches the pattern established in Batch 3 with the Temple to Tiamat's forward reference to the same node.
+The connection to `shadowed-hollows-proper` is a forward reference. The Hollows interior remains a placeholder in the topology baseline and is not authored in this batch. This matches the pattern established in Batch 3 with the Temple of Mordrax's forward reference to the same node.
 
 The connection to `rift-of-discord-edge` reflects operational coordination — the Vigil's patrol force covers both zones, and lateral movement between the two Edges along the Vigil's patrol routes is canonical. This is the first two-corruption-zone inter-Edge connection in the realm; it represents the realm's layered threshold geography.
 
@@ -136,7 +136,7 @@ The "attending back" patrol discipline is a canonical Vigil practice specific to
 
 The exposure effects framework follows the Rift's structure with the important note that the Hollows' effects are primarily psychological and recovery is harder than physical-corruption recovery. This gives the GPT operational guidance for any scene involving extended Hollows Approach presence.
 
-The Temple access corridor shielding function — the Vigil's broader monitoring of the Hollows zone as part of Temple-adjacent protection — is canonical per Batch 3's Temple to Tiamat authoring. The Temple is beneath the Hollows; the Approach is one of the surface zones the Vigil monitors as part of the layered protection. The Approach itself does NOT provide Temple access; that is separate infrastructure.
+The Temple access corridor shielding function — the Vigil's broader monitoring of the Hollows zone as part of Temple-adjacent protection — is canonical per Batch 3's Temple of Mordrax authoring. The Temple is beneath the Hollows; the Approach is one of the surface zones the Vigil monitors as part of the layered protection. The Approach itself does NOT provide Temple access; that is separate infrastructure.
 
 The residual psychological effects some travelers carry after Approach exposure — the lingering watchedness, the altered relationship with solitude — is a canonical narrative hook. Future storylines involving characters with Hollows Approach experience can reference this. For a few travelers, the effects do not fully fade, which creates interesting character-development possibilities.
 

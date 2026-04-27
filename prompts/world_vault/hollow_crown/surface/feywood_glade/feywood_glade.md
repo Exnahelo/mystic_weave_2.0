@@ -88,7 +88,7 @@ The Council's meeting place is in Thornveil, near but not at the Heartwood. Coun
 
 ## Military and the Heartwarden Order
 
-The Feywood Glade maintains a formal military structure, though you would not know it from daily life in Thornveil. The elves have trained for war since before the realm existed and have fought in only one — the Discordant War, and only because Tiamat's release would have threatened the Heartwood. The military exists. It trains. It is always ready. It is almost never deployed.
+The Feywood Glade maintains a formal military structure, though you would not know it from daily life in Thornveil. The elves have trained for war since before the realm existed and have fought in only one — the Discordant War, and only because Mordrax's release would have threatened the Heartwood. The military exists. It trains. It is always ready. It is almost never deployed.
 
 The **formal military** bears an organizational name in elven tradition — the **Greenshield** — and maintains standing units, ranks, and traditional structure drawn from elven noble warrior traditions. Every adult elf of certain noble families undergoes formal military training; many non-noble elves do as well. Training begins in childhood and continues across the elf's full lifespan. The result is a civilian population that is, by realm standards, unusually combat-capable.
 
@@ -112,7 +112,7 @@ This worldview is incompatible with the realm's Bahamutic monotheism in some dee
 
 The realm-Glade relationship is specific, ancient, and durable:
 
-- **Ptarian Pact alliance.** The Glade swore alliance to the nascent realm during the Ptarian Pact's founding period. The alliance acknowledges the Glade's sovereignty, commits the realm to non-interference in Glade affairs, and commits the Glade to defensive cooperation if the realm faces existential threat. The alliance has been honored since. The Discordant War's Feywood contingent was a fulfillment of this alliance — the elves sent fighters because Tiamat's release would have threatened the Heartwood and the Glade by extension, and the Pact's terms justified the deployment.
+- **Ptarian Pact alliance.** The Glade swore alliance to the nascent realm during the Ptarian Pact's founding period. The alliance acknowledges the Glade's sovereignty, commits the realm to non-interference in Glade affairs, and commits the Glade to defensive cooperation if the realm faces existential threat. The alliance has been honored since. The Discordant War's Feywood contingent was a fulfillment of this alliance — the elves sent fighters because Mordrax's release would have threatened the Heartwood and the Glade by extension, and the Pact's terms justified the deployment.
 - **Mutual non-interference.** The realm does not send armies, officials, or formal representation into the Glade without invitation. The Glade does not send forces or formal representation into the realm beyond sanctioned diplomatic contact at the Border. Each operates in its own territory.
 - **Mercantile exchange.** The primary ongoing contact between realm and Glade is mercantile — the exchange windows conducted at the Border, where elven goods and realm goods are traded. This relationship is economically significant for both sides and provides the practical reason the Feywood tolerates occasional foolish realm visitors crossing without sanction.
 - **Diplomatic contact.** Formal diplomatic matters between realm and Glade route through the Council of Elders. The Council's diplomatic approach is patient — realm timelines feel rushed to Council members, and the Council's deliberations feel glacial to realm officials. Both sides have learned to accommodate the mismatch.
@@ -180,7 +180,7 @@ The coming-of-age trial tradition for certain elven families — child raised in
 
 The elven physiology and long-term-human-resident effect — subtle physical changes from prolonged Glade exposure — is canonically established. Long-term Glade-resident humans eventually develop elf-adjacent qualities.
 
-The ancient alliance and mercantile relationship with the realm are canonically established. The Discordant War deployment's motivation (Heartwood threat from potential Tiamat release) is canonical.
+The ancient alliance and mercantile relationship with the realm are canonically established. The Discordant War deployment's motivation (Heartwood threat from potential Mordrax release) is canonical.
 
 The Glade's spiritual framework — non-deistic, land-relationship-centered, druidic-in-form — is canonically established. Compatible with realm Bahamutic monotheism in practice despite philosophical incompatibility.
 

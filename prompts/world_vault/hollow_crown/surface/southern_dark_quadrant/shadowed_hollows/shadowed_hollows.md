@@ -2,7 +2,7 @@
 id: shadowed-hollows
 name: Shadowed Hollows
 type: region_zone
-description: The biome above and around the Temple to Tiamat, where necrotic energy seeps
+description: The biome above and around the Temple of Mordrax, where necrotic energy seeps
   upward through the rock. The vegetation here is twisted and pale. Shadows move independently
   of light sources. Wraiths and shadow creatures ar…
 tags:
@@ -18,7 +18,7 @@ tags:
 
 # Shadowed Hollows
 
-The biome above and around the Temple to Tiamat, where necrotic energy seeps upward through the rock. The vegetation here is twisted and pale. Shadows move independently of light sources. Wraiths and shadow creatures are occasionally encountered. The Sapphire Sentinels monitor this area covertly. The Wardens patrol the perimeter but do not enter without cause. Cult activity has been detected here — individuals drawn to Tiamat's influence sometimes gather in the deeper hollows. The Rift of Discord is visible from the highest point.
+The biome above and around the Temple of Mordrax, where necrotic energy seeps upward through the rock. The vegetation here is twisted and pale. Shadows move independently of light sources. Wraiths and shadow creatures are occasionally encountered. The Sapphire Sentinels monitor this area covertly. The Wardens patrol the perimeter but do not enter without cause. Cult activity has been detected here — individuals drawn to Mordrax's influence sometimes gather in the deeper hollows. The Rift of Discord is visible from the highest point.
 
 ## Tags
 

@@ -145,4 +145,4 @@ The Vigil's Platinum Accord heritage — the order's continuing military charact
 
 The unauthorized-approach handling protocol (lost travelers assisted, deliberate evaders intercepted and handled) gives the GPT operational guidance for any narrative involving characters attempting to reach the monastery by unsanctioned means. Such storylines are not trivially punished but are also not trivially successful; the Vigil's response is calibrated to intent.
 
-The Approach is genuinely traversable in ordinary play — this is not a sealed location like the Temple to Tiamat. Characters with legitimate business can reach the monastery. The difficulty is real but not insurmountable.
+The Approach is genuinely traversable in ordinary play — this is not a sealed location like the Temple of Mordrax. Characters with legitimate business can reach the monastery. The difficulty is real but not insurmountable.

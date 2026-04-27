@@ -162,7 +162,7 @@ The Silent Grove is accessible from Thornveil by its managed path. Travel time i
 
 ## Authoring Notes
 
-The Silent Grove uses `sacred-site` type, consistent with the Heartwood's type and distinct from `sealed-site` (Temple to Tiamat) and ordinary `settlement` types. Like the Heartwood, this location is canonically central and accessible with specific protocols rather than unreachable.
+The Silent Grove uses `sacred-site` type, consistent with the Heartwood's type and distinct from `sealed-site` (Temple of Mordrax) and ordinary `settlement` types. Like the Heartwood, this location is canonically central and accessible with specific protocols rather than unreachable.
 
 The canonical name "The Silent Grove" is established here. Prior references to the grove's older naming or to "Heartwarden training site" should be reconciled to this name in topology review.
 

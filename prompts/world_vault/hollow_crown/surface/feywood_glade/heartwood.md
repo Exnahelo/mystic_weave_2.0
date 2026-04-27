@@ -99,7 +99,7 @@ This mutual sustenance is the deepest canon of elven religion. The elves live at
 
 ## Character
 
-The Heartwood has a specific atmospheric character that no other location in the realm matches. Sacred sites exist elsewhere — the Stronghold's Platinum Heart, the Temple to Tiamat's sealed chambers — but these are sacred-in-relation-to-deity in ways the Heartwood is not. The Heartwood is sacred-as-the-land. Its presence is continuous rather than channeled through ceremony. Its response is ecological rather than divine.
+The Heartwood has a specific atmospheric character that no other location in the realm matches. Sacred sites exist elsewhere — the Stronghold's Platinum Heart, the Temple of Mordrax's sealed chambers — but these are sacred-in-relation-to-deity in ways the Heartwood is not. The Heartwood is sacred-as-the-land. Its presence is continuous rather than channeled through ceremony. Its response is ecological rather than divine.
 
 Visitors to the clearing describe specific effects that recur across diverse individuals. Time feels different near the Heartwood — not distorted in the Glade's general sense, but weighted, as though minutes in the clearing carry more than minutes elsewhere. Thought clarifies, in the sense that concerns which felt large when entering the clearing sometimes appear smaller when leaving; less because they have been dismissed than because they have been contextualized within the larger scale the Heartwood embodies. Emotions surface — not induced, but permitted, as though the clearing's ambient character allows responses that ordinary life suppresses.
 
@@ -142,7 +142,7 @@ The Heartwood is technically accessible within the Feywood Glade — physically 
 
 ## Authoring Notes
 
-The Heartwood uses `sacred-site` type — a new type I'm introducing for this batch, distinct from the `sealed-site` type used for the Temple to Tiamat. `sealed-site` indicated a canonically known but unreachable location; `sacred-site` indicates a canonically central and accessible sacred location with specific access protocols. If the validator rejects this type, fall back to `location` with appropriate tags. The distinction matters for narrative scene-handling but not for technical operation.
+The Heartwood uses `sacred-site` type — a new type I'm introducing for this batch, distinct from the `sealed-site` type used for the Temple of Mordrax. `sealed-site` indicated a canonically known but unreachable location; `sacred-site` indicates a canonically central and accessible sacred location with specific access protocols. If the validator rejects this type, fall back to `location` with appropriate tags. The distinction matters for narrative scene-handling but not for technical operation.
 
 The Heartwood is NOT a settlement. It does not host residents. Its related settlement is Thornveil, which surrounds it.
 

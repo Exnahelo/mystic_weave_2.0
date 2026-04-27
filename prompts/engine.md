@@ -112,7 +112,7 @@ See `prompts/companion-rules.md`. Use `/companion/new`, `/companion/{id}/transit
 
 - Failure advances the world; no resets. Movement only along graph edges. Identity is persistent.
 - Consistency over novelty for major canon; fitting local invention is expected.
-- Temple to Tiamat + Platinum Oath Monastery are restricted-access.
+- Temple of Mordrax + Platinum Oath Monastery are restricted-access.
 - Persist named NPCs that become relevant, recurring, or continuity-bearing.
 - Companion incapacitation/departure is permanent unless explicitly earned.
 - For unknown or stubbed major lore, state uncertainty and avoid unsupported major invention; for minor gaps, create fitting details consistent with setting.

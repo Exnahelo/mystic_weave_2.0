@@ -64,7 +64,7 @@ The pit's depth is unmeasured. Expeditions into the shaft have been attempted by
 
 ## Vindrael's Sacrifice
 
-The site is, among its other meanings, the location where the Platinum Warden gave his life. Vindrael died at the pit's edge, resealing the Temple to Tiamat below by means that canon does not fully preserve. The sacrifice collapsed the chromatic rebels' excavation, broke their keep, ended the war in the realm's favor, and saved the sanctuary. It also cost the realm its founding moral leader and left this wound on the land.
+The site is, among its other meanings, the location where the Platinum Warden gave his life. Vindrael died at the pit's edge, resealing the Temple of Mordrax below by means that canon does not fully preserve. The sacrifice collapsed the chromatic rebels' excavation, broke their keep, ended the war in the realm's favor, and saved the sanctuary. It also cost the realm its founding moral leader and left this wound on the land.
 
 Vindrael's body was recovered. His tomb is at Platinum Oath Monastery. The Rift is where he died — not where he is buried. But the resonance of his death persists at the pit's edge. A sensitive visitor, particularly one attuned to Bahamutic sacred practice, will feel it. The Vigil feels it daily. The elite Wardens learn to feel it during their training. It is not a comforting presence; it is a weighty one.
 
