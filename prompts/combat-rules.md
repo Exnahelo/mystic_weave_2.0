@@ -1,6 +1,6 @@
 # Mystic Weave — Combat Rules
 
-Version 1.0 — April 2026  
+Version 1.1 — April 2026  
 Status: Active rules scaffold. Expand as combat systems are finalized.
 
 ---
@@ -29,7 +29,7 @@ Use this file together with:
 
 Armor affects mobility by category, not by hyper-detailed simulation.
 
-- **Unarmored** — no Agility difficulty impact; some characters intentionally build around this state
+- **Unarmored** — no Agility difficulty impact; some characters intentionally build around this state. Unarmored fighting is governed by the `martial_arts` knowledge group, not by a separate unarmored knowledge group.
 - **Light armor** — no Agility difficulty impact under normal conditions
 - **Medium armor** — GPT applies judgment; Agility difficulty may increase one step in demanding physical contexts
 - **Heavy armor** — Agility difficulty increases one step as a baseline; two steps in demanding physical contexts
@@ -40,24 +40,28 @@ The GPT should interpret armor category first, then context. Do not invent granu
 
 There is currently one shield entry in the catalog. Shield contributes to pre-combat HP through its floor and ceiling values just like armor does, with ceiling 30 and floor 5. Narrative descriptors of shield size or type may be mentioned by the narrator, but they do not affect mechanics.
 
-### Weapon Knowledge and Application Rule
+### Weapon and Armor Knowledge and Application Rule
 
-Weapons operate on two linked layers:
+Combat operates on two linked layers:
 
-- **Knowledge tag** — the broad family of weapon use a character understands
-- **Application tag** — the specific weapon a character becomes practiced with over time
+- **Knowledge tag** — the broad family of combat use a character understands
+- **Application tag** — the specific weapon, armor class, or technique a character becomes practiced with over time
 
-The current weapon knowledge tags are:
-- grappling
-- melee
-- reach
-- ranged
-- mechanical
-- unconventional
+The canonical knowledge tags for combat are:
 
-The GPT should treat these as the primary handling categories for weapon familiarity.
+- `close_combat` — short-range body-and-implement combat
+- `melee` — standard one-handed and two-handed weapon combat
+- `reach` — extended-reach weapon combat
+- `ranged` — projectile combat (bows, thrown, sling)
+- `mechanical` — engineered ranged combat (crossbows, rigged shot)
+- `unconventional` — improvised, exotic, or non-standard weapon use
+- `martial_arts` — disciplined unarmed combat traditions; includes unarmored fighting
+- `armor` — armor and shield handling
 
-The application tag is the actual weapon itself, such as:
+The GPT should treat these as the primary handling categories for combat familiarity.
+
+The application tag is the specific implement or class within the family. Weapon applications include items such as:
+
 - knife
 - dagger
 - sword
@@ -66,7 +70,14 @@ The application tag is the actual weapon itself, such as:
 - light_crossbow
 - whip
 
-A character may understand a weapon family through knowledge without being equally practiced in every application within that family.
+Armor applications are:
+
+- light_armor
+- medium_armor
+- heavy_armor
+- shields
+
+A character may understand a combat family through knowledge without being equally practiced in every application within that family.
 
 ### Weapon Matching Rule
 
@@ -125,7 +136,7 @@ An attack resolves in up to two rolls:
 - **Miss:** attack ends, no damage.
 - **Hit:** continue to Roll 2.
 
-**Unarmored evasion modifier:** If the defender is unarmored, the attacker's Roll 1 threshold is reduced by (defender's unarmored application tier × 5). T5 unarmored defender vs. T1 weapon attacker: 55 − 25 = 30.
+**Unarmored evasion modifier:** If the defender is unarmored, the attacker's Roll 1 threshold is reduced by (defender's `martial_arts` knowledge tier × 5). T5 martial_arts defender vs. T1 weapon attacker: 55 − 25 = 30.
 
 **Roll 2 — How much damage?**
 - Both attacker and defender roll d100. Higher is better for each side.
@@ -157,7 +168,7 @@ Where:
 - `armor_tier` is the character's application tier for the armor class in use (`light_armor`, `medium_armor`, `heavy_armor`). T0 if untrained.
 - `shield_floor` and `shield_ceiling` are from the shield catalog entry (5 and 30).
 - `shield_tier` is the character's application tier for `shields`. T0 if untrained. Omit the entire shield contribution if no shield is equipped.
-- Unarmored contributes no HP (floor=0, ceiling=0). Unarmored defense is evasion-based, applied to Roll 1 instead.
+- Unarmored contributes no HP (floor=0, ceiling=0). Unarmored defense is evasion-based, applied to Roll 1 instead via the `martial_arts` knowledge tier.
 
 ### Dual Wielding
 
@@ -256,4 +267,4 @@ Until fuller combat rules are finalized, follow these principles:
 
 ## Summary
 
-Combat v1.0 defines backend-authoritative resolution using two rolls per attack, fixed-threshold hit mechanics mirrored from magic spell resolution, a contested-roll damage model with agility-based reduction, and pre-combat HP derived from armor and shield floor/ceiling values combined with skill tier. Ammunition is a damage modifier, not a proficiency layer. Additional combat subsystems (positioning, magic in combat, mounted combat, etc.) remain placeholders for future canonization.
+Combat v1.0 defines backend-authoritative resolution using two rolls per attack, fixed-threshold hit mechanics mirrored from magic spell resolution, a contested-roll damage model with agility-based reduction, and pre-combat HP derived from armor and shield floor/ceiling values combined with skill tier. Ammunition is a damage modifier, not a proficiency layer. Weapon and armor knowledge follows the canonical taxonomy: `close_combat`, `melee`, `reach`, `ranged`, `mechanical`, `unconventional`, `martial_arts`, and `armor` as knowledge groups, with armor applications `light_armor`, `medium_armor`, `heavy_armor`, `shields`. Additional combat subsystems (positioning, magic in combat, mounted combat, etc.) remain placeholders for future canonization.
