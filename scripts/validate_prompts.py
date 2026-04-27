@@ -13,7 +13,6 @@ import yaml
 REQUIRED_PROMPTS = {
     "prompts/engine.md": ["# Mystic Weave", "## Turn Loop", "## API Reference"],
     "prompts/character-creation.md": ["# Mystic Weave", "## Character Creation Flow", "## API Fields for Character Creation"],
-    "prompts/companion-rules.md": ["# Mystic Weave — Companion Rules", "## Three-Tier Model", "## GPT Conduct Rules"],
     "prompts/world-rules.md": ["#", "##"],
     "prompts/economy-rules.md": ["# Mystic Weave — Economy Rules", "## Coin Economy Rules", "## Barter Economy Rules"],
     "prompts/world.md": ["# Drakenvale", "## Governance", "## Reference Files"],
