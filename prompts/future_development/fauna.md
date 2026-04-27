@@ -9,7 +9,7 @@ at `data/beasts/creatures.json` ships a subset.
 
 ---
 
-## Feywood Glade
+## Feywood
 
 Naming palette: poetic / ancient world / fey / botanical
 

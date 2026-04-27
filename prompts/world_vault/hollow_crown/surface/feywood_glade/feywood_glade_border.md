@@ -1,11 +1,11 @@
 ---
 id: feywood-glade-border
-name: Feywood Glade Border
+name: Feywood Border
 type: route-node
 region_id: hollow-crown
 parent_location_id: western-temperate-forest
 description: >
-  The realm-side threshold to the Feywood Glade, where the road from Dracélune
+  The realm-side threshold to the Feywood, where the road from Dracélune
   ends and the western temperate forest gives way to the Glade's liminal
   territory. From outside, the Border shows as an ordinary forest edge — a
   line of older, taller, stranger trees standing somewhat differently than
@@ -14,7 +14,7 @@ description: >
   no gate, no physical barrier. The Border is marked by stone waymarkers set
   in place over generations and by the small Hall of Guides station that
   manages sanctioned expedition traffic from here. The realm honors an ancient
-  alliance with the Feywood Glade: safe passage at the Border is reserved for
+  alliance with the Feywood: safe passage at the Border is reserved for
   those with guide sanction or elven welcome; unsanctioned entry is tolerated
   but genuinely consequential. Travelers who cross without preparation rarely
   return as they departed, and some do not return at all.
@@ -42,9 +42,9 @@ threat_level: 2
 discovered: true
 ---
 
-# Feywood Glade Border
+# Feywood Border
 
-The realm-side threshold to the Feywood Glade, where the road from Dracélune ends and the western temperate forest gives way to the Glade's liminal territory. From outside, the Border shows as an ordinary forest edge — a line of older, taller, stranger trees standing somewhat differently than their realm-side neighbors, the ground beyond them shifting in quality in ways that a traveler notices without being able to name. There is no wall, no gate, no physical barrier. The Border is marked by stone waymarkers set in place over generations and by the small Hall of Guides station that manages sanctioned expedition traffic from here. The realm honors an ancient alliance with the Feywood Glade: safe passage at the Border is reserved for those with guide sanction or elven welcome; unsanctioned entry is tolerated but genuinely consequential. Travelers who cross without preparation rarely return as they departed, and some do not return at all.
+The realm-side threshold to the Feywood, where the road from Dracélune ends and the western temperate forest gives way to the Glade's liminal territory. From outside, the Border shows as an ordinary forest edge — a line of older, taller, stranger trees standing somewhat differently than their realm-side neighbors, the ground beyond them shifting in quality in ways that a traveler notices without being able to name. There is no wall, no gate, no physical barrier. The Border is marked by stone waymarkers set in place over generations and by the small Hall of Guides station that manages sanctioned expedition traffic from here. The realm honors an ancient alliance with the Feywood: safe passage at the Border is reserved for those with guide sanction or elven welcome; unsanctioned entry is tolerated but genuinely consequential. Travelers who cross without preparation rarely return as they departed, and some do not return at all.
 
 ## Scene Texture
 
@@ -99,10 +99,10 @@ Between exchange windows, the Border is quieter. Casual traffic is minimal. The 
 
 ## Functions
 
-- **Realm-side sanctioned threshold.** The Border is the realm's recognized entry point to the Feywood Glade. Sanctioned crossing occurs here; unsanctioned crossing also occurs here, and the realm's institutional response is calibrated accordingly.
+- **Realm-side sanctioned threshold.** The Border is the realm's recognized entry point to the Feywood. Sanctioned crossing occurs here; unsanctioned crossing also occurs here, and the realm's institutional response is calibrated accordingly.
 - **Expedition infrastructure.** The Hall of Guides station, the stone waymarkers, and the adjacent cleared terrain serve as the realm's operational infrastructure for Glade expedition traffic. The Hall of Guides from Dracélune handles the institutional work.
 - **Mercantile exchange site.** Periodic exchange windows conduct the realm-Glade mercantile relationship at the Border. Elven traders come here; realm traders come here; the exchange happens on realm soil but in the Border's liminal atmosphere.
-- **Elven diplomatic contact point.** Formal diplomatic matters between the realm and the Feywood Glade typically route through the Border initially. The elves do not typically travel into the realm's interior; the realm sends delegations to the Border (or, for very formal matters, the realm's delegation is escorted into the Glade by elven welcome). The Border is the neutral meeting ground.
+- **Elven diplomatic contact point.** Formal diplomatic matters between the realm and the Feywood typically route through the Border initially. The elves do not typically travel into the realm's interior; the realm sends delegations to the Border (or, for very formal matters, the realm's delegation is escorted into the Glade by elven welcome). The Border is the neutral meeting ground.
 - **Return point for returning expeditions.** Travelers returning from the Glade aim to re-exit through the sanctioned Border. Guides accompanying expeditions manage this exit carefully; the Glade's liminal geometry means that improper exit can deposit travelers anywhere in the realm. Exiting through the proper Border, under guide supervision, is the reliable way to return.
 
 ## Character
@@ -154,7 +154,7 @@ Unsanctioned crossing is not physically prevented. Travelers who choose to cross
 - `vaelmere`
 ## Authoring Notes
 
-The Feywood Glade Border is route-node type, consistent with the other threshold authoring pattern established in Batch 5. Its role is threshold rather than corridor; the important element is the crossing event itself rather than travel through a zone.
+The Feywood Border is route-node type, consistent with the other threshold authoring pattern established in Batch 5. Its role is threshold rather than corridor; the important element is the crossing event itself rather than travel through a zone.
 
 `known_npcs` includes both realm-side (Hall of Guides Border Steward) and Feywood-side (Elven Trade Envoy) roles. Both are Tier-3 generative. The Elven Trade Envoy's presence is episodic rather than continuous — they appear during exchange windows and return to the Glade afterward — which is canonically important for how the Border feels between windows.
 
@@ -172,7 +172,7 @@ The connection to `western-temperate-forest` is the regional parent reference.
 
 The "awaiting" character of the Border — distinct from the Hollows' watching and the Rift's pulsing — is canonical atmospheric character. GPT scenes at the Border should emphasize neutral present-attention rather than threat or hostility.
 
-The Glade's liminal geometry — external-small, internal-massive, improper-exit geographic displacement — is canonically established in Border authoring and will be elaborated in the Feywood Glade interior node. This is the realm-side description of the phenomenon.
+The Glade's liminal geometry — external-small, internal-massive, improper-exit geographic displacement — is canonically established in Border authoring and will be elaborated in the Feywood interior node. This is the realm-side description of the phenomenon.
 
 The stone waymarkers are canonical infrastructure. They are ancient, elven-carved, and mark sanctioned crossing points. They are NOT authored as separate location nodes; they are features of the Border.
 
@@ -180,7 +180,7 @@ The exchange window structure is canonical mercantile infrastructure. Exchange w
 
 The Elven Trade Envoy role represents the Feywood's senior mercantile figure at exchanges. Not a Heartwarden, not a Council member — a specialized trader with established realm contacts. This preserves the elven Council's separation from ordinary realm engagement while acknowledging the functional trade relationship.
 
-The Hall of Guides' canonical knowledge of safe Glade exit is an important piece of Feywood Glade operational canon. Guides know how to exit the Glade at the intended Border location; this knowledge is professional and carefully maintained. Future storylines involving Glade travel should acknowledge this — guided expeditions return reliably; unguided travelers do not.
+The Hall of Guides' canonical knowledge of safe Glade exit is an important piece of Feywood operational canon. Guides know how to exit the Glade at the intended Border location; this knowledge is professional and carefully maintained. Future storylines involving Glade travel should acknowledge this — guided expeditions return reliably; unguided travelers do not.
 
 The Hall of Guides station is canonical infrastructure but NOT authored as a separate location node. It is an internal feature of the Border.
 

@@ -5,7 +5,7 @@ type: settlement
 region_id: hollow-crown
 parent_location_id: feywood-glade
 description: >
-  The elven capital city of the Feywood Glade, grown around the Heartwood at
+  The elven capital city of the Feywood, grown around the Heartwood at
   the Glade's sacred center. Thornveil is neither a built city in the realm's
   sense nor a wild settlement — it is something specific to elven
   civilization, a place where ancient trees and centuries-old elven craftwork
@@ -44,11 +44,11 @@ discovered: false
 
 # Thornveil
 
-The elven capital city of the Feywood Glade, grown around the Heartwood at the Glade's sacred center. Thornveil is neither a built city in the realm's sense nor a wild settlement — it is something specific to elven civilization, a place where ancient trees and centuries-old elven craftwork have grown together into a living urban whole. Homes, halls, and workshops are integrated with the forest canopy rather than clearing it; streets wind through groves rather than following geometric plans; noble family estates occupy the older growth at the city's deeper reaches; the Council of Elders' chambers hold deliberations that can last decades. Several thousand elves live here permanently, joined by rare non-elf residents whose integration has been earned over years. Thornveil exists for one reason: to protect the Heartwood at its center, and through that protection, to preserve the Glade itself.
+The elven capital city of the Feywood, grown around the Heartwood at the Glade's sacred center. Thornveil is neither a built city in the realm's sense nor a wild settlement — it is something specific to elven civilization, a place where ancient trees and centuries-old elven craftwork have grown together into a living urban whole. Homes, halls, and workshops are integrated with the forest canopy rather than clearing it; streets wind through groves rather than following geometric plans; noble family estates occupy the older growth at the city's deeper reaches; the Council of Elders' chambers hold deliberations that can last decades. Several thousand elves live here permanently, joined by rare non-elf residents whose integration has been earned over years. Thornveil exists for one reason: to protect the Heartwood at its center, and through that protection, to preserve the Glade itself.
 
 ## Scene Texture
 
-A traveler approaching Thornveil through the Feywood Glade sees the city emerge from the forest rather than announcing itself against it. There are no walls. There are no gates. There is no clear boundary where wilderness ends and city begins. The forest gradually becomes more intentional — subtle signs of cultivation appear, paths become more defined, occasional buildings become visible among the trees — and at some point the traveler realizes they are no longer in wild Glade terrain but are walking through Thornveil's outer reaches.
+A traveler approaching Thornveil through the Feywood sees the city emerge from the forest rather than announcing itself against it. There are no walls. There are no gates. There is no clear boundary where wilderness ends and city begins. The forest gradually becomes more intentional — subtle signs of cultivation appear, paths become more defined, occasional buildings become visible among the trees — and at some point the traveler realizes they are no longer in wild Glade terrain but are walking through Thornveil's outer reaches.
 
 The transition is organic because the city itself is organic. Elven architecture does not impose geometric form on the forest; it works with the forest's existing character to produce structures that feel grown rather than built. Buildings use living trees as structural supports. Wooden frames incorporate the natural bend of branches that have been guided over decades rather than cut to specific dimensions. Walls are sometimes living plant material — woven, trained, grown into density — rather than inert timber. Roofs incorporate the canopy above, with buildings' upper floors sometimes indistinguishable from the surrounding tree structure.
 
@@ -104,13 +104,13 @@ Trade goods from the Crafthall eventually make their way to the Border for excha
 
 ### The Outer Bounds
 
-The city's outermost zone, where Thornveil gradually dissolves back into Feywood Glade wilderness. Residences here are more dispersed. Newer residents — integrated non-elves, elves returning from long absences, younger elves establishing their own lives — often settle in the Outer Bounds first, sometimes moving inward as their roots in the city deepen.
+The city's outermost zone, where Thornveil gradually dissolves back into Feywood wilderness. Residences here are more dispersed. Newer residents — integrated non-elves, elves returning from long absences, younger elves establishing their own lives — often settle in the Outer Bounds first, sometimes moving inward as their roots in the city deepen.
 
 The Outer Bounds also contains the **trade-staging area** — the zone where goods bound for the Border's exchange windows are aggregated, where elven traders prepare for the journey outward, and where returning traders unload their realm-goods acquisitions before distributing them to Thornveil's Crafthall and Common Hearth markets. This is the most realm-facing part of the city and the most likely to host occasional realm visitors on sanctioned business who are not ready or not permitted for deeper access.
 
 ## The Council of Elders
 
-The Council of Elders is Thornveil's governing body. Canonically established in the Feywood Glade region-zone as consensus-based and slow-paced; Thornveil's authoring adds the operational reality.
+The Council of Elders is Thornveil's governing body. Canonically established in the Feywood region-zone as consensus-based and slow-paced; Thornveil's authoring adds the operational reality.
 
 **Composition.** The Council consists of representatives drawn from the oldest noble families, senior druidic practitioners, recognized elder figures whose wisdom has accumulated across centuries, and specific rotating seats held by senior Greenshield commanders and Heartwarden captains. The total Council size varies between about thirty and fifty members depending on recent deaths, retirements, elevations, and family recognitions; this is not fixed.
 
@@ -124,7 +124,7 @@ The Council of Elders is Thornveil's governing body. Canonically established in 
 
 ## The Greenshield
 
-Thornveil hosts the operational headquarters of the Greenshield — the Feywood Glade's formal military. The headquarters is in the Noble Groves, occupying traditional military-family estates that have served this function for generations.
+Thornveil hosts the operational headquarters of the Greenshield — the Feywood's formal military. The headquarters is in the Noble Groves, occupying traditional military-family estates that have served this function for generations.
 
 **Structure.** The Greenshield maintains standing units organized along traditional elven military lines: ranger-archers, heavy-foot formations (elves in full war-gear are physically imposing), scout units, healer-wardens who move with combat formations. Ranks run from common soldier through sergeant-equivalent, captain, commander, and senior commander. The **Greenshield Commander** is the senior military officer, holding a Tier-3 generative role responsible for overall military readiness and coordination with the Council.
 
@@ -144,7 +144,7 @@ Heartwardens in the city are recognizable but not flamboyantly so. Their distinc
 
 ## The Coming-of-Age Trial Tradition
 
-Certain noble families maintain the coming-of-age tradition described in the Feywood Glade region-zone authoring. A child born into such a family is taken into the wilds to be raised closer to the land than ordinary Thornveil upbringing, returning to the family estate for holidays and significant events but otherwise learning from the Glade itself in the earliest years.
+Certain noble families maintain the coming-of-age tradition described in the Feywood region-zone authoring. A child born into such a family is taken into the wilds to be raised closer to the land than ordinary Thornveil upbringing, returning to the family estate for holidays and significant events but otherwise learning from the Glade itself in the earliest years.
 
 When the child comes of age — the specific age varies by family tradition, roughly the elven equivalent of 60-80 years old — the family sends them into the Glade's outer terrain for trials. The trials test connection to the land, practical survival skill, combat capability, judgment, and moral character across weeks or months of sustained exposure. Successful trial completion earns the young elf their adult position — Heartwarden, Greenshield officer, druid, noble family heir, or whatever their nature has led them toward.
 
@@ -178,7 +178,7 @@ The Glade's "respect the wood" principle applies inside Thornveil as well as in 
 
 ## Access
 
-Thornveil is accessible only through the Feywood Glade interior, typically with an elven host or a Hall of Guides guide. Direct approach from the Border is not possible in ordinary experience — the Glade's geometry does not extend a direct path from the Border to Thornveil for travelers who haven't earned one. Sanctioned visitors reaching Thornveil do so through their host's or guide's guidance.
+Thornveil is accessible only through the Feywood interior, typically with an elven host or a Hall of Guides guide. Direct approach from the Border is not possible in ordinary experience — the Glade's geometry does not extend a direct path from the Border to Thornveil for travelers who haven't earned one. Sanctioned visitors reaching Thornveil do so through their host's or guide's guidance.
 
 **Typical sanctioned visitors:**
 - Realm Council-level delegations on diplomatic business
@@ -216,9 +216,9 @@ Thornveil is accessible only through the Feywood Glade interior, typically with 
 - `vaelmere`
 ## Authoring Notes
 
-Thornveil is the Feywood Glade's capital city. Its primary canonical function is to protect the Heartwood at its center; its secondary functions are to serve as the elven civilization's civic, cultural, and military center.
+Thornveil is the Feywood's capital city. Its primary canonical function is to protect the Heartwood at its center; its secondary functions are to serve as the elven civilization's civic, cultural, and military center.
 
-The replacement of the existing placeholder is substantial. The placeholder's existing connections list was sparse; this authoring establishes canonical connections to the Heartwood, Silent Grove, and Feywood Glade region-zone. The placeholder's connection to Feywood Glade Border is specifically NOT preserved, because direct Border-to-Thornveil travel contradicts the Glade's liminal geometry. Topology reconciliation should confirm this correction.
+The replacement of the existing placeholder is substantial. The placeholder's existing connections list was sparse; this authoring establishes canonical connections to the Heartwood, Silent Grove, and Feywood region-zone. The placeholder's connection to Feywood Border is specifically NOT preserved, because direct Border-to-Thornveil travel contradicts the Glade's liminal geometry. Topology reconciliation should confirm this correction.
 
 The Council of Elders is referenced throughout but is a distributed body rather than a single NPC. The Council's representatives can be instantiated as scene-specific characters for any narrative requiring Council interaction.
 
@@ -226,7 +226,7 @@ The Greenshield Commander and Heartwarden Captain are Tier-3 generative roles sp
 
 The five functional zones (Heartwood Approach, Noble Groves, Common Hearth, Crafthall, Outer Bounds) are canonically established as Thornveil's internal organization and are each authored as their own navigable location nodes under `thornveil/`. Thornveil itself remains the city-level node; scenes that stay at the city register stay in this file. Scenes that move meaningfully into a specific zone may use the district node directly for tighter framing, NPC placement, and scene logic.
 
-The coming-of-age trial tradition is canonically established here, elaborating on the framing in Feywood Glade region-zone authoring. Roughly a dozen noble families hold the tradition. Character backstory involving such trials is narratively rich for any elven character with noble-family origin.
+The coming-of-age trial tradition is canonically established here, elaborating on the framing in Feywood region-zone authoring. Roughly a dozen noble families hold the tradition. Character backstory involving such trials is narratively rich for any elven character with noble-family origin.
 
 The integration practice for non-elven residents is canonically established. Several realm-adjacent communities (notably Dewhollow) have specific Thornveil connections through integrated residents. Future storylines involving these cross-realm relationships have substantial narrative potential.
 
@@ -240,6 +240,6 @@ The "the Glade reshapes disrespectful visitors' experience" character is canonic
 
 `discovered: false` at the canonical level. Most realm residents know Thornveil exists; very few have seen it. Characters who physically visit Thornveil should have their session state updated to discovered upon arrival.
 
-The realm-side "Thornveil is the city around the Heartwood" understanding is now canonically consistent throughout realm worldbuilding. Earlier references that suggested Thornveil might be elsewhere (such as the placeholder's connection to the Feywood Glade Border) are corrected by this authoring.
+The realm-side "Thornveil is the city around the Heartwood" understanding is now canonically consistent throughout realm worldbuilding. Earlier references that suggested Thornveil might be elsewhere (such as the placeholder's connection to the Feywood Border) are corrected by this authoring.
 
 Threat level 1 reflects the genuine consequences for disrespectful behavior. Thornveil is civically safe; it is not safe for visitors who fail to match its required level of respect.

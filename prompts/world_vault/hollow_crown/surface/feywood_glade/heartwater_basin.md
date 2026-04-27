@@ -4,7 +4,7 @@ name: Heartwater Basin
 type: region_zone
 region_id: hollow-crown
 parent_location_id: feywood-glade
-description: The lake-and-river system at the Feywood Glade's hydrological heart — an asymmetric freshwater zone that shapes the Thornveil landmass and drains outward through the Outer Old-Growth Wild. The Basin is a full ecological system in its own right, supporting the Glade's aquatic fauna, waterfowl, and riparian flora, and providing the water that sustains both Thornveil's civic life and the deeper forest interior. It is also the second-fastest zone to register Heartwood stress; druids monitor its surface behavior, amphibian choruses, and fish populations as early indicators of the broader land's health. The Basin is not a sacred site in the ritual sense but is continuously attended by the elves who live around it.
+description: The lake-and-river system at the Feywood's hydrological heart — an asymmetric freshwater zone that shapes the Thornveil landmass and drains outward through the Outer Old-Growth Wild. The Basin is a full ecological system in its own right, supporting the Glade's aquatic fauna, waterfowl, and riparian flora, and providing the water that sustains both Thornveil's civic life and the deeper forest interior. It is also the second-fastest zone to register Heartwood stress; druids monitor its surface behavior, amphibian choruses, and fish populations as early indicators of the broader land's health. The Basin is not a sacred site in the ritual sense but is continuously attended by the elves who live around it.
 connections:
 - feywood-glade
 - thornveil
@@ -112,4 +112,4 @@ Fishing and aquaculture are both canonically restrained practices. The catch is 
 
 Boats exist but are small. No realm-style galleys, barges, or watercraft-with-sails appear in the Basin.
 
-The Basin connects Thornveil, Heartwood Estate (reachable by following the drainage), and the broader Feywood Glade region. It does not directly connect to the Silent Grove, the Heartwood itself, or the Border — those are reached through other pathways.
+The Basin connects Thornveil, Heartwood Estate (reachable by following the drainage), and the broader Feywood region. It does not directly connect to the Silent Grove, the Heartwood itself, or the Border — those are reached through other pathways.

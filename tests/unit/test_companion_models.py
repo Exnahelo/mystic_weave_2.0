@@ -109,7 +109,7 @@ def test_creature_narrative_populated_validates() -> None:
         wound="Old scars at shoulder.",
         quirks=["Quiet", "Highly observant"],
         flaws=["Slow to trust strangers"],
-        bonds=["Feywood Glade"],
+        bonds=["Feywood"],
         drives=["Remain with handler", "Hunt when safe"],
     )
     assert narrative.origin.startswith("Raised")

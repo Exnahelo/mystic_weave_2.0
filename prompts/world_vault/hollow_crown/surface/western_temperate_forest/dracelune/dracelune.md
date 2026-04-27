@@ -3,7 +3,7 @@ id: dracelune
 name: Dracélune
 type: settlement
 region_id: hollow-crown
-description: The realm's western trade capital and the threshold city between ordinary Drakenvale life and the untamed Feywood Glade beyond. Dracélune sits at the edge of the western temperate forest where the land softens toward liminal Fey-touched terrain, its streets and plazas built across stilted platforms, stone causeways, and terraced riverside districts. It is the first and last true city the Silver Scale Trading Company's caravans pass through on their inbound and outbound routes, the primary realm-side staging point for any expedition into the Feywood, and the most culturally porous settlement in the Hollow Crown. Dracélune is lively, music-thick, commercially fast, and quietly permissive in ways that make it feel less like the rest of Drakenvale and more like itself.
+description: The realm's western trade capital and the threshold city between ordinary Drakenvale life and the untamed Feywood beyond. Dracélune sits at the edge of the western temperate forest where the land softens toward liminal Fey-touched terrain, its streets and plazas built across stilted platforms, stone causeways, and terraced riverside districts. It is the first and last true city the Silver Scale Trading Company's caravans pass through on their inbound and outbound routes, the primary realm-side staging point for any expedition into the Feywood, and the most culturally porous settlement in the Hollow Crown. Dracélune is lively, music-thick, commercially fast, and quietly permissive in ways that make it feel less like the rest of Drakenvale and more like itself.
 connections:
 - western-temperate-forest
 - feywood-glade-border
@@ -33,7 +33,7 @@ discovered: true
 
 # Dracélune
 
-The realm's western trade capital and the threshold city between ordinary Drakenvale life and the untamed Feywood Glade beyond. Dracélune sits at the edge of the western temperate forest where the land softens toward liminal Fey-touched terrain, its streets and plazas built across stilted platforms, stone causeways, and terraced riverside districts. It is the first and last true city the Silver Scale Trading Company's caravans pass through on their inbound and outbound routes, the primary realm-side staging point for any expedition into the Feywood, and the most culturally porous settlement in the Hollow Crown. Dracélune is lively, music-thick, commercially fast, and quietly permissive in ways that make it feel less like the rest of Drakenvale and more like itself.
+The realm's western trade capital and the threshold city between ordinary Drakenvale life and the untamed Feywood beyond. Dracélune sits at the edge of the western temperate forest where the land softens toward liminal Fey-touched terrain, its streets and plazas built across stilted platforms, stone causeways, and terraced riverside districts. It is the first and last true city the Silver Scale Trading Company's caravans pass through on their inbound and outbound routes, the primary realm-side staging point for any expedition into the Feywood, and the most culturally porous settlement in the Hollow Crown. Dracélune is lively, music-thick, commercially fast, and quietly permissive in ways that make it feel less like the rest of Drakenvale and more like itself.
 
 ## Scene Texture
 
@@ -63,7 +63,7 @@ Dracélune organizes around its geography and its trade function:
 ## Functions
 
 - **Trade hub.** Dracélune is the primary realm-side interface for the Silver Scale Trading Company's inbound and outbound caravan routes. Virtually all trade goods moving between the Hollow Crown and the controlled external world pass through this city. The Inbound Quarter's infrastructure is built for this volume.
-- **Feywood threshold.** Dracélune is the realm's main staging point for Feywood Glade expeditions. Outfitters provide specialized gear; guides provide route knowledge and escort services; information brokers provide current Feywood conditions and warnings; the Hall of Guides coordinates the guide profession. Every credible expedition into the Feywood begins (and, if successful, ends) here.
+- **Feywood threshold.** Dracélune is the realm's main staging point for Feywood expeditions. Outfitters provide specialized gear; guides provide route knowledge and escort services; information brokers provide current Feywood conditions and warnings; the Hall of Guides coordinates the guide profession. Every credible expedition into the Feywood begins (and, if successful, ends) here.
 - **Cultural crossroads.** The realm's most culturally porous settlement. Travelers from across Drakenvale and the controlled handful of external contacts converge here, and the city's music, food, crafts, and conversation carry influences from throughout the realm and, in subtler ways, from beyond it.
 - **Civic administration.** The Dracélune Mayor's office handles local governance, coordination with the Administrative Quarter in the Stronghold, and the specialized legal and customs work that a border trade city requires. Civic authority here is more commercially focused than in Drakenvale City proper.
 - **Shadow trade reality.** Every major trade hub hosts an underworld economy. Dracélune is no exception. The shadow trade handles smuggling, information brokering beyond the licensed tier, the movement of Feywood-origin materials that would be questioned through legitimate channels, and the occasional personal-escape traffic. The Dragon Guard and Wardens work against this, but the shadow economy persists. It stays genuinely hidden — the city's visible face is clean, the underground is underground, and those who cross back and forth between the two do so carefully.
@@ -102,7 +102,7 @@ Dragon Guard presence is substantial at the city's perimeter and in the Inbound 
 
 Foreign visitors arriving via SSTC caravan are processed at the Inbound Quarter's customs offices. Most are cleared for city access; some with specific expedition credentials may receive Feywood-threshold permits; a few are turned back for reasons the city does not make public. Once inside the city proper, travelers move freely.
 
-The Feywood Glade threshold is a controlled boundary. Passage across it is by permit, by sanctioned guide escort, or by the unauthorized-crossing path that anyone with functioning curiosity eventually learns exists and usually should not take.
+The Feywood threshold is a controlled boundary. Passage across it is by permit, by sanctioned guide escort, or by the unauthorized-crossing path that anyone with functioning curiosity eventually learns exists and usually should not take.
 
 ## Tags
 
@@ -140,7 +140,7 @@ The Harbor Steward of the Inbound is a generative role handling customs, caravan
 
 The cultural disposition of *the world rolls on* is established here as Dracélune's distinctive character line. This is a reliable scene-setting detail for any Dracélune scene.
 
-The Feywood Glade Border connection is the realm-side threshold toward the Feywood itself. Beyond that node, Feywood interior content remains a future authoring concern.
+The Feywood Border connection is the realm-side threshold toward the Feywood itself. Beyond that node, Feywood interior content remains a future authoring concern.
 
 The connections to Silvercut, Dewhollow, Scalemere, and Thornveil match existing topology baseline patterns where supply villages and adjacent settlements feed trade into Dracélune. The baseline has these as one-way inbound to Dracélune; topology reconciliation will address reciprocity at end of location batches.
 

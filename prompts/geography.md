@@ -115,9 +115,9 @@ The Draconic Grasslands form the open central meadows surrounding the city of Dr
 
 The Temperate Forest is the largest natural region by surface area within the basin. It surrounds much of the central grassland ring and spreads across the western, northwestern, and southwestern sectors of the Hollow Crown. Ancient silverwood groves, layered undergrowth, enchanted flora, hidden roads, and quiet settlements define it.
 
-### Feywood Glade — Fixed Pocket Within the Temperate Forest
+### Feywood — Fixed Pocket Within the Temperate Forest
 
-The Feywood Glade occupies a fixed physical location within the Temperate Forest, but its interior does not obey ordinary spatial logic. It is larger within than without, connected to the Feywild, and constrained by the Hollow Crown’s surrounding magical field. It may redirect travelers to different points within the valley, but it cannot deposit anyone beyond the mountain walls.
+The Feywood occupies a fixed physical location within the Temperate Forest, but its interior does not obey ordinary spatial logic. It is larger within than without, connected to the Feywild, and constrained by the Hollow Crown’s surrounding magical field. It may redirect travelers to different points within the valley, but it cannot deposit anyone beyond the mountain walls.
 
 ### Volcanic Highlands — Northeast
 
@@ -222,7 +222,7 @@ These nodes should be treated as the basin’s practical anchors for trade, trav
 
 The Hollow Crown's spatial structure is represented by five aligned grids: three surface overlays (terrain, settlements, routes), one subterranean overlay sharing the surface coordinate system, and one Feywood interior grid with its own non-Euclidean coordinate system. These grids supersede the prior 12×12 coarse map.
 
-All surface and subterranean grids use the same 24×24 coordinate system — rows `A`–`X`, columns `01`–`24`. At the canonical 350 km basin diameter, each cell is approximately 16 km. The Feywood Glade interior is a separate 12×12 grid using rows `α`–`μ` (Greek letters, to avoid ambiguity with surface rows) and columns `01`–`12`. The Feywood's cell scale is narrative rather than physical; its interior is non-Euclidean and responds to visitor disposition and sanction.
+All surface and subterranean grids use the same 24×24 coordinate system — rows `A`–`X`, columns `01`–`24`. At the canonical 350 km basin diameter, each cell is approximately 16 km. The Feywood interior is a separate 12×12 grid using rows `α`–`μ` (Greek letters, to avoid ambiguity with surface rows) and columns `01`–`12`. The Feywood's cell scale is narrative rather than physical; its interior is non-Euclidean and responds to visitor disposition and sanction.
 
 Multi-cell settlement footprints indicate physical size: a single-cell marker is a village or hamlet (~16 km scale feature), a 2×1 or 1×2 is a larger town, and 2×2 or larger is a city. The Drakenvale urban core spans 14 cells to reflect the Stronghold plus surrounding terraced city and lakefront districts.
 
@@ -245,7 +245,7 @@ TERRAIN (Map A, Map E)          SETTLEMENTS (Map B)             ROUTES (Map C)
   R  Rift of Discord              d  Dewhollow
   ·  not applicable               e  Scalemere                   FEYWOOD INTERIOR (Map E)
                                   f  Crystalhaven                  Y  Heartwood (sacred central grove)
-                                  h  Feywood Glade Border          T  Thornveil (elven city, rings Y)
+                                  h  Feywood Border          T  Thornveil (elven city, rings Y)
                                   i  Platinum Oath Approach        U  outer elven settlement
                                   j  Shadowed Hollows Approach     D  Silent Grove
                                   k  Rift of Discord Edge          B  Glade Boundary (realm threshold)
@@ -403,7 +403,7 @@ X  |   ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  �
 
 ---
 
-### Map E — Feywood Glade Interior (12×12, non-Euclidean)
+### Map E — Feywood Interior (12×12, non-Euclidean)
 
 Separate coordinate system. Rows `α`–`μ` (Greek, to avoid confusion with surface rows), columns `01`–`12`. The Feywood's external footprint on Map A is `H5–K6` (~60 km outer, corresponding to the Glade Boundary `h` at surface cell `J4`); internally, the space is much larger and travel-responsive. Distances and the path between two points shift based on visitor disposition, guide sanction, and the Glade's will. With sanctioned elven guidance, travel is predictable. Without sanction, the Glade redirects.
 
@@ -452,8 +452,8 @@ Heartwood `Y` at the dead center. Thornveil `T` forms a complete ring around the
 | Sacred Pools descent | — | `N11–N14` | Southern face of the Stronghold; sacred waters descend here |
 | Southern Lake | — | `O10–R14` | Great south-facing lake at city base |
 | Dracélune | `2` | `I3` | Western forest trade capital; Feywood-adjacent |
-| Feywood Glade Border | `h` | `J4` | Realm-side threshold to the Feywood interior |
-| Feywood Glade (external) | — | `H5–K6` | External surface footprint of the non-Euclidean interior |
+| Feywood Border | `h` | `J4` | Realm-side threshold to the Feywood interior |
+| Feywood (external) | — | `H5–K6` | External surface footprint of the non-Euclidean interior |
 | Silvercut | `c` | `F4` | Forest timber settlement, northwestern forest |
 | Dewhollow | `d` | `K7` | Forest magical-flora cultivation village, east of Feywood |
 | Scalemere | `e` | `R14` | Fishing village on the southeastern lake shore |
@@ -544,6 +544,6 @@ Major travel flows follow a few repeatable patterns:
 
 ## Geographic Summary
 
-The Hollow Crown is a hidden interior world organized in rings, sectors, and layered depths. At its center stands the Heartmass, the fused celestial-platinum impact core from which the Stronghold of Drakenvale was carved. Within the Stronghold lies the Heartstone, the realm’s living crystal center. Around the Stronghold spreads the city of Drakenvale, then the Draconic Grasslands, then the larger natural and hazardous regions of forest, wetland, caverns, volcanic highland, corrupted southern quadrant, and enclosing alpine walls. Between the outer crown and lower basin runs the broken escarpment zone of the Inner Ramparts. The Temple of Mordrax remains beneath the Shadowed Hollows. The Rift of Discord remains nearby but separate. The wetlands drain the basin through hidden underground channels. The Feywood Glade is fixed in place but internally lawless. The Crystal Caverns run beneath all of it.
+The Hollow Crown is a hidden interior world organized in rings, sectors, and layered depths. At its center stands the Heartmass, the fused celestial-platinum impact core from which the Stronghold of Drakenvale was carved. Within the Stronghold lies the Heartstone, the realm’s living crystal center. Around the Stronghold spreads the city of Drakenvale, then the Draconic Grasslands, then the larger natural and hazardous regions of forest, wetland, caverns, volcanic highland, corrupted southern quadrant, and enclosing alpine walls. Between the outer crown and lower basin runs the broken escarpment zone of the Inner Ramparts. The Temple of Mordrax remains beneath the Shadowed Hollows. The Rift of Discord remains nearby but separate. The wetlands drain the basin through hidden underground channels. The Feywood is fixed in place but internally lawless. The Crystal Caverns run beneath all of it.
 
 This is the canonical geographic structure of Drakenvale.

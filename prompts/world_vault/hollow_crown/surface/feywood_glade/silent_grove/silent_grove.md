@@ -4,7 +4,7 @@ name: The Silent Grove
 type: sacred-site
 region_id: hollow-crown
 parent_location_id: feywood-glade
-description: The Feywood Glade's sacred grove of training and druidic practice, set apart from Thornveil in the Glade's deeper interior where ancient trees of extraordinary age form a natural sanctuary. The Silent Grove is the training home of the Heartwarden order — warriors selected for the sworn role of Heartwood protection train here through multi-year cycles under senior Heartwardens and druidic instructors. Druidic practitioners also use the Grove for extended retreat, sustained practice, and the preservation of oral traditions that carry elven ecological and spiritual knowledge across centuries. The Grove is not residential in the Thornveil sense; everyone present is here for the work. It is not open to casual visitors; access is granted only to those whose purpose matches the Grove's function. The ambient atmosphere is one of disciplined quiet — the Grove is called Silent because those who work here have learned to move and speak with the same attentive restraint the ancient trees themselves hold.
+description: The Feywood's sacred grove of training and druidic practice, set apart from Thornveil in the Glade's deeper interior where ancient trees of extraordinary age form a natural sanctuary. The Silent Grove is the training home of the Heartwarden order — warriors selected for the sworn role of Heartwood protection train here through multi-year cycles under senior Heartwardens and druidic instructors. Druidic practitioners also use the Grove for extended retreat, sustained practice, and the preservation of oral traditions that carry elven ecological and spiritual knowledge across centuries. The Grove is not residential in the Thornveil sense; everyone present is here for the work. It is not open to casual visitors; access is granted only to those whose purpose matches the Grove's function. The ambient atmosphere is one of disciplined quiet — the Grove is called Silent because those who work here have learned to move and speak with the same attentive restraint the ancient trees themselves hold.
 connections:
 - feywood-glade
 - thornveil
@@ -28,7 +28,7 @@ discovered: false
 
 # The Silent Grove
 
-The Feywood Glade's sacred grove of training and druidic practice, set apart from Thornveil in the Glade's deeper interior where ancient trees of extraordinary age form a natural sanctuary. The Silent Grove is the training home of the Heartwarden order — warriors selected for the sworn role of Heartwood protection train here through multi-year cycles under senior Heartwardens and druidic instructors. Druidic practitioners also use the Grove for extended retreat, sustained practice, and the preservation of oral traditions that carry elven ecological and spiritual knowledge across centuries. The Grove is not residential in the Thornveil sense; everyone present is here for the work. It is not open to casual visitors; access is granted only to those whose purpose matches the Grove's function. The ambient atmosphere is one of disciplined quiet — the Grove is called Silent because those who work here have learned to move and speak with the same attentive restraint the ancient trees themselves hold.
+The Feywood's sacred grove of training and druidic practice, set apart from Thornveil in the Glade's deeper interior where ancient trees of extraordinary age form a natural sanctuary. The Silent Grove is the training home of the Heartwarden order — warriors selected for the sworn role of Heartwood protection train here through multi-year cycles under senior Heartwardens and druidic instructors. Druidic practitioners also use the Grove for extended retreat, sustained practice, and the preservation of oral traditions that carry elven ecological and spiritual knowledge across centuries. The Grove is not residential in the Thornveil sense; everyone present is here for the work. It is not open to casual visitors; access is granted only to those whose purpose matches the Grove's function. The ambient atmosphere is one of disciplined quiet — the Grove is called Silent because those who work here have learned to move and speak with the same attentive restraint the ancient trees themselves hold.
 
 ## Scene Texture
 
@@ -57,7 +57,7 @@ The **air** carries the Glade's general ambient magic concentrated in the Grove'
 
 ## Functions
 
-The Silent Grove serves specific functions in Feywood Glade life:
+The Silent Grove serves specific functions in Feywood life:
 
 ### Heartwarden Training
 

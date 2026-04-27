@@ -126,9 +126,9 @@ def record(msg):
 # --- Step 1: Move misplaced silverwood_trail ---
 
 def move_silverwood_trail():
-    src_yaml = DATA_ROOT / 'surface/feywood_glade/silverwood_trail.yaml'
+    src_yaml = DATA_ROOT / 'surface/feywood/silverwood_trail.yaml'
     dst_yaml = DATA_ROOT / 'surface/western_temperate_forest/silverwood_trail.yaml'
-    src_md = VAULT_ROOT / 'surface/feywood_glade/silverwood_trail.md'
+    src_md = VAULT_ROOT / 'surface/feywood/silverwood_trail.md'
     dst_md = VAULT_ROOT / 'surface/western_temperate_forest/silverwood_trail.md'
 
     moved = []

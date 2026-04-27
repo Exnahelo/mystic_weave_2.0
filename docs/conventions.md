@@ -72,13 +72,13 @@ Prose narrative canon for major named NPCs continues to live in `prompts/npcs.md
 Directory pattern example:
 
 ```
-data/npcs/hollow_crown/feywood_glade/named.json
-data/npcs/hollow_crown/feywood_glade/roles.json
+data/npcs/hollow_crown/feywood/named.json
+data/npcs/hollow_crown/feywood/roles.json
 data/npcs/hollow_crown/dracelune/named.json   (future)
 data/npcs/hollow_crown/dracelune/roles.json   (future)
 ```
 
-When a region's `named.json` grows beyond approximately 30 entries, it may be split by sub-region (e.g., `feywood_glade/thornveil/named.json`) to keep individual files manageable. Do not pre-split; wait until the file is actually crowded.
+When a region's `named.json` grows beyond approximately 30 entries, it may be split by sub-region (e.g., `feywood/thornveil/named.json`) to keep individual files manageable. Do not pre-split; wait until the file is actually crowded.
 
 Player characters are not stored in this tree. PC data lives in the Postgres character system and the player's personal records.
 

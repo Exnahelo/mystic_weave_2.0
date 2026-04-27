@@ -1,9 +1,9 @@
 ---
 id: feywood-glade
-name: Feywood Glade
+name: Feywood
 type: region_zone
 region_id: hollow-crown
-description: The liminal forest realm that exists within the Hollow Crown's geography but does not obey its ordinary rules. The Feywood Glade appears from outside as a contained patch of the western temperate forest — a pocket perhaps half a day's walk across at its widest, bordered clearly by the realm-side Feywood Glade Border. Inside, the Glade is larger than any realm-side geography can account for. Its forests extend in ways that are not measurable from outside. Its interior holds the elven city of Thornveil around the Heartwood that is the land's living center, secondary elven settlements, sacred groves, and the wild terrain between them — all occupying space that, by any ordinary reckoning, should not fit within the Glade's external footprint. The Glade is not hostile. It is not corrupted. It is magical land functioning at its own heightened logic, protected by the elves who have lived here since before the realm existed, and by the land itself in return.
+description: The liminal forest realm that exists within the Hollow Crown's geography but does not obey its ordinary rules. The Feywood appears from outside as a contained patch of the western temperate forest — a pocket perhaps half a day's walk across at its widest, bordered clearly by the realm-side Feywood Border. Inside, the Glade is larger than any realm-side geography can account for. Its forests extend in ways that are not measurable from outside. Its interior holds the elven city of Thornveil around the Heartwood that is the land's living center, secondary elven settlements, sacred groves, and the wild terrain between them — all occupying space that, by any ordinary reckoning, should not fit within the Glade's external footprint. The Glade is not hostile. It is not corrupted. It is magical land functioning at its own heightened logic, protected by the elves who have lived here since before the realm existed, and by the land itself in return.
 connections:
 - feywood-glade-border
 - heartwood
@@ -26,9 +26,9 @@ threat_level: 3
 discovered: false
 ---
 
-# Feywood Glade
+# Feywood
 
-The liminal forest realm that exists within the Hollow Crown's geography but does not obey its ordinary rules. The Feywood Glade appears from outside as a contained patch of the western temperate forest — a pocket perhaps half a day's walk across at its widest, bordered clearly by the realm-side Feywood Glade Border. Inside, the Glade is larger than any realm-side geography can account for. Its forests extend in ways that are not measurable from outside. Its interior holds the elven city of Thornveil around the Heartwood that is the land's living center, secondary elven settlements, sacred groves, and the wild terrain between them — all occupying space that, by any ordinary reckoning, should not fit within the Glade's external footprint. The Glade is not hostile. It is not corrupted. It is magical land functioning at its own heightened logic, protected by the elves who have lived here since before the realm existed, and by the land itself in return.
+The liminal forest realm that exists within the Hollow Crown's geography but does not obey its ordinary rules. The Feywood appears from outside as a contained patch of the western temperate forest — a pocket perhaps half a day's walk across at its widest, bordered clearly by the realm-side Feywood Border. Inside, the Glade is larger than any realm-side geography can account for. Its forests extend in ways that are not measurable from outside. Its interior holds the elven city of Thornveil around the Heartwood that is the land's living center, secondary elven settlements, sacred groves, and the wild terrain between them — all occupying space that, by any ordinary reckoning, should not fit within the Glade's external footprint. The Glade is not hostile. It is not corrupted. It is magical land functioning at its own heightened logic, protected by the elves who have lived here since before the realm existed, and by the land itself in return.
 
 ## Scene Texture
 
@@ -62,7 +62,7 @@ The Glade's most distinctive feature is its internal geometry. Understood proper
 
 ## The Elven Homeland
 
-The Feywood Glade is the elves' homeland and has been since before the realm existed. The founding of the Hollow Crown — the Oath of the Fallen's establishment, the first dragons and the first human settlements — occurred around a pre-existing elven presence in the Glade. The elves watched the realm come into being. They have lived alongside it through every subsequent age.
+The Feywood is the elves' homeland and has been since before the realm existed. The founding of the Hollow Crown — the Oath of the Fallen's establishment, the first dragons and the first human settlements — occurred around a pre-existing elven presence in the Glade. The elves watched the realm come into being. They have lived alongside it through every subsequent age.
 
 The elven population is the Glade's majority demographic. Ancient noble families trace their lineage back through generations whose total span is measured in millennia. Common families, craftfolk, druidic practitioners, warriors, traders — the full social spectrum of elven life is represented within the Glade. Elves of the Glade are generally taller and slighter of build than realm-side humans, with the specific physiology that magical ambient exposure produces over generations. Their hair and eye coloration runs across a range that includes colors realm-side species do not produce — silver-white, deep forest green, luminous amber.
 
@@ -72,7 +72,7 @@ The elves' relationship with the Glade is not one of ownership. The Glade is not
 
 ## Governance
 
-The Feywood Glade is governed by a **Council of Elders** — a consensus-based body drawn from elven noble families, druidic practitioners, and recognized elder figures whose wisdom has accumulated over centuries. The Council does not have a single leader. Deliberations move at a pace that realm-side observers often find remarkable — decisions may take weeks or years to reach, as the Council considers implications across longer time-horizons than human politics accommodates.
+The Feywood is governed by a **Council of Elders** — a consensus-based body drawn from elven noble families, druidic practitioners, and recognized elder figures whose wisdom has accumulated over centuries. The Council does not have a single leader. Deliberations move at a pace that realm-side observers often find remarkable — decisions may take weeks or years to reach, as the Council considers implications across longer time-horizons than human politics accommodates.
 
 The Council's primary responsibilities are:
 
@@ -88,7 +88,7 @@ The Council's meeting place is in Thornveil, near but not at the Heartwood. Coun
 
 ## Military and the Heartwarden Order
 
-The Feywood Glade maintains a formal military structure, though you would not know it from daily life in Thornveil. The elves have trained for war since before the realm existed and have fought in only one — the Discordant War, and only because Mordrax's release would have threatened the Heartwood. The military exists. It trains. It is always ready. It is almost never deployed.
+The Feywood maintains a formal military structure, though you would not know it from daily life in Thornveil. The elves have trained for war since before the realm existed and have fought in only one — the Discordant War, and only because Mordrax's release would have threatened the Heartwood. The military exists. It trains. It is always ready. It is almost never deployed.
 
 The **formal military** bears an organizational name in elven tradition — the **Greenshield** — and maintains standing units, ranks, and traditional structure drawn from elven noble warrior traditions. Every adult elf of certain noble families undergoes formal military training; many non-noble elves do as well. Training begins in childhood and continues across the elf's full lifespan. The result is a civilian population that is, by realm standards, unusually combat-capable.
 
@@ -120,7 +120,7 @@ The realm-Glade relationship is specific, ancient, and durable:
 
 ## Character
 
-The Feywood Glade has a specific atmospheric character that distinguishes it from every other region in the realm. It is magical at a continuous background intensity — not dramatic magical effects, but ambient magic that colors light, sound, wildlife, weather, and the traveler's own sense of self. The Glade does not feel like a realm with magic in it; it feels like magic manifesting as a realm.
+The Feywood has a specific atmospheric character that distinguishes it from every other region in the realm. It is magical at a continuous background intensity — not dramatic magical effects, but ambient magic that colors light, sound, wildlife, weather, and the traveler's own sense of self. The Glade does not feel like a realm with magic in it; it feels like magic manifesting as a realm.
 
 The elves' bearing contributes to the Glade's character. They move through their own territory with a specific quality of attention that realm-side species rarely match. They know where they are, they know what is around them, they know what the land is doing at any given moment. This knowledge is not heightened awareness in an alarming sense; it is baseline competence for the environment. Realm visitors often find elven presence calming rather than intimidating — there is security in being near someone who clearly understands the place.
 
@@ -130,7 +130,7 @@ The elves themselves have a sense of humor that realm visitors can miss at first
 
 ## Access
 
-The Feywood Glade is accessible through the Feywood Glade Border. Sanctioned entry — Hall of Guides guide, elven welcome-token, or formal diplomatic protocol — is the reliable method. Unsanctioned entry is technically possible and produces the consequences documented at the Border.
+The Feywood is accessible through the Feywood Border. Sanctioned entry — Hall of Guides guide, elven welcome-token, or formal diplomatic protocol — is the reliable method. Unsanctioned entry is technically possible and produces the consequences documented at the Border.
 
 **Navigation within the Glade.** Sanctioned visitors are guided by their Hall of Guides companion or their elven host. Experienced solo visitors (rare — typically scholars with Glade-specific expertise) navigate through established personal relationships with the land and with specific elven contacts. Unsanctioned entrants navigate on their own and typically do not navigate successfully.
 
@@ -162,11 +162,11 @@ The Feywood Glade is accessible through the Feywood Glade Border. Sanctioned ent
 - `vaelmere`
 ## Authoring Notes
 
-The Feywood Glade is a region-zone type, consistent with Southern Lake and Ashfield Fields authoring. As a region-zone, it describes the geography, ecology, and character of an area rather than a specific settlement or corridor. The Glade's distinctive features (liminal geometry, elven homeland status, magical ecology) shape how scenes set "in the Glade" differ from scenes at specific Glade locations.
+The Feywood is a region-zone type, consistent with Southern Lake and Ashfield Fields authoring. As a region-zone, it describes the geography, ecology, and character of an area rather than a specific settlement or corridor. The Glade's distinctive features (liminal geometry, elven homeland status, magical ecology) shape how scenes set "in the Glade" differ from scenes at specific Glade locations.
 
 `known_npcs` is empty. Named NPCs live at specific settlements within the Glade (Thornveil, outer settlement, etc.) rather than at the Glade region-zone level. Scene-instantiated characters appear as needed.
 
-The placement in a new directory `surface/feywood_glade/` is deliberate. The Glade is a sovereign realm-adjacent space, not an administrative subzone of the western temperate forest. Subsequent Feywood locations (Heartwood, Thornveil, Silent Grove, outer elven settlement) will be organized under this directory.
+The placement in a new directory `surface/feywood/` is deliberate. The Glade is a sovereign realm-adjacent space, not an administrative subzone of the western temperate forest. Subsequent Feywood locations (Heartwood, Thornveil, Silent Grove, outer elven settlement) will be organized under this directory.
 
 The Glade's liminal geometry — external-small, internal-massive, travel-responsive — is canonically established here. GPT scenes set in the Glade should reflect this as baseline environmental reality rather than as magical emergencies.
 

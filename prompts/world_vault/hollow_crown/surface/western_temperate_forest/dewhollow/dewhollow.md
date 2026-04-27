@@ -65,7 +65,7 @@ Inter-generational family patterns exist — some families have stayed for multi
 
 ## The Feywood Relationship
 
-Dewhollow's proximity to the Feywood Glade shapes the village's operating reality. The Feywood is dangerous terrain. Its effects bleed into the surrounding forest in subtle gradations — the further from the threshold, the less pronounced; the closer, the stronger. Dewhollow sits in the zone where the bleed is strong enough to support the cultivation of Fey-adjacent flora but not so strong that ordinary life becomes impossible.
+Dewhollow's proximity to the Feywood shapes the village's operating reality. The Feywood is dangerous terrain. Its effects bleed into the surrounding forest in subtle gradations — the further from the threshold, the less pronounced; the closer, the stronger. Dewhollow sits in the zone where the bleed is strong enough to support the cultivation of Fey-adjacent flora but not so strong that ordinary life becomes impossible.
 
 Residents adapt to the proximity. They pay attention to the specific weather patterns that precede heavier Feywood bleed. They notice when the morning dew becomes denser than usual — a sign the threshold is in one of its more active phases. They know which flora respond to these phases by blooming early, changing color, or becoming temporarily more potent. They know which days are best for which work.
 
@@ -83,7 +83,7 @@ The village has a distinctive relationship with knowledge. Information is shared
 
 ## Access
 
-The village is open to travelers with purpose. The forest paths from Dracélune bring commissioned purchasers, visiting scholars, apprentice candidates, and the occasional traveler with specific business. The path to the Feywood Glade Border departs westward from the village and is used by sanctioned expedition traffic passing between Dracélune and the Feywood. Dewhollow sits on this route and sees regular expedition-related visitors.
+The village is open to travelers with purpose. The forest paths from Dracélune bring commissioned purchasers, visiting scholars, apprentice candidates, and the occasional traveler with specific business. The path to the Feywood Border departs westward from the village and is used by sanctioned expedition traffic passing between Dracélune and the Feywood. Dewhollow sits on this route and sees regular expedition-related visitors.
 
 Accommodation is at the Morning Bell inn or in the handful of small guesthouses operated by senior families. Rooms are clean, meals are substantial, and rates are reasonable. Extended stays (for apprentices in training, scholars on field assignment, or commissioned purchasers awaiting specific harvest windows) are negotiated through the Cultivar Warden's office.
 

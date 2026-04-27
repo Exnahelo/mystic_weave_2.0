@@ -13,7 +13,7 @@ tags:
 
 # Western Temperate Forest
 
-The western temperate forest contains old woodland, trade-facing settlements, and the fixed but internally unstable Feywood Glade.
+The western temperate forest contains old woodland, trade-facing settlements, and the fixed but internally unstable Feywood.
 
 ## Tags
 

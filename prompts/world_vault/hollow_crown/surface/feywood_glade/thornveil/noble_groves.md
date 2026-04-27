@@ -57,7 +57,7 @@ The system of grove-holding is fluid over elven timescales. Families rise, decli
 
 ## Greenshield Headquarters
 
-The Feywood Glade's formal military — the Greenshield — is headquartered at an estate in the Noble Groves, occupying traditional military-family grounds (historically House Thornmere but rotating through several lineages) that have served this function for generations. The headquarters is integrated with its surrounding estate rather than a separate military compound.
+The Feywood's formal military — the Greenshield — is headquartered at an estate in the Noble Groves, occupying traditional military-family grounds (historically House Thornmere but rotating through several lineages) that have served this function for generations. The headquarters is integrated with its surrounding estate rather than a separate military compound.
 
 Greenshield operations from this site include:
 
