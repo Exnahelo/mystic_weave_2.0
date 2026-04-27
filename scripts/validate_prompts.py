@@ -32,7 +32,7 @@ ENGINE_REQUIRED_SECTIONS = [
 ]
 
 CALENDAR_REQUIRED_MARKERS = [
-    "# Mystic Weave — The Ptarian Calendar",
+    "# Mystic Weave — The Oath Calendar",
     "## Weather",
     "## Time of Day Progression",
     "## GPT Time Rules (Non-Negotiable)",
