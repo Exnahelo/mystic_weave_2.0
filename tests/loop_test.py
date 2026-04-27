@@ -56,7 +56,7 @@ def subsection(title: str) -> None:
 
 TEST_CHARACTER = {
     "character_name": "Krath",
-    "ancestry": "dragonborn",
+    "ancestry": "drakari",
     "culture": "drakenvale_city",
     "focus": "devoted",
     "background": "soldier",
@@ -133,7 +133,7 @@ def part1(client: httpx.Client) -> str | None:
         check("1.1.d", len(opts.get("backgrounds", [])) == 8, f"backgrounds count: {len(opts.get('backgrounds', []))}")
         check("1.1.da", set(opts.keys()) == {"ancestries", "cultures", "focus", "backgrounds"}, f"/options keys: {sorted(opts.keys())}")
         ancestry_indices = [s["index"] for s in opts.get("ancestries", [])]
-        check("1.1.e", "dragonborn" in ancestry_indices, f"'dragonborn' in ancestries")
+        check("1.1.e", "drakari" in ancestry_indices, f"'drakari' in ancestries")
         check("1.1.f", "human" in ancestry_indices, f"'human' in ancestries")
         culture_indices = [c["index"] for c in opts.get("cultures", [])]
         check("1.1.fa", "drakenvale_city" in culture_indices, f"'drakenvale_city' in cultures")
@@ -171,7 +171,7 @@ def part1(client: httpx.Client) -> str | None:
 
     # Core identity fields
     check("1.3.b", char["name"] == "Krath", f"name: {char['name']}")
-    check("1.3.c", char["ancestry"] == "dragonborn", f"ancestry: {char['ancestry']}")
+    check("1.3.c", char["ancestry"] == "drakari", f"ancestry: {char['ancestry']}")
     check("1.3.ca", char["culture"] == "drakenvale_city", f"culture: {char['culture']}")
     check("1.3.d", char["focus"] == "devoted", f"focus: {char['focus']}")
     check("1.3.e", char["background"] == "soldier", f"background: {char['background']}")
@@ -461,7 +461,7 @@ def part2(client: httpx.Client, session_id: str) -> None:
     save_body = {
         "character": {
             "name": "Krath",
-            "ancestry": "dragonborn",
+            "ancestry": "drakari",
             "culture": "drakenvale_city",
             "focus": "devoted",
             "background": "soldier",
