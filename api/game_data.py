@@ -98,7 +98,7 @@ def _load_json(filename: str) -> dict[str, Any] | list[Any]:
 # ---------------------------------------------------------------------------
 
 def get_ancestry(index: str) -> dict[str, Any]:
-    """Return ancestry data for the given index (e.g. 'human', 'dragonborn')."""
+    """Return ancestry data for the given index (e.g. 'human', 'drakari')."""
     data = _load_json("characters/ancestry.json")
     if index not in data:
         raise ValueError(f"Unknown ancestry: {index!r}. Valid: {sorted(data.keys())}")

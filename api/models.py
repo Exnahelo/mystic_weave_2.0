@@ -232,7 +232,7 @@ class CharacterModel(BaseModel):
 
     # Core identity
     name:           str
-    ancestry:       str   # e.g. "human", "dragonborn"
+    ancestry:       str   # e.g. "human", "drakari"
     draconic_traits: list[str] = Field(default_factory=list)
     culture:        str
     focus:          str   # e.g. "devoted", "stalker"

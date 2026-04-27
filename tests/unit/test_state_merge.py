@@ -39,7 +39,7 @@ def _current_state() -> dict:
     character = CharacterModel.model_validate(
         {
             "name": "Krath",
-            "ancestry": "dragonborn",
+            "ancestry": "drakari",
             "culture": "draconic_grasslands",
             "focus": "devoted",
             "background": "soldier",

@@ -25,7 +25,7 @@ Python 3.13 · FastAPI · uvicorn · asyncpg · Pydantic v2 · Postgres on Railw
 - **6 outcome bands** — Critical Success through Critical Failure, margin-based
 
 **Character options** (all verified against `GET /options` — never hardcoded)
-- **8 species** — one generalist (Human), seven specialists (Orc, Elf, Halfling, Dwarf, Gnome, Tiefling, Dragonborn)
+- **8 species** — one generalist (Human), seven specialists (Orc, Elf, Halfling, Dwarf, Gnome, Tiefling, Drakari)
 - **7 focus archetypes** — Champion, Sentinel, Stalker, Wayfinder, Arcanist, Devoted, Speaker
 - **8 backgrounds** — Soldier, Scholar, Criminal, Noble, Outlander, Artisan, Acolyte, Performer
 
@@ -220,7 +220,7 @@ curl http://localhost:8000/version
 curl http://localhost:8000/options
 curl -X POST http://localhost:8000/session/new \
   -H "Content-Type: application/json" \
-  -d '{"character_name":"Krath","ancestry":"dragonborn","culture":"drakenvale_city","focus":"devoted","background":"soldier","adjustment_points":{"will":2,"endurance":3},"starting_location":"drakenvale-city"}'
+  -d '{"character_name":"Krath","ancestry":"drakari","culture":"drakenvale_city","focus":"devoted","background":"soldier","adjustment_points":{"will":2,"endurance":3},"starting_location":"drakenvale-city"}'
 curl -X POST http://localhost:8000/roll \
   -H "Content-Type: application/json" \
   -d '{"target":64}'

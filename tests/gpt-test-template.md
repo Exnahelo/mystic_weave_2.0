@@ -3,7 +3,7 @@
 Run this test manually in the GPT builder against the live Railway deployment.
 Estimated time: 2–3 hours.
 
-**Test character:** Dragonborn / Devoted / Noble — Will +2, Endurance +3
+**Test character:** Drakari / Devoted / Noble — Will +2, Endurance +3
 Use this character consistently across all blocks so state accumulates meaningfully.
 
 ---
@@ -14,7 +14,7 @@ Use this character consistently across all blocks so state accumulates meaningfu
 1. Start a new conversation with the GPT.
 2. Say: "I want to start a new game."
 3. The GPT should call `GET /options` and walk through species → focus → background → adjustment points.
-4. Choose: **Dragonborn / Devoted / Noble**
+4. Choose: **Drakari / Devoted / Noble**
 5. Allocate adjustment points: **Will +2, Endurance +3**
 6. When the GPT reaches identity questions, provide the following answers:
    - Origin: *"Exiled from Drakenvale after a failed oath to the Dragon Guard"*

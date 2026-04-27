@@ -127,7 +127,7 @@ class SessionDeltaFlowConn:
 def _build_valid_character() -> dict:
     return {
         "name": "Krath",
-        "ancestry": "dragonborn",
+        "ancestry": "drakari",
         "culture": "drakenvale_city",
         "focus": "devoted",
         "background": "soldier",

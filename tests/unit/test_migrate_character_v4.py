@@ -13,7 +13,7 @@ from tests.helpers import zero_advancement
 def test_migrate_character_payload_renames_species_and_removes_legacy_keys() -> None:
     payload = {
         "name": "Krath",
-        'species': "dragonborn",
+        'species': "drakari",
         "focus": "devoted",
         "background": "acolyte",
         "hp": {"current": 100, "max": 100},
@@ -44,7 +44,7 @@ def test_migrate_character_payload_renames_species_and_removes_legacy_keys() -> 
 
     assert changed is True
     assert used_default is True
-    assert migrated["ancestry"] == "dragonborn"
+    assert migrated["ancestry"] == "drakari"
     assert migrated["culture"] == DEFAULT_CULTURE
     assert migrated["fields"] == {"sacred": 1, "warding": 1}
     assert 'species' not in migrated
@@ -94,7 +94,7 @@ def test_migrate_character_payload_preserves_existing_culture_and_fields() -> No
 def test_migrate_character_document_validates_output() -> None:
     payload = {
         "name": "Krath",
-        'species': "dragonborn",
+        'species': "drakari",
         "focus": "devoted",
         "background": "acolyte",
         "hp": {"current": 100, "max": 100},
@@ -121,7 +121,7 @@ def test_migrate_character_document_validates_output() -> None:
 
     assert changed is True
     assert used_default is True
-    assert validated.ancestry == "dragonborn"
+    assert validated.ancestry == "drakari"
     assert validated.culture == DEFAULT_CULTURE
     assert migrated["ancestry"] == validated.ancestry
 
