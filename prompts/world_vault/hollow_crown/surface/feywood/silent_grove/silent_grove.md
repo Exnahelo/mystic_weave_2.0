@@ -4,7 +4,23 @@ name: The Silent Grove
 type: sacred-site
 region_id: hollow-crown
 parent_location_id: feywood
-description: The Feywood's sacred grove of training, druidic practice, and origin — set apart from Thornveil in the Feywood's deeper interior where ancient trees of extraordinary age form a natural sanctuary. The Silent Grove is the literal origin point of elven civilization in this world: the site where the elves of the age, after giving up their immortality to repair the land following the Cataclysm, settled among the first trees that rose from their sacrifice. From that founding the Grove has continued as the training home of the Heartwarden order, the working seat of the Druid Master and Reading Glade tradition, and the elven community's deepest reference for what it means to belong to this land. The Grove is not residential in the Thornveil sense; everyone present is here for the work. Access is granted only to those whose purpose matches the Grove's function. The ambient atmosphere is one of disciplined quiet — the Grove is called Silent because those who work here have learned to move and speak with the same attentive restraint the ancient trees themselves hold.
+description: >
+  The Feywood's sacred grove of training, druidic practice, and origin —
+  set apart from Thornveil in the Feywood's deeper interior where ancient
+  trees of extraordinary age form a natural sanctuary. The Silent Grove
+  is the literal origin point of elven civilization in this world — the
+  site where the elves of the age, after giving up their immortality to
+  repair the land following the Cataclysm, settled among the first trees
+  that rose from their sacrifice. From that founding the Grove has
+  continued as the training home of the Heartwarden order, the working
+  seat of the Druid Master and Reading Glade tradition, and the elven
+  community's deepest reference for what it means to belong to this
+  land. The Grove is not residential in the Thornveil sense; everyone
+  present is here for the work. Access is granted only to those whose
+  purpose matches the Grove's function. The ambient atmosphere is one
+  of disciplined quiet — the Grove is called Silent because those who
+  work here have learned to move and speak with the same attentive
+  restraint the ancient trees themselves hold.
 connections:
 - feywood
 - thornveil
