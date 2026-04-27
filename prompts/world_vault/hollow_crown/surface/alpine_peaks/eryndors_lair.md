@@ -12,7 +12,6 @@ tags:
 - drakenvale
 - eryndor
 - lair
-- gold-dragon
 - bahamut
 - shrine
 - diplomacy
@@ -111,7 +110,6 @@ Unauthorized approach does not reach the Lair. The route from Lastmark's screene
 - drakenvale
 - eryndor
 - lair
-- gold-dragon
 - bahamut
 - shrine
 - diplomacy
@@ -146,4 +144,4 @@ The connection to `alpine-peaks` is the regional parent reference.
 
 Threat level 0 reflects the Lair's civic safety. Eryndor is not a danger to invited guests; uninvited intrusion has consequence, but the node itself is not hazardous territory.
 
-The Lair's architectural splendor (skylights, gold-quartz inlays, marble floors) is deliberate canonical character. This is not a dark cave. It is a deliberate statement — a gold dragon of Solveris does not live in darkness, and the Lair's beauty is itself a sacred expression.
+The Lair's architectural splendor (skylights, gold-quartz inlays, marble floors) is deliberate canonical character. This is not a dark cave. It is a deliberate statement — a dragon of Solveris does not live in darkness, and the Lair's beauty is itself a sacred expression.

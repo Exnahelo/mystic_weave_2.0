@@ -3,7 +3,7 @@ id: hall-of-scales
 name: Hall of Scales
 type: settlement
 region_id: hollow-crown
-description: The realm's broad university and its surrounding college town, set in the open Draconic Grasslands between Drakenvale City and Ashfield. The Hall itself is an academic complex of tiered lecture halls, drilling grounds, workshop annexes, and archives, built for general higher education across scholarship, civic learning, martial training, guild foundations, and the first tiers of magical study. The town that has grown around it exists to support the student population — inns, taverns, bookbinders, supply shops, and the ordinary civic trades of a place shaped by an academic calendar. Ardrynn the Measured, bronze dragon scholar, oversees the institution and makes her residence here.
+description: The realm's broad university and its surrounding college town, set in the open Draconic Grasslands between Drakenvale City and Ashfield. The Hall itself is an academic complex of tiered lecture halls, drilling grounds, workshop annexes, and archives, built for general higher education across scholarship, civic learning, martial training, guild foundations, and the first tiers of magical study. The town that has grown around it exists to support the student population — inns, taverns, bookbinders, supply shops, and the ordinary civic trades of a place shaped by an academic calendar. Ardrynn the Measured, dragon scholar, oversees the institution and makes her residence here.
 connections:
 - drakenvale-city
 - ashfield
@@ -16,7 +16,6 @@ tags:
 - draconic-grasslands
 - ardrynn
 - education
-- bronze-dragon
 - civic
 known_npcs:
 - Ardrynn the Measured
@@ -27,7 +26,7 @@ discovered: true
 
 # Hall of Scales
 
-The realm's broad university and its surrounding college town, set in the open Draconic Grasslands between Drakenvale City and Ashfield. The Hall itself is an academic complex of tiered lecture halls, drilling grounds, workshop annexes, and archives, built for general higher education across scholarship, civic learning, martial training, guild foundations, and the first tiers of magical study. The town that has grown around it exists to support the student population — inns, taverns, bookbinders, supply shops, and the ordinary civic trades of a place shaped by an academic calendar. Ardrynn the Measured, bronze dragon scholar, oversees the institution and makes her residence here.
+The realm's broad university and its surrounding college town, set in the open Draconic Grasslands between Drakenvale City and Ashfield. The Hall itself is an academic complex of tiered lecture halls, drilling grounds, workshop annexes, and archives, built for general higher education across scholarship, civic learning, martial training, guild foundations, and the first tiers of magical study. The town that has grown around it exists to support the student population — inns, taverns, bookbinders, supply shops, and the ordinary civic trades of a place shaped by an academic calendar. Ardrynn the Measured, dragon scholar, oversees the institution and makes her residence here.
 
 ## Scene Texture
 
@@ -35,7 +34,7 @@ The Hall sits on an open rise in the central Draconic Grasslands, within a day's
 
 The academic complex is not a single structure. It is a scatter of buildings arranged loosely around a central quadrangle — the Hall proper at the quad's north side, a formal columned structure of pale grassland stone with layered roofs in the realm's draconic architectural idiom. The flanking buildings handle specialized functions: the Martial Yards to the east, where Dragon Guard instructors and Warden-aligned trainers drill combat candidates; the Workshop Wings to the west, where guild-track students apprentice with visiting craftsmen; the Archive Block to the south, a squat reinforced structure holding the Hall's teaching libraries and student records; and the Tower of Foundational Arts to the northeast, where first-tier magical instruction is conducted under heavy containment wards appropriate for beginners' mistakes.
 
-Ardrynn herself is housed in the Hall proper. A private wing extends off the building's rear, sized to accommodate a bronze dragon and constructed to admit her through a ground-level arch rather than forcing a landing on the Hall's roof. She can be seen walking the outer grounds at most hours — slow, deliberate, occasionally stopping to speak with a passing student or to look at something in the sky only she has noticed.
+Ardrynn herself is housed in the Hall proper. A private wing extends off the building's rear, sized to accommodate a dragon and constructed to admit her through a ground-level arch rather than forcing a landing on the Hall's roof. She can be seen walking the outer grounds at most hours — slow, deliberate, occasionally stopping to speak with a passing student or to look at something in the sky only she has noticed.
 
 Outward from the academic complex, the town spreads across the open grassland in a loose grid. Closest to the Hall are the student inns and boarding houses, clustered thickly along the three main entry roads. Beyond them, the commercial district — bookbinders, stationers, ink and parchment merchants, food stalls, clothiers, and a surprising number of taverns for a town this size. Further out, the residential quarter and the handful of permanent faculty residences. The town's population swells during the academic terms and empties noticeably during the long breaks, when most students return home to settlements across the realm.
 
@@ -84,7 +83,6 @@ Students arriving for enrollment are processed through the Rector's offices in t
 - draconic-grasslands
 - ardrynn
 - education
-- bronze-dragon
 - civic
 
 ## Connected Nodes

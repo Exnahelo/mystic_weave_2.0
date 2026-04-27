@@ -20,7 +20,6 @@ tags:
 - drakenvale
 - zarkeros
 - lair
-- red-dragon
 - volcanic
 - fortress
 - restricted
@@ -40,7 +39,6 @@ A volcanic fortress carved deep into the northeastern crater wall, in the heart 
 - drakenvale
 - zarkeros
 - lair
-- red-dragon
 - volcanic
 - fortress
 - restricted

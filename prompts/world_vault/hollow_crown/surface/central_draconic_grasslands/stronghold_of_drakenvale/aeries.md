@@ -77,4 +77,4 @@ The `known_npcs` field is empty because the Council dragons' primary narrative a
 
 Resident non-Council dragons (scholars, guardians, long-term visitors) may be introduced as Tier-3 generative roles during play. See `npcs.md` for the Resident Dragon Scholar and Resident Dragon Guardian roles.
 
-The broader concept of scattered dragon lairs in the Alpine Peaks — personal territories for recluse dragons, griffin nests, and similar — is intentionally NOT folded into this node. Those belong to future Alpine wilderness authoring if and when that region expands.
+The broader concept of scattered lairs for dragons in the Alpine Peaks — personal territories for recluse dragons, griffin nests, and similar — is intentionally NOT folded into this node. Those belong to future Alpine wilderness authoring if and when that region expands.
