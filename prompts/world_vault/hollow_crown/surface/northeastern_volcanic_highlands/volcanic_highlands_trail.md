@@ -14,7 +14,7 @@ description: >
   operations all demand the infrastructure. The terrain is unforgiving: dark
   volcanic stone underfoot, sparse vegetation, ambient heat from active vents
   along the route, and the particular ashy horizon that marks all
-  northeastern-volcanic-highlands travel. Dragonborn-heavy hauler crews work
+  northeastern-volcanic-highlands travel. Drakari-heavy hauler crews work
   the trail continuously. A traveler unaccustomed to the thermal environment
   finds the journey exhausting; experienced travelers simply find it ordinary.
 connections:
@@ -29,7 +29,7 @@ tags:
 - industrial-corridor
 - supply-route
 - thermal-environment
-- dragonborn-heavy
+- drakari-heavy
 known_npcs: []
 threat_level: 1
 discovered: true
@@ -37,7 +37,7 @@ discovered: true
 
 # Volcanic Highlands Trail
 
-The realm's primary industrial supply corridor, running eastward from Zarkharath's Infernal Forge causeway to Cinderpit's mining operations through the open volcanic highlands. The trail is wider and more heavily built than most of the realm's routes — a constant flow of loaded ore and coal wagons westbound, empty haulers and provisioning supplies eastbound, and the specialized thermal-gear caravans that service the deep-shaft operations all demand the infrastructure. The terrain is unforgiving: dark volcanic stone underfoot, sparse vegetation, ambient heat from active vents along the route, and the particular ashy horizon that marks all northeastern-volcanic-highlands travel. Dragonborn-heavy hauler crews work the trail continuously. A traveler unaccustomed to the thermal environment finds the journey exhausting; experienced travelers simply find it ordinary.
+The realm's primary industrial supply corridor, running eastward from Zarkharath's Infernal Forge causeway to Cinderpit's mining operations through the open volcanic highlands. The trail is wider and more heavily built than most of the realm's routes — a constant flow of loaded ore and coal wagons westbound, empty haulers and provisioning supplies eastbound, and the specialized thermal-gear caravans that service the deep-shaft operations all demand the infrastructure. The terrain is unforgiving: dark volcanic stone underfoot, sparse vegetation, ambient heat from active vents along the route, and the particular ashy horizon that marks all northeastern-volcanic-highlands travel. Drakari-heavy hauler crews work the trail continuously. A traveler unaccustomed to the thermal environment finds the journey exhausting; experienced travelers simply find it ordinary.
 
 ## Scene Texture
 
@@ -81,7 +81,7 @@ Travelers carry northeastern-volcanic-highlands appropriate supplies: extra wate
 
 The Volcanic Highlands Trail has a distinctive working character that distinguishes it from the realm's other routes. Regular travelers — hauler crews, rotation workers, commissioning customers — treat the trail as infrastructure rather than as travel. The journey is part of the workday for most who use it; it is not scenic tourism or recreational movement. This gives the trail a businesslike, steady atmosphere that visitors notice.
 
-Dragonborn are disproportionately represented on the trail. Hauler crews are often dragonborn-majority because the thermal environment rewards heat tolerance; mining rotation workers are dragonborn-heavy because Cinderpit's demographic skews that way; Forge workers crossing to Cinderpit for joint operations are dragonborn-heavy for similar reasons. A traveler on the trail will meet more dragonborn here than on any realm route other than Zarkharath's internal streets.
+Drakari are disproportionately represented on the trail. Hauler crews are often drakari-majority because the thermal environment rewards heat tolerance; mining rotation workers are drakari-heavy because Cinderpit's demographic skews that way; Forge workers crossing to Cinderpit for joint operations are drakari-heavy for similar reasons. A traveler on the trail will meet more drakari here than on any realm route other than Zarkharath's internal streets.
 
 Courtesy among trail travelers is direct and practical. Loaded wagons have right of way over empty ones (the reverse of the Silverwood Trail's southbound-favoring convention, and for obvious reasons: loaded teams cannot easily stop or restart). Travelers pulling off for rest signal oncoming traffic with a double-whistle. Strangers at water stops exchange brief greetings about road conditions and move on; the trail's practical environment shapes a working courtesy rather than a social one.
 
@@ -107,7 +107,7 @@ The highlands beyond the trail proper are genuinely hazardous. Travelers wanderi
 - industrial-corridor
 - supply-route
 - thermal-environment
-- dragonborn-heavy
+- drakari-heavy
 
 ## Connected Nodes
 
@@ -127,7 +127,7 @@ Travel time (one day empty, day-and-a-half loaded) is canonical. The slower pace
 
 The loaded-yields-to-empty convention is inverted from Silverwood Trail's southbound-favoring convention. Each trail's conventions reflect its working character — Silverwood is gentler and more mixed-use; Volcanic Highlands is harder and more industrial.
 
-Dragonborn demographic overrepresentation on the trail is canonical and reflects both endpoints' dragonborn concentrations. This is functional (heat tolerance) rather than social-hierarchical.
+Drakari demographic overrepresentation on the trail is canonical and reflects both endpoints' drakari concentrations. This is functional (heat tolerance) rather than social-hierarchical.
 
 Thermal features (heat vents, lava channels, atmospheric haze) are canonical environmental characteristics. GPT scenes on the trail should consistently reflect these features.
 

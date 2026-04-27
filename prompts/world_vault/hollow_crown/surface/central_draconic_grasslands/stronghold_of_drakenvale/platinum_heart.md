@@ -57,7 +57,7 @@ The Flame responded visibly only twice in recorded memory: once at the moment of
 
 The Heart is not locked. No gate or guard bars the stair, beyond the ordinary Dragon Guard presence at the Stronghold's main approaches. The filter is cultural. Residents climb with respect and depart with composure. The High Acolyte of the Platinum Flame is present during ceremonial hours and greets or redirects visitors as appropriate. Disrespect is rare; those who attempt it tend to find the experience more uncomfortable than the social consequences explain.
 
-Dragons visiting the Heart land on the outer ring. Dragonborn, kobolds, and humanoid residents ascend by stair. There is no status hierarchy in the approach — a farmer's climb and a Council dragon's arrival carry equal weight in the sanctum's sight.
+Dragons visiting the Heart land on the outer ring. Drakari, kobolds, and humanoid residents ascend by stair. There is no status hierarchy in the approach — a farmer's climb and a Council dragon's arrival carry equal weight in the sanctum's sight.
 
 ## Tags
 

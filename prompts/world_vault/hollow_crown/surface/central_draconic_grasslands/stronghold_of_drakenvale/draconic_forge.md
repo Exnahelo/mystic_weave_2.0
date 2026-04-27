@@ -54,7 +54,7 @@ No dragon's breath is considered interchangeable. The character of the fire shap
 
 ## The Master Smith
 
-The Master Smith of the Draconic Forge oversees all working, trains apprentices, and serves as the realm's authority on sacred-craft matters. The role is Tier-3 generative. Current incumbents are typically dragonborn of advanced age and unusual moral discipline, and the role has been held continuously since the sanctuary's founding. Succession is deliberate; the Master Smith names a primary apprentice well before retirement, and the transfer is witnessed by at least one Council dragon.
+The Master Smith of the Draconic Forge oversees all working, trains apprentices, and serves as the realm's authority on sacred-craft matters. The role is Tier-3 generative. Current incumbents are typically drakari of advanced age and unusual moral discipline, and the role has been held continuously since the sanctuary's founding. Succession is deliberate; the Master Smith names a primary apprentice well before retirement, and the transfer is witnessed by at least one Council dragon.
 
 ## Access
 

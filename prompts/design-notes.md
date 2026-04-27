@@ -21,7 +21,7 @@ These were open questions that have now been answered and committed to the world
 
 **Wardens vs. Dragon Guard** — Two distinct organizations. The Wardens report to Eryndor in peacetime (sacred sites, internal security, investigation). They temporarily fall under Zarkeros when militarized (precision strikes, crisis response). The Dragon Guard is Zarkeros's exclusively for external defense. Canon. In both world and organizations files.
 
-**Trial of Wings** — Non-lethal ritualized duel, overseen by the Council, for disputes of honor or grievance. Rarely invoked, highly respected. Open to dragons and dragonborn; mortals typically use mediation instead. Canon. In `world.md`.
+**Trial of Wings** — Non-lethal ritualized duel, overseen by the Council, for disputes of honor or grievance. Rarely invoked, highly respected. Open to dragons and drakari; mortals typically use mediation instead. Canon. In `world.md`.
 
 **SSTC relationship** — Independent guild, not a state organ. All three Council members hold advisory or operational roles within it. Varethyn runs the Amethyst Veil through its trade routes. Canon. In both world and organizations files.
 
@@ -141,7 +141,7 @@ guarantees about which fields are present for each tier and keep the
 schema clean for consumers.
 
 **SapientCompanion** — humanoid party members (halfling scout, elven
-healer, dragonborn duelist). Mirrors the PC schema.
+healer, drakari duelist). Mirrors the PC schema.
 
 Fields:
 - `ancestry`, `culture`, `background`, `focus`

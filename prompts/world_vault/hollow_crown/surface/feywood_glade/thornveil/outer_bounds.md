@@ -53,7 +53,7 @@ The Trade Envoy Outer Bounds Liaison is a Council-appointed senior role, coordin
 
 The Outer Bounds holds a disproportionate share of Thornveil's newer residents:
 
-**Integrated non-elves.** Humans, rare dwarves, occasional dragonborn, others of long-term residence in Thornveil most commonly begin and often remain in the Outer Bounds. Integration here is less socially observed than in the inner districts — the Hearth's tight cluster life or the Groves' house-inflected register can be difficult to enter; the Outer Bounds is more open.
+**Integrated non-elves.** Humans, rare dwarves, occasional drakari, others of long-term residence in Thornveil most commonly begin and often remain in the Outer Bounds. Integration here is less socially observed than in the inner districts — the Hearth's tight cluster life or the Groves' house-inflected register can be difficult to enter; the Outer Bounds is more open.
 
 **Returning elves.** Elves returning from extended absences — realm-side work, outer-Glade postings, long study elsewhere, diplomatic service — often settle in the Outer Bounds first as they re-establish Thornveil residency. Some stay; some move inward over years.
 

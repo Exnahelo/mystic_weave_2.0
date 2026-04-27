@@ -21,7 +21,7 @@ tags:
 - metallurgy
 - lava
 - enchanted-craft
-- dragonborn-heavy
+- drakari-heavy
 known_npcs:
 - Zarkeros the Inferno
 - Infernal Forge Guildmaster
@@ -46,7 +46,7 @@ Across the lava bed, carved into the cliff face of the surrounding volcanic rang
 
 The city proper spreads outward from the lava bed in concentric working districts. Closest to the Forge are the **Smelting Yards** — raw ore processing, refining, and the noisiest heaviest-labor work. Beyond them, the **Metalwork Quarter**, where the actual crafting of weapons, tools, armor, and finished goods happens in guild-affiliated workshops. Further out, the **Foundry Residences** — housing for the thousands of workers whose lives are structured around the Forge's production cycles. At the outer edges, the **Administrative Complex** (the Infernal Forge Guild's offices, the Dragon Guard liaison station, the market and trade interface), and the **Guest Quarter** (where visitors, inspectors, and commissioning agents from elsewhere in the realm lodge).
 
-The population is heavily dragonborn. Not exclusively — mortal craftsmen, mortal and kobold laborers, and a significant dwarvish presence all work and live here — but the dragonborn concentration is the highest in the realm. Zarkeros's patronage, the volcanic climate, and the forge-aligned cultural identity all draw dragonborn to Zarkharath. Many Zarkharath dragonborn trace their lineage directly to the city's founding and consider it their ancestral home in a way that dragonborn from other settlements do not experience.
+The population is heavily drakari. Not exclusively — mortal craftsmen, mortal and kobold laborers, and a significant dwarvish presence all work and live here — but the drakari concentration is the highest in the realm. Zarkeros's patronage, the volcanic climate, and the forge-aligned cultural identity all draw drakari to Zarkharath. Many Zarkharath drakari trace their lineage directly to the city's founding and consider it their ancestral home in a way that drakari from other settlements do not experience.
 
 The city is loud in a specific way. Not the chaotic loudness of a market — Zarkharath's noise is rhythmic, industrial, punctuated. Hammer strikes on anvils in coordinated work rhythms. The deep hiss of quenching. The rumble of ore carts on stone tracks. The steady low roar of the Forge itself, continuous at the edge of hearing. Residents sleep through it. Visitors learn to sleep through it in about three days, or they stop sleeping.
 
@@ -76,7 +76,7 @@ Zarkeros's character is strength, discipline, and decisive judgment. He is not c
 
 The Guild is the city's political and economic organizing structure. Headquartered in the Administrative Complex at the outer edge of the city, it manages production schedules, quality standards, apprenticeship programs, commissioning agreements, trade coordination, and the ward-infrastructure maintenance that keeps the lava bed contained.
 
-The **Guildmaster** is the Guild's senior authority. Tier-3 generative role. Typically a senior dragonborn master smith with decades of experience and Zarkeros's trust. The Guildmaster serves as Zarkeros's operational deputy for city matters, filters petitions for audience, and represents Zarkharath in dealings with the Draconic Council and other realm institutions.
+The **Guildmaster** is the Guild's senior authority. Tier-3 generative role. Typically a senior drakari master smith with decades of experience and Zarkeros's trust. The Guildmaster serves as Zarkeros's operational deputy for city matters, filters petitions for audience, and represents Zarkharath in dealings with the Draconic Council and other realm institutions.
 
 Under the Guildmaster, the Guild's structure includes:
 
@@ -114,7 +114,7 @@ Environmental hazards are real. The ambient temperature in the inner city distri
 - metallurgy
 - lava
 - enchanted-craft
-- dragonborn-heavy
+- drakari-heavy
 
 ## Connected Nodes
 
@@ -140,4 +140,4 @@ Cinderpit-to-Zarkharath is an ore/coal supply route. Stonemark-to-Zarkharath ind
 
 Threat level 1 reflects environmental hazards (heat, lava proximity, industrial operations) rather than social or political threat. The city is safe in civic terms; the city is not safe in environmental terms for unprepared visitors.
 
-The dragonborn demographic concentration is narratively significant. Zarkharath is the realm's most dragonborn-dense settlement. Characters of dragonborn ancestry arriving here for the first time may have ancestral or cultural resonance; this is an authored texture point, not a mechanical effect.
+The drakari demographic concentration is narratively significant. Zarkharath is the realm's most drakari-dense settlement. Characters of drakari ancestry arriving here for the first time may have ancestral or cultural resonance; this is an authored texture point, not a mechanical effect.

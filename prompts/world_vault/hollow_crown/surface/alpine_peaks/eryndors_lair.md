@@ -92,7 +92,7 @@ Characters encountering Eryndor here should understand: he is interested in them
 
 ## The Lair Steward
 
-The **Lair Steward** manages the day-to-day operations of the Lair: staff, scheduling, Silver Wing coordination, security liaison, the practical administration of a working draconic residence. Tier-3 generative role. Typically a senior dragonborn or long-tenured mortal with decades of service to Eryndor's household and deep knowledge of the realm's diplomatic operations.
+The **Lair Steward** manages the day-to-day operations of the Lair: staff, scheduling, Silver Wing coordination, security liaison, the practical administration of a working draconic residence. Tier-3 generative role. Typically a senior drakari or long-tenured mortal with decades of service to Eryndor's household and deep knowledge of the realm's diplomatic operations.
 
 The Steward is the practical interface for most matters that do not require Eryndor's personal attention. A character arriving at the Lair for routine business — a Silver Wing dispatch, a message delivery, an administrative matter involving Eryndor's portfolio — will typically meet with the Steward rather than Eryndor himself. Access to Eryndor for direct audience is granted through the Steward's scheduling.
 

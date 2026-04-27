@@ -59,7 +59,7 @@ Ardrynn holds the distinction of being one of the few non-Council dragons with a
 
 ## The Rector
 
-The Rector of the Hall of Scales is the operational head of the institution — handling faculty, curriculum, admissions, student discipline, and the interface with visiting instructors and commissioned work. The role is Tier-3 generative. The current Rector may be instantiated during play as needed. Typically the Rector is a long-tenured dragonborn or mortal scholar whom Ardrynn trusts to run the institution's daily business without requiring her attention.
+The Rector of the Hall of Scales is the operational head of the institution — handling faculty, curriculum, admissions, student discipline, and the interface with visiting instructors and commissioned work. The role is Tier-3 generative. The current Rector may be instantiated during play as needed. Typically the Rector is a long-tenured drakari or mortal scholar whom Ardrynn trusts to run the institution's daily business without requiring her attention.
 
 ## Student Life
 

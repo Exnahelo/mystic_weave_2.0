@@ -65,7 +65,7 @@ A visitor seeking information in the Records Halls typically works through a Rec
 
 ## The Chief Steward
 
-The Chief Steward of the Quarter oversees daily operations, mediates inter-division disputes, and serves as the Quarter's formal interface with the Council. The role is generative — specific incumbents may be named during play. The Chief Steward is typically a dragonborn or long-serving mortal, invariably politically careful, and one of the more quietly influential figures in the sanctuary. Petition scheduling alone gives the role real weight.
+The Chief Steward of the Quarter oversees daily operations, mediates inter-division disputes, and serves as the Quarter's formal interface with the Council. The role is generative — specific incumbents may be named during play. The Chief Steward is typically a drakari or long-serving mortal, invariably politically careful, and one of the more quietly influential figures in the sanctuary. Petition scheduling alone gives the role real weight.
 
 ## Access
 

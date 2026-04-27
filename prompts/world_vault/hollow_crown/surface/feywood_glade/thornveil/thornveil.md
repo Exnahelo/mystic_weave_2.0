@@ -156,7 +156,7 @@ Non-traditional families and non-noble elves have their own coming-of-age practi
 
 ## Integrated Non-Elf Residents
 
-A small population of non-elven residents lives in Thornveil, mostly in the Outer Bounds. These are individuals — humans, rare dwarves, occasional dragonborn, and a few of other ancestries — who have earned their place through years or decades of demonstrated respect, work, and integration with the elven community.
+A small population of non-elven residents lives in Thornveil, mostly in the Outer Bounds. These are individuals — humans, rare dwarves, occasional drakari, and a few of other ancestries — who have earned their place through years or decades of demonstrated respect, work, and integration with the elven community.
 
 Integration is not formalized. A non-elf living at Thornveil begins as a guest of specific elven hosts, accumulates relationships and contributions over time, and eventually becomes recognized as a resident rather than a visitor. This recognition is distributed — no single authority grants it, and no ceremony marks it — but it becomes real through accumulated consensus of the elves who know the individual. Integration rarely takes less than a decade in elven timescales; often longer.
 
