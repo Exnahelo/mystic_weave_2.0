@@ -3,8 +3,7 @@ name: Heartwood
 type: sacred-site
 region_id: hollow-crown
 parent_location_id: feywood
-description: The living heart of the Feywood and the land it sustains. The Heartwood is an ancient tree of extraordinary scale, standing at the Feywood's sacred center within the elven city of Thornveil that has grown up around it as its civic protector. The tree is not a sacred site in the sense of a built shrine or consecrated structure; it IS the sacred center, the source and focus of the Feywood's magical vitality, the anchor from which the land's responses to its inhabitants flow. Elves born in the Feywood greet the Heartwood in passing throughout their lives. Heartwardens take their sworn oaths at its base. The Council of Elders meets at the Heartwood for decisions of weight that require the land's direct attention. Its canopy reaches above Thornveil's rooflines; its trunk is broader than any assembly of humans could encircle; its roots extend through the earth in patterns that druids understand and realm scholars do not. The Heartwood is the Feywood and the Feywood is the Heartwood. Their
-  health is one health. Their protection is one protection.
+description: The living heart of the Feywood and the source of the liminal field that protects it. The Heartwood is an ancient, conscious tree of extraordinary scale, standing at the Feywood's sacred center within the elven city of Thornveil that has grown up around it as its civic protector. It was discovered, not made — found by an elf adjacent to the Silent Grove community in the deep past, after the elves had given their immortality to heal the land and the first trees of the valley had risen from that sacrifice. House Heartwood takes its name from the tree it did not own. The Heartwood does not control the Feywood; it communicates with the land and the lives within it, sustaining the protective geometry of the Feywood and reading the intent of those who cross into the field. Its roots extend through the Hollow Crown's ecosystem in patterns that determine how the Feywood expels the unwelcome and shelters the trusted. Beneath its base, accessed through the buttress roots, lies the Council Chamber and the Pool — the site of the Heartwood's rare direct communication with people. The Heartwood is the Feywood and the Feywood is the Heartwood. Their health is one health.
 connections:
 - feywood
 - thornveil
@@ -20,6 +19,9 @@ tags:
 - heartwarden-site
 - council-ceremonial
 - ancient
+- conscious
+- root-network
+- house-heartwood
 known_npcs:
 - Heartwarden on Watch
 - Elder Druid of the Heartwood
