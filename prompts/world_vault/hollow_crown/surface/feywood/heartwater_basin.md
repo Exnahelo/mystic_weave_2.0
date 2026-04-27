@@ -18,7 +18,7 @@ tags:
 - riparian
 - ecological-indicator
 - living-architecture-adjacent
-- Feywood-interior
+- feywood-interior
 known_npcs: []
 threat_level: 1
 discovered: false
@@ -94,7 +94,7 @@ Realm visitors to Vaelmere occasionally request access to the Basin for scholarl
 - riparian
 - ecological-indicator
 - living-architecture-adjacent
-- Feywood-interior
+- feywood-interior
 
 ## Connected Nodes
 
