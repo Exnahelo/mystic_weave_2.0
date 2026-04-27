@@ -8,7 +8,7 @@ from tests.helpers import zero_advancement
 def test_seed_character_applies_adjustments_and_tags() -> None:
     character = seed_character(
         name="Krath",
-        ancestry_index="dragonborn",
+        ancestry_index="drakari",
         culture_index="draconic_grasslands",
         focus_index="devoted",
         background_index="soldier",
@@ -21,14 +21,16 @@ def test_seed_character_applies_adjustments_and_tags() -> None:
     assert character["domains"]["endurance"] == 48
     assert character["domains"]["presence"] == 54
     assert character["knowledge"]["discipline"] == 2
-    assert character["application"]["dragon_breath"] == 1
+    # Drakari ancestry no longer grants application tags via traits
+    # (Magical Inheritance is a creation-time choice, not a fixed grant)
+    assert "dragon_breath" not in character["application"]
 
 
 @pytest.mark.unit
 def test_seed_character_populates_stacked_fields() -> None:
     character = seed_character(
         name="Krath",
-        ancestry_index="dragonborn",
+        ancestry_index="drakari",
         culture_index="draconic_grasslands",
         focus_index="devoted",
         background_index="acolyte",
@@ -41,7 +43,7 @@ def test_seed_character_populates_stacked_fields() -> None:
 def test_seed_character_applies_culture_domain_bonuses() -> None:
     character = seed_character(
         name="Krath",
-        ancestry_index="dragonborn",
+        ancestry_index="drakari",
         culture_index="draconic_grasslands",
         focus_index="devoted",
         background_index="soldier",
