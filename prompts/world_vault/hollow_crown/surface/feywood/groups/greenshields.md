@@ -3,7 +3,7 @@ id: greenshields
 name: The Greenshields
 type: order
 region_id: hollow-crown
-parent_location_id: feywood
+parent_location_id: thornveil
 description: >
   The Feywood's primary defensive military order. The Greenshields are
   responsible for settlement defense, daily security, patrols throughout

@@ -3,7 +3,7 @@ id: elder-roots
 name: The Elder Roots
 type: order
 region_id: hollow-crown
-parent_location_id: feywood
+parent_location_id: silent-grove
 description: >
   The druidic community of the Feywood. The Elder Roots are the elves and
   the rare integrated non-elven residents whose practice attends directly

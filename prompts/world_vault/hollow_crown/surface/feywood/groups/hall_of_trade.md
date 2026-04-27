@@ -3,7 +3,7 @@ id: hall-of-trade
 name: The Hall of Trade
 type: order
 region_id: hollow-crown
-parent_location_id: feywood
+parent_location_id: vaelmere
 description: >
   The Feywood's primary trade organization. The Hall of Trade is the
   institutional structure that handles the operational flow of goods

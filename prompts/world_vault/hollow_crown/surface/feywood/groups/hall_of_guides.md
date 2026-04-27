@@ -3,7 +3,7 @@ id: hall-of-guides
 name: The Hall of Guides
 type: order
 region_id: hollow-crown
-parent_location_id: feywood
+parent_location_id: vaelmere
 description: >
   The Feywood's specialist organization for civilian-coded escort of
   sanctioned visitors through the realm's liminal geometry. The Hall of

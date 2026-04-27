@@ -3,7 +3,7 @@ id: heartwardens
 name: The Heartwardens
 type: order
 region_id: hollow-crown
-parent_location_id: feywood
+parent_location_id: heartwood
 description: >
   The elite sacred-guardian order of the Heartwood and the Silent Grove.
   Heartwardens are sworn directly to the Heartwood and are responsible

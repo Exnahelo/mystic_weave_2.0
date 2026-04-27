@@ -3,7 +3,7 @@ id: rangers
 name: The Rangers
 type: order
 region_id: hollow-crown
-parent_location_id: feywood
+parent_location_id: thornveil
 description: >
   The specialist outer-range branch of the Greenshields. Rangers are sworn
   Greenshields who have completed additional specialist training and serve

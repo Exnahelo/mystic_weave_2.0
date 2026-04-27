@@ -3,7 +3,7 @@ id: council-of-elders
 name: The Council of Elders
 type: order
 region_id: hollow-crown
-parent_location_id: feywood
+parent_location_id: thornveil
 description: >
   The governing body of the Feywood. The Council of Elders is composed of
   representatives drawn from the noble houses, additional minor houses,
