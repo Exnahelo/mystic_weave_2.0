@@ -8,7 +8,7 @@ description: The Silent Grove's primary site for Heartwarden training — the fo
 connections:
 - silent-grove
 - heartwood
-- reading-Feywood
+- reading-glade
 tags:
 - drakenvale
 - feywood
@@ -92,7 +92,7 @@ Observing a training session without being part of the instruction is unusual; m
 
 - `silent-grove`
 - `heartwood`
-- `reading-Feywood`
+- `reading-glade`
 
 ## Authoring Notes
 

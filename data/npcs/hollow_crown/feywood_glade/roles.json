@@ -148,11 +148,11 @@
     "name": "Druid Master of the Silent Grove",
     "tier": 3,
     "role_scope": "silent_grove_druidic",
-    "typical_context": "Senior druidic figure with long tenure at the Silent Grove's Reading Feywood and broader sustained practice areas.",
+    "typical_context": "Senior druidic figure with long tenure at the Silent Grove's Reading Glade and broader sustained practice areas.",
     "register": "Measured, patient, long pauses; often speaks least when understanding most.",
     "authority_scope": "Senior practitioner authority over the Silent Grove's druidic work; not a commander but a voice whose guidance is sought and honored.",
     "common_scene_functions": [
-      "Oversight of druidic study at the Reading Feywood",
+      "Oversight of druidic study at the Reading Glade",
       "Coordination with Heartwarden Captain on integrated training",
       "Receipt of visiting Elder Druid from the Heartwood",
       "Scholarly consultation on ecological and ambient-field matters"
