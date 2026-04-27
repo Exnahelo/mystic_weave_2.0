@@ -17,7 +17,7 @@ tags:
 - liminal
 - elven-homeland
 - magical-ecology
-- ptarian-sovereign
+- oath-sovereign
 - heartwood
 - sacred-land
 - predates-realm
@@ -148,7 +148,7 @@ The Feywood Glade is accessible through the Feywood Glade Border. Sanctioned ent
 - liminal
 - elven-homeland
 - magical-ecology
-- ptarian-sovereign
+- oath-sovereign
 - heartwood
 - sacred-land
 - predates-realm

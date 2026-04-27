@@ -12,7 +12,6 @@ tags:
 - drakenvale
 - eryndor
 - lair
-- bahamut
 - shrine
 - diplomacy
 - alpine-peaks
@@ -110,7 +109,6 @@ Unauthorized approach does not reach the Lair. The route from Lastmark's screene
 - drakenvale
 - eryndor
 - lair
-- bahamut
 - shrine
 - diplomacy
 - alpine-peaks

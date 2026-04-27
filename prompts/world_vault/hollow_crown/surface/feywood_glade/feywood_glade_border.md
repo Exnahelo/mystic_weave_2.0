@@ -34,7 +34,7 @@ tags:
 - hall-of-guides
 - sanctioned-crossing
 - western-forest
-- ptarian-alliance
+- oath-alliance
 known_npcs:
 - Hall of Guides Border Steward
 - Elven Trade Envoy
@@ -143,7 +143,7 @@ Unsanctioned crossing is not physically prevented. Travelers who choose to cross
 - hall-of-guides
 - sanctioned-crossing
 - western-forest
-- ptarian-alliance
+- oath-alliance
 
 ## Connected Nodes
 

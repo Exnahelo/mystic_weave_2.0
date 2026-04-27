@@ -13,11 +13,9 @@ tags:
 - drakenvale
 - stronghold
 - sacred
-- bahamut
 - platinum-flame
 - high-sanctum
 - platinum-acolytes
-- ptarian-pact
 - pilgrimage
 known_npcs:
 - High Acolyte of the Platinum Flame
@@ -64,11 +62,9 @@ Dragons visiting the Heart land on the outer ring. Drakari, kobolds, and humanoi
 - drakenvale
 - stronghold
 - sacred
-- bahamut
 - platinum-flame
 - high-sanctum
 - platinum-acolytes
-- ptarian-pact
 - pilgrimage
 
 ## Connected Nodes

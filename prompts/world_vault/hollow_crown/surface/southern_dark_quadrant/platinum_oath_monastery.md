@@ -16,7 +16,6 @@ tags:
 - warden-training
 - drakenvale
 - lore-significant
-- bahamut
 - vigil
 known_npcs:
 - Serevane
@@ -46,7 +45,6 @@ Trade and supply come up the approach road from Greymantle and the Rift of Disco
 - warden-training
 - drakenvale
 - lore-significant
-- bahamut
 - vigil
 
 ## Connected Nodes

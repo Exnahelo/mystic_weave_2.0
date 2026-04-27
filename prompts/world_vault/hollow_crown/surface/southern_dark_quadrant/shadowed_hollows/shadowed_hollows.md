@@ -9,7 +9,6 @@ tags:
 - drakenvale
 - hazard
 - necrotic
-- tiamat
 - cult
 - shadow
 - restricted
@@ -25,7 +24,6 @@ The biome above and around the Temple of Mordrax, where necrotic energy seeps up
 - drakenvale
 - hazard
 - necrotic
-- tiamat
 - cult
 - shadow
 - restricted
