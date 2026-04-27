@@ -3,17 +3,17 @@ id: heartwood
 name: Heartwood
 type: sacred-site
 region_id: hollow-crown
-parent_location_id: feywood-glade
+parent_location_id: feywood
 description: The living heart of the Feywood and the land it sustains. The Heartwood is an ancient tree of extraordinary scale, standing at the Glade's sacred center within the elven city of Thornveil that has grown up around it as its civic protector. The tree is not a sacred site in the sense of a built shrine or consecrated structure; it IS the sacred center, the source and focus of the Glade's magical vitality, the anchor from which the land's responses to its inhabitants flow. Elves born in the Glade greet the Heartwood in passing throughout their lives. Heartwardens take their sworn oaths at its base. The Council of Elders meets at the Heartwood for decisions of weight that require the land's direct attention. Its canopy reaches above Thornveil's rooflines; its trunk is broader than any assembly of humans could encircle; its roots extend through the earth in patterns that druids understand and realm scholars do not. The Heartwood is the Glade and the Glade is the Heartwood. Their health is one health. Their protection is one protection.
 connections:
-- feywood-glade
+- feywood
 - thornveil
 - silent-grove
 tags:
 - drakenvale
 - heartwood
 - sacred-site
-- feywood-glade
+- feywood
 - feywood-center
 - living-heart
 - elven-sacred
@@ -126,7 +126,7 @@ The Heartwood is technically accessible within the Feywood — physically reacha
 - drakenvale
 - heartwood
 - sacred-site
-- feywood-glade
+- feywood
 - feywood-center
 - living-heart
 - elven-sacred
@@ -136,7 +136,7 @@ The Heartwood is technically accessible within the Feywood — physically reacha
 
 ## Connected Nodes
 
-- `feywood-glade`
+- `feywood`
 - `thornveil`
 - `silent-grove`
 
@@ -164,7 +164,7 @@ The canonical connection to `thornveil` represents the surrounding city. Thornve
 
 The canonical connection to `silent-grove` represents the training and ceremonial site where Heartwardens train and druids practice. Heartwardens serve rotations at the Heartwood from their training home at the grove.
 
-The connection to `feywood-glade` is the regional parent reference.
+The connection to `feywood` is the regional parent reference.
 
 Threat level 1 is deceptively low. The Heartwood itself is benign; the consequences of mistreating or disrespecting it are not. GPT scenes should communicate that the Heartwood is safe for respectful visitors while making clear that disrespect here is uniquely severe in the realm's topology.
 

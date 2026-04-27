@@ -22,7 +22,7 @@ connections:
 - outer-bounds
 tags:
 - drakenvale
-- feywood-glade
+- feywood
 - thornveil
 - common-hearth
 - district
@@ -82,7 +82,7 @@ Visitors are expected to operate at the Hearth's register — domestic, warm, at
 ## Tags
 
 - drakenvale
-- feywood-glade
+- feywood
 - thornveil
 - common-hearth
 - district

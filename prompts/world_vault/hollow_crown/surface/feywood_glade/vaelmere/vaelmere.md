@@ -3,17 +3,17 @@ id: vaelmere
 name: Vaelmere
 type: settlement
 region_id: hollow-crown
-parent_location_id: feywood-glade
+parent_location_id: feywood
 description: The Feywood's outer settlement and trade waypoint, positioned in the Glade's realm-facing interior where the sanctioned path from the Feywood Border leads inward before continuing onward to Thornveil. Vaelmere is where external commerce becomes elven commerce — realm traders bringing goods through the Border meet Vaelmere's trade houses; elven goods bound for the Border are staged here before their outward journey. The settlement is also a real elven community in its own right, home to roughly six hundred residents who combine the trader, craftfolk, and civic roles a commercial waypoint requires with the continuous elven life that characterizes all Feywood settlements. Vaelmere exists to protect Thornveil from the friction of daily commercial contact with the realm while honoring the mercantile alliance that has sustained the Feywood-realm relationship for a thousand years.
 connections:
-- feywood-glade
+- feywood
 - thornveil
-- feywood-glade-border
+- feywood-border
 tags:
 - drakenvale
 - vaelmere
 - settlement
-- feywood-glade
+- feywood
 - elven-settlement
 - trade-waypoint
 - mercantile-hub
@@ -151,7 +151,7 @@ Vaelmere is accessible from the Feywood Border by the sanctioned path, which a g
 - drakenvale
 - vaelmere
 - settlement
-- feywood-glade
+- feywood
 - elven-settlement
 - trade-waypoint
 - mercantile-hub
@@ -161,19 +161,19 @@ Vaelmere is accessible from the Feywood Border by the sanctioned path, which a g
 
 ## Connected Nodes
 
-- `feywood-glade`
+- `feywood`
 - `thornveil`
-- `feywood-glade-border`
+- `feywood-border`
 
 ## Authoring Notes
 
 Vaelmere is a settlement type, consistent with other elven and realm settlements in the authoring taxonomy. Its distinctive character as a trade waypoint is reflected in the authoring but does not require a specialized type beyond settlement.
 
-The connection to `feywood-glade-border` is canonical and represents the primary sanctioned approach route. This is the only Feywood interior location connected directly to the Border in this batch's authoring.
+The connection to `feywood-border` is canonical and represents the primary sanctioned approach route. This is the only Feywood interior location connected directly to the Border in this batch's authoring.
 
 The connection to `thornveil` represents the onward path to the capital. Vaelmere-to-Thornveil travel is internal Glade movement requiring several hours, along the path that all approved Thornveil-bound visitors traverse.
 
-The connection to `feywood-glade` is the regional parent reference.
+The connection to `feywood` is the regional parent reference.
 
 The Warden of Vaelmere, Trade Master, and Greenshield Outer-Rotation Captain are Tier-3 generative roles specific to this location.
 

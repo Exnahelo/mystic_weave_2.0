@@ -100,7 +100,7 @@ def _character() -> dict:
 
 def _world() -> dict:
     return {
-        "location": "feywood-glade",
+        "location": "feywood",
         "threat": "none",
         "goal": "explore",
         "turn": 1,

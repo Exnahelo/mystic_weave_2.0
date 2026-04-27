@@ -26,7 +26,7 @@
   {
     "id": "economy_node_dracelune_feywood_threshold_01",
     "name": "Dracélune / Feywood Threshold",
-    "settlements": ["dracelune", "feywood-glade-border", "thornveil"],
+    "settlements": ["dracelune", "feywood-border", "thornveil"],
     "region": "Western Forest / Feywood Threshold",
     "market_profile": ["threshold_trade", "liminal_exchange", "mixed_merchants", "rare_goods"],
     "primary_exports": ["feywood_goods", "enchanted_materials", "rare_herbs", "liminal_trade_goods", "brokered_information"],

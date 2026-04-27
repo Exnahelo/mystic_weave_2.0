@@ -7,7 +7,7 @@ description: The realm's cultivator of Fey-influenced flora, set in the western 
 connections:
 - western-temperate-forest
 - dracelune
-- feywood-glade-border
+- feywood-border
 - silverwood-trail
 tags:
 - drakenvale
@@ -108,7 +108,7 @@ Travelers wandering off the village's managed paths into the Feywood-adjacent zo
 
 - `western-temperate-forest`
 - `dracelune`
-- `feywood-glade-border`
+- `feywood-border`
 - `silverwood-trail`
 ## Authoring Notes
 
@@ -124,7 +124,7 @@ The "ambient weirdness" of Dewhollow is a canonical village feature — plants t
 
 The Arcane Conservatory's standing commissions with Dewhollow establish institutional continuity between the two entities. Future storylines involving specific Conservatory research may plausibly route through Dewhollow. Dewhollow-trained herbalists working at the Conservatory or elsewhere in the realm carry a recognized credential.
 
-The connection to `feywood-glade-border` is two-way. Sanctioned expedition traffic between Dracélune and the Feywood uses the Dewhollow route.
+The connection to `feywood-border` is two-way. Sanctioned expedition traffic between Dracélune and the Feywood uses the Dewhollow route.
 
 The connection to `dracelune` represents the primary trade and administrative flow. Two-way.
 

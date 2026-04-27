@@ -12,7 +12,7 @@ connections:
 - trade-hall
 tags:
 - drakenvale
-- feywood-glade
+- feywood
 - vaelmere
 - guest-house
 - location
@@ -79,7 +79,7 @@ Realm visitor experience at the Guest House is generally positive across the cen
 ## Tags
 
 - drakenvale
-- feywood-glade
+- feywood
 - vaelmere
 - guest-house
 - location

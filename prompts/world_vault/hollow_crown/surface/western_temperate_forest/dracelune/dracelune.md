@@ -6,7 +6,7 @@ region_id: hollow-crown
 description: The realm's western trade capital and the threshold city between ordinary Drakenvale life and the untamed Feywood beyond. Dracélune sits at the edge of the western temperate forest where the land softens toward liminal Fey-touched terrain, its streets and plazas built across stilted platforms, stone causeways, and terraced riverside districts. It is the first and last true city the Silver Scale Trading Company's caravans pass through on their inbound and outbound routes, the primary realm-side staging point for any expedition into the Feywood, and the most culturally porous settlement in the Hollow Crown. Dracélune is lively, music-thick, commercially fast, and quietly permissive in ways that make it feel less like the rest of Drakenvale and more like itself.
 connections:
 - western-temperate-forest
-- feywood-glade-border
+- feywood-border
 - silvercut
 - dewhollow
 - scalemere
@@ -120,7 +120,7 @@ The Feywood threshold is a controlled boundary. Passage across it is by permit, 
 ## Connected Nodes
 
 - `western-temperate-forest`
-- `feywood-glade-border`
+- `feywood-border`
 - `silvercut`
 - `dewhollow`
 - `scalemere`

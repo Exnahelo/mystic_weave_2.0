@@ -52,8 +52,8 @@ RECIPROCATE_PAIRS = [
     ('silverwood-trail', 'dewhollow'),
     ('silverwood-trail', 'dracelune'),
     ('stonemark', 'drakenvale-city'),
-    ('vaelmere', 'feywood-glade'),
-    ('vaelmere', 'feywood-glade-border'),
+    ('vaelmere', 'feywood'),
+    ('vaelmere', 'feywood-border'),
     ('vaelmere', 'thornveil'),
     ('zarkharath', 'stronghold-of-drakenvale'),
     ('scalemere', 'crystalhaven'),  # new lake route

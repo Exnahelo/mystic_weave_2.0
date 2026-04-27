@@ -60,9 +60,9 @@ Reason:
 
 These links currently point beyond the explicitly authored local map and are retained as intentional external stubs rather than reciprocity defects:
 
-- `dracelune` → `feywood-glade-border`
-- `dewhollow` → `feywood-glade-border`
-- `thornveil` → `feywood-glade-border`
+- `dracelune` → `feywood-border`
+- `dewhollow` → `feywood-border`
+- `thornveil` → `feywood-border`
 - `shadowed-hollows-approach` → `shadowed-hollows-proper`
 
 Guidance:

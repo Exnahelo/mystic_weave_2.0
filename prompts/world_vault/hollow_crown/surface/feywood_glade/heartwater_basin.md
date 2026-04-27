@@ -3,15 +3,15 @@ id: heartwater-basin
 name: Heartwater Basin
 type: region_zone
 region_id: hollow-crown
-parent_location_id: feywood-glade
+parent_location_id: feywood
 description: The lake-and-river system at the Feywood's hydrological heart — an asymmetric freshwater zone that shapes the Thornveil landmass and drains outward through the Outer Old-Growth Wild. The Basin is a full ecological system in its own right, supporting the Glade's aquatic fauna, waterfowl, and riparian flora, and providing the water that sustains both Thornveil's civic life and the deeper forest interior. It is also the second-fastest zone to register Heartwood stress; druids monitor its surface behavior, amphibian choruses, and fish populations as early indicators of the broader land's health. The Basin is not a sacred site in the ritual sense but is continuously attended by the elves who live around it.
 connections:
-- feywood-glade
+- feywood
 - thornveil
 - heartwood-estate
 tags:
 - drakenvale
-- feywood-glade
+- feywood
 - heartwater-basin
 - region-zone
 - freshwater
@@ -87,7 +87,7 @@ Realm visitors to Vaelmere occasionally request access to the Basin for scholarl
 ## Tags
 
 - drakenvale
-- feywood-glade
+- feywood
 - heartwater-basin
 - region-zone
 - freshwater
@@ -98,7 +98,7 @@ Realm visitors to Vaelmere occasionally request access to the Basin for scholarl
 
 ## Connected Nodes
 
-- `feywood-glade`
+- `feywood`
 - `thornveil`
 - `heartwood-estate`
 

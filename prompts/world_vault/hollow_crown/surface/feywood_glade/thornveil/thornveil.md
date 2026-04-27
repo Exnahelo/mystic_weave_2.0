@@ -3,7 +3,7 @@ id: thornveil
 name: Thornveil
 type: settlement
 region_id: hollow-crown
-parent_location_id: feywood-glade
+parent_location_id: feywood
 description: >
   The elven capital city of the Feywood, grown around the Heartwood at
   the Glade's sacred center. Thornveil is neither a built city in the realm's
@@ -19,7 +19,7 @@ description: >
   Heartwood at its center, and through that protection, to preserve the Glade
   itself.
 connections:
-- feywood-glade
+- feywood
 - heartwood
 - silent-grove
 - vaelmere
@@ -27,7 +27,7 @@ tags:
 - drakenvale
 - thornveil
 - settlement
-- feywood-glade
+- feywood
 - elven-capital
 - heartwood-protector
 - council-seat
@@ -200,7 +200,7 @@ Thornveil is accessible only through the Feywood interior, typically with an elv
 - drakenvale
 - thornveil
 - settlement
-- feywood-glade
+- feywood
 - elven-capital
 - heartwood-protector
 - council-seat
@@ -210,7 +210,7 @@ Thornveil is accessible only through the Feywood interior, typically with an elv
 
 ## Connected Nodes
 
-- `feywood-glade`
+- `feywood`
 - `heartwood`
 - `silent-grove`
 - `vaelmere`

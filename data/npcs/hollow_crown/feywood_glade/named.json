@@ -17,7 +17,7 @@
       "Currently Heartwarden Captain-emeritus; resumes active Captain duty when the House Heartwood Proving candidate departs for the Proving",
       "Known epithet: The Hammer"
     ],
-    "tags": ["named", "tier-2", "house-heartwood", "heartwarden-captain-emeritus", "discordant-war-commander", "heartwood-bow-bearer", "feywood-glade"],
+    "tags": ["named", "tier-2", "house-heartwood", "heartwarden-captain-emeritus", "discordant-war-commander", "heartwood-bow-bearer", "feywood"],
     "description": "Lethariel Heartwood is the current head of House Heartwood, former and future Heartwarden Captain, and the living craftsperson of the Heartwood bow. She led the Feywood contingent during the Discordant War, fought beside Vindrael the Platinum Warden, and witnessed his sacrifice at the Dark Hold's pit — a living witness whose testimony is more specific than any realm record preserves. Currently in Captain-emeritus standing at Heartwood Estate, she will resume active Captain duty when the current House Heartwood Proving candidate departs for the Proving. Anti-monumental by temperament; her standing is legible in what she doesn't perform rather than in what she displays.",
     "scene_guidance": "Treat Lethariel as a gravity-well character. Scenes involving her run slower; she responds with silence as often as with words. The Heartwood bow is simply present with her — leaned against a tree, across her back, at hand — never displayed. Realm visitors often fail to recognize it as significant; elven visitors recognize it immediately and adjust. Love toward her daughter shows through expectation and instruction rather than demonstration. Reserve Lethariel for scenes of genuine weight; overuse flattens her."
   },
@@ -38,7 +38,7 @@
       "House Vaelaryn maintains the highest non-elf integration rate of any elven estate",
       "Known epithet: The Hearth"
     ],
-    "tags": ["named", "tier-2", "house-vaelaryn", "diplomat", "feywood-glade"],
+    "tags": ["named", "tier-2", "house-vaelaryn", "diplomat", "feywood"],
     "description": "Caelthir Vaelaryn is the senior figure of House Vaelaryn, the most realm-facing of the noble houses. He is father to Sylvara and Aelarion and partner to Lethariel Heartwood; where Lethariel carries the house's martial and sacred gravity, Caelthir carries its diplomatic and relational weight. House Vaelaryn's high non-elf integration rate runs through his leadership. He is a listener more than a speaker, and his authority shows in the space he creates for others rather than in declarations he makes.",
     "scene_guidance": "Caelthir is the scene's patience. He asks the question that opens the real conversation. Use him when a scene needs the house's diplomatic register, when realm-side visitors need a genuinely approachable elven contact, or when Sylvara's family context matters. His voice contrasts with Lethariel's; pair them carefully — they complement rather than overlap. His current residence is not canonically fixed to a single location; he moves between Vaelaryn lands, Thornveil, and occasionally Heartwood Estate as family or house business requires."
   },
@@ -59,7 +59,7 @@
       "Bears the Heartwood name per matrilineal naming convention",
       "Location and circumstance are deliberately unfixed; a narrative thread available for development"
     ],
-    "tags": ["named", "tier-2", "house-heartwood", "absent", "narrative-thread", "feywood-glade"],
+    "tags": ["named", "tier-2", "house-heartwood", "absent", "narrative-thread", "feywood"],
     "description": "Aelarion Heartwood is Sylvara's brother and the second Heartwood child of Lethariel and Caelthir's generation. He is canonically absent from the Feywood in current narrative time; specifics of where he is, what he is doing, and why are deliberately unfixed. The absence is structural — a thread available for development when narrative needs arise — and his return (or confirmation of further circumstances) is a potential major-event moment.",
     "scene_guidance": "Aelarion should appear in narrative indirectly: mentioned by family, referenced in House Heartwood's senior figures' correspondence, hinted at through letters or inquiries reaching the Glade. Direct scenes with him should be reserved for major narrative beats — his return, a discovered location, a revealed purpose. Do not casually place him in the Glade. Do not over-specify his circumstances; the openness is the point."
   },

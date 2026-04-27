@@ -23,7 +23,7 @@ connections:
 - noble-groves
 tags:
 - drakenvale
-- feywood-glade
+- feywood
 - thornveil
 - heartwood-approach
 - district
@@ -83,7 +83,7 @@ Realm visitors do not routinely enter the Approach. Those who do are accompanied
 ## Tags
 
 - drakenvale
-- feywood-glade
+- feywood
 - thornveil
 - heartwood-approach
 - district

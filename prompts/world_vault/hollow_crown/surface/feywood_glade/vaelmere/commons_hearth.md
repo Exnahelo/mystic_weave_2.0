@@ -12,7 +12,7 @@ connections:
 - trade-hall
 tags:
 - drakenvale
-- feywood-glade
+- feywood
 - vaelmere
 - commons-hearth
 - location
@@ -86,7 +86,7 @@ Visitor behavior at the Commons Hearth is expected to match the register. Loudne
 ## Tags
 
 - drakenvale
-- feywood-glade
+- feywood
 - vaelmere
 - commons-hearth
 - location

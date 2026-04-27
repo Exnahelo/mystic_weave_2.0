@@ -12,7 +12,7 @@ connections:
 - crafthall
 tags:
 - drakenvale
-- feywood-glade
+- feywood
 - thornveil
 - noble-groves
 - district
@@ -84,7 +84,7 @@ Realm visitors with sustained relationships to specific houses occasionally spen
 ## Tags
 
 - drakenvale
-- feywood-glade
+- feywood
 - thornveil
 - noble-groves
 - district

@@ -12,7 +12,7 @@ connections:
 - outer-bounds
 tags:
 - drakenvale
-- feywood-glade
+- feywood
 - thornveil
 - crafthall
 - district
@@ -77,7 +77,7 @@ Visitors walking through the Crafthall without business are discouraged without 
 ## Tags
 
 - drakenvale
-- feywood-glade
+- feywood
 - thornveil
 - crafthall
 - district

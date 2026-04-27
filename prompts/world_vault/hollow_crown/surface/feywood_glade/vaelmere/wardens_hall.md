@@ -12,7 +12,7 @@ connections:
 - guest-house
 tags:
 - drakenvale
-- feywood-glade
+- feywood
 - vaelmere
 - wardens-hall
 - location
@@ -74,7 +74,7 @@ Casual visitors to the Hall are not common. The register is civic, not social.
 ## Tags
 
 - drakenvale
-- feywood-glade
+- feywood
 - vaelmere
 - wardens-hall
 - location

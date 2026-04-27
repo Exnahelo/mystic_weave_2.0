@@ -54,7 +54,7 @@ System reference: `prompts/world-rules.md` and `prompts/character-creation.md`
   - `eryndors-lair` → `sacred-pools`
   - `eryndors-lair` → `platinum-heart`
 - Retained off-map outward connections as placeholders until their destination files are authored:
-  - `dracelune` → `feywood-glade-border`
+  - `dracelune` → `feywood-border`
   - `volcanic-highlands` → `draconic-grasslands`
 
 Reference: `world-topology-baseline.md`

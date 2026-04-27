@@ -12,7 +12,7 @@ connections:
 - vaelmere
 tags:
 - drakenvale
-- feywood-glade
+- feywood
 - thornveil
 - outer-bounds
 - district
@@ -74,7 +74,7 @@ The path between Thornveil's Outer Bounds and Vaelmere is Thornveil's most-trave
 ## Tags
 
 - drakenvale
-- feywood-glade
+- feywood
 - thornveil
 - outer-bounds
 - district

@@ -3,7 +3,7 @@ id: heartwood-estate
 name: Heartwood Estate
 type: location
 region_id: hollow-crown
-parent_location_id: feywood-glade
+parent_location_id: feywood
 description: >
   The ancestral woodland seat of House Heartwood — one of two substantial seats
   the house maintains, complementing the house's Thornveil seat in the
@@ -23,12 +23,12 @@ description: >
   anti-monumental — the same organic-integration aesthetic as Thornveil,
   carried to a smaller and more wild-adjacent register.
 connections:
-- feywood-glade
+- feywood
 - thornveil
 - heartwater-basin
 tags:
 - drakenvale
-- feywood-glade
+- feywood
 - heartwood-estate
 - noble-estate
 - house-heartwood
@@ -97,7 +97,7 @@ Unsanctioned travelers do not reach the Estate. The approach path does not exten
 ## Tags
 
 - drakenvale
-- feywood-glade
+- feywood
 - heartwood-estate
 - noble-estate
 - house-heartwood
@@ -109,7 +109,7 @@ Unsanctioned travelers do not reach the Estate. The approach path does not exten
 
 ## Connected Nodes
 
-- `feywood-glade`
+- `feywood`
 - `thornveil`
 - `heartwater-basin`
 

@@ -11,7 +11,7 @@ connections:
 - reading-glade
 tags:
 - drakenvale
-- feywood-glade
+- feywood
 - silent-grove
 - training-grounds
 - location
@@ -78,7 +78,7 @@ Observing a training session without being part of the instruction is unusual; m
 ## Tags
 
 - drakenvale
-- feywood-glade
+- feywood
 - silent-grove
 - training-grounds
 - location

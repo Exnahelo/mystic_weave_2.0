@@ -3,17 +3,17 @@ id: silent-grove
 name: The Silent Grove
 type: sacred-site
 region_id: hollow-crown
-parent_location_id: feywood-glade
+parent_location_id: feywood
 description: The Feywood's sacred grove of training and druidic practice, set apart from Thornveil in the Glade's deeper interior where ancient trees of extraordinary age form a natural sanctuary. The Silent Grove is the training home of the Heartwarden order — warriors selected for the sworn role of Heartwood protection train here through multi-year cycles under senior Heartwardens and druidic instructors. Druidic practitioners also use the Grove for extended retreat, sustained practice, and the preservation of oral traditions that carry elven ecological and spiritual knowledge across centuries. The Grove is not residential in the Thornveil sense; everyone present is here for the work. It is not open to casual visitors; access is granted only to those whose purpose matches the Grove's function. The ambient atmosphere is one of disciplined quiet — the Grove is called Silent because those who work here have learned to move and speak with the same attentive restraint the ancient trees themselves hold.
 connections:
-- feywood-glade
+- feywood
 - thornveil
 - heartwood
 tags:
 - drakenvale
 - silent-grove
 - sacred-site
-- feywood-glade
+- feywood
 - heartwarden-training
 - druidic-practice
 - ceremonial-site
@@ -147,7 +147,7 @@ The Silent Grove is accessible from Thornveil by its managed path. Travel time i
 - drakenvale
 - silent-grove
 - sacred-site
-- feywood-glade
+- feywood
 - heartwarden-training
 - druidic-practice
 - ceremonial-site
@@ -156,7 +156,7 @@ The Silent Grove is accessible from Thornveil by its managed path. Travel time i
 
 ## Connected Nodes
 
-- `feywood-glade`
+- `feywood`
 - `thornveil`
 - `heartwood`
 
@@ -178,7 +178,7 @@ The connection to `thornveil` represents the managed path connecting the two loc
 
 The connection to `heartwood` represents the training-oath relationship. Heartwarden candidates train at the Grove; they take their oath at the Heartwood; they return to the Grove briefly before beginning active rotation. The connection is not geographic proximity but institutional relationship.
 
-The connection to `feywood-glade` is the regional parent reference.
+The connection to `feywood` is the regional parent reference.
 
 Threat level 1 reflects the disciplined training environment (real weapons, real practice, real consequences for carelessness) and the ambient consequences of disrespect. The Grove is safe for approved visitors behaving appropriately; it is not welcoming to casual disrespect.
 

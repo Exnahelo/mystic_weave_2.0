@@ -8,11 +8,11 @@ description: Vaelmere's primary mercantile institution and the functional heart 
 connections:
 - vaelmere
 - outer-bounds
-- feywood-glade-border
+- feywood-border
 - wardens-hall
 tags:
 - drakenvale
-- feywood-glade
+- feywood
 - vaelmere
 - trade-hall
 - location
@@ -93,7 +93,7 @@ Casual visitors do not enter the Hall. It is a working institution, not a public
 ## Tags
 
 - drakenvale
-- feywood-glade
+- feywood
 - vaelmere
 - trade-hall
 - location
@@ -107,7 +107,7 @@ Casual visitors do not enter the Hall. It is a working institution, not a public
 
 - `vaelmere`
 - `outer-bounds`
-- `feywood-glade-border`
+- `feywood-border`
 - `wardens-hall`
 
 ## Authoring Notes

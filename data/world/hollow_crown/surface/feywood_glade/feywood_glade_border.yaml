@@ -1,4 +1,4 @@
-id: feywood-glade-border
+id: feywood-border
 name: Feywood Border
 type: route-node
 region_id: hollow-crown
@@ -7,13 +7,13 @@ description: The realm-side threshold to the Feywood, where the road from Dracé
 connections:
 - dracelune
 - dewhollow
-- feywood-glade
+- feywood
 - western-temperate-forest
 - vaelmere
 tags:
 - drakenvale
-- feywood-glade-border
-- feywood-glade
+- feywood-border
+- feywood
 - route-node
 - threshold
 - liminal

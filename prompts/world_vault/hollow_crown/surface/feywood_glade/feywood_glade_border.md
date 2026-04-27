@@ -1,5 +1,5 @@
 ---
-id: feywood-glade-border
+id: feywood-border
 name: Feywood Border
 type: route-node
 region_id: hollow-crown
@@ -21,13 +21,13 @@ description: >
 connections:
 - dracelune
 - dewhollow
-- feywood-glade
+- feywood
 - western-temperate-forest
 - vaelmere
 tags:
 - drakenvale
-- feywood-glade-border
-- feywood-glade
+- feywood-border
+- feywood
 - route-node
 - threshold
 - liminal
@@ -135,8 +135,8 @@ Unsanctioned crossing is not physically prevented. Travelers who choose to cross
 ## Tags
 
 - drakenvale
-- feywood-glade-border
-- feywood-glade
+- feywood-border
+- feywood
 - route-node
 - threshold
 - liminal
@@ -149,7 +149,7 @@ Unsanctioned crossing is not physically prevented. Travelers who choose to cross
 
 - `dracelune`
 - `dewhollow`
-- `feywood-glade`
+- `feywood`
 - `western-temperate-forest`
 - `vaelmere`
 ## Authoring Notes
@@ -162,7 +162,7 @@ The connection to `thornveil` from the existing placeholder topology is NOT pres
 
 The connection to `silverwood-trail` from the existing placeholder is also NOT preserved. The Silverwood Trail runs Dracélune-to-Silvercut through western temperate forest — it does not terminate at the Feywood Border. The existing connection was either an error or represents a shared nearby geography that should be handled at the region-zone level rather than as a direct node-to-node connection. Topology reconciliation should address.
 
-The connection to `feywood-glade` is the primary connection establishing the Border as the realm's entry to the Glade interior. This is two-way — travelers cross the Border into the Glade, and returning expeditions exit through the Border.
+The connection to `feywood` is the primary connection establishing the Border as the realm's entry to the Glade interior. This is two-way — travelers cross the Border into the Glade, and returning expeditions exit through the Border.
 
 The connection to `dracelune` is the primary realm-side route. Two-way.
 

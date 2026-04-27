@@ -20,7 +20,7 @@ connections:
 - heartwater-basin
 tags:
 - drakenvale
-- feywood-glade
+- feywood
 - silent-grove
 - reading-glade
 - location
@@ -81,7 +81,7 @@ On the rare occasions a non-druid visits, they are accompanied by a senior druid
 ## Tags
 
 - drakenvale
-- feywood-glade
+- feywood
 - silent-grove
 - reading-glade
 - location
