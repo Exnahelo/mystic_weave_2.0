@@ -123,7 +123,7 @@ Lethariel is in residence and accessible for significant plot business involving
 
 The current House Heartwood Proving candidate — Sylvara Heartwood, the player's PC — is in the preparation phase at the Estate ahead of her Proving at 90. The specific lifecycle state (exact current age, specific residence arrangement, day-to-day activities, companion status) is managed through the Postgres character system, not through world data. World narration may reference Sylvara by name and describe her as the current Proving candidate in residence; scenes should read the PC's current state from character-system context rather than from this node's static description.
 
-Ash (bonded moonthorn wolf) is canonically Sylvara's bonded companion. As a PC companion, Ash is tracked through the PC's character record rather than through world NPC data; Ash's location and presence follow Sylvara. World narration may reference Ash by name in scenes at the Estate when Sylvara is present; do not treat Ash as a location-persistent NPC.
+Dusk (bonded moonthorn wolf) is canonically Sylvara's bonded companion. As a PC companion, Dusk is tracked through the PC's character record rather than through world NPC data; Dusk's location and presence follow Sylvara. World narration may reference Dusk by name in scenes at the Estate when Sylvara is present; do not treat Dusk as a location-persistent NPC.
 
 The Estate is anti-monumental by design. GPT narration should resist any realm-noble register — no banners, no heraldic display, no guards-at-the-door. The house's legitimacy is relational and ancient, not performative.
 

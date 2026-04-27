@@ -50,7 +50,7 @@ def _bond_links() -> BondLinks:
 
 def _creature_companion(**overrides):
     payload = {
-        "name": "Ash",
+        "name": "Dusk",
         "species": "wolf",
         "subspecies": "moonthorn_wolf",
         "size": "medium",
@@ -125,7 +125,7 @@ def test_creature_narrative_forbids_extra() -> None:
 @pytest.mark.unit
 def test_creature_companion_minimal_validates() -> None:
     creature = _creature_companion()
-    assert creature.name == "Ash"
+    assert creature.name == "Dusk"
     assert creature.tier == "creature"
     assert creature.subspecies == "moonthorn_wolf"
     assert creature.movement_modes == ["walk"]
@@ -259,7 +259,7 @@ def test_envelope_dispatches_by_tier() -> None:
             "id": "test_creature",
             "companion": {
                 "tier": "creature",
-                "name": "Ash",
+                "name": "Dusk",
                 "species": "wolf",
                 "subspecies": "moonthorn_wolf",
                 "size": "medium",
@@ -278,12 +278,12 @@ def test_envelope_dispatches_by_tier() -> None:
 
 @pytest.mark.unit
 def test_regression_stored_creature_envelopes_validate_with_tier() -> None:
-    ash = CompanionEnvelope.model_validate(
+    dusk CompanionEnvelope.model_validate(
         {
             "id": "sylvara_heartwood_moonthorn_wolf",
             "companion": {
                 "tier": "creature",
-                "name": "Ash",
+                "name": "Dusk",
                 "species": "wolf",
                 "subspecies": "moonthorn_wolf",
                 "subtype": "moonthorn_wolf",
@@ -332,7 +332,7 @@ def test_regression_stored_creature_envelopes_validate_with_tier() -> None:
     )
 
     assert isinstance(ash.companion, CreatureCompanion)
-    assert ash.companion.subspecies == "moonthorn_wolf"
+    assert Dusk.companion.subspecies == "moonthorn_wolf"
     assert isinstance(ember.companion, CreatureCompanion)
     assert ember.companion.subspecies == "mist_hound"
 
@@ -360,7 +360,7 @@ def test_exceptional_companion_with_narrative_validates() -> None:
         (
             CreatureCompanion,
             {
-                "name": "Ash",
+                "name": "Dusk",
                 "species": "wolf",
                 "subspecies": "moonthorn_wolf",
                 "size": "medium",
@@ -681,7 +681,7 @@ def test_creature_domains_enforce_25_to_60(payload) -> None:
 )
 def test_literal_enums_reject_invalid_values(field_name, value) -> None:
     payload = {
-        "name": "Ash",
+        "name": "Dusk",
         "species": "wolf",
         "subspecies": "moonthorn_wolf",
         "size": "medium",
@@ -708,7 +708,7 @@ def test_literal_enums_reject_invalid_values(field_name, value) -> None:
 )
 def test_literal_list_enums_reject_invalid_values(field_name, value) -> None:
     payload = {
-        "name": "Ash",
+        "name": "Dusk",
         "species": "wolf",
         "subspecies": "moonthorn_wolf",
         "size": "medium",

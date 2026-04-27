@@ -146,7 +146,7 @@ def _world() -> dict:
     }
 
 
-def _creature_payload(name: str = "Ash") -> dict:
+def _creature_payload(name: str = "Dusk") -> dict:
     return {
         "tier": "creature",
         "name": name,
@@ -173,7 +173,7 @@ def _creature_payload(name: str = "Ash") -> dict:
 def _exceptional_payload() -> dict:
     return {
         "tier": "exceptional",
-        "name": "Ash",
+        "name": "Dusk",
         "species": "wolf",
         "subspecies": "moonthorn_wolf",
         "subtype": "moonthorn_wolf",
