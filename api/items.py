@@ -60,20 +60,42 @@ class Inventory(BaseModel):
 
 # ---------- worldness ----------
 
+class PricingComponentRef(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    id: str = Field(pattern=r"^[a-z][a-z0-9_]*$")
+    key: Optional[str] = None  # required when component kind == "lookup"
+
+
+class PricingInputs(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    components: list[PricingComponentRef] = Field(min_length=1)
+
+
 class Pricing(BaseModel):
     model_config = ConfigDict(extra="forbid")
     model: PricingModel = "authored"
     canonical_value_cp: Optional[int] = Field(default=None, ge=0)
-    inputs: Optional[dict] = None
+    inputs: Optional[PricingInputs] = None
 
     @model_validator(mode="after")
     def _enforce_model_inputs(self) -> "Pricing":
-        if self.model == "authored" and self.canonical_value_cp is None:
-            raise ValueError(
-                "pricing.model='authored' requires canonical_value_cp"
-            )
-        if self.model == "computed" and self.inputs is None:
-            raise ValueError("pricing.model='computed' requires inputs")
+        if self.model == "authored":
+            if self.canonical_value_cp is None:
+                raise ValueError(
+                    "pricing.model='authored' requires canonical_value_cp"
+                )
+            if self.inputs is not None:
+                raise ValueError(
+                    "pricing.model='authored' must not have inputs"
+                )
+        if self.model == "computed":
+            if self.inputs is None:
+                raise ValueError("pricing.model='computed' requires inputs")
+            if self.canonical_value_cp is not None:
+                raise ValueError(
+                    "pricing.model='computed' must not author "
+                    "canonical_value_cp; value is derived from rules"
+                )
         return self
 
 
