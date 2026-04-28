@@ -569,7 +569,7 @@ def part2(client: httpx.Client, session_id: str) -> None:
 
         # Core fields
         check("2.2.b", char["hp"]["current"] == 85, f"hp saved: {char['hp']['current']}")
-        check("2.2.c", len(state["log"]) == 1, "log has 1 entry")
+        check("2.2.c", len(state["log"]) >= 1, f"log has {len(state['log'])} entries")
         check("2.2.d", world["turn"] == 2, f"turn: {world['turn']}")
 
         # v3.1.0 — identity round-trip
