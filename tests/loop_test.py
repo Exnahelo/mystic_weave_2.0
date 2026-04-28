@@ -197,8 +197,8 @@ def part1(client: httpx.Client) -> str | None:
     check("1.3.o", application.get("courage") == 1, f"courage A1: {application.get('courage')}")
 
     check("1.3.p", char.get("fields", {}).get("sacred") == 1, f"sacred field T1: {char.get('fields', {}).get('sacred')}")
-    check("1.3.q", application.get("medium_armor") == 1, f"medium_armor A1: {application.get('medium_armor')}")
-    check("1.3.r", application.get("melee") == 1, f"melee A1: {application.get('melee')}")
+    check("1.3.q", knowledge.get("medium_armor") == 1, f"medium_armor K1: {knowledge.get('medium_armor')}")
+    check("1.3.r", knowledge.get("melee") == 1, f"melee K1: {knowledge.get('melee')}")
 
     # v3.1.0 — identity block
     identity = char.get("identity", {})
@@ -286,6 +286,7 @@ def part2(client: httpx.Client, session_id: str) -> None:
         check("2.1b.b", wolf_template is not None, "moonthorn_wolf present in /catalog/creatures")
 
     if wolf_template is not None:
+        base_hp = wolf_template["base_hp"]
         creature_payload = {
             "name": "Shadowmere",
             "species": wolf_template["species"],
@@ -301,7 +302,7 @@ def part2(client: httpx.Client, session_id: str) -> None:
             "movement_modes": wolf_template["movement_modes"],
             "natural_weapons": wolf_template["natural_weapons"],
             "carrying_capacity": wolf_template["carrying_capacity"],
-            "hp": {"current": wolf_template["base_hp"], "max": wolf_template["base_hp"]},
+            "hp": base_hp,
             "domains": wolf_template["base_domains"],
             "temperament": wolf_template["temperament"],
             "bond_links": {"primary": handler_id},
@@ -376,7 +377,7 @@ def part2(client: httpx.Client, session_id: str) -> None:
                     updated = next((entry for entry in delta_world["companions"] if entry["id"] == companion_id), None)
                     check("2.1b.m", updated is not None, "updated companion still present after delta")
                     if updated is not None:
-                        check("2.1b.n", updated["hp"]["current"] == wolf_template["base_hp"] - 2,
+                        check("2.1b.n", updated["hp"]["current"] == base_hp["current"] - 2,
                               f"companion hp updated via delta: {updated['hp']['current']}")
 
             transition_payload = {
@@ -394,7 +395,7 @@ def part2(client: httpx.Client, session_id: str) -> None:
                 "movement_modes": wolf_template["movement_modes"],
                 "natural_weapons": wolf_template["natural_weapons"],
                 "carrying_capacity": wolf_template["carrying_capacity"],
-                "hp": {"current": wolf_template["base_hp"] - 2, "max": wolf_template["base_hp"]},
+                "hp": {"current": base_hp["current"] - 2, "max": base_hp["max"]},
                 "domains": wolf_template["base_domains"],
                 "temperament": wolf_template["temperament"],
                 "bond_links": {"primary": handler_id},
