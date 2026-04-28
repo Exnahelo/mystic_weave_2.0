@@ -80,6 +80,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements-dev.txt
 
+      - name: Apply database migrations
+        run: alembic upgrade head
+
       - name: Start API server
         run: |
           nohup uvicorn api.main:app --host 127.0.0.1 --port 8000 > /tmp/uvicorn.log 2>&1 &

@@ -143,14 +143,17 @@ def part1(client: httpx.Client) -> str | None:
         check("1.1.h", "soldier" in bg_indices, "'soldier' in backgrounds")
 
     subsection("Test 1.1b — GET /catalog/items")
-    r = client.get("/catalog/items")
-    check("1.1b.a", r.status_code == 200, f"GET /catalog/items → {r.status_code}")
-    if r.status_code == 200:
-        payload = r.json()
-        check("1.1b.b", set(payload.keys()) == {"mundane_items", "magical_items", "apparel_items"}, f"catalog/items keys: {sorted(payload.keys())}")
-        magical_item_names = [item.get("name") for item in payload.get("magical_items", [])]
+    magical_r = client.get("/catalog/items", params={"kind": "magical"})
+    check("1.1b.a", magical_r.status_code == 200, f"GET /catalog/items?kind=magical → {magical_r.status_code}")
+    apparel_r = client.get("/catalog/items", params={"kind": "apparel"})
+    check("1.1b.b", apparel_r.status_code == 200, f"GET /catalog/items?kind=apparel → {apparel_r.status_code}")
+    if magical_r.status_code == 200:
+        magical_payload = magical_r.json()
+        magical_item_names = [item.get("name") for item in magical_payload.get("magical_items", [])]
         check("1.1b.c", ("Blessed Water" in magical_item_names) or ("Holy Water" in magical_item_names), "Blessed Water or Holy Water present in catalog magical")
-        apparel_item_names = [item.get("name") for item in payload.get("apparel_items", [])]
+    if apparel_r.status_code == 200:
+        apparel_payload = apparel_r.json()
+        apparel_item_names = [item.get("name") for item in apparel_payload.get("apparel_items", [])]
         check("1.1b.d", "Common Clothes" in apparel_item_names, "Common Clothes present in catalog apparel")
 
     subsection("Test 1.2 — Seed test locations")
