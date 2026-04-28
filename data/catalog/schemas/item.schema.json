@@ -1,0 +1,1056 @@
+{
+  "$defs": {
+    "ActivationModule": {
+      "additionalProperties": false,
+      "properties": {
+        "command_word": {
+          "default": false,
+          "title": "Command Word",
+          "type": "boolean"
+        },
+        "duration": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duration"
+        },
+        "type": {
+          "enum": [
+            "passive",
+            "action",
+            "bonus-action",
+            "reaction",
+            "minute",
+            "hour",
+            "ritual"
+          ],
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "ActivationModule",
+      "type": "object"
+    },
+    "AmmunitionModule": {
+      "additionalProperties": false,
+      "properties": {
+        "recoverable": {
+          "default": true,
+          "title": "Recoverable",
+          "type": "boolean"
+        },
+        "weapon_compatibility": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Weapon Compatibility",
+          "type": "array"
+        }
+      },
+      "required": [
+        "weapon_compatibility"
+      ],
+      "title": "AmmunitionModule",
+      "type": "object"
+    },
+    "ArmorModule": {
+      "additionalProperties": false,
+      "properties": {
+        "armor_type": {
+          "enum": [
+            "light",
+            "medium",
+            "heavy",
+            "shield"
+          ],
+          "title": "Armor Type",
+          "type": "string"
+        },
+        "base_ac": {
+          "minimum": 0,
+          "title": "Base Ac",
+          "type": "integer"
+        },
+        "dex_bonus": {
+          "$ref": "#/$defs/DexBonus"
+        },
+        "stealth_disadvantage": {
+          "default": false,
+          "title": "Stealth Disadvantage",
+          "type": "boolean"
+        },
+        "strength_required": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Strength Required"
+        }
+      },
+      "required": [
+        "armor_type",
+        "base_ac",
+        "dex_bonus"
+      ],
+      "title": "ArmorModule",
+      "type": "object"
+    },
+    "AttunementModule": {
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "restrictions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Restrictions",
+          "type": "array"
+        }
+      },
+      "title": "AttunementModule",
+      "type": "object"
+    },
+    "Availability": {
+      "additionalProperties": false,
+      "properties": {
+        "legality": {
+          "anyOf": [
+            {
+              "enum": [
+                "open",
+                "restricted",
+                "contraband"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Legality"
+        },
+        "market_tags": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Market Tags",
+          "type": "array"
+        },
+        "settlement_minimum": {
+          "anyOf": [
+            {
+              "enum": [
+                "hamlet",
+                "village",
+                "town",
+                "city",
+                "capital"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Settlement Minimum"
+        }
+      },
+      "title": "Availability",
+      "type": "object"
+    },
+    "ChargesModule": {
+      "additionalProperties": false,
+      "properties": {
+        "maximum": {
+          "minimum": 1,
+          "title": "Maximum",
+          "type": "integer"
+        },
+        "recharge": {
+          "anyOf": [
+            {
+              "enum": [
+                "short-rest",
+                "long-rest",
+                "dawn",
+                "dusk",
+                "never"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recharge"
+        },
+        "recharge_dice": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recharge Dice"
+        }
+      },
+      "required": [
+        "maximum"
+      ],
+      "title": "ChargesModule",
+      "type": "object"
+    },
+    "ConsumableModule": {
+      "additionalProperties": false,
+      "properties": {
+        "consume_action": {
+          "default": "action",
+          "enum": [
+            "passive",
+            "action",
+            "bonus-action",
+            "reaction",
+            "minute",
+            "hour",
+            "ritual"
+          ],
+          "title": "Consume Action",
+          "type": "string"
+        },
+        "uses": {
+          "minimum": 1,
+          "title": "Uses",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "uses"
+      ],
+      "title": "ConsumableModule",
+      "type": "object"
+    },
+    "ContainerModule": {
+      "additionalProperties": false,
+      "properties": {
+        "capacity_items": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Capacity Items"
+        },
+        "capacity_lb": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Capacity Lb"
+        },
+        "extradimensional": {
+          "default": false,
+          "title": "Extradimensional",
+          "type": "boolean"
+        }
+      },
+      "title": "ContainerModule",
+      "type": "object"
+    },
+    "CraftingModule": {
+      "additionalProperties": true,
+      "description": "STUB: crafting subsystem not implemented.",
+      "properties": {},
+      "title": "CraftingModule",
+      "type": "object"
+    },
+    "Damage": {
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Condition"
+        },
+        "dice": {
+          "title": "Dice",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "dice",
+        "type"
+      ],
+      "title": "Damage",
+      "type": "object"
+    },
+    "DexBonus": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed": {
+          "title": "Allowed",
+          "type": "boolean"
+        },
+        "max": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max"
+        }
+      },
+      "required": [
+        "allowed"
+      ],
+      "title": "DexBonus",
+      "type": "object"
+    },
+    "DurabilityModule": {
+      "additionalProperties": true,
+      "description": "STUB: degradation/repair subsystem not implemented.",
+      "properties": {},
+      "title": "DurabilityModule",
+      "type": "object"
+    },
+    "Effect": {
+      "additionalProperties": false,
+      "description": "A rules-resolving change. `source` is provenance only; resolution looks at\n`id` against the effect registry.",
+      "properties": {
+        "applies_to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Applies To"
+        },
+        "cost_charges": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cost Charges"
+        },
+        "id": {
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "params": {
+          "additionalProperties": true,
+          "title": "Params",
+          "type": "object"
+        },
+        "requires_activation": {
+          "default": false,
+          "title": "Requires Activation",
+          "type": "boolean"
+        },
+        "source": {
+          "enum": [
+            "magical",
+            "material",
+            "mundane",
+            "crafted",
+            "blessed",
+            "cursed",
+            "innate"
+          ],
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "source"
+      ],
+      "title": "Effect",
+      "type": "object"
+    },
+    "EncumbranceModule": {
+      "additionalProperties": true,
+      "description": "STUB: bulk/encumbrance subsystem not implemented.",
+      "properties": {},
+      "title": "EncumbranceModule",
+      "type": "object"
+    },
+    "Inventory": {
+      "additionalProperties": false,
+      "properties": {
+        "bulk": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bulk"
+        },
+        "max_stack": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Stack"
+        },
+        "stackable": {
+          "default": false,
+          "title": "Stackable",
+          "type": "boolean"
+        },
+        "weight_lb": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Weight Lb"
+        }
+      },
+      "title": "Inventory",
+      "type": "object"
+    },
+    "ItemMeta": {
+      "additionalProperties": false,
+      "description": "Optional sparse provenance, when justified per-record.",
+      "properties": {
+        "license": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "License"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Version"
+        }
+      },
+      "title": "ItemMeta",
+      "type": "object"
+    },
+    "KnowledgeModule": {
+      "additionalProperties": false,
+      "description": "Catalog-side ID metadata; per-character knowledge state is on inventory.",
+      "properties": {
+        "hidden_until_identified": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Hidden Until Identified",
+          "type": "array"
+        },
+        "identification_difficulty": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Identification Difficulty"
+        }
+      },
+      "title": "KnowledgeModule",
+      "type": "object"
+    },
+    "Modules": {
+      "additionalProperties": false,
+      "properties": {
+        "activation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ActivationModule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "ammunition": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AmmunitionModule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "armor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArmorModule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "attunement": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AttunementModule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "charges": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ChargesModule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "consumable": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ConsumableModule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "container": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ContainerModule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "crafting": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CraftingModule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "durability": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DurabilityModule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "effects": {
+          "items": {
+            "$ref": "#/$defs/Effect"
+          },
+          "title": "Effects",
+          "type": "array"
+        },
+        "encumbrance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EncumbranceModule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "knowledge": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/KnowledgeModule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "tool": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolModule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "weapon": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WeaponModule"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "Modules",
+      "type": "object"
+    },
+    "Notability": {
+      "additionalProperties": false,
+      "properties": {
+        "faction_significance": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Faction Significance",
+          "type": "array"
+        },
+        "notable": {
+          "default": false,
+          "title": "Notable",
+          "type": "boolean"
+        },
+        "quest_bound": {
+          "default": false,
+          "title": "Quest Bound",
+          "type": "boolean"
+        }
+      },
+      "title": "Notability",
+      "type": "object"
+    },
+    "Pricing": {
+      "additionalProperties": false,
+      "properties": {
+        "canonical_value_cp": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Canonical Value Cp"
+        },
+        "inputs": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PricingInputs"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "model": {
+          "default": "authored",
+          "enum": [
+            "authored",
+            "computed"
+          ],
+          "title": "Model",
+          "type": "string"
+        }
+      },
+      "title": "Pricing",
+      "type": "object"
+    },
+    "PricingComponentRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-z][a-z0-9_]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Key"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "PricingComponentRef",
+      "type": "object"
+    },
+    "PricingInputs": {
+      "additionalProperties": false,
+      "properties": {
+        "components": {
+          "items": {
+            "$ref": "#/$defs/PricingComponentRef"
+          },
+          "minItems": 1,
+          "title": "Components",
+          "type": "array"
+        }
+      },
+      "required": [
+        "components"
+      ],
+      "title": "PricingInputs",
+      "type": "object"
+    },
+    "Range": {
+      "additionalProperties": false,
+      "properties": {
+        "long_ft": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Long Ft"
+        },
+        "normal_ft": {
+          "minimum": 0,
+          "title": "Normal Ft",
+          "type": "integer"
+        },
+        "type": {
+          "enum": [
+            "melee",
+            "ranged",
+            "thrown"
+          ],
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "normal_ft"
+      ],
+      "title": "Range",
+      "type": "object"
+    },
+    "ToolModule": {
+      "additionalProperties": false,
+      "properties": {
+        "proficiency_group": {
+          "title": "Proficiency Group",
+          "type": "string"
+        },
+        "roll_tags": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Roll Tags",
+          "type": "array"
+        },
+        "tool_role": {
+          "anyOf": [
+            {
+              "enum": [
+                "permission",
+                "difficulty-shift"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tool Role"
+        }
+      },
+      "required": [
+        "proficiency_group"
+      ],
+      "title": "ToolModule",
+      "type": "object"
+    },
+    "WeaponModule": {
+      "additionalProperties": false,
+      "properties": {
+        "attribute_scaling": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Attribute Scaling",
+          "type": "array"
+        },
+        "damage": {
+          "items": {
+            "$ref": "#/$defs/Damage"
+          },
+          "title": "Damage",
+          "type": "array"
+        },
+        "hands": {
+          "enum": [
+            "one",
+            "two",
+            "one-or-two"
+          ],
+          "title": "Hands",
+          "type": "string"
+        },
+        "properties": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Properties",
+          "type": "array"
+        },
+        "range": {
+          "$ref": "#/$defs/Range"
+        },
+        "training": {
+          "enum": [
+            "simple",
+            "martial",
+            "exotic"
+          ],
+          "title": "Training",
+          "type": "string"
+        },
+        "weapon_type": {
+          "title": "Weapon Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "weapon_type",
+        "training",
+        "hands",
+        "range",
+        "damage"
+      ],
+      "title": "WeaponModule",
+      "type": "object"
+    },
+    "Worldness": {
+      "additionalProperties": false,
+      "properties": {
+        "availability": {
+          "$ref": "#/$defs/Availability"
+        },
+        "notability": {
+          "$ref": "#/$defs/Notability"
+        },
+        "pricing": {
+          "$ref": "#/$defs/Pricing"
+        },
+        "rarity": {
+          "default": "common",
+          "enum": [
+            "common",
+            "uncommon",
+            "rare",
+            "very-rare",
+            "legendary",
+            "unique"
+          ],
+          "title": "Rarity",
+          "type": "string"
+        }
+      },
+      "title": "Worldness",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "affordances": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Affordances",
+      "type": "array"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "id": {
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "title": "Id",
+      "type": "string"
+    },
+    "inventory": {
+      "$ref": "#/$defs/Inventory"
+    },
+    "meta": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ItemMeta"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "modules": {
+      "$ref": "#/$defs/Modules"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "tags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    },
+    "worldness": {
+      "$ref": "#/$defs/Worldness"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "description"
+  ],
+  "title": "Item",
+  "type": "object"
+}
