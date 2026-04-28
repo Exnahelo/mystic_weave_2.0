@@ -20,9 +20,9 @@
       "id": "magical_rarity",
       "kind": "lookup",
       "table": {
-        "common":    5000,
-        "uncommon":  20000,
-        "rare":      500000,
+        "common": 5000,
+        "uncommon": 20000,
+        "rare": 500000,
         "very-rare": 2000000,
         "legendary": 10000000
       }
@@ -34,14 +34,38 @@
     }
   ],
   "advisory_bands": {
-    "weapon.simple":     {"low_cp": 100,    "high_cp": 500},
-    "weapon.martial":    {"low_cp": 1000,   "high_cp": 3000},
-    "weapon.exotic":     {"low_cp": 3000,   "high_cp": 10000},
-    "armor.light":       {"low_cp": 500,    "high_cp": 2000},
-    "armor.medium":      {"low_cp": 2000,   "high_cp": 8000},
-    "armor.heavy":       {"low_cp": 10000,  "high_cp": 40000},
-    "gear.basic":        {"low_cp": 10,     "high_cp": 500},
-    "gear.adventuring":  {"low_cp": 100,    "high_cp": 2000}
+    "weapon.simple": {
+      "low_cp": 5,
+      "high_cp": 2500
+    },
+    "weapon.martial": {
+      "low_cp": 500,
+      "high_cp": 7500
+    },
+    "weapon.exotic": {
+      "low_cp": 1000,
+      "high_cp": 10000
+    },
+    "armor.light": {
+      "low_cp": 500,
+      "high_cp": 5000
+    },
+    "armor.medium": {
+      "low_cp": 2000,
+      "high_cp": 8000
+    },
+    "armor.heavy": {
+      "low_cp": 10000,
+      "high_cp": 200000
+    },
+    "gear.basic": {
+      "low_cp": 1,
+      "high_cp": 1000
+    },
+    "gear.adventuring": {
+      "low_cp": 50,
+      "high_cp": 5000
+    }
   },
   "regional_modifiers": null
 }
