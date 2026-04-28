@@ -1,0 +1,49 @@
+{
+  "id": "chain-shirt",
+  "name": "Chain Shirt",
+  "description": "A tunic of interlocked steel rings worn over padding. Common among guards and house levies.",
+  "tags": [
+    "mundane",
+    "armor",
+    "steel",
+    "cloth"
+  ],
+  "affordances": [],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 20.0,
+    "stackable": false
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 5000
+    },
+    "availability": {
+      "settlement_minimum": "town",
+      "legality": "open",
+      "market_tags": [
+        "armorer",
+        "blacksmith"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "armor": {
+      "armor_type": "medium",
+      "base_ac": 13,
+      "dex_bonus": {
+        "allowed": true,
+        "max": 2
+      },
+      "strength_required": null,
+      "stealth_disadvantage": false
+    },
+    "effects": []
+  }
+}

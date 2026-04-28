@@ -1,0 +1,49 @@
+{
+  "id": "plate-armor",
+  "name": "Plate Armor",
+  "description": "Articulated steel plates fitted to the wearer at considerable expense. The mark of a household champion.",
+  "tags": [
+    "mundane",
+    "armor",
+    "steel",
+    "notable"
+  ],
+  "affordances": [],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 65.0,
+    "stackable": false
+  },
+  "worldness": {
+    "rarity": "rare",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 150000
+    },
+    "availability": {
+      "settlement_minimum": "city",
+      "legality": "open",
+      "market_tags": [
+        "armorer",
+        "noble-armory"
+      ]
+    },
+    "notability": {
+      "notable": true,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "armor": {
+      "armor_type": "heavy",
+      "base_ac": 18,
+      "dex_bonus": {
+        "allowed": false,
+        "max": null
+      },
+      "strength_required": 15,
+      "stealth_disadvantage": true
+    },
+    "effects": []
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "scale-mail",
+  "name": "Scale Mail",
+  "description": "Overlapping steel scales sewn to a leather backing. Heavier than chain but cheaper to repair.",
+  "tags": [
+    "mundane",
+    "armor",
+    "steel",
+    "leather"
+  ],
+  "affordances": [],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 45.0,
+    "stackable": false
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 5000
+    },
+    "availability": {
+      "settlement_minimum": "town",
+      "legality": "open",
+      "market_tags": [
+        "armorer",
+        "blacksmith"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "armor": {
+      "armor_type": "medium",
+      "base_ac": 14,
+      "dex_bonus": {
+        "allowed": true,
+        "max": 2
+      },
+      "strength_required": null,
+      "stealth_disadvantage": true
+    },
+    "effects": []
+  }
+}
