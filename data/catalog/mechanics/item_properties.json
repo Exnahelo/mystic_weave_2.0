@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "item_properties": [
+    {"id": "versatile", "description": "Can be wielded one- or two-handed; two-handed grip uses larger damage die."},
+    {"id": "finesse", "description": "May use Dexterity in place of Strength for attack and damage."},
+    {"id": "light", "description": "Easy to wield; eligible for two-weapon fighting."},
+    {"id": "heavy", "description": "Penalizes wielders below standard size or strength."},
+    {"id": "thrown", "description": "Can be thrown to make a ranged attack."},
+    {"id": "two-handed", "description": "Requires two hands to wield."},
+    {"id": "reach", "description": "Extends melee reach by 5 ft."},
+    {"id": "loading", "description": "Reload action limits attacks per turn."},
+    {"id": "ammunition", "description": "Requires ammunition to attack."}
+  ]
+}

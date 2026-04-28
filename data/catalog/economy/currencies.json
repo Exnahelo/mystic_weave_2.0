@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "base_unit": "cp",
+  "currencies": [
+    {"id": "cp", "name": "Copper Piece", "value_cp": 1},
+    {"id": "sp", "name": "Silver Piece", "value_cp": 10},
+    {"id": "ep", "name": "Electrum Piece", "value_cp": 50},
+    {"id": "gp", "name": "Gold Piece", "value_cp": 100},
+    {"id": "pp", "name": "Platinum Piece", "value_cp": 1000}
+  ]
+}

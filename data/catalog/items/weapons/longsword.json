@@ -1,0 +1,48 @@
+{
+  "id": "longsword",
+  "name": "Longsword",
+  "description": "A versatile straight-bladed sword, equally at home in one hand or two.",
+  "tags": ["martial", "melee", "steel", "weapon"],
+  "affordances": ["cut", "thrust", "parry"],
+  "schema_version": 1,
+
+  "inventory": {
+    "weight_lb": 3.0,
+    "stackable": false
+  },
+
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 1500
+    },
+    "availability": {
+      "settlement_minimum": "town",
+      "legality": "open",
+      "market_tags": ["weaponsmith", "blacksmith"]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+
+  "modules": {
+    "weapon": {
+      "weapon_type": "longsword",
+      "training": "martial",
+      "hands": "one-or-two",
+      "range": {
+        "type": "melee",
+        "normal_ft": 5
+      },
+      "damage": [
+        {"dice": "1d8", "type": "slashing", "condition": "one-handed"},
+        {"dice": "1d10", "type": "slashing", "condition": "two-handed"}
+      ],
+      "properties": ["versatile"],
+      "attribute_scaling": ["strength"]
+    }
+  }
+}
