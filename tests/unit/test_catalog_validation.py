@@ -1,5 +1,5 @@
-from api.items import Effect
-from scripts.validate_catalog import _validate_effect_params
+from api.items import Effect, Item
+from scripts.validate_catalog import _infer_band_key, _validate_effect_params
 
 
 EFFECT_CONTRACTS = {
@@ -119,3 +119,108 @@ def test_unknown_damage_type_fails() -> None:
     )
 
     assert "test-item/damage-bonus-flat: unknown damage_type 'void'" in errors
+
+
+def _item(modules: dict) -> Item:
+    return Item(
+        id="test-item",
+        name="Test Item",
+        description="A test item.",
+        worldness={"pricing": {"model": "authored", "canonical_value_cp": 100}},
+        modules=modules,
+    )
+
+
+def test_infer_band_key_longsword_like_item_returns_martial_weapon() -> None:
+    item = _item(
+        {
+            "weapon": {
+                "weapon_type": "longsword",
+                "training": "martial",
+                "hands": "one-or-two",
+                "range": {"type": "melee", "normal_ft": 5},
+                "damage": [{"dice": "1d8", "type": "slashing"}],
+            }
+        }
+    )
+
+    assert _infer_band_key(item) == "weapon.martial"
+
+
+def test_infer_band_key_simple_weapon_returns_simple_weapon() -> None:
+    item = _item(
+        {
+            "weapon": {
+                "weapon_type": "club",
+                "training": "simple",
+                "hands": "one",
+                "range": {"type": "melee", "normal_ft": 5},
+                "damage": [{"dice": "1d4", "type": "bludgeoning"}],
+            }
+        }
+    )
+
+    assert _infer_band_key(item) == "weapon.simple"
+
+
+def test_infer_band_key_flame_tongue_like_item_skips_attunement() -> None:
+    item = _item(
+        {
+            "weapon": {
+                "weapon_type": "longsword",
+                "training": "martial",
+                "hands": "one-or-two",
+                "range": {"type": "melee", "normal_ft": 5},
+                "damage": [{"dice": "1d8", "type": "slashing"}],
+            },
+            "attunement": {"required": True},
+        }
+    )
+
+    assert _infer_band_key(item) is None
+
+
+def test_infer_band_key_magical_effect_skips_band() -> None:
+    item = _item(
+        {
+            "weapon": {
+                "weapon_type": "longsword",
+                "training": "martial",
+                "hands": "one-or-two",
+                "range": {"type": "melee", "normal_ft": 5},
+                "damage": [{"dice": "1d8", "type": "slashing"}],
+            },
+            "effects": [
+                {
+                    "id": "attack-bonus-flat",
+                    "source": "magical",
+                    "params": {"value": 1},
+                }
+            ],
+        }
+    )
+
+    assert _infer_band_key(item) is None
+
+
+def test_infer_band_key_activation_skips_band() -> None:
+    item = _item(
+        {
+            "weapon": {
+                "weapon_type": "longsword",
+                "training": "martial",
+                "hands": "one-or-two",
+                "range": {"type": "melee", "normal_ft": 5},
+                "damage": [{"dice": "1d8", "type": "slashing"}],
+            },
+            "activation": {"type": "bonus-action"},
+        }
+    )
+
+    assert _infer_band_key(item) is None
+
+
+def test_infer_band_key_no_recognized_module_returns_none() -> None:
+    item = _item({})
+
+    assert _infer_band_key(item) is None

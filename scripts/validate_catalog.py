@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from api.items import Item, derive_indexes  # noqa: E402
+from core.pricing import load_price_rules, resolve_price_cp  # noqa: E402
 
 
 CATALOG_DIR = ROOT / "data" / "catalog"
@@ -79,8 +80,58 @@ def _validate_effect_params(
     return errors
 
 
+def _infer_band_key(item: Item) -> str | None:
+    """
+    Return the advisory_bands key for this item's primary category, or
+    None if no band applies (notable/unique magical items, items with
+    no recognized module).
+
+    Magical items skip bands: their cost is dominated by rarity, not
+    by base equipment band.
+    """
+    # Magical items: skip bands. Detected by presence of activation,
+    # attunement, or any effect with source == "magical".
+    modules = item.modules
+    if getattr(modules, "attunement", None) is not None:
+        return None
+    if getattr(modules, "activation", None) is not None:
+        return None
+    effects = getattr(modules, "effects", []) or []
+    if any(getattr(e, "source", None) == "magical" for e in effects):
+        return None
+
+    # Weapon
+    weapon = getattr(modules, "weapon", None)
+    if weapon is not None:
+        training = getattr(weapon, "training", None)
+        if training in ("simple", "martial", "exotic"):
+            return f"weapon.{training}"
+        return None
+
+    # Armor (if/when an armor module exists; tolerate its absence)
+    armor = getattr(modules, "armor", None)
+    if armor is not None:
+        weight_class = getattr(armor, "weight_class", None) or getattr(
+            armor, "armor_class", None
+        )
+        if weight_class in ("light", "medium", "heavy"):
+            return f"armor.{weight_class}"
+        return None
+
+    # Gear (if/when a gear module exists)
+    gear = getattr(modules, "gear", None)
+    if gear is not None:
+        category = getattr(gear, "category", None)
+        if category in ("basic", "adventuring"):
+            return f"gear.{category}"
+        return None
+
+    return None
+
+
 def main() -> int:
     # Load controlled vocabularies
+    price_rules = load_price_rules(CATALOG_DIR / "economy" / "price_rules.json")
     effect_ids = load_vocab(MECH_DIR / "effects.json", "effects")
     with (MECH_DIR / "effects.json").open() as f:
         effect_contracts = {e["id"]: e["params"] for e in json.load(f)["effects"]}
@@ -98,6 +149,7 @@ def main() -> int:
     print(f"Found {len(item_files)} item file(s)\n")
 
     errors = 0
+    warnings = 0
     seen_ids: dict[str, Path] = {}
 
     for path in item_files:
@@ -160,11 +212,37 @@ def main() -> int:
                 print(f"  FAIL {message}")
                 errors += 1
 
+        pricing = item.worldness.pricing
+
+        if pricing.model == "computed":
+            try:
+                derived = resolve_price_cp(pricing.inputs, price_rules)
+                print(f"  OK pricing computed: {item.id} -> {derived} cp")
+            except ValueError as e:
+                print(f"  FAIL pricing: {item.id}: {e}")
+                errors += 1
+
+        elif pricing.model == "authored":
+            band_key = _infer_band_key(item)
+            bands = price_rules.get("advisory_bands", {})
+            if band_key and band_key in bands:
+                band = bands[band_key]
+                v = pricing.canonical_value_cp
+                if v < band["low_cp"] or v > band["high_cp"]:
+                    print(
+                        f"  WARN pricing band: {item.id} authored at {v} cp, "
+                        f"{band_key} band is {band['low_cp']}-{band['high_cp']} cp"
+                    )
+                    warnings += 1
+
         idx = derive_indexes(item)
         flags = [k for k, v in idx.items() if v]
         print(f"  OK: {item.id} -- derived: {flags}")
 
-    print(f"\n{'PASS' if errors == 0 else f'FAIL ({errors} errors)'}")
+    print(
+        f"\n{'PASS' if errors == 0 else f'FAIL ({errors} errors)'} "
+        f"({warnings} warnings)"
+    )
     return 0 if errors == 0 else 1
 
 
