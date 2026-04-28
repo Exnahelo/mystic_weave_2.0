@@ -1,12 +1,57 @@
 {
   "schema_version": 1,
   "market_tags": [
-    {"id": "general-goods", "description": "Common general store carrying everyday supplies."},
-    {"id": "blacksmith", "description": "Smithy producing and selling metal goods."},
-    {"id": "weaponsmith", "description": "Specialist weapons producer or dealer."},
-    {"id": "armorer", "description": "Specialist armor producer or dealer."},
-    {"id": "enchanter", "description": "Practitioner who creates or sells minor magical goods."},
-    {"id": "auction", "description": "Periodic sale by bidding; high-end, irregular stock."},
-    {"id": "noble-armory", "description": "Private armory of a noble house; access by relationship or theft."}
+    {
+      "id": "general-goods",
+      "description": "Common general store carrying everyday supplies."
+    },
+    {
+      "id": "blacksmith",
+      "description": "Smithy producing and selling metal goods."
+    },
+    {
+      "id": "weaponsmith",
+      "description": "Specialist weapons producer or dealer."
+    },
+    {
+      "id": "armorer",
+      "description": "Specialist armor producer or dealer."
+    },
+    {
+      "id": "enchanter",
+      "description": "Practitioner who creates or sells minor magical goods."
+    },
+    {
+      "id": "auction",
+      "description": "Periodic sale by bidding; high-end, irregular stock."
+    },
+    {
+      "id": "noble-armory",
+      "description": "Private armory of a noble house; access by relationship or theft."
+    },
+    {
+      "id": "fletcher",
+      "description": "Producer or seller of arrows, bolts, and bows."
+    },
+    {
+      "id": "leatherworker",
+      "description": "Producer or seller of leather goods and light armor."
+    },
+    {
+      "id": "tailor",
+      "description": "Producer or seller of cloth garments and padded gear."
+    },
+    {
+      "id": "carpenter",
+      "description": "Producer or seller of wooden goods."
+    },
+    {
+      "id": "apothecary",
+      "description": "Producer or seller of herbal remedies and medical supplies."
+    },
+    {
+      "id": "underworld",
+      "description": "Available through criminal or grey-market channels."
+    }
   ]
 }
