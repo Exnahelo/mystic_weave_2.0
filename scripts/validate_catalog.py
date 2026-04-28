@@ -27,9 +27,63 @@ def load_vocab(path: Path, key: str, id_field: str = "id") -> set[str]:
     return {entry[id_field] for entry in data[key]}
 
 
+def _validate_effect_params(
+    item_id: str,
+    eff: object,
+    effect_contracts: dict[str, dict],
+    damage_type_ids: set[str],
+) -> list[str]:
+    errors: list[str] = []
+    contract = effect_contracts[eff.id]
+    provided = set(eff.params.keys())
+    declared = set(contract.keys())
+
+    # Required params present
+    for pname, pspec in contract.items():
+        if pspec.get("required", False) and pname not in provided:
+            errors.append(f"{item_id}/{eff.id}: missing required param '{pname}'")
+
+    # No unknown params
+    for pname in provided - declared:
+        errors.append(f"{item_id}/{eff.id}: unknown param '{pname}'")
+
+    # Type check
+    type_map = {
+        "int": int,
+        "string": str,
+        "bool": bool,
+        "float": (int, float),
+    }
+    for pname, value in eff.params.items():
+        if pname not in contract:
+            continue  # already reported above
+        expected = contract[pname]["type"]
+        if expected not in type_map:
+            errors.append(
+                f"{item_id}/{eff.id}: param '{pname}' has "
+                f"unsupported declared type '{expected}' in registry"
+            )
+            continue
+        if not isinstance(value, type_map[expected]):
+            errors.append(
+                f"{item_id}/{eff.id}: param '{pname}' expected "
+                f"{expected}, got {type(value).__name__}"
+            )
+
+    # Cross-reference: damage_type must be in damage_types.json
+    if "damage_type" in eff.params:
+        dt = eff.params["damage_type"]
+        if dt not in damage_type_ids:
+            errors.append(f"{item_id}/{eff.id}: unknown damage_type '{dt}'")
+
+    return errors
+
+
 def main() -> int:
     # Load controlled vocabularies
     effect_ids = load_vocab(MECH_DIR / "effects.json", "effects")
+    with (MECH_DIR / "effects.json").open() as f:
+        effect_contracts = {e["id"]: e["params"] for e in json.load(f)["effects"]}
     affordance_ids = load_vocab(MECH_DIR / "affordances.json", "affordances")
     tag_ids = load_vocab(MECH_DIR / "tags.json", "tags")
     damage_type_ids = load_vocab(MECH_DIR / "damage_types.json", "damage_types")
@@ -98,6 +152,12 @@ def main() -> int:
         for eff in item.modules.effects:
             if eff.id not in effect_ids:
                 print(f"  FAIL unknown effect id: {eff.id}")
+                errors += 1
+                continue
+            for message in _validate_effect_params(
+                item.id, eff, effect_contracts, damage_type_ids
+            ):
+                print(f"  FAIL {message}")
                 errors += 1
 
         idx = derive_indexes(item)
