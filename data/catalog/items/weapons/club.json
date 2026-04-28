@@ -1,0 +1,64 @@
+{
+  "id": "club",
+  "name": "Club",
+  "description": "A length of hardwood weighted at one end. The peasant's weapon \u2014 and the brawler's first reach.",
+  "tags": [
+    "mundane",
+    "weapon",
+    "melee",
+    "simple",
+    "wood"
+  ],
+  "affordances": [
+    "bash",
+    "improvised-weapon"
+  ],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 2.0,
+    "stackable": false
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 10
+    },
+    "availability": {
+      "settlement_minimum": "hamlet",
+      "legality": "open",
+      "market_tags": [
+        "general-goods",
+        "carpenter"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "weapon": {
+      "weapon_type": "club",
+      "training": "simple",
+      "hands": "one",
+      "range": {
+        "type": "melee",
+        "normal_ft": 5
+      },
+      "damage": [
+        {
+          "dice": "1d4",
+          "type": "bludgeoning"
+        }
+      ],
+      "properties": [
+        "light"
+      ],
+      "attribute_scaling": [
+        "strength"
+      ]
+    },
+    "effects": []
+  }
+}

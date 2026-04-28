@@ -1,0 +1,69 @@
+{
+  "id": "dagger",
+  "name": "Dagger",
+  "description": "A short, double-edged blade equally at home concealed at the belt or thrown across a tavern.",
+  "tags": [
+    "mundane",
+    "weapon",
+    "melee",
+    "simple",
+    "steel"
+  ],
+  "affordances": [
+    "cut",
+    "thrust",
+    "throw"
+  ],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 1.0,
+    "stackable": false
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 200
+    },
+    "availability": {
+      "settlement_minimum": "hamlet",
+      "legality": "open",
+      "market_tags": [
+        "weaponsmith",
+        "blacksmith",
+        "general-goods"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "weapon": {
+      "weapon_type": "dagger",
+      "training": "simple",
+      "hands": "one",
+      "range": {
+        "type": "melee",
+        "normal_ft": 5
+      },
+      "damage": [
+        {
+          "dice": "1d4",
+          "type": "piercing"
+        }
+      ],
+      "properties": [
+        "finesse",
+        "light",
+        "thrown"
+      ],
+      "attribute_scaling": [
+        "strength",
+        "dexterity"
+      ]
+    },
+    "effects": []
+  }
+}

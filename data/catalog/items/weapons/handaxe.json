@@ -1,0 +1,66 @@
+{
+  "id": "handaxe",
+  "name": "Handaxe",
+  "description": "A short-hafted axe that hews kindling as readily as flesh and answers the throwing arm well.",
+  "tags": [
+    "mundane",
+    "weapon",
+    "melee",
+    "simple",
+    "steel",
+    "wood"
+  ],
+  "affordances": [
+    "cut",
+    "throw"
+  ],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 2.0,
+    "stackable": false
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 500
+    },
+    "availability": {
+      "settlement_minimum": "village",
+      "legality": "open",
+      "market_tags": [
+        "weaponsmith",
+        "blacksmith"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "weapon": {
+      "weapon_type": "handaxe",
+      "training": "simple",
+      "hands": "one",
+      "range": {
+        "type": "melee",
+        "normal_ft": 5
+      },
+      "damage": [
+        {
+          "dice": "1d6",
+          "type": "slashing"
+        }
+      ],
+      "properties": [
+        "light",
+        "thrown"
+      ],
+      "attribute_scaling": [
+        "strength"
+      ]
+    },
+    "effects": []
+  }
+}

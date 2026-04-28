@@ -1,0 +1,65 @@
+{
+  "id": "glaive",
+  "name": "Glaive",
+  "description": "A curved single-edged blade fixed to a long haft, kept at distance and swept in wide arcs.",
+  "tags": [
+    "mundane",
+    "weapon",
+    "melee",
+    "martial",
+    "steel",
+    "wood"
+  ],
+  "affordances": [
+    "cut"
+  ],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 6.0,
+    "stackable": false
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 2000
+    },
+    "availability": {
+      "settlement_minimum": "town",
+      "legality": "open",
+      "market_tags": [
+        "weaponsmith"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "weapon": {
+      "weapon_type": "glaive",
+      "training": "martial",
+      "hands": "two",
+      "range": {
+        "type": "melee",
+        "normal_ft": 10
+      },
+      "damage": [
+        {
+          "dice": "1d10",
+          "type": "slashing"
+        }
+      ],
+      "properties": [
+        "heavy",
+        "reach",
+        "two-handed"
+      ],
+      "attribute_scaling": [
+        "strength"
+      ]
+    },
+    "effects": []
+  }
+}

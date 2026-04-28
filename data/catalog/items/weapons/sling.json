@@ -1,0 +1,64 @@
+{
+  "id": "sling",
+  "name": "Sling",
+  "description": "A leather pouch on twin cords, whirled overhead to hurl a stone with surprising force.",
+  "tags": [
+    "mundane",
+    "weapon",
+    "ranged",
+    "simple",
+    "leather"
+  ],
+  "affordances": [
+    "shoot"
+  ],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 0.5,
+    "stackable": false
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 10
+    },
+    "availability": {
+      "settlement_minimum": "hamlet",
+      "legality": "open",
+      "market_tags": [
+        "general-goods",
+        "leatherworker"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "weapon": {
+      "weapon_type": "sling",
+      "training": "simple",
+      "hands": "one",
+      "range": {
+        "type": "ranged",
+        "normal_ft": 30,
+        "long_ft": 120
+      },
+      "damage": [
+        {
+          "dice": "1d4",
+          "type": "bludgeoning"
+        }
+      ],
+      "properties": [
+        "ammunition"
+      ],
+      "attribute_scaling": [
+        "dexterity"
+      ]
+    },
+    "effects": []
+  }
+}

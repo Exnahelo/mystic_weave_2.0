@@ -1,0 +1,70 @@
+{
+  "id": "battleaxe",
+  "name": "Battleaxe",
+  "description": "A broad steel blade on a long haft, balanced for one- or two-handed work.",
+  "tags": [
+    "mundane",
+    "weapon",
+    "melee",
+    "martial",
+    "steel",
+    "wood"
+  ],
+  "affordances": [
+    "cut"
+  ],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 4.0,
+    "stackable": false
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 1000
+    },
+    "availability": {
+      "settlement_minimum": "town",
+      "legality": "open",
+      "market_tags": [
+        "weaponsmith",
+        "blacksmith"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "weapon": {
+      "weapon_type": "battleaxe",
+      "training": "martial",
+      "hands": "one-or-two",
+      "range": {
+        "type": "melee",
+        "normal_ft": 5
+      },
+      "damage": [
+        {
+          "dice": "1d8",
+          "type": "slashing",
+          "condition": "one-handed"
+        },
+        {
+          "dice": "1d10",
+          "type": "slashing",
+          "condition": "two-handed"
+        }
+      ],
+      "properties": [
+        "versatile"
+      ],
+      "attribute_scaling": [
+        "strength"
+      ]
+    },
+    "effects": []
+  }
+}

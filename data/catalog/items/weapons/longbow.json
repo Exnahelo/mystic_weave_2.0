@@ -1,0 +1,65 @@
+{
+  "id": "longbow",
+  "name": "Longbow",
+  "description": "A tall recurved bow demanding strength to draw and offering reach few weapons match.",
+  "tags": [
+    "mundane",
+    "weapon",
+    "ranged",
+    "martial",
+    "wood"
+  ],
+  "affordances": [
+    "shoot"
+  ],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 2.0,
+    "stackable": false
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 5000
+    },
+    "availability": {
+      "settlement_minimum": "town",
+      "legality": "open",
+      "market_tags": [
+        "fletcher"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "weapon": {
+      "weapon_type": "longbow",
+      "training": "martial",
+      "hands": "two",
+      "range": {
+        "type": "ranged",
+        "normal_ft": 150,
+        "long_ft": 600
+      },
+      "damage": [
+        {
+          "dice": "1d8",
+          "type": "piercing"
+        }
+      ],
+      "properties": [
+        "ammunition",
+        "heavy",
+        "two-handed"
+      ],
+      "attribute_scaling": [
+        "dexterity"
+      ]
+    },
+    "effects": []
+  }
+}

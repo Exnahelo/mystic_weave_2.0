@@ -1,0 +1,73 @@
+{
+  "id": "spear",
+  "name": "Spear",
+  "description": "A shafted blade balanced for throwing or thrusting from a hunter's stance.",
+  "tags": [
+    "mundane",
+    "weapon",
+    "melee",
+    "simple",
+    "wood",
+    "steel"
+  ],
+  "affordances": [
+    "thrust",
+    "throw"
+  ],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 3.0,
+    "stackable": false
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 100
+    },
+    "availability": {
+      "settlement_minimum": "hamlet",
+      "legality": "open",
+      "market_tags": [
+        "weaponsmith",
+        "blacksmith",
+        "general-goods"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "weapon": {
+      "weapon_type": "spear",
+      "training": "simple",
+      "hands": "one-or-two",
+      "range": {
+        "type": "melee",
+        "normal_ft": 5
+      },
+      "damage": [
+        {
+          "dice": "1d6",
+          "type": "piercing",
+          "condition": "one-handed"
+        },
+        {
+          "dice": "1d8",
+          "type": "piercing",
+          "condition": "two-handed"
+        }
+      ],
+      "properties": [
+        "thrown",
+        "versatile"
+      ],
+      "attribute_scaling": [
+        "strength"
+      ]
+    },
+    "effects": []
+  }
+}
