@@ -144,6 +144,30 @@ Updated after post-cleanup audit — 2026-04-18.
   `scripts/validate_naming.py`'s Python rule the next time a
   migration lands (was flagged but never reproduced as a failure).
 
+## CI / Process Debt
+
+- [ ] Configure branch protection on main: require Lint+Unit+Contract,
+      Integration+Loop Test, and catalog-validation status checks before merge.
+- [ ] Set up failure notification on main CI (GitHub email-on-failure or
+      Slack webhook). Main CI was red for 30+ runs without anyone noticing.
+- [ ] Audit recent direct-to-main pushes: commit 0c4b579b ("Renames Feywood
+      Glade to Feywood in all content") corrupted tests/unit/test_companion_models.py
+      via sloppy find-replace and merged anyway. Investigate whether mass-rename
+      commits go through PR review.
+- [ ] Update GitHub Actions to Node.js 24 before Sept 16 2026 deprecation.
+
+## Item Schema Follow-ups
+
+- [ ] Tighten Effect.params validation against effect registry param contracts
+      in mechanics/effects.json.
+- [ ] Author next batch of items: 10-20 mundane (basic weapons, armor, common gear).
+- [ ] JSON Schema export: emit data/catalog/schemas/*.schema.json from Pydantic
+      models for non-Python consumers (GPT builder).
+- [ ] Pricing rules engine: design and implement economy/price_rules.json so
+      future items can use pricing.model: "computed".
+- [ ] API integration: add endpoints reading from data/catalog/, plan cutover
+      from data/items/.
+
 ---
 
 ## 🚫 Restricted Future Builds
