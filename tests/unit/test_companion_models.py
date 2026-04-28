@@ -331,8 +331,8 @@ def test_regression_stored_creature_envelopes_validate_with_tier() -> None:
         }
     )
 
-    assert isinstance(ash.companion, CreatureCompanion)
-    assert Dusk.companion.subspecies == "moonthorn_wolf"
+    assert isinstance(dusk.companion, CreatureCompanion)
+    assert dusk.companion.subspecies == "moonthorn_wolf"
     assert isinstance(ember.companion, CreatureCompanion)
     assert ember.companion.subspecies == "mist_hound"
 

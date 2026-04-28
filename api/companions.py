@@ -288,7 +288,7 @@ def derive_sapient_slug(name: str) -> str:
     return slug
 
 
-from api import models as core_models
+from api import models as core_models  # noqa: E402  -- deferred to break circular import with api.models
 
 _CORE_TYPES = {
     "ArchivedCompanionEnvelope": ArchivedCompanionEnvelope,

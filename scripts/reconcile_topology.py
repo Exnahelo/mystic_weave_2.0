@@ -4,7 +4,6 @@ import yaml
 import re
 from pathlib import Path
 import shutil
-import sys
 
 ROOT = Path('.')
 DATA_ROOT = ROOT / 'data/world/hollow_crown'

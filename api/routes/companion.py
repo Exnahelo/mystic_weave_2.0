@@ -13,7 +13,6 @@ from pydantic import BaseModel, ConfigDict, ValidationError, model_validator
 from api.companions import (
     ArchivedCompanionEnvelope,
     Companion,
-    CompanionEnvelope,
     CompanionRecord,
     CreatureCompanion,
     CreatureCompanionRecord,

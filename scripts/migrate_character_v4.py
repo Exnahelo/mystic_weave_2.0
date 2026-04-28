@@ -17,7 +17,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from api.models import CharacterModel
+from api.models import CharacterModel  # noqa: E402  -- after sys.path insert above
 
 MIGRATION_LOG_ENTRY = "Schema migrated to v4.0.0 — ancestry/culture/fields."
 DEFAULT_CULTURE = "drakenvale_city"

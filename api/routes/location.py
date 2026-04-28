@@ -9,7 +9,6 @@ GET  /location/{location_id}/connections   — get valid movement options from c
 from __future__ import annotations
 
 import json
-from typing import Any
 
 import asyncpg
 from fastapi import APIRouter, Depends, HTTPException, Response, status

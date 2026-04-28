@@ -23,7 +23,7 @@ from typing import TYPE_CHECKING
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 if TYPE_CHECKING:
-    from api.companions import ArchivedCompanionEnvelope, CompanionEnvelope, CompanionRecord
+    from api.companions import ArchivedCompanionEnvelope, CompanionRecord
 
 
 DOMAIN_KEYS: tuple[str, ...] = (

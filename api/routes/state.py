@@ -14,7 +14,6 @@ from __future__ import annotations
 import json
 from typing import Any
 
-import api.companions  # ensures WorldModel.model_rebuild runs
 
 import asyncpg
 from fastapi import APIRouter, Depends, HTTPException

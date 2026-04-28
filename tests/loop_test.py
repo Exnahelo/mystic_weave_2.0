@@ -133,14 +133,14 @@ def part1(client: httpx.Client) -> str | None:
         check("1.1.d", len(opts.get("backgrounds", [])) == 8, f"backgrounds count: {len(opts.get('backgrounds', []))}")
         check("1.1.da", set(opts.keys()) == {"ancestries", "cultures", "focus", "backgrounds"}, f"/options keys: {sorted(opts.keys())}")
         ancestry_indices = [s["index"] for s in opts.get("ancestries", [])]
-        check("1.1.e", "drakari" in ancestry_indices, f"'drakari' in ancestries")
-        check("1.1.f", "human" in ancestry_indices, f"'human' in ancestries")
+        check("1.1.e", "drakari" in ancestry_indices, "'drakari' in ancestries")
+        check("1.1.f", "human" in ancestry_indices, "'human' in ancestries")
         culture_indices = [c["index"] for c in opts.get("cultures", [])]
-        check("1.1.fa", "drakenvale_city" in culture_indices, f"'drakenvale_city' in cultures")
+        check("1.1.fa", "drakenvale_city" in culture_indices, "'drakenvale_city' in cultures")
         focus_indices = [f["index"] for f in opts.get("focus", [])]
-        check("1.1.g", "devoted" in focus_indices, f"'devoted' in focus")
+        check("1.1.g", "devoted" in focus_indices, "'devoted' in focus")
         bg_indices = [b["index"] for b in opts.get("backgrounds", [])]
-        check("1.1.h", "soldier" in bg_indices, f"'soldier' in backgrounds")
+        check("1.1.h", "soldier" in bg_indices, "'soldier' in backgrounds")
 
     subsection("Test 1.1b — GET /catalog/items")
     r = client.get("/catalog/items")
@@ -233,7 +233,7 @@ def part1(client: httpx.Client) -> str | None:
     world = data["world"]
     check("1.3.af", world["location"] == "test-loc-alpha", f"location: {world['location']}")
     check("1.3.ag", world["turn"] == 1, f"turn: {world['turn']}")
-    check("1.3.ah", isinstance(world.get("companions"), list), f"companions list present")
+    check("1.3.ah", isinstance(world.get("companions"), list), "companions list present")
     economy = world.get("economy", {})
     check("1.3.ai", economy.get("wealth_tier") == "modest", f"wealth_tier: {economy.get('wealth_tier')}")
     check("1.3.aj", economy.get("coin") == 1200, f"coin: {economy.get('coin')}")
@@ -263,17 +263,17 @@ def part2(client: httpx.Client, session_id: str) -> None:
     check("2.1.a", r.status_code == 200, f"GET /state → {r.status_code}")
     if r.status_code == 200:
         state = r.json()
-        check("2.1.b", state["session_id"] == session_id, f"session_id matches")
-        check("2.1.c", state["character"]["name"] == "Krath", f"character loaded")
+        check("2.1.b", state["session_id"] == session_id, "session_id matches")
+        check("2.1.c", state["character"]["name"] == "Krath", "character loaded")
         check("2.1.d", len(state["log"]) == 0, f"log empty: {len(state['log'])}")
         # v3.1.0 — new blocks survive round-trip load
-        check("2.1.e", isinstance(state["character"].get("identity"), dict), f"identity persisted")
-        check("2.1.f", isinstance(state["character"].get("equipment"), dict), f"equipment persisted")
-        check("2.1.g", isinstance(state["character"].get("reputation"), list), f"reputation persisted")
-        check("2.1.h", isinstance(state["character"].get("advancement"), dict), f"advancement persisted")
-        check("2.1.i", isinstance(state["world"].get("companions"), list), f"companions persisted")
-        check("2.1.j", isinstance(state["world"].get("economy"), dict), f"economy persisted")
-        check("2.1.k", isinstance(state["world"].get("politics"), dict), f"politics persisted")
+        check("2.1.e", isinstance(state["character"].get("identity"), dict), "identity persisted")
+        check("2.1.f", isinstance(state["character"].get("equipment"), dict), "equipment persisted")
+        check("2.1.g", isinstance(state["character"].get("reputation"), list), "reputation persisted")
+        check("2.1.h", isinstance(state["character"].get("advancement"), dict), "advancement persisted")
+        check("2.1.i", isinstance(state["world"].get("companions"), list), "companions persisted")
+        check("2.1.j", isinstance(state["world"].get("economy"), dict), "economy persisted")
+        check("2.1.k", isinstance(state["world"].get("politics"), dict), "politics persisted")
     subsection("Test 2.1b — Companion lifecycle")
     catalog_resp = client.get("/catalog/creatures")
     check("2.1b.a", catalog_resp.status_code == 200, f"GET /catalog/creatures → {catalog_resp.status_code}")
@@ -350,7 +350,7 @@ def part2(client: httpx.Client, session_id: str) -> None:
             if get_resp.status_code == 200:
                 got = get_resp.json()
                 check("2.1b.i", got["companion_id"] == companion_id, f"fetched companion_id matches: {got['companion_id']}")
-                check("2.1b.j", got["archived"] is False, f"include_archived=false returns active record")
+                check("2.1b.j", got["archived"] is False, "include_archived=false returns active record")
 
             state_for_delta = client.get(f"/state/{session_id}")
             check("2.1b.k", state_for_delta.status_code == 200, f"GET /state before companion delta → {state_for_delta.status_code}")
@@ -426,7 +426,7 @@ def part2(client: httpx.Client, session_id: str) -> None:
                 if tier_history:
                     check("2.1b.s", tier_history[0]["from_tier"] == "creature", f"from_tier: {tier_history[0]['from_tier']}")
                     check("2.1b.t", tier_history[0]["to_tier"] == "exceptional", f"to_tier: {tier_history[0]['to_tier']}")
-                    check("2.1b.u", bool(tier_history[0].get("trigger")), f"transition trigger recorded")
+                    check("2.1b.u", bool(tier_history[0].get("trigger")), "transition trigger recorded")
 
             state_after_transition = client.get(f"/state/{session_id}")
             check("2.1b.v", state_after_transition.status_code == 200, f"GET /state after transition → {state_after_transition.status_code}")
@@ -435,7 +435,7 @@ def part2(client: httpx.Client, session_id: str) -> None:
                 archive = world_after.get("companion_archive", [])
                 check("2.1b.w", len(archive) == 1, f"world.companion_archive count: {len(archive)}")
                 if archive:
-                    check("2.1b.x", archive[0]["id"] == companion_id, f"archived record id matches transitioned companion")
+                    check("2.1b.x", archive[0]["id"] == companion_id, "archived record id matches transitioned companion")
 
             already_exceptional_resp = client.post(
                 f"/companion/{companion_id}/transition",
@@ -565,12 +565,12 @@ def part2(client: httpx.Client, session_id: str) -> None:
 
         # Core fields
         check("2.2.b", char["hp"]["current"] == 85, f"hp saved: {char['hp']['current']}")
-        check("2.2.c", len(state["log"]) == 1, f"log has 1 entry")
+        check("2.2.c", len(state["log"]) == 1, "log has 1 entry")
         check("2.2.d", world["turn"] == 2, f"turn: {world['turn']}")
 
         # v3.1.0 — identity round-trip
         check("2.2.e", char.get("identity", {}).get("alignment", {}).get("order") == "lawful",
-              f"alignment.order round-trips")
+              "alignment.order round-trips")
 
         # v3.1.0 — equipment round-trip
         worn = char.get("equipment", {}).get("worn", [])
@@ -582,7 +582,7 @@ def part2(client: httpx.Client, session_id: str) -> None:
         rep = char.get("reputation", [])
         check("2.2.i", len(rep) == 2, f"reputation entries: {len(rep)}")
         council_rep = next((e for e in rep if e["faction"] == "draconic_council"), None)
-        check("2.2.j", council_rep is not None, f"draconic_council entry present")
+        check("2.2.j", council_rep is not None, "draconic_council entry present")
         check("2.2.k", council_rep["standing"] == -40 if council_rep else False,
               f"council standing: {council_rep['standing'] if council_rep else 'missing'}")
 
@@ -631,11 +631,11 @@ def part3(client: httpx.Client) -> None:
     check("3.1.a", r.status_code == 200, f"POST /roll → {r.status_code}")
     if r.status_code == 200:
         result = r.json()
-        check("3.1.b", "roll" in result, f"'roll' in response")
-        check("3.1.c", "target" in result, f"'target' in response")
-        check("3.1.d", "success" in result, f"'success' in response")
-        check("3.1.e", "degree" in result, f"'degree' in response")
-        check("3.1.f", "margin" in result, f"'margin' in response")
+        check("3.1.b", "roll" in result, "'roll' in response")
+        check("3.1.c", "target" in result, "'target' in response")
+        check("3.1.d", "success" in result, "'success' in response")
+        check("3.1.e", "degree" in result, "'degree' in response")
+        check("3.1.f", "margin" in result, "'margin' in response")
         check("3.1.g", 1 <= result["roll"] <= 100, f"roll={result['roll']} in [1,100]")
         check("3.1.h", result["target"] == 65, f"target echoed: {result['target']}")
         expected_margin = 65 - result["roll"]
@@ -661,11 +661,11 @@ def part3(client: httpx.Client) -> None:
     if r.status_code == 200:
         result = r.json()
         if result["roll"] == 1:
-            check("3.3.a", result["degree"] == "critical_success", f"roll=1 → critical_success")
-            check("3.3.b", result["critical_success"] is True, f"critical_success flag True")
+            check("3.3.a", result["degree"] == "critical_success", "roll=1 → critical_success")
+            check("3.3.b", result["critical_success"] is True, "critical_success flag True")
         if result["roll"] == 100:
-            check("3.3.c", result["degree"] == "critical_failure", f"roll=100 → critical_failure")
-            check("3.3.d", result["critical_failure"] is True, f"critical_failure flag True")
+            check("3.3.c", result["degree"] == "critical_failure", "roll=100 → critical_failure")
+            check("3.3.d", result["critical_failure"] is True, "critical_failure flag True")
 
 
 # ---------------------------------------------------------------------------
@@ -740,7 +740,7 @@ def part5(client: httpx.Client, session_id: str) -> None:
 
         # v3.1.0 — identity survives re-seed
         identity = char.get("identity", {})
-        check("5.1.f", isinstance(identity, dict), f"identity block present after re-seed")
+        check("5.1.f", isinstance(identity, dict), "identity block present after re-seed")
         check("5.1.g", identity.get("alignment", {}).get("order") == "chaotic",
               f"alignment.order: {identity.get('alignment', {}).get('order')}")
         check("5.1.h", len(identity.get("motivations", [])) == 1,
@@ -748,11 +748,11 @@ def part5(client: httpx.Client, session_id: str) -> None:
 
         # v3.1.0 — equipment and reputation seeded empty
         check("5.1.i", char.get("equipment") == {"worn": [], "carried": [], "stashed": []},
-              f"equipment empty on re-seed")
+              "equipment empty on re-seed")
         check("5.1.j", char.get("reputation") == [],
-              f"reputation empty on re-seed")
+              "reputation empty on re-seed")
         check("5.1.k", char.get("advancement") == zero_advancement(),
-              f"advancement initialized on re-seed")
+              "advancement initialized on re-seed")
 
 
 # ---------------------------------------------------------------------------
@@ -870,7 +870,7 @@ def part7(client: httpx.Client) -> None:
 # ---------------------------------------------------------------------------
 
 def main() -> None:
-    print(f"\nMystic Weave 2.0 — Loop Test")
+    print("\nMystic Weave 2.0 — Loop Test")
     print(f"Target: {BASE_URL}\n")
 
     with httpx.Client(base_url=BASE_URL, timeout=15.0) as client:
@@ -878,7 +878,7 @@ def main() -> None:
         if r.status_code != 200:
             print(f"FATAL: /health returned {r.status_code}. Is the server running?")
             sys.exit(1)
-        print(f"Health check: OK")
+        print("Health check: OK")
 
         session_id = part1(client)
         if session_id:

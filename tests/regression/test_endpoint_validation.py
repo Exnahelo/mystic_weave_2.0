@@ -6,7 +6,6 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
 from api.database import get_pool
-from api.models import CharacterModel, WorldModel
 from api.routes import session, state
 from tests.helpers import zero_advancement
 
