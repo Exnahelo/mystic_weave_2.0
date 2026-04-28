@@ -1,0 +1,41 @@
+{
+  "id": "pitons-bundle",
+  "name": "Climbing Pitons (10)",
+  "description": "Ten iron spikes with eyelets, hammered into rock or timber to anchor a rope.",
+  "tags": [
+    "mundane",
+    "survival",
+    "iron"
+  ],
+  "affordances": [
+    "climb-aid"
+  ],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 2.5,
+    "stackable": true,
+    "max_stack": 10
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 50
+    },
+    "availability": {
+      "settlement_minimum": "village",
+      "legality": "open",
+      "market_tags": [
+        "general-goods",
+        "blacksmith"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "effects": []
+  }
+}

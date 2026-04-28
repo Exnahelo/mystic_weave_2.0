@@ -1,0 +1,44 @@
+{
+  "id": "rations-day",
+  "name": "Trail Rations (1 day)",
+  "description": "Hard biscuit, dried meat, and waxed cheese \u2014 one day's calories for an adult, packed for the road.",
+  "tags": [
+    "mundane",
+    "survival",
+    "consumable"
+  ],
+  "affordances": [
+    "portable-food"
+  ],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 2.0,
+    "stackable": true,
+    "max_stack": 10
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 50
+    },
+    "availability": {
+      "settlement_minimum": "hamlet",
+      "legality": "open",
+      "market_tags": [
+        "general-goods"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "consumable": {
+      "uses": 1,
+      "consume_action": "action"
+    },
+    "effects": []
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "backpack",
+  "name": "Backpack",
+  "description": "A canvas pack with leather straps, suitable for the weight one person can sensibly carry on the road.",
+  "tags": [
+    "mundane",
+    "survival",
+    "cloth",
+    "leather",
+    "container"
+  ],
+  "affordances": [
+    "carry",
+    "store"
+  ],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 5.0,
+    "stackable": false
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 200
+    },
+    "availability": {
+      "settlement_minimum": "hamlet",
+      "legality": "open",
+      "market_tags": [
+        "general-goods",
+        "leatherworker"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "container": {
+      "capacity_lb": 30.0,
+      "capacity_items": null,
+      "extradimensional": false
+    },
+    "effects": []
+  }
+}

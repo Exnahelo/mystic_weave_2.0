@@ -1,0 +1,39 @@
+{
+  "id": "signal-whistle",
+  "name": "Signal Whistle",
+  "description": "A small carved bone or brass whistle on a cord; carries half a mile through quiet woods.",
+  "tags": [
+    "mundane",
+    "survival"
+  ],
+  "affordances": [
+    "signal"
+  ],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 0.1,
+    "stackable": true,
+    "max_stack": 5
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 5
+    },
+    "availability": {
+      "settlement_minimum": "hamlet",
+      "legality": "open",
+      "market_tags": [
+        "general-goods"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "effects": []
+  }
+}

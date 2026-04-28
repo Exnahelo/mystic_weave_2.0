@@ -1,0 +1,40 @@
+{
+  "id": "ten-foot-pole",
+  "name": "Ten-Foot Pole",
+  "description": "A straight wooden pole, ten feet long. Vital and unglamorous.",
+  "tags": [
+    "mundane",
+    "survival",
+    "wood"
+  ],
+  "affordances": [
+    "probe"
+  ],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 7.0,
+    "stackable": false
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 5
+    },
+    "availability": {
+      "settlement_minimum": "hamlet",
+      "legality": "open",
+      "market_tags": [
+        "general-goods",
+        "carpenter"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "effects": []
+  }
+}

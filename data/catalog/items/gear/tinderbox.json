@@ -1,0 +1,39 @@
+{
+  "id": "tinderbox",
+  "name": "Tinderbox",
+  "description": "A small tin holding flint, steel, and dry tinder. Reliably starts a fire in seconds where improvising would take minutes.",
+  "tags": [
+    "mundane",
+    "survival",
+    "iron"
+  ],
+  "affordances": [
+    "ignite"
+  ],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 1.0,
+    "stackable": false
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 50
+    },
+    "availability": {
+      "settlement_minimum": "hamlet",
+      "legality": "open",
+      "market_tags": [
+        "general-goods"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "effects": []
+  }
+}

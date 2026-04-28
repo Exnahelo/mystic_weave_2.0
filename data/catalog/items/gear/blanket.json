@@ -1,0 +1,41 @@
+{
+  "id": "blanket",
+  "name": "Wool Blanket",
+  "description": "A heavy woolen blanket. Warm even when wet \u2014 the only honest thing you can say about wool.",
+  "tags": [
+    "mundane",
+    "survival",
+    "cloth"
+  ],
+  "affordances": [
+    "warm"
+  ],
+  "schema_version": 1,
+  "inventory": {
+    "weight_lb": 3.0,
+    "stackable": true,
+    "max_stack": 5
+  },
+  "worldness": {
+    "rarity": "common",
+    "pricing": {
+      "model": "authored",
+      "canonical_value_cp": 50
+    },
+    "availability": {
+      "settlement_minimum": "hamlet",
+      "legality": "open",
+      "market_tags": [
+        "general-goods",
+        "tailor"
+      ]
+    },
+    "notability": {
+      "notable": false,
+      "quest_bound": false
+    }
+  },
+  "modules": {
+    "effects": []
+  }
+}
