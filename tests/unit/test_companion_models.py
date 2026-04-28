@@ -278,7 +278,7 @@ def test_envelope_dispatches_by_tier() -> None:
 
 @pytest.mark.unit
 def test_regression_stored_creature_envelopes_validate_with_tier() -> None:
-    dusk CompanionEnvelope.model_validate(
+    dusk = CompanionEnvelope.model_validate(
         {
             "id": "sylvara_heartwood_moonthorn_wolf",
             "companion": {
