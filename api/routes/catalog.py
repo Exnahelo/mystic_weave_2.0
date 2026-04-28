@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from typing import Any, Literal, get_args
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, HTTPException, Query
 
 from api.companions import (
     AgeCategory,
@@ -26,19 +26,16 @@ from api.companions import (
     TrainingLevel,
 )
 from api.game_data import (
-    list_ammunition,
-    list_apparel_items,
-    list_armor,
+    filter_catalog_by_kind,
+    load_catalog_items,
     list_creature_catalog,
     list_exceptional_catalog,
     list_learned_commands,
-    list_magical_items,
-    list_mundane_items,
     list_natural_abilities,
     list_tactical_roles,
-    list_weapons,
 )
 from api.models import (
+    CatalogItemDetailResponse,
     CompanionVocabResponse,
     CreatureCatalogResponse,
     ItemCatalogResponse,
@@ -67,18 +64,21 @@ async def get_item_catalog(
     ),
 ) -> ItemCatalogResponse:
     """
-    Return one runtime item catalog.
+    Return one runtime item catalog from the catalog source.
 
-    `kind` is required so clients cannot accidentally request the full combined
-    catalog and exceed response-size caps.
+    `kind` is required so clients cannot accidentally request the full
+    combined catalog and exceed response-size caps. The "apparel" bucket
+    is preserved for API stability but always returns empty (no apparel
+    module exists in the catalog schema).
     """
+    items = [ItemOption(**i) for i in filter_catalog_by_kind(kind)]
     return ItemCatalogResponse(
-        mundane_items=[ItemOption(**item) for item in list_mundane_items()] if kind == "mundane" else [],
-        magical_items=[ItemOption(**item) for item in list_magical_items()] if kind == "magical" else [],
-        apparel_items=[ItemOption(**item) for item in list_apparel_items()] if kind == "apparel" else [],
-        weapon_items=[ItemOption(**item) for item in list_weapons()] if kind == "weapon" else [],
-        armor_items=[ItemOption(**item) for item in list_armor()] if kind == "armor" else [],
-        ammunition_items=[ItemOption(**item) for item in list_ammunition()] if kind == "ammunition" else [],
+        mundane_items=items if kind == "mundane" else [],
+        magical_items=items if kind == "magical" else [],
+        apparel_items=items if kind == "apparel" else [],
+        weapon_items=items if kind == "weapon" else [],
+        armor_items=items if kind == "armor" else [],
+        ammunition_items=items if kind == "ammunition" else [],
     )
 
 
@@ -121,3 +121,22 @@ async def get_companion_vocab() -> CompanionVocabResponse:
         communication_levels=_literal_values(Communication),
         autonomy_levels=_literal_values(Autonomy),
     )
+
+
+@router.get(
+    "/catalog/items/{item_id}",
+    response_model=CatalogItemDetailResponse,
+    tags=["catalog"],
+)
+async def get_catalog_item(item_id: str) -> CatalogItemDetailResponse:
+    """
+    Return the full catalog Item for a given ID.
+
+    The response follows the api.items.Item schema. The schema is also
+    exported as data/catalog/schemas/item.schema.json for tool consumers.
+    """
+    for item in load_catalog_items():
+        if item["id"] == item_id:
+            payload = {k: v for k, v in item.items() if k != "_subdir"}
+            return CatalogItemDetailResponse.model_validate(payload)
+    raise HTTPException(status_code=404, detail=f"item not found: {item_id}")

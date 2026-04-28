@@ -926,6 +926,15 @@ class ItemOption(BaseModel):
     effects: list[str] = Field(default_factory=list)
 
 
+class CatalogItemDetailResponse(BaseModel):
+    """Full catalog item, as authored. Shape matches api.items.Item."""
+    model_config = ConfigDict(extra="allow")
+
+    id: str
+    name: str
+    description: str = ""
+
+
 class KnowledgeGroupEntry(BaseModel):
     index: str
     name: str

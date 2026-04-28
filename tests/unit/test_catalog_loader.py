@@ -10,6 +10,8 @@ import api.game_data as game_data
 @pytest.fixture(autouse=True)
 def clear_catalog_cache() -> None:
     game_data.load_catalog_items.cache_clear()
+    yield
+    game_data.load_catalog_items.cache_clear()
 
 
 def _write_item(root: Path, subdir: str, filename: str, item: dict) -> Path:
