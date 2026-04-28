@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "rarities": [
+    {"id": "common", "rank": 1},
+    {"id": "uncommon", "rank": 2},
+    {"id": "rare", "rank": 3},
+    {"id": "very-rare", "rank": 4},
+    {"id": "legendary", "rank": 5},
+    {"id": "unique", "rank": 6}
+  ]
+}

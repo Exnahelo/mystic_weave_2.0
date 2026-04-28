@@ -10,3 +10,4 @@ reports/
 .vscode/settings.json
 prompts/.obsidian/graph.json
 prompts/.obsidian/workspace.json
+data/build/

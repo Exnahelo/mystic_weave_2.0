@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "affordances": [
+    {
+      "id": "cut",
+      "name": "Cut",
+      "category": "physical-manipulation",
+      "description": "Can sever, slice, or shape suitable materials."
+    },
+    {
+      "id": "thrust",
+      "name": "Thrust",
+      "category": "physical-manipulation",
+      "description": "Can pierce or stab into resistant materials."
+    },
+    {
+      "id": "parry",
+      "name": "Parry",
+      "category": "combat-defensive",
+      "description": "Can deflect incoming melee attacks if wielded skillfully."
+    },
+    {
+      "id": "illuminate",
+      "name": "Illuminate",
+      "category": "utility",
+      "description": "Can provide useful light in dark environments."
+    },
+    {
+      "id": "ignite",
+      "name": "Ignite",
+      "category": "utility",
+      "description": "Can set flammable materials on fire."
+    },
+    {
+      "id": "signal",
+      "name": "Signal",
+      "category": "utility",
+      "description": "Can be used to communicate at distance through visibility or sound."
+    },
+    {
+      "id": "improvised-weapon",
+      "name": "Improvised Weapon",
+      "category": "combat-offensive",
+      "description": "Can be wielded as a weapon at reduced effectiveness."
+    }
+  ]
+}
