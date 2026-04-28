@@ -12,10 +12,10 @@ Tests the full game loop against a running local (or Railway) instance:
 
 Usage:
     # Against local server
-    python tests/loop_test.py
+    python -m tests.loop_test
 
     # Against Railway
-    python tests/loop_test.py https://mysticweave-production.up.railway.app
+    python -m tests.loop_test https://mysticweave-production.up.railway.app
 """
 
 from __future__ import annotations

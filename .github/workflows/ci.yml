@@ -97,4 +97,4 @@ jobs:
           exit 1
 
       - name: Run loop test
-        run: python tests/loop_test.py
+        run: python -m tests.loop_test
