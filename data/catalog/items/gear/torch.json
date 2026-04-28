@@ -22,7 +22,8 @@
   "worldness": {
     "rarity": "common",
     "pricing": {
-      "model": "authored"
+      "model": "authored",
+      "canonical_value_cp": 1
     },
     "availability": {
       "settlement_minimum": "hamlet",
