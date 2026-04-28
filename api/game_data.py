@@ -14,6 +14,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, Callable
 
+from api.items import Item, derive_indexes
 from api.models import DOMAIN_KEYS
 from core.dice_roller import roll
 
@@ -55,6 +56,7 @@ _BEAST_DATA_FILES = (
     "beasts/learned_commands.json",
     "beasts/tactical_roles.json",
 )
+_CATALOG_ITEMS_DIR = _DATA_DIR / "catalog" / "items"
 _NPC_DATA_DIR = _DATA_DIR / "npcs"
 _MAGIC_DIR = _DATA_DIR / "magic"
 _PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
@@ -91,6 +93,131 @@ def _load_json(filename: str) -> dict[str, Any] | list[Any]:
     if isinstance(data, list) and data and "index" in data[0]:
         return {item["index"]: item for item in data}
     return data
+
+
+@lru_cache(maxsize=1)
+def load_catalog_items() -> list[dict[str, Any]]:
+    """
+    Load every item under data/catalog/items/**/*.json.
+
+    Each item is validated through the Item Pydantic model at load time;
+    validation errors raise immediately so a broken catalog fails fast at
+    startup rather than at request time.
+
+    Returns a list of dicts in stable order (sorted by ID). Each dict has
+    an extra `_subdir` key (the immediate parent directory under
+    catalog/items/, e.g. "weapons", "armor", "gear") for downstream
+    category routing. The `_subdir` key is the only field added; all other
+    fields are exactly as authored.
+    """
+    if not _CATALOG_ITEMS_DIR.is_dir():
+        return []
+
+    out: list[dict[str, Any]] = []
+    for path in sorted(_CATALOG_ITEMS_DIR.rglob("*.json")):
+        # Skip template files (starts with underscore) defensively, though
+        # data/catalog/items/ should not contain any.
+        if path.name.startswith("_"):
+            continue
+        raw = json.loads(path.read_text())
+        # Validate. Raises pydantic.ValidationError on failure.
+        Item.model_validate(raw)
+        # Tag with subdir for category routing.
+        subdir = path.parent.name
+        raw["_subdir"] = subdir
+        out.append(raw)
+
+    out.sort(key=lambda d: d["id"])
+    return out
+
+
+def project_catalog_to_item_option(item: dict[str, Any]) -> dict[str, Any]:
+    """
+    Project a catalog Item dict into the ItemOption shape consumed by the
+    legacy /catalog/items?kind=... endpoint.
+
+    Mapping:
+      - id, name, description, tags: copied
+      - category: derived from the item's _subdir
+                  (e.g. "weapons" -> "weapon", "armor" -> "armor",
+                   "ammunition" -> "ammunition", "gear" -> "gear")
+      - roll_tag: None (no direct equivalent in new schema; the first
+                  tool.roll_tags entry is NOT surfaced here to keep the
+                  projection lossless and unambiguous)
+
+    The Item model has no apparel module yet; apparel-shaped catalog items
+    do not exist in this batch. The projection is best-effort and stable:
+    extra fields beyond ItemOption's defined fields are not added (the
+    ItemOption model has extra="allow", but we avoid relying on it).
+    """
+    subdir_to_category = {
+        "weapons": "weapon",
+        "armor": "armor",
+        "ammunition": "ammunition",
+        "gear": "gear",
+        "wondrous": "wondrous",
+    }
+    return {
+        "id": item["id"],
+        "name": item["name"],
+        "category": subdir_to_category.get(item.get("_subdir", ""), "gear"),
+        "description": item.get("description", ""),
+        "tags": list(item.get("tags", [])),
+        "roll_tag": None,
+    }
+
+
+def filter_catalog_by_kind(kind: str) -> list[dict[str, Any]]:
+    """
+    Return catalog items projected to ItemOption shape, filtered by the
+    legacy `kind` query parameter values.
+
+    Filter rules (using derive_indexes):
+      - "magical":    is_magical == True
+      - "weapon":     is_weapon == True AND is_magical == False
+      - "armor":      is_armor == True AND is_magical == False
+      - "ammunition": is_ammunition == True
+      - "mundane":    not (is_weapon or is_armor or is_ammunition or is_magical)
+      - "apparel":    [] (no apparel module in current schema)
+
+    The "magical" bucket overrides weapon/armor for items that are both,
+    matching the legacy convention where magical longswords appeared in
+    magical_item.json, not weapon.json.
+
+    Unknown kind values return an empty list rather than raising; route
+    layer handles input validation.
+    """
+    if kind == "apparel":
+        return []
+
+    out: list[dict[str, Any]] = []
+    for item in load_catalog_items():
+        idx = derive_indexes(
+            Item.model_validate({k: v for k, v in item.items() if k != "_subdir"})
+        )
+
+        if kind == "magical":
+            include = idx["is_magical"]
+        elif kind == "weapon":
+            include = idx["is_weapon"] and not idx["is_magical"]
+        elif kind == "armor":
+            include = idx["is_armor"] and not idx["is_magical"]
+        elif kind == "ammunition":
+            include = idx["is_ammunition"]
+        elif kind == "mundane":
+            include = not (
+                idx["is_weapon"]
+                or idx["is_armor"]
+                or idx["is_ammunition"]
+                or idx["is_magical"]
+            )
+        else:
+            include = False
+
+        if include:
+            out.append(project_catalog_to_item_option(item))
+
+    return out
 
 
 # ---------------------------------------------------------------------------
