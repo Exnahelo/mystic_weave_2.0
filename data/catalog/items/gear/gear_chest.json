@@ -2,7 +2,7 @@
   "id": "gear-chest",
   "name": "Chest",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "storage",
   "schema_version": 1,
   "description": "A heavy secure storage container intended for fixed locations rather than travel.",
   "narrative_effects": [
@@ -17,8 +17,12 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 5000,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "affluent",
+  "market_tags": [
+    "carpenter",
+    "blacksmith",
+    "noble-armory"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

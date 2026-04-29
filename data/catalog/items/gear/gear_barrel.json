@@ -2,7 +2,7 @@
   "id": "gear-barrel",
   "name": "Barrel",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "storage",
   "schema_version": 1,
   "description": "A heavy barrel for storing liquid or dry goods in meaningful volume.",
   "narrative_effects": [
@@ -17,8 +17,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 200,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "comfortable",
+  "market_tags": [
+    "carpenter",
+    "general-goods"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

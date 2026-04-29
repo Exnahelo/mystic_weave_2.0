@@ -2,7 +2,7 @@
   "id": "gear-basket",
   "name": "Basket",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "storage",
   "schema_version": 1,
   "description": "An open carry basket used for market goods, produce, and field collection.",
   "narrative_effects": [
@@ -17,8 +17,10 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 20,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

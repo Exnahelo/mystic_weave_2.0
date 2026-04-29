@@ -2,9 +2,9 @@
   "id": "gear-thornfiber-basket",
   "name": "Thornfiber Basket",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "storage",
   "schema_version": 1,
-  "description": "A Thornfiber-woven basket of the pattern common throughout Thornveil and Vaelmere \u2014 lightweight, durable, serviceable for gathering and household use.",
+  "description": "A Thornfiber-woven basket of the pattern common throughout Thornveil and Vaelmere — lightweight, durable, serviceable for gathering and household use.",
   "narrative_effects": [
     "Standard gathering and storage container.",
     "Recognizable elven craft; often retained as a household piece rather than discarded when it wears."
@@ -20,8 +20,10 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 15,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

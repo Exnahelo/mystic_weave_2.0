@@ -2,7 +2,7 @@
   "id": "gear-flask",
   "name": "Flask",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "storage",
   "schema_version": 1,
   "description": "A compact container for carrying a pint of liquid.",
   "narrative_effects": [
@@ -17,8 +17,10 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 10,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "destitute",
+  "market_tags": [
+    "general-goods"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,
