@@ -2,7 +2,7 @@
   "id": "gear-cooks-pot",
   "name": "Cook's Pot",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "survival",
   "schema_version": 1,
   "description": "A durable field or hearth pot for boiling, brewing, and proper meal preparation.",
   "narrative_effects": [
@@ -17,8 +17,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 20,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "blacksmith"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

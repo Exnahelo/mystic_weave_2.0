@@ -2,7 +2,7 @@
   "id": "rain-dew-catch",
   "name": "Rain / Dew Catch",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "survival",
   "schema_version": 1,
   "description": "A lightweight collection sheet and line kit for gathering rainwater or condensing overnight moisture into a usable vessel.",
   "narrative_effects": [
@@ -18,8 +18,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 35,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "tailor"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

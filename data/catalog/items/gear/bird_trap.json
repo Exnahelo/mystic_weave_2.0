@@ -2,7 +2,7 @@
   "id": "bird-trap",
   "name": "Bird Trap",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "survival",
   "schema_version": 1,
   "description": "A lightweight trigger trap for catching roosting or ground-feeding birds in camp-adjacent or foraging conditions.",
   "narrative_effects": [
@@ -18,8 +18,10 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 20,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

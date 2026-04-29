@@ -2,7 +2,7 @@
   "id": "gear-fishing-line-hook",
   "name": "Fishing Line and Hook",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "survival",
   "schema_version": 1,
   "description": "A simple but functional line-and-hook kit for fishing as food gathering or small-scale resource collection.",
   "narrative_effects": [
@@ -18,8 +18,10 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 3,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "destitute",
+  "market_tags": [
+    "general-goods"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

@@ -2,7 +2,7 @@
   "id": "gear-pole-10ft",
   "name": "Pole (10 ft)",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "survival",
   "schema_version": 1,
   "description": "A long utility pole for probing, vaulting, testing surfaces, or reaching distant objects without contact.",
   "narrative_effects": [
@@ -18,8 +18,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 1,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "destitute",
+  "market_tags": [
+    "general-goods",
+    "carpenter"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,
