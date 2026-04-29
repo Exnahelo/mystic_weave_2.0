@@ -2,7 +2,7 @@
   "id": "gear-map",
   "name": "Map",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "navigation",
   "schema_version": 1,
   "description": "A mapped representation of a known area used to aid travel and orientation.",
   "narrative_effects": [
@@ -17,8 +17,10 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 10,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "destitute",
+  "market_tags": [
+    "general-goods"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

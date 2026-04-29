@@ -2,11 +2,11 @@
   "id": "veilvine-wayfinder",
   "name": "Veilvine Wayfinder",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "navigation",
   "schema_version": 1,
-  "description": "A small pendant of living Veilvine tended by its bearer \u2014 whose color shift indicates seasonal thresholds and ambient-field conditions in the Feywood and at the Border.",
+  "description": "A small pendant of living Veilvine tended by its bearer — whose color shift indicates seasonal thresholds and ambient-field conditions in the Feywood and at the Border.",
   "narrative_effects": [
-    "Provides subtle visual reading of ambient-field state and seasonal transition timing \u2014 useful for druidic and ranger work.",
+    "Provides subtle visual reading of ambient-field state and seasonal transition timing — useful for druidic and ranger work.",
     "Requires regular tending; neglected wayfinders wither within weeks.",
     "Not a realm-trade item; given by druids or druidic-adjacent elves to practitioners who will actually tend it."
   ],
@@ -22,7 +22,7 @@
   "rarity": "uncommon",
   "legality": "open",
   "value_cd": 500,
-  "wealth_tier_floor": null,
+  "wealth_tier_floor": "comfortable",
   "market_tags": [],
   "consumable": false,
   "charges_max": null,

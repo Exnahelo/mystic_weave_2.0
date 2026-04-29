@@ -2,7 +2,7 @@
   "id": "gear-spyglass",
   "name": "Spyglass",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "navigation",
   "schema_version": 1,
   "description": "A distant-view optical tool for surveying terrain, movement, and remote details.",
   "narrative_effects": [
@@ -17,8 +17,11 @@
   "rarity": "uncommon",
   "legality": "open",
   "value_cd": 10000,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "affluent",
+  "market_tags": [
+    "noble-armory",
+    "auction"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,
