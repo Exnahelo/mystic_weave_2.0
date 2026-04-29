@@ -198,6 +198,10 @@
       "description": ""
     },
     {
+      "id": "composite-treatment",
+      "description": "Item is built around Feywood composite treatment (resins, mineral washes, treated fibers). See data/catalog/crafting/materials.json."
+    },
+    {
       "id": "concealable",
       "description": ""
     },
@@ -308,6 +312,10 @@
     {
       "id": "elven-military",
       "description": ""
+    },
+    {
+      "id": "elven-steel",
+      "description": "Item is built around or includes Elven Steel (feywrought ordinary metal). See data/catalog/crafting/materials.json."
     },
     {
       "id": "emergency",
