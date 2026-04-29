@@ -2,7 +2,7 @@
   "id": "ceremonial-elven-robe",
   "name": "Ceremonial Elven Robe",
   "category": "apparel",
-  "subcategory": "clothing",
+  "subcategory": "ceremonial",
   "schema_version": 1,
   "description": "A formal robe worn by elves for observances, oath-marking events, and Council-facing business — woven from fine elven plant-fiber textiles with subtle house-identifying weave patterns.",
   "narrative_effects": [

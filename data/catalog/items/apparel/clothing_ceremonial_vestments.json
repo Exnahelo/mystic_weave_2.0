@@ -2,7 +2,7 @@
   "id": "clothing-ceremonial-vestments",
   "name": "Ceremonial Vestments",
   "category": "apparel",
-  "subcategory": "clothing",
+  "subcategory": "ceremonial",
   "schema_version": 1,
   "description": "Formal vestments crafted for religious ceremonies, sacred rites, and devotional occasions.",
   "narrative_effects": [
@@ -10,7 +10,6 @@
   ],
   "tags": [
     "apparel",
-    "clothing",
     "ceremonial",
     "sacred",
     "formal"
