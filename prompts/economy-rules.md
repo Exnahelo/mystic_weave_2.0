@@ -1,6 +1,6 @@
 # Mystic Weave — Economy Rules
 
-Version 1.0 — April 2026
+Version 1.1 — April 2026
 Status: Canonical. Upload to GPT builder as a knowledge file.
 
 ---
@@ -11,10 +11,13 @@ This file contains the GPT-facing rules for handling coin, barter, pricing conte
 
 Use this file together with:
 
-* `data/economy/currency.json`
-* `data/characters/starting_wealth.json`
-* `data/economy/prices.json`
-* `data/economy/regional_nodes.json`
+* `data/catalog/items/<category>/` — per-item catalog with `value_cd` per item (item-level prices)
+* `data/economy/currency.json` — denomination data and conversion values
+* `data/economy/prices.json` — baseline reference prices for services, lodging, food, transport, and other non-catalog purchases
+* `data/economy/regional_nodes.json` — regional availability and trade-node heuristics
+* `data/characters/starting_wealth.json` — starting wealth tiers for character creation
+* `mechanics-tables.md` — currency narration ranges, wealth tier vocabulary
+* `items-rules.md` — item interpretation and catalog usage
 
 ---
 
@@ -39,7 +42,7 @@ Use coin for:
 * mundane goods with stable reference pricing
 * purchases in SSTC-adjacent trade environments
 
-Use the JSON price tables as baseline references. Do not invent arbitrary prices when a listed comparable exists.
+For item purchases, the catalog `value_cd` field is the baseline price. For services and non-catalog purchases (meals, lodging, transport, professional fees), use `data/economy/prices.json`. Do not invent arbitrary prices when a listed comparable exists.
 
 ---
 
@@ -47,7 +50,7 @@ Use the JSON price tables as baseline references. Do not invent arbitrary prices
 
 Use barter when the exchange centers on:
 
-* magical goods
+* magical goods (especially T2 and above per items-rules.md tier framework)
 * magical services
 * rare or unstable materials
 * relics or sacred objects
@@ -77,16 +80,14 @@ When a transaction is barter-appropriate:
 
 ## Narration Convention
 
-Coin should be narrated naturally by denomination, not as raw decimal gold.
-
-Use these rules:
+Coin should be narrated naturally by denomination, not as raw decimal gold. The narration ranges table is in `mechanics-tables.md`; the rule:
 
 * amounts under 1 GD → narrate as CD or SD
 * amounts from 1 to 99 GD → narrate as GD
 * amounts 100 GD and above → narrate as PD when divisible cleanly by 10, otherwise GD
 * never narrate a price as raw GD when a more natural denomination applies
 
-The data layer may store values in CD for consistency. The GPT should still narrate them using natural denominations.
+The data layer stores values in CD for consistency. The GPT narrates them using natural denominations.
 
 ---
 
@@ -101,6 +102,8 @@ Use it to guide:
 * what level of reserves, comfort, or dependence makes sense in narration
 
 Only update `wealth_tier` when a material change in long-term status occurs.
+
+Items in the catalog may carry `wealth_tier_floor` as a soft hint (items typical of or limited to characters at that tier and above). It is informational, not a hard gate.
 
 ---
 
@@ -138,6 +141,8 @@ Examples:
 * liminal, fey-adjacent, or threshold-trade goods are more plausible through Dracélune
 * security-sensitive, ward-related, or low-trust corridor trade behaves differently near Greymantle and the Platinum Oath approach
 
+The catalog's `market_tags` field on individual items signals which kinds of vendors typically stock or fence the item; cross-reference with regional context.
+
 ---
 
 ## Transaction State Rules
@@ -156,7 +161,8 @@ These are mandatory.
 
 3. **Do not invent arbitrary prices when reference data exists.**
 
-   * Use listed prices when available.
+   * For items: use catalog `value_cd`.
+   * For services and non-catalog goods: use `data/economy/prices.json`.
    * For unlisted goods, estimate from the nearest comparable item and remain session-consistent.
 
 4. **Barter is narrative, not arithmetic.**
@@ -171,10 +177,13 @@ These are mandatory.
 
 ## Reference Files
 
+* `data/catalog/items/<category>/` — per-item catalog with `value_cd`, `wealth_tier_floor`, `market_tags`, `legality`
 * `data/economy/currency.json` — denomination data and conversion values
-* `data/characters/starting_wealth.json` — starting wealth tiers for character creation
-* `data/economy/prices.json` — baseline price tables stored in CD
+* `data/economy/prices.json` — service and non-catalog reference prices, stored in CD
 * `data/economy/regional_nodes.json` — regional availability and trade-node heuristics
+* `data/characters/starting_wealth.json` — starting wealth tiers for character creation
+* `mechanics-tables.md` — currency narration table, wealth tier vocabulary
+* `items-rules.md` — item interpretation and catalog usage
 * `world.md` — world-level social and economic context
 * `groups.md` — SSTC and institutional trade context
 
@@ -182,4 +191,4 @@ These are mandatory.
 
 ## Summary
 
-Use coin for ordinary trade. Use barter for meaningful or leverage-based exchange. Read price tables as baselines, not absolutes. Let region, scarcity, risk, and trust shape what is available and how it is valued. Always update economy state when a transaction occurs.
+Use coin for ordinary trade. Use barter for meaningful or leverage-based exchange. Read catalog `value_cd` and prices.json as baselines, not absolutes. Let region, scarcity, risk, and trust shape what is available and how it is valued. Always update economy state when a transaction occurs.
