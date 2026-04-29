@@ -150,6 +150,10 @@
       "description": ""
     },
     {
+      "id": "celestial-metal",
+      "description": "Recovered Elarith or other star-touched metal used as a material identity tag."
+    },
+    {
       "id": "ceremonial",
       "description": ""
     },
