@@ -60,33 +60,62 @@ crafting/materials.json`
          might improve coherence.
       Decision deferred — not urgent until slot count climbs further.
 
-## Item Schema Follow-ups
-
-- [ ] Tighten `Effect.params` validation against effect registry param
-      contracts in `mechanics/effects.json`.
-- [ ] **Pricing rules engine**: design and implement
-      `economy/price_rules.json` so future items can use
-      `pricing.model: "computed"`. Currently all items have static
-      `value_cd`.
-- [ ] **Materials → items linkage**: items currently reference materials
-      via the loose-coupled `tags` array. When the enchantment/crafting
-      arc starts, promote to a structured `materials: list[str]` field
-      on the Item model with validator cross-reference to
-      `data/catalog/crafting/materials.json`.
-
 ## CI / Process Debt
 
 - [ ] Configure branch protection on main: require Lint+Unit+Contract,
-      Integration+Loop Test, and catalog-validation status checks before merge.
-- [ ] Set up failure notification on main CI (GitHub email-on-failure or
-      Slack webhook). Main CI was red for 30+ runs without anyone noticing.
-- [x] Audit recent direct-to-main pushes: commit 0c4b579b ("Renames Feywood
-      Glade to Feywood in all content") corrupted tests/unit/test_companion_models.py
-      via sloppy find-replace and merged anyway. Investigate whether mass-rename
-      commits go through PR review.
-- [x] Update GitHub Actions to Node.js 24 before Sept 16 2026 deprecation.
-- [ ] **Add observability for production verifier failures**: scheduled
-      workflow exists but doesn't alert. Email or webhook on failure.
+      Integration+Loop Test, Item Catalog Validation, and Pre-Deploy
+      Contract+Smoke Bundle status checks before merge. (User must do
+      this in GitHub UI; not scriptable.)
+- [ ] Set up failure notification on main CI (GitHub email-on-failure
+      or Slack webhook). Main CI was red for 30+ runs without anyone
+      noticing.
+- [ ] Audit recent direct-to-main pushes: commit 0c4b579b ("Renames
+      Feywood Glade to Feywood in all content") corrupted
+      tests/unit/test_companion_models.py via sloppy find-replace and
+      merged anyway. Investigate whether mass-rename commits go through
+      PR review.
+- [ ] Update GitHub Actions to Node.js 24 before Sept 16 2026
+      deprecation.
+
+## Catalog Stabilization Follow-ups
+
+- [ ] Audit `data/catalog/registries/` for orphan tags (defined but never
+      used) and missing tags (used in items but not registered).
+- [ ] Decide intent of `data/catalog/crafting/materials.json`. Crafting
+      subsystem is documented as deferred but `materials.json` exists.
+- [ ] Resolve singular vs plural directory naming inconsistency
+      (`weapon/` vs `weapons/`, `shield/` vs `shields/`). See
+      `docs/items-schema.md`.
+- [ ] Review parallel namespaces against `docs/items-schema.md`
+      "What Lives Outside data/catalog/" section. Decide whether to
+      consolidate or keep separate, one namespace at a time:
+      - `data/tags/` vs `data/catalog/registries/`
+      - `data/economy/` vs `data/catalog/economy/`
+      - `data/magic/`, `data/beasts/`, `data/characters/`, `data/npcs/`
+
+## Item Schema Follow-ups
+
+- [ ] Tighten `Effect.params` validation against effect registry param
+      contracts in `mechanics/effects.json`. (NOTE: this referenced the
+      modular schema that was rolled back; reconsider whether it
+      applies to the current flat schema.)
+- [ ] Author next batch of items (10-20 mundane) — gear, ammunition,
+      apparel coverage gaps.
+- [ ] JSON Schema export: emit `data/catalog/schemas/*.schema.json` from
+      Pydantic models for non-Python consumers (GPT builder).
+- [ ] Pricing rules engine: design and implement `economy/price_rules.json`
+      so future items can use computed pricing rather than authored
+      `canonical_value_cd`.
+- [ ] API integration: confirm endpoints reading from `data/catalog/`
+      are stable, plan retirement of any legacy `data/items/` paths if
+      they still exist.
+
+## Subsystems Deferred
+
+- [ ] Services subsystem (`data/catalog/services/`)
+- [ ] Vendors subsystem (`data/catalog/vendors/`)
+- [ ] Crafting subsystem (`data/catalog/crafting/recipes.json`,
+      `stations.json` beyond `materials.json`)
 
 ## IP / Licensing (Open Questions)
 
