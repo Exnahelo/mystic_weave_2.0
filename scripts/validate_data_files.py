@@ -723,11 +723,13 @@ def main() -> None:
     _validate_cultures(data_dir / "characters" / "culture.json", failures)
     _validate_tag_rows(data_dir / "characters" / "focus.json", failures, expected_count=9)
     _validate_tag_rows(data_dir / "characters" / "background.json", failures, expected_count=8)
-    _validate_apparel(data_dir / "items" / "apparel.json", failures)
-    for item_file in (data_dir / "items").glob("*.json"):
-        if item_file.name.startswith("_"):
-            continue
-        _validate_items_roll_tags(item_file, failures)
+    legacy_items_dir = data_dir / "items"
+    if legacy_items_dir.exists():
+        _validate_apparel(legacy_items_dir / "apparel.json", failures)
+        for item_file in legacy_items_dir.glob("*.json"):
+            if item_file.name.startswith("_"):
+                continue
+            _validate_items_roll_tags(item_file, failures)
 
     beast_dir = data_dir / "beasts"
     natural_ability_rows = _validate_simple_catalog(beast_dir / "natural_abilities.json", failures)
