@@ -2,12 +2,12 @@
   "id": "rootlace-amulet",
   "name": "Rootlace Amulet",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "focus",
   "schema_version": 1,
-  "description": "A small amulet containing living Rootlace Mycelium in a sealed chamber \u2014 given to druids and attuned elves to maintain a subtle continuous read of the Feywood's root-memory network.",
+  "description": "A small amulet containing living Rootlace Mycelium in a sealed chamber — given to druids and attuned elves to maintain a subtle continuous read of the Feywood's root-memory network.",
   "narrative_effects": [
     "Supports attentional practice by providing a very subtle ambient-field signal the bearer learns to read over months of carry.",
-    "Not magical in a flashy sense; the effect is relational \u2014 a trained bearer notices the Feywood's state shifts slightly earlier than they otherwise would.",
+    "Not magical in a flashy sense; the effect is relational — a trained bearer notices the Feywood's state shifts slightly earlier than they otherwise would.",
     "Cannot function outside the Feywood's immediate ambient-field reach; realm-side, the amulet's chamber goes dormant."
   ],
   "tags": [
@@ -22,7 +22,7 @@
   "rarity": "rare",
   "legality": "open",
   "value_cd": 600,
-  "wealth_tier_floor": null,
+  "wealth_tier_floor": "comfortable",
   "market_tags": [],
   "consumable": false,
   "charges_max": null,

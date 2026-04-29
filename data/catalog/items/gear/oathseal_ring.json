@@ -2,7 +2,7 @@
   "id": "oathseal-ring",
   "name": "Oathseal Ring",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "focus",
   "schema_version": 1,
   "description": "A signet that marks formal vows and is recognized by select civic orders.",
   "narrative_effects": [
@@ -16,8 +16,11 @@
   "rarity": "rare",
   "legality": "open",
   "value_cd": 1400,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "wealthy",
+  "market_tags": [
+    "enchanter",
+    "noble-armory"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

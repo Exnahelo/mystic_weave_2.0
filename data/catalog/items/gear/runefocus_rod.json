@@ -2,7 +2,7 @@
   "id": "runefocus-rod",
   "name": "Runefocus Rod",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "focus",
   "schema_version": 1,
   "description": "A crystal-inlaid channeling rod tuned to stabilize short arcane workings.",
   "narrative_effects": [
@@ -15,8 +15,10 @@
   "rarity": "uncommon",
   "legality": "open",
   "value_cd": 900,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "comfortable",
+  "market_tags": [
+    "enchanter"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

@@ -2,7 +2,7 @@
   "id": "lumen-charm",
   "name": "Lumen Charm",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "focus",
   "schema_version": 1,
   "description": "A palm-sized charm that emits steady witchlight when invoked.",
   "narrative_effects": [
@@ -16,8 +16,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 320,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "comfortable",
+  "market_tags": [
+    "enchanter",
+    "general-goods"
+  ],
   "consumable": true,
   "charges_max": 3,
   "knowledge_tag": null,
