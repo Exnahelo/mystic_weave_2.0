@@ -94,7 +94,7 @@ def main() -> None:
         if version.status_code != 200:
             fail(f"GET /version -> {version.status_code}")
         v = version.json()
-        if v.get("api_version") != "4.3.0":
+        if v.get("api_version") != "4.4.0":
             fail(f"api_version mismatch in /version: {v.get('api_version')}")
         if not isinstance(v.get("combat_rules_fingerprint"), str) or not v.get("combat_rules_fingerprint"):
             fail("/version missing combat_rules_fingerprint")

@@ -1,10 +1,9 @@
 openapi: 3.1.0
 info:
   title: Mystic Weave
-  description: Persistent game state backend for a text-based RPG powered by a custom
-    GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution
-    with domain scores and competency tiers.
-  version: 4.3.0
+  description: Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API
+    is the memory. d100 roll-under resolution with domain scores and competency tiers.
+  version: 4.4.0
 servers:
 - url: https://mysticweave-production.up.railway.app
   description: Production (Railway)
@@ -36,8 +35,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       summary: Save State
-      description: Save game state, deep-merge character and world updates onto stored
-        state, and append one log entry atomically.
+      description: Save game state, deep-merge character and world updates onto stored state, and append one log entry atomically.
       operationId: save_state_state__session_id__post
       parameters:
       - name: session_id
@@ -68,8 +66,7 @@ paths:
   /state/{session_id}/delta:
     post:
       summary: Save State Delta
-      description: Apply a validated structured state delta to stored game state,
-        then append one log entry atomically.
+      description: Apply a validated structured state delta to stored game state, then append one log entry atomically.
       operationId: save_state_delta_state__session_id__delta_post
       parameters:
       - name: session_id
@@ -131,8 +128,7 @@ paths:
   /character/create:
     post:
       summary: Create Character
-      description: 'Seed a character from game system data and update the session''s
-        character record.
+      description: 'Seed a character from game system data and update the session''s character record.
 
 
         The session must already exist (created via POST /session/new).
@@ -161,10 +157,9 @@ paths:
   /character/{session_id}/spend_ap:
     post:
       summary: Spend Ap
-      description: 'Spend AP to raise a domain score. Earned AP can only be drawn
-        from the target domain''s pool; awarded AP can be drawn for any domain. The
-        two sources may be combined. Bracket costs apply point-by-point: 1 AP per
-        point at scores 25-60, 2 AP at 61-70, 3 AP at 71-80.'
+      description: 'Spend AP to raise a domain score. Earned AP can only be drawn from the target domain''s pool; awarded
+        AP can be drawn for any domain. The two sources may be combined. Bracket costs apply point-by-point: 1 AP per point
+        at scores 25-60, 2 AP at 61-70, 3 AP at 71-80.'
       operationId: spend_ap_character__session_id__spend_ap_post
       parameters:
       - name: session_id
@@ -195,8 +190,7 @@ paths:
   /roll:
     post:
       summary: Roll Dice
-      description: Roll 1d100 against a target and return success state plus degree
-        band.
+      description: Roll 1d100 against a target and return success state plus degree band.
       operationId: roll_dice_roll_post
       requestBody:
         content:
@@ -222,8 +216,7 @@ paths:
       tags:
       - combat
       summary: Compute Max Hp Endpoint
-      description: Compute pre-combat HP from armor and shield catalog values plus
-        skill tiers.
+      description: Compute pre-combat HP from armor and shield catalog values plus skill tiers.
       operationId: compute_max_hp_endpoint_combat_compute_max_hp_post
       requestBody:
         content:
@@ -249,8 +242,7 @@ paths:
       tags:
       - combat
       summary: Resolve Attack Endpoint
-      description: Resolve a single Combat v1.0 attack atomically using backend-authoritative
-        dice.
+      description: Resolve a single Combat v1.0 attack atomically using backend-authoritative dice.
       operationId: resolve_attack_endpoint_combat_resolve_attack_post
       requestBody:
         content:
@@ -274,8 +266,7 @@ paths:
   /location/{location_id}:
     get:
       summary: Get Location
-      description: 'Load location data. The GPT must call this before describing any
-        place.
+      description: 'Load location data. The GPT must call this before describing any place.
 
         Returns 404 if the location does not exist in the database.'
       operationId: get_location_location__location_id__get
@@ -302,8 +293,7 @@ paths:
   /location:
     post:
       summary: Upsert Location
-      description: Create or update a location via UPSERT, and persist valid world-graph
-        connections from the payload.
+      description: Create or update a location via UPSERT, and persist valid world-graph connections from the payload.
       operationId: upsert_location_location_post
       requestBody:
         content:
@@ -384,12 +374,16 @@ paths:
       tags:
       - catalog
       summary: Get Item Catalog
-      description: 'Return one runtime item catalog.
+      description: 'Return one runtime item catalog from the catalog source.
 
 
-        `kind` is required so clients cannot accidentally request the full combined
+        `kind` is required so clients cannot accidentally request the full
 
-        catalog and exceed response-size caps.'
+        combined catalog and exceed response-size caps. The "apparel" bucket
+
+        is preserved for API stability but always returns empty (no apparel
+
+        module exists in the catalog schema).'
       operationId: get_item_catalog_catalog_items_get
       parameters:
       - name: kind
@@ -404,11 +398,9 @@ paths:
           - armor
           - ammunition
           type: string
-          description: 'Required. Which item catalog to return: mundane, magical,
-            apparel, weapon, armor, or ammunition.'
+          description: 'Required. Which item catalog to return: mundane, magical, apparel, weapon, armor, or ammunition.'
           title: Kind
-        description: 'Required. Which item catalog to return: mundane, magical, apparel,
-          weapon, armor, or ammunition.'
+        description: 'Required. Which item catalog to return: mundane, magical, apparel, weapon, armor, or ammunition.'
       responses:
         '200':
           description: Successful Response
@@ -450,11 +442,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CompanionVocabResponse'
+  /catalog/items/{item_id}:
+    get:
+      tags:
+      - catalog
+      summary: Get Catalog Item
+      description: 'Return the full catalog Item for a given ID.
+
+
+        The response follows the api.items.Item schema. The schema is also
+
+        exported as data/catalog/schemas/item.schema.json for tool consumers.'
+      operationId: get_catalog_item_catalog_items__item_id__get
+      parameters:
+      - name: item_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Item Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogItemDetailResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /scene/{session_id}:
     get:
       summary: Get Scene Context
-      description: Build and return compact scene context from persisted state and
-        current location for narration input.
+      description: Build and return compact scene context from persisted state and current location for narration input.
       operationId: get_scene_context_scene__session_id__get
       parameters:
       - name: session_id
@@ -481,8 +504,7 @@ paths:
       tags:
       - tags
       summary: Get Tags
-      description: 'Return the canonical tag vocabularies: knowledge groups, magic
-        fields, applications.'
+      description: 'Return the canonical tag vocabularies: knowledge groups, magic fields, applications.'
       operationId: get_tags_tags_get
       responses:
         '200':
@@ -586,8 +608,8 @@ paths:
       tags:
       - npcs
       summary: Get Npcs
-      description: Return NPC registry entries. Use `tier=named` for tier 1-2 individuals,
-        `tier=roles` for tier 3 role templates, or omit for both.
+      description: Return NPC registry entries. Use `tier=named` for tier 1-2 individuals, `tier=roles` for tier 3 role templates,
+        or omit for both.
       operationId: get_npcs_npcs_get
       parameters:
       - name: tier
@@ -597,11 +619,9 @@ paths:
           anyOf:
           - type: string
           - type: 'null'
-          description: 'Filter by tier category: ''named'' (tier 1-2) or ''roles''
-            (tier 3). Omit for all.'
+          description: 'Filter by tier category: ''named'' (tier 1-2) or ''roles'' (tier 3). Omit for all.'
           title: Tier
-        description: 'Filter by tier category: ''named'' (tier 1-2) or ''roles'' (tier
-          3). Omit for all.'
+        description: 'Filter by tier category: ''named'' (tier 1-2) or ''roles'' (tier 3). Omit for all.'
       responses:
         '200':
           description: Successful Response
@@ -620,7 +640,7 @@ paths:
       tags:
       - health
       summary: Root
-      description: "Root \u2014 confirms the API is running."
+      description: Root — confirms the API is running.
       operationId: root__get
       responses:
         '200':
@@ -634,7 +654,7 @@ paths:
       tags:
       - health
       summary: Health Check
-      description: "Health check endpoint \u2014 used by Railway and uptime monitors."
+      description: Health check endpoint — used by Railway and uptime monitors.
       operationId: health_check_health_get
       responses:
         '200':
@@ -699,8 +719,7 @@ components:
             type: integer
           type: object
           title: Points Available Earned
-          description: 'Per-domain earned AP pools. Keys: power, agility, perception,
-            endurance, intellect, will, presence.'
+          description: 'Per-domain earned AP pools. Keys: power, agility, perception, endurance, intellect, will, presence.'
         points_available_awarded:
           type: integer
           title: Points Available Awarded
@@ -718,8 +737,7 @@ components:
             type: integer
           type: object
           title: Tag Advance Counters
-          description: Per-domain counters; tag advances increment these. At 3, convert
-            to +1 earned AP in that domain.
+          description: Per-domain counters; tag advances increment these. At 3, convert to +1 earned AP in that domain.
       type: object
       title: AdvancementState
       description: 'Per-domain earned AP pools, single awarded AP pool, lifetime totals,
@@ -993,6 +1011,25 @@ components:
       required:
       - primary
       title: BondLinks
+    CatalogItemDetailResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+          default: ''
+      additionalProperties: true
+      type: object
+      required:
+      - id
+      - name
+      title: CatalogItemDetailResponse
+      description: Full catalog item, as authored. Shape matches api.items.Item.
     CharacterModel-Input:
       properties:
         name:
@@ -1525,8 +1562,7 @@ components:
       - focus
       - background
       title: CreateCharacterRequest
-      description: "Body for POST /character/create \u2014 seeds character from game\
-        \ system data."
+      description: Body for POST /character/create — seeds character from game system data.
     CreateCharacterResponse:
       properties:
         session_id:
@@ -1952,12 +1988,20 @@ components:
       additionalProperties: false
       type: object
       title: CreatureNarrative
-      description: "Optional narrative block for creatures with individual story-weight\n\
-        content. Nullable on the parent models. Catalog-templated creatures\nwithout\
-        \ individual history leave this as None.\n\nUsed on CreatureCompanion and\
-        \ ExceptionalCompanion. For\nExceptionalCompanion with sapience=full, the\
-        \ fields here may be\nredundant with motivations/alignment \u2014 that's a\
-        \ content concern,\nnot a schema one."
+      description: 'Optional narrative block for creatures with individual story-weight
+
+        content. Nullable on the parent models. Catalog-templated creatures
+
+        without individual history leave this as None.
+
+
+        Used on CreatureCompanion and ExceptionalCompanion. For
+
+        ExceptionalCompanion with sapience=full, the fields here may be
+
+        redundant with motivations/alignment — that''s a content concern,
+
+        not a schema one.'
     CultureOption:
       properties:
         index:
@@ -2049,8 +2093,7 @@ components:
           title: Obligations
       type: object
       title: Economy
-      description: 'Economic state. wealth_tier is the universal abstraction (works
-        for barter
+      description: 'Economic state. wealth_tier is the universal abstraction (works for barter
 
         and currency economies alike). coin is stored as total Copper Drakes (CD)
 
@@ -2152,8 +2195,7 @@ components:
       additionalProperties: false
       type: object
       title: EquipmentDelta
-      description: Sparse equipment update; merges by slot rather than replacing all
-        equipment.
+      description: Sparse equipment update; merges by slot rather than replacing all equipment.
     EquipmentItem:
       properties:
         id:
@@ -3175,9 +3217,9 @@ components:
           $ref: '#/components/schemas/Alignment'
       type: object
       title: Identity
-      description: "Narrative character block. Captured at creation, GPT-readable\
-        \ every session.\nAll fields optional at creation \u2014 can be filled in\
-        \ as play reveals them."
+      description: 'Narrative character block. Captured at creation, GPT-readable every session.
+
+        All fields optional at creation — can be filled in as play reveals them.'
     Identity-Output:
       properties:
         origin:
@@ -3212,9 +3254,9 @@ components:
           $ref: '#/components/schemas/Alignment'
       type: object
       title: Identity
-      description: "Narrative character block. Captured at creation, GPT-readable\
-        \ every session.\nAll fields optional at creation \u2014 can be filled in\
-        \ as play reveals them."
+      description: 'Narrative character block. Captured at creation, GPT-readable every session.
+
+        All fields optional at creation — can be filled in as play reveals them.'
     ItemCatalogResponse:
       properties:
         mundane_items:
@@ -3686,9 +3728,14 @@ components:
       - focus
       - backgrounds
       title: OptionsResponse
-      description: "Response for GET /options \u2014 creation-scope enumeration.\n\
-        \nOnly ancestries, cultures, focus archetypes, and backgrounds live here.\n\
-        Runtime catalogs are served by /catalog/items, /catalog/creatures,\n/catalog/vocab."
+      description: 'Response for GET /options — creation-scope enumeration.
+
+
+        Only ancestries, cultures, focus archetypes, and backgrounds live here.
+
+        Runtime catalogs are served by /catalog/items, /catalog/creatures,
+
+        /catalog/vocab.'
     PacingState:
       properties:
         tension:
@@ -3745,8 +3792,9 @@ components:
           default: unknown
       type: object
       title: Politics
-      description: "World-level relational and political state.\nNot a subsystem \u2014\
-        \ a lightweight store for the GPT to track active context."
+      description: 'World-level relational and political state.
+
+        Not a subsystem — a lightweight store for the GPT to track active context.'
     ReputationEntry:
       properties:
         faction:
@@ -3870,7 +3918,7 @@ components:
       required:
       - target
       title: RollRequest
-      description: "Body for POST /roll \u2014 d100 roll-under resolution."
+      description: Body for POST /roll — d100 roll-under resolution.
     RollResponse:
       properties:
         roll:
@@ -4257,8 +4305,7 @@ components:
       - location_summary
       - relevant_character_state
       title: SceneContext
-      description: Derived GPT-facing scene payload assembled from full state + location
-        + log.
+      description: Derived GPT-facing scene payload assembled from full state + location + log.
     SceneLocationSummary:
       properties:
         id:
@@ -4326,8 +4373,7 @@ components:
           type: integer
           minimum: 0.0
           title: Use Earned
-          description: AP to draw from earned pool of target_domain. Must not exceed
-            points_available_earned[target_domain].
+          description: AP to draw from earned pool of target_domain. Must not exceed points_available_earned[target_domain].
           default: 0
         use_awarded:
           type: integer
