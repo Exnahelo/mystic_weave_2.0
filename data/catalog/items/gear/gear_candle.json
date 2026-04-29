@@ -2,7 +2,7 @@
   "id": "gear-candle",
   "name": "Candle",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "light",
   "schema_version": 1,
   "description": "A small fragile light source that burns for about an hour in calm conditions.",
   "narrative_effects": [

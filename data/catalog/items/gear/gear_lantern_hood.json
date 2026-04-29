@@ -2,7 +2,7 @@
   "id": "gear-lantern-hood",
   "name": "Lantern Hood",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "light",
   "schema_version": 1,
   "description": "A fitted hood attachment that controls and narrows lantern light.",
   "narrative_effects": [

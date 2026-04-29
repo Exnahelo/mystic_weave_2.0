@@ -2,9 +2,9 @@
   "id": "heartlight-lantern",
   "name": "Heartlight Lantern",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "light",
   "schema_version": 1,
-  "description": "An elven lantern housing cultivated Hearthlight Fungus in a shaped crystal-and-wood frame \u2014 the standard Thornveil and Vaelmere evening light source, available in limited realm trade.",
+  "description": "An elven lantern housing cultivated Hearthlight Fungus in a shaped crystal-and-wood frame — the standard Thornveil and Vaelmere evening light source, available in limited realm trade.",
   "narrative_effects": [
     "Provides soft continuous bioluminescent light without fuel, flame, or smoke.",
     "The fungus responds to ambient-field conditions: brightness subtly dims under Turning, cooperating with the Feywood's health register rather than masking it.",

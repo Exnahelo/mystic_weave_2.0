@@ -2,7 +2,7 @@
   "id": "gear-torch",
   "name": "Torch",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "light",
   "schema_version": 1,
   "description": "A simple handheld light source that burns out after roughly an hour.",
   "narrative_effects": [

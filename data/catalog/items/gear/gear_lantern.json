@@ -2,7 +2,7 @@
   "id": "gear-lantern",
   "name": "Lantern",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "light",
   "schema_version": 1,
   "description": "A hooded lantern that provides steady light in darkness when fueled with oil.",
   "narrative_effects": [
