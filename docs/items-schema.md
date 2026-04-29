@@ -235,7 +235,7 @@ These directories exist with README placeholders and will be filled in when thei
 
 - `data/catalog/services/` — paid actions (lodging, healing, transport, hireling labor)
 - `data/catalog/vendors/` — vendor archetypes (smithy, wandering trader, enchanter)
-- `data/catalog/crafting/` — recipes and material traits (`materials.json` exists; recipes do not)
+- `data/catalog/crafting/` — partial. `materials.json` is authored (Drakenvale material vocabulary with lore, magical status, scarcity, narrative properties). Used as a worldbuilding/vocabulary reference. Recipes (`recipes.json`) and stations (`stations.json`) are not authored — those constitute the deferred subsystem. Items reference materials by tag (e.g. `tags: [elven-steel]`), not by material ID; that mapping will tighten when recipes ship.
 
 Do not author content into these directories without first designing the subsystem schema. The current README markers are intentional.
 
