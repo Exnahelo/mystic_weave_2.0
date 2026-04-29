@@ -220,7 +220,7 @@ Rule of thumb: if the same definition could appear in a different campaign with 
 - `data/world/` — specific Drakenvale instances (NPCs, locations, factions, named items).
 - `data/characters/` — character creation catalogs (ancestries, backgrounds, cultures, focuses, starting wealth).
 - `data/magic/` — spell field definitions.
-- `data/beasts/` — creature catalog.
+- `data/companions/` — creature catalog.
 - `data/economy/` — top-level economy (currency, prices, regional nodes).
 - `data/tags/` — application/knowledge/magic-field tag vocabularies (legacy parallel to `data/catalog/registries/`; consolidation is a known TODO).
 - `data/npcs/` — NPC archetypes.

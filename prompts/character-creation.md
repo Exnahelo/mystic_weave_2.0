@@ -116,7 +116,7 @@ For each Creature Companion:
 - **Name.**
 - **Species and subspecies.** What kind of animal it is (e.g.,
   moonthorn wolf, courser, falcon). Source from
-  `data/beasts/creatures.json` via `GET /catalog/creatures`. The
+  `data/companions/creatures.json` via `GET /catalog/creatures`. The
   GPT does not invent creature stat blocks; it uses catalog entries.
 - **Size and age category.** Standard descriptors from the catalog
   entry.

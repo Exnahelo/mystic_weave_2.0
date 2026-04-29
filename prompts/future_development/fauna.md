@@ -5,7 +5,7 @@ not shipping data. It captures elevated regional fauna of Drakenvale
 and will feed future bestiary/combat/encounter system work.
 
 Not all entries will become companion-eligible. The companion catalog
-at `data/beasts/creatures.json` ships a subset.
+at `data/companions/creatures.json` ships a subset.
 
 ---
 

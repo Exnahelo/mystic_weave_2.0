@@ -26,7 +26,7 @@ Last updated: 2026-04-29
 crafting/materials.json`
 - [ ] **Wire `data/environment/`** (`feywood_animals.json`,
       `feywood_plants.json`) into code. Currently authored but unread.
-      Decide read pattern: pre-load into game_data like `data/beasts/`,
+      Decide read pattern: pre-load into game_data like `data/companions/`,
       or load on demand from a new endpoint.
 - [ ] **Cross-reference materials ↔ ecology**: items reference materials
       (silverbark-ash, thornroot-stalker-hide, etc.); materials reference
@@ -91,7 +91,7 @@ crafting/materials.json`
       consolidate or keep separate, one namespace at a time:
       - `data/tags/` vs `data/catalog/registries/`
       - `data/economy/` vs `data/catalog/economy/`
-      - `data/magic/`, `data/beasts/`, `data/characters/`, `data/npcs/`
+      - `data/magic/`, `data/companions/`, `data/characters/`, `data/npcs/`
 
 ## Item Schema Follow-ups
 

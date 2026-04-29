@@ -77,7 +77,7 @@
     "canonical_tier": "primary",
     "cultural_role": "prestige elven mount; prized bond animal; Feywood's signature courser",
     "tags": ["herbivore", "equine", "briarmane", "companion-capable", "mount"],
-    "description": "A tall, lean courser of the Feywood — named for the dark thorn-and-silver pattern running down its mane and tail. Briarmanes are admired for their speed and the ambient-field-sensitivity they share with other Feywood-touched creatures. Occasional hunt quarry when unbonded; canonically companion-capable. See `briarmane_courser` in `data/beasts/creatures.json` for the companion profile."
+    "description": "A tall, lean courser of the Feywood — named for the dark thorn-and-silver pattern running down its mane and tail. Briarmanes are admired for their speed and the ambient-field-sensitivity they share with other Feywood-touched creatures. Occasional hunt quarry when unbonded; canonically companion-capable. See `briarmane_courser` in `data/companions/creatures.json` for the companion profile."
   },
   {
     "id": "hearthgoat",
@@ -109,7 +109,7 @@
     "canonical_tier": "primary",
     "cultural_role": "Feywood's defining canid; exceptional elven life-bonds (Ash)",
     "tags": ["predator", "canid", "moonthorn", "apex", "pack", "bondable-exceptional"],
-    "description": "The principal Feywood pack predator and the defining canid of the outer wild. Colloquially \"Feywood wolves.\" Moonthorn packs hunt Feywoodhorn stag, rootback elk, boar of the briar, and briarmane courser; they take silverbough hart rarely. In exceptional circumstances a moonthorn wolf may form a deep life-bond with an individual elf — the relationship is pack, not domestication. House Heartwood has had bonded moonthorn wolves across generations (Ash is Sylvara's bonded wolf). See `moonthorn_wolf` in `data/beasts/creatures.json` for the companion profile."
+    "description": "The principal Feywood pack predator and the defining canid of the outer wild. Colloquially \"Feywood wolves.\" Moonthorn packs hunt Feywoodhorn stag, rootback elk, boar of the briar, and briarmane courser; they take silverbough hart rarely. In exceptional circumstances a moonthorn wolf may form a deep life-bond with an individual elf — the relationship is pack, not domestication. House Heartwood has had bonded moonthorn wolves across generations (Ash is Sylvara's bonded wolf). See `moonthorn_wolf` in `data/companions/creatures.json` for the companion profile."
   },
   {
     "id": "mossveil_cat",
@@ -333,7 +333,7 @@
     "canonical_tier": "primary",
     "cultural_role": "messenger symbolism; widespread day raptor",
     "tags": ["bird", "raptor", "mistwing", "messenger", "companion-capable"],
-    "description": "A day raptor widespread across the Feywood. Mistwings carry canonical messenger symbolism in Feywood tradition and are prized by rangers as scouts and message birds. See `mistwing_hawk` in `data/beasts/creatures.json` for the companion profile."
+    "description": "A day raptor widespread across the Feywood. Mistwings carry canonical messenger symbolism in Feywood tradition and are prized by rangers as scouts and message birds. See `mistwing_hawk` in `data/companions/creatures.json` for the companion profile."
   },
   {
     "id": "thornsong_owl",

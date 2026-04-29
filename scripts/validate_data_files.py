@@ -731,7 +731,7 @@ def main() -> None:
                 continue
             _validate_items_roll_tags(item_file, failures)
 
-    beast_dir = data_dir / "beasts"
+    beast_dir = data_dir / "companions"
     natural_ability_rows = _validate_simple_catalog(beast_dir / "natural_abilities.json", failures)
     VALID_BEAST_NATURAL_ABILITIES = {row["id"] for row in natural_ability_rows if isinstance(row, dict) and isinstance(row.get("id"), str)}
     _validate_simple_catalog(beast_dir / "learned_commands.json", failures)

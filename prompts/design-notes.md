@@ -266,8 +266,8 @@ touches:
 
 - `api/models.py` — three new Pydantic classes
 - `api/routes/options.py` — new `/options` entries for enums
-- `data/beasts/creatures.json` — seed catalog (starter set)
-- `data/beasts/exceptional.json` — seed catalog (probably empty at
+- `data/companions/creatures.json` — seed catalog (starter set)
+- `data/companions/exceptional.json` — seed catalog (probably empty at
   start)
 - Seeding helpers for `CompanionModel` equivalents
 - `scripts/validate_naming.py` and `scripts/validate_data_files.py`
