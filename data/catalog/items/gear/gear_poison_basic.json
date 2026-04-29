@@ -2,7 +2,7 @@
   "id": "gear-poison-basic",
   "name": "Poison, Basic (vial)",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "consumable",
   "schema_version": 1,
   "description": "A basic weapon poison applied to deliver harmful effects on the next successful hit.",
   "narrative_effects": [
@@ -17,8 +17,11 @@
   "rarity": "rare",
   "legality": "open",
   "value_cd": 1000,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "comfortable",
+  "market_tags": [
+    "underworld",
+    "apothecary"
+  ],
   "consumable": true,
   "charges_max": 1,
   "knowledge_tag": null,
@@ -33,7 +36,7 @@
   "damage_modifier": null,
   "recoverable": true,
   "special_effect_tag": null,
-  "tier": null,
-  "magic_field": null,
+  "tier": "T1",
+  "magic_field": "alchemy",
   "tool_role": null
 }

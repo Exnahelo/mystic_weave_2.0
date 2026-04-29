@@ -2,7 +2,7 @@
   "id": "holy-water",
   "name": "Holy Water",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "consumable",
   "schema_version": 1,
   "description": "A potent consecrated vial reserved for grave rites and hostile profane entities.",
   "narrative_effects": [
@@ -16,8 +16,10 @@
   "rarity": "rare",
   "legality": "open",
   "value_cd": 480,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "comfortable",
+  "market_tags": [
+    "temple"
+  ],
   "consumable": true,
   "charges_max": 1,
   "knowledge_tag": null,

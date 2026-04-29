@@ -2,7 +2,7 @@
   "id": "blessed-water",
   "name": "Blessed Water",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "consumable",
   "schema_version": 1,
   "description": "Water sanctified in a formal rite for warding and minor purification.",
   "narrative_effects": [
@@ -16,8 +16,10 @@
   "rarity": "uncommon",
   "legality": "open",
   "value_cd": 220,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "comfortable",
+  "market_tags": [
+    "temple"
+  ],
   "consumable": true,
   "charges_max": 1,
   "knowledge_tag": null,
