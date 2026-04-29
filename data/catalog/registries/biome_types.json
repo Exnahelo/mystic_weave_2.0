@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "biome_types": [
+    {
+      "id": "forest-temperate",
+      "description": "Mixed deciduous and coniferous forest in temperate climate."
+    },
+    {
+      "id": "forest-fey",
+      "description": "Forest with active fey ecology and magical living systems. The Feywood is the canonical example."
+    },
+    {
+      "id": "volcanic-highland",
+      "description": "Volcanic mountain regions with active or dormant vents. Source of forge metals, sulfur, obsidian."
+    },
+    {
+      "id": "wetland",
+      "description": "Marsh, swamp, riparian, and bog systems. Source of certain herbs, reeds, peat."
+    },
+    {
+      "id": "cavern-deep",
+      "description": "Subterranean cave systems beyond surface ecology. Source of crystal, deep ores, and resonance materials."
+    },
+    {
+      "id": "grassland",
+      "description": "Open plains, savanna, prairie. Source of grain, fiber, and grazing-derived materials."
+    },
+    {
+      "id": "coastal",
+      "description": "Shoreline, intertidal, and salt-influenced ecosystems. Source of salt, kelp, certain shells."
+    },
+    {
+      "id": "mountain-alpine",
+      "description": "High-altitude mountain environments above timberline."
+    },
+    {
+      "id": "tundra-cold",
+      "description": "Permafrost and cold-arid regions."
+    },
+    {
+      "id": "desert-arid",
+      "description": "Hot or cold desert environments."
+    },
+    {
+      "id": "liminal-fey",
+      "description": "Threshold zones where fey influence is unstable or partial. Material properties may shift."
+    },
+    {
+      "id": "ruin-ancient",
+      "description": "Sites of pre-Cataclysm civilization where worked materials and artifacts may persist."
+    },
+    {
+      "id": "impact-strewn",
+      "description": "Areas where celestial fragments fell during the Cataclysm. Source of recovered celestial metal."
+    },
+    {
+      "id": "domestic",
+      "description": "Cultivated, husbanded, or otherwise produced through settled labor. Source of farmed and ranched materials."
+    }
+  ]
+}

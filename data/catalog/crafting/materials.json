@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "materials": [
+    {
+      "id": "elarith",
+      "name": "Elarith",
+      "aliases": [
+        "Elyndral",
+        "starvein",
+        "heartfall",
+        "sky-iron"
+      ],
+      "category": "metal",
+      "magical_status": "magical-material",
+      "magic_field": null,
+      "biome_type": "impact-strewn",
+      "known_origins": [
+        "hollow-crown"
+      ],
+      "scarcity": "reserved",
+      "treatment_required": false,
+      "origin_culture": "feywood",
+      "description": "Recovered celestial metal scattered across the Hollow Crown by the Cataclysm. The Feywood does not mine — it gathers. Smiths and wardens collect Elarith from riverbeds, lake margins, exposed scars in the land, and old impact-strewn ground; the result is a generations-long reserve held by elder houses, military orders, and ceremonial offices. The metal is treated as sacred and used sparingly for heirlooms, named weapons, ceremonial objects, and works of state meant to endure across generations.",
+      "narrative_properties": [
+        "Holds an edge unnaturally well; works that use it endure across generations of service.",
+        "Pale and faintly silvery; under moonlight or sanctified light a subtle sheen appears that ordinary steel does not produce.",
+        "Elven naming distinguishes Elarith (everyday smithcraft register) from Elyndral (ceremonial and sworn-context register). Outsiders typically use 'starvein' as a folk term, while Drakenvale formally calls it Heartfall and treats it as kin to the Heartmass core.",
+        "Recovery is sanctioned, partly ritual, and partly guardianship. Fresh celestial signs trigger expeditions whose first task is judging whether the fall is safe to disturb at all.",
+        "Drakenvale and the Feywood share a Cataclysm origin but parallel naming traditions; the same fragment-metal sits at the center of both polities' identity in different forms — monumental for Drakenvale, dispersed and ceremonial for the Feywood."
+      ]
+    },
+    {
+      "id": "longbough",
+      "name": "Longbough",
+      "aliases": [],
+      "category": "wood",
+      "magical_status": "magical-material",
+      "magic_field": "druidry",
+      "biome_type": "forest-fey",
+      "known_origins": [
+        "feywood"
+      ],
+      "scarcity": "uncommon",
+      "treatment_required": false,
+      "origin_culture": "feywood",
+      "description": "A Feywood hardwood used by elven bowyers for the canonical longbow. Longbough is gathered from naturally fallen limbs or harvested under druidic sign rather than cut from living timber. The wood is shaped slowly — sometimes over years or decades — to match a specific archer.",
+      "narrative_properties": [
+        "Carries a faint ambient-field responsiveness that practiced archers can feel in the draw — a real magical-material property, not just superior craft.",
+        "Tension memory holds across long service; a Longbough bow re-tunes itself to its archer over time rather than degrading.",
+        "Items made from Longbough are T0-eligible: the material is magical, but the items themselves carry no active magic effect.",
+        "Not commercially traded; access comes through Feywood craft tradition and house relationship."
+      ]
+    },
+    {
+      "id": "witheroak",
+      "name": "Witheroak",
+      "aliases": [],
+      "category": "wood",
+      "magical_status": "magical-material",
+      "magic_field": "druidry",
+      "biome_type": "forest-fey",
+      "known_origins": [
+        "feywood"
+      ],
+      "scarcity": "rare",
+      "treatment_required": false,
+      "origin_culture": "feywood",
+      "description": "A Feywood hardwood with intrinsic magical character, used almost exclusively for druidic and Heartwarden ceremonial objects rather than utility craft. Harvested under specific conditions tied to Feywood ecological strain.",
+      "narrative_properties": [
+        "Carries real druidic-magical properties bound up with Feywood ecological cycles — items made from it qualify as T0 magical-material.",
+        "Used for ritual rather than utility; a Witheroak object signals ceremonial purpose, not combat preparation.",
+        "Cutting Witheroak outside sanctioned Feywood practice is a serious cultural offense.",
+        "Stocks expand and contract with the Feywood's overall condition; rare under stable conditions and rarer still during ecological strain."
+      ]
+    },
+    {
+      "id": "silverbark-ash",
+      "name": "Silverbark Ash",
+      "aliases": [],
+      "category": "wood",
+      "magical_status": "mundane",
+      "magic_field": null,
+      "biome_type": "forest-fey",
+      "known_origins": [
+        "feywood"
+      ],
+      "scarcity": "uncommon",
+      "treatment_required": false,
+      "origin_culture": "feywood",
+      "description": "A culturally prized Feywood ash variant used for spear shafts, war staves, and arrow shafts where flexibility and durability matter. Lighter and stronger than realm-side ash equivalents, but no functional magical properties — a product of careful Feywood husbandry rather than active magic.",
+      "narrative_properties": [
+        "Straighter, more flexible, and more durable than equivalent realm-side wood.",
+        "Items made from Silverbark Ash are notable mundane — exceptional craft, not magical material.",
+        "Used widely across Feywood weaponry; not as restricted as Longbough or Witheroak.",
+        "Often combined with small amounts of Elarith or ordinary metal at edge or point under the Feywood composite-craft tradition."
+      ]
+    },
+    {
+      "id": "ironroot",
+      "name": "Ironroot",
+      "aliases": [],
+      "category": "wood",
+      "magical_status": "mundane",
+      "magic_field": null,
+      "biome_type": "forest-fey",
+      "known_origins": [
+        "feywood"
+      ],
+      "scarcity": "uncommon",
+      "treatment_required": false,
+      "origin_culture": "feywood",
+      "description": "A Feywood hardwood with unusual structural strength and resistance to splitting. Used by House Ironsap for shield cores and similar load-bearing applications. Sourced from sanctioned deadfall rather than living trees.",
+      "narrative_properties": [
+        "Lighter than steel of equivalent protective value; serves across generations without warping.",
+        "Items made from Ironroot are notable mundane — superior craft material, not magical.",
+        "Closely associated with House Ironsap's shield-making tradition.",
+        "Often paired with elven metalwork for rim and reinforcement work."
+      ]
+    },
+    {
+      "id": "elven-steel",
+      "name": "Elven Steel",
+      "aliases": [
+        "feywrought steel",
+        "feywrought metal"
+      ],
+      "category": "metal",
+      "magical_status": "mundane",
+      "magic_field": null,
+      "biome_type": "domestic",
+      "known_origins": [
+        "feywood"
+      ],
+      "scarcity": "uncommon",
+      "treatment_required": false,
+      "origin_culture": "feywood",
+      "description": "Ordinary metal worked at Feywood smithcraft standards. Not Elarith — Elven Steel is sourced through trade with Drakenvale, surface recovery, and limited working of mundane ore that does not require the deep mining elven culture refuses. Generations of metallurgical refinement let elven smiths produce strong, light, durable work from limited material, often paired with Feywood composite treatments to reduce metal use further.",
+      "narrative_properties": [
+        "The everyday signature of elven smithcraft — visible in shield rims, sword fittings, harness work, tool edges, and other places where some metal is genuinely needed.",
+        "Items made from Elven Steel are notable mundane: superior craft tradition, not magical material.",
+        "Often described as feywrought when emphasizing the smithcraft tradition itself, particularly in formal or commercial contexts.",
+        "Distinguished from Elarith by everything: source, abundance, ceremonial weight, social signaling. An elf wearing Elven Steel signals competence; an elf wearing Elarith signals something else entirely."
+      ]
+    },
+    {
+      "id": "composite-treatment",
+      "name": "Feywood Composite Treatment",
+      "aliases": [
+        "feywood composite",
+        "elven composite",
+        "treated composite"
+      ],
+      "category": "composite",
+      "magical_status": "mundane",
+      "magic_field": null,
+      "biome_type": "domestic",
+      "known_origins": [
+        "feywood"
+      ],
+      "scarcity": "uncommon",
+      "treatment_required": true,
+      "origin_culture": "feywood",
+      "description": "The Feywood signature for reducing metal dependence in tools, weapons, and armor. Composite treatment is not a single material but a tradition — Feywood resins, plant oils, mineral washes, treated fibers, and bark or hide laminates applied in combination to reinforce natural materials. The practice lets elven smiths build gear that is lighter, more flexible, and longer-lived than equivalent metal-heavy work, using only as much metal as a piece genuinely needs.",
+      "narrative_properties": [
+        "Not magical. Composite treatment is craft economy: generations of metallurgical and material-science refinement, not active enchantment.",
+        "Common applications: spear shafts and bow staves treated against splintering; layered hide armor cured for shock absorption; shield wood paired with metal rims so the rim does the protective work and the wood does the structural work; harness fittings and pack frames bonded with cured resin instead of riveting.",
+        "An item described as 'feywrought composite' has been built around composite treatment as part of its core construction. An item described as 'elven-treated' has had composite treatment applied to a specific component.",
+        "Treatments are tradition-specific: a House Heartwood spear and a House Ironsap shield use related but distinguishable composite techniques. Outsiders generally cannot tell which house a piece came from; elves often can."
+      ]
+    },
+    {
+      "id": "thornroot-stalker-hide",
+      "name": "Thornroot Stalker hide",
+      "aliases": [],
+      "category": "hide-leather",
+      "magical_status": "actively-magical",
+      "magic_field": "warding",
+      "biome_type": "forest-fey",
+      "known_origins": [
+        "feywood"
+      ],
+      "scarcity": "rare",
+      "treatment_required": true,
+      "origin_culture": "feywood",
+      "description": "Hide of the Thornroot Stalker — a Feywood predator whose pelt carries a field-illegibility trace preserved through specialized elven tanning. The trace softens ambient magical awareness of whoever wears the prepared hide.",
+      "narrative_properties": [
+        "Items made from Thornroot Stalker hide are T1+ magical: the field-illegibility trace is an active magical property the wearer benefits from.",
+        "Anti-detection effect: attuned sentries and bound wards register the wearer less reliably when the hide is worn correctly. Does not confer invisibility to ordinary sight, scent, or hearing.",
+        "Stalkerhide is not traded. A worked piece comes from a hunt the wearer was present for, or from a house that owes the wearer a specific debt.",
+        "Outside the Feywood, recognized Stalkerhide draws attention from any elf who knows what it is."
+      ]
+    },
+    {
+      "id": "thornveil-vine",
+      "name": "Thornveil Vine",
+      "aliases": [],
+      "category": "living",
+      "magical_status": "actively-magical",
+      "magic_field": "druidry",
+      "biome_type": "forest-fey",
+      "known_origins": [
+        "feywood"
+      ],
+      "scarcity": "rare",
+      "treatment_required": true,
+      "origin_culture": "feywood",
+      "description": "A living Feywood vine cultivated for integration into elven combat textiles, particularly Heartwarden vestments. Woven into reinforcement points where its living character contributes to the garment's mobility and protective qualities.",
+      "narrative_properties": [
+        "Items integrating Thornveil Vine are T1+ magical: the vine is a living druidic material with active properties, not merely decorative.",
+        "Tended rather than repaired — Thornveil reinforcements are maintained as living tissue across the garment's working life.",
+        "Closely associated with Heartwarden vestments and similar ceremonial-combat applications.",
+        "Cannot be stockpiled like inert material; requires ongoing care."
+      ]
+    },
+    {
+      "id": "thornmere-vinework",
+      "name": "Thornmere Vinework",
+      "aliases": [],
+      "category": "living",
+      "magical_status": "actively-magical",
+      "magic_field": "druidry",
+      "biome_type": "forest-fey",
+      "known_origins": [
+        "feywood"
+      ],
+      "scarcity": "rare",
+      "treatment_required": true,
+      "origin_culture": "feywood",
+      "description": "Living vine-woven armor produced by House Thornmere's defensive vinework tradition. The vinework is grown to the wearer's measurements over weeks and tended through the wearer's working life; it is not constructed in the conventional sense.",
+      "narrative_properties": [
+        "Items are T0+ magical: the living material itself carries druidic properties; the item-class exists because of active druidic ecology, not despite it.",
+        "Tended rather than repaired; House Thornmere armorers maintain continuity of the living material for the wearer's life.",
+        "Non-elf bearers are rare; vinework armor is given in sustained relationship with the house, not commerce.",
+        "Cannot exist outside ongoing house care — abandoned vinework reverts to inert plant matter within months."
+      ]
+    },
+    {
+      "id": "moonthorn",
+      "name": "Moonthorn",
+      "aliases": [],
+      "category": "bone-horn",
+      "magical_status": "mundane",
+      "magic_field": null,
+      "biome_type": "forest-fey",
+      "known_origins": [
+        "feywood"
+      ],
+      "scarcity": "uncommon",
+      "treatment_required": false,
+      "origin_culture": "feywood",
+      "description": "Material derived from Moonthorn wolves — typically shed canines or other naturally fallen elements gathered for ceremonial knife handles, decorative inlays, or marker pieces. The wolf is not killed for the material; relationship with a Moonthorn pack is the only legitimate access path.",
+      "narrative_properties": [
+        "Items incorporating Moonthorn material are notable mundane — provenance matters more than form.",
+        "A Moonthorn handle on a knife signals to other elves that the bearer has earned a specific relationship with a wolf or pack.",
+        "Outside the Feywood the material reads as exotic but not magically loaded.",
+        "Recognized Moonthorn pieces are essentially impossible to trade legitimately."
+      ]
+    }
+  ]
+}

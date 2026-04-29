@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "material_categories": [
+    {
+      "id": "metal",
+      "description": "Worked metal: ferrous, non-ferrous, alloys, celestial-recovered."
+    },
+    {
+      "id": "wood",
+      "description": "Hardwood, softwood, treated wood; harvested or fallen."
+    },
+    {
+      "id": "hide-leather",
+      "description": "Animal hides, tanned leathers, treated skin."
+    },
+    {
+      "id": "fiber",
+      "description": "Plant or animal fiber, cordage, woven cloth, rope."
+    },
+    {
+      "id": "stone",
+      "description": "Worked stone: building stone, abrasive, gemstone, mineral."
+    },
+    {
+      "id": "living",
+      "description": "Materials drawn from or maintained as living systems."
+    },
+    {
+      "id": "bone-horn",
+      "description": "Bone, horn, antler, ivory, claw, shell."
+    },
+    {
+      "id": "composite",
+      "description": "Engineered combinations of base materials, treated as a unit."
+    },
+    {
+      "id": "other",
+      "description": "Materials outside the standard categories."
+    }
+  ]
+}
