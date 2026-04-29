@@ -17,8 +17,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 50,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "apothecary"
+  ],
   "consumable": true,
   "charges_max": 1,
   "knowledge_tag": null,
