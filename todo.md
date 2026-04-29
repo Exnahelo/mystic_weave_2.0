@@ -23,14 +23,7 @@ Last updated: 2026-04-29
       `data/catalog/vendors/README.md` as future-work placeholders.
 
 ## Lore / Worldbuilding
-
-- [x] **Author Feywood lore prose** into existing files (no new prompt file
-      to preserve slot budget under GPT builder's 20-doc cap):
-      * Recovery economy → section in `economy-rules.md`
-      * Composite craft philosophy + reserve access hierarchy → section in
-        `items-rules.md`
-      * Brief naming culture note (Elarith / Heartfall / starvein) →
-        `items-rules.md`, cross-reference to `data/catalog/crafting/materials.json`
+crafting/materials.json`
 - [ ] **Wire `data/environment/`** (`feywood_animals.json`,
       `feywood_plants.json`) into code. Currently authored but unread.
       Decide read pattern: pre-load into game_data like `data/beasts/`,
@@ -45,6 +38,13 @@ Last updated: 2026-04-29
       (Heartwardens, Greenshields, House Thornmere, House Ironsap) but not
       yet authored canonically. Sketch governance and access hierarchy
       when the catalog hints make it necessary.
+- [x] **Author Feywood lore prose** into existing files (no new prompt file
+      to preserve slot budget under GPT builder's 20-doc cap):
+      * Recovery economy → section in `economy-rules.md`
+      * Composite craft philosophy + reserve access hierarchy → section in
+        `items-rules.md`
+      * Brief naming culture note (Elarith / Heartfall / starvein) →
+        `items-rules.md`, cross-reference to `data/catalog/
 
 ## Prompt Architecture
 
