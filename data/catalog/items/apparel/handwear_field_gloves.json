@@ -1,0 +1,41 @@
+{
+  "id": "handwear-field-gloves",
+  "name": "Field Gloves",
+  "category": "apparel",
+  "subcategory": "handwear",
+  "schema_version": 1,
+  "description": "High-end all-weather gloves built for maximum durability, protection, and sustained hard use.",
+  "narrative_effects": [
+    "Supports extended field operations with maximum hand protection and weatherproofing."
+  ],
+  "tags": [
+    "apparel",
+    "handwear",
+    "field",
+    "all-weather",
+    "premium"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 400,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

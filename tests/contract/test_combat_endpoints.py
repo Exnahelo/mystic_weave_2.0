@@ -18,9 +18,9 @@ def test_compute_max_hp_happy_path_returns_expected_math() -> None:
         response = client.post(
             "/combat/compute_max_hp",
             json={
-                "armor_id": "armor_plate_01",
+                "armor_id": "plate",
                 "armor_tier": 3,
-                "shield_id": "shield_01",
+                "shield_id": "shield",
                 "shield_tier": 2,
             },
         )
@@ -31,9 +31,9 @@ def test_compute_max_hp_happy_path_returns_expected_math() -> None:
         "base": 100,
         "armor_contribution": 68,
         "shield_contribution": 15,
-        "armor_id": "armor_plate_01",
+        "armor_id": "plate",
         "armor_tier": 3,
-        "shield_id": "shield_01",
+        "shield_id": "shield",
         "shield_tier": 2,
     }
 
@@ -44,7 +44,7 @@ def test_compute_max_hp_rejects_tier_out_of_range() -> None:
     with TestClient(app) as client:
         response = client.post(
             "/combat/compute_max_hp",
-            json={"armor_id": "armor_plate_01", "armor_tier": 6},
+            json={"armor_id": "plate", "armor_tier": 6},
         )
 
     assert response.status_code == 422
@@ -56,7 +56,7 @@ def test_compute_max_hp_rejects_non_armor_set() -> None:
     with TestClient(app) as client:
         response = client.post(
             "/combat/compute_max_hp",
-            json={"armor_id": "armor_bracers_01", "armor_tier": 1},
+            json={"armor_id": "bracers", "armor_tier": 1},
         )
 
     assert response.status_code == 422
@@ -81,7 +81,7 @@ def test_resolve_attack_minimum_valid_input_returns_well_formed_response() -> No
         response = client.post(
             "/combat/resolve_attack",
             json={
-                "weapon_id": "weapon_sword_01",
+                "weapon_id": "sword",
                 "weapon_tier": 0,
                 "defender_is_unarmored": False,
             },
@@ -135,7 +135,7 @@ def test_resolve_attack_rejects_unknown_ammo() -> None:
         response = client.post(
             "/combat/resolve_attack",
             json={
-                "weapon_id": "weapon_sword_01",
+                "weapon_id": "sword",
                 "weapon_tier": 0,
                 "ammo_id": "missing_ammo",
                 "defender_is_unarmored": False,
@@ -152,7 +152,7 @@ def test_resolve_attack_rejects_weapon_tier_out_of_range() -> None:
         response = client.post(
             "/combat/resolve_attack",
             json={
-                "weapon_id": "weapon_sword_01",
+                "weapon_id": "sword",
                 "weapon_tier": 6,
                 "defender_is_unarmored": False,
             },

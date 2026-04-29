@@ -1,0 +1,42 @@
+{
+  "id": "sling-stones-standard",
+  "name": "Sling Stones",
+  "category": "ammunition",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "Smooth stone ammunition sized for practical sling use.",
+  "narrative_effects": [
+    "Required to use a sling effectively at range.",
+    "Spent sling stones are usually treated as lost, scattered, or not worth recovering individually."
+  ],
+  "tags": [
+    "ammo",
+    "sling",
+    "standard"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 5,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "ranged",
+  "application_tag": "sling",
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": "standard",
+  "used_with": [
+    "sling"
+  ],
+  "bundle_size": 20,
+  "damage_modifier": 0,
+  "recoverable": false,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

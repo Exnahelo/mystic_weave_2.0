@@ -1,0 +1,43 @@
+{
+  "id": "rope-arrows",
+  "name": "Rope Arrows",
+  "category": "ammunition",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "Heavy arrowheads designed to carry and anchor light climbing line or signaling cord.",
+  "narrative_effects": [
+    "Supports line-placement or difficult elevated anchoring where conditions allow.",
+    "May be recoverable if the anchor holds and the head remains intact."
+  ],
+  "tags": [
+    "ammo",
+    "bow",
+    "utility",
+    "climbing"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 90,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "ranged",
+  "application_tag": "longbow",
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": "special",
+  "used_with": [
+    "longbow"
+  ],
+  "bundle_size": 3,
+  "damage_modifier": 5,
+  "recoverable": false,
+  "special_effect_tag": "anchoring",
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

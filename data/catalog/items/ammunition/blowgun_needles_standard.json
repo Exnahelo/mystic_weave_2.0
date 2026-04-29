@@ -1,0 +1,42 @@
+{
+  "id": "blowgun-needles-standard",
+  "name": "Blowgun Needles",
+  "category": "ammunition",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "Light blowgun needles intended for quiet projectile use.",
+  "narrative_effects": [
+    "Required to use a blowgun effectively.",
+    "Spent needles are usually lost, bent, or impractical to recover in useful quantity."
+  ],
+  "tags": [
+    "ammo",
+    "blowgun",
+    "standard"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 10,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "unconventional",
+  "application_tag": "blowgun",
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": "standard",
+  "used_with": [
+    "blowgun"
+  ],
+  "bundle_size": 20,
+  "damage_modifier": 0,
+  "recoverable": false,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

@@ -1,0 +1,39 @@
+{
+  "id": "breastplate",
+  "name": "Breastplate",
+  "category": "armor",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "A shaped torso plate paired with lighter supporting materials, offering strong core protection without the full burden of heavy armor.",
+  "narrative_effects": [
+    "May increase Agility difficulty by one step in demanding physical contexts, depending on situation and judgment."
+  ],
+  "tags": [
+    "armor",
+    "medium",
+    "plate"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 5000,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "armor",
+  "application_tag": "medium_armor",
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": 20,
+  "armor_ceiling": 75,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

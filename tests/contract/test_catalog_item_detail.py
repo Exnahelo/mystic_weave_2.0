@@ -15,26 +15,28 @@ def _make_app() -> FastAPI:
 def test_get_catalog_item_longsword_returns_full_item_shape() -> None:
     app = _make_app()
     with TestClient(app) as client:
-        response = client.get("/catalog/items/longsword")
+        response = client.get("/catalog/items/sword")
 
     assert response.status_code == 200
     payload = response.json()
-    assert payload["id"] == "longsword"
-    assert "weapon" in payload["modules"]
-    assert payload["worldness"]["pricing"]["canonical_value_cp"] == 1500
+    assert payload["id"] == "sword"
+    assert payload["category"] == "weapon"
+    assert payload["base_damage"] is not None
+    assert payload["value_cd"] > 0
 
 
 @pytest.mark.contract
 def test_get_catalog_item_flame_tongue_returns_magical_modules() -> None:
     app = _make_app()
     with TestClient(app) as client:
-        response = client.get("/catalog/items/flame-tongue-longsword")
+        response = client.get("/catalog/items/heartlight-lantern")
 
     assert response.status_code == 200
     payload = response.json()
-    assert payload["id"] == "flame-tongue-longsword"
-    assert "attunement" in payload["modules"]
-    assert payload["modules"]["effects"]
+    assert payload["id"] == "heartlight-lantern"
+    assert payload["category"] == "gear"
+    assert payload["tier"] is not None
+    assert payload["magic_field"] is not None
 
 
 @pytest.mark.contract
@@ -51,7 +53,7 @@ def test_get_catalog_item_nonexistent_returns_404() -> None:
 def test_get_catalog_item_torch_returns_200() -> None:
     app = _make_app()
     with TestClient(app) as client:
-        response = client.get("/catalog/items/torch")
+        response = client.get("/catalog/items/gear-torch")
 
     assert response.status_code == 200
-    assert response.json()["id"] == "torch"
+    assert response.json()["id"] == "gear-torch"

@@ -1,0 +1,43 @@
+{
+  "id": "gear-feywood-honey",
+  "name": "Feywood Honey",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A sealed jar of honey from Honeybound bees \u2014 distinctly floral, slightly field-reactive to sensitive attunements, prized both as food and as a preserve base.",
+  "narrative_effects": [
+    "Standard food and preserve ingredient with notably long shelf life.",
+    "Vaelmere trade export in modest quantities; realm connoisseurs distinguish Feywood honey by its specific floral character."
+  ],
+  "tags": [
+    "consumable",
+    "food",
+    "honey",
+    "honeybound",
+    "feywood",
+    "preserve"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 40,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": true,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "item_subcategories": {
+    "gear": [
+      {
+        "id": "survival"
+      },
+      {
+        "id": "storage"
+      },
+      {
+        "id": "light"
+      },
+      {
+        "id": "tool"
+      },
+      {
+        "id": "navigation"
+      },
+      {
+        "id": "medicine"
+      },
+      {
+        "id": "instrument"
+      },
+      {
+        "id": "focus"
+      },
+      {
+        "id": "consumable"
+      },
+      {
+        "id": "document"
+      },
+      {
+        "id": "other"
+      }
+    ],
+    "apparel": [
+      {
+        "id": "clothing"
+      },
+      {
+        "id": "footwear"
+      },
+      {
+        "id": "handwear"
+      },
+      {
+        "id": "outerwear"
+      },
+      {
+        "id": "ceremonial"
+      },
+      {
+        "id": "headwear"
+      }
+    ]
+  }
+}

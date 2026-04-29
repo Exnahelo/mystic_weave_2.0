@@ -1,0 +1,39 @@
+{
+  "id": "gear-crowbar",
+  "name": "Crowbar",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A heavy pry bar for forcing doors, containers, and lodged structures.",
+  "narrative_effects": [
+    "Reduces difficulty of forcing doors, lids, and secured containers."
+  ],
+  "tags": [
+    "tactical",
+    "tool",
+    "breach"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 20,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

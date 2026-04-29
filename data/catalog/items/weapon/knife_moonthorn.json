@@ -1,0 +1,46 @@
+{
+  "id": "knife-moonthorn",
+  "name": "Moonthorn Hunting Knife",
+  "category": "weapon",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "A small hunting knife with a handle worked from a moonthorn wolf's shed canine \u2014 given rather than bought, typically to an elf who has earned a specific relationship with a wolf or pack.",
+  "narrative_effects": [
+    "Carries the same mechanics as a standard knife.",
+    "Provenance matters more than form \u2014 wearing a Moonthorn knife signals a relationship to other elves who understand the craft; the knife itself does nothing extraordinary."
+  ],
+  "tags": [
+    "weapon",
+    "close-combat",
+    "knife",
+    "moonthorn",
+    "ceremonial",
+    "rare",
+    "feywood"
+  ],
+  "roll_tag": null,
+  "rarity": "rare",
+  "legality": "open",
+  "value_cd": 200,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "close_combat",
+  "application_tag": "knife",
+  "base_damage": 10,
+  "weapon_handedness": {
+    "hands": "one"
+  },
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

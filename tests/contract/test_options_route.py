@@ -72,7 +72,7 @@ def test_get_catalog_items_returns_expected_groups() -> None:
     assert mundane_response.json()["ammunition_items"] == []
 
     assert len(magical_response.json()["magical_items"]) >= 1
-    assert apparel_response.json()["apparel_items"] == []
+    assert len(apparel_response.json()["apparel_items"]) >= 1
     assert len(weapon_response.json()["weapon_items"]) >= 14
     assert len(armor_response.json()["armor_items"]) >= 6
     assert len(ammunition_response.json()["ammunition_items"]) >= 3
@@ -115,7 +115,7 @@ def test_get_catalog_items_kind_filter_returns_only_requested_group() -> None:
     apparel_payload = apparel_response.json()
     assert apparel_payload["mundane_items"] == []
     assert apparel_payload["magical_items"] == []
-    assert apparel_payload["apparel_items"] == []
+    assert apparel_payload["apparel_items"]
     assert apparel_payload["weapon_items"] == []
     assert apparel_payload["armor_items"] == []
     assert apparel_payload["ammunition_items"] == []

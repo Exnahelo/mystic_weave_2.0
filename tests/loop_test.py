@@ -840,9 +840,9 @@ def part7(client: httpx.Client) -> None:
 
     subsection("Test 7.1 — POST /combat/compute_max_hp")
     r = client.post("/combat/compute_max_hp", json={
-        "armor_id": "armor_plate_01",
+        "armor_id": "plate",
         "armor_tier": 3,
-        "shield_id": "shield_01",
+        "shield_id": "shield",
         "shield_tier": 2,
     })
     check("7.1.a", r.status_code == 200, f"POST /combat/compute_max_hp → {r.status_code}")
@@ -852,7 +852,7 @@ def part7(client: httpx.Client) -> None:
 
     subsection("Test 7.2 — POST /combat/resolve_attack")
     r = client.post("/combat/resolve_attack", json={
-        "weapon_id": "weapon_sword_01",
+        "weapon_id": "sword",
         "weapon_tier": 2,
         "defender_is_unarmored": False,
     })

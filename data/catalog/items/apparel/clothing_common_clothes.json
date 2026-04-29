@@ -1,0 +1,40 @@
+{
+  "id": "clothing-common-clothes",
+  "name": "Common Clothes",
+  "category": "apparel",
+  "subcategory": "clothing",
+  "schema_version": 1,
+  "description": "Simple everyday clothing worn by laborers, farmers, and ordinary folk.",
+  "narrative_effects": [
+    "Provides baseline unremarkable appearance appropriate for common settings."
+  ],
+  "tags": [
+    "apparel",
+    "clothing",
+    "daily",
+    "basic"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 20,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

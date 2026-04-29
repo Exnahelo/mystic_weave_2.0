@@ -1,0 +1,39 @@
+{
+  "id": "shield",
+  "name": "Shield",
+  "category": "shield",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "A general shield entry. Specific size and type are handled narratively at runtime rather than as separate catalog items.",
+  "narrative_effects": [
+    "Supports active defensive framing. Movement and handling impact depend on described size and type, judged at runtime."
+  ],
+  "tags": [
+    "shield",
+    "defensive",
+    "equipment"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 100,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "armor",
+  "application_tag": "shields",
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": 5,
+  "armor_ceiling": 30,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

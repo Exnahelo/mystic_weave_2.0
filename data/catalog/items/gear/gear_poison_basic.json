@@ -1,0 +1,39 @@
+{
+  "id": "gear-poison-basic",
+  "name": "Poison, Basic (vial)",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A basic weapon poison applied to deliver harmful effects on the next successful hit.",
+  "narrative_effects": [
+    "Coats a weapon to deliver a poison effect on the next successful strike."
+  ],
+  "tags": [
+    "consumable",
+    "poison",
+    "offensive"
+  ],
+  "roll_tag": "pharmacology",
+  "rarity": "rare",
+  "legality": "open",
+  "value_cd": 1000,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": true,
+  "charges_max": 1,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

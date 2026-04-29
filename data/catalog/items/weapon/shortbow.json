@@ -1,0 +1,42 @@
+{
+  "id": "shortbow",
+  "name": "Shortbow",
+  "category": "weapon",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "A compact bow suited to mobile shooting and practical field use.",
+  "narrative_effects": [
+    "Supports flexible ranged attacks with moderate power and easier handling."
+  ],
+  "tags": [
+    "weapon",
+    "ranged",
+    "bow",
+    "mobile"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 300,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "ranged",
+  "application_tag": "shortbow",
+  "base_damage": 10,
+  "weapon_handedness": {
+    "hands": "one"
+  },
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

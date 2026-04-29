@@ -1,0 +1,40 @@
+{
+  "id": "piton-set-6",
+  "name": "Piton Set (6)",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "Six iron pitons for anchoring rope, securing traverses, or establishing stable climbing points on rock and worked stone.",
+  "narrative_effects": [
+    "Required for reliable fixed anchors in climbing or descent scenes where natural anchor points are insufficient."
+  ],
+  "tags": [
+    "travel",
+    "climbing",
+    "anchor",
+    "tool"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 60,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": true,
+  "charges_max": 6,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

@@ -1,0 +1,39 @@
+{
+  "id": "gear-pliers",
+  "name": "Pliers",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A gripping tool for bending, pinching, and manipulating small materials.",
+  "narrative_effects": [
+    "Supports gripping and bending fine materials during repair or fabrication."
+  ],
+  "tags": [
+    "craft",
+    "tool",
+    "fine-work"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 10,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

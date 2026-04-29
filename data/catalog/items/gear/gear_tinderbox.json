@@ -1,0 +1,39 @@
+{
+  "id": "gear-tinderbox",
+  "name": "Tinderbox",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A compact kit for reliably lighting fires without relying on improvisation.",
+  "narrative_effects": [
+    "Required to reliably light fires without improvising a method."
+  ],
+  "tags": [
+    "survival",
+    "camp",
+    "tool"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 5,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

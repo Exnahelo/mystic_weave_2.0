@@ -1,0 +1,45 @@
+{
+  "id": "sword-greenshield-pattern",
+  "name": "Greenshield-Pattern Sword",
+  "category": "weapon",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "The elven Greenshield's standard military sword \u2014 a straight double-edged blade of refined elven metallurgy, balanced for the cut-and-thrust technique Greenshield doctrine emphasizes.",
+  "narrative_effects": [
+    "Supports standard sword technique with the specific balance elven military training favors.",
+    "Rare in realm-side hands; its presence on a non-elf signals either long-term elven relationship or a trophy whose provenance is worth asking about."
+  ],
+  "tags": [
+    "weapon",
+    "melee",
+    "sword",
+    "greenshield",
+    "elven-military",
+    "feywood"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 500,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "melee",
+  "application_tag": "sword",
+  "base_damage": 15,
+  "weapon_handedness": {
+    "hands": "one"
+  },
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

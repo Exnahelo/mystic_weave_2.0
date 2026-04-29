@@ -1,0 +1,44 @@
+{
+  "id": "blessed-bolts",
+  "name": "Blessed Bolts",
+  "category": "ammunition",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "Consecrated bolts prepared for use in rites of sanctioned violence against profane or corrupted threats.",
+  "narrative_effects": [
+    "Supports sacred-pressure framing where holy authority is recognized and relevant.",
+    "Typically treated as ritually expended whether physically recoverable or not."
+  ],
+  "tags": [
+    "ammo",
+    "crossbow",
+    "sacred",
+    "bahamutic"
+  ],
+  "roll_tag": null,
+  "rarity": "rare",
+  "legality": "open",
+  "value_cd": 180,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "mechanical",
+  "application_tag": "light_crossbow",
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": "special",
+  "used_with": [
+    "light-crossbow",
+    "heavy-crossbow"
+  ],
+  "bundle_size": 5,
+  "damage_modifier": 5,
+  "recoverable": false,
+  "special_effect_tag": "sacred",
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

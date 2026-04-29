@@ -1,0 +1,39 @@
+{
+  "id": "gear-torch",
+  "name": "Torch",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A simple handheld light source that burns out after roughly an hour.",
+  "narrative_effects": [
+    "Provides temporary light in darkness before burning out."
+  ],
+  "tags": [
+    "consumable",
+    "survival",
+    "light"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 1,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": true,
+  "charges_max": 1,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

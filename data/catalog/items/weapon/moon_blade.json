@@ -1,0 +1,46 @@
+{
+  "id": "moon-blade",
+  "name": "Moon Blade",
+  "category": "weapon",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "A compact elven blade carried alongside the longer Greenshield-pattern sword for close-line work and dense-terrain engagements. Forged to elven metallurgy standards and balanced for the cut-and-thrust technique Greenshield doctrine emphasizes at shorter reach. The name reflects the pale sheen the blade takes under moonlight \u2014 a property of the forging rather than an enchantment.",
+  "narrative_effects": [
+    "Supports disciplined cutting and thrusting in close melee with elven Greenshield balance.",
+    "Rare in realm-side hands; its presence on a non-elf signals either long-term elven relationship or a trophy whose provenance is worth asking about."
+  ],
+  "tags": [
+    "weapon",
+    "melee",
+    "blade",
+    "shortsword",
+    "moon-blade",
+    "elven",
+    "feywood"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 350,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "melee",
+  "application_tag": "sword",
+  "base_damage": 15,
+  "weapon_handedness": {
+    "hands": "one"
+  },
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

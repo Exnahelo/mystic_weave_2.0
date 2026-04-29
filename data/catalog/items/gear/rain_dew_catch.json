@@ -1,0 +1,40 @@
+{
+  "id": "rain-dew-catch",
+  "name": "Rain / Dew Catch",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A lightweight collection sheet and line kit for gathering rainwater or condensing overnight moisture into a usable vessel.",
+  "narrative_effects": [
+    "Supports passive water collection in wet, misted, or dew-heavy environments without relying entirely on open sources."
+  ],
+  "tags": [
+    "survival",
+    "camp",
+    "water",
+    "tool"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 35,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

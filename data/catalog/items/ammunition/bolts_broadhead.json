@@ -1,0 +1,44 @@
+{
+  "id": "bolts-broadhead",
+  "name": "Broadhead Bolts",
+  "category": "ammunition",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "Heavy broadhead bolts intended for hunting and soft-target lethality.",
+  "narrative_effects": [
+    "Supports stronger bleeding or flesh-wound framing against unarmored or lightly protected targets.",
+    "May be recoverable if not badly damaged on impact."
+  ],
+  "tags": [
+    "ammo",
+    "crossbow",
+    "broadhead",
+    "hunting"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 45,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "mechanical",
+  "application_tag": "light_crossbow",
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": "special",
+  "used_with": [
+    "light-crossbow",
+    "heavy-crossbow"
+  ],
+  "bundle_size": 10,
+  "damage_modifier": 5,
+  "recoverable": false,
+  "special_effect_tag": "bleed_pressure",
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

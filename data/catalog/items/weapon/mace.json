@@ -1,0 +1,42 @@
+{
+  "id": "mace",
+  "name": "Mace",
+  "category": "weapon",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "A one-handed crushing weapon built to deliver punishing impact through armor and guard.",
+  "narrative_effects": [
+    "Supports crushing blows against guarded or armored targets."
+  ],
+  "tags": [
+    "weapon",
+    "melee",
+    "bludgeoning",
+    "armored-opponent"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 150,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "melee",
+  "application_tag": "mace",
+  "base_damage": 15,
+  "weapon_handedness": {
+    "hands": "one"
+  },
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

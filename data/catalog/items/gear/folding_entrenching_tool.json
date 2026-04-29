@@ -1,0 +1,41 @@
+{
+  "id": "folding-entrenching-tool",
+  "name": "Folding Entrenching Tool",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A compact folding field shovel for scraping trenches, burying refuse, cutting drainage lines, and light excavation on the move.",
+  "narrative_effects": [
+    "Supports efficient field digging, drainage work, and hasty camp fortification without requiring a full shovel."
+  ],
+  "tags": [
+    "survival",
+    "camp",
+    "tool",
+    "labor",
+    "portable"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 120,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

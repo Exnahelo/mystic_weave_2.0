@@ -1,0 +1,49 @@
+{
+  "id": "proven-handaxe",
+  "name": "Proven Handaxe",
+  "category": "weapon",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "A close-fighting axe with an elven-forged head and a Silverbark Ash haft, given to those who survive a wild proving. The haft absorbs impact shock more cleanly than realm hardwoods, reducing hand fatigue across a long day's work. Each axe is marked discreetly on the underside of the haft with a sigil recognizable to the giver's house.",
+  "narrative_effects": [
+    "Carries the same mechanics as a standard handaxe.",
+    "The Silverbark haft absorbs impact shock more cleanly than dense realm hardwoods, reducing hand fatigue across a long day's work.",
+    "Not bought. A Proven Handaxe is given by a house or elder to an elf who has survived a formal or informal proving; the axe itself carries no magical property, but its presence on a person's belt is a visible statement of proving-status recognized across Feywood culture."
+  ],
+  "tags": [
+    "weapon",
+    "close-combat",
+    "light",
+    "handaxe",
+    "silverbark-ash",
+    "elven",
+    "feywood",
+    "proving-gift",
+    "throwable-candidate"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 120,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "melee",
+  "application_tag": "axe",
+  "base_damage": 10,
+  "weapon_handedness": {
+    "hands": "one"
+  },
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

@@ -1,0 +1,39 @@
+{
+  "id": "gear-candle",
+  "name": "Candle",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A small fragile light source that burns for about an hour in calm conditions.",
+  "narrative_effects": [
+    "Provides minimal light for a short duration and is easily extinguished."
+  ],
+  "tags": [
+    "consumable",
+    "light",
+    "utility"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 1,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": true,
+  "charges_max": 1,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

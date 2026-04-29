@@ -1,0 +1,41 @@
+{
+  "id": "outerwear-court-cloak",
+  "name": "Court Cloak",
+  "category": "apparel",
+  "subcategory": "outerwear",
+  "schema_version": 1,
+  "description": "Formal high-status outerwear for nobles, ceremonies, and appearances at court or elite gatherings.",
+  "narrative_effects": [
+    "Supports formal social framing and status signaling in elite or ceremonial settings."
+  ],
+  "tags": [
+    "apparel",
+    "outerwear",
+    "formal",
+    "noble",
+    "court"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 800,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

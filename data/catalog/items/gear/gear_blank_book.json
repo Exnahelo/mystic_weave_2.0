@@ -1,0 +1,39 @@
+{
+  "id": "gear-blank-book",
+  "name": "Book (blank)",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A bound blank book used as a journal, ledger, or reference volume.",
+  "narrative_effects": [
+    "Supports journaling, record keeping, and reference use; accurate reference books may aid relevant intellect work."
+  ],
+  "tags": [
+    "writing",
+    "records",
+    "reference"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 250,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

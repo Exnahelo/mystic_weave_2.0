@@ -1,0 +1,1113 @@
+{
+  "schema_version": 1,
+  "item_tags": [
+    {
+      "id": "alchemy",
+      "description": ""
+    },
+    {
+      "id": "all-weather",
+      "description": ""
+    },
+    {
+      "id": "ammo",
+      "description": ""
+    },
+    {
+      "id": "amulet",
+      "description": ""
+    },
+    {
+      "id": "anchor",
+      "description": ""
+    },
+    {
+      "id": "animal-gear",
+      "description": ""
+    },
+    {
+      "id": "anti-poison",
+      "description": ""
+    },
+    {
+      "id": "apparel",
+      "description": ""
+    },
+    {
+      "id": "appearance",
+      "description": ""
+    },
+    {
+      "id": "appraisal",
+      "description": ""
+    },
+    {
+      "id": "arcane",
+      "description": ""
+    },
+    {
+      "id": "archery",
+      "description": ""
+    },
+    {
+      "id": "armor",
+      "description": ""
+    },
+    {
+      "id": "armor-breaking",
+      "description": ""
+    },
+    {
+      "id": "armor-piercing",
+      "description": ""
+    },
+    {
+      "id": "armored-opponent",
+      "description": ""
+    },
+    {
+      "id": "art",
+      "description": ""
+    },
+    {
+      "id": "artifact",
+      "description": ""
+    },
+    {
+      "id": "attachment",
+      "description": ""
+    },
+    {
+      "id": "authentication",
+      "description": ""
+    },
+    {
+      "id": "bahamutic",
+      "description": ""
+    },
+    {
+      "id": "baseline",
+      "description": ""
+    },
+    {
+      "id": "basic",
+      "description": ""
+    },
+    {
+      "id": "belt",
+      "description": ""
+    },
+    {
+      "id": "binding",
+      "description": ""
+    },
+    {
+      "id": "bioluminescent",
+      "description": ""
+    },
+    {
+      "id": "blade",
+      "description": ""
+    },
+    {
+      "id": "blowgun",
+      "description": ""
+    },
+    {
+      "id": "bludgeoning",
+      "description": ""
+    },
+    {
+      "id": "bodkin",
+      "description": ""
+    },
+    {
+      "id": "bonded-mount",
+      "description": ""
+    },
+    {
+      "id": "bow",
+      "description": ""
+    },
+    {
+      "id": "breach",
+      "description": ""
+    },
+    {
+      "id": "briarmane",
+      "description": ""
+    },
+    {
+      "id": "broadhead",
+      "description": ""
+    },
+    {
+      "id": "bulk",
+      "description": ""
+    },
+    {
+      "id": "camp",
+      "description": ""
+    },
+    {
+      "id": "ceremonial",
+      "description": ""
+    },
+    {
+      "id": "ceremonial-combat",
+      "description": ""
+    },
+    {
+      "id": "chain",
+      "description": ""
+    },
+    {
+      "id": "chopping",
+      "description": ""
+    },
+    {
+      "id": "cider",
+      "description": ""
+    },
+    {
+      "id": "climbing",
+      "description": ""
+    },
+    {
+      "id": "cloak",
+      "description": ""
+    },
+    {
+      "id": "close-combat",
+      "description": ""
+    },
+    {
+      "id": "clothing",
+      "description": ""
+    },
+    {
+      "id": "cold-weather",
+      "description": ""
+    },
+    {
+      "id": "combat",
+      "description": ""
+    },
+    {
+      "id": "concealable",
+      "description": ""
+    },
+    {
+      "id": "construction",
+      "description": ""
+    },
+    {
+      "id": "consumable",
+      "description": ""
+    },
+    {
+      "id": "container",
+      "description": ""
+    },
+    {
+      "id": "control",
+      "description": ""
+    },
+    {
+      "id": "cooking",
+      "description": ""
+    },
+    {
+      "id": "cordage",
+      "description": ""
+    },
+    {
+      "id": "cosmetic",
+      "description": ""
+    },
+    {
+      "id": "court",
+      "description": ""
+    },
+    {
+      "id": "craft",
+      "description": ""
+    },
+    {
+      "id": "crossbow",
+      "description": ""
+    },
+    {
+      "id": "cutting",
+      "description": ""
+    },
+    {
+      "id": "daily",
+      "description": ""
+    },
+    {
+      "id": "dawnmint",
+      "description": ""
+    },
+    {
+      "id": "deception",
+      "description": ""
+    },
+    {
+      "id": "defensive",
+      "description": ""
+    },
+    {
+      "id": "dewberry",
+      "description": ""
+    },
+    {
+      "id": "discordant-war",
+      "description": ""
+    },
+    {
+      "id": "disguise",
+      "description": ""
+    },
+    {
+      "id": "documents",
+      "description": ""
+    },
+    {
+      "id": "drafting",
+      "description": ""
+    },
+    {
+      "id": "drink",
+      "description": ""
+    },
+    {
+      "id": "druidic",
+      "description": ""
+    },
+    {
+      "id": "dual-use",
+      "description": ""
+    },
+    {
+      "id": "durable",
+      "description": ""
+    },
+    {
+      "id": "elemental",
+      "description": ""
+    },
+    {
+      "id": "elven",
+      "description": ""
+    },
+    {
+      "id": "elven-military",
+      "description": ""
+    },
+    {
+      "id": "emergency",
+      "description": ""
+    },
+    {
+      "id": "equipment",
+      "description": ""
+    },
+    {
+      "id": "fever-remedy",
+      "description": ""
+    },
+    {
+      "id": "feywood",
+      "description": ""
+    },
+    {
+      "id": "field",
+      "description": ""
+    },
+    {
+      "id": "field-care",
+      "description": ""
+    },
+    {
+      "id": "field-illegible-trace",
+      "description": ""
+    },
+    {
+      "id": "field-sense",
+      "description": ""
+    },
+    {
+      "id": "fine-work",
+      "description": ""
+    },
+    {
+      "id": "fire",
+      "description": ""
+    },
+    {
+      "id": "fishing",
+      "description": ""
+    },
+    {
+      "id": "fixed",
+      "description": ""
+    },
+    {
+      "id": "flexible",
+      "description": ""
+    },
+    {
+      "id": "food",
+      "description": ""
+    },
+    {
+      "id": "foot-protection",
+      "description": ""
+    },
+    {
+      "id": "footwear",
+      "description": ""
+    },
+    {
+      "id": "forearm-protection",
+      "description": ""
+    },
+    {
+      "id": "forest",
+      "description": ""
+    },
+    {
+      "id": "formal",
+      "description": ""
+    },
+    {
+      "id": "formation",
+      "description": ""
+    },
+    {
+      "id": "fragile",
+      "description": ""
+    },
+    {
+      "id": "frost",
+      "description": ""
+    },
+    {
+      "id": "fuel",
+      "description": ""
+    },
+    {
+      "id": "fungus",
+      "description": ""
+    },
+    {
+      "id": "gathering",
+      "description": ""
+    },
+    {
+      "id": "gauntlet",
+      "description": ""
+    },
+    {
+      "id": "goldcap",
+      "description": ""
+    },
+    {
+      "id": "greenshield",
+      "description": ""
+    },
+    {
+      "id": "hand-protection",
+      "description": ""
+    },
+    {
+      "id": "handaxe",
+      "description": ""
+    },
+    {
+      "id": "handwear",
+      "description": ""
+    },
+    {
+      "id": "healer",
+      "description": ""
+    },
+    {
+      "id": "hearthgoat",
+      "description": ""
+    },
+    {
+      "id": "hearthwool",
+      "description": ""
+    },
+    {
+      "id": "heartlight",
+      "description": ""
+    },
+    {
+      "id": "heartwarden",
+      "description": ""
+    },
+    {
+      "id": "heartwood-bow",
+      "description": ""
+    },
+    {
+      "id": "heat",
+      "description": ""
+    },
+    {
+      "id": "heavy",
+      "description": ""
+    },
+    {
+      "id": "herbalism",
+      "description": ""
+    },
+    {
+      "id": "hide",
+      "description": ""
+    },
+    {
+      "id": "honey",
+      "description": ""
+    },
+    {
+      "id": "honeybound",
+      "description": ""
+    },
+    {
+      "id": "hooking",
+      "description": ""
+    },
+    {
+      "id": "hunting",
+      "description": ""
+    },
+    {
+      "id": "impact",
+      "description": ""
+    },
+    {
+      "id": "improvised-adjacent",
+      "description": ""
+    },
+    {
+      "id": "incendiary",
+      "description": ""
+    },
+    {
+      "id": "infusion",
+      "description": ""
+    },
+    {
+      "id": "inspection",
+      "description": ""
+    },
+    {
+      "id": "intimidating",
+      "description": ""
+    },
+    {
+      "id": "ironroot",
+      "description": ""
+    },
+    {
+      "id": "knife",
+      "description": ""
+    },
+    {
+      "id": "labor",
+      "description": ""
+    },
+    {
+      "id": "lantern",
+      "description": ""
+    },
+    {
+      "id": "leather",
+      "description": ""
+    },
+    {
+      "id": "leatherwork",
+      "description": ""
+    },
+    {
+      "id": "lethariel",
+      "description": ""
+    },
+    {
+      "id": "light",
+      "description": ""
+    },
+    {
+      "id": "liquid",
+      "description": ""
+    },
+    {
+      "id": "living",
+      "description": ""
+    },
+    {
+      "id": "living-artifact",
+      "description": ""
+    },
+    {
+      "id": "lockpicking",
+      "description": ""
+    },
+    {
+      "id": "long-range",
+      "description": ""
+    },
+    {
+      "id": "longbough",
+      "description": ""
+    },
+    {
+      "id": "longbow",
+      "description": ""
+    },
+    {
+      "id": "mane-braid",
+      "description": ""
+    },
+    {
+      "id": "marker",
+      "description": ""
+    },
+    {
+      "id": "market",
+      "description": ""
+    },
+    {
+      "id": "martial",
+      "description": ""
+    },
+    {
+      "id": "masonry",
+      "description": ""
+    },
+    {
+      "id": "measurement",
+      "description": ""
+    },
+    {
+      "id": "mechanical",
+      "description": ""
+    },
+    {
+      "id": "medical",
+      "description": ""
+    },
+    {
+      "id": "medium",
+      "description": ""
+    },
+    {
+      "id": "melee",
+      "description": ""
+    },
+    {
+      "id": "mild-medicine",
+      "description": ""
+    },
+    {
+      "id": "military",
+      "description": ""
+    },
+    {
+      "id": "mobile",
+      "description": ""
+    },
+    {
+      "id": "moon-blade",
+      "description": ""
+    },
+    {
+      "id": "moonthorn",
+      "description": ""
+    },
+    {
+      "id": "mount",
+      "description": ""
+    },
+    {
+      "id": "navigation",
+      "description": ""
+    },
+    {
+      "id": "noble",
+      "description": ""
+    },
+    {
+      "id": "non-tradeable",
+      "description": ""
+    },
+    {
+      "id": "oathbloom",
+      "description": ""
+    },
+    {
+      "id": "observance",
+      "description": ""
+    },
+    {
+      "id": "observation",
+      "description": ""
+    },
+    {
+      "id": "offensive",
+      "description": ""
+    },
+    {
+      "id": "outerwear",
+      "description": ""
+    },
+    {
+      "id": "padded",
+      "description": ""
+    },
+    {
+      "id": "piercing",
+      "description": ""
+    },
+    {
+      "id": "plate",
+      "description": ""
+    },
+    {
+      "id": "poison",
+      "description": ""
+    },
+    {
+      "id": "polearm",
+      "description": ""
+    },
+    {
+      "id": "portable",
+      "description": ""
+    },
+    {
+      "id": "practical",
+      "description": ""
+    },
+    {
+      "id": "precise",
+      "description": ""
+    },
+    {
+      "id": "precision",
+      "description": ""
+    },
+    {
+      "id": "premium",
+      "description": ""
+    },
+    {
+      "id": "preserve",
+      "description": ""
+    },
+    {
+      "id": "projectile",
+      "description": ""
+    },
+    {
+      "id": "proving-gift",
+      "description": ""
+    },
+    {
+      "id": "quiet-step",
+      "description": ""
+    },
+    {
+      "id": "ranged",
+      "description": ""
+    },
+    {
+      "id": "ranger",
+      "description": ""
+    },
+    {
+      "id": "rare",
+      "description": ""
+    },
+    {
+      "id": "ration",
+      "description": ""
+    },
+    {
+      "id": "reach",
+      "description": ""
+    },
+    {
+      "id": "realm-facing",
+      "description": ""
+    },
+    {
+      "id": "records",
+      "description": ""
+    },
+    {
+      "id": "redveil",
+      "description": ""
+    },
+    {
+      "id": "reference",
+      "description": ""
+    },
+    {
+      "id": "reinforced",
+      "description": ""
+    },
+    {
+      "id": "relational-magic",
+      "description": ""
+    },
+    {
+      "id": "relational-token",
+      "description": ""
+    },
+    {
+      "id": "religious",
+      "description": ""
+    },
+    {
+      "id": "repair",
+      "description": ""
+    },
+    {
+      "id": "resinheart",
+      "description": ""
+    },
+    {
+      "id": "rest",
+      "description": ""
+    },
+    {
+      "id": "restraint",
+      "description": ""
+    },
+    {
+      "id": "ritual",
+      "description": ""
+    },
+    {
+      "id": "road",
+      "description": ""
+    },
+    {
+      "id": "rootlace",
+      "description": ""
+    },
+    {
+      "id": "rope",
+      "description": ""
+    },
+    {
+      "id": "rugged",
+      "description": ""
+    },
+    {
+      "id": "sacred",
+      "description": ""
+    },
+    {
+      "id": "safety",
+      "description": ""
+    },
+    {
+      "id": "salve",
+      "description": ""
+    },
+    {
+      "id": "sanctioned-visitor",
+      "description": ""
+    },
+    {
+      "id": "scale",
+      "description": ""
+    },
+    {
+      "id": "scholarly",
+      "description": ""
+    },
+    {
+      "id": "sealant",
+      "description": ""
+    },
+    {
+      "id": "secure",
+      "description": ""
+    },
+    {
+      "id": "sewing",
+      "description": ""
+    },
+    {
+      "id": "shelter",
+      "description": ""
+    },
+    {
+      "id": "shield",
+      "description": ""
+    },
+    {
+      "id": "shortsword",
+      "description": ""
+    },
+    {
+      "id": "signal",
+      "description": ""
+    },
+    {
+      "id": "silverbark-ash",
+      "description": ""
+    },
+    {
+      "id": "silverleaf",
+      "description": ""
+    },
+    {
+      "id": "simple",
+      "description": ""
+    },
+    {
+      "id": "slashing",
+      "description": ""
+    },
+    {
+      "id": "sleep",
+      "description": ""
+    },
+    {
+      "id": "sling",
+      "description": ""
+    },
+    {
+      "id": "social",
+      "description": ""
+    },
+    {
+      "id": "spear",
+      "description": ""
+    },
+    {
+      "id": "special",
+      "description": ""
+    },
+    {
+      "id": "splint",
+      "description": ""
+    },
+    {
+      "id": "staff",
+      "description": ""
+    },
+    {
+      "id": "standard",
+      "description": ""
+    },
+    {
+      "id": "stealth",
+      "description": ""
+    },
+    {
+      "id": "stonework",
+      "description": ""
+    },
+    {
+      "id": "storage",
+      "description": ""
+    },
+    {
+      "id": "studded",
+      "description": ""
+    },
+    {
+      "id": "subdual",
+      "description": ""
+    },
+    {
+      "id": "summerpear",
+      "description": ""
+    },
+    {
+      "id": "survival",
+      "description": ""
+    },
+    {
+      "id": "sword",
+      "description": ""
+    },
+    {
+      "id": "tactical",
+      "description": ""
+    },
+    {
+      "id": "thornfiber",
+      "description": ""
+    },
+    {
+      "id": "thornmere",
+      "description": ""
+    },
+    {
+      "id": "thornroot-stalker",
+      "description": ""
+    },
+    {
+      "id": "throwable-candidate",
+      "description": ""
+    },
+    {
+      "id": "thrown",
+      "description": ""
+    },
+    {
+      "id": "thrusting",
+      "description": ""
+    },
+    {
+      "id": "tool",
+      "description": ""
+    },
+    {
+      "id": "tracking",
+      "description": ""
+    },
+    {
+      "id": "trade",
+      "description": ""
+    },
+    {
+      "id": "trade-export",
+      "description": ""
+    },
+    {
+      "id": "trader",
+      "description": ""
+    },
+    {
+      "id": "trapping",
+      "description": ""
+    },
+    {
+      "id": "travel",
+      "description": ""
+    },
+    {
+      "id": "two-handed",
+      "description": ""
+    },
+    {
+      "id": "unarmed-adjacent",
+      "description": ""
+    },
+    {
+      "id": "unarmored",
+      "description": ""
+    },
+    {
+      "id": "unconventional",
+      "description": ""
+    },
+    {
+      "id": "unique",
+      "description": ""
+    },
+    {
+      "id": "utilitarian",
+      "description": ""
+    },
+    {
+      "id": "utility",
+      "description": ""
+    },
+    {
+      "id": "vaelmere",
+      "description": ""
+    },
+    {
+      "id": "veilvine",
+      "description": ""
+    },
+    {
+      "id": "versatile",
+      "description": ""
+    },
+    {
+      "id": "vestments",
+      "description": ""
+    },
+    {
+      "id": "vinework",
+      "description": ""
+    },
+    {
+      "id": "war-staff",
+      "description": ""
+    },
+    {
+      "id": "water",
+      "description": ""
+    },
+    {
+      "id": "waterproofing",
+      "description": ""
+    },
+    {
+      "id": "waxed",
+      "description": ""
+    },
+    {
+      "id": "wayfinder",
+      "description": ""
+    },
+    {
+      "id": "weapon",
+      "description": ""
+    },
+    {
+      "id": "weapon-support",
+      "description": ""
+    },
+    {
+      "id": "weather",
+      "description": ""
+    },
+    {
+      "id": "weather-resistant",
+      "description": ""
+    },
+    {
+      "id": "weatherproof",
+      "description": ""
+    },
+    {
+      "id": "weighted",
+      "description": ""
+    },
+    {
+      "id": "welcome-token",
+      "description": ""
+    },
+    {
+      "id": "wine",
+      "description": ""
+    },
+    {
+      "id": "witheroak",
+      "description": ""
+    },
+    {
+      "id": "woodwork",
+      "description": ""
+    },
+    {
+      "id": "writing",
+      "description": ""
+    }
+  ]
+}

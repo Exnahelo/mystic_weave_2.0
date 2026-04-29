@@ -1,0 +1,40 @@
+{
+  "id": "footwear-turnshoes",
+  "name": "Turnshoes",
+  "category": "apparel",
+  "subcategory": "footwear",
+  "schema_version": 1,
+  "description": "Standard soft-soled daily footwear suitable for settled environments and light walking.",
+  "narrative_effects": [
+    "Provides baseline footwear for town and indoor use with no special protection."
+  ],
+  "tags": [
+    "apparel",
+    "footwear",
+    "daily",
+    "basic"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 30,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

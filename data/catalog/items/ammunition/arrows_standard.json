@@ -1,0 +1,43 @@
+{
+  "id": "arrows-standard",
+  "name": "Arrows",
+  "category": "ammunition",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "Standard arrows used with shortbows and longbows for ordinary ranged combat.",
+  "narrative_effects": [
+    "Required to use compatible bows for ordinary ranged attacks.",
+    "Some fired arrows may be recoverable depending on impact, terrain, and scene outcome."
+  ],
+  "tags": [
+    "ammo",
+    "bow",
+    "standard"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 20,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "ranged",
+  "application_tag": "shortbow",
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": "standard",
+  "used_with": [
+    "shortbow",
+    "longbow"
+  ],
+  "bundle_size": 20,
+  "damage_modifier": 0,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "market_tags": [
+    {
+      "id": "apothecary",
+      "description": ""
+    },
+    {
+      "id": "armorer",
+      "description": ""
+    },
+    {
+      "id": "auction",
+      "description": ""
+    },
+    {
+      "id": "blacksmith",
+      "description": ""
+    },
+    {
+      "id": "carpenter",
+      "description": ""
+    },
+    {
+      "id": "enchanter",
+      "description": ""
+    },
+    {
+      "id": "fletcher",
+      "description": ""
+    },
+    {
+      "id": "general-goods",
+      "description": ""
+    },
+    {
+      "id": "leatherworker",
+      "description": ""
+    },
+    {
+      "id": "noble-armory",
+      "description": ""
+    },
+    {
+      "id": "tailor",
+      "description": ""
+    },
+    {
+      "id": "temple",
+      "description": ""
+    },
+    {
+      "id": "underworld",
+      "description": ""
+    },
+    {
+      "id": "weaponsmith",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "bolts-standard",
+  "name": "Bolts",
+  "category": "ammunition",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "Standard crossbow bolts used with light and heavy crossbows.",
+  "narrative_effects": [
+    "Required to use compatible crossbows for ordinary ranged attacks.",
+    "Some fired bolts may be recoverable depending on impact, terrain, and scene outcome."
+  ],
+  "tags": [
+    "ammo",
+    "crossbow",
+    "standard"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 30,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "mechanical",
+  "application_tag": "light_crossbow",
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": "standard",
+  "used_with": [
+    "light-crossbow",
+    "heavy-crossbow"
+  ],
+  "bundle_size": 20,
+  "damage_modifier": 0,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

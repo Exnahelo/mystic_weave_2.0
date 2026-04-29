@@ -1,0 +1,39 @@
+{
+  "id": "gear-spyglass",
+  "name": "Spyglass",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A distant-view optical tool for surveying terrain, movement, and remote details.",
+  "narrative_effects": [
+    "Reduces difficulty of distant visual observation where line of sight is available."
+  ],
+  "tags": [
+    "observation",
+    "travel",
+    "tool"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 10000,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

@@ -1,0 +1,41 @@
+{
+  "id": "handwear-reinforced-gloves",
+  "name": "Reinforced Gloves",
+  "category": "apparel",
+  "subcategory": "handwear",
+  "schema_version": 1,
+  "description": "Tougher gloves with added padding and durability for labor, combat, and rough handling.",
+  "narrative_effects": [
+    "Supports sustained heavy labor and rough handling with improved grip and impact padding."
+  ],
+  "tags": [
+    "apparel",
+    "handwear",
+    "reinforced",
+    "durable",
+    "labor"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 150,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

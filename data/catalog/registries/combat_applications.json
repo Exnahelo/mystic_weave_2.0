@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "combat_applications": [
+    {
+      "id": "axe",
+      "knowledge_group": "melee"
+    },
+    {
+      "id": "blowgun",
+      "knowledge_group": "unconventional"
+    },
+    {
+      "id": "chain",
+      "knowledge_group": "unconventional"
+    },
+    {
+      "id": "club",
+      "knowledge_group": "melee"
+    },
+    {
+      "id": "dagger",
+      "knowledge_group": "close_combat"
+    },
+    {
+      "id": "halberd",
+      "knowledge_group": "reach"
+    },
+    {
+      "id": "heavy_armor",
+      "knowledge_group": "armor"
+    },
+    {
+      "id": "heavy_crossbow",
+      "knowledge_group": "mechanical"
+    },
+    {
+      "id": "knife",
+      "knowledge_group": "close_combat"
+    },
+    {
+      "id": "light_armor",
+      "knowledge_group": "armor"
+    },
+    {
+      "id": "light_crossbow",
+      "knowledge_group": "mechanical"
+    },
+    {
+      "id": "longbow",
+      "knowledge_group": "ranged"
+    },
+    {
+      "id": "mace",
+      "knowledge_group": "melee"
+    },
+    {
+      "id": "medium_armor",
+      "knowledge_group": "armor"
+    },
+    {
+      "id": "net",
+      "knowledge_group": "unconventional"
+    },
+    {
+      "id": "shields",
+      "knowledge_group": "armor"
+    },
+    {
+      "id": "shortbow",
+      "knowledge_group": "ranged"
+    },
+    {
+      "id": "sling",
+      "knowledge_group": "ranged"
+    },
+    {
+      "id": "spear",
+      "knowledge_group": "reach"
+    },
+    {
+      "id": "sword",
+      "knowledge_group": "melee"
+    },
+    {
+      "id": "thrown_blade",
+      "knowledge_group": "ranged"
+    },
+    {
+      "id": "unarmored",
+      "knowledge_group": "armor"
+    },
+    {
+      "id": "whip",
+      "knowledge_group": "unconventional"
+    }
+  ]
+}

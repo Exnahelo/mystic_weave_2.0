@@ -1,0 +1,43 @@
+{
+  "id": "gear-redveil-preparation",
+  "name": "Redveil Shelf Preparation",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A prepared pouch of dried and ground Redveil Shelf fungus \u2014 the Feywood's canonical fever remedy and serious-wound preparation.",
+  "narrative_effects": [
+    "Supports field triage rolls for fever management and wound preparations beyond Silverleaf's lighter register.",
+    "Limited export quantities; not every realm healer carries it."
+  ],
+  "tags": [
+    "consumable",
+    "medical",
+    "fungus",
+    "redveil",
+    "feywood",
+    "fever-remedy"
+  ],
+  "roll_tag": "field_triage",
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 60,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": true,
+  "charges_max": 1,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

@@ -1,0 +1,39 @@
+{
+  "id": "gear-grappling-hook",
+  "name": "Grappling Hook",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A hooked anchor used with rope to catch and secure elevated surfaces.",
+  "narrative_effects": [
+    "Required to anchor rope to elevated or difficult surfaces without another fixed point."
+  ],
+  "tags": [
+    "tactical",
+    "travel",
+    "climbing"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 20,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

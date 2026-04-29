@@ -1,0 +1,44 @@
+{
+  "id": "blowgun-needles-marking",
+  "name": "Marking Needles",
+  "category": "ammunition",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "Special needles designed to deliver dye, scent marker, or similar tagging payloads rather than direct harm.",
+  "narrative_effects": [
+    "Supports marking, tracking, or identification framing against unaware or fleeing targets.",
+    "Treated as expended once delivered."
+  ],
+  "tags": [
+    "ammo",
+    "blowgun",
+    "marker",
+    "tracking",
+    "utility"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 40,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "unconventional",
+  "application_tag": "blowgun",
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": "special",
+  "used_with": [
+    "blowgun"
+  ],
+  "bundle_size": 10,
+  "damage_modifier": 5,
+  "recoverable": false,
+  "special_effect_tag": "marking",
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

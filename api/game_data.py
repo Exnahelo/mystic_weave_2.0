@@ -30,14 +30,6 @@ _TAG_REGISTRY_FILES = (
     "tags/magic_fields.json",
     "tags/applications.json",
 )
-_ITEM_DATA_FILES = (
-    "items/gear.json",
-    "items/magical_item.json",
-    "items/apparel.json",
-    "items/armor.json",
-    "items/weapon.json",
-    "items/ammunition.json",
-)
 _SPELL_DATA_FILES = (
     "magic/alchemy.json",
     "magic/binding.json",
@@ -136,34 +128,21 @@ def project_catalog_to_item_option(item: dict[str, Any]) -> dict[str, Any]:
     Project a catalog Item dict into the ItemOption shape consumed by the
     legacy /catalog/items?kind=... endpoint.
 
-    Mapping:
-      - id, name, description, tags: copied
-      - category: derived from the item's _subdir
-                  (e.g. "weapons" -> "weapon", "armor" -> "armor",
-                   "ammunition" -> "ammunition", "gear" -> "gear")
-      - roll_tag: None (no direct equivalent in new schema; the first
-                  tool.roll_tags entry is NOT surfaced here to keep the
-                  projection lossless and unambiguous)
-
-    The Item model has no apparel module yet; apparel-shaped catalog items
-    do not exist in this batch. The projection is best-effort and stable:
-    extra fields beyond ItemOption's defined fields are not added (the
-    ItemOption model has extra="allow", but we avoid relying on it).
+    Mapping: id, name, category, description, tags, and roll_tag are copied
+    from the canonical flat catalog item.
     """
-    subdir_to_category = {
-        "weapons": "weapon",
-        "armor": "armor",
-        "ammunition": "ammunition",
-        "gear": "gear",
-        "wondrous": "wondrous",
-    }
     return {
         "id": item["id"],
         "name": item["name"],
-        "category": subdir_to_category.get(item.get("_subdir", ""), "gear"),
+        "category": item["category"],
         "description": item.get("description", ""),
         "tags": list(item.get("tags", [])),
-        "roll_tag": None,
+        "roll_tag": item.get("roll_tag"),
+        "consumable": item.get("consumable", False),
+        "charges": item.get("charges_max"),
+        "rarity": item.get("rarity", "common"),
+        "value_cd": item.get("value_cd", 0),
+        "effects": list(item.get("narrative_effects", [])),
     }
 
 
@@ -175,10 +154,10 @@ def filter_catalog_by_kind(kind: str) -> list[dict[str, Any]]:
     Filter rules (using derive_indexes):
       - "magical":    is_magical == True
       - "weapon":     is_weapon == True AND is_magical == False
-      - "armor":      is_armor == True AND is_magical == False
+      - "armor":      is_armor == True OR is_shield == True, and is_magical == False
       - "ammunition": is_ammunition == True
-      - "mundane":    not (is_weapon or is_armor or is_ammunition or is_magical)
-      - "apparel":    [] (no apparel module in current schema)
+      - "mundane":    gear items with is_magical == False
+      - "apparel":    is_apparel == True
 
     The "magical" bucket overrides weapon/armor for items that are both,
     matching the legacy convention where magical longswords appeared in
@@ -187,9 +166,6 @@ def filter_catalog_by_kind(kind: str) -> list[dict[str, Any]]:
     Unknown kind values return an empty list rather than raising; route
     layer handles input validation.
     """
-    if kind == "apparel":
-        return []
-
     out: list[dict[str, Any]] = []
     for item in load_catalog_items():
         idx = derive_indexes(
@@ -201,16 +177,13 @@ def filter_catalog_by_kind(kind: str) -> list[dict[str, Any]]:
         elif kind == "weapon":
             include = idx["is_weapon"] and not idx["is_magical"]
         elif kind == "armor":
-            include = idx["is_armor"] and not idx["is_magical"]
+            include = (idx["is_armor"] or idx["is_shield"]) and not idx["is_magical"]
         elif kind == "ammunition":
             include = idx["is_ammunition"]
+        elif kind == "apparel":
+            include = idx["is_apparel"]
         elif kind == "mundane":
-            include = not (
-                idx["is_weapon"]
-                or idx["is_armor"]
-                or idx["is_ammunition"]
-                or idx["is_magical"]
-            )
+            include = idx["is_gear"] and not idx["is_magical"]
         else:
             include = False
 
@@ -471,116 +444,33 @@ def validate_application_parent_cap(
                 f"parent knowledge group {parent_group!r} is at T{parent_tier}"
             )
 
-def list_mundane_items() -> list[dict[str, Any]]:
-    """Return all mundane catalog items."""
-    data = _load_json("items/gear.json")
-    if not isinstance(data, list):
-        return []
-    return data
-
-
-def list_weapons() -> list[dict[str, Any]]:
-    """Return all weapon catalog items."""
-    data = _load_json("items/weapon.json")
-    if not isinstance(data, list):
-        return []
-    return data
-
-
-def list_armor() -> list[dict[str, Any]]:
-    """Return all armor catalog items."""
-    data = _load_json("items/armor.json")
-    if not isinstance(data, list):
-        return []
-    return data
-
-
-def list_ammunition() -> list[dict[str, Any]]:
-    """Return all ammunition catalog items."""
-    data = _load_json("items/ammunition.json")
-    if not isinstance(data, list):
-        return []
-    return data
-
-
-def list_magical_items() -> list[dict[str, Any]]:
-    """Return all magical catalog items."""
-    data = _load_json("items/magical_item.json")
-    if not isinstance(data, list):
-        return []
-    return data
-
-
-def list_apparel_items() -> list[dict[str, Any]]:
-    """Return all apparel catalog items."""
-    data = _load_json("items/apparel.json")
-    if not isinstance(data, list):
-        return []
-    return data
-
-
-def list_all_items() -> list[dict[str, Any]]:
-    """Return concatenated runtime item catalogs."""
-    return (
-        list_mundane_items()
-        + list_magical_items()
-        + list_apparel_items()
-        + list_weapons()
-        + list_armor()
-        + list_ammunition()
-    )
+def get_catalog_item(item_id: str, category: str | None = None) -> dict[str, Any]:
+    """Return a canonical catalog item by ID, optionally constrained by category."""
+    for item in load_catalog_items():
+        if item.get("id") == item_id and (category is None or item.get("category") == category):
+            return {k: v for k, v in item.items() if k != "_subdir"}
+    label = category or "item"
+    raise ValueError(f"Unknown {label}: {item_id!r}")
 
 
 def get_weapon(weapon_id: str) -> dict[str, Any]:
     """Return a weapon catalog entry by ID."""
-    data = _load_json("items/weapon.json")
-    if not isinstance(data, list):
-        raise ValueError("weapon catalog unavailable")
-    for item in data:
-        if item.get("id") == weapon_id:
-            if item.get("category") != "weapon":
-                raise ValueError(f"Invalid weapon entry: {weapon_id!r}")
-            return item
-    raise ValueError(f"Unknown weapon: {weapon_id!r}")
+    return get_catalog_item(weapon_id, "weapon")
 
 
 def get_armor(armor_id: str) -> dict[str, Any]:
     """Return an armor catalog entry by ID."""
-    data = _load_json("items/armor.json")
-    if not isinstance(data, list):
-        raise ValueError("armor catalog unavailable")
-    for item in data:
-        if item.get("id") == armor_id:
-            if item.get("category") != "armor":
-                raise ValueError(f"Invalid armor entry: {armor_id!r}")
-            return item
-    raise ValueError(f"Unknown armor: {armor_id!r}")
+    return get_catalog_item(armor_id, "armor")
 
 
 def get_shield(shield_id: str) -> dict[str, Any]:
     """Return a shield catalog entry by ID."""
-    data = _load_json("items/armor.json")
-    if not isinstance(data, list):
-        raise ValueError("shield catalog unavailable")
-    for item in data:
-        if item.get("id") == shield_id:
-            if item.get("category") != "shield":
-                raise ValueError(f"Invalid shield entry: {shield_id!r}")
-            return item
-    raise ValueError(f"Unknown shield: {shield_id!r}")
+    return get_catalog_item(shield_id, "shield")
 
 
 def get_ammunition(ammo_id: str) -> dict[str, Any]:
     """Return an ammunition catalog entry by ID."""
-    data = _load_json("items/ammunition.json")
-    if not isinstance(data, list):
-        raise ValueError("ammunition catalog unavailable")
-    for item in data:
-        if item.get("id") == ammo_id:
-            if item.get("category") != "ammunition":
-                raise ValueError(f"Invalid ammunition entry: {ammo_id!r}")
-            return item
-    raise ValueError(f"Unknown ammunition: {ammo_id!r}")
+    return get_catalog_item(ammo_id, "ammunition")
 
 
 def compute_max_hp(
@@ -863,7 +753,7 @@ def data_fingerprint() -> str:
     Exposed by GET /version for deployment/contract sanity checks.
     """
     hasher = hashlib.sha256()
-    for filename in (*_DATA_FILES, *_ITEM_DATA_FILES, *_BEAST_DATA_FILES):
+    for filename in (*_DATA_FILES, *_BEAST_DATA_FILES):
         path = _DATA_DIR / filename
         if not path.exists():
             continue

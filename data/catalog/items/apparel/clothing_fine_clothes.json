@@ -1,0 +1,40 @@
+{
+  "id": "clothing-fine-clothes",
+  "name": "Fine Clothes",
+  "category": "apparel",
+  "subcategory": "clothing",
+  "schema_version": 1,
+  "description": "Well-made formal clothing suitable for elite, ceremonial, or high-society settings.",
+  "narrative_effects": [
+    "Supports social checks in formal or elite environments where appearance signals status."
+  ],
+  "tags": [
+    "apparel",
+    "clothing",
+    "formal",
+    "noble"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 1500,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

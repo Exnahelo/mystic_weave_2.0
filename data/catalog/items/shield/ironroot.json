@@ -1,0 +1,42 @@
+{
+  "id": "ironroot",
+  "name": "Ironroot Shield",
+  "category": "shield",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "An elven shield with Ironroot hardwood core and elven metalwork rim \u2014 lighter than realm steel shields of equivalent protection, harvested from sanctioned deadfall and coordinated with House Ironsap.",
+  "narrative_effects": [
+    "Supports standard active defense with lighter carry weight than steel equivalents.",
+    "Ironroot material does not warp or split under long service; shields serve across generations."
+  ],
+  "tags": [
+    "shield",
+    "defensive",
+    "ironroot",
+    "elven",
+    "feywood"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 400,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "armor",
+  "application_tag": "shields",
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": 10,
+  "armor_ceiling": 30,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

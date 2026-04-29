@@ -1,0 +1,39 @@
+{
+  "id": "gear-field-rations",
+  "name": "Field Rations (per day)",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A one-day ration pack intended to sustain travel without fresh provisioning.",
+  "narrative_effects": [
+    "Required to avoid hunger penalties during extended travel without other food sources."
+  ],
+  "tags": [
+    "consumable",
+    "survival",
+    "food"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 5,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": true,
+  "charges_max": 1,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

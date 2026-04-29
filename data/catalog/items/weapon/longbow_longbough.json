@@ -1,0 +1,45 @@
+{
+  "id": "longbow-longbough",
+  "name": "Longbough Longbow",
+  "category": "weapon",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "The canonical elven longbow \u2014 shaped over years or decades from Longbough wood offered by a naturally fallen limb or through druidic sign, rather than cut from living timber.",
+  "narrative_effects": [
+    "Supports precise long-range archery with the restraint and reverence elven bowyery demands.",
+    "Longbough material carries a faint ambient-field responsiveness that practiced archers can feel in the draw."
+  ],
+  "tags": [
+    "weapon",
+    "ranged",
+    "longbow",
+    "longbough",
+    "elven",
+    "feywood"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 300,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "ranged",
+  "application_tag": "longbow",
+  "base_damage": 20,
+  "weapon_handedness": {
+    "hands": "one"
+  },
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

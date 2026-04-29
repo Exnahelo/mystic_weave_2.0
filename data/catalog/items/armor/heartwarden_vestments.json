@@ -1,0 +1,43 @@
+{
+  "id": "heartwarden-vestments",
+  "name": "Heartwarden Vestments",
+  "category": "armor",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "The sworn Heartwarden's combat vestments \u2014 layered elven textile-and-leather construction integrating woven Thornveil Vine elements at reinforcement points, worn during Watch rotations and formal duties.",
+  "narrative_effects": [
+    "Provides light-armor protection with exceptional mobility appropriate to Heartwarden protective doctrine.",
+    "Not issued to non-Heartwardens; unsanctioned possession by a non-Heartwarden is a significant breach of elven sacred order."
+  ],
+  "tags": [
+    "armor",
+    "light",
+    "heartwarden",
+    "vestments",
+    "ceremonial-combat",
+    "feywood"
+  ],
+  "roll_tag": null,
+  "rarity": "rare",
+  "legality": "open",
+  "value_cd": 3000,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "armor",
+  "application_tag": "light_armor",
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": 18,
+  "armor_ceiling": 38,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

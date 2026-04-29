@@ -1,0 +1,41 @@
+{
+  "id": "clothing-ceremonial-vestments",
+  "name": "Ceremonial Vestments",
+  "category": "apparel",
+  "subcategory": "clothing",
+  "schema_version": 1,
+  "description": "Formal vestments crafted for religious ceremonies, sacred rites, and devotional occasions.",
+  "narrative_effects": [
+    "Supports sacred and ceremonial framing where devotional attire carries institutional weight."
+  ],
+  "tags": [
+    "apparel",
+    "clothing",
+    "ceremonial",
+    "sacred",
+    "formal"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 2000,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

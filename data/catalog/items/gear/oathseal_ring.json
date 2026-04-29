@@ -1,0 +1,38 @@
+{
+  "id": "oathseal-ring",
+  "name": "Oathseal Ring",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A signet that marks formal vows and is recognized by select civic orders.",
+  "narrative_effects": [
+    "Supports binding-oath ceremony framing and social leverage where oath custom is honored."
+  ],
+  "tags": [
+    "special",
+    "sacred"
+  ],
+  "roll_tag": "ritual_structure",
+  "rarity": "rare",
+  "legality": "open",
+  "value_cd": 1400,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": "T1",
+  "magic_field": "runecraft",
+  "tool_role": null
+}

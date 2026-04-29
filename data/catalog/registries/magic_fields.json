@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "magic_fields": [
+    {
+      "id": "sacred",
+      "primary_domain": "will"
+    },
+    {
+      "id": "warding",
+      "primary_domain": "will"
+    },
+    {
+      "id": "binding",
+      "primary_domain": "will"
+    },
+    {
+      "id": "elemental",
+      "primary_domain": "endurance"
+    },
+    {
+      "id": "druidry",
+      "primary_domain": "perception"
+    },
+    {
+      "id": "illusion",
+      "primary_domain": "presence"
+    },
+    {
+      "id": "runecraft",
+      "primary_domain": "intellect"
+    },
+    {
+      "id": "alchemy",
+      "primary_domain": "intellect"
+    },
+    {
+      "id": "necromancy",
+      "primary_domain": "intellect"
+    }
+  ]
+}

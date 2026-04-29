@@ -1,0 +1,41 @@
+{
+  "id": "outerwear-waxed-cloak",
+  "name": "Waxed Cloak",
+  "category": "apparel",
+  "subcategory": "outerwear",
+  "schema_version": 1,
+  "description": "Wax-treated cloak with better weather resistance for rough travel and wet conditions.",
+  "narrative_effects": [
+    "Supports travel in rain and wet conditions without soaking through quickly."
+  ],
+  "tags": [
+    "apparel",
+    "outerwear",
+    "waxed",
+    "weather-resistant",
+    "travel"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 250,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

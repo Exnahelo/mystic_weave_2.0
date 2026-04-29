@@ -1,0 +1,43 @@
+{
+  "id": "handaxe",
+  "name": "Handaxe",
+  "category": "weapon",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "A compact axe suited to close fighting, harsh utility work, and brutal short-range strikes.",
+  "narrative_effects": [
+    "Supports tight-quarters chopping attacks and rough field utility where a small axe is practical."
+  ],
+  "tags": [
+    "weapon",
+    "close-combat",
+    "light",
+    "chopping",
+    "throwable-candidate"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 80,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "melee",
+  "application_tag": "axe",
+  "base_damage": 10,
+  "weapon_handedness": {
+    "hands": "one"
+  },
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

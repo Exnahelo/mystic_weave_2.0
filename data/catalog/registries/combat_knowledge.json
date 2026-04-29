@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "combat_knowledge": [
+    {
+      "id": "close_combat",
+      "description": "Short-range body-and-implement combat."
+    },
+    {
+      "id": "melee",
+      "description": "Standard one-handed and two-handed weapon combat."
+    },
+    {
+      "id": "reach",
+      "description": "Extended-reach weapon combat."
+    },
+    {
+      "id": "ranged",
+      "description": "Projectile combat (bows, thrown, sling)."
+    },
+    {
+      "id": "mechanical",
+      "description": "Engineered ranged combat (crossbows, rigged shot)."
+    },
+    {
+      "id": "unconventional",
+      "description": "Improvised, exotic, or non-standard weapon use."
+    },
+    {
+      "id": "martial_arts",
+      "description": "Disciplined unarmed combat traditions; includes unarmored fighting."
+    },
+    {
+      "id": "armor",
+      "description": "Armor and shield handling."
+    }
+  ]
+}

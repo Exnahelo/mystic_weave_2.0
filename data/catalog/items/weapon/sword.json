@@ -1,0 +1,42 @@
+{
+  "id": "sword",
+  "name": "Sword",
+  "category": "weapon",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "A standard full-length sword built for decisive battlefield or dueling use.",
+  "narrative_effects": [
+    "Supports versatile melee offense with strong cultural and martial legitimacy."
+  ],
+  "tags": [
+    "weapon",
+    "melee",
+    "blade",
+    "martial"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 800,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "melee",
+  "application_tag": "sword",
+  "base_damage": 15,
+  "weapon_handedness": {
+    "hands": "one"
+  },
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

@@ -1,0 +1,40 @@
+{
+  "id": "gear-lantern",
+  "name": "Lantern",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A hooded lantern that provides steady light in darkness when fueled with oil.",
+  "narrative_effects": [
+    "Provides reliable light in darkness when supplied with oil."
+  ],
+  "tags": [
+    "survival",
+    "camp",
+    "light",
+    "tool"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 30,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

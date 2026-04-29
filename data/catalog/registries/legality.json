@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "legality": [
+    {
+      "id": "open",
+      "description": "Openly bought, sold, and carried."
+    },
+    {
+      "id": "restricted",
+      "description": "Regulated; requires license, permit, or institutional access."
+    },
+    {
+      "id": "contraband",
+      "description": "Illegal to own, trade, or carry in most jurisdictions."
+    }
+  ]
+}

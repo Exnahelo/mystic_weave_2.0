@@ -1,0 +1,40 @@
+{
+  "id": "gear-alchemists-fire",
+  "name": "Alchemist's Fire (flask)",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A volatile flask designed to ignite a struck target until extinguished.",
+  "narrative_effects": [
+    "Supports ignition and ongoing burning pressure until put out."
+  ],
+  "tags": [
+    "consumable",
+    "alchemy",
+    "offensive",
+    "fire"
+  ],
+  "roll_tag": "pharmacology",
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 250,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": true,
+  "charges_max": 1,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

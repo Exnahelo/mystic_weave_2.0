@@ -1,0 +1,41 @@
+{
+  "id": "footwear-reinforced-boots",
+  "name": "Reinforced Boots",
+  "category": "apparel",
+  "subcategory": "footwear",
+  "schema_version": 1,
+  "description": "Tougher boots with added support and durability for marching, combat, and hard wear.",
+  "narrative_effects": [
+    "Supports sustained marching and rough terrain with improved ankle support and sole durability."
+  ],
+  "tags": [
+    "apparel",
+    "footwear",
+    "reinforced",
+    "durable",
+    "combat"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 500,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

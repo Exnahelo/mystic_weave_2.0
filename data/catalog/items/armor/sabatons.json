@@ -1,0 +1,39 @@
+{
+  "id": "sabatons",
+  "name": "Sabatons",
+  "category": "armor",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "Armored foot protection worn with plate or heavy combat gear to guard the feet and ankles during battle.",
+  "narrative_effects": [
+    "Provides heavy foot and ankle protection; increases Agility difficulty by one step as a baseline with other heavy armor."
+  ],
+  "tags": [
+    "armor",
+    "heavy",
+    "foot-protection"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 2000,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "armor",
+  "application_tag": "heavy_armor",
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": 0,
+  "armor_ceiling": 0,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

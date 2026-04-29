@@ -1,0 +1,42 @@
+{
+  "id": "sling",
+  "name": "Sling",
+  "category": "weapon",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "A simple ranged weapon using stones or similar projectiles through practiced release.",
+  "narrative_effects": [
+    "Supports low-cost ranged harassment where stones or sling ammo are available."
+  ],
+  "tags": [
+    "weapon",
+    "ranged",
+    "sling",
+    "simple"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 20,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "ranged",
+  "application_tag": "sling",
+  "base_damage": 10,
+  "weapon_handedness": {
+    "hands": "one"
+  },
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

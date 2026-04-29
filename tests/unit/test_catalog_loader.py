@@ -25,74 +25,48 @@ def _base_item(item_id: str, *, name: str | None = None) -> dict:
     return {
         "id": item_id,
         "name": name or item_id.replace("-", " ").title(),
+        "category": "gear",
         "description": f"Description for {item_id}.",
+        "value_cd": 1,
         "tags": ["test"],
-        "affordances": [],
         "schema_version": 1,
-        "inventory": {"weight_lb": 1.0, "stackable": False},
-        "worldness": {
-            "rarity": "common",
-            "pricing": {"model": "authored", "canonical_value_cp": 1},
-            "availability": {
-                "settlement_minimum": "hamlet",
-                "legality": "open",
-                "market_tags": [],
-            },
-            "notability": {"notable": False, "quest_bound": False},
-        },
-        "modules": {},
     }
 
 
 def _weapon_item(item_id: str, *, magical: bool = False) -> dict:
     item = _base_item(item_id)
+    item["category"] = "weapon"
     item["tags"] = ["weapon"]
-    item["modules"] = {
-        "weapon": {
-            "weapon_type": "longsword",
-            "training": "martial",
-            "hands": "one-or-two",
-            "range": {"type": "melee", "normal_ft": 5},
-            "damage": [{"dice": "1d8", "type": "slashing"}],
-            "properties": [],
-            "attribute_scaling": ["strength"],
-        }
-    }
+    item["knowledge_tag"] = "melee"
+    item["application_tag"] = "sword"
+    item["base_damage"] = 60
+    item["weapon_handedness"] = {"hands": "one"}
     if magical:
-        item["modules"]["effects"] = [
-            {
-                "id": "attack-bonus-flat",
-                "source": "magical",
-                "applies_to": "weapon-attack",
-                "params": {"value": 1},
-            }
-        ]
+        item["tier"] = "T1"
+        item["magic_field"] = "elemental"
     return item
 
 
 def _armor_item(item_id: str) -> dict:
     item = _base_item(item_id)
+    item["category"] = "armor"
     item["tags"] = ["armor"]
-    item["modules"] = {
-        "armor": {
-            "armor_type": "light",
-            "base_ac": 11,
-            "dex_bonus": {"allowed": True},
-            "stealth_disadvantage": False,
-        }
-    }
+    item["knowledge_tag"] = "armor"
+    item["application_tag"] = "light_armor"
+    item["armor_floor"] = 10
+    item["armor_ceiling"] = 20
     return item
 
 
 def _ammunition_item(item_id: str) -> dict:
     item = _base_item(item_id)
+    item["category"] = "ammunition"
     item["tags"] = ["ammunition"]
-    item["modules"] = {
-        "ammunition": {
-            "weapon_compatibility": ["shortbow"],
-            "recoverable": True,
-        }
-    }
+    item["knowledge_tag"] = "ranged"
+    item["application_tag"] = "shortbow"
+    item["ammo_class"] = "standard"
+    item["used_with"] = ["shortbow"]
+    item["damage_modifier"] = 0
     return item
 
 
@@ -116,7 +90,7 @@ def test_load_catalog_items_loads_recursively_sorted_by_id(
 ) -> None:
     _set_catalog_dir(monkeypatch, tmp_path)
     _write_item(tmp_path, "gear", "zeta.json", _base_item("zeta"))
-    _write_item(tmp_path, "weapons", "alpha.json", _weapon_item("alpha"))
+    _write_item(tmp_path, "weapon", "alpha.json", _weapon_item("alpha"))
 
     items = game_data.load_catalog_items()
 
@@ -150,14 +124,14 @@ def test_load_catalog_items_adds_subdir_from_immediate_parent(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     _set_catalog_dir(monkeypatch, tmp_path)
-    _write_item(tmp_path, "weapons", "sword.json", _weapon_item("sword"))
+    _write_item(tmp_path, "weapon", "sword.json", _weapon_item("sword"))
 
-    assert game_data.load_catalog_items()[0]["_subdir"] == "weapons"
+    assert game_data.load_catalog_items()[0]["_subdir"] == "weapon"
 
 
 def test_project_catalog_to_item_option_for_weapon_subdir() -> None:
     item = _weapon_item("longsword")
-    item["_subdir"] = "weapons"
+    item["_subdir"] = "weapon"
 
     assert game_data.project_catalog_to_item_option(item) == {
         "id": "longsword",
@@ -166,6 +140,11 @@ def test_project_catalog_to_item_option_for_weapon_subdir() -> None:
         "description": "Description for longsword.",
         "tags": ["weapon"],
         "roll_tag": None,
+        "consumable": False,
+        "charges": None,
+        "rarity": "common",
+        "value_cd": 1,
+        "effects": [],
     }
 
 
@@ -191,10 +170,10 @@ def test_filter_catalog_by_kind_weapon_includes_non_magical_excludes_magical(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     _set_catalog_dir(monkeypatch, tmp_path)
-    _write_item(tmp_path, "weapons", "longsword.json", _weapon_item("longsword"))
+    _write_item(tmp_path, "weapon", "longsword.json", _weapon_item("longsword"))
     _write_item(
         tmp_path,
-        "weapons",
+        "weapon",
         "flame_tongue.json",
         _weapon_item("flame-tongue", magical=True),
     )
@@ -209,10 +188,10 @@ def test_filter_catalog_by_kind_magical_includes_magical_excludes_non_magical(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     _set_catalog_dir(monkeypatch, tmp_path)
-    _write_item(tmp_path, "weapons", "longsword.json", _weapon_item("longsword"))
+    _write_item(tmp_path, "weapon", "longsword.json", _weapon_item("longsword"))
     _write_item(
         tmp_path,
-        "weapons",
+        "weapon",
         "flame_tongue.json",
         _weapon_item("flame-tongue", magical=True),
     )
@@ -228,12 +207,12 @@ def test_filter_catalog_by_kind_mundane_excludes_typed_and_magical_items(
 ) -> None:
     _set_catalog_dir(monkeypatch, tmp_path)
     _write_item(tmp_path, "gear", "rope.json", _base_item("rope"))
-    _write_item(tmp_path, "weapons", "longsword.json", _weapon_item("longsword"))
+    _write_item(tmp_path, "weapon", "longsword.json", _weapon_item("longsword"))
     _write_item(tmp_path, "armor", "leather.json", _armor_item("leather"))
     _write_item(tmp_path, "ammunition", "arrows.json", _ammunition_item("arrows"))
     _write_item(
         tmp_path,
-        "weapons",
+        "weapon",
         "flame_tongue.json",
         _weapon_item("flame-tongue", magical=True),
     )

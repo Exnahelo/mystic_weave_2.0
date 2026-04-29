@@ -1,0 +1,39 @@
+{
+  "id": "gear-map",
+  "name": "Map",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "A mapped representation of a known area used to aid travel and orientation.",
+  "narrative_effects": [
+    "Reduces navigation difficulty in the area it accurately represents."
+  ],
+  "tags": [
+    "travel",
+    "navigation",
+    "records"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 10,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

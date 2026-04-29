@@ -1,49 +1,39 @@
 {
   "id": "scale-mail",
   "name": "Scale Mail",
-  "description": "Overlapping steel scales sewn to a leather backing. Heavier than chain but cheaper to repair.",
-  "tags": [
-    "mundane",
-    "armor",
-    "steel",
-    "leather"
-  ],
-  "affordances": [],
+  "category": "armor",
+  "subcategory": null,
   "schema_version": 1,
-  "inventory": {
-    "weight_lb": 45.0,
-    "stackable": false
-  },
-  "worldness": {
-    "rarity": "common",
-    "pricing": {
-      "model": "authored",
-      "canonical_value_cp": 5000
-    },
-    "availability": {
-      "settlement_minimum": "town",
-      "legality": "open",
-      "market_tags": [
-        "armorer",
-        "blacksmith"
-      ]
-    },
-    "notability": {
-      "notable": false,
-      "quest_bound": false
-    }
-  },
-  "modules": {
-    "armor": {
-      "armor_type": "medium",
-      "base_ac": 14,
-      "dex_bonus": {
-        "allowed": true,
-        "max": 2
-      },
-      "strength_required": null,
-      "stealth_disadvantage": true
-    },
-    "effects": []
-  }
+  "description": "Overlapping scale armor built for practical battlefield defense with moderate bulk and movement cost.",
+  "narrative_effects": [
+    "May increase Agility difficulty by one step in demanding physical contexts, depending on situation and judgment."
+  ],
+  "tags": [
+    "armor",
+    "medium",
+    "scale"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 4000,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "armor",
+  "application_tag": "medium_armor",
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": 20,
+  "armor_ceiling": 75,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
 }

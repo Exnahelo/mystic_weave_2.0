@@ -1,0 +1,42 @@
+{
+  "id": "whip",
+  "name": "Whip",
+  "category": "weapon",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "A flexible weapon used more for control, reach tricks, and intimidation than straightforward damage.",
+  "narrative_effects": [
+    "Supports unconventional control, disorientation, or spacing tactics depending on context."
+  ],
+  "tags": [
+    "weapon",
+    "unconventional",
+    "flexible",
+    "control"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 100,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "unconventional",
+  "application_tag": "whip",
+  "base_damage": 10,
+  "weapon_handedness": {
+    "hands": "one"
+  },
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

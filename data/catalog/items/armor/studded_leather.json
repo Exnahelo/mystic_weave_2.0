@@ -1,0 +1,40 @@
+{
+  "id": "studded-leather",
+  "name": "Studded Leather",
+  "category": "armor",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "Leather armor reinforced with metal studs or rivets for improved protection while maintaining light armor mobility.",
+  "narrative_effects": [
+    "Supports light protection framing with no baseline Agility difficulty impact under normal conditions."
+  ],
+  "tags": [
+    "armor",
+    "light",
+    "studded",
+    "reinforced"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 4500,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "armor",
+  "application_tag": "light_armor",
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": 20,
+  "armor_ceiling": 50,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

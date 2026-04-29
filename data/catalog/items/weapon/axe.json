@@ -1,0 +1,42 @@
+{
+  "id": "axe",
+  "name": "Axe",
+  "category": "weapon",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "A full-sized combat axe built for committed chopping strikes and heavy momentum.",
+  "narrative_effects": [
+    "Supports forceful cutting attacks that emphasize commitment and impact."
+  ],
+  "tags": [
+    "weapon",
+    "melee",
+    "chopping",
+    "martial"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 300,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "melee",
+  "application_tag": "axe",
+  "base_damage": 15,
+  "weapon_handedness": {
+    "hands": "one"
+  },
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

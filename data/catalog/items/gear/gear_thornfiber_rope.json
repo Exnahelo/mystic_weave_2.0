@@ -1,0 +1,42 @@
+{
+  "id": "gear-thornfiber-rope",
+  "name": "Thornfiber Rope",
+  "category": "gear",
+  "subcategory": "other",
+  "schema_version": 1,
+  "description": "Elven-woven rope of Thornfiber Cane \u2014 lighter and more flexible than hemp of equivalent strength, durable across wet conditions.",
+  "narrative_effects": [
+    "Standard utility rope with the distinctive slight green-grey tone of Thornfiber.",
+    "Trade export; readily available at Vaelmere and at realm-side traders with Feywood relationships."
+  ],
+  "tags": [
+    "cordage",
+    "rope",
+    "thornfiber",
+    "elven",
+    "feywood"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 25,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

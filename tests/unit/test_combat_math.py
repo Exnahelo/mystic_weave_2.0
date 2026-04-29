@@ -15,7 +15,7 @@ class FakeDice:
 
 @pytest.mark.unit
 def test_compute_max_hp_heavy_armor_floor_and_ceiling() -> None:
-    armor = get_armor("armor_plate_01")
+    armor = get_armor("plate")
 
     assert compute_max_hp(armor, 0, None, 0) == {
         "max_hp": 120,
@@ -33,8 +33,8 @@ def test_compute_max_hp_heavy_armor_floor_and_ceiling() -> None:
 
 @pytest.mark.unit
 def test_compute_max_hp_unarmored_and_shield_stack() -> None:
-    unarmored = get_armor("armor_unarmored_01")
-    shield = get_shield("shield_01")
+    unarmored = get_armor("unarmored")
+    shield = get_shield("shield")
 
     assert compute_max_hp(unarmored, 0, None, 0) == {
         "max_hp": 100,
@@ -54,7 +54,7 @@ def test_compute_max_hp_unarmored_and_shield_stack() -> None:
         "armor_contribution": 0,
         "shield_contribution": 5,
     }
-    assert compute_max_hp(get_armor("armor_plate_01"), 3, shield, 2) == {
+    assert compute_max_hp(get_armor("plate"), 3, shield, 2) == {
         "max_hp": 183,
         "base": 100,
         "armor_contribution": 68,
@@ -65,9 +65,9 @@ def test_compute_max_hp_unarmored_and_shield_stack() -> None:
 @pytest.mark.unit
 def test_resolve_attack_critical_hit_path_applies_ammo_then_agility() -> None:
     result = resolve_attack(
-        weapon_id="weapon_sword_01",
+        weapon_id="sword",
         weapon_tier=3,
-        ammo_id="ammo_arrows_broadhead_01",
+        ammo_id="arrows-broadhead",
         defender_is_unarmored=False,
         defender_agility_tier=2,
         dice=FakeDice(1),
@@ -88,7 +88,7 @@ def test_resolve_attack_critical_hit_path_applies_ammo_then_agility() -> None:
 @pytest.mark.unit
 def test_resolve_attack_fumble_path_has_rebound_only() -> None:
     result = resolve_attack(
-        weapon_id="weapon_sword_01",
+        weapon_id="sword",
         weapon_tier=2,
         defender_is_unarmored=False,
         dice=FakeDice(100, 6),
@@ -105,7 +105,7 @@ def test_resolve_attack_fumble_path_has_rebound_only() -> None:
 @pytest.mark.unit
 def test_resolve_attack_miss_path_does_not_roll_second_stage() -> None:
     result = resolve_attack(
-        weapon_id="weapon_sword_01",
+        weapon_id="sword",
         weapon_tier=0,
         defender_is_unarmored=False,
         dice=FakeDice(90),
@@ -120,9 +120,9 @@ def test_resolve_attack_miss_path_does_not_roll_second_stage() -> None:
 @pytest.mark.unit
 def test_resolve_attack_hit_path_computes_damage_formula() -> None:
     result = resolve_attack(
-        weapon_id="weapon_sword_01",
+        weapon_id="sword",
         weapon_tier=3,
-        ammo_id="ammo_arrows_broadhead_01",
+        ammo_id="arrows-broadhead",
         defender_is_unarmored=False,
         defender_agility_tier=1,
         dice=FakeDice(50, 80, 30),
@@ -138,7 +138,7 @@ def test_resolve_attack_hit_path_computes_damage_formula() -> None:
 @pytest.mark.unit
 def test_resolve_attack_tie_path_zeroes_damage() -> None:
     result = resolve_attack(
-        weapon_id="weapon_sword_01",
+        weapon_id="sword",
         weapon_tier=3,
         defender_is_unarmored=False,
         dice=FakeDice(40, 55, 55),
@@ -153,7 +153,7 @@ def test_resolve_attack_tie_path_zeroes_damage() -> None:
 @pytest.mark.unit
 def test_resolve_attack_unarmored_threshold_reduction_and_clamp() -> None:
     reduced = resolve_attack(
-        weapon_id="weapon_sword_01",
+        weapon_id="sword",
         weapon_tier=1,
         defender_is_unarmored=True,
         defender_unarmored_tier=5,
@@ -164,7 +164,7 @@ def test_resolve_attack_unarmored_threshold_reduction_and_clamp() -> None:
     assert reduced["hit"] is False
 
     lowest_valid = resolve_attack(
-        weapon_id="weapon_sword_01",
+        weapon_id="sword",
         weapon_tier=0,
         defender_is_unarmored=True,
         defender_unarmored_tier=5,
@@ -177,7 +177,7 @@ def test_resolve_attack_unarmored_threshold_reduction_and_clamp() -> None:
 @pytest.mark.unit
 def test_resolve_attack_off_hand_halves_effective_base() -> None:
     result = resolve_attack(
-        weapon_id="weapon_greatsword_01",
+        weapon_id="greatsword",
         weapon_tier=3,
         use_off_hand=True,
         defender_is_unarmored=False,
@@ -191,7 +191,7 @@ def test_resolve_attack_off_hand_halves_effective_base() -> None:
 @pytest.mark.unit
 def test_resolve_attack_negative_margin_reduces_damage_and_minus_100_floors_to_zero() -> None:
     reduced = resolve_attack(
-        weapon_id="weapon_sword_01",
+        weapon_id="sword",
         weapon_tier=3,
         defender_is_unarmored=False,
         dice=FakeDice(40, 20, 80),
@@ -202,7 +202,7 @@ def test_resolve_attack_negative_margin_reduces_damage_and_minus_100_floors_to_z
     assert reduced["hit"] is True
 
     floored = resolve_attack(
-        weapon_id="weapon_sword_01",
+        weapon_id="sword",
         weapon_tier=3,
         defender_is_unarmored=False,
         dice=FakeDice(40, 1, 100),

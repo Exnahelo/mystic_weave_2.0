@@ -1,307 +1,210 @@
 """
 Item catalog schema for Mystic Weave 2.0.
 
-Architecture:
-    identity   -- what it is
-    inventory  -- how it occupies/carries/stacks
-    worldness  -- how the world values, restricts, recognizes it
-    modules    -- what it does (presence-based, no discriminator string)
-    state      -- per-instance, lives on inventory records, NOT here
+Flat schema: every field at the top level. Required fields gated by category.
+Vocabulary cross-references validated against registries at catalog-load time
+(see scripts/validate_catalog.py).
 
-Decision rule:
-    rules-resolving change      -> effect
-    plausible improvised action -> affordance
-    why an effect exists        -> source/provenance
-    world reaction              -> worldness
-    this copy                   -> state (inventory record)
-    kind of item                -> identity or category module
-    carrying/stacking/storage   -> inventory
+Model serves both:
+  - Narrator GPT (prose: description, narrative_effects; categorical: tags)
+  - Combat backend (numeric: base_damage, armor_floor, armor_ceiling)
 """
 
+from __future__ import annotations
+
 from typing import Literal, Optional
+
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
-# ---------- controlled vocabularies (Literal types for now; mechanics/*.json
-#            holds the authoritative list, validators cross-check at load) ----
+# ---------- closed vocabularies (Literal types; registries are runtime truth) ----------
+
+ItemCategory = Literal["weapon", "armor", "shield", "ammunition", "apparel", "gear"]
 
 Rarity = Literal["common", "uncommon", "rare", "very-rare", "legendary", "unique"]
+
 Legality = Literal["open", "restricted", "contraband"]
-SettlementTier = Literal["hamlet", "village", "town", "city", "capital"]
-EffectSource = Literal[
-    "magical", "material", "mundane", "crafted", "blessed", "cursed", "innate"
-]
-ActivationType = Literal[
-    "passive", "action", "bonus-action", "reaction", "minute", "hour", "ritual"
-]
-RechargeCycle = Literal["short-rest", "long-rest", "dawn", "dusk", "never"]
-PricingModel = Literal["authored", "computed"]
+
+WealthTierFloor = Literal["destitute", "modest", "comfortable", "wealthy", "affluent"]
+
+ToolRole = Literal["permission", "difficulty-shift"]
+
+AmmoClass = Literal["standard", "special"]
+
+ItemTier = Literal["T0", "T1", "T2", "T3", "T4", "T5"]
+
+WeaponHands = Literal["one", "two", "versatile"]
 
 
-# ---------- identity helpers ----------
+# ---------- helper sub-models ----------
 
-class ItemMeta(BaseModel):
-    """Optional sparse provenance, when justified per-record."""
+class WeaponHandedness(BaseModel):
+    """How a weapon is wielded. Two-handed weapons cannot be paired off-hand."""
+
     model_config = ConfigDict(extra="forbid")
-    source: Optional[str] = None
-    license: Optional[str] = None
-    version: Optional[str] = None
+    hands: WeaponHands
 
 
-# ---------- inventory ----------
+# ---------- top-level Item ----------
 
-class Inventory(BaseModel):
+class Item(BaseModel):
+    """
+    Canonical item shape for Mystic Weave. Source of truth for all item data.
+    """
+
     model_config = ConfigDict(extra="forbid")
-    weight_lb: Optional[float] = Field(default=None, ge=0)
-    bulk: Optional[float] = Field(default=None, ge=0)  # stub-friendly
-    stackable: bool = False
-    max_stack: Optional[int] = Field(default=None, ge=1)
 
+    # ---------- identity ----------
+    id: str = Field(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
+    name: str
+    category: ItemCategory
+    subcategory: Optional[str] = None
+    schema_version: Literal[1] = 1
 
-# ---------- worldness ----------
+    # ---------- prose (GPT-facing) ----------
+    description: str = Field(max_length=500)
+    narrative_effects: list[str] = Field(default_factory=list)
 
-class PricingComponentRef(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    id: str = Field(pattern=r"^[a-z][a-z0-9_]*$")
-    key: Optional[str] = None  # required when component kind == "lookup"
+    # ---------- categorical descriptors ----------
+    tags: list[str] = Field(default_factory=list)
+    roll_tag: Optional[str] = None
 
+    # ---------- worldness / economy ----------
+    rarity: Rarity = "common"
+    legality: Legality = "open"
+    value_cd: int = Field(ge=0)
+    wealth_tier_floor: Optional[WealthTierFloor] = None
+    market_tags: list[str] = Field(default_factory=list)
 
-class PricingInputs(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    components: list[PricingComponentRef] = Field(min_length=1)
+    # ---------- state / consumption ----------
+    consumable: bool = False
+    charges_max: Optional[int] = Field(default=None, ge=1)
 
+    # ---------- combat dispatch (required by category) ----------
+    knowledge_tag: Optional[str] = None
+    application_tag: Optional[str] = None
 
-class Pricing(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    model: PricingModel = "authored"
-    canonical_value_cp: Optional[int] = Field(default=None, ge=0)
-    inputs: Optional[PricingInputs] = None
+    # ---------- weapon-specific ----------
+    base_damage: Optional[int] = Field(default=None, ge=0)
+    weapon_handedness: Optional[WeaponHandedness] = None
 
+    # ---------- armor/shield-specific ----------
+    armor_floor: Optional[int] = Field(default=None, ge=0)
+    armor_ceiling: Optional[int] = Field(default=None, ge=0)
+
+    # ---------- ammunition-specific ----------
+    ammo_class: Optional[AmmoClass] = None
+    used_with: list[str] = Field(default_factory=list)
+    bundle_size: Optional[int] = Field(default=None, ge=1)
+    damage_modifier: Optional[int] = None
+    recoverable: bool = True
+    special_effect_tag: Optional[str] = None
+
+    # ---------- magical-specific ----------
+    tier: Optional[ItemTier] = None
+    magic_field: Optional[str] = None
+
+    # ---------- tool-specific ----------
+    tool_role: Optional[ToolRole] = None
+
+    # ---------- validation ----------
     @model_validator(mode="after")
-    def _enforce_model_inputs(self) -> "Pricing":
-        if self.model == "authored":
-            if self.canonical_value_cp is None:
+    def _enforce_category_requirements(self) -> "Item":
+        if self.category == "weapon":
+            if self.base_damage is None:
+                raise ValueError("category=weapon requires base_damage")
+            if self.knowledge_tag is None or self.application_tag is None:
+                raise ValueError("category=weapon requires knowledge_tag and application_tag")
+
+        if self.category in ("armor", "shield"):
+            if self.armor_floor is None or self.armor_ceiling is None:
                 raise ValueError(
-                    "pricing.model='authored' requires canonical_value_cp"
+                    f"category={self.category} requires armor_floor and armor_ceiling"
                 )
-            if self.inputs is not None:
+            if self.armor_floor > self.armor_ceiling:
+                raise ValueError("armor_floor must be <= armor_ceiling")
+            if self.knowledge_tag is None or self.application_tag is None:
                 raise ValueError(
-                    "pricing.model='authored' must not have inputs"
+                    f"category={self.category} requires knowledge_tag and application_tag"
                 )
-        if self.model == "computed":
-            if self.inputs is None:
-                raise ValueError("pricing.model='computed' requires inputs")
-            if self.canonical_value_cp is not None:
+
+        if self.category == "ammunition":
+            if self.ammo_class is None:
+                raise ValueError("category=ammunition requires ammo_class")
+            if not self.used_with:
+                raise ValueError("category=ammunition requires non-empty used_with")
+            if self.damage_modifier is None:
                 raise ValueError(
-                    "pricing.model='computed' must not author "
-                    "canonical_value_cp; value is derived from rules"
+                    "category=ammunition requires damage_modifier (use 0 for standard)"
                 )
+            if self.knowledge_tag is None or self.application_tag is None:
+                raise ValueError(
+                    "category=ammunition requires knowledge_tag and application_tag"
+                )
+
+        if self.category in ("apparel", "gear"):
+            non_combat_violations = []
+            if self.base_damage is not None:
+                non_combat_violations.append("base_damage")
+            if self.armor_floor is not None or self.armor_ceiling is not None:
+                non_combat_violations.append("armor_floor/armor_ceiling")
+            if self.ammo_class is not None:
+                non_combat_violations.append("ammo_class")
+            if non_combat_violations:
+                raise ValueError(
+                    f"category={self.category} must not have combat fields: "
+                    f"{', '.join(non_combat_violations)}"
+                )
+
+        # Magical fields
+        if self.tier is not None and self.tier != "T0":
+            if self.magic_field is None:
+                raise ValueError(f"tier={self.tier} requires magic_field (T0 may omit it)")
+
+        if self.magic_field is not None and self.tier is None:
+            raise ValueError("magic_field set without tier; declare T0-T5")
+
+        # Charges
+        if self.charges_max is not None and not self.consumable:
+            raise ValueError("charges_max set requires consumable=True")
+
+        # Magical-unarmored rule:
+        # An armor-slot item with application_tag=unarmored and armor_floor > 0
+        # must be magical (tier T1+ and magic_field set). Mundane unarmored
+        # cannot grant armor; only magical garments can armor while preserving
+        # martial_arts evasion.
+        if (
+            self.category in ("armor", "shield")
+            and self.application_tag == "unarmored"
+            and self.armor_floor is not None
+            and self.armor_floor > 0
+        ):
+            if self.tier is None or self.tier == "T0":
+                raise ValueError(
+                    "application_tag=unarmored with armor_floor > 0 requires tier T1+ "
+                    "(magical unarmored)"
+                )
+            if self.magic_field is None:
+                raise ValueError(
+                    "application_tag=unarmored with armor_floor > 0 requires magic_field"
+                )
+
         return self
 
 
-class Availability(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    settlement_minimum: Optional[SettlementTier] = None
-    legality: Optional[Legality] = None
-    market_tags: list[str] = Field(default_factory=list)
-
-
-class Notability(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    notable: bool = False
-    quest_bound: bool = False
-    faction_significance: list[str] = Field(default_factory=list)
-
-
-class Worldness(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    rarity: Rarity = "common"
-    pricing: Pricing = Field(default_factory=lambda: Pricing(canonical_value_cp=0))
-    availability: Availability = Field(default_factory=Availability)
-    notability: Notability = Field(default_factory=Notability)
-
-
-# ---------- effects ----------
-
-class Effect(BaseModel):
-    """
-    A rules-resolving change. `source` is provenance only; resolution looks at
-    `id` against the effect registry.
-    """
-    model_config = ConfigDict(extra="forbid")
-    id: str = Field(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
-    source: EffectSource
-    applies_to: Optional[str] = None
-    requires_activation: bool = False
-    cost_charges: Optional[int] = Field(default=None, ge=0)
-    params: dict = Field(default_factory=dict)
-
-
-# ---------- capability modules ----------
-
-class Range(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    type: Literal["melee", "ranged", "thrown"]
-    normal_ft: int = Field(ge=0)
-    long_ft: Optional[int] = Field(default=None, ge=0)
-
-
-class Damage(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    dice: str  # e.g. "1d8"
-    type: str  # cross-checked against mechanics/damage_types.json
-    condition: Optional[str] = None  # e.g. "one-handed", "two-handed"
-
-
-class WeaponModule(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    weapon_type: str
-    training: Literal["simple", "martial", "exotic"]
-    hands: Literal["one", "two", "one-or-two"]
-    range: Range
-    damage: list[Damage]
-    properties: list[str] = Field(default_factory=list)
-    attribute_scaling: list[str] = Field(default_factory=list)
-
-
-class DexBonus(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    allowed: bool
-    max: Optional[int] = Field(default=None, ge=0)
-
-
-class ArmorModule(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    armor_type: Literal["light", "medium", "heavy", "shield"]
-    base_ac: int = Field(ge=0)
-    dex_bonus: DexBonus
-    strength_required: Optional[int] = Field(default=None, ge=0)
-    stealth_disadvantage: bool = False
-
-
-class ConsumableModule(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    uses: int = Field(ge=1)
-    consume_action: ActivationType = "action"
-
-
-class ToolModule(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    proficiency_group: str
-    roll_tags: list[str] = Field(default_factory=list)
-    tool_role: Optional[Literal["permission", "difficulty-shift"]] = None
-
-
-class ContainerModule(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    capacity_lb: Optional[float] = Field(default=None, ge=0)
-    capacity_items: Optional[int] = Field(default=None, ge=0)
-    extradimensional: bool = False
-
-
-class AmmunitionModule(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    weapon_compatibility: list[str]
-    recoverable: bool = True
-
-
-class ActivationModule(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    type: ActivationType
-    duration: Optional[str] = None
-    command_word: bool = False
-
-
-class ChargesModule(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    maximum: int = Field(ge=1)
-    recharge: Optional[RechargeCycle] = None
-    recharge_dice: Optional[str] = None
-
-
-class AttunementModule(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    required: bool = True
-    restrictions: list[str] = Field(default_factory=list)
-
-
-class KnowledgeModule(BaseModel):
-    """Catalog-side ID metadata; per-character knowledge state is on inventory."""
-    model_config = ConfigDict(extra="forbid")
-    identification_difficulty: Optional[int] = Field(default=None, ge=0)
-    hidden_until_identified: list[str] = Field(default_factory=list)
-
-
-# ---------- stub modules (subsystems not yet built) ----------
-
-class DurabilityModule(BaseModel):
-    """STUB: degradation/repair subsystem not implemented."""
-    model_config = ConfigDict(extra="allow")
-
-
-class CraftingModule(BaseModel):
-    """STUB: crafting subsystem not implemented."""
-    model_config = ConfigDict(extra="allow")
-
-
-class EncumbranceModule(BaseModel):
-    """STUB: bulk/encumbrance subsystem not implemented."""
-    model_config = ConfigDict(extra="allow")
-
-
-# ---------- module bag ----------
-
-class Modules(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    weapon: Optional[WeaponModule] = None
-    armor: Optional[ArmorModule] = None
-    consumable: Optional[ConsumableModule] = None
-    tool: Optional[ToolModule] = None
-    container: Optional[ContainerModule] = None
-    ammunition: Optional[AmmunitionModule] = None
-    activation: Optional[ActivationModule] = None
-    charges: Optional[ChargesModule] = None
-    attunement: Optional[AttunementModule] = None
-    knowledge: Optional[KnowledgeModule] = None
-    effects: list[Effect] = Field(default_factory=list)
-    durability: Optional[DurabilityModule] = None
-    crafting: Optional[CraftingModule] = None
-    encumbrance: Optional[EncumbranceModule] = None
-
-
-# ---------- top-level item ----------
-
-class Item(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-
-    # identity
-    id: str = Field(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
-    name: str
-    description: str
-    tags: list[str] = Field(default_factory=list)
-    affordances: list[str] = Field(default_factory=list)
-    schema_version: Literal[1] = 1
-    meta: Optional[ItemMeta] = None
-
-    # composition
-    inventory: Inventory = Field(default_factory=Inventory)
-    worldness: Worldness = Field(default_factory=Worldness)
-    modules: Modules = Field(default_factory=Modules)
-
-
-# ---------- derived indexes (computed at load, not authored) ----------
+# ---------- derived index helpers (used by routes/loaders) ----------
 
 def derive_indexes(item: Item) -> dict:
-    m = item.modules
+    """Compute boolean flags from an Item for fast filtering."""
     return {
-        "is_weapon": m.weapon is not None,
-        "is_armor": m.armor is not None,
-        "is_consumable": m.consumable is not None,
-        "is_container": m.container is not None,
-        "is_ammunition": m.ammunition is not None,
-        "is_magical": any(e.source == "magical" for e in m.effects),
-        "is_attuneable": m.attunement is not None,
-        "has_charges": m.charges is not None,
-        "is_notable": item.worldness.notability.notable,
-        "is_quest_bound": item.worldness.notability.quest_bound,
+        "is_weapon": item.category == "weapon",
+        "is_armor": item.category == "armor",
+        "is_shield": item.category == "shield",
+        "is_ammunition": item.category == "ammunition",
+        "is_apparel": item.category == "apparel",
+        "is_gear": item.category == "gear",
+        "is_magical": item.tier is not None and item.tier != "T0",
+        "is_mundane": item.tier is None,
+        "has_charges": item.charges_max is not None,
+        "is_consumable": item.consumable,
     }

@@ -1,0 +1,43 @@
+{
+  "id": "greatsword",
+  "name": "Greatsword",
+  "category": "weapon",
+  "subcategory": null,
+  "schema_version": 1,
+  "description": "A large two-handed sword meant for powerful sweeping offense and battlefield dominance.",
+  "narrative_effects": [
+    "Supports broad, forceful blade work with heavy striking presence."
+  ],
+  "tags": [
+    "weapon",
+    "melee",
+    "heavy",
+    "blade",
+    "two-handed"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 1500,
+  "wealth_tier_floor": null,
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": "melee",
+  "application_tag": "sword",
+  "base_damage": 25,
+  "weapon_handedness": {
+    "hands": "two"
+  },
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}
