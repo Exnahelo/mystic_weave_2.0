@@ -4,10 +4,11 @@
   "category": "weapon",
   "subcategory": null,
   "schema_version": 1,
-  "description": "A compact elven blade carried alongside the longer Greenshield-pattern sword for close-line work and dense-terrain engagements. Forged to elven metallurgy standards and balanced for the cut-and-thrust technique Greenshield doctrine emphasizes at shorter reach. The name reflects the pale sheen the blade takes under moonlight \u2014 a property of the forging rather than an enchantment.",
+  "description": "A compact elven blade of recovered Elarith carried alongside the longer Greenshield-pattern sword for close-line work and dense-terrain engagements. Forged to feywrought standards and balanced for the cut-and-thrust technique Greenshield doctrine emphasizes at shorter reach. The name reflects the pale sheen the Elarith takes under moonlight — a property of the metal itself, not an enchantment.",
   "narrative_effects": [
     "Supports disciplined cutting and thrusting in close melee with elven Greenshield balance.",
-    "Rare in realm-side hands; its presence on a non-elf signals either long-term elven relationship or a trophy whose provenance is worth asking about."
+    "Edge endurance is unusual: Elarith holds geometry across long service that ordinary steel does not match.",
+    "Rare in realm-side hands; the metal itself, recognized by anyone trained in elven smithcraft, raises serious questions about how it left the Feywood."
   ],
   "tags": [
     "weapon",

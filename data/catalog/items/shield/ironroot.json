@@ -4,17 +4,20 @@
   "category": "shield",
   "subcategory": null,
   "schema_version": 1,
-  "description": "An elven shield with Ironroot hardwood core and elven metalwork rim \u2014 lighter than realm steel shields of equivalent protection, harvested from sanctioned deadfall and coordinated with House Ironsap.",
+  "description": "An elven shield with an Ironroot hardwood core and a feywrought metal rim, joined by Feywood composite treatment so the rim does the protective work and the wood does the structural work. Lighter than realm steel shields of equivalent protection, harvested from sanctioned deadfall and coordinated with House Ironsap.",
   "narrative_effects": [
     "Supports standard active defense with lighter carry weight than steel equivalents.",
-    "Ironroot material does not warp or split under long service; shields serve across generations."
+    "Ironroot does not warp or split under long service, and the composite bond between wood core and metal rim does not loosen the way riveted shields eventually do; pieces of this kind serve across generations.",
+    "An Ironsap-marked shield in non-elven hands raises immediate questions in any company that recognizes the house mark."
   ],
   "tags": [
     "shield",
     "defensive",
     "ironroot",
     "elven",
-    "feywood"
+    "feywood",
+    "elven-steel",
+    "composite-treatment"
   ],
   "roll_tag": null,
   "rarity": "uncommon",

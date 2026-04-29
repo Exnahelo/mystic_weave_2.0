@@ -4,11 +4,11 @@
   "category": "weapon",
   "subcategory": null,
   "schema_version": 1,
-  "description": "A close-fighting axe with an elven-forged head and a Silverbark Ash haft, given to those who survive a wild proving. The haft absorbs impact shock more cleanly than realm hardwoods, reducing hand fatigue across a long day's work. Each axe is marked discreetly on the underside of the haft with a sigil recognizable to the giver's house.",
+  "description": "A close-fighting axe with an Elarith head and a Silverbark Ash haft, given as heirloom by the small number of houses that maintain a wild-proving tradition. Each axe is marked discreetly on the underside of the haft with a sigil recognizable to the giver's house, and the same axe may pass through several generations of an honored line.",
   "narrative_effects": [
-    "Carries the same mechanics as a standard handaxe.",
+    "Carries the same combat mechanics as a standard handaxe; its weight is in what it signals, not in what it does.",
     "The Silverbark haft absorbs impact shock more cleanly than dense realm hardwoods, reducing hand fatigue across a long day's work.",
-    "Not bought. A Proven Handaxe is given by a house or elder to an elf who has survived a formal or informal proving; the axe itself carries no magical property, but its presence on a person's belt is a visible statement of proving-status recognized across Feywood culture."
+    "Not bought, not commissioned, and not common: a Proven Handaxe comes only from a house that runs a wild proving and only to an elf who has survived theirs. Visible on the belt, it announces both proving-status and house affiliation to anyone in Feywood culture who knows what they are looking at."
   ],
   "tags": [
     "weapon",

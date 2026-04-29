@@ -4,10 +4,11 @@
   "category": "weapon",
   "subcategory": null,
   "schema_version": 1,
-  "description": "The elven Greenshield's standard military sword \u2014 a straight double-edged blade of refined elven metallurgy, balanced for the cut-and-thrust technique Greenshield doctrine emphasizes.",
+  "description": "The elven Greenshield's standard military sword — a straight double-edged blade of recovered Elarith, feywrought to the cut-and-thrust technique Greenshield doctrine emphasizes. Issued to active Greenshield rank rather than owned personally, with the metal returning to house custody when the bearer leaves service.",
   "narrative_effects": [
     "Supports standard sword technique with the specific balance elven military training favors.",
-    "Rare in realm-side hands; its presence on a non-elf signals either long-term elven relationship or a trophy whose provenance is worth asking about."
+    "Edge endurance is unusual: Elarith holds geometry across long service that ordinary steel does not match.",
+    "Rare in realm-side hands; the metal itself, recognized by anyone trained in elven smithcraft, raises serious questions about how it left the Feywood."
   ],
   "tags": [
     "weapon",
