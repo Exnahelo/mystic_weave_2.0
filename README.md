@@ -25,16 +25,17 @@ Python 3.13 · FastAPI · uvicorn · asyncpg · Pydantic v2 · Postgres on Railw
 - **6 outcome bands** — Critical Success through Critical Failure, margin-based
 
 **Character options** (all verified against `GET /options` — never hardcoded)
-- **8 species** — one generalist (Human), seven specialists (Orc, Elf, Halfling, Dwarf, Gnome, Tiefling, Drakari)
-- **7 focus archetypes** — Champion, Sentinel, Stalker, Wayfinder, Arcanist, Devoted, Speaker
+- **8 ancestries** — Human, Orc, Elf, Halfling, Dwarf, Gnome, Vulkar, Drakari
+- **11 cultures** — regional upbringing layer applied after ancestry
+- **9 focus archetypes** — Champion, Sentinel, Stalker, Wayfinder, Arcanist, Devoted, Speaker, Warden, Druid
 - **8 backgrounds** — Soldier, Scholar, Criminal, Noble, Outlander, Artisan, Acolyte, Performer
 
-**Character layers** (v3.2.0)
+**Character layers** (v4.4.0)
 - **Identity** — origin, motivations, quirks, bonds, flaws, wound, alignment (two-axis enum + ethos note)
 - **Equipment** — worn / carried / stashed slots, optional `roll_tag` linking items to application tags
 - **Reputation** — per-faction standing (−100 to +100); party reputation computed by GPT at resolution time
 
-**World layers** (v3.2.0)
+**World layers** (v4.4.0)
 - **Companions** — lightweight companion schema with identity, optional stat block, disposition, and faction standing
 - **Economy** — wealth tier (universal) + raw coin (currency regions); trade goods and obligations
 - **Politics** — faction memberships, active obligations, legal standing, leverage, tensions, Conclave status
