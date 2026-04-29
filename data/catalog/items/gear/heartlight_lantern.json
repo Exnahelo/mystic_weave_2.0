@@ -22,8 +22,11 @@
   "rarity": "uncommon",
   "legality": "open",
   "value_cd": 350,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "comfortable",
+  "market_tags": [
+    "enchanter",
+    "general-goods"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,
