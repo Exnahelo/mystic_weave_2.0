@@ -2,7 +2,7 @@
   "id": "gear-field-rations",
   "name": "Field Rations (per day)",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "survival",
   "schema_version": 1,
   "description": "A one-day ration pack intended to sustain travel without fresh provisioning.",
   "narrative_effects": [

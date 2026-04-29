@@ -2,7 +2,7 @@
   "id": "gear-oil-flask",
   "name": "Oil (per flask)",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "light",
   "schema_version": 1,
   "description": "A flask of lamp oil used as lantern fuel or as an ignitable liquid in dangerous situations.",
   "narrative_effects": [
