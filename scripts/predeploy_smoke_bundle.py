@@ -80,11 +80,21 @@ def main() -> None:
         if wolf_template is None:
             fail("GET /catalog/creatures: moonthorn_wolf missing from creature_catalog")
 
-        items = client.get("/catalog/items")
-        expect_status(items, 200, "GET /catalog/items")
+        items = client.get("/catalog/items", params={"kind": "weapon"})
+        expect_status(items, 200, "GET /catalog/items?kind=weapon")
         item_keys = set(items.json().keys())
-        if item_keys != {"mundane_items", "magical_items", "apparel_items"}:
-            fail(f"GET /catalog/items: unexpected key set {sorted(item_keys)}")
+        expected_item_keys = {
+            "mundane_items",
+            "magical_items",
+            "apparel_items",
+            "weapon_items",
+            "armor_items",
+            "ammunition_items",
+        }
+        if item_keys != expected_item_keys:
+            fail(f"GET /catalog/items?kind=weapon: unexpected key set {sorted(item_keys)}")
+        if not items.json().get("weapon_items"):
+            fail("GET /catalog/items?kind=weapon: weapon_items is empty")
 
         vocab = client.get("/catalog/vocab")
         expect_status(vocab, 200, "GET /catalog/vocab")
@@ -138,6 +148,8 @@ def main() -> None:
         state_get = client.get(f"/state/{session_id}")
         expect_status(state_get, 200, "GET /state/{session_id}")
 
+        base_hp = wolf_template["base_hp"]
+        hp_payload = base_hp if isinstance(base_hp, dict) else {"current": base_hp, "max": base_hp}
         companion_payload = {
             "name": "Smokefang",
             "species": wolf_template["species"],
@@ -153,7 +165,7 @@ def main() -> None:
             "movement_modes": wolf_template["movement_modes"],
             "natural_weapons": wolf_template["natural_weapons"],
             "carrying_capacity": wolf_template["carrying_capacity"],
-            "hp": {"current": wolf_template["base_hp"], "max": wolf_template["base_hp"]},
+            "hp": hp_payload,
             "domains": wolf_template["base_domains"],
             "temperament": wolf_template["temperament"],
             "bond_links": {"primary": "smokerunner"},
