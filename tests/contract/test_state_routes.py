@@ -157,7 +157,35 @@ def _world(turn: int = 1, time_of_day: str = "morning") -> dict:
 
 
 @pytest.mark.contract
-def test_save_returns_drift_warning_when_time_stale() -> None:
+def test_save_rejects_when_turn_advances_without_time() -> None:
+    """Turn advanced + no world.time field in body → 422 (enforced acknowledgment)."""
+    conn = StateRouteConn("sess1", _character(), _world(turn=1, time_of_day="morning"))
+    app = _make_app(FakePool(conn))
+
+    # Build a body that sends turn=2 but omits the time block entirely.
+    world_no_time = _world(turn=2, time_of_day="morning")
+    world_no_time.pop("time")
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1",
+            json={
+                "character": _character(),
+                "world": world_no_time,
+                "log_entry": "Turn advanced without time.",
+            },
+        )
+
+    assert response.status_code == 422
+    body = response.json()
+    assert body["detail"]["error"] == "time_acknowledgment_required"
+    assert body["detail"]["previous_turn"] == 1
+    assert body["detail"]["current_turn"] == 2
+
+
+@pytest.mark.contract
+def test_save_accepts_when_turn_advances_with_time_echoed() -> None:
+    """Turn advanced + time block present (even echoing prior values) → 200 (acknowledgment)."""
     conn = StateRouteConn("sess1", _character(), _world(turn=1, time_of_day="morning"))
     app = _make_app(FakePool(conn))
 
@@ -166,16 +194,15 @@ def test_save_returns_drift_warning_when_time_stale() -> None:
             "/state/sess1",
             json={
                 "character": _character(),
-                "world": _world(turn=2, time_of_day="morning"),
-                "log_entry": "Turn advanced without time.",
+                "world": _world(turn=2, time_of_day="morning"),  # time block present, same time_of_day
+                "log_entry": "Deliberate no-advance turn.",
             },
         )
 
     assert response.status_code == 200
     payload = response.json()
+    # Drift warning still informative, but save succeeds because acknowledgment was given.
     assert payload["time_drift_warning"] is not None
-    assert payload["time_drift_warning"]["previous_turn"] == 1
-    assert payload["time_drift_warning"]["current_turn"] == 2
 
 
 @pytest.mark.contract
@@ -217,7 +244,8 @@ def test_first_save_returns_null_warning() -> None:
 
 
 @pytest.mark.contract
-def test_delta_returns_drift_warning_when_turn_advances_without_time_change() -> None:
+def test_delta_rejects_when_turn_advances_without_time() -> None:
+    """Delta: turn advanced + body.world.time None → 422."""
     conn = StateRouteConn("sess1", _character(), _world(turn=1, time_of_day="morning"))
     app = _make_app(FakePool(conn))
 
@@ -230,7 +258,37 @@ def test_delta_returns_drift_warning_when_turn_advances_without_time_change() ->
             },
         )
 
+    assert response.status_code == 422
+    body = response.json()
+    assert body["detail"]["error"] == "time_acknowledgment_required"
+    assert body["detail"]["current_turn"] == 2
+
+
+@pytest.mark.contract
+def test_delta_accepts_when_turn_advances_with_time_echoed() -> None:
+    """Delta: turn advanced + body.world.time present (echo) → 200."""
+    conn = StateRouteConn("sess1", _character(), _world(turn=1, time_of_day="morning"))
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1/delta",
+            json={
+                "world": {
+                    "turn": 2,
+                    "time": {
+                        "day": 1,
+                        "month": "Verdantrise",
+                        "year": 847,
+                        "time_of_day": "morning",
+                        "season": "spring",
+                        "festival": None,
+                        "weather": "clear",
+                        "weather_note": "",
+                    },
+                },
+                "log_entry": "Delta acknowledging no-advance turn.",
+            },
+        )
+
     assert response.status_code == 200
-    payload = response.json()
-    assert payload["time_drift_warning"] is not None
-    assert payload["time_drift_warning"]["current_turn"] == 2

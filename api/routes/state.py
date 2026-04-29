@@ -398,6 +398,32 @@ async def save_state(
                 current_time=validated_world.time,
             )
 
+        # Enforce: if turn advanced, the request body must include a `time`
+        # block (acknowledgment). Echoing the previous time_of_day is allowed
+        # — that affirms a deliberate no-advance turn. Silent omission is
+        # rejected so time drift cannot accumulate unnoticed.
+        if (
+            previous_turn is not None
+            and validated_world.turn > previous_turn
+            and not isinstance(world_json.get("time"), dict)
+        ):
+            raise HTTPException(
+                status_code=422,
+                detail={
+                    "error": "time_acknowledgment_required",
+                    "message": (
+                        f"Turn advanced from {previous_turn} to {validated_world.turn} "
+                        f"but request body included no world.time field. "
+                        f"Resubmit with world.time advanced per the Travel Time Reference "
+                        f"in prompts/calendar.md, or include world.time with the current "
+                        f"time_of_day to affirm a deliberate no-advance turn."
+                    ),
+                    "previous_turn": previous_turn,
+                    "current_turn": validated_world.turn,
+                    "previous_time": previous_time.model_dump() if previous_time else None,
+                },
+            )
+
         row = await conn.fetchrow(
             """
             INSERT INTO game_states (session_id, character, world, log, updated_at)
@@ -484,6 +510,28 @@ async def save_state_delta(
             current_turn=applied_world.turn,
             current_time=applied_world.time,
         )
+
+        # Enforce: if turn advanced, the delta must include a `time` field
+        # (acknowledgment). Setting time with the current time_of_day echoed
+        # is allowed — that affirms a deliberate no-advance turn. Silent
+        # omission is rejected.
+        if applied_world.turn > previous_turn and body.world.time is None:
+            raise HTTPException(
+                status_code=422,
+                detail={
+                    "error": "time_acknowledgment_required",
+                    "message": (
+                        f"Turn advanced from {previous_turn} to {applied_world.turn} "
+                        f"but delta included no world.time field. "
+                        f"Resubmit with world.time advanced per the Travel Time Reference "
+                        f"in prompts/calendar.md, or include world.time with the current "
+                        f"time_of_day to affirm a deliberate no-advance turn."
+                    ),
+                    "previous_turn": previous_turn,
+                    "current_turn": applied_world.turn,
+                    "previous_time": previous_time.model_dump(),
+                },
+            )
 
         row = await conn.fetchrow(
             """
