@@ -1052,3 +1052,8 @@ class TagsResponse(BaseModel):
     knowledge_groups: list[KnowledgeGroupEntry]
     magic_fields: list[MagicFieldEntry]
     applications: list[ApplicationEntry]
+
+
+# Resolve companion forward references for modules/tests that import route
+# modules directly without going through api.main.
+from api import companions as _companions  # noqa: E402,F401

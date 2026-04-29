@@ -336,3 +336,43 @@ core_models.NewSessionRequest.model_rebuild(
         "CompanionEnvelope": CompanionEnvelope,
     }
 )
+core_models.CharacterModel.model_rebuild(
+    _types_namespace={
+        "ArchivedCompanionEnvelope": ArchivedCompanionEnvelope,
+        "Companion": Companion,
+        "CompanionRecord": CompanionRecord,
+        "CompanionEnvelope": CompanionEnvelope,
+    }
+)
+core_models.CharacterStateDelta.model_rebuild(
+    _types_namespace={
+        "ArchivedCompanionEnvelope": ArchivedCompanionEnvelope,
+        "Companion": Companion,
+        "CompanionRecord": CompanionRecord,
+        "CompanionEnvelope": CompanionEnvelope,
+    }
+)
+core_models.ApplyStateDeltaRequest.model_rebuild(
+    _types_namespace={
+        "ArchivedCompanionEnvelope": ArchivedCompanionEnvelope,
+        "Companion": Companion,
+        "CompanionRecord": CompanionRecord,
+        "CompanionEnvelope": CompanionEnvelope,
+    }
+)
+core_models.SaveStateRequest.model_rebuild(
+    _types_namespace={
+        "ArchivedCompanionEnvelope": ArchivedCompanionEnvelope,
+        "Companion": Companion,
+        "CompanionRecord": CompanionRecord,
+        "CompanionEnvelope": CompanionEnvelope,
+    }
+)
+core_models.GameStateResponse.model_rebuild(
+    _types_namespace={
+        "ArchivedCompanionEnvelope": ArchivedCompanionEnvelope,
+        "Companion": Companion,
+        "CompanionRecord": CompanionRecord,
+        "CompanionEnvelope": CompanionEnvelope,
+    }
+)
