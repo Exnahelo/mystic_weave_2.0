@@ -2,9 +2,9 @@
   "id": "gear-redveil-preparation",
   "name": "Redveil Shelf Preparation",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "medicine",
   "schema_version": 1,
-  "description": "A prepared pouch of dried and ground Redveil Shelf fungus \u2014 the Feywood's canonical fever remedy and serious-wound preparation.",
+  "description": "A prepared pouch of dried and ground Redveil Shelf fungus — the Feywood's canonical fever remedy and serious-wound preparation.",
   "narrative_effects": [
     "Supports field triage rolls for fever management and wound preparations beyond Silverleaf's lighter register.",
     "Limited export quantities; not every realm healer carries it."
@@ -21,8 +21,10 @@
   "rarity": "uncommon",
   "legality": "open",
   "value_cd": 60,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "apothecary"
+  ],
   "consumable": true,
   "charges_max": 1,
   "knowledge_tag": null,

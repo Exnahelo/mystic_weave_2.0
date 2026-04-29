@@ -2,9 +2,9 @@
   "id": "gear-silverleaf-balm",
   "name": "Silverleaf Balm",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "medicine",
   "schema_version": 1,
-  "description": "A prepared jar of Silverleaf Balm \u2014 the canonical Feywood healer's salve for wounds, bruises, and minor burns. Cool on contact, mild-scented.",
+  "description": "A prepared jar of Silverleaf Balm — the canonical Feywood healer's salve for wounds, bruises, and minor burns. Cool on contact, mild-scented.",
   "narrative_effects": [
     "Supports field triage rolls for cuts, bruises, and burns.",
     "A standard Vaelmere trade export; appears routinely in realm healers' kits through elven supply chains."
@@ -21,8 +21,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 30,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "apothecary",
+    "general-goods"
+  ],
   "consumable": true,
   "charges_max": 1,
   "knowledge_tag": null,

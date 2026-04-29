@@ -2,7 +2,7 @@
   "id": "gear-tourniquet",
   "name": "Tourniquet",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "medicine",
   "schema_version": 1,
   "description": "A field emergency restraint used to control severe bleeding until further treatment is possible.",
   "narrative_effects": [
@@ -17,8 +17,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 15,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "apothecary",
+    "general-goods"
+  ],
   "consumable": true,
   "charges_max": 1,
   "knowledge_tag": null,

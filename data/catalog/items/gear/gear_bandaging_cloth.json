@@ -2,7 +2,7 @@
   "id": "gear-bandaging-cloth",
   "name": "Bandaging Cloth",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "medicine",
   "schema_version": 1,
   "description": "Clean cloth strips used for wound dressing and ordinary field care.",
   "narrative_effects": [
@@ -17,8 +17,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 10,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "destitute",
+  "market_tags": [
+    "apothecary",
+    "general-goods"
+  ],
   "consumable": true,
   "charges_max": 1,
   "knowledge_tag": null,

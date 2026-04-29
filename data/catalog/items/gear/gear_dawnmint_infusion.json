@@ -2,9 +2,9 @@
   "id": "gear-dawnmint-infusion",
   "name": "Dawnmint Infusion",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "medicine",
   "schema_version": 1,
-  "description": "A prepared jar of dried Dawnmint leaves for hot-water infusion \u2014 culinary, gently medicinal, widely carried by Feywood travelers for tea and minor household medicine.",
+  "description": "A prepared jar of dried Dawnmint leaves for hot-water infusion — culinary, gently medicinal, widely carried by Feywood travelers for tea and minor household medicine.",
   "narrative_effects": [
     "Supports pharmacology rolls for mild digestive or calming preparation.",
     "Comfortably familiar to both Feywood and realm users; Vaelmere exports these in quantity."
@@ -21,8 +21,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 20,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "apothecary",
+    "general-goods"
+  ],
   "consumable": true,
   "charges_max": 1,
   "knowledge_tag": null,
