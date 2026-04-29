@@ -2,7 +2,7 @@
   "id": "gear-paper-sheet",
   "name": "Paper (sheet)",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "document",
   "schema_version": 1,
   "description": "A standard sheet used for notes, records, letters, and informal documents.",
   "narrative_effects": [
@@ -17,8 +17,10 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 2,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "destitute",
+  "market_tags": [
+    "general-goods"
+  ],
   "consumable": true,
   "charges_max": 1,
   "knowledge_tag": null,

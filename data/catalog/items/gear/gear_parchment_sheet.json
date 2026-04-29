@@ -2,7 +2,7 @@
   "id": "gear-parchment-sheet",
   "name": "Parchment (sheet)",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "document",
   "schema_version": 1,
   "description": "A durable writing material used for formal, lasting, or important documents.",
   "narrative_effects": [
@@ -17,8 +17,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 30,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "leatherworker"
+  ],
   "consumable": true,
   "charges_max": 1,
   "knowledge_tag": null,

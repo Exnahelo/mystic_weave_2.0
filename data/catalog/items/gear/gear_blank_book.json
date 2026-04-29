@@ -2,7 +2,7 @@
   "id": "gear-blank-book",
   "name": "Book (blank)",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "document",
   "schema_version": 1,
   "description": "A bound blank book used as a journal, ledger, or reference volume.",
   "narrative_effects": [
@@ -17,8 +17,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 250,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "comfortable",
+  "market_tags": [
+    "general-goods",
+    "leatherworker"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

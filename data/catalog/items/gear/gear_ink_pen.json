@@ -2,7 +2,7 @@
   "id": "gear-ink-pen",
   "name": "Ink Pen",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "document",
   "schema_version": 1,
   "description": "A pen used for writing, annotation, and formal document work.",
   "narrative_effects": [
@@ -17,8 +17,10 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 2,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "destitute",
+  "market_tags": [
+    "general-goods"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

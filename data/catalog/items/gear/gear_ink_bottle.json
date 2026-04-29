@@ -2,7 +2,7 @@
   "id": "gear-ink-bottle",
   "name": "Ink (bottle)",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "document",
   "schema_version": 1,
   "description": "A bottle of writing ink used for correspondence, annotation, and recordkeeping.",
   "narrative_effects": [
@@ -17,8 +17,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 100,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "apothecary"
+  ],
   "consumable": true,
   "charges_max": 1,
   "knowledge_tag": null,
