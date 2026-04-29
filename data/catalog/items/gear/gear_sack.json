@@ -16,8 +16,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 1,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "destitute",
+  "market_tags": [
+    "general-goods",
+    "tailor"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,
