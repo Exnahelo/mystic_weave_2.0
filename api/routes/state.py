@@ -188,6 +188,29 @@ def _merge_equipment_slots(base: dict[str, Any], incoming: dict[str, Any]) -> di
     return result
 
 
+# Canonical month ordering for the Oath Calendar (prompts/calendar.md).
+# Used for time monotonicity checks — incoming time must not be earlier than
+# stored time on the world timeline.
+MONTH_ORDER = (
+    "Ashwake", "Embertide", "Mistbreak", "Verdantrise",
+    "Clearwater", "Goldmere", "Scaletide", "Amberveil",
+    "Ashenfall", "Ironmoor", "Dimlight", "Deepwarden",
+)
+TIME_OF_DAY_ORDER = ("dawn", "morning", "midday", "afternoon", "dusk", "night")
+
+
+def _time_to_tuple(t: TimeState) -> tuple[int, int, int, int]:
+    """Convert TimeState to a comparable (year, month_idx, day, time_of_day_idx) tuple.
+
+    Unknown month or time_of_day values fall back to position 0 — defensive but
+    shouldn't occur with validated TimeState input.
+    """
+    month_idx = MONTH_ORDER.index(t.month) if t.month in MONTH_ORDER else 0
+    tod_value = t.time_of_day.value if hasattr(t.time_of_day, "value") else str(t.time_of_day)
+    tod_idx = TIME_OF_DAY_ORDER.index(tod_value) if tod_value in TIME_OF_DAY_ORDER else 0
+    return (t.year, month_idx, t.day, tod_idx)
+
+
 def _detect_time_drift(
     previous_turn: int,
     previous_time: TimeState,
@@ -424,6 +447,38 @@ async def save_state(
                 },
             )
 
+        # Enforce: time must be monotonically forward. Reject if incoming
+        # world.time represents an older world-timeline position than the
+        # stored time. Catches the case where the GPT regenerates a default
+        # time block (e.g. day=1) and would silently overwrite the stored
+        # day. Only enforced when a time block was sent and prior state exists.
+        if (
+            previous_time is not None
+            and isinstance(world_json.get("time"), dict)
+        ):
+            previous_tuple = _time_to_tuple(previous_time)
+            current_tuple = _time_to_tuple(validated_world.time)
+            if current_tuple < previous_tuple:
+                raise HTTPException(
+                    status_code=422,
+                    detail={
+                        "error": "time_regression_rejected",
+                        "message": (
+                            f"Incoming world.time is earlier than stored time. "
+                            f"Time may not move backward. If this turn is in the same "
+                            f"in-world moment, echo the stored time_of_day, day, month, "
+                            f"and year. If the stored time is wrong, fix it by sending "
+                            f"a forward time. Stored: day {previous_time.day} of "
+                            f"{previous_time.month} {previous_time.year} "
+                            f"({previous_time.time_of_day}); incoming: day "
+                            f"{validated_world.time.day} of {validated_world.time.month} "
+                            f"{validated_world.time.year} ({validated_world.time.time_of_day})."
+                        ),
+                        "previous_time": previous_time.model_dump(),
+                        "incoming_time": validated_world.time.model_dump(),
+                    },
+                )
+
         row = await conn.fetchrow(
             """
             INSERT INTO game_states (session_id, character, world, log, updated_at)
@@ -532,6 +587,32 @@ async def save_state_delta(
                     "previous_time": previous_time.model_dump(),
                 },
             )
+
+        # Enforce: time must be monotonically forward. Reject if applied
+        # world.time represents an older timeline position than stored time.
+        # Only enforced when a time field was sent in the delta.
+        if body.world.time is not None:
+            previous_tuple = _time_to_tuple(previous_time)
+            current_tuple = _time_to_tuple(applied_world.time)
+            if current_tuple < previous_tuple:
+                raise HTTPException(
+                    status_code=422,
+                    detail={
+                        "error": "time_regression_rejected",
+                        "message": (
+                            f"Incoming world.time is earlier than stored time. "
+                            f"Time may not move backward. If this turn is in the same "
+                            f"in-world moment, echo the stored day, month, year, and "
+                            f"time_of_day. Stored: day {previous_time.day} of "
+                            f"{previous_time.month} {previous_time.year} "
+                            f"({previous_time.time_of_day}); incoming: day "
+                            f"{applied_world.time.day} of {applied_world.time.month} "
+                            f"{applied_world.time.year} ({applied_world.time.time_of_day})."
+                        ),
+                        "previous_time": previous_time.model_dump(),
+                        "incoming_time": applied_world.time.model_dump(),
+                    },
+                )
 
         row = await conn.fetchrow(
             """

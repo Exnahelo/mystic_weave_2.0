@@ -206,6 +206,62 @@ def test_save_accepts_when_turn_advances_with_time_echoed() -> None:
 
 
 @pytest.mark.contract
+def test_save_rejects_time_regression() -> None:
+    """The actual GPT bug: time block sent with day=1 (regenerated default) over stored day=4 → 422."""
+    # Existing state is already at day 4 of Verdantrise, afternoon.
+    stored_world = _world(turn=10, time_of_day="afternoon")
+    stored_world["time"]["day"] = 4
+    conn = StateRouteConn("sess1", _character(), stored_world)
+    app = _make_app(FakePool(conn))
+
+    # Incoming save sends a full time block but with day=1 (default regeneration).
+    incoming_world = _world(turn=11, time_of_day="afternoon")
+    incoming_world["time"]["day"] = 1  # regression!
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1",
+            json={
+                "character": _character(),
+                "world": incoming_world,
+                "log_entry": "Save layer regenerates day=1 over stored day=4.",
+            },
+        )
+
+    assert response.status_code == 422
+    body = response.json()
+    assert body["detail"]["error"] == "time_regression_rejected"
+    assert body["detail"]["previous_time"]["day"] == 4
+    assert body["detail"]["incoming_time"]["day"] == 1
+
+
+@pytest.mark.contract
+def test_save_accepts_legitimate_month_wrap() -> None:
+    """day=1 of next month over day=30 of prev month → 200 (forward in time)."""
+    stored_world = _world(turn=10, time_of_day="night")
+    stored_world["time"]["day"] = 30
+    stored_world["time"]["month"] = "Verdantrise"
+    conn = StateRouteConn("sess1", _character(), stored_world)
+    app = _make_app(FakePool(conn))
+
+    incoming_world = _world(turn=11, time_of_day="dawn")
+    incoming_world["time"]["day"] = 1
+    incoming_world["time"]["month"] = "Clearwater"  # next month
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1",
+            json={
+                "character": _character(),
+                "world": incoming_world,
+                "log_entry": "Crossed midnight from day 30 Verdantrise to day 1 Clearwater.",
+            },
+        )
+
+    assert response.status_code == 200
+
+
+@pytest.mark.contract
 def test_save_without_drift_returns_null_warning() -> None:
     conn = StateRouteConn("sess1", _character(), _world(turn=1, time_of_day="morning"))
     app = _make_app(FakePool(conn))
