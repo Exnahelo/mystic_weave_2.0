@@ -15,7 +15,8 @@
     "sword",
     "greenshield",
     "elven-military",
-    "feywood"
+    "feywood",
+    "celestial-metal"
   ],
   "roll_tag": null,
   "rarity": "uncommon",
@@ -39,7 +40,7 @@
   "damage_modifier": null,
   "recoverable": true,
   "special_effect_tag": null,
-  "tier": null,
+  "tier": "T0",
   "magic_field": null,
   "tool_role": null
 }
