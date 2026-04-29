@@ -2,7 +2,7 @@
   "id": "gear-waxed-line",
   "name": "Waxed Line",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "tool",
   "schema_version": 1,
   "description": "Wax-treated fiber line with improved weather resistance and reliable grip under wet conditions.",
   "narrative_effects": [
@@ -17,8 +17,10 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 15,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

@@ -2,7 +2,7 @@
   "id": "gear-cord",
   "name": "Cord",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "tool",
   "schema_version": 1,
   "description": "Reinforced weatherproof cord built for load-bearing rigging, climbing support, and sustained field use.",
   "narrative_effects": [
@@ -18,8 +18,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 40,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "leatherworker"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

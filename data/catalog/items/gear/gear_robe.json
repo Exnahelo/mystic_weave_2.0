@@ -2,7 +2,7 @@
   "id": "gear-robe",
   "name": "Robe",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "tool",
   "schema_version": 1,
   "description": "A robe associated with religious, scholarly, or institutional identity.",
   "narrative_effects": [
@@ -18,8 +18,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 10,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "destitute",
+  "market_tags": [
+    "tailor",
+    "temple"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

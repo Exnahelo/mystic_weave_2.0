@@ -2,7 +2,7 @@
   "id": "gear-chain-10ft",
   "name": "Chain (10 ft)",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "tool",
   "schema_version": 1,
   "description": "A short length of chain for secure restraint, anchoring, or reinforced binding.",
   "narrative_effects": [
@@ -17,8 +17,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 50,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "blacksmith"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

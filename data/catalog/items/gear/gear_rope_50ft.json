@@ -2,7 +2,7 @@
   "id": "gear-rope-50ft",
   "name": "Rope (50 ft)",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "tool",
   "schema_version": 1,
   "description": "A sturdy fifty-foot length of rope for climbing support, binding, hauling, and rigging.",
   "narrative_effects": [
@@ -18,8 +18,10 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 10,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "destitute",
+  "market_tags": [
+    "general-goods"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

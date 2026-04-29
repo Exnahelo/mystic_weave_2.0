@@ -2,9 +2,9 @@
   "id": "gear-resinheart-sealant",
   "name": "Resinheart Sealant",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "tool",
   "schema_version": 1,
-  "description": "A small jar of refined Resinheart Pine resin \u2014 the Feywood's canonical waterproofing and wood-sealing compound, also used for incense and as a light adhesive.",
+  "description": "A small jar of refined Resinheart Pine resin — the Feywood's canonical waterproofing and wood-sealing compound, also used for incense and as a light adhesive.",
   "narrative_effects": [
     "Seals leather, wood, and textile against moisture for sustained periods.",
     "A minor Vaelmere trade export; realm travelers with Feywood connections often keep a jar for field use."
@@ -20,8 +20,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 35,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "carpenter"
+  ],
   "consumable": true,
   "charges_max": 1,
   "knowledge_tag": null,

@@ -2,7 +2,7 @@
   "id": "gear-thread",
   "name": "Thread",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "tool",
   "schema_version": 1,
   "description": "A spool of thread used for sewing, mending, and suturing.",
   "narrative_effects": [
@@ -18,8 +18,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 2,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "destitute",
+  "market_tags": [
+    "general-goods",
+    "tailor"
+  ],
   "consumable": true,
   "charges_max": 1,
   "knowledge_tag": null,

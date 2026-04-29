@@ -2,7 +2,7 @@
   "id": "gear-feed-bag",
   "name": "Feed Bag",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "tool",
   "schema_version": 1,
   "description": "A feed bag used to maintain and feed a mount during travel.",
   "narrative_effects": [
@@ -17,8 +17,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 10,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "destitute",
+  "market_tags": [
+    "general-goods",
+    "leatherworker"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

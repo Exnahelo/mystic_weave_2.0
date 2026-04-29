@@ -2,7 +2,7 @@
   "id": "gear-costume",
   "name": "Costume",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "tool",
   "schema_version": 1,
   "description": "Role-specific clothing intended to support impersonation or performed identity.",
   "narrative_effects": [
@@ -18,8 +18,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 50,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "tailor",
+    "underworld"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

@@ -2,7 +2,7 @@
   "id": "gear-awl",
   "name": "Awl",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "tool",
   "schema_version": 1,
   "description": "A hand tool used to pierce leather or heavy material in craft and repair work.",
   "narrative_effects": [
@@ -17,8 +17,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 5,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "destitute",
+  "market_tags": [
+    "general-goods",
+    "leatherworker"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

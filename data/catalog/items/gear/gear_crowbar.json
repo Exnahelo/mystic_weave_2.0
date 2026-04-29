@@ -2,7 +2,7 @@
   "id": "gear-crowbar",
   "name": "Crowbar",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "tool",
   "schema_version": 1,
   "description": "A heavy pry bar for forcing doors, containers, and lodged structures.",
   "narrative_effects": [
@@ -17,8 +17,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 20,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "blacksmith"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,
