@@ -100,6 +100,9 @@ Last updated: 2026-04-29
 
 ## Recently Completed (for context)
 
+- [x] 2026-04-29 / `abe1d83` — Production verifier version assertion now derives from `schemas/openapi.yaml` and fails loudly on schema/version drift.
+- [x] 2026-04-29 / `abe1d83` — Production verifier coverage expanded for `/options` key parity, `/tags` shape/non-empty values, and usable `data_fingerprint`.
+- [x] 2026-04-29 / `c72b3ab` — README character-option and layer-version drift reconciled to ancestry/culture/current archetype wording.
 - Foundation reset to canonical Mystic Weave item schema (commit `731b9ab`)
 - Mechanics reference tables prompt (commit `ca94b73`)
 - API v4.4.0 with `/catalog/items/{item_id}` endpoint (commit `ec1d3b9`)
