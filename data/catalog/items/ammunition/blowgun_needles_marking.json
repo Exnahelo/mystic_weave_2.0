@@ -20,8 +20,10 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 40,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "apothecary"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": "unconventional",

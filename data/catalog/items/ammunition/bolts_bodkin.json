@@ -19,8 +19,10 @@
   "rarity": "uncommon",
   "legality": "open",
   "value_cd": 60,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "fletcher"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": "mechanical",

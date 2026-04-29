@@ -23,7 +23,7 @@
   "rarity": "uncommon",
   "legality": "open",
   "value_cd": 3500,
-  "wealth_tier_floor": null,
+  "wealth_tier_floor": "wealthy",
   "market_tags": [],
   "consumable": false,
   "charges_max": null,

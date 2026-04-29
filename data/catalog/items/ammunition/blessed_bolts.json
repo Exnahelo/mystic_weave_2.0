@@ -19,8 +19,11 @@
   "rarity": "rare",
   "legality": "open",
   "value_cd": 180,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "temple",
+    "fletcher"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": "mechanical",
@@ -38,7 +41,7 @@
   "damage_modifier": 5,
   "recoverable": false,
   "special_effect_tag": "sacred",
-  "tier": null,
-  "magic_field": null,
+  "tier": "T1",
+  "magic_field": "sacred",
   "tool_role": null
 }

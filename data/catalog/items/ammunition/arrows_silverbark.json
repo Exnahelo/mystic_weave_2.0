@@ -21,7 +21,7 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 25,
-  "wealth_tier_floor": null,
+  "wealth_tier_floor": "destitute",
   "market_tags": [],
   "consumable": false,
   "charges_max": null,

@@ -20,8 +20,10 @@
   "rarity": "uncommon",
   "legality": "open",
   "value_cd": 400,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "comfortable",
+  "market_tags": [
+    "armorer"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": "armor",

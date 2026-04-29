@@ -6,7 +6,7 @@
   "schema_version": 1,
   "description": "A Feywood ranger's layered leather armor \u2014 tanned from sanctioned hides (silverbough hart, Feywoodhorn stag, rootback elk) using elven processes that preserve flexibility across long service.",
   "narrative_effects": [
-    "Provides medium-armor protection with the quieter motion elven field operation demands.",
+    "Provides light-armor protection with the quieter motion elven field operation demands.",
     "Often bears subtle house-marks or personal identifiers recognizable only to trained elven observers."
   ],
   "tags": [
@@ -21,8 +21,11 @@
   "rarity": "uncommon",
   "legality": "open",
   "value_cd": 600,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "comfortable",
+  "market_tags": [
+    "armorer",
+    "leatherworker"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": "armor",

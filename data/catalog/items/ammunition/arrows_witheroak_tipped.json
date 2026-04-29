@@ -22,7 +22,7 @@
   "rarity": "rare",
   "legality": "open",
   "value_cd": 300,
-  "wealth_tier_floor": null,
+  "wealth_tier_floor": "comfortable",
   "market_tags": [],
   "consumable": false,
   "charges_max": null,
@@ -40,7 +40,7 @@
   "damage_modifier": 0,
   "recoverable": false,
   "special_effect_tag": "ritual_marking",
-  "tier": null,
-  "magic_field": null,
+  "tier": "T0",
+  "magic_field": "druidry",
   "tool_role": null
 }
