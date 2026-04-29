@@ -191,6 +191,22 @@ def _base_world() -> dict:
             "active_tensions": [],
             "conclave_status": "unknown",
         },
+        "time": {
+            "day": 1,
+            "month": "Verdantrise",
+            "year": 847,
+            "time_of_day": "morning",
+            "season": "spring",
+            "festival": None,
+            "weather": "clear",
+            "weather_note": "",
+        },
+        "survival": {
+            "hunger": "sated",
+            "hydration": "hydrated",
+            "fatigue": "rested",
+            "load": "normal",
+        },
     }
 
 
@@ -299,7 +315,8 @@ def test_multi_turn_companion_lifecycle_and_political_economy_progression() -> N
 @pytest.mark.regression
 def test_delta_save_applies_partial_updates_and_preserves_unsent_fields() -> None:
     session_id = "deltachain1"
-    conn = MultiTurnFakeConn(session_id, _base_character(), _base_world())
+    base_world = _base_world()
+    conn = MultiTurnFakeConn(session_id, _base_character(), base_world)
     app = _make_app(FakePool(conn))
 
     with TestClient(app) as client:
@@ -307,7 +324,7 @@ def test_delta_save_applies_partial_updates_and_preserves_unsent_fields() -> Non
             f"/state/{session_id}/delta",
             json={
                 "character": {"notes": "Delta note"},
-                "world": {"turn": 2, "threat": "medium"},
+                "world": {"turn": 2, "threat": "medium", "time": base_world["time"]},
                 "log_entry": "Delta applied.",
             },
         )
@@ -431,6 +448,7 @@ def test_full_save_partial_payload_preserves_knowledge_and_application() -> None
                 "world": {
                     "turn": 2,
                     "threat": "medium",
+                    "time": base_world["time"],
                 },
                 "log_entry": "Partial full save applied.",
             },

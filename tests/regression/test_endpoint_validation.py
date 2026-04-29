@@ -444,6 +444,7 @@ def test_state_save_preserves_existing_world_structured_blocks_when_legacy_paylo
         "companions": [],
         "economy": _build_valid_world()["economy"],
         "politics": _build_valid_world()["politics"],
+        "time": existing_world["time"],
     }
 
     with TestClient(app) as client:
