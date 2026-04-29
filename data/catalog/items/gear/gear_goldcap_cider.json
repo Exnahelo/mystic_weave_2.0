@@ -2,9 +2,9 @@
   "id": "gear-goldcap-cider",
   "name": "Goldcap Cider",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "survival",
   "schema_version": 1,
-  "description": "A flask of Goldcap cider from Vaelmere and Thornveil orchards \u2014 one of the Feywood's canonical trade exports, familiar enough to reach realm taverns via Vaelmere's flow.",
+  "description": "A flask of Goldcap cider from Vaelmere and Thornveil orchards — one of the Feywood's canonical trade exports, familiar enough to reach realm taverns via Vaelmere's flow.",
   "narrative_effects": [
     "Standard alcoholic drink; its specific tartness is recognized by regular realm drinkers of Feywood exports.",
     "Consistent quality across vintages owing to the Goldcap apple's reliable character."

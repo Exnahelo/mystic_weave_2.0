@@ -2,9 +2,9 @@
   "id": "gear-hearthgoat-cheese-ration",
   "name": "Hearthgoat Cheese Ration",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "survival",
   "schema_version": 1,
-  "description": "A block of aged Hearthgoat cheese wrapped in waxed leaves for travel \u2014 the Feywood's standard travel protein, durable across weeks of carry.",
+  "description": "A block of aged Hearthgoat cheese wrapped in waxed leaves for travel — the Feywood's standard travel protein, durable across weeks of carry.",
   "narrative_effects": [
     "Standard field ration, calorically dense, travels well in cool conditions.",
     "Less common realm-side; hearthgoat dairy doesn't export widely beyond border settlements."

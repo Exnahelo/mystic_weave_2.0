@@ -4,10 +4,10 @@
   "category": "gear",
   "subcategory": "other",
   "schema_version": 1,
-  "description": "A small woven cord, bead, or carved disc given by an elven host to a sanctioned visitor \u2014 a relational artifact whose legitimacy comes from its provenance, not its form.",
+  "description": "A small woven cord, bead, or carved disc given by an elven host to a sanctioned visitor — a relational artifact whose legitimacy comes from its provenance, not its form.",
   "narrative_effects": [
     "The Feywood's ambient field registers the bearer as a welcome guest. Path-finding is subtly more cooperative; the Feywood's geometry favors the bearer's intended destinations.",
-    "Legitimacy derives from the specific act of giving by a recognized host \u2014 a stolen or forged token confers nothing, and attempts to forge one are recognizable to attuned elven observers.",
+    "Legitimacy derives from the specific act of giving by a recognized host — a stolen or forged token confers nothing, and attempts to forge one are recognizable to attuned elven observers.",
     "Typically carried on the person (worn at the wrist, neck, or on a belt) for the duration of a visit; returned or kept as a memento when the visit concludes."
   ],
   "tags": [

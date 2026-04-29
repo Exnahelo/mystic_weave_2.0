@@ -2,9 +2,9 @@
   "id": "gear-feywood-honey",
   "name": "Feywood Honey",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "survival",
   "schema_version": 1,
-  "description": "A sealed jar of honey from Honeybound bees \u2014 distinctly floral, slightly field-reactive to sensitive attunements, prized both as food and as a preserve base.",
+  "description": "A sealed jar of honey from Honeybound bees — distinctly floral, slightly field-reactive to sensitive attunements, prized both as food and as a preserve base.",
   "narrative_effects": [
     "Standard food and preserve ingredient with notably long shelf life.",
     "Vaelmere trade export in modest quantities; realm connoisseurs distinguish Feywood honey by its specific floral character."

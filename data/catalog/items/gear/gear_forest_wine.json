@@ -2,9 +2,9 @@
   "id": "gear-forest-wine",
   "name": "Feywood Forest Wine",
   "category": "gear",
-  "subcategory": "other",
+  "subcategory": "survival",
   "schema_version": 1,
-  "description": "A bottle of Feywood forest wine \u2014 base blend of Summerpear, Dewberry, and seasonal flowers; lighter and more floral than realm grape wines.",
+  "description": "A bottle of Feywood forest wine — base blend of Summerpear, Dewberry, and seasonal flowers; lighter and more floral than realm grape wines.",
   "narrative_effects": [
     "Standard drink; a modest Vaelmere trade export with loyal realm clientele.",
     "Not interchangeable with realm wines at formal occasions; appears in its own category on sophisticated tables."
