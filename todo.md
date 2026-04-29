@@ -11,12 +11,12 @@ Last updated: 2026-04-29
 - [ ] **Gear curation pass** (132 items, the big one): same fields plus
       tier+magic_field for magical trinkets, foci, and consumables. Probably
       its own session.
-- [ ] **Retroactive T0 + celestial-metal tag** for three weapons whose
+- [x] **Retroactive T0 + celestial-metal tag** for three weapons whose
       identity centers on recovered Elarith:
       `weapon/moon-blade`, `weapon/sword-greenshield-pattern`,
       `weapon/proven-handaxe`. Set `tier: T0` and add `celestial-metal` to
       `tags`. Validator passes; small follow-up patch.
-- [ ] **Stale 5e cleanup**: delete `data/catalog/economy/currencies.json`
+- [x] **Stale 5e cleanup**: delete `data/catalog/economy/currencies.json`
       (uses cp/sp/ep/gp/pp; canonical CD/SD/GD/PD lives in
       `data/economy/currency.json`) and remove the empty parent dir.
       Keep `data/catalog/services/README.md` and
@@ -84,7 +84,7 @@ Last updated: 2026-04-29
       Glade to Feywood in all content") corrupted tests/unit/test_companion_models.py
       via sloppy find-replace and merged anyway. Investigate whether mass-rename
       commits go through PR review.
-- [ ] Update GitHub Actions to Node.js 24 before Sept 16 2026 deprecation.
+- [x] Update GitHub Actions to Node.js 24 before Sept 16 2026 deprecation.
 - [ ] **Add observability for production verifier failures**: scheduled
       workflow exists but doesn't alert. Email or webhook on failure.
 
