@@ -1,6 +1,6 @@
 # Mystic Weave — Item Rules
 
-Version 2.0 — April 2026
+Version 2.1 — April 2026
 Status: Canonical. Upload to GPT builder as a knowledge file.
 
 ---
@@ -257,6 +257,56 @@ Tier does not currently govern:
 * whether items can be unmade, damaged, or decay
 
 These belong to the enchantment-rules arc, not to the tier framework. Until that arc is authored, tier is a narrative and mechanical-impact descriptor only.
+
+---
+
+## Cultural Material Traditions
+
+Some items in the catalog reflect distinct cultural craft traditions rather than purely mechanical differences. The GPT should narrate items in these traditions consistently with the worldbuilding behind them, even though the mechanical effects are already settled in the catalog.
+
+### Feywood Composite Craft
+
+Elven craft does not match human or dwarven traditions. Drakenvale-side and human cultures often solve a structural problem by adding more iron — more thickness, more rivets, more plate. The Feywood does not. Elven smiths and wardens have spent generations engineering around metal scarcity, building gear that uses less metal by relying on treated woods, layered hides, mineral washes, plant resins, and other Feywood materials in concert.
+
+The result is gear that is lighter, balanced, durable, and extremely deliberate in its construction. It is not magically superior to mundane equivalents. It is exceptional craft, not an active power.
+
+Three working tiers describe how Feywood items use material:
+
+* **Ordinary use** — mundane materials, even where beautifully made. Wood, horn, bone, leather, woven fiber, bark-laminate, treated hide. Lesser traded metals where used at all. Most everyday Feywood items.
+* **High craft** — items built around specially treated Feywood materials that reduce metal dependence. Silverbark Ash hafts, Ironroot shield cores, treated leather composites. Still mundane mechanically, but distinct in lore and construction. Items in this tier may be notable but should not be promoted to T0 by default.
+* **Reserved works** — items whose identity centers on a magical material: recovered celestial metal (Elarith), Longbough wood, Witheroak ritual material, living Thornveil or Thornmere vinework, or Thornroot Stalker hide. These qualify for T0 (material-only) or T1+ (actively magical), per their catalog records.
+
+When narrating Feywood items, prefer language that emphasizes craft economy and material harmony over "magic wood stronger than steel." An elven spear has a small metal point because the craft tradition reserves metal for where it matters; an elven longbow uses almost no metal at all; ranger leathers are layered composite, not steel-augmented hide. The catalog already encodes the mechanical effects — the GPT's job is to keep the narration consistent with the tradition.
+
+### The Recovery Economy and the Elarith Reserve
+
+The elves do not mine. Their metal comes from recovery: celestial-metal fragments scattered across the Hollow Crown by the Cataclysm, gathered patiently from riverbeds, lake margins, and impact-strewn ground over generations. The Feywood holds a generations-long reserve from this work, kept by elder houses, military orders, and ceremonial offices.
+
+Recovered celestial metal is treated as sacred. It is reserved for heirlooms, ceremonial works, named weapons, and works of state meant to endure across generations. Ordinary Feywood goods do not use it. This is structural, not arbitrary — the reserve only stays viable because composite craft minimizes baseline metal use and Elarith is restricted to genuinely exceptional commissions.
+
+The narrative implications:
+
+* Items made with Elarith are not bought. They are inherited, awarded for proving, given through formal house relationship, or commissioned through institutional sanction.
+* New celestial signs occasionally trigger sanctioned recovery expeditions. These are part recovery, part ritual, and part guardianship. What falls from the sky is not always safe to disturb.
+* Elven characters wearing or carrying celestial-metal items signal something specific to other elves: house standing, military rank, ceremonial office, or a debt-of-honor relationship. Outsiders may not read the signal correctly, but elves do.
+* Drakenvale's relationship to celestial material is monumental and central (the Heartmass, the Heartstone, the Stronghold). The Feywood's relationship is dispersed, recovered, and ceremonial. The two polities share a Cataclysm origin but parallel naming traditions for the same fragment-metal.
+
+When a player attempts to acquire, trade, or commission an Elarith item, the GPT should treat the request as relationship-and-obligation rather than commerce. See `economy-rules.md` for the barter procedure and `data/catalog/crafting/materials.json` for the canonical material record.
+
+### Naming Culture for Recovered Celestial Metal
+
+The same material is named differently across cultures. The catalog stores `aliases` on the elarith material; the GPT should narrate the term that fits the speaker:
+
+| Speaker | Term |
+|---|---|
+| Elves (everyday smithcraft) | Elarith |
+| Elves (ceremonial, oath-context, formal) | Elyndral |
+| Drakenvale (formal) | Heartfall — kin to the Heartmass core |
+| Outsiders, working/folk usage | starvein, sky-iron, falling-iron |
+
+A Heartwarden Captain at investiture says Elyndral. The same captain in their workshop says Elarith. A Drakenvale envoy says Heartfall. A human caravan trader says starvein. These are not interchangeable in formal contexts.
+
+Cross-reference: `data/catalog/crafting/materials.json` is the canonical material record. The aliases listed there are the data; this section explains the cultural use.
 
 ---
 

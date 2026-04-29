@@ -1,6 +1,6 @@
 # Mystic Weave — Economy Rules
 
-Version 1.1 — April 2026
+Version 1.2 — April 2026
 Status: Canonical. Upload to GPT builder as a knowledge file.
 
 ---
@@ -142,6 +142,36 @@ Examples:
 * security-sensitive, ward-related, or low-trust corridor trade behaves differently near Greymantle and the Platinum Oath approach
 
 The catalog's `market_tags` field on individual items signals which kinds of vendors typically stock or fence the item; cross-reference with regional context.
+
+---
+
+## Cultural Economic Traditions
+
+Beyond regional availability, distinct cultures within the world operate on economic traditions that differ from baseline Drakenvale-side trade. The GPT should narrate transactions consistently with the originating culture, not collapse everything into ordinary coin commerce.
+
+### The Feywood: Recovery Economy
+
+The Feywood does not run on extraction. The elves do not mine. Their metal comes from a generations-long recovery tradition: celestial fragments scattered across the Hollow Crown by the Cataclysm, gathered patiently from riverbeds, impact-strewn ground, and exposed scars in the land. The Feywood holds a real and lasting reserve from this work, kept by elder houses, military orders, and ceremonial offices.
+
+This produces a different kind of economy than coin trade:
+
+* **Recovered celestial metal (Elarith) is not a commodity.** It is reserved for heirlooms, named weapons, ceremonial works, and commissions of state. No ordinary Feywood good uses it. No SSTC vendor stocks it. No coin price exists for it because no coin transaction is appropriate.
+* **Composite craft makes baseline gear viable without metal abundance.** Most Feywood items use treated woods, layered hides, plant resins, and mineral washes — not as magic, but as engineering around scarcity. See the Feywood Composite Craft section in `items-rules.md`.
+* **High-craft items can move through coin or barter** depending on what they are. A Silverbark Ash spear may be sold to an outsider through SSTC channels. A Heartwarden's vestments will not be.
+* **Reserved works move through institutional relationship.** When a player wants an Elarith item — a moon blade, a Greenshield-Pattern sword, a Heartwarden's blade — coin will not buy it. Acquisition runs through proving, oath, house obligation, ceremonial commission, or a sanctioned expedition. This is barter at its strongest, with relationship and recognition as the medium.
+
+When narrating elven goods, the GPT should default to barter framing for anything beyond ordinary craft, and should treat any attempt to "shop for" Elarith items as a category error. The character does not buy a moon blade. The character earns one, is given one, or returns home with one because something happened.
+
+### Drakenvale and the Feywood: Parallel Origins
+
+Both polities share a Cataclysm-event origin for celestial metal, but their relationships to it diverge:
+
+* **Drakenvale** holds the Heartmass — the largest fragment, fused with platinum-veined heartrock, foundational to the Stronghold and the Heartstone. Drakenvale's relationship to celestial material is monumental, central, architectural, and political.
+* **The Feywood** holds the rest — dispersed fragments recovered through patient gathering. Its relationship is diasporic, ceremonial, and oriented around heirlooms and named works.
+
+These two polities are sovereign-equal allies. Neither party comments freely on the other's reserve. A Drakenvale envoy and a Feywood Heartwarden may meet without ever discussing where their respective celestial-metal stocks come from or how much remains. The mutual silence is not hostile; it is one of the things that keeps the alliance functional.
+
+For naming conventions across speakers (Elarith / Elyndral / Heartfall / starvein), see the Naming Culture section in `items-rules.md`. The canonical material record is `data/catalog/crafting/materials.json`.
 
 ---
 
