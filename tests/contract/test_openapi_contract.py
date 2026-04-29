@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytest
 
 from api.main import app
@@ -5,6 +7,30 @@ from api.main import app
 
 MAX_ROUTE_DESCRIPTION_LENGTH = 300
 HTTP_METHODS = {"get", "post", "put", "patch", "delete", "head", "options"}
+
+
+def _load_expected_api_version() -> str:
+    """Read the expected API version from schemas/openapi.yaml."""
+    schema_path = Path(__file__).resolve().parents[2] / "schemas" / "openapi.yaml"
+    assert schema_path.exists(), f"missing OpenAPI schema: {schema_path}"
+
+    in_info = False
+    with open(schema_path, "r", encoding="utf-8") as f:
+        for raw_line in f:
+            line = raw_line.rstrip("\n")
+            stripped = line.strip()
+            if stripped == "info:":
+                in_info = True
+                continue
+            if in_info and line and not line.startswith(" "):
+                break
+            if in_info and stripped.startswith("version:"):
+                _, value = stripped.split(":", 1)
+                version = value.strip().strip('"\'')
+                assert version, f"empty info.version in {schema_path}"
+                return version
+
+    raise AssertionError(f"missing info.version in {schema_path}")
 
 
 def _iter_operations(spec: dict):
@@ -27,7 +53,7 @@ def _resolve_schema(spec: dict, schema: dict) -> dict:
 def test_openapi_contract_has_expected_core_shapes() -> None:
     # Avoid startup/lifespan side effects (DB pool creation) for pure contract checks.
     spec = app.openapi()
-    assert spec["info"]["version"] == "4.4.0"
+    assert spec["info"]["version"] == _load_expected_api_version()
 
     new_session_required = spec["components"]["schemas"]["NewSessionRequest"][
         "required"

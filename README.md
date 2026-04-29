@@ -283,6 +283,6 @@ When bumping the API version, update it in **two places**:
 1. `api/main.py` — the `version=` argument to `FastAPI()`
 2. `schemas/openapi.yaml` — the `info.version` field
 
-Both must stay in sync. The contract test at `tests/contract/test_openapi_contract.py` asserts the version string — update that assertion too.
+Both must stay in sync. The contract test and production verifier derive their expected version from `schemas/openapi.yaml`.
 
 **Current backend/schema version:** 4.4.0
