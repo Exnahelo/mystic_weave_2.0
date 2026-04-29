@@ -19,15 +19,17 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 1000,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "comfortable",
+  "market_tags": [
+    "weaponsmith"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": "mechanical",
   "application_tag": "heavy_crossbow",
   "base_damage": 25,
   "weapon_handedness": {
-    "hands": "one"
+    "hands": "two"
   },
   "armor_floor": null,
   "armor_ceiling": null,

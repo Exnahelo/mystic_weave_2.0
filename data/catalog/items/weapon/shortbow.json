@@ -18,15 +18,18 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 300,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "comfortable",
+  "market_tags": [
+    "fletcher",
+    "weaponsmith"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": "ranged",
   "application_tag": "shortbow",
   "base_damage": 10,
   "weapon_handedness": {
-    "hands": "one"
+    "hands": "two"
   },
   "armor_floor": null,
   "armor_ceiling": null,

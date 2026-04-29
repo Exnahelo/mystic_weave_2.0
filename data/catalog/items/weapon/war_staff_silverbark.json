@@ -22,7 +22,7 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 60,
-  "wealth_tier_floor": null,
+  "wealth_tier_floor": "modest",
   "market_tags": [],
   "consumable": false,
   "charges_max": null,
@@ -30,7 +30,7 @@
   "application_tag": "spear",
   "base_damage": 15,
   "weapon_handedness": {
-    "hands": "one"
+    "hands": "two"
   },
   "armor_floor": null,
   "armor_ceiling": null,

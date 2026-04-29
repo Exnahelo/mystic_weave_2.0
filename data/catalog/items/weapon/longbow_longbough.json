@@ -21,7 +21,7 @@
   "rarity": "uncommon",
   "legality": "open",
   "value_cd": 300,
-  "wealth_tier_floor": null,
+  "wealth_tier_floor": "comfortable",
   "market_tags": [],
   "consumable": false,
   "charges_max": null,
@@ -29,7 +29,7 @@
   "application_tag": "longbow",
   "base_damage": 20,
   "weapon_handedness": {
-    "hands": "one"
+    "hands": "two"
   },
   "armor_floor": null,
   "armor_ceiling": null,
