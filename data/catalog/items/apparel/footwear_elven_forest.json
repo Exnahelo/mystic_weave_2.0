@@ -4,7 +4,7 @@
   "category": "apparel",
   "subcategory": "footwear",
   "schema_version": 1,
-  "description": "Soft-soled high-laced boots of elven construction \u2014 quiet on forest floor, durable across long travel, shaped for the specific terrain elves cross routinely.",
+  "description": "Soft-soled high-laced boots of elven construction — quiet on forest floor, durable across long travel, shaped for the specific terrain elves cross routinely.",
   "narrative_effects": [
     "Supports quiet movement on forest terrain; noticeably less noise than realm-standard boots on leaf litter and undergrowth.",
     "Common carry for elves traveling realm-side; their soft tread is often the first nonvisual indicator an elf has entered a space."
@@ -21,8 +21,10 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 120,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "leatherworker"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

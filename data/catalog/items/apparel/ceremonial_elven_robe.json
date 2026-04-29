@@ -4,7 +4,7 @@
   "category": "apparel",
   "subcategory": "clothing",
   "schema_version": 1,
-  "description": "A formal robe worn by elves for observances, oath-marking events, and Council-facing business \u2014 woven from fine elven plant-fiber textiles with subtle house-identifying weave patterns.",
+  "description": "A formal robe worn by elves for observances, oath-marking events, and Council-facing business — woven from fine elven plant-fiber textiles with subtle house-identifying weave patterns.",
   "narrative_effects": [
     "Signals ceremonial presence at observances and formal civic occasions.",
     "Specific weave patterns encode house affiliation readable by trained elven eyes."
@@ -21,8 +21,11 @@
   "rarity": "uncommon",
   "legality": "open",
   "value_cd": 250,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "comfortable",
+  "market_tags": [
+    "tailor",
+    "temple"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

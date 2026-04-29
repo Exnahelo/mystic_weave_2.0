@@ -4,7 +4,7 @@
   "category": "apparel",
   "subcategory": "outerwear",
   "schema_version": 1,
-  "description": "The Vaelmere-standard trader's overcoat \u2014 a practical blend of elven tailoring and realm-trader utility, designed for long Border transit and sustained cross-cultural work.",
+  "description": "The Vaelmere-standard trader's overcoat — a practical blend of elven tailoring and realm-trader utility, designed for long Border transit and sustained cross-cultural work.",
   "narrative_effects": [
     "Maintains warmth across Border crossings and realm-side travel.",
     "Cut signals Vaelmere origin to realm traders who work regularly with the Feywood; a visual shortcut that smooths negotiations."
@@ -21,8 +21,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 150,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "comfortable",
+  "market_tags": [
+    "tailor",
+    "general-goods"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

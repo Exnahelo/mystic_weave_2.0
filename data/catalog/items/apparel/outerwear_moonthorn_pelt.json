@@ -4,10 +4,10 @@
   "category": "apparel",
   "subcategory": "outerwear",
   "schema_version": 1,
-  "description": "A cloak of moonthorn wolf pelt \u2014 made only from a wolf's natural death, never from a hunted pelt; the pelt's origin is known to all who understand the Feywood's relational ethics.",
+  "description": "A cloak of moonthorn wolf pelt — made only from a wolf's natural death, never from a hunted pelt; the pelt's origin is known to all who understand the Feywood's relational ethics.",
   "narrative_effects": [
     "Provides significant cold-weather protection.",
-    "Earned rather than purchased \u2014 appearing in realm trade is essentially impossible; a moonthorn pelt cloak on a non-elf is a question in itself.",
+    "Earned rather than purchased — appearing in realm trade is essentially impossible; a moonthorn pelt cloak on a non-elf is a question in itself.",
     "Elves reading the cloak's origin correctly treat the wearer with specific attention regardless of their other signals."
   ],
   "tags": [
@@ -22,7 +22,7 @@
   "rarity": "rare",
   "legality": "open",
   "value_cd": 1200,
-  "wealth_tier_floor": null,
+  "wealth_tier_floor": "wealthy",
   "market_tags": [],
   "consumable": false,
   "charges_max": null,

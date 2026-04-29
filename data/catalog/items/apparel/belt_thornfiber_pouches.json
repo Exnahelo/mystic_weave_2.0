@@ -4,7 +4,7 @@
   "category": "apparel",
   "subcategory": "clothing",
   "schema_version": 1,
-  "description": "A sturdy belt of woven Thornfiber Cane with fitted pouches for field gear \u2014 the Feywood's standard traveling belt, widely worn by rangers, gatherers, and Vaelmere residents.",
+  "description": "A sturdy belt of woven Thornfiber Cane with fitted pouches for field gear — the Feywood's standard traveling belt, widely worn by rangers, gatherers, and Vaelmere residents.",
   "narrative_effects": [
     "Carries small gear (Silverleaf Balm, fire kit, small tools, field notes) in organized fashion.",
     "Thornfiber weave is weather-resistant and maintains shape across long service."
@@ -20,8 +20,11 @@
   "rarity": "common",
   "legality": "open",
   "value_cd": 40,
-  "wealth_tier_floor": null,
-  "market_tags": [],
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "leatherworker"
+  ],
   "consumable": false,
   "charges_max": null,
   "knowledge_tag": null,

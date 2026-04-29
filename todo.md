@@ -4,7 +4,7 @@ Last updated: 2026-04-29
 
 ## Active Catalog Work
 
-- [ ] **Apparel curation pass** (25 items): populate `market_tags` and
+- [x] **Apparel curation pass** (25 items): populate `market_tags` and
       `wealth_tier_floor`, flag any magical items needing tier+magic_field.
       Pattern matches the weapon/armor/shield/ammunition passes already
       completed.
