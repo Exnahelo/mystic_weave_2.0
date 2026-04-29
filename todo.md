@@ -1,5 +1,79 @@
 # Mystic Weave — TODO
 
+Last updated: 2026-04-29
+
+## Active Catalog Work
+
+- [ ] **Apparel curation pass** (25 items): populate `market_tags` and
+      `wealth_tier_floor`, flag any magical items needing tier+magic_field.
+      Pattern matches the weapon/armor/shield/ammunition passes already
+      completed.
+- [ ] **Gear curation pass** (132 items, the big one): same fields plus
+      tier+magic_field for magical trinkets, foci, and consumables. Probably
+      its own session.
+- [ ] **Retroactive T0 + celestial-metal tag** for three weapons whose
+      identity centers on recovered Elarith:
+      `weapon/moon-blade`, `weapon/sword-greenshield-pattern`,
+      `weapon/proven-handaxe`. Set `tier: T0` and add `celestial-metal` to
+      `tags`. Validator passes; small follow-up patch.
+- [ ] **Stale 5e cleanup**: delete `data/catalog/economy/currencies.json`
+      (uses cp/sp/ep/gp/pp; canonical CD/SD/GD/PD lives in
+      `data/economy/currency.json`) and remove the empty parent dir.
+      Keep `data/catalog/services/README.md` and
+      `data/catalog/vendors/README.md` as future-work placeholders.
+
+## Lore / Worldbuilding
+
+- [ ] **Author Feywood lore prose** into existing files (no new prompt file
+      to preserve slot budget under GPT builder's 20-doc cap):
+      * Recovery economy → section in `economy-rules.md`
+      * Composite craft philosophy + reserve access hierarchy → section in
+        `items-rules.md`
+      * Brief naming culture note (Elarith / Heartfall / starvein) →
+        `items-rules.md`, cross-reference to `data/catalog/crafting/materials.json`
+- [ ] **Wire `data/environment/`** (`feywood_animals.json`,
+      `feywood_plants.json`) into code. Currently authored but unread.
+      Decide read pattern: pre-load into game_data like `data/beasts/`,
+      or load on demand from a new endpoint.
+- [ ] **Cross-reference materials ↔ ecology**: items reference materials
+      (silverbark-ash, thornroot-stalker-hide, etc.); materials reference
+      biomes; environment files reference creatures whose materials we
+      catalog. The links exist conceptually but aren't formalized.
+      Decide if this needs a structured cross-reference layer or stays
+      narrative-only.
+- [ ] **Institutional structure for Feywood** is implied by the catalog
+      (Heartwardens, Greenshields, House Thornmere, House Ironsap) but not
+      yet authored canonically. Sketch governance and access hierarchy
+      when the catalog hints make it necessary.
+
+## Prompt Architecture
+
+- [ ] **Decide on prompt restructuring strategy** — slot pressure is
+      real (~16 of 20 used). Options identified:
+      1. Hybrid model — extract structured data (denomination tables,
+         regional mappings, vocabularies) to JSON; leave reasoning prose
+         in markdown. Saves ~30% per file. Lower payoff.
+      2. Fold smaller rules files (economy-rules, difficulty-rules) into
+         existing larger files like `world.md`. Frees full slots.
+      3. Consolidate cross-referencing rules into a single `play-rules.md`.
+         Items, economy, and difficulty all reference each other; merge
+         might improve coherence.
+      Decision deferred — not urgent until slot count climbs further.
+
+## Item Schema Follow-ups
+
+- [ ] Tighten `Effect.params` validation against effect registry param
+      contracts in `mechanics/effects.json`.
+- [ ] **Pricing rules engine**: design and implement
+      `economy/price_rules.json` so future items can use
+      `pricing.model: "computed"`. Currently all items have static
+      `value_cd`.
+- [ ] **Materials → items linkage**: items currently reference materials
+      via the loose-coupled `tags` array. When the enchantment/crafting
+      arc starts, promote to a structured `materials: list[str]` field
+      on the Item model with validator cross-reference to
+      `data/catalog/crafting/materials.json`.
+
 ## CI / Process Debt
 
 - [ ] Configure branch protection on main: require Lint+Unit+Contract,
@@ -11,18 +85,31 @@
       via sloppy find-replace and merged anyway. Investigate whether mass-rename
       commits go through PR review.
 - [ ] Update GitHub Actions to Node.js 24 before Sept 16 2026 deprecation.
+- [ ] **Add observability for production verifier failures**: scheduled
+      workflow exists but doesn't alert. Email or webhook on failure.
 
-## Item Schema Follow-ups
+## IP / Licensing (Open Questions)
 
-- [ ] Tighten Effect.params validation against effect registry param contracts
-      in mechanics/effects.json.
-- [ ] Author next batch of items: 10-20 mundane (basic weapons, armor, common gear).
-- [ ] JSON Schema export: emit data/catalog/schemas/*.schema.json from Pydantic
-      models for non-Python consumers (GPT builder).
-- [ ] Pricing rules engine: design and implement economy/price_rules.json so
-      future items can use pricing.model: "computed".
-- [ ] API integration: add endpoints reading from data/catalog/, plan cutover
-      from data/items/.
+- [ ] Decide on forking permissions — currently CC BY-NC-ND, which
+      restricts derivatives. Confirm whether community forks for personal
+      campaigns are acceptable under the license interpretation.
+- [ ] Decide on redistribution scope — what parts of the world content are
+      shareable, what stays restricted to the canonical repo.
+
+---
+
+## Recently Completed (for context)
+
+- Foundation reset to canonical Mystic Weave item schema (commit `731b9ab`)
+- Mechanics reference tables prompt (commit `ca94b73`)
+- API v4.4.0 with `/catalog/items/{item_id}` endpoint (commit `ec1d3b9`)
+- items-rules.md v2.0 + economy-rules.md v1.1 (commit `3b14353`)
+- Weapon curation pass — 36 items (commit `248af6c`)
+- Armor + shield + ammunition curation pass — 42 items (commit `7e94340`)
+- Materials catalog with 9 entries plus biome_types and material_categories
+  registries (queued, not yet committed at time of this update)
+- JSON Schema export tooling (commit `1e6e07c`)
+- GitHub Actions updated to latest major versions (commit `71316e8`)
 
 ---
 
