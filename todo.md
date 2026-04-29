@@ -8,7 +8,7 @@ Last updated: 2026-04-29
       `wealth_tier_floor`, flag any magical items needing tier+magic_field.
       Pattern matches the weapon/armor/shield/ammunition passes already
       completed.
-- [ ] **Gear curation pass** (132 items, the big one): same fields plus
+- [x] **Gear curation pass** (132 items, the big one): same fields plus
       tier+magic_field for magical trinkets, foci, and consumables. Probably
       its own session.
 - [x] **Retroactive T0 + celestial-metal tag** for three weapons whose
@@ -24,7 +24,7 @@ Last updated: 2026-04-29
 
 ## Lore / Worldbuilding
 
-- [ ] **Author Feywood lore prose** into existing files (no new prompt file
+- [x] **Author Feywood lore prose** into existing files (no new prompt file
       to preserve slot budget under GPT builder's 20-doc cap):
       * Recovery economy → section in `economy-rules.md`
       * Composite craft philosophy + reserve access hierarchy → section in
