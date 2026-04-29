@@ -73,9 +73,9 @@ Kill stale process if needed, then restart uvicorn.
 
 ### Local repro commands
 ```bash
-python scripts/check_openapi_drift.py
-python scripts/validate_data_files.py
-python scripts/validate_prompts.py
+python3 scripts/check_openapi_drift.py
+python3 scripts/validate_data_files.py
+python3 scripts/validate_prompts.py
 pytest -q tests/unit tests/contract tests/regression/test_endpoint_validation.py tests/regression/test_multi_turn_persistence.py
 ```
 
@@ -86,7 +86,7 @@ pytest -q tests/unit tests/contract tests/regression/test_endpoint_validation.py
 ### Local preflight
 Start API locally, then run:
 ```bash
-python scripts/predeploy_smoke_bundle.py http://127.0.0.1:8000
+python3 scripts/predeploy_smoke_bundle.py http://127.0.0.1:8000
 ```
 
 ### CI equivalent
@@ -112,7 +112,7 @@ python scripts/predeploy_smoke_bundle.py http://127.0.0.1:8000
    - `/version`
 5. Run production contract verification:
    ```bash
-   python scripts/verify_production_contract.py https://mysticweave-production.up.railway.app
+   python3 scripts/verify_production_contract.py https://mysticweave-production.up.railway.app
    ```
 
 ---

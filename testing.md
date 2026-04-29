@@ -10,12 +10,12 @@
 
 ### Pull requests
 - Lint (`ruff`)
-- OpenAPI drift check (`python scripts/check_openapi_drift.py`)
-- Data validation (`python scripts/validate_data_files.py`)
-- Prompt validation (`python scripts/validate_prompts.py`)
+- OpenAPI drift check (`python3 scripts/check_openapi_drift.py`)
+- Data validation (`python3 scripts/validate_data_files.py`)
+- Prompt validation (`python3 scripts/validate_prompts.py`)
 - Unit + contract tests (`pytest tests/unit tests/contract`)
 - Regression persistence tests (`tests/regression/test_endpoint_validation.py`, `tests/regression/test_multi_turn_persistence.py`)
-- Integration smoke (`python tests/loop_test.py`) against ephemeral Postgres
+- Integration smoke (`python3 tests/loop_test.py`) against ephemeral Postgres
 - Pre-deploy bundle workflow (`.github/workflows/predeploy.yml`) for contract + smoke gating
 
 ### Push to `main`
@@ -43,20 +43,20 @@ ruff check api core tests
 Run OpenAPI drift check:
 
 ```bash
-python scripts/check_openapi_drift.py
+python3 scripts/check_openapi_drift.py
 ```
 
 Run data + prompt validators:
 
 ```bash
-python scripts/validate_data_files.py
-python scripts/validate_prompts.py
+python3 scripts/validate_data_files.py
+python3 scripts/validate_prompts.py
 ```
 
 Run pre-deploy smoke bundle (against running API):
 
 ```bash
-python scripts/predeploy_smoke_bundle.py http://127.0.0.1:8000
+python3 scripts/predeploy_smoke_bundle.py http://127.0.0.1:8000
 ```
 
 Run fast tests:
@@ -74,7 +74,7 @@ pytest tests/regression/test_endpoint_validation.py tests/regression/test_multi_
 Run loop smoke against local API:
 
 ```bash
-python tests/loop_test.py
+python3 tests/loop_test.py
 ```
 
 Ensure DB schema is current before starting the app:

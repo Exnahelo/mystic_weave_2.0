@@ -231,21 +231,21 @@ curl -X POST http://localhost:8000/roll \
 
 ```bash
 # Static contract/data/prompt guards
-python scripts/check_openapi_drift.py
-python scripts/validate_data_files.py
-python scripts/validate_prompts.py
+python3 scripts/check_openapi_drift.py
+python3 scripts/validate_data_files.py
+python3 scripts/validate_prompts.py
 
 # Pre-deploy smoke bundle (requires running API)
-python scripts/predeploy_smoke_bundle.py http://127.0.0.1:8000
+python3 scripts/predeploy_smoke_bundle.py http://127.0.0.1:8000
 
 # Fast tests (unit + contract)
 pytest tests/unit tests/contract
 
 # Full loop smoke (requires running server + DB)
-python tests/loop_test.py
+python3 tests/loop_test.py
 
 # Against Railway
-python tests/loop_test.py https://mysticweave-production.up.railway.app
+python3 tests/loop_test.py https://mysticweave-production.up.railway.app
 ```
 
 ## Deployment (Railway)
@@ -264,7 +264,7 @@ Operational troubleshooting guide: `operational-runbook.md`
 ### Production Verification
 
 ```bash
-python scripts/verify_production_contract.py
+python3 scripts/verify_production_contract.py
 ```
 
 Checks that the live deployment matches the repo: OpenAPI required fields, option indices, and version metadata.
