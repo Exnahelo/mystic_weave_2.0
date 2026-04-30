@@ -473,7 +473,15 @@ class WorldModel(BaseModel):
 # ---------------------------------------------------------------------------
 
 class CharacterStateDelta(BaseModel):
-    """Typed partial character update for extraction-driven turn commits."""
+    """
+    Typed partial character update for extraction-driven turn commits.
+
+    Note on `advancement`: the delta endpoint recomputes advancement
+    authoritatively from existing state and tag-tier transitions. Any
+    client-supplied `advancement` value is replaced server-side. The field
+    remains on the schema for forward compatibility and round-trip safety,
+    but its content has no effect on persisted state.
+    """
     model_config = ConfigDict(extra="forbid")
 
     hp: HP | None = None
