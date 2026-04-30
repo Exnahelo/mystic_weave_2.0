@@ -32,9 +32,9 @@ from api.models import (
     SaveStateRequest,
     SurvivalState,
     TimeState,
-    TimeDriftWarning,
     WorldModel,
 )
+from api.time_advance import advance_time
 
 router = APIRouter()
 
@@ -213,65 +213,6 @@ def _merge_equipment_slots(base: dict[str, Any], incoming: dict[str, Any]) -> di
     return result
 
 
-# Canonical month ordering for the Oath Calendar (prompts/calendar.md).
-# Used for time monotonicity checks — incoming time must not be earlier than
-# stored time on the world timeline.
-MONTH_ORDER = (
-    "Ashwake", "Embertide", "Mistbreak", "Verdantrise",
-    "Clearwater", "Goldmere", "Scaletide", "Amberveil",
-    "Ashenfall", "Ironmoor", "Dimlight", "Deepwarden",
-)
-TIME_OF_DAY_ORDER = ("dawn", "morning", "midday", "afternoon", "dusk", "night")
-
-
-def _time_to_tuple(t: TimeState) -> tuple[int, int, int, int]:
-    """Convert TimeState to a comparable (year, month_idx, day, time_of_day_idx) tuple.
-
-    Unknown month or time_of_day values fall back to position 0 — defensive but
-    shouldn't occur with validated TimeState input.
-    """
-    month_idx = MONTH_ORDER.index(t.month) if t.month in MONTH_ORDER else 0
-    tod_value = t.time_of_day.value if hasattr(t.time_of_day, "value") else str(t.time_of_day)
-    tod_idx = TIME_OF_DAY_ORDER.index(tod_value) if tod_value in TIME_OF_DAY_ORDER else 0
-    return (t.year, month_idx, t.day, tod_idx)
-
-
-def _detect_time_drift(
-    previous_turn: int,
-    previous_time: TimeState,
-    current_turn: int,
-    current_time: TimeState,
-) -> TimeDriftWarning | None:
-    """
-    Return a warning if turn advanced but time did not.
-
-    Time is considered advanced if day, month, year, or time_of_day changed.
-    """
-    if current_turn <= previous_turn:
-        return None
-
-    time_changed = (
-        current_time.day != previous_time.day
-        or current_time.month != previous_time.month
-        or current_time.year != previous_time.year
-        or current_time.time_of_day != previous_time.time_of_day
-    )
-    if time_changed:
-        return None
-
-    return TimeDriftWarning(
-        previous_turn=previous_turn,
-        current_turn=current_turn,
-        previous_time=previous_time,
-        current_time=current_time,
-        message=(
-            f"Turn advanced from {previous_turn} to {current_turn} but world.time did not "
-            f"change. Review the Ptarian calendar travel table and advance time_of_day, "
-            f"day, or both in your next save if the scene consumed in-world time."
-        ),
-    )
-
-
 def validate_delta(delta: ApplyStateDeltaRequest) -> None:
     """Validate delta-level invariants before state application."""
     if not delta.log_entry.strip():
@@ -398,9 +339,6 @@ async def save_state(
             "SELECT character, world FROM game_states WHERE session_id = $1",
             session_id,
         )
-        previous_turn: int | None = None
-        previous_time: TimeState | None = None
-
         if existing_row is not None:
             existing_character: dict[str, Any] = json.loads(existing_row["character"])
             existing_world: dict[str, Any] = json.loads(existing_row["world"])
@@ -413,11 +351,19 @@ async def save_state(
                 existing_character, incoming_character
             )
 
+            normalized_existing_world = _normalize_world_state(existing_world)
+            existing_time = TimeState.model_validate(normalized_existing_world["time"])
+            new_time = advance_time(existing_time, body.time_elapsed)
+
+            incoming_time = world_json.get("time") if isinstance(world_json.get("time"), dict) else {}
+            if "weather" in incoming_time:
+                new_time = new_time.model_copy(update={"weather": incoming_time["weather"]})
+            if "weather_note" in incoming_time:
+                new_time = new_time.model_copy(update={"weather_note": incoming_time["weather_note"]})
+
             merged_character = _deep_merge(existing_character, incoming_character)
             merged_world = _deep_merge(existing_world, world_json)
-            normalized_existing_world = _normalize_world_state(existing_world)
-            previous_turn = int(normalized_existing_world.get("turn", 1))
-            previous_time = TimeState.model_validate(normalized_existing_world["time"])
+            merged_world["time"] = new_time.model_dump(mode="json")
         else:
             merged_character = incoming_character
             merged_world = world_json
@@ -436,72 +382,6 @@ async def save_state(
 
         merged_character_json = validated_character.model_dump(by_alias=True)
         validated_world_json = validated_world.model_dump()
-        drift_warning = None
-        if previous_turn is not None and previous_time is not None:
-            drift_warning = _detect_time_drift(
-                previous_turn=previous_turn,
-                previous_time=previous_time,
-                current_turn=validated_world.turn,
-                current_time=validated_world.time,
-            )
-
-        # Enforce: if turn advanced, the request body must include a `time`
-        # block (acknowledgment). Echoing the previous time_of_day is allowed
-        # — that affirms a deliberate no-advance turn. Silent omission is
-        # rejected so time drift cannot accumulate unnoticed.
-        if (
-            previous_turn is not None
-            and validated_world.turn > previous_turn
-            and not isinstance(world_json.get("time"), dict)
-        ):
-            raise HTTPException(
-                status_code=422,
-                detail={
-                    "error": "time_acknowledgment_required",
-                    "message": (
-                        f"Turn advanced from {previous_turn} to {validated_world.turn} "
-                        f"but request body included no world.time field. "
-                        f"Resubmit with world.time advanced per the Travel Time Reference "
-                        f"in prompts/calendar.md, or include world.time with the current "
-                        f"time_of_day to affirm a deliberate no-advance turn."
-                    ),
-                    "previous_turn": previous_turn,
-                    "current_turn": validated_world.turn,
-                    "previous_time": previous_time.model_dump() if previous_time else None,
-                },
-            )
-
-        # Enforce: time must be monotonically forward. Reject if incoming
-        # world.time represents an older world-timeline position than the
-        # stored time. Catches the case where the GPT regenerates a default
-        # time block (e.g. day=1) and would silently overwrite the stored
-        # day. Only enforced when a time block was sent and prior state exists.
-        if (
-            previous_time is not None
-            and isinstance(world_json.get("time"), dict)
-        ):
-            previous_tuple = _time_to_tuple(previous_time)
-            current_tuple = _time_to_tuple(validated_world.time)
-            if current_tuple < previous_tuple:
-                raise HTTPException(
-                    status_code=422,
-                    detail={
-                        "error": "time_regression_rejected",
-                        "message": (
-                            f"Incoming world.time is earlier than stored time. "
-                            f"Time may not move backward. If this turn is in the same "
-                            f"in-world moment, echo the stored time_of_day, day, month, "
-                            f"and year. If the stored time is wrong, fix it by sending "
-                            f"a forward time. Stored: day {previous_time.day} of "
-                            f"{previous_time.month} {previous_time.year} "
-                            f"({previous_time.time_of_day}); incoming: day "
-                            f"{validated_world.time.day} of {validated_world.time.month} "
-                            f"{validated_world.time.year} ({validated_world.time.time_of_day})."
-                        ),
-                        "previous_time": previous_time.model_dump(),
-                        "incoming_time": validated_world.time.model_dump(),
-                    },
-                )
 
         row = await conn.fetchrow(
             """
@@ -535,7 +415,6 @@ async def save_state(
         world=response_world,
         log=json.loads(row["log"]),
         updated_at=row["updated_at"],
-        time_drift_warning=drift_warning,
     )
 
 
@@ -554,7 +433,6 @@ async def save_state_delta(
 ) -> GameStateResponse:
     """Apply partial typed state updates and persist validated full state."""
     log_entry_json = json.dumps([body.log_entry])
-    drift_warning = None
 
     async with pool.acquire() as conn:
         existing_row = await conn.fetchrow(
@@ -567,9 +445,6 @@ async def save_state_delta(
 
         try:
             validate_delta(body)
-            normalized_existing_world = _normalize_world_state(json.loads(existing_row["world"]))
-            previous_turn = int(normalized_existing_world.get("turn", 1))
-            previous_time = TimeState.model_validate(normalized_existing_world["time"])
             applied = apply_delta(
                 {
                     "character": existing_row["character"],
@@ -581,62 +456,6 @@ async def save_state_delta(
             raise HTTPException(status_code=422, detail=str(e))
         except ValidationError as e:
             raise HTTPException(status_code=422, detail=_plain_validation_errors(e))
-
-        applied_world = WorldModel.model_validate(applied["world"])
-        drift_warning = _detect_time_drift(
-            previous_turn=previous_turn,
-            previous_time=previous_time,
-            current_turn=applied_world.turn,
-            current_time=applied_world.time,
-        )
-
-        # Enforce: if turn advanced, the delta must include a `time` field
-        # (acknowledgment). Setting time with the current time_of_day echoed
-        # is allowed — that affirms a deliberate no-advance turn. Silent
-        # omission is rejected.
-        if applied_world.turn > previous_turn and body.world.time is None:
-            raise HTTPException(
-                status_code=422,
-                detail={
-                    "error": "time_acknowledgment_required",
-                    "message": (
-                        f"Turn advanced from {previous_turn} to {applied_world.turn} "
-                        f"but delta included no world.time field. "
-                        f"Resubmit with world.time advanced per the Travel Time Reference "
-                        f"in prompts/calendar.md, or include world.time with the current "
-                        f"time_of_day to affirm a deliberate no-advance turn."
-                    ),
-                    "previous_turn": previous_turn,
-                    "current_turn": applied_world.turn,
-                    "previous_time": previous_time.model_dump(),
-                },
-            )
-
-        # Enforce: time must be monotonically forward. Reject if applied
-        # world.time represents an older timeline position than stored time.
-        # Only enforced when a time field was sent in the delta.
-        if body.world.time is not None:
-            previous_tuple = _time_to_tuple(previous_time)
-            current_tuple = _time_to_tuple(applied_world.time)
-            if current_tuple < previous_tuple:
-                raise HTTPException(
-                    status_code=422,
-                    detail={
-                        "error": "time_regression_rejected",
-                        "message": (
-                            f"Incoming world.time is earlier than stored time. "
-                            f"Time may not move backward. If this turn is in the same "
-                            f"in-world moment, echo the stored day, month, year, and "
-                            f"time_of_day. Stored: day {previous_time.day} of "
-                            f"{previous_time.month} {previous_time.year} "
-                            f"({previous_time.time_of_day}); incoming: day "
-                            f"{applied_world.time.day} of {applied_world.time.month} "
-                            f"{applied_world.time.year} ({applied_world.time.time_of_day})."
-                        ),
-                        "previous_time": previous_time.model_dump(),
-                        "incoming_time": applied_world.time.model_dump(),
-                    },
-                )
 
         row = await conn.fetchrow(
             """
@@ -670,5 +489,4 @@ async def save_state_delta(
         world=response_world,
         log=json.loads(row["log"]),
         updated_at=row["updated_at"],
-        time_drift_warning=drift_warning,
     )

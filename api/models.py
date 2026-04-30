@@ -415,22 +415,6 @@ class TimeElapsed(BaseModel):
         return self
 
 
-class TimeDriftWarning(BaseModel):
-    """
-    Emitted when a state save advances the turn counter but does not
-    advance in-world time. Non-blocking; included in response for the
-    GPT to observe and self-correct.
-    """
-
-    model_config = ConfigDict(extra="forbid")
-
-    previous_turn: int
-    current_turn: int
-    previous_time: TimeState
-    current_time: TimeState
-    message: str
-
-
 class SurvivalState(BaseModel):
     """Lightweight survival/load tracking using coarse state bands."""
     hunger:    HungerState    = HungerState.sated
@@ -586,7 +570,6 @@ class GameStateResponse(BaseModel):
     world:      WorldModel
     log:        list[str]
     updated_at: datetime | None = None
-    time_drift_warning: TimeDriftWarning | None = None
 
 
 class SpendAPRequest(BaseModel):

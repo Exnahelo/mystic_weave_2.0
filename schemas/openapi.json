@@ -4597,16 +4597,6 @@
               }
             ],
             "title": "Updated At"
-          },
-          "time_drift_warning": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TimeDriftWarning"
-              },
-              {
-                "type": "null"
-              }
-            ]
           }
         },
         "type": "object",
@@ -6502,39 +6492,6 @@
           "applications"
         ],
         "title": "TagsResponse"
-      },
-      "TimeDriftWarning": {
-        "properties": {
-          "previous_turn": {
-            "type": "integer",
-            "title": "Previous Turn"
-          },
-          "current_turn": {
-            "type": "integer",
-            "title": "Current Turn"
-          },
-          "previous_time": {
-            "$ref": "#/components/schemas/TimeState"
-          },
-          "current_time": {
-            "$ref": "#/components/schemas/TimeState"
-          },
-          "message": {
-            "type": "string",
-            "title": "Message"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "previous_turn",
-          "current_turn",
-          "previous_time",
-          "current_time",
-          "message"
-        ],
-        "title": "TimeDriftWarning",
-        "description": "Emitted when a state save advances the turn counter but does not\nadvance in-world time. Non-blocking; included in response for the\nGPT to observe and self-correct."
       },
       "TimeElapsed": {
         "properties": {
