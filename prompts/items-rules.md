@@ -255,9 +255,18 @@ Magical and special items may declare a `mechanical_effect` block specifying the
 - `applies_to` — categories of checks the effect covers
 - `does_not_apply` — categories the effect explicitly excludes (optional)
 
-The narrator reads `mechanical_effect` directly when adjudicating rolls involving the item. If the trigger condition is met and the situation matches `applies_to`, the modifier applies. If the situation matches `does_not_apply`, the modifier explicitly does not apply.
+The `mechanical_effect` field is **binding**, not advisory. When a character uses or wears an item with this field populated, the narrator must:
 
-Items without `mechanical_effect` set carry only their `narrative_effects` and provide no guaranteed roll modifier. The narrator may still assign situational adjudication for such items, but should do so transparently and ideally consistently across sessions.
+1. Check the item's `trigger`. If the trigger condition is met in the current fiction, the effect is active.
+2. Check `applies_to`. If the situation matches, the `modifier` applies to the roll.
+3. Check `does_not_apply`. If the situation matches an exclusion, the modifier is suppressed.
+4. State the modifier in the roll's reasoning text so it is auditable.
+
+The narrator does not have discretion to skip an active modifier as "situational flavor only." If a player asks how an item is helping mechanically, the answer comes from the `mechanical_effect` field — not from improvised positioning judgment, and not from the narrator's prior assumptions about how that item "usually" works.
+
+When `applies_to` and `does_not_apply` could both arguably cover a situation, default to the item's stated core function as described in `description` and `narrative_effects`. The mechanical_effect field formalizes what an item does — it should not contradict the item's identity through technicality.
+
+Items without `mechanical_effect` populated provide only narrative positioning, not a guaranteed modifier. The narrator may still grant situational adjudication for such items, but should do so transparently and consistently across rolls.
 
 Until the enchantment-rules arc is authored, default modifier magnitudes by tier:
 
