@@ -44,26 +44,15 @@ def _load_expected_indices(repo_root: Path) -> tuple[set[str], set[str], set[str
 
 
 def _load_expected_api_version(repo_root: Path) -> str:
-    """Read the expected API version from schemas/openapi.yaml."""
-    schema_path = repo_root / "schemas" / "openapi.yaml"
+    """Read the expected API version from schemas/openapi.json."""
+    schema_path = repo_root / "schemas" / "openapi.json"
     if not schema_path.exists():
         fail(f"missing OpenAPI schema: {schema_path}")
 
-    in_info = False
     with open(schema_path, "r", encoding="utf-8") as f:
-        for raw_line in f:
-            line = raw_line.rstrip("\n")
-            stripped = line.strip()
-            if stripped == "info:":
-                in_info = True
-                continue
-            if in_info and line and not line.startswith(" "):
-                break
-            if in_info and stripped.startswith("version:"):
-                _, value = stripped.split(":", 1)
-                version = value.strip().strip('"\'')
-                if version:
-                    return version
+        version = json.load(f).get("info", {}).get("version")
+    if isinstance(version, str) and version:
+        return version
 
     fail(f"missing info.version in {schema_path}")
 

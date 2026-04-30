@@ -272,7 +272,7 @@ touches:
 - Seeding helpers for `CompanionModel` equivalents
 - `scripts/validate_naming.py` and `scripts/validate_data_files.py`
   extensions
-- `schemas/openapi.yaml` regeneration + prose audit
+- `schemas/openapi.json` regeneration + prose audit
 - `prompts/engine.md` companion handling (watch the 8000-char ceiling)
 - `prompts/character-creation.md` updates if companion selection is
   part of creation flow

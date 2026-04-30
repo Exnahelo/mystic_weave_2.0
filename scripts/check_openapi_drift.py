@@ -5,9 +5,8 @@ from __future__ import annotations
 
 import sys
 import re
+import json
 from pathlib import Path
-
-import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -25,9 +24,9 @@ def _normalize_path(path: str) -> str:
 
 
 def _load_repo_spec() -> dict:
-    spec_path = Path(__file__).resolve().parents[1] / "schemas" / "openapi.yaml"
+    spec_path = Path(__file__).resolve().parents[1] / "schemas" / "openapi.json"
     with open(spec_path, "r", encoding="utf-8") as f:
-        return yaml.safe_load(f)
+        return json.load(f)
 
 
 def _operation_map(spec: dict) -> dict[tuple[str, str], dict]:
@@ -74,7 +73,7 @@ def main() -> None:
     )
     missing_in_app = sorted(set(repo_ops) - set(app_ops))
     if missing_in_repo:
-        issues.append(f"operations missing in schemas/openapi.yaml: {missing_in_repo}")
+        issues.append(f"operations missing in schemas/openapi.json: {missing_in_repo}")
     if missing_in_app:
         issues.append(f"operations missing in FastAPI app spec: {missing_in_app}")
 

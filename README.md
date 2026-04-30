@@ -106,7 +106,7 @@ Reference: `world-topology-baseline.md`
 
 ```
 api/
-  main.py              # FastAPI app — version string here (keep in sync with openapi.yaml)
+  main.py              # FastAPI app — version string here (keep in sync with openapi.json)
   models.py            # Pydantic v2 models (schema/release version 4.4.0)
   game_data.py         # Game system data loader + seed_character
   database.py          # asyncpg pool management
@@ -168,7 +168,7 @@ prompts/               # GPT prompt corpus + markdown world-vault mirrors
   npcs.md
   design-notes.md      # Internal — do NOT upload to GPT builder
 schemas/
-  openapi.yaml         # OpenAPI document format 3.1.0, schema/release version 4.4.0 — upload to GPT builder Actions
+  openapi.json         # OpenAPI document format 3.1.0, schema/release version 4.4.0 — upload to GPT builder Actions
 scripts/
   seed_locations.py    # Seed canonical structured world data from data/world/ into DB
   verify_production_contract.py  # Validate production against repo expectations
@@ -281,8 +281,10 @@ Checks that the live deployment matches the repo: OpenAPI required fields, optio
 
 When bumping the API version, update it in **two places**:
 1. `api/main.py` — the `version=` argument to `FastAPI()`
-2. `schemas/openapi.yaml` — the `info.version` field
+2. `schemas/openapi.json` — the `info.version` field
 
-Both must stay in sync. The contract test and production verifier derive their expected version from `schemas/openapi.yaml`.
+When you change models or routes, run `python3 scripts/regenerate_openapi.py` to update `schemas/openapi.json`. CI's drift check enforces that committed spec matches the running app.
+
+Both must stay in sync. The contract test and production verifier derive their expected version from `schemas/openapi.json`.
 
 **Current backend/schema version:** 4.4.0

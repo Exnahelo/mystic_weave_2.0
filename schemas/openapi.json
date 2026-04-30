@@ -1,0 +1,7029 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Mystic Weave",
+    "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
+    "version": "4.4.0"
+  },
+  "servers": [
+    {
+      "url": "https://mysticweave-production.up.railway.app",
+      "description": "Production (Railway)"
+    }
+  ],
+  "paths": {
+    "/state/{session_id}": {
+      "get": {
+        "summary": "Load State",
+        "description": "Load the full game state for a session. Returns 404 if not found.",
+        "operationId": "load_state_state__session_id__get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameStateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Save State",
+        "description": "Save game state, deep-merge character and world updates onto stored state, and append one log entry atomically.",
+        "operationId": "save_state_state__session_id__post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveStateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameStateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/state/{session_id}/delta": {
+      "post": {
+        "summary": "Save State Delta",
+        "description": "Apply a validated structured state delta to stored game state, then append one log entry atomically.",
+        "operationId": "save_state_delta_state__session_id__delta_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplyStateDeltaRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GameStateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/session/new": {
+      "post": {
+        "summary": "New Session",
+        "description": "Create a new game session.\n\nSeeds the character from local game system data using the provided\nancestry, culture, focus, and background. Returns the session_id and initial\ncharacter + world state.",
+        "operationId": "new_session_session_new_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewSessionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewSessionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/character/create": {
+      "post": {
+        "summary": "Create Character",
+        "description": "Seed a character from game system data and update the session's character record.\n\nThe session must already exist (created via POST /session/new).\nReturns 404 if the session is not found.",
+        "operationId": "create_character_character_create_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCharacterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCharacterResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/character/{session_id}/spend_ap": {
+      "post": {
+        "summary": "Spend Ap",
+        "description": "Spend AP to raise a domain score. Earned AP can only be drawn from the target domain's pool; awarded AP can be drawn for any domain. The two sources may be combined. Bracket costs apply point-by-point: 1 AP per point at scores 25-60, 2 AP at 61-70, 3 AP at 71-80.",
+        "operationId": "spend_ap_character__session_id__spend_ap_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpendAPRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpendAPResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/roll": {
+      "post": {
+        "summary": "Roll Dice",
+        "description": "Roll 1d100 against a target and return success state plus degree band.",
+        "operationId": "roll_dice_roll_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RollRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RollResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/combat/compute_max_hp": {
+      "post": {
+        "tags": [
+          "combat"
+        ],
+        "summary": "Compute Max Hp Endpoint",
+        "description": "Compute pre-combat HP from armor and shield catalog values plus skill tiers.",
+        "operationId": "compute_max_hp_endpoint_combat_compute_max_hp_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComputeMaxHpRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComputeMaxHpResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/combat/resolve_attack": {
+      "post": {
+        "tags": [
+          "combat"
+        ],
+        "summary": "Resolve Attack Endpoint",
+        "description": "Resolve a single Combat v1.0 attack atomically using backend-authoritative dice.",
+        "operationId": "resolve_attack_endpoint_combat_resolve_attack_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveAttackRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResolveAttackResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/location/{location_id}": {
+      "get": {
+        "summary": "Get Location",
+        "description": "Load location data. The GPT must call this before describing any place.\nReturns 404 if the location does not exist in the database.",
+        "operationId": "get_location_location__location_id__get",
+        "parameters": [
+          {
+            "name": "location_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Location Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/location": {
+      "post": {
+        "summary": "Upsert Location",
+        "description": "Create or update a location via UPSERT, and persist valid world-graph connections from the payload.",
+        "operationId": "upsert_location_location_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocationData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Location updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/location/{location_id}/connections": {
+      "get": {
+        "summary": "Get Connections",
+        "description": "Return all valid movement options from the given location.\n\nThe GPT may only move the player to locations listed here.\nMovement to unlisted locations is not permitted.",
+        "operationId": "get_connections_location__location_id__connections_get",
+        "parameters": [
+          {
+            "name": "location_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Location Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConnectionsResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/options": {
+      "get": {
+        "tags": [
+          "options"
+        ],
+        "summary": "Get Options",
+        "description": "Return creation options only: ancestries, cultures, focus, backgrounds.\n\nUse this at character creation. Do not invent or enumerate choices from\nmemory. Runtime catalogs live under /catalog/*.",
+        "operationId": "get_options_options_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptionsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/catalog/items": {
+      "get": {
+        "tags": [
+          "catalog"
+        ],
+        "summary": "Get Item Catalog",
+        "description": "Return one runtime item catalog from the catalog source.\n\n`kind` is required so clients cannot accidentally request the full\ncombined catalog and exceed response-size caps. The \"apparel\" bucket\nis preserved for API stability but always returns empty (no apparel\nmodule exists in the catalog schema).",
+        "operationId": "get_item_catalog_catalog_items_get",
+        "parameters": [
+          {
+            "name": "kind",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "enum": [
+                "mundane",
+                "magical",
+                "apparel",
+                "weapon",
+                "armor",
+                "ammunition"
+              ],
+              "type": "string",
+              "description": "Required. Which item catalog to return: mundane, magical, apparel, weapon, armor, or ammunition.",
+              "title": "Kind"
+            },
+            "description": "Required. Which item catalog to return: mundane, magical, apparel, weapon, armor, or ammunition."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemCatalogResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/catalog/creatures": {
+      "get": {
+        "tags": [
+          "catalog"
+        ],
+        "summary": "Get Creature Catalog",
+        "description": "Return creature and exceptional companion catalogs.",
+        "operationId": "get_creature_catalog_catalog_creatures_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatureCatalogResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/catalog/vocab": {
+      "get": {
+        "tags": [
+          "catalog"
+        ],
+        "summary": "Get Companion Vocab",
+        "description": "Return companion vocab lists and enum literals.",
+        "operationId": "get_companion_vocab_catalog_vocab_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanionVocabResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/catalog/items/{item_id}": {
+      "get": {
+        "tags": [
+          "catalog"
+        ],
+        "summary": "Get Catalog Item",
+        "description": "Return the full catalog Item for a given ID.\n\nThe response follows the api.items.Item schema. The schema is also\nexported as data/catalog/schemas/item.schema.json for tool consumers.",
+        "operationId": "get_catalog_item_catalog_items__item_id__get",
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Item Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogItemDetailResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scene/{session_id}": {
+      "get": {
+        "summary": "Get Scene Context",
+        "description": "Build and return compact scene context from persisted state and current location for narration input.",
+        "operationId": "get_scene_context_scene__session_id__get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SceneContext"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tags": {
+      "get": {
+        "tags": [
+          "tags"
+        ],
+        "summary": "Get Tags",
+        "description": "Return the canonical tag vocabularies: knowledge groups, magic fields, applications.",
+        "operationId": "get_tags_tags_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companion/new": {
+      "post": {
+        "summary": "Create Companion",
+        "operationId": "create_companion_companion_new_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCompanionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companion/{companion_id}/transition": {
+      "post": {
+        "summary": "Transition Companion",
+        "operationId": "transition_companion_companion__companion_id__transition_post",
+        "parameters": [
+          {
+            "name": "companion_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Companion Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransitionCompanionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companion/{companion_id}": {
+      "get": {
+        "summary": "Get Companion",
+        "operationId": "get_companion_companion__companion_id__get",
+        "parameters": [
+          {
+            "name": "companion_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Companion Id"
+            }
+          },
+          {
+            "name": "session_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "include_archived",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Include Archived"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/npcs": {
+      "get": {
+        "tags": [
+          "npcs"
+        ],
+        "summary": "Get Npcs",
+        "description": "Return NPC registry entries. Use `tier=named` for tier 1-2 individuals, `tier=roles` for tier 3 role templates, or omit for both.",
+        "operationId": "get_npcs_npcs_get",
+        "parameters": [
+          {
+            "name": "tier",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by tier category: 'named' (tier 1-2) or 'roles' (tier 3). Omit for all.",
+              "title": "Tier"
+            },
+            "description": "Filter by tier category: 'named' (tier 1-2) or 'roles' (tier 3). Omit for all."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NpcRegistryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Root",
+        "description": "Root — confirms the API is running.",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Health Check",
+        "description": "Health check endpoint — used by Railway and uptime monitors.",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/version": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Version",
+        "description": "Deployment/version metadata for sanity checks across environments.",
+        "operationId": "version_version_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AdjustmentPoints": {
+        "properties": {
+          "power": {
+            "type": "integer",
+            "title": "Power",
+            "default": 0
+          },
+          "agility": {
+            "type": "integer",
+            "title": "Agility",
+            "default": 0
+          },
+          "perception": {
+            "type": "integer",
+            "title": "Perception",
+            "default": 0
+          },
+          "endurance": {
+            "type": "integer",
+            "title": "Endurance",
+            "default": 0
+          },
+          "intellect": {
+            "type": "integer",
+            "title": "Intellect",
+            "default": 0
+          },
+          "will": {
+            "type": "integer",
+            "title": "Will",
+            "default": 0
+          },
+          "presence": {
+            "type": "integer",
+            "title": "Presence",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "AdjustmentPoints",
+        "description": "Player's +10 domain adjustment pool at creation. Max +5 per domain."
+      },
+      "AdvancementState": {
+        "properties": {
+          "points_available_earned": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Points Available Earned",
+            "description": "Per-domain earned AP pools. Keys: power, agility, perception, endurance, intellect, will, presence."
+          },
+          "points_available_awarded": {
+            "type": "integer",
+            "title": "Points Available Awarded",
+            "default": 0
+          },
+          "points_spent": {
+            "type": "integer",
+            "title": "Points Spent",
+            "default": 0
+          },
+          "points_earned_total": {
+            "type": "integer",
+            "title": "Points Earned Total",
+            "default": 0
+          },
+          "tag_advance_counters": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Tag Advance Counters",
+            "description": "Per-domain counters; tag advances increment these. At 3, convert to +1 earned AP in that domain."
+          }
+        },
+        "type": "object",
+        "title": "AdvancementState",
+        "description": "Per-domain earned AP pools, single awarded AP pool, lifetime totals,\nand per-domain tag advancement counters.\n\nEarned AP is locked to its source domain (each domain has its own pool).\nAwarded AP is free-allocation across any domain (single pool).\nCounters track tag advances per domain; every 3 advances in a domain\nconverts to +1 earned AP in that domain."
+      },
+      "Alignment": {
+        "properties": {
+          "order": {
+            "$ref": "#/components/schemas/AlignmentOrder",
+            "default": "neutral"
+          },
+          "intent": {
+            "$ref": "#/components/schemas/AlignmentIntent",
+            "default": "neutral"
+          },
+          "ethos_note": {
+            "type": "string",
+            "title": "Ethos Note",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "Alignment"
+      },
+      "AlignmentIntent": {
+        "type": "string",
+        "enum": [
+          "good",
+          "neutral",
+          "evil"
+        ],
+        "title": "AlignmentIntent"
+      },
+      "AlignmentOrder": {
+        "type": "string",
+        "enum": [
+          "lawful",
+          "neutral",
+          "chaotic"
+        ],
+        "title": "AlignmentOrder"
+      },
+      "AncestryOption": {
+        "properties": {
+          "index": {
+            "type": "string",
+            "title": "Index"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "default": ""
+          },
+          "primary_domain": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Primary Domain"
+          },
+          "domains": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Domains"
+          },
+          "traits": {
+            "items": {
+              "$ref": "#/components/schemas/AncestryTrait"
+            },
+            "type": "array",
+            "title": "Traits"
+          }
+        },
+        "type": "object",
+        "required": [
+          "index",
+          "name",
+          "domains"
+        ],
+        "title": "AncestryOption"
+      },
+      "AncestryTrait": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "mechanical_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mechanical Note"
+          },
+          "application_tag": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Application Tag"
+          },
+          "roll_domain": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Roll Domain"
+          },
+          "usage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Usage"
+          },
+          "fatigue": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fatigue"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "description"
+        ],
+        "title": "AncestryTrait"
+      },
+      "ApplicationEntry": {
+        "properties": {
+          "index": {
+            "type": "string",
+            "title": "Index"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "group": {
+            "type": "string",
+            "title": "Group"
+          },
+          "primary_domain": {
+            "type": "string",
+            "title": "Primary Domain"
+          },
+          "domain_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Domain Note"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "examples": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Examples"
+          }
+        },
+        "type": "object",
+        "required": [
+          "index",
+          "name",
+          "group",
+          "primary_domain",
+          "description"
+        ],
+        "title": "ApplicationEntry"
+      },
+      "ApplyStateDeltaRequest": {
+        "properties": {
+          "character": {
+            "$ref": "#/components/schemas/CharacterStateDelta"
+          },
+          "world": {
+            "$ref": "#/components/schemas/WorldStateDelta"
+          },
+          "log_entry": {
+            "type": "string",
+            "title": "Log Entry"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "log_entry"
+        ],
+        "title": "ApplyStateDeltaRequest",
+        "description": "Body for POST /state/{session_id}/delta"
+      },
+      "ArchivedCompanionEnvelope-Input": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "companion": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SapientCompanion-Input"
+              },
+              {
+                "$ref": "#/components/schemas/CreatureCompanion"
+              },
+              {
+                "$ref": "#/components/schemas/ExceptionalCompanion-Input"
+              }
+            ],
+            "title": "Companion",
+            "discriminator": {
+              "propertyName": "tier",
+              "mapping": {
+                "creature": "#/components/schemas/CreatureCompanion",
+                "exceptional": "#/components/schemas/ExceptionalCompanion-Input",
+                "sapient": "#/components/schemas/SapientCompanion-Input"
+              }
+            }
+          },
+          "archived_at": {
+            "type": "string",
+            "title": "Archived At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "companion",
+          "archived_at"
+        ],
+        "title": "ArchivedCompanionEnvelope"
+      },
+      "ArchivedCompanionEnvelope-Output": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "companion": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SapientCompanion-Output"
+              },
+              {
+                "$ref": "#/components/schemas/CreatureCompanion"
+              },
+              {
+                "$ref": "#/components/schemas/ExceptionalCompanion-Output"
+              }
+            ],
+            "title": "Companion",
+            "discriminator": {
+              "propertyName": "tier",
+              "mapping": {
+                "creature": "#/components/schemas/CreatureCompanion",
+                "exceptional": "#/components/schemas/ExceptionalCompanion-Output",
+                "sapient": "#/components/schemas/SapientCompanion-Output"
+              }
+            }
+          },
+          "archived_at": {
+            "type": "string",
+            "title": "Archived At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "companion",
+          "archived_at"
+        ],
+        "title": "ArchivedCompanionEnvelope"
+      },
+      "BackgroundOption": {
+        "properties": {
+          "index": {
+            "type": "string",
+            "title": "Index"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "default": ""
+          },
+          "domain_bonuses": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Domain Bonuses"
+          },
+          "knowledge_tags": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 5.0,
+              "minimum": 1.0,
+              "description": "Competency tag tier. Must be an integer from 1 through 5."
+            },
+            "type": "object",
+            "title": "Knowledge Tags"
+          },
+          "application_tags": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 5.0,
+              "minimum": 1.0,
+              "description": "Competency tag tier. Must be an integer from 1 through 5."
+            },
+            "type": "object",
+            "title": "Application Tags"
+          },
+          "field_tags": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 5.0,
+              "minimum": 1.0,
+              "description": "Competency tag tier. Must be an integer from 1 through 5."
+            },
+            "type": "object",
+            "title": "Field Tags"
+          }
+        },
+        "type": "object",
+        "required": [
+          "index",
+          "name"
+        ],
+        "title": "BackgroundOption"
+      },
+      "BondLinks": {
+        "properties": {
+          "primary": {
+            "type": "string",
+            "title": "Primary"
+          },
+          "secondary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Secondary"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "primary"
+        ],
+        "title": "BondLinks"
+      },
+      "CatalogItemDetailResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "default": ""
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "CatalogItemDetailResponse",
+        "description": "Full catalog item, as authored. Shape matches api.items.Item."
+      },
+      "CharacterModel-Input": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "ancestry": {
+            "type": "string",
+            "title": "Ancestry"
+          },
+          "draconic_traits": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Draconic Traits"
+          },
+          "culture": {
+            "type": "string",
+            "title": "Culture"
+          },
+          "focus": {
+            "type": "string",
+            "title": "Focus"
+          },
+          "background": {
+            "type": "string",
+            "title": "Background"
+          },
+          "hp": {
+            "$ref": "#/components/schemas/HP"
+          },
+          "domains": {
+            "$ref": "#/components/schemas/DomainScores"
+          },
+          "knowledge": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 5.0,
+              "minimum": 1.0,
+              "description": "Competency tag tier. Must be an integer from 1 through 5."
+            },
+            "type": "object",
+            "title": "Knowledge"
+          },
+          "application": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 5.0,
+              "minimum": 1.0,
+              "description": "Competency tag tier. Must be an integer from 1 through 5."
+            },
+            "type": "object",
+            "title": "Application"
+          },
+          "fields": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 5.0,
+              "minimum": 1.0,
+              "description": "Competency tag tier. Must be an integer from 1 through 5."
+            },
+            "type": "object",
+            "title": "Fields"
+          },
+          "status_effects": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Status Effects"
+          },
+          "notes": {
+            "type": "string",
+            "title": "Notes",
+            "default": ""
+          },
+          "identity": {
+            "$ref": "#/components/schemas/Identity-Input"
+          },
+          "equipment": {
+            "$ref": "#/components/schemas/Equipment-Input"
+          },
+          "reputation": {
+            "items": {
+              "$ref": "#/components/schemas/ReputationEntry"
+            },
+            "type": "array",
+            "title": "Reputation"
+          },
+          "advancement": {
+            "$ref": "#/components/schemas/AdvancementState"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "ancestry",
+          "culture",
+          "focus",
+          "background",
+          "hp",
+          "domains"
+        ],
+        "title": "CharacterModel"
+      },
+      "CharacterModel-Output": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "ancestry": {
+            "type": "string",
+            "title": "Ancestry"
+          },
+          "draconic_traits": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Draconic Traits"
+          },
+          "culture": {
+            "type": "string",
+            "title": "Culture"
+          },
+          "focus": {
+            "type": "string",
+            "title": "Focus"
+          },
+          "background": {
+            "type": "string",
+            "title": "Background"
+          },
+          "hp": {
+            "$ref": "#/components/schemas/HP"
+          },
+          "domains": {
+            "$ref": "#/components/schemas/DomainScores"
+          },
+          "knowledge": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 5.0,
+              "minimum": 1.0,
+              "description": "Competency tag tier. Must be an integer from 1 through 5."
+            },
+            "type": "object",
+            "title": "Knowledge"
+          },
+          "application": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 5.0,
+              "minimum": 1.0,
+              "description": "Competency tag tier. Must be an integer from 1 through 5."
+            },
+            "type": "object",
+            "title": "Application"
+          },
+          "fields": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 5.0,
+              "minimum": 1.0,
+              "description": "Competency tag tier. Must be an integer from 1 through 5."
+            },
+            "type": "object",
+            "title": "Fields"
+          },
+          "status_effects": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Status Effects"
+          },
+          "notes": {
+            "type": "string",
+            "title": "Notes",
+            "default": ""
+          },
+          "identity": {
+            "$ref": "#/components/schemas/Identity-Output"
+          },
+          "equipment": {
+            "$ref": "#/components/schemas/Equipment-Output"
+          },
+          "reputation": {
+            "items": {
+              "$ref": "#/components/schemas/ReputationEntry"
+            },
+            "type": "array",
+            "title": "Reputation"
+          },
+          "advancement": {
+            "$ref": "#/components/schemas/AdvancementState"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "ancestry",
+          "culture",
+          "focus",
+          "background",
+          "hp",
+          "domains"
+        ],
+        "title": "CharacterModel"
+      },
+      "CharacterStateDelta": {
+        "properties": {
+          "hp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HP"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "domains": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Domains"
+          },
+          "knowledge": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer",
+                  "maximum": 5.0,
+                  "minimum": 1.0,
+                  "description": "Competency tag tier. Must be an integer from 1 through 5."
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Knowledge"
+          },
+          "application": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer",
+                  "maximum": 5.0,
+                  "minimum": 1.0,
+                  "description": "Competency tag tier. Must be an integer from 1 through 5."
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Application"
+          },
+          "fields": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer",
+                  "maximum": 5.0,
+                  "minimum": 1.0,
+                  "description": "Competency tag tier. Must be an integer from 1 through 5."
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fields"
+          },
+          "status_effects": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Effects"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "equipment": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EquipmentDelta"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reputation": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ReputationEntry"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reputation"
+          },
+          "advancement": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdvancementState"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "draconic_traits": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Draconic Traits"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "CharacterStateDelta",
+        "description": "Typed partial character update for extraction-driven turn commits.\n\nNote on `advancement`: the delta endpoint recomputes advancement\nauthoritatively from existing state and tag-tier transitions. Any\nclient-supplied `advancement` value is replaced server-side. The field\nremains on the schema for forward compatibility and round-trip safety,\nbut its content has no effect on persisted state."
+      },
+      "CombatDamageResult": {
+        "properties": {
+          "weapon_base": {
+            "type": "integer",
+            "title": "Weapon Base"
+          },
+          "effective_base": {
+            "type": "integer",
+            "title": "Effective Base"
+          },
+          "ammo_modifier": {
+            "type": "integer",
+            "title": "Ammo Modifier"
+          },
+          "margin_multiplier": {
+            "type": "number",
+            "title": "Margin Multiplier"
+          },
+          "agility_reduction_multiplier": {
+            "type": "number",
+            "title": "Agility Reduction Multiplier"
+          },
+          "pre_reduction": {
+            "type": "integer",
+            "title": "Pre Reduction"
+          },
+          "final": {
+            "type": "integer",
+            "title": "Final"
+          }
+        },
+        "type": "object",
+        "required": [
+          "weapon_base",
+          "effective_base",
+          "ammo_modifier",
+          "margin_multiplier",
+          "agility_reduction_multiplier",
+          "pre_reduction",
+          "final"
+        ],
+        "title": "CombatDamageResult"
+      },
+      "CombatReboundResult": {
+        "properties": {
+          "attacker_damage": {
+            "type": "integer",
+            "title": "Attacker Damage"
+          }
+        },
+        "type": "object",
+        "required": [
+          "attacker_damage"
+        ],
+        "title": "CombatReboundResult"
+      },
+      "CombatRoll1Result": {
+        "properties": {
+          "value": {
+            "type": "integer",
+            "title": "Value"
+          },
+          "target": {
+            "type": "integer",
+            "title": "Target"
+          },
+          "base_target": {
+            "type": "integer",
+            "title": "Base Target"
+          }
+        },
+        "type": "object",
+        "required": [
+          "value",
+          "target",
+          "base_target"
+        ],
+        "title": "CombatRoll1Result"
+      },
+      "CombatRoll2Result": {
+        "properties": {
+          "attacker": {
+            "type": "integer",
+            "title": "Attacker"
+          },
+          "defender": {
+            "type": "integer",
+            "title": "Defender"
+          },
+          "margin": {
+            "type": "integer",
+            "title": "Margin"
+          }
+        },
+        "type": "object",
+        "required": [
+          "attacker",
+          "defender",
+          "margin"
+        ],
+        "title": "CombatRoll2Result"
+      },
+      "CompanionResponse": {
+        "properties": {
+          "companion_id": {
+            "type": "string",
+            "title": "Companion Id"
+          },
+          "companion": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SapientCompanion-Output"
+              },
+              {
+                "$ref": "#/components/schemas/CreatureCompanion"
+              },
+              {
+                "$ref": "#/components/schemas/ExceptionalCompanion-Output"
+              }
+            ],
+            "title": "Companion",
+            "discriminator": {
+              "propertyName": "tier",
+              "mapping": {
+                "creature": "#/components/schemas/CreatureCompanion",
+                "exceptional": "#/components/schemas/ExceptionalCompanion-Output",
+                "sapient": "#/components/schemas/SapientCompanion-Output"
+              }
+            }
+          },
+          "archived": {
+            "type": "boolean",
+            "title": "Archived",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "companion_id",
+          "companion"
+        ],
+        "title": "CompanionResponse"
+      },
+      "CompanionVocabResponse": {
+        "properties": {
+          "natural_abilities": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Natural Abilities"
+          },
+          "learned_commands": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Learned Commands"
+          },
+          "tactical_roles": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Tactical Roles"
+          },
+          "training_levels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Training Levels"
+          },
+          "bond_levels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Bond Levels"
+          },
+          "age_categories": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Age Categories"
+          },
+          "creature_sizes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Creature Sizes"
+          },
+          "carrying_capacities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Carrying Capacities"
+          },
+          "movement_modes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Movement Modes"
+          },
+          "natural_weapons": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Natural Weapons"
+          },
+          "sapience_levels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Sapience Levels"
+          },
+          "communication_levels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Communication Levels"
+          },
+          "autonomy_levels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Autonomy Levels"
+          }
+        },
+        "type": "object",
+        "title": "CompanionVocabResponse",
+        "description": "Response for GET /catalog/vocab."
+      },
+      "ComputeMaxHpRequest": {
+        "properties": {
+          "armor_id": {
+            "type": "string",
+            "title": "Armor Id"
+          },
+          "armor_tier": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Armor Tier"
+          },
+          "shield_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shield Id"
+          },
+          "shield_tier": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Shield Tier",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "armor_id",
+          "armor_tier"
+        ],
+        "title": "ComputeMaxHpRequest"
+      },
+      "ComputeMaxHpResponse": {
+        "properties": {
+          "max_hp": {
+            "type": "integer",
+            "title": "Max Hp"
+          },
+          "base": {
+            "type": "integer",
+            "title": "Base"
+          },
+          "armor_contribution": {
+            "type": "integer",
+            "title": "Armor Contribution"
+          },
+          "shield_contribution": {
+            "type": "integer",
+            "title": "Shield Contribution"
+          },
+          "armor_id": {
+            "type": "string",
+            "title": "Armor Id"
+          },
+          "armor_tier": {
+            "type": "integer",
+            "title": "Armor Tier"
+          },
+          "shield_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shield Id"
+          },
+          "shield_tier": {
+            "type": "integer",
+            "title": "Shield Tier"
+          }
+        },
+        "type": "object",
+        "required": [
+          "max_hp",
+          "base",
+          "armor_contribution",
+          "shield_contribution",
+          "armor_id",
+          "armor_tier",
+          "shield_id",
+          "shield_tier"
+        ],
+        "title": "ComputeMaxHpResponse"
+      },
+      "ConnectionInfo": {
+        "properties": {
+          "to_id": {
+            "type": "string",
+            "title": "To Id"
+          },
+          "traversal": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Traversal"
+          },
+          "distance": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Distance"
+          }
+        },
+        "type": "object",
+        "required": [
+          "to_id"
+        ],
+        "title": "ConnectionInfo"
+      },
+      "ConnectionsResponse": {
+        "properties": {
+          "from_id": {
+            "type": "string",
+            "title": "From Id"
+          },
+          "connections": {
+            "items": {
+              "$ref": "#/components/schemas/ConnectionInfo"
+            },
+            "type": "array",
+            "title": "Connections"
+          }
+        },
+        "type": "object",
+        "required": [
+          "from_id",
+          "connections"
+        ],
+        "title": "ConnectionsResponse"
+      },
+      "ConsequenceWeight": {
+        "type": "string",
+        "enum": [
+          "local",
+          "situational",
+          "regional",
+          "campaign"
+        ],
+        "title": "ConsequenceWeight"
+      },
+      "CreateCharacterRequest": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "ancestry": {
+            "type": "string",
+            "title": "Ancestry"
+          },
+          "culture": {
+            "type": "string",
+            "title": "Culture"
+          },
+          "focus": {
+            "type": "string",
+            "title": "Focus"
+          },
+          "background": {
+            "type": "string",
+            "title": "Background"
+          },
+          "adjustment_points": {
+            "$ref": "#/components/schemas/AdjustmentPoints"
+          },
+          "identity": {
+            "$ref": "#/components/schemas/Identity-Input"
+          }
+        },
+        "type": "object",
+        "required": [
+          "session_id",
+          "name",
+          "ancestry",
+          "culture",
+          "focus",
+          "background"
+        ],
+        "title": "CreateCharacterRequest",
+        "description": "Body for POST /character/create — seeds character from game system data."
+      },
+      "CreateCharacterResponse": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "character": {
+            "$ref": "#/components/schemas/CharacterModel-Output"
+          }
+        },
+        "type": "object",
+        "required": [
+          "session_id",
+          "character"
+        ],
+        "title": "CreateCharacterResponse"
+      },
+      "CreateCompanionRequest": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "handler_id": {
+            "type": "string",
+            "title": "Handler Id"
+          },
+          "tier": {
+            "type": "string",
+            "enum": [
+              "sapient",
+              "creature",
+              "exceptional"
+            ],
+            "title": "Tier"
+          },
+          "companion": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SapientCompanion-Input"
+              },
+              {
+                "$ref": "#/components/schemas/CreatureCompanion"
+              },
+              {
+                "$ref": "#/components/schemas/ExceptionalCompanion-Input"
+              }
+            ],
+            "title": "Companion",
+            "discriminator": {
+              "propertyName": "tier",
+              "mapping": {
+                "creature": "#/components/schemas/CreatureCompanion",
+                "exceptional": "#/components/schemas/ExceptionalCompanion-Input",
+                "sapient": "#/components/schemas/SapientCompanion-Input"
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "session_id",
+          "handler_id",
+          "tier",
+          "companion"
+        ],
+        "title": "CreateCompanionRequest"
+      },
+      "CreatureCatalogResponse": {
+        "properties": {
+          "creature_catalog": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Creature Catalog"
+          },
+          "exceptional_catalog": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Exceptional Catalog"
+          }
+        },
+        "type": "object",
+        "title": "CreatureCatalogResponse",
+        "description": "Response for GET /catalog/creatures."
+      },
+      "CreatureCompanion": {
+        "properties": {
+          "tier": {
+            "type": "string",
+            "const": "creature",
+            "title": "Tier",
+            "default": "creature"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "species": {
+            "type": "string",
+            "title": "Species"
+          },
+          "subspecies": {
+            "type": "string",
+            "title": "Subspecies"
+          },
+          "subtype": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subtype"
+          },
+          "size": {
+            "type": "string",
+            "enum": [
+              "tiny",
+              "small",
+              "medium",
+              "large",
+              "huge"
+            ],
+            "title": "Size"
+          },
+          "size_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size Note"
+          },
+          "age_category": {
+            "type": "string",
+            "enum": [
+              "juvenile",
+              "young_adult",
+              "adult",
+              "mature",
+              "elder"
+            ],
+            "title": "Age Category"
+          },
+          "tactical_roles": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "mount",
+                "pack",
+                "scout",
+                "guard",
+                "hunter",
+                "companion"
+              ]
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Tactical Roles"
+          },
+          "training_level": {
+            "type": "string",
+            "enum": [
+              "untrained",
+              "basic",
+              "trained",
+              "expert"
+            ],
+            "title": "Training Level"
+          },
+          "bond_level": {
+            "type": "string",
+            "enum": [
+              "wary",
+              "accepting",
+              "bonded",
+              "devoted"
+            ],
+            "title": "Bond Level"
+          },
+          "natural_abilities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Natural Abilities"
+          },
+          "learned_commands": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Learned Commands"
+          },
+          "command_notes": {
+            "type": "string",
+            "title": "Command Notes",
+            "default": ""
+          },
+          "movement_modes": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "walk",
+                "fly",
+                "swim",
+                "climb",
+                "burrow"
+              ]
+            },
+            "type": "array",
+            "title": "Movement Modes"
+          },
+          "natural_weapons": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "bite",
+                "claw",
+                "hoof",
+                "tail_slam",
+                "breath",
+                "sting",
+                "none"
+              ]
+            },
+            "type": "array",
+            "title": "Natural Weapons"
+          },
+          "carrying_capacity": {
+            "type": "string",
+            "enum": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "title": "Carrying Capacity",
+            "default": "none"
+          },
+          "hp": {
+            "$ref": "#/components/schemas/HP"
+          },
+          "domains": {
+            "$ref": "#/components/schemas/CreatureDomains"
+          },
+          "temperament": {
+            "type": "string",
+            "title": "Temperament",
+            "default": ""
+          },
+          "bond_links": {
+            "$ref": "#/components/schemas/BondLinks"
+          },
+          "narrative": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreatureNarrative"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "species",
+          "subspecies",
+          "size",
+          "age_category",
+          "tactical_roles",
+          "training_level",
+          "bond_level",
+          "hp",
+          "domains",
+          "bond_links"
+        ],
+        "title": "CreatureCompanion"
+      },
+      "CreatureCompanionRecord": {
+        "properties": {
+          "tier": {
+            "type": "string",
+            "const": "creature",
+            "title": "Tier",
+            "default": "creature"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "species": {
+            "type": "string",
+            "title": "Species"
+          },
+          "subspecies": {
+            "type": "string",
+            "title": "Subspecies"
+          },
+          "subtype": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subtype"
+          },
+          "size": {
+            "type": "string",
+            "enum": [
+              "tiny",
+              "small",
+              "medium",
+              "large",
+              "huge"
+            ],
+            "title": "Size"
+          },
+          "size_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size Note"
+          },
+          "age_category": {
+            "type": "string",
+            "enum": [
+              "juvenile",
+              "young_adult",
+              "adult",
+              "mature",
+              "elder"
+            ],
+            "title": "Age Category"
+          },
+          "tactical_roles": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "mount",
+                "pack",
+                "scout",
+                "guard",
+                "hunter",
+                "companion"
+              ]
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Tactical Roles"
+          },
+          "training_level": {
+            "type": "string",
+            "enum": [
+              "untrained",
+              "basic",
+              "trained",
+              "expert"
+            ],
+            "title": "Training Level"
+          },
+          "bond_level": {
+            "type": "string",
+            "enum": [
+              "wary",
+              "accepting",
+              "bonded",
+              "devoted"
+            ],
+            "title": "Bond Level"
+          },
+          "natural_abilities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Natural Abilities"
+          },
+          "learned_commands": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Learned Commands"
+          },
+          "command_notes": {
+            "type": "string",
+            "title": "Command Notes",
+            "default": ""
+          },
+          "movement_modes": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "walk",
+                "fly",
+                "swim",
+                "climb",
+                "burrow"
+              ]
+            },
+            "type": "array",
+            "title": "Movement Modes"
+          },
+          "natural_weapons": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "bite",
+                "claw",
+                "hoof",
+                "tail_slam",
+                "breath",
+                "sting",
+                "none"
+              ]
+            },
+            "type": "array",
+            "title": "Natural Weapons"
+          },
+          "carrying_capacity": {
+            "type": "string",
+            "enum": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "title": "Carrying Capacity",
+            "default": "none"
+          },
+          "hp": {
+            "$ref": "#/components/schemas/HP"
+          },
+          "domains": {
+            "$ref": "#/components/schemas/CreatureDomains"
+          },
+          "temperament": {
+            "type": "string",
+            "title": "Temperament",
+            "default": ""
+          },
+          "bond_links": {
+            "$ref": "#/components/schemas/BondLinks"
+          },
+          "narrative": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreatureNarrative"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "species",
+          "subspecies",
+          "size",
+          "age_category",
+          "tactical_roles",
+          "training_level",
+          "bond_level",
+          "hp",
+          "domains",
+          "bond_links",
+          "id"
+        ],
+        "title": "CreatureCompanionRecord"
+      },
+      "CreatureDomains": {
+        "properties": {
+          "physical": {
+            "type": "integer",
+            "maximum": 60.0,
+            "minimum": 25.0,
+            "title": "Physical"
+          },
+          "instinct": {
+            "type": "integer",
+            "maximum": 60.0,
+            "minimum": 25.0,
+            "title": "Instinct"
+          },
+          "composure": {
+            "type": "integer",
+            "maximum": 60.0,
+            "minimum": 25.0,
+            "title": "Composure"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "physical",
+          "instinct",
+          "composure"
+        ],
+        "title": "CreatureDomains"
+      },
+      "CreatureNarrative": {
+        "properties": {
+          "origin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Origin"
+          },
+          "wound": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Wound"
+          },
+          "quirks": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Quirks"
+          },
+          "flaws": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Flaws"
+          },
+          "bonds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Bonds"
+          },
+          "drives": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Drives"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "CreatureNarrative",
+        "description": "Optional narrative block for creatures with individual story-weight\ncontent. Nullable on the parent models. Catalog-templated creatures\nwithout individual history leave this as None.\n\nUsed on CreatureCompanion and ExceptionalCompanion. For\nExceptionalCompanion with sapience=full, the fields here may be\nredundant with motivations/alignment — that's a content concern,\nnot a schema one."
+      },
+      "CultureOption": {
+        "properties": {
+          "index": {
+            "type": "string",
+            "title": "Index"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "default": ""
+          },
+          "domain_bonuses": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Domain Bonuses"
+          },
+          "knowledge_tags": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 5.0,
+              "minimum": 1.0,
+              "description": "Competency tag tier. Must be an integer from 1 through 5."
+            },
+            "type": "object",
+            "title": "Knowledge Tags"
+          },
+          "application_tags": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 5.0,
+              "minimum": 1.0,
+              "description": "Competency tag tier. Must be an integer from 1 through 5."
+            },
+            "type": "object",
+            "title": "Application Tags"
+          },
+          "field_tags": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 5.0,
+              "minimum": 1.0,
+              "description": "Competency tag tier. Must be an integer from 1 through 5."
+            },
+            "type": "object",
+            "title": "Field Tags"
+          }
+        },
+        "type": "object",
+        "required": [
+          "index",
+          "name"
+        ],
+        "title": "CultureOption"
+      },
+      "DomainScores": {
+        "properties": {
+          "power": {
+            "type": "integer",
+            "title": "Power"
+          },
+          "agility": {
+            "type": "integer",
+            "title": "Agility"
+          },
+          "perception": {
+            "type": "integer",
+            "title": "Perception"
+          },
+          "endurance": {
+            "type": "integer",
+            "title": "Endurance"
+          },
+          "intellect": {
+            "type": "integer",
+            "title": "Intellect"
+          },
+          "will": {
+            "type": "integer",
+            "title": "Will"
+          },
+          "presence": {
+            "type": "integer",
+            "title": "Presence"
+          }
+        },
+        "type": "object",
+        "required": [
+          "power",
+          "agility",
+          "perception",
+          "endurance",
+          "intellect",
+          "will",
+          "presence"
+        ],
+        "title": "DomainScores"
+      },
+      "Economy": {
+        "properties": {
+          "wealth_tier": {
+            "$ref": "#/components/schemas/WealthTier",
+            "default": "modest"
+          },
+          "coin": {
+            "type": "integer",
+            "title": "Coin",
+            "default": 0
+          },
+          "trade_goods": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Trade Goods"
+          },
+          "obligations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Obligations"
+          }
+        },
+        "type": "object",
+        "title": "Economy",
+        "description": "Economic state. wealth_tier is the universal abstraction (works for barter\nand currency economies alike). coin is stored as total Copper Drakes (CD)\nas a raw integer for regions that use hard currency (e.g. outside\nDrakenvale via the SSTC). 100 CD = 1 GD."
+      },
+      "EconomyDelta": {
+        "properties": {
+          "wealth_tier": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WealthTier"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "coin": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coin"
+          },
+          "trade_goods": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trade Goods"
+          },
+          "obligations": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Obligations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "EconomyDelta",
+        "description": "Sparse economy update for delta application."
+      },
+      "Equipment-Input": {
+        "properties": {
+          "worn": {
+            "items": {
+              "$ref": "#/components/schemas/EquipmentItem"
+            },
+            "type": "array",
+            "title": "Worn"
+          },
+          "carried": {
+            "items": {
+              "$ref": "#/components/schemas/EquipmentItem"
+            },
+            "type": "array",
+            "title": "Carried"
+          },
+          "stashed": {
+            "items": {
+              "$ref": "#/components/schemas/EquipmentItem"
+            },
+            "type": "array",
+            "title": "Stashed"
+          }
+        },
+        "type": "object",
+        "title": "Equipment",
+        "description": "Three-slot equipment inventory."
+      },
+      "Equipment-Output": {
+        "properties": {
+          "worn": {
+            "items": {
+              "$ref": "#/components/schemas/EquipmentItem"
+            },
+            "type": "array",
+            "title": "Worn"
+          },
+          "carried": {
+            "items": {
+              "$ref": "#/components/schemas/EquipmentItem"
+            },
+            "type": "array",
+            "title": "Carried"
+          },
+          "stashed": {
+            "items": {
+              "$ref": "#/components/schemas/EquipmentItem"
+            },
+            "type": "array",
+            "title": "Stashed"
+          }
+        },
+        "type": "object",
+        "title": "Equipment",
+        "description": "Three-slot equipment inventory."
+      },
+      "EquipmentDelta": {
+        "properties": {
+          "worn": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/EquipmentItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Worn"
+          },
+          "carried": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/EquipmentItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Carried"
+          },
+          "stashed": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/EquipmentItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stashed"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "EquipmentDelta",
+        "description": "Sparse equipment update; merges by slot rather than replacing all equipment."
+      },
+      "EquipmentItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "default": ""
+          },
+          "tags": {
+            "items": {
+              "$ref": "#/components/schemas/EquipmentTag"
+            },
+            "type": "array",
+            "title": "Tags"
+          },
+          "roll_tag": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Roll Tag"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "EquipmentItem",
+        "description": "Single item in any equipment slot."
+      },
+      "EquipmentTag": {
+        "type": "string",
+        "enum": [
+          "utility",
+          "weapon",
+          "armor",
+          "consumable",
+          "arcane",
+          "sacred",
+          "trade_good",
+          "special"
+        ],
+        "title": "EquipmentTag"
+      },
+      "ExceptionalCompanion-Input": {
+        "properties": {
+          "tier": {
+            "type": "string",
+            "const": "exceptional",
+            "title": "Tier",
+            "default": "exceptional"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "species": {
+            "type": "string",
+            "title": "Species"
+          },
+          "subspecies": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subspecies"
+          },
+          "subtype": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subtype"
+          },
+          "size": {
+            "type": "string",
+            "enum": [
+              "tiny",
+              "small",
+              "medium",
+              "large",
+              "huge"
+            ],
+            "title": "Size"
+          },
+          "size_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size Note"
+          },
+          "age_category": {
+            "type": "string",
+            "enum": [
+              "juvenile",
+              "young_adult",
+              "adult",
+              "mature",
+              "elder"
+            ],
+            "title": "Age Category"
+          },
+          "tactical_roles": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "mount",
+                "pack",
+                "scout",
+                "guard",
+                "hunter",
+                "companion"
+              ]
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Tactical Roles"
+          },
+          "training_level": {
+            "type": "string",
+            "enum": [
+              "untrained",
+              "basic",
+              "trained",
+              "expert"
+            ],
+            "title": "Training Level"
+          },
+          "bond_level": {
+            "type": "string",
+            "enum": [
+              "wary",
+              "accepting",
+              "bonded",
+              "devoted"
+            ],
+            "title": "Bond Level"
+          },
+          "natural_abilities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Natural Abilities"
+          },
+          "learned_commands": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Learned Commands"
+          },
+          "command_notes": {
+            "type": "string",
+            "title": "Command Notes",
+            "default": ""
+          },
+          "movement_modes": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "walk",
+                "fly",
+                "swim",
+                "climb",
+                "burrow"
+              ]
+            },
+            "type": "array",
+            "title": "Movement Modes"
+          },
+          "natural_weapons": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "bite",
+                "claw",
+                "hoof",
+                "tail_slam",
+                "breath",
+                "sting",
+                "none"
+              ]
+            },
+            "type": "array",
+            "title": "Natural Weapons"
+          },
+          "carrying_capacity": {
+            "type": "string",
+            "enum": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "title": "Carrying Capacity",
+            "default": "none"
+          },
+          "hp": {
+            "$ref": "#/components/schemas/HP"
+          },
+          "temperament": {
+            "type": "string",
+            "title": "Temperament",
+            "default": ""
+          },
+          "bond_links": {
+            "$ref": "#/components/schemas/BondLinks"
+          },
+          "narrative": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreatureNarrative"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "exceptional_profile": {
+            "$ref": "#/components/schemas/ExceptionalProfile"
+          },
+          "motivations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Motivations"
+          },
+          "domains": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreatureDomains"
+              },
+              {
+                "$ref": "#/components/schemas/DomainScores"
+              }
+            ],
+            "title": "Domains"
+          },
+          "knowledge": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Knowledge"
+          },
+          "application": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Application"
+          },
+          "alignment": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Alignment"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "supernatural_traits": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Supernatural Traits"
+          },
+          "known_languages": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Known Languages"
+          },
+          "tier_history": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Tier History"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "species",
+          "size",
+          "age_category",
+          "tactical_roles",
+          "training_level",
+          "bond_level",
+          "hp",
+          "bond_links",
+          "exceptional_profile",
+          "motivations",
+          "domains"
+        ],
+        "title": "ExceptionalCompanion"
+      },
+      "ExceptionalCompanion-Output": {
+        "properties": {
+          "tier": {
+            "type": "string",
+            "const": "exceptional",
+            "title": "Tier",
+            "default": "exceptional"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "species": {
+            "type": "string",
+            "title": "Species"
+          },
+          "subspecies": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subspecies"
+          },
+          "subtype": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subtype"
+          },
+          "size": {
+            "type": "string",
+            "enum": [
+              "tiny",
+              "small",
+              "medium",
+              "large",
+              "huge"
+            ],
+            "title": "Size"
+          },
+          "size_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size Note"
+          },
+          "age_category": {
+            "type": "string",
+            "enum": [
+              "juvenile",
+              "young_adult",
+              "adult",
+              "mature",
+              "elder"
+            ],
+            "title": "Age Category"
+          },
+          "tactical_roles": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "mount",
+                "pack",
+                "scout",
+                "guard",
+                "hunter",
+                "companion"
+              ]
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Tactical Roles"
+          },
+          "training_level": {
+            "type": "string",
+            "enum": [
+              "untrained",
+              "basic",
+              "trained",
+              "expert"
+            ],
+            "title": "Training Level"
+          },
+          "bond_level": {
+            "type": "string",
+            "enum": [
+              "wary",
+              "accepting",
+              "bonded",
+              "devoted"
+            ],
+            "title": "Bond Level"
+          },
+          "natural_abilities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Natural Abilities"
+          },
+          "learned_commands": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Learned Commands"
+          },
+          "command_notes": {
+            "type": "string",
+            "title": "Command Notes",
+            "default": ""
+          },
+          "movement_modes": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "walk",
+                "fly",
+                "swim",
+                "climb",
+                "burrow"
+              ]
+            },
+            "type": "array",
+            "title": "Movement Modes"
+          },
+          "natural_weapons": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "bite",
+                "claw",
+                "hoof",
+                "tail_slam",
+                "breath",
+                "sting",
+                "none"
+              ]
+            },
+            "type": "array",
+            "title": "Natural Weapons"
+          },
+          "carrying_capacity": {
+            "type": "string",
+            "enum": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "title": "Carrying Capacity",
+            "default": "none"
+          },
+          "hp": {
+            "$ref": "#/components/schemas/HP"
+          },
+          "temperament": {
+            "type": "string",
+            "title": "Temperament",
+            "default": ""
+          },
+          "bond_links": {
+            "$ref": "#/components/schemas/BondLinks"
+          },
+          "narrative": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreatureNarrative"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "exceptional_profile": {
+            "$ref": "#/components/schemas/ExceptionalProfile"
+          },
+          "motivations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Motivations"
+          },
+          "domains": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreatureDomains"
+              },
+              {
+                "$ref": "#/components/schemas/DomainScores"
+              }
+            ],
+            "title": "Domains"
+          },
+          "knowledge": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Knowledge"
+          },
+          "application": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Application"
+          },
+          "alignment": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Alignment"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "supernatural_traits": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Supernatural Traits"
+          },
+          "known_languages": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Known Languages"
+          },
+          "tier_history": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Tier History"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "species",
+          "size",
+          "age_category",
+          "tactical_roles",
+          "training_level",
+          "bond_level",
+          "hp",
+          "bond_links",
+          "exceptional_profile",
+          "motivations",
+          "domains"
+        ],
+        "title": "ExceptionalCompanion"
+      },
+      "ExceptionalCompanionRecord-Input": {
+        "properties": {
+          "tier": {
+            "type": "string",
+            "const": "exceptional",
+            "title": "Tier",
+            "default": "exceptional"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "species": {
+            "type": "string",
+            "title": "Species"
+          },
+          "subspecies": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subspecies"
+          },
+          "subtype": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subtype"
+          },
+          "size": {
+            "type": "string",
+            "enum": [
+              "tiny",
+              "small",
+              "medium",
+              "large",
+              "huge"
+            ],
+            "title": "Size"
+          },
+          "size_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size Note"
+          },
+          "age_category": {
+            "type": "string",
+            "enum": [
+              "juvenile",
+              "young_adult",
+              "adult",
+              "mature",
+              "elder"
+            ],
+            "title": "Age Category"
+          },
+          "tactical_roles": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "mount",
+                "pack",
+                "scout",
+                "guard",
+                "hunter",
+                "companion"
+              ]
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Tactical Roles"
+          },
+          "training_level": {
+            "type": "string",
+            "enum": [
+              "untrained",
+              "basic",
+              "trained",
+              "expert"
+            ],
+            "title": "Training Level"
+          },
+          "bond_level": {
+            "type": "string",
+            "enum": [
+              "wary",
+              "accepting",
+              "bonded",
+              "devoted"
+            ],
+            "title": "Bond Level"
+          },
+          "natural_abilities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Natural Abilities"
+          },
+          "learned_commands": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Learned Commands"
+          },
+          "command_notes": {
+            "type": "string",
+            "title": "Command Notes",
+            "default": ""
+          },
+          "movement_modes": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "walk",
+                "fly",
+                "swim",
+                "climb",
+                "burrow"
+              ]
+            },
+            "type": "array",
+            "title": "Movement Modes"
+          },
+          "natural_weapons": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "bite",
+                "claw",
+                "hoof",
+                "tail_slam",
+                "breath",
+                "sting",
+                "none"
+              ]
+            },
+            "type": "array",
+            "title": "Natural Weapons"
+          },
+          "carrying_capacity": {
+            "type": "string",
+            "enum": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "title": "Carrying Capacity",
+            "default": "none"
+          },
+          "hp": {
+            "$ref": "#/components/schemas/HP"
+          },
+          "temperament": {
+            "type": "string",
+            "title": "Temperament",
+            "default": ""
+          },
+          "bond_links": {
+            "$ref": "#/components/schemas/BondLinks"
+          },
+          "narrative": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreatureNarrative"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "exceptional_profile": {
+            "$ref": "#/components/schemas/ExceptionalProfile"
+          },
+          "motivations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Motivations"
+          },
+          "domains": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreatureDomains"
+              },
+              {
+                "$ref": "#/components/schemas/DomainScores"
+              }
+            ],
+            "title": "Domains"
+          },
+          "knowledge": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Knowledge"
+          },
+          "application": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Application"
+          },
+          "alignment": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Alignment"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "supernatural_traits": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Supernatural Traits"
+          },
+          "known_languages": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Known Languages"
+          },
+          "tier_history": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Tier History"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "species",
+          "size",
+          "age_category",
+          "tactical_roles",
+          "training_level",
+          "bond_level",
+          "hp",
+          "bond_links",
+          "exceptional_profile",
+          "motivations",
+          "domains",
+          "id"
+        ],
+        "title": "ExceptionalCompanionRecord"
+      },
+      "ExceptionalCompanionRecord-Output": {
+        "properties": {
+          "tier": {
+            "type": "string",
+            "const": "exceptional",
+            "title": "Tier",
+            "default": "exceptional"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "species": {
+            "type": "string",
+            "title": "Species"
+          },
+          "subspecies": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subspecies"
+          },
+          "subtype": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subtype"
+          },
+          "size": {
+            "type": "string",
+            "enum": [
+              "tiny",
+              "small",
+              "medium",
+              "large",
+              "huge"
+            ],
+            "title": "Size"
+          },
+          "size_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size Note"
+          },
+          "age_category": {
+            "type": "string",
+            "enum": [
+              "juvenile",
+              "young_adult",
+              "adult",
+              "mature",
+              "elder"
+            ],
+            "title": "Age Category"
+          },
+          "tactical_roles": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "mount",
+                "pack",
+                "scout",
+                "guard",
+                "hunter",
+                "companion"
+              ]
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Tactical Roles"
+          },
+          "training_level": {
+            "type": "string",
+            "enum": [
+              "untrained",
+              "basic",
+              "trained",
+              "expert"
+            ],
+            "title": "Training Level"
+          },
+          "bond_level": {
+            "type": "string",
+            "enum": [
+              "wary",
+              "accepting",
+              "bonded",
+              "devoted"
+            ],
+            "title": "Bond Level"
+          },
+          "natural_abilities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Natural Abilities"
+          },
+          "learned_commands": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Learned Commands"
+          },
+          "command_notes": {
+            "type": "string",
+            "title": "Command Notes",
+            "default": ""
+          },
+          "movement_modes": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "walk",
+                "fly",
+                "swim",
+                "climb",
+                "burrow"
+              ]
+            },
+            "type": "array",
+            "title": "Movement Modes"
+          },
+          "natural_weapons": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "bite",
+                "claw",
+                "hoof",
+                "tail_slam",
+                "breath",
+                "sting",
+                "none"
+              ]
+            },
+            "type": "array",
+            "title": "Natural Weapons"
+          },
+          "carrying_capacity": {
+            "type": "string",
+            "enum": [
+              "none",
+              "small",
+              "medium",
+              "large"
+            ],
+            "title": "Carrying Capacity",
+            "default": "none"
+          },
+          "hp": {
+            "$ref": "#/components/schemas/HP"
+          },
+          "temperament": {
+            "type": "string",
+            "title": "Temperament",
+            "default": ""
+          },
+          "bond_links": {
+            "$ref": "#/components/schemas/BondLinks"
+          },
+          "narrative": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreatureNarrative"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "exceptional_profile": {
+            "$ref": "#/components/schemas/ExceptionalProfile"
+          },
+          "motivations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Motivations"
+          },
+          "domains": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreatureDomains"
+              },
+              {
+                "$ref": "#/components/schemas/DomainScores"
+              }
+            ],
+            "title": "Domains"
+          },
+          "knowledge": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Knowledge"
+          },
+          "application": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Application"
+          },
+          "alignment": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Alignment"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "supernatural_traits": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Supernatural Traits"
+          },
+          "known_languages": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Known Languages"
+          },
+          "tier_history": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Tier History"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "species",
+          "size",
+          "age_category",
+          "tactical_roles",
+          "training_level",
+          "bond_level",
+          "hp",
+          "bond_links",
+          "exceptional_profile",
+          "motivations",
+          "domains",
+          "id"
+        ],
+        "title": "ExceptionalCompanionRecord"
+      },
+      "ExceptionalProfile": {
+        "properties": {
+          "sapience": {
+            "type": "string",
+            "enum": [
+              "partial",
+              "full"
+            ],
+            "title": "Sapience"
+          },
+          "communication": {
+            "type": "string",
+            "enum": [
+              "instinctive",
+              "symbolic",
+              "speech"
+            ],
+            "title": "Communication"
+          },
+          "autonomy": {
+            "type": "string",
+            "enum": [
+              "limited",
+              "moderate",
+              "high"
+            ],
+            "title": "Autonomy"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "sapience",
+          "communication",
+          "autonomy"
+        ],
+        "title": "ExceptionalProfile"
+      },
+      "FatigueState": {
+        "type": "string",
+        "enum": [
+          "rested",
+          "tired",
+          "fatigued",
+          "exhausted"
+        ],
+        "title": "FatigueState"
+      },
+      "FocusOption": {
+        "properties": {
+          "index": {
+            "type": "string",
+            "title": "Index"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "default": ""
+          },
+          "knowledge_tags": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 5.0,
+              "minimum": 1.0,
+              "description": "Competency tag tier. Must be an integer from 1 through 5."
+            },
+            "type": "object",
+            "title": "Knowledge Tags"
+          },
+          "application_tags": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 5.0,
+              "minimum": 1.0,
+              "description": "Competency tag tier. Must be an integer from 1 through 5."
+            },
+            "type": "object",
+            "title": "Application Tags"
+          },
+          "field_tags": {
+            "additionalProperties": {
+              "type": "integer",
+              "maximum": 5.0,
+              "minimum": 1.0,
+              "description": "Competency tag tier. Must be an integer from 1 through 5."
+            },
+            "type": "object",
+            "title": "Field Tags"
+          },
+          "signature_tag": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Signature Tag"
+          }
+        },
+        "type": "object",
+        "required": [
+          "index",
+          "name"
+        ],
+        "title": "FocusOption"
+      },
+      "GameStateResponse": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "character": {
+            "$ref": "#/components/schemas/CharacterModel-Output"
+          },
+          "world": {
+            "$ref": "#/components/schemas/WorldModel-Output"
+          },
+          "log": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Log"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "time_drift_warning": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TimeDriftWarning"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "session_id",
+          "character",
+          "world",
+          "log"
+        ],
+        "title": "GameStateResponse",
+        "description": "Response for GET /state/{session_id}"
+      },
+      "HP": {
+        "properties": {
+          "current": {
+            "type": "integer",
+            "title": "Current"
+          },
+          "max": {
+            "type": "integer",
+            "title": "Max",
+            "default": 100
+          }
+        },
+        "type": "object",
+        "required": [
+          "current"
+        ],
+        "title": "HP"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "service": {
+            "type": "string",
+            "title": "Service"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "service"
+        ],
+        "title": "HealthResponse"
+      },
+      "HungerState": {
+        "type": "string",
+        "enum": [
+          "sated",
+          "hungry",
+          "starving"
+        ],
+        "title": "HungerState"
+      },
+      "HydrationState": {
+        "type": "string",
+        "enum": [
+          "hydrated",
+          "thirsty",
+          "dehydrated"
+        ],
+        "title": "HydrationState"
+      },
+      "Identity-Input": {
+        "properties": {
+          "origin": {
+            "type": "string",
+            "title": "Origin",
+            "default": ""
+          },
+          "motivations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Motivations"
+          },
+          "quirks": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Quirks"
+          },
+          "bonds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Bonds"
+          },
+          "flaws": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Flaws"
+          },
+          "wound": {
+            "type": "string",
+            "title": "Wound",
+            "default": ""
+          },
+          "alignment": {
+            "$ref": "#/components/schemas/Alignment"
+          }
+        },
+        "type": "object",
+        "title": "Identity",
+        "description": "Narrative character block. Captured at creation, GPT-readable every session.\nAll fields optional at creation — can be filled in as play reveals them."
+      },
+      "Identity-Output": {
+        "properties": {
+          "origin": {
+            "type": "string",
+            "title": "Origin",
+            "default": ""
+          },
+          "motivations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Motivations"
+          },
+          "quirks": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Quirks"
+          },
+          "bonds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Bonds"
+          },
+          "flaws": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Flaws"
+          },
+          "wound": {
+            "type": "string",
+            "title": "Wound",
+            "default": ""
+          },
+          "alignment": {
+            "$ref": "#/components/schemas/Alignment"
+          }
+        },
+        "type": "object",
+        "title": "Identity",
+        "description": "Narrative character block. Captured at creation, GPT-readable every session.\nAll fields optional at creation — can be filled in as play reveals them."
+      },
+      "ItemCatalogResponse": {
+        "properties": {
+          "mundane_items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemOption"
+            },
+            "type": "array",
+            "title": "Mundane Items"
+          },
+          "magical_items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemOption"
+            },
+            "type": "array",
+            "title": "Magical Items"
+          },
+          "apparel_items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemOption"
+            },
+            "type": "array",
+            "title": "Apparel Items"
+          },
+          "weapon_items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemOption"
+            },
+            "type": "array",
+            "title": "Weapon Items"
+          },
+          "armor_items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemOption"
+            },
+            "type": "array",
+            "title": "Armor Items"
+          },
+          "ammunition_items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemOption"
+            },
+            "type": "array",
+            "title": "Ammunition Items"
+          }
+        },
+        "type": "object",
+        "title": "ItemCatalogResponse",
+        "description": "Response for GET /catalog/items."
+      },
+      "ItemOption": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "default": ""
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tags"
+          },
+          "roll_tag": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Roll Tag"
+          },
+          "consumable": {
+            "type": "boolean",
+            "title": "Consumable",
+            "default": false
+          },
+          "charges": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Charges"
+          },
+          "rarity": {
+            "type": "string",
+            "title": "Rarity",
+            "default": "common"
+          },
+          "value_cd": {
+            "type": "integer",
+            "title": "Value Cd",
+            "default": 0
+          },
+          "effects": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Effects"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "category"
+        ],
+        "title": "ItemOption"
+      },
+      "KnowledgeGroupEntry": {
+        "properties": {
+          "index": {
+            "type": "string",
+            "title": "Index"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "primary_domain": {
+            "type": "string",
+            "title": "Primary Domain"
+          },
+          "secondary_domain": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Secondary Domain"
+          },
+          "domain_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Domain Note"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "examples": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Examples"
+          },
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          }
+        },
+        "type": "object",
+        "required": [
+          "index",
+          "name",
+          "primary_domain",
+          "description",
+          "kind"
+        ],
+        "title": "KnowledgeGroupEntry"
+      },
+      "LoadState": {
+        "type": "string",
+        "enum": [
+          "light",
+          "normal",
+          "burdened",
+          "overloaded"
+        ],
+        "title": "LoadState"
+      },
+      "LocationData": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "default": "unknown"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "default": ""
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tags"
+          },
+          "connections": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Connections"
+          },
+          "threat_level": {
+            "type": "integer",
+            "title": "Threat Level",
+            "default": 0
+          },
+          "known_npcs": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Known Npcs"
+          },
+          "discovered": {
+            "type": "boolean",
+            "title": "Discovered",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "LocationData",
+        "description": "Shape of the JSONB data column in the locations table."
+      },
+      "LocationResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocationData"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "data"
+        ],
+        "title": "LocationResponse"
+      },
+      "MagicFieldEntry": {
+        "properties": {
+          "index": {
+            "type": "string",
+            "title": "Index"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "primary_domain": {
+            "type": "string",
+            "title": "Primary Domain"
+          },
+          "secondary_domain": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Secondary Domain"
+          },
+          "domain_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Domain Note"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "examples": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Examples"
+          },
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          }
+        },
+        "type": "object",
+        "required": [
+          "index",
+          "name",
+          "primary_domain",
+          "description",
+          "kind"
+        ],
+        "title": "MagicFieldEntry"
+      },
+      "NewSessionRequest": {
+        "properties": {
+          "character_name": {
+            "type": "string",
+            "title": "Character Name"
+          },
+          "ancestry": {
+            "type": "string",
+            "title": "Ancestry"
+          },
+          "culture": {
+            "type": "string",
+            "title": "Culture"
+          },
+          "focus": {
+            "type": "string",
+            "title": "Focus"
+          },
+          "background": {
+            "type": "string",
+            "title": "Background"
+          },
+          "adjustment_points": {
+            "$ref": "#/components/schemas/AdjustmentPoints"
+          },
+          "starting_location": {
+            "type": "string",
+            "title": "Starting Location",
+            "default": "unknown"
+          },
+          "goal": {
+            "type": "string",
+            "title": "Goal",
+            "default": "survive"
+          },
+          "threat": {
+            "type": "string",
+            "title": "Threat",
+            "default": "unknown"
+          },
+          "identity": {
+            "$ref": "#/components/schemas/Identity-Input"
+          },
+          "starting_economy": {
+            "$ref": "#/components/schemas/Economy"
+          },
+          "companions": {
+            "anyOf": [
+              {
+                "items": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/SapientCompanionRecord-Input"
+                    },
+                    {
+                      "$ref": "#/components/schemas/CreatureCompanionRecord"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ExceptionalCompanionRecord-Input"
+                    }
+                  ],
+                  "discriminator": {
+                    "propertyName": "tier",
+                    "mapping": {
+                      "creature": "#/components/schemas/CreatureCompanionRecord",
+                      "exceptional": "#/components/schemas/ExceptionalCompanionRecord-Input",
+                      "sapient": "#/components/schemas/SapientCompanionRecord-Input"
+                    }
+                  }
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Companions"
+          },
+          "equipment": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Equipment-Input"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "character_name",
+          "ancestry",
+          "culture",
+          "focus",
+          "background"
+        ],
+        "title": "NewSessionRequest",
+        "description": "Body for POST /session/new"
+      },
+      "NewSessionResponse": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "character": {
+            "$ref": "#/components/schemas/CharacterModel-Output"
+          },
+          "world": {
+            "$ref": "#/components/schemas/WorldModel-Output"
+          }
+        },
+        "type": "object",
+        "required": [
+          "session_id",
+          "character",
+          "world"
+        ],
+        "title": "NewSessionResponse"
+      },
+      "NpcRegistryEntry": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "tier": {
+            "type": "integer",
+            "title": "Tier"
+          },
+          "age": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Age"
+          },
+          "house_affiliation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "House Affiliation"
+          },
+          "current_location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Location"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status"
+          },
+          "disposition": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Disposition"
+          },
+          "role_summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Role Summary"
+          },
+          "voice": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Voice"
+          },
+          "narrative_anchors": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Narrative Anchors"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tags"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "default": ""
+          },
+          "scene_guidance": {
+            "type": "string",
+            "title": "Scene Guidance",
+            "default": ""
+          },
+          "role_scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Role Scope"
+          },
+          "typical_context": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Typical Context"
+          },
+          "register": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Register"
+          },
+          "authority_scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Authority Scope"
+          },
+          "common_scene_functions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Common Scene Functions"
+          },
+          "generation_guidance": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Generation Guidance"
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "tier"
+        ],
+        "title": "NpcRegistryEntry",
+        "description": "A single NPC registry entry loaded from data/npcs/."
+      },
+      "NpcRegistryResponse": {
+        "properties": {
+          "entries": {
+            "items": {
+              "$ref": "#/components/schemas/NpcRegistryEntry"
+            },
+            "type": "array",
+            "title": "Entries"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count",
+            "default": 0
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "required": [
+          "entries"
+        ],
+        "title": "NpcRegistryResponse",
+        "description": "Response for GET /npcs."
+      },
+      "OptionsResponse": {
+        "properties": {
+          "ancestries": {
+            "items": {
+              "$ref": "#/components/schemas/AncestryOption"
+            },
+            "type": "array",
+            "title": "Ancestries"
+          },
+          "cultures": {
+            "items": {
+              "$ref": "#/components/schemas/CultureOption"
+            },
+            "type": "array",
+            "title": "Cultures"
+          },
+          "focus": {
+            "items": {
+              "$ref": "#/components/schemas/FocusOption"
+            },
+            "type": "array",
+            "title": "Focus"
+          },
+          "backgrounds": {
+            "items": {
+              "$ref": "#/components/schemas/BackgroundOption"
+            },
+            "type": "array",
+            "title": "Backgrounds"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ancestries",
+          "cultures",
+          "focus",
+          "backgrounds"
+        ],
+        "title": "OptionsResponse",
+        "description": "Response for GET /options — creation-scope enumeration.\n\nOnly ancestries, cultures, focus archetypes, and backgrounds live here.\nRuntime catalogs are served by /catalog/items, /catalog/creatures,\n/catalog/vocab."
+      },
+      "PacingState": {
+        "properties": {
+          "tension": {
+            "type": "integer",
+            "title": "Tension",
+            "default": 3
+          },
+          "last_consequence_weight": {
+            "$ref": "#/components/schemas/ConsequenceWeight",
+            "default": "local"
+          },
+          "turns_since_social_beat": {
+            "type": "integer",
+            "title": "Turns Since Social Beat",
+            "default": 0
+          },
+          "turns_since_discovery": {
+            "type": "integer",
+            "title": "Turns Since Discovery",
+            "default": 0
+          },
+          "turn_count": {
+            "type": "integer",
+            "title": "Turn Count",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "PacingState",
+        "description": "Lightweight pacing guidance block for scene cadence and intensity."
+      },
+      "Politics": {
+        "properties": {
+          "faction_memberships": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Faction Memberships"
+          },
+          "active_obligations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Active Obligations"
+          },
+          "legal_standing": {
+            "type": "string",
+            "title": "Legal Standing",
+            "default": "unknown"
+          },
+          "known_leverage": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Known Leverage"
+          },
+          "active_tensions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Active Tensions"
+          },
+          "conclave_status": {
+            "type": "string",
+            "title": "Conclave Status",
+            "default": "unknown"
+          }
+        },
+        "type": "object",
+        "title": "Politics",
+        "description": "World-level relational and political state.\nNot a subsystem — a lightweight store for the GPT to track active context."
+      },
+      "ReputationEntry": {
+        "properties": {
+          "faction": {
+            "type": "string",
+            "title": "Faction"
+          },
+          "standing": {
+            "type": "integer",
+            "title": "Standing",
+            "default": 0
+          },
+          "note": {
+            "type": "string",
+            "title": "Note",
+            "default": ""
+          },
+          "last_change": {
+            "type": "string",
+            "title": "Last Change",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "required": [
+          "faction"
+        ],
+        "title": "ReputationEntry",
+        "description": "Standing with a single faction or community.\nMissing entry = unknown (faction has no opinion yet).\nRange: -100 (despised) to +100 (revered)."
+      },
+      "ResolveAttackRequest": {
+        "properties": {
+          "weapon_id": {
+            "type": "string",
+            "title": "Weapon Id"
+          },
+          "weapon_tier": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Weapon Tier"
+          },
+          "ammo_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ammo Id"
+          },
+          "use_off_hand": {
+            "type": "boolean",
+            "title": "Use Off Hand",
+            "default": false
+          },
+          "defender_is_unarmored": {
+            "type": "boolean",
+            "title": "Defender Is Unarmored"
+          },
+          "defender_unarmored_tier": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Defender Unarmored Tier",
+            "default": 0
+          },
+          "defender_agility_tier": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Defender Agility Tier",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "weapon_id",
+          "weapon_tier",
+          "defender_is_unarmored"
+        ],
+        "title": "ResolveAttackRequest"
+      },
+      "ResolveAttackResponse": {
+        "properties": {
+          "hit": {
+            "type": "boolean",
+            "title": "Hit"
+          },
+          "critical_hit": {
+            "type": "boolean",
+            "title": "Critical Hit"
+          },
+          "fumble": {
+            "type": "boolean",
+            "title": "Fumble"
+          },
+          "tied": {
+            "type": "boolean",
+            "title": "Tied"
+          },
+          "roll_1": {
+            "$ref": "#/components/schemas/CombatRoll1Result"
+          },
+          "roll_2": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CombatRoll2Result"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "damage": {
+            "$ref": "#/components/schemas/CombatDamageResult"
+          },
+          "rebound": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CombatReboundResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "events": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Events"
+          }
+        },
+        "type": "object",
+        "required": [
+          "hit",
+          "critical_hit",
+          "fumble",
+          "tied",
+          "roll_1",
+          "roll_2",
+          "damage",
+          "events"
+        ],
+        "title": "ResolveAttackResponse"
+      },
+      "RollRequest": {
+        "properties": {
+          "target": {
+            "type": "integer",
+            "title": "Target"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason",
+            "description": "Optional short description of the attempted action for observability/debugging."
+          }
+        },
+        "type": "object",
+        "required": [
+          "target"
+        ],
+        "title": "RollRequest",
+        "description": "Body for POST /roll — d100 roll-under resolution."
+      },
+      "RollResponse": {
+        "properties": {
+          "roll": {
+            "type": "integer",
+            "title": "Roll"
+          },
+          "target": {
+            "type": "integer",
+            "title": "Target"
+          },
+          "success": {
+            "type": "boolean",
+            "title": "Success"
+          },
+          "margin": {
+            "type": "integer",
+            "title": "Margin"
+          },
+          "degree": {
+            "type": "string",
+            "title": "Degree"
+          },
+          "critical_success": {
+            "type": "boolean",
+            "title": "Critical Success",
+            "default": false
+          },
+          "critical_failure": {
+            "type": "boolean",
+            "title": "Critical Failure",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "roll",
+          "target",
+          "success",
+          "margin",
+          "degree"
+        ],
+        "title": "RollResponse"
+      },
+      "SapientCompanion-Input": {
+        "properties": {
+          "tier": {
+            "type": "string",
+            "const": "sapient",
+            "title": "Tier",
+            "default": "sapient"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "ancestry": {
+            "type": "string",
+            "title": "Ancestry"
+          },
+          "culture": {
+            "type": "string",
+            "title": "Culture"
+          },
+          "background": {
+            "type": "string",
+            "title": "Background"
+          },
+          "focus": {
+            "type": "string",
+            "title": "Focus"
+          },
+          "hp": {
+            "$ref": "#/components/schemas/HP"
+          },
+          "domains": {
+            "$ref": "#/components/schemas/DomainScores"
+          },
+          "knowledge": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Knowledge"
+          },
+          "application": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Application"
+          },
+          "identity": {
+            "$ref": "#/components/schemas/Identity-Input"
+          },
+          "equipment": {
+            "$ref": "#/components/schemas/Equipment-Input"
+          },
+          "reputation": {
+            "items": {
+              "$ref": "#/components/schemas/ReputationEntry"
+            },
+            "type": "array",
+            "title": "Reputation"
+          },
+          "bond_links": {
+            "$ref": "#/components/schemas/BondLinks"
+          },
+          "known_languages": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Known Languages"
+          },
+          "companions": {
+            "items": {
+              "$ref": "#/components/schemas/CreatureCompanion"
+            },
+            "type": "array",
+            "title": "Companions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "ancestry",
+          "culture",
+          "background",
+          "focus",
+          "hp",
+          "domains",
+          "identity",
+          "equipment",
+          "bond_links"
+        ],
+        "title": "SapientCompanion"
+      },
+      "SapientCompanion-Output": {
+        "properties": {
+          "tier": {
+            "type": "string",
+            "const": "sapient",
+            "title": "Tier",
+            "default": "sapient"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "ancestry": {
+            "type": "string",
+            "title": "Ancestry"
+          },
+          "culture": {
+            "type": "string",
+            "title": "Culture"
+          },
+          "background": {
+            "type": "string",
+            "title": "Background"
+          },
+          "focus": {
+            "type": "string",
+            "title": "Focus"
+          },
+          "hp": {
+            "$ref": "#/components/schemas/HP"
+          },
+          "domains": {
+            "$ref": "#/components/schemas/DomainScores"
+          },
+          "knowledge": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Knowledge"
+          },
+          "application": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Application"
+          },
+          "identity": {
+            "$ref": "#/components/schemas/Identity-Output"
+          },
+          "equipment": {
+            "$ref": "#/components/schemas/Equipment-Output"
+          },
+          "reputation": {
+            "items": {
+              "$ref": "#/components/schemas/ReputationEntry"
+            },
+            "type": "array",
+            "title": "Reputation"
+          },
+          "bond_links": {
+            "$ref": "#/components/schemas/BondLinks"
+          },
+          "known_languages": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Known Languages"
+          },
+          "companions": {
+            "items": {
+              "$ref": "#/components/schemas/CreatureCompanion"
+            },
+            "type": "array",
+            "title": "Companions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "ancestry",
+          "culture",
+          "background",
+          "focus",
+          "hp",
+          "domains",
+          "identity",
+          "equipment",
+          "bond_links"
+        ],
+        "title": "SapientCompanion"
+      },
+      "SapientCompanionRecord-Input": {
+        "properties": {
+          "tier": {
+            "type": "string",
+            "const": "sapient",
+            "title": "Tier",
+            "default": "sapient"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "ancestry": {
+            "type": "string",
+            "title": "Ancestry"
+          },
+          "culture": {
+            "type": "string",
+            "title": "Culture"
+          },
+          "background": {
+            "type": "string",
+            "title": "Background"
+          },
+          "focus": {
+            "type": "string",
+            "title": "Focus"
+          },
+          "hp": {
+            "$ref": "#/components/schemas/HP"
+          },
+          "domains": {
+            "$ref": "#/components/schemas/DomainScores"
+          },
+          "knowledge": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Knowledge"
+          },
+          "application": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Application"
+          },
+          "identity": {
+            "$ref": "#/components/schemas/Identity-Input"
+          },
+          "equipment": {
+            "$ref": "#/components/schemas/Equipment-Input"
+          },
+          "reputation": {
+            "items": {
+              "$ref": "#/components/schemas/ReputationEntry"
+            },
+            "type": "array",
+            "title": "Reputation"
+          },
+          "bond_links": {
+            "$ref": "#/components/schemas/BondLinks"
+          },
+          "known_languages": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Known Languages"
+          },
+          "companions": {
+            "items": {
+              "$ref": "#/components/schemas/CreatureCompanion"
+            },
+            "type": "array",
+            "title": "Companions"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "ancestry",
+          "culture",
+          "background",
+          "focus",
+          "hp",
+          "domains",
+          "identity",
+          "equipment",
+          "bond_links",
+          "id"
+        ],
+        "title": "SapientCompanionRecord"
+      },
+      "SapientCompanionRecord-Output": {
+        "properties": {
+          "tier": {
+            "type": "string",
+            "const": "sapient",
+            "title": "Tier",
+            "default": "sapient"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "ancestry": {
+            "type": "string",
+            "title": "Ancestry"
+          },
+          "culture": {
+            "type": "string",
+            "title": "Culture"
+          },
+          "background": {
+            "type": "string",
+            "title": "Background"
+          },
+          "focus": {
+            "type": "string",
+            "title": "Focus"
+          },
+          "hp": {
+            "$ref": "#/components/schemas/HP"
+          },
+          "domains": {
+            "$ref": "#/components/schemas/DomainScores"
+          },
+          "knowledge": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Knowledge"
+          },
+          "application": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Application"
+          },
+          "identity": {
+            "$ref": "#/components/schemas/Identity-Output"
+          },
+          "equipment": {
+            "$ref": "#/components/schemas/Equipment-Output"
+          },
+          "reputation": {
+            "items": {
+              "$ref": "#/components/schemas/ReputationEntry"
+            },
+            "type": "array",
+            "title": "Reputation"
+          },
+          "bond_links": {
+            "$ref": "#/components/schemas/BondLinks"
+          },
+          "known_languages": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Known Languages"
+          },
+          "companions": {
+            "items": {
+              "$ref": "#/components/schemas/CreatureCompanion"
+            },
+            "type": "array",
+            "title": "Companions"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "ancestry",
+          "culture",
+          "background",
+          "focus",
+          "hp",
+          "domains",
+          "identity",
+          "equipment",
+          "bond_links",
+          "id"
+        ],
+        "title": "SapientCompanionRecord"
+      },
+      "SaveStateRequest": {
+        "properties": {
+          "character": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CharacterModel-Input"
+              },
+              {
+                "$ref": "#/components/schemas/CharacterStateDelta"
+              }
+            ],
+            "title": "Character"
+          },
+          "world": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WorldModel-Input"
+              },
+              {
+                "$ref": "#/components/schemas/WorldStateDelta"
+              }
+            ],
+            "title": "World"
+          },
+          "log_entry": {
+            "type": "string",
+            "title": "Log Entry"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "log_entry"
+        ],
+        "title": "SaveStateRequest",
+        "description": "Body for POST /state/{session_id}"
+      },
+      "SceneContext": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "location_summary": {
+            "$ref": "#/components/schemas/SceneLocationSummary"
+          },
+          "visible_entities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Visible Entities"
+          },
+          "immediate_stakes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Immediate Stakes"
+          },
+          "relevant_character_state": {
+            "$ref": "#/components/schemas/SceneRelevantCharacterState"
+          },
+          "recent_log": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Recent Log"
+          },
+          "active_threats": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Active Threats"
+          },
+          "available_opportunities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Available Opportunities"
+          }
+        },
+        "type": "object",
+        "required": [
+          "session_id",
+          "location_summary",
+          "relevant_character_state"
+        ],
+        "title": "SceneContext",
+        "description": "Derived GPT-facing scene payload assembled from full state + location + log."
+      },
+      "SceneLocationSummary": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "default": "unknown"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "default": ""
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tags"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "SceneLocationSummary",
+        "description": "Compact location payload for turn narration."
+      },
+      "SceneRelevantCharacterState": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "hp": {
+            "$ref": "#/components/schemas/HP"
+          },
+          "status_effects": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Status Effects"
+          },
+          "survival": {
+            "$ref": "#/components/schemas/SurvivalState"
+          },
+          "active_companions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Active Companions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "hp"
+        ],
+        "title": "SceneRelevantCharacterState",
+        "description": "Narration-relevant subset of character/world state."
+      },
+      "SpendAPRequest": {
+        "properties": {
+          "target_domain": {
+            "type": "string",
+            "title": "Target Domain",
+            "description": "Domain to advance. Must be one of the seven domains."
+          },
+          "points": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Points",
+            "description": "Number of domain points to purchase. Must be positive."
+          },
+          "use_earned": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Use Earned",
+            "description": "AP to draw from earned pool of target_domain. Must not exceed points_available_earned[target_domain].",
+            "default": 0
+          },
+          "use_awarded": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Use Awarded",
+            "description": "AP to draw from awarded pool. Must not exceed points_available_awarded.",
+            "default": 0
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "target_domain",
+          "points"
+        ],
+        "title": "SpendAPRequest",
+        "description": "Body for POST /character/{session_id}/spend_ap"
+      },
+      "SpendAPResponse": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "target_domain": {
+            "type": "string",
+            "title": "Target Domain"
+          },
+          "points_purchased": {
+            "type": "integer",
+            "title": "Points Purchased"
+          },
+          "ap_cost_total": {
+            "type": "integer",
+            "title": "Ap Cost Total"
+          },
+          "ap_drawn_earned": {
+            "type": "integer",
+            "title": "Ap Drawn Earned"
+          },
+          "ap_drawn_awarded": {
+            "type": "integer",
+            "title": "Ap Drawn Awarded"
+          },
+          "new_domain_score": {
+            "type": "integer",
+            "title": "New Domain Score"
+          },
+          "advancement": {
+            "$ref": "#/components/schemas/AdvancementState"
+          }
+        },
+        "type": "object",
+        "required": [
+          "session_id",
+          "target_domain",
+          "points_purchased",
+          "ap_cost_total",
+          "ap_drawn_earned",
+          "ap_drawn_awarded",
+          "new_domain_score",
+          "advancement"
+        ],
+        "title": "SpendAPResponse"
+      },
+      "SurvivalState": {
+        "properties": {
+          "hunger": {
+            "$ref": "#/components/schemas/HungerState",
+            "default": "sated"
+          },
+          "hydration": {
+            "$ref": "#/components/schemas/HydrationState",
+            "default": "hydrated"
+          },
+          "fatigue": {
+            "$ref": "#/components/schemas/FatigueState",
+            "default": "rested"
+          },
+          "load": {
+            "$ref": "#/components/schemas/LoadState",
+            "default": "normal"
+          }
+        },
+        "type": "object",
+        "title": "SurvivalState",
+        "description": "Lightweight survival/load tracking using coarse state bands."
+      },
+      "TagsResponse": {
+        "properties": {
+          "knowledge_groups": {
+            "items": {
+              "$ref": "#/components/schemas/KnowledgeGroupEntry"
+            },
+            "type": "array",
+            "title": "Knowledge Groups"
+          },
+          "magic_fields": {
+            "items": {
+              "$ref": "#/components/schemas/MagicFieldEntry"
+            },
+            "type": "array",
+            "title": "Magic Fields"
+          },
+          "applications": {
+            "items": {
+              "$ref": "#/components/schemas/ApplicationEntry"
+            },
+            "type": "array",
+            "title": "Applications"
+          }
+        },
+        "type": "object",
+        "required": [
+          "knowledge_groups",
+          "magic_fields",
+          "applications"
+        ],
+        "title": "TagsResponse"
+      },
+      "TimeDriftWarning": {
+        "properties": {
+          "previous_turn": {
+            "type": "integer",
+            "title": "Previous Turn"
+          },
+          "current_turn": {
+            "type": "integer",
+            "title": "Current Turn"
+          },
+          "previous_time": {
+            "$ref": "#/components/schemas/TimeState"
+          },
+          "current_time": {
+            "$ref": "#/components/schemas/TimeState"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "previous_turn",
+          "current_turn",
+          "previous_time",
+          "current_time",
+          "message"
+        ],
+        "title": "TimeDriftWarning",
+        "description": "Emitted when a state save advances the turn counter but does not\nadvance in-world time. Non-blocking; included in response for the\nGPT to observe and self-correct."
+      },
+      "TimeOfDay": {
+        "type": "string",
+        "enum": [
+          "dawn",
+          "morning",
+          "midday",
+          "afternoon",
+          "dusk",
+          "night"
+        ],
+        "title": "TimeOfDay"
+      },
+      "TimeState": {
+        "properties": {
+          "day": {
+            "type": "integer",
+            "title": "Day",
+            "default": 1
+          },
+          "month": {
+            "type": "string",
+            "title": "Month",
+            "default": "Verdantrise"
+          },
+          "year": {
+            "type": "integer",
+            "title": "Year",
+            "default": 847
+          },
+          "time_of_day": {
+            "$ref": "#/components/schemas/TimeOfDay",
+            "default": "morning"
+          },
+          "season": {
+            "type": "string",
+            "title": "Season",
+            "default": "spring"
+          },
+          "festival": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Festival"
+          },
+          "weather": {
+            "$ref": "#/components/schemas/WeatherState",
+            "default": "clear"
+          },
+          "weather_note": {
+            "type": "string",
+            "title": "Weather Note",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "TimeState",
+        "description": "In-world time, calendar, and weather state."
+      },
+      "TransitionCompanionRequest": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "new_companion": {
+            "$ref": "#/components/schemas/ExceptionalCompanion-Input"
+          },
+          "trigger": {
+            "type": "string",
+            "title": "Trigger"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "session_id",
+          "new_companion",
+          "trigger"
+        ],
+        "title": "TransitionCompanionRequest"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "VersionResponse": {
+        "properties": {
+          "service": {
+            "type": "string",
+            "title": "Service"
+          },
+          "api_version": {
+            "type": "string",
+            "title": "Api Version"
+          },
+          "git_sha": {
+            "type": "string",
+            "title": "Git Sha"
+          },
+          "data_fingerprint": {
+            "type": "string",
+            "title": "Data Fingerprint"
+          },
+          "combat_rules_fingerprint": {
+            "type": "string",
+            "title": "Combat Rules Fingerprint"
+          },
+          "ancestry_count": {
+            "type": "integer",
+            "title": "Ancestry Count"
+          },
+          "culture_count": {
+            "type": "integer",
+            "title": "Culture Count"
+          },
+          "focus_count": {
+            "type": "integer",
+            "title": "Focus Count"
+          },
+          "backgrounds_count": {
+            "type": "integer",
+            "title": "Backgrounds Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "service",
+          "api_version",
+          "git_sha",
+          "data_fingerprint",
+          "combat_rules_fingerprint",
+          "ancestry_count",
+          "culture_count",
+          "focus_count",
+          "backgrounds_count"
+        ],
+        "title": "VersionResponse"
+      },
+      "WealthTier": {
+        "type": "string",
+        "enum": [
+          "destitute",
+          "modest",
+          "comfortable",
+          "wealthy",
+          "affluent"
+        ],
+        "title": "WealthTier"
+      },
+      "WeatherState": {
+        "type": "string",
+        "enum": [
+          "clear",
+          "mist",
+          "storm",
+          "ash-haze",
+          "unnatural"
+        ],
+        "title": "WeatherState"
+      },
+      "WorldModel-Input": {
+        "properties": {
+          "location": {
+            "type": "string",
+            "title": "Location"
+          },
+          "threat": {
+            "type": "string",
+            "title": "Threat"
+          },
+          "goal": {
+            "type": "string",
+            "title": "Goal"
+          },
+          "turn": {
+            "type": "integer",
+            "title": "Turn",
+            "default": 1
+          },
+          "companions": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/SapientCompanionRecord-Input"
+                },
+                {
+                  "$ref": "#/components/schemas/CreatureCompanionRecord"
+                },
+                {
+                  "$ref": "#/components/schemas/ExceptionalCompanionRecord-Input"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "tier",
+                "mapping": {
+                  "creature": "#/components/schemas/CreatureCompanionRecord",
+                  "exceptional": "#/components/schemas/ExceptionalCompanionRecord-Input",
+                  "sapient": "#/components/schemas/SapientCompanionRecord-Input"
+                }
+              }
+            },
+            "type": "array",
+            "title": "Companions"
+          },
+          "companion_archive": {
+            "items": {
+              "$ref": "#/components/schemas/ArchivedCompanionEnvelope-Input"
+            },
+            "type": "array",
+            "title": "Companion Archive"
+          },
+          "economy": {
+            "$ref": "#/components/schemas/Economy"
+          },
+          "politics": {
+            "$ref": "#/components/schemas/Politics"
+          },
+          "time": {
+            "$ref": "#/components/schemas/TimeState"
+          },
+          "survival": {
+            "$ref": "#/components/schemas/SurvivalState"
+          },
+          "pacing": {
+            "$ref": "#/components/schemas/PacingState"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "location",
+          "threat",
+          "goal"
+        ],
+        "title": "WorldModel"
+      },
+      "WorldModel-Output": {
+        "properties": {
+          "location": {
+            "type": "string",
+            "title": "Location"
+          },
+          "threat": {
+            "type": "string",
+            "title": "Threat"
+          },
+          "goal": {
+            "type": "string",
+            "title": "Goal"
+          },
+          "turn": {
+            "type": "integer",
+            "title": "Turn",
+            "default": 1
+          },
+          "companions": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/SapientCompanionRecord-Output"
+                },
+                {
+                  "$ref": "#/components/schemas/CreatureCompanionRecord"
+                },
+                {
+                  "$ref": "#/components/schemas/ExceptionalCompanionRecord-Output"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "tier",
+                "mapping": {
+                  "creature": "#/components/schemas/CreatureCompanionRecord",
+                  "exceptional": "#/components/schemas/ExceptionalCompanionRecord-Output",
+                  "sapient": "#/components/schemas/SapientCompanionRecord-Output"
+                }
+              }
+            },
+            "type": "array",
+            "title": "Companions"
+          },
+          "companion_archive": {
+            "items": {
+              "$ref": "#/components/schemas/ArchivedCompanionEnvelope-Output"
+            },
+            "type": "array",
+            "title": "Companion Archive"
+          },
+          "economy": {
+            "$ref": "#/components/schemas/Economy"
+          },
+          "politics": {
+            "$ref": "#/components/schemas/Politics"
+          },
+          "time": {
+            "$ref": "#/components/schemas/TimeState"
+          },
+          "survival": {
+            "$ref": "#/components/schemas/SurvivalState"
+          },
+          "pacing": {
+            "$ref": "#/components/schemas/PacingState"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "location",
+          "threat",
+          "goal"
+        ],
+        "title": "WorldModel"
+      },
+      "WorldStateDelta": {
+        "properties": {
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "threat": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Threat"
+          },
+          "goal": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Goal"
+          },
+          "turn": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Turn"
+          },
+          "companions": {
+            "anyOf": [
+              {
+                "items": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/SapientCompanionRecord-Input"
+                    },
+                    {
+                      "$ref": "#/components/schemas/CreatureCompanionRecord"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ExceptionalCompanionRecord-Input"
+                    }
+                  ],
+                  "discriminator": {
+                    "propertyName": "tier",
+                    "mapping": {
+                      "creature": "#/components/schemas/CreatureCompanionRecord",
+                      "exceptional": "#/components/schemas/ExceptionalCompanionRecord-Input",
+                      "sapient": "#/components/schemas/SapientCompanionRecord-Input"
+                    }
+                  }
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Companions"
+          },
+          "companion_archive": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ArchivedCompanionEnvelope-Input"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Companion Archive"
+          },
+          "economy": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EconomyDelta"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "politics": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Politics"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "time": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TimeState"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "survival": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SurvivalState"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "pacing": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PacingState"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "WorldStateDelta",
+        "description": "Typed partial world update for extraction-driven turn commits."
+      }
+    }
+  }
+}

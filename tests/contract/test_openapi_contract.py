@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import pytest
@@ -10,27 +11,14 @@ HTTP_METHODS = {"get", "post", "put", "patch", "delete", "head", "options"}
 
 
 def _load_expected_api_version() -> str:
-    """Read the expected API version from schemas/openapi.yaml."""
-    schema_path = Path(__file__).resolve().parents[2] / "schemas" / "openapi.yaml"
+    """Read the expected API version from schemas/openapi.json."""
+    schema_path = Path(__file__).resolve().parents[2] / "schemas" / "openapi.json"
     assert schema_path.exists(), f"missing OpenAPI schema: {schema_path}"
 
-    in_info = False
     with open(schema_path, "r", encoding="utf-8") as f:
-        for raw_line in f:
-            line = raw_line.rstrip("\n")
-            stripped = line.strip()
-            if stripped == "info:":
-                in_info = True
-                continue
-            if in_info and line and not line.startswith(" "):
-                break
-            if in_info and stripped.startswith("version:"):
-                _, value = stripped.split(":", 1)
-                version = value.strip().strip('"\'')
-                assert version, f"empty info.version in {schema_path}"
-                return version
-
-    raise AssertionError(f"missing info.version in {schema_path}")
+        version = json.load(f).get("info", {}).get("version")
+    assert version, f"empty info.version in {schema_path}"
+    return version
 
 
 def _iter_operations(spec: dict):
