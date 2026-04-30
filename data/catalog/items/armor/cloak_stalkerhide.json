@@ -43,10 +43,10 @@
   "tier": "T1",
   "magic_field": "warding",
   "mechanical_effect": {
-    "trigger": "hood up, wearer still",
-    "modifier": "+10 target",
-    "applies_to": "checks where the primary failure risk is being magically registered or perceived: passive ward-sense, forest-awareness, entity notice, magical tracking, scrying, and similar ambient magical awareness of the wearer as a presence",
-    "does_not_apply": "ordinary sight, scent, or hearing; untargeted area effects that affect a volume of space whether or not they register the wearer (standing field phenomena, environmental hazards, broad continuity disruptions); active combat detection rolls where the opponent is using mundane senses"
+  "trigger": "hood up, cloak worn",
+  "modifier": "+10 target vs magical detection; +5 target vs mundane sight, scent, or hearing",
+  "applies_to": "stealth, evasion, and concealment checks where the failure risk is being detected by another creature, ward, or place. The +10 modifier applies when the detector is a magical field, ward, entity, or ambient awareness. The +5 modifier applies when the detector is mundane sight, scent, or hearing.",
+  "does_not_apply": "physical hazards that affect a volume regardless of presence (fire, flood, falling debris); active combat once detection is no longer the question"
   },
   "tool_role": null
 }
