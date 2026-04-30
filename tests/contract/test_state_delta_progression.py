@@ -167,30 +167,62 @@ def test_state_delta_seeded_above_application_cannot_advance_further() -> None:
         )
     assert response.status_code == 422
 
-
 @pytest.mark.contract
-def test_state_delta_partial_world_time_preserves_existing_fields() -> None:
+def test_state_delta_advances_time_via_steps() -> None:
+    """Delta time_elapsed.steps advances server-computed time."""
     world = _world()
-    world["time"] = {
-        "day": 4,
-        "month": "Verdantrise",
-        "year": 847,
-        "time_of_day": "morning",
-        "season": "spring",
-        "festival": None,
-        "weather": "clear",
-        "weather_note": "",
-    }
+    world["time"]["time_of_day"] = "morning"
     app = _make_app(FakePool(DeltaConn(_character(), world)))
+
     with TestClient(app) as client:
         response = client.post(
             "/state/sess1/delta",
-            json={"world": {"time": {"time_of_day": "afternoon"}}, "log_entry": "advance time"},
+            json={"world": {"goal": "survive"}, "time_elapsed": {"steps": 2}, "log_entry": "advance time"},
+        )
+
+    assert response.status_code == 200
+    time = response.json()["world"]["time"]
+    assert time["day"] == 1
+    assert time["time_of_day"] == "afternoon"
+
+
+@pytest.mark.contract
+def test_state_delta_ignores_incoming_derived_time_fields() -> None:
+    """Delta world.time.day is ignored in favor of server-computed time."""
+    world = _world()
+    world["time"]["day"] = 4
+    app = _make_app(FakePool(DeltaConn(_character(), world)))
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1/delta",
+            json={"world": {"time": {"day": 999}}, "log_entry": "ignore derived"},
         )
 
     assert response.status_code == 200
     time = response.json()["world"]["time"]
     assert time["day"] == 4
-    assert time["month"] == "Verdantrise"
-    assert time["year"] == 847
-    assert time["time_of_day"] == "afternoon"
+    assert time["time_of_day"] == "morning"
+
+
+@pytest.mark.contract
+def test_state_delta_preserves_incoming_weather() -> None:
+    """Delta world.time.weather and weather_note remain writable."""
+    app = _make_app(FakePool(DeltaConn(_character(), _world())))
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1/delta",
+            json={
+                "world": {"time": {"weather": "mist", "weather_note": "river fog"}},
+                "log_entry": "weather change",
+            },
+        )
+
+    assert response.status_code == 200
+    time = response.json()["world"]["time"]
+    assert time["weather"] == "mist"
+    assert time["weather_note"] == "river fog"
+    assert time["day"] == 1
+    assert time["time_of_day"] == "morning"
+

@@ -250,6 +250,16 @@ def apply_delta(current_state: dict[str, Any], delta: ApplyStateDeltaRequest) ->
     new_advancement = _apply_advancement_and_validate_caps(existing_character, character_delta)
     character_delta["advancement"] = new_advancement
 
+    normalized_existing_world = _normalize_world_state(existing_world)
+    existing_time = TimeState.model_validate(normalized_existing_world["time"])
+    new_time = advance_time(existing_time, delta.time_elapsed)
+
+    incoming_time = world_delta.get("time") if isinstance(world_delta.get("time"), dict) else {}
+    if "weather" in incoming_time:
+        new_time = new_time.model_copy(update={"weather": incoming_time["weather"]})
+    if "weather_note" in incoming_time:
+        new_time = new_time.model_copy(update={"weather_note": incoming_time["weather_note"]})
+
     equipment_delta = character_delta.pop("equipment", None)
     merged_character = _deep_merge(existing_character, character_delta)
     if equipment_delta is not None:
@@ -258,6 +268,7 @@ def apply_delta(current_state: dict[str, Any], delta: ApplyStateDeltaRequest) ->
         )
 
     merged_world = _deep_merge(existing_world, world_delta)
+    merged_world["time"] = new_time.model_dump(mode="json")
 
     merged_character = _normalize_character_state(merged_character)
     merged_world = _normalize_world_state(merged_world)
