@@ -39,5 +39,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "alchemy",
+  "mechanical_effect": {
+    "trigger": "consumed or administered before or shortly after poison exposure; active for roughly an hour",
+    "modifier": "+5 target",
+    "applies_to": "checks to resist, reduce, or recover from poison effects during the antitoxin's effective period",
+    "does_not_apply": "disease, curses, non-poison toxins outside its scope, or poison effects already resolved beyond treatment"
+  },
   "tool_role": null
 }

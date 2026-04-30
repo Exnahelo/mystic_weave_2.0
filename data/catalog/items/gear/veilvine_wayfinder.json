@@ -40,5 +40,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "runecraft",
+  "mechanical_effect": {
+    "trigger": "living pendant is tended and within the Feywood or Border ambient-field conditions it can read",
+    "modifier": "+5 target",
+    "applies_to": "druidic or ranger navigation, seasonal-transition timing, and ambient-field state reading where subtle visual color shifts are useful",
+    "does_not_apply": "neglected or withered wayfinders; precise map replacement; regions outside the field conditions the Veilvine can register"
+  },
   "tool_role": null
 }

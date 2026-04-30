@@ -39,5 +39,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "alchemy",
+  "mechanical_effect": {
+    "trigger": "flask strikes or is applied to a target that can ignite or suffer ongoing burning pressure",
+    "modifier": "ignition plus ongoing burning pressure until put out",
+    "applies_to": "checks to ignite targets, create fire hazards, force a target to deal with burning, or maintain pressure through alchemical fire",
+    "does_not_apply": "nonflammable or fireproof targets; underwater or smothered conditions; situations where ongoing flame cannot persist"
+  },
   "tool_role": null
 }

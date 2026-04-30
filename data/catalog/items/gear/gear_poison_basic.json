@@ -38,5 +38,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "alchemy",
+  "mechanical_effect": {
+    "trigger": "applied to a weapon before the next successful strike; poison is delivered on that strike",
+    "modifier": "poison effect on next successful strike",
+    "applies_to": "the next successful weapon strike made with the coated weapon where the target can be poisoned",
+    "does_not_apply": "targets immune or not meaningfully susceptible to poison; attacks after the coating is spent; checks unrelated to delivering the coated strike"
+  },
   "tool_role": null
 }

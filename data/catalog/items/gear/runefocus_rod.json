@@ -35,5 +35,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "runecraft",
+  "mechanical_effect": {
+    "trigger": "held and used to channel a short arcane working in an unstable magical environment",
+    "modifier": "+5 target",
+    "applies_to": "controlled casting, stabilization, or theory-grounded checks where the rod provides narrative grounding in unstable magical conditions",
+    "does_not_apply": "mundane tasks; long rituals beyond a short working; environments that are stable enough that the rod provides no special help"
+  },
   "tool_role": null
 }

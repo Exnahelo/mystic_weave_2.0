@@ -40,5 +40,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "runecraft",
+  "mechanical_effect": {
+    "trigger": "carried by the bonded rider while interacting with Briarmane Coursers or those who recognize the braid's relational meaning",
+    "modifier": "+5 target",
+    "applies_to": "initial encounter, calming, recognition, or trust-framing checks involving Briarmane Coursers or Feywood riders who understand the token",
+    "does_not_apply": "bearers separated from the actual bonded relationship; ordinary animal handling unrelated to Briarmanes; groups that do not recognize the braid"
+  },
   "tool_role": null
 }

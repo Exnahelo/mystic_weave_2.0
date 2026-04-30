@@ -40,5 +40,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "sacred",
+  "mechanical_effect": {
+    "trigger": "trained bearer has carried it for months and is within the Feywood's immediate ambient-field reach",
+    "modifier": "+5 target",
+    "applies_to": "checks to notice Feywood ambient-field state shifts, root-memory signals, or subtle field changes slightly earlier than otherwise possible",
+    "does_not_apply": "untrained or new bearers; realm-side use outside ambient-field reach; flashy detection, divination, or precise navigation beyond subtle field-sense"
+  },
   "tool_role": null
 }

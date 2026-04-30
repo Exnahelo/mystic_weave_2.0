@@ -43,5 +43,11 @@
   "special_effect_tag": "frost",
   "tier": "T1",
   "magic_field": "alchemy",
+  "mechanical_effect": {
+    "trigger": "fired from a compatible bow at a target or surface where chilling, brittleness, or slowing impact is plausible",
+    "modifier": "+5 target",
+    "applies_to": "checks to exploit frost effects: chilling impact, brittle surfaces, exposed mechanisms, or slowing pressure delivered by a bow shot",
+    "does_not_apply": "targets or materials unaffected by cold; ordinary accuracy beyond the frost-delivery purpose; situations where chilling would not help"
+  },
   "tool_role": null
 }

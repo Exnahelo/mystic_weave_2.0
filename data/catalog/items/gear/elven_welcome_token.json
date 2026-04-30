@@ -40,5 +40,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "runecraft",
+  "mechanical_effect": {
+    "trigger": "carried on the person by the legitimate recipient during the sanctioned visit for which it was given",
+    "modifier": "+10 target",
+    "applies_to": "Feywood path-finding, ambient-field cooperation, and checks where being registered as a welcome guest helps movement toward intended destinations",
+    "does_not_apply": "stolen or forged tokens; uses outside the host-sanctioned visit; social authority beyond welcome-guest status; regions outside the Feywood ambient field"
+  },
   "tool_role": null
 }

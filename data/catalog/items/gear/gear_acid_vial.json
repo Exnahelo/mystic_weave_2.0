@@ -38,5 +38,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "alchemy",
+  "mechanical_effect": {
+    "trigger": "vial applied or thrown so the acid makes direct contact with the target object or creature",
+    "modifier": "corrosive damage or material degradation on direct contact",
+    "applies_to": "checks to corrode locks, hinges, bindings, surfaces, armor weak points, or creatures vulnerable to acid contact",
+    "does_not_apply": "targets protected from contact; materials not meaningfully affected by acid; situations where corrosion is irrelevant"
+  },
   "tool_role": null
 }

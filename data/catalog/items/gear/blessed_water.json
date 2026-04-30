@@ -36,5 +36,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "sacred",
+  "mechanical_effect": {
+    "trigger": "applied, sprinkled, or used as part of a consecration, ward-tracing, or cleansing rite against minor corruption",
+    "modifier": "+5 target",
+    "applies_to": "checks for minor purification, ward tracing, consecration, or cleansing narration where sacred authority is relevant",
+    "does_not_apply": "major banishment or grave profane entities requiring stronger rites; mundane cleaning; situations with no sacred or corruptive element"
+  },
   "tool_role": null
 }

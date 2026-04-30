@@ -43,5 +43,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "runecraft",
+  "mechanical_effect": {
+    "trigger": "lantern carried and uncovered while its fungal colony is alive and tended",
+    "modifier": "+5 target",
+    "applies_to": "exploration, navigation, reading, or careful movement checks where soft steady light without fuel, flame, or smoke is the relevant advantage",
+    "does_not_apply": "bright-light signaling, blinding, heat/fire needs, or masking Feywood ambient-field conditions under Turning"
+  },
   "tool_role": null
 }

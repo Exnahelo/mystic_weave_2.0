@@ -36,5 +36,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "sacred",
+  "mechanical_effect": {
+    "trigger": "applied, sprinkled, or used as part of a rite against a profane entity, corruption, or banishment situation where sacred authority is recognized",
+    "modifier": "+10 target",
+    "applies_to": "strong purification, banishment, consecration, or hostile profane-entity checks where holy water is directly used",
+    "does_not_apply": "mundane cleaning; entities or situations with no sacred/profane relevance; uses that do not expend or apply the vial"
+  },
   "tool_role": null
 }

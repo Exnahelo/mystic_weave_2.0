@@ -40,5 +40,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "sacred",
+  "mechanical_effect": {
+    "trigger": "used at the specific oath-marking event for which it was prepared and consumed by the oathtaker and witnesses as part of the ceremony",
+    "modifier": "+5 target",
+    "applies_to": "checks to structure, witness, solemnize, or interpret the intended oath-marking ceremony",
+    "does_not_apply": "other ceremonies; speculative storage; trade or export; attempts to use it outside the prepared oath event"
+  },
   "tool_role": null
 }

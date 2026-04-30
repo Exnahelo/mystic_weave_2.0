@@ -43,5 +43,11 @@
   "special_effect_tag": "fire",
   "tier": "T1",
   "magic_field": "alchemy",
+  "mechanical_effect": {
+    "trigger": "launched from a compatible sling at a target or area where a fragile incendiary capsule can shatter and ignite",
+    "modifier": "+5 target",
+    "applies_to": "checks to set small fires, create fiery distraction, or deliver small-scale ignition through sling firepot impact",
+    "does_not_apply": "nonflammable or soaked targets; precision attacks where shattering ignition is irrelevant; situations where fire would not help"
+  },
   "tool_role": null
 }

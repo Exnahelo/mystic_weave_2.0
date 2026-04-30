@@ -37,5 +37,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "runecraft",
+  "mechanical_effect": {
+    "trigger": "presented or used in binding-oath ceremony framing where the relevant custom or civic order honors it",
+    "modifier": "+5 target",
+    "applies_to": "checks involving formal vows, oath ceremony structure, recognition by select civic orders, or social leverage grounded in honored oath custom",
+    "does_not_apply": "groups that do not honor the oath custom; ordinary persuasion with no vow context; forged or contextless displays"
+  },
   "tool_role": null
 }

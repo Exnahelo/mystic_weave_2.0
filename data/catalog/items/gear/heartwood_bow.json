@@ -42,5 +42,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "runecraft",
+  "mechanical_effect": {
+    "trigger": "wielded by Lethariel Heartwood or a sanctioned bearer in defense of the Heartwood or the Feywood",
+    "modifier": "+10 target and +1 damage step",
+    "applies_to": "bow attacks and defense-of-Feywood shots where heightened accuracy and penetrating force from the Heartwood Bow apply",
+    "does_not_apply": "unsanctioned bearers; uses outside defense of the Heartwood or Feywood; checks unrelated to arrows loosed from the bow"
+  },
   "tool_role": null
 }

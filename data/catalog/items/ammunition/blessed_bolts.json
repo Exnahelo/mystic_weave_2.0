@@ -43,5 +43,11 @@
   "special_effect_tag": "sacred",
   "tier": "T1",
   "magic_field": "sacred",
+  "mechanical_effect": {
+    "trigger": "fired from a compatible crossbow in sanctioned violence against a profane, corrupted, undead, or sacredly vulnerable threat where holy authority is recognized and relevant",
+    "modifier": "+5 target",
+    "applies_to": "attack or pressure checks where the bolt's consecration can matter against profane, corrupted, undead, or oath-hostile entities",
+    "does_not_apply": "ordinary targets with no sacred vulnerability; non-combat social authority checks; attacks where the bolt is not fired from a compatible crossbow"
+  },
   "tool_role": null
 }

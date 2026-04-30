@@ -37,5 +37,11 @@
   "special_effect_tag": null,
   "tier": "T1",
   "magic_field": "runecraft",
+  "mechanical_effect": {
+    "trigger": "invoked and one charge is active, producing steady witchlight",
+    "modifier": "+5 target",
+    "applies_to": "exploration, searching, travel, or manipulation checks where reliable light in darkness without open flame materially helps",
+    "does_not_apply": "bright-light signaling, heat/fire needs, concealment in darkness, or checks unaffected by visibility"
+  },
   "tool_role": null
 }

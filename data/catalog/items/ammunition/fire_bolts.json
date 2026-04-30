@@ -43,5 +43,11 @@
   "special_effect_tag": "fire",
   "tier": "T1",
   "magic_field": "alchemy",
+  "mechanical_effect": {
+    "trigger": "fired from a compatible crossbow at a target or material that can plausibly ignite or be affected by delivered flame",
+    "modifier": "+5 target",
+    "applies_to": "checks to ignite vulnerable materials, create fire pressure, or deliver fire through a crossbow shot",
+    "does_not_apply": "nonflammable or soaked targets; situations where fire would not help; ordinary accuracy beyond the fire-delivery purpose"
+  },
   "tool_role": null
 }
