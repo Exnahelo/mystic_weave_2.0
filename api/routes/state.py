@@ -300,8 +300,8 @@ def apply_delta(current_state: dict[str, Any], delta: ApplyStateDeltaRequest) ->
     - On any validation failure, no state is committed. The previously stored state and log
       remain unchanged.
     """
-    character_delta = delta.character.model_dump(exclude_none=True, by_alias=True)
-    world_delta = delta.world.model_dump(exclude_none=True)
+    character_delta = delta.character.model_dump(exclude_unset=True, by_alias=True)
+    world_delta = delta.world.model_dump(exclude_unset=True)
 
     existing_character = json.loads(current_state["character"])
     existing_world = json.loads(current_state["world"])

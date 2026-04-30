@@ -166,3 +166,31 @@ def test_state_delta_seeded_above_application_cannot_advance_further() -> None:
             json={"character": {"application": {"hauling": 3}}, "log_entry": "bad seeded advance"},
         )
     assert response.status_code == 422
+
+
+@pytest.mark.contract
+def test_state_delta_partial_world_time_preserves_existing_fields() -> None:
+    world = _world()
+    world["time"] = {
+        "day": 4,
+        "month": "Verdantrise",
+        "year": 847,
+        "time_of_day": "morning",
+        "season": "spring",
+        "festival": None,
+        "weather": "clear",
+        "weather_note": "",
+    }
+    app = _make_app(FakePool(DeltaConn(_character(), world)))
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1/delta",
+            json={"world": {"time": {"time_of_day": "afternoon"}}, "log_entry": "advance time"},
+        )
+
+    assert response.status_code == 200
+    time = response.json()["world"]["time"]
+    assert time["day"] == 4
+    assert time["month"] == "Verdantrise"
+    assert time["year"] == 847
+    assert time["time_of_day"] == "afternoon"
