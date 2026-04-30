@@ -157,6 +157,58 @@ def _world(turn: int = 1, time_of_day: str = "morning") -> dict:
 
 
 @pytest.mark.contract
+def test_save_full_state_tag_advance_increments_counter() -> None:
+    character = _character()
+    character["knowledge"]["athletics"] = 1
+    conn = StateRouteConn("sess1", character, _world(turn=1, time_of_day="morning"))
+    app = _make_app(FakePool(conn))
+
+    incoming_character = _character()
+    incoming_character["knowledge"]["athletics"] = 2
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1",
+            json={
+                "character": incoming_character,
+                "world": _world(turn=1, time_of_day="morning"),
+                "log_entry": "Full save advances athletics.",
+            },
+        )
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["character"]["advancement"]["tag_advance_counters"]["power"] == 1
+
+
+@pytest.mark.contract
+def test_save_full_state_application_beyond_parent_returns_422() -> None:
+    character = _character()
+    character["knowledge"]["athletics"] = 1
+    character["application"]["hauling"] = 1
+    conn = StateRouteConn("sess1", character, _world(turn=1, time_of_day="morning"))
+    app = _make_app(FakePool(conn))
+
+    incoming_character = _character()
+    incoming_character["knowledge"]["athletics"] = 1
+    incoming_character["application"]["hauling"] = 3
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1",
+            json={
+                "character": incoming_character,
+                "world": _world(turn=1, time_of_day="morning"),
+                "log_entry": "Full save violates parent cap.",
+            },
+        )
+
+    assert response.status_code == 422
+    body = response.json()
+    assert body["detail"]["message"] == "parent-cap violation"
+
+
+@pytest.mark.contract
 def test_save_rejects_when_turn_advances_without_time() -> None:
     """Turn advanced + no world.time field in body → 422 (enforced acknowledgment)."""
     conn = StateRouteConn("sess1", _character(), _world(turn=1, time_of_day="morning"))

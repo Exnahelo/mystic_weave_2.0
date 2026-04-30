@@ -166,6 +166,31 @@ def _apply_tag_advancement_counters(
     return advancement
 
 
+def _apply_advancement_and_validate_caps(
+    existing_character: dict[str, Any],
+    incoming_character: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Run the shared advancement-counter update and parent-cap validation
+    used by both /state/{session_id} (full save) and /state/{session_id}/delta.
+
+    `incoming_character` is treated as a delta-shaped dict: only fields present
+    contribute to counter increments. Returns the updated advancement dict.
+    Raises HTTPException(422) on parent-cap violation.
+    """
+    new_advancement = _apply_tag_advancement_counters(existing_character, incoming_character)
+    application_block = incoming_character.get("application")
+    if isinstance(application_block, dict) and application_block:
+        try:
+            validate_application_parent_cap(existing_character, application_block)
+        except ValueError as exc:
+            raise HTTPException(
+                status_code=422,
+                detail={"message": "parent-cap violation", "error": str(exc)},
+            )
+    return new_advancement
+
+
 def _normalize_world_state(payload: dict[str, Any]) -> dict[str, Any]:
     """Backfill missing structured world fields for legacy/incomplete payloads."""
     normalized = dict(payload)
@@ -281,18 +306,8 @@ def apply_delta(current_state: dict[str, Any], delta: ApplyStateDeltaRequest) ->
     existing_character = json.loads(current_state["character"])
     existing_world = json.loads(current_state["world"])
 
-    new_advancement = _apply_tag_advancement_counters(existing_character, character_delta)
+    new_advancement = _apply_advancement_and_validate_caps(existing_character, character_delta)
     character_delta["advancement"] = new_advancement
-
-    application_delta = character_delta.get("application")
-    if isinstance(application_delta, dict) and application_delta:
-        try:
-            validate_application_parent_cap(existing_character, application_delta)
-        except ValueError as exc:
-            raise HTTPException(
-                status_code=422,
-                detail={"message": "parent-cap violation", "error": str(exc)},
-            )
 
     equipment_delta = character_delta.pop("equipment", None)
     merged_character = _deep_merge(existing_character, character_delta)
@@ -389,6 +404,15 @@ async def save_state(
         if existing_row is not None:
             existing_character: dict[str, Any] = json.loads(existing_row["character"])
             existing_world: dict[str, Any] = json.loads(existing_row["world"])
+
+            # Run advancement counters and parent-cap validation against the
+            # incoming payload before merge, mirroring the delta endpoint.
+            # First saves (existing_row is None) skip this; counter updates
+            # require a prior state to diff against.
+            incoming_character["advancement"] = _apply_advancement_and_validate_caps(
+                existing_character, incoming_character
+            )
+
             merged_character = _deep_merge(existing_character, incoming_character)
             merged_world = _deep_merge(existing_world, world_json)
             normalized_existing_world = _normalize_world_state(existing_world)
