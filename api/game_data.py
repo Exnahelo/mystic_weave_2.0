@@ -131,7 +131,7 @@ def project_catalog_to_item_option(item: dict[str, Any]) -> dict[str, Any]:
     Mapping: id, name, category, description, tags, and roll_tag are copied
     from the canonical flat catalog item.
     """
-    return {
+    projected = {
         "id": item["id"],
         "name": item["name"],
         "category": item["category"],
@@ -144,6 +144,9 @@ def project_catalog_to_item_option(item: dict[str, Any]) -> dict[str, Any]:
         "value_cd": item.get("value_cd", 0),
         "effects": list(item.get("narrative_effects", [])),
     }
+    if item.get("mechanical_effect") is not None:
+        projected["mechanical_effect"] = item["mechanical_effect"]
+    return projected
 
 
 def filter_catalog_by_kind(kind: str) -> list[dict[str, Any]]:
