@@ -95,6 +95,19 @@ async def upsert_location(
             json.dumps(data_dict),
         )
 
+        # Treat the saved connections array as authoritative for this source.
+        # Remove outbound graph edges that were present in an earlier version of
+        # the location but are no longer listed in the updated payload.
+        await conn.execute(
+            """
+            DELETE FROM world_graph
+             WHERE from_id = $1
+               AND NOT (to_id = ANY($2::text[]))
+            """,
+            body.id,
+            body.connections,
+        )
+
         # Upsert world_graph edges for each connection listed in the data.
         # We only insert edges where the target location already exists,
         # to avoid FK violations. If a target did not exist at the time a source
