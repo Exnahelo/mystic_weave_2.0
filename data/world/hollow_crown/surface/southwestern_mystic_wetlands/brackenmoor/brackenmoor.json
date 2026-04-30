@@ -1,0 +1,28 @@
+{
+  "id": "brackenmoor",
+  "name": "Brackenmoor",
+  "type": "settlement",
+  "region_id": "hollow-crown",
+  "description": "The realm's rare-specimen gathering village, set at the transition zone where the western temperate forest gives way to the Mystic Wetlands' upper reaches. Brackenmoor's residents are wild-harvesters — they know the transition biome intimately and spend their working days in the bogs, fen edges, and damp hardwood stands where the realm's rarest herbs, mosses, fungi, and small specimens grow. The harvest moves downstream to Mirefall for specialized preparation and onward distribution. The village itself is modest, weathered, and built to resist the wet ground that surrounds it. Its residents have the quiet competence of people whose work depends on knowing things most others do not.",
+  "connections": [
+    "southwestern-mystic-wetlands",
+    "mirefall",
+    "western-temperate-forest"
+  ],
+  "tags": [
+    "drakenvale",
+    "brackenmoor",
+    "wetland-edge",
+    "rare-specimens",
+    "gathering-village",
+    "transition-biome",
+    "supply-village",
+    "mirefall-upstream"
+  ],
+  "known_npcs": [
+    "Fenwarden",
+    "Specimen Master"
+  ],
+  "threat_level": 1,
+  "discovered": true
+}

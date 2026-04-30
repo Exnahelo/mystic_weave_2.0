@@ -20,7 +20,7 @@ canonical node.
 
 ### Stem↔id
 
-For every world YAML file and every vault markdown mirror:
+For every world JSON file and every vault markdown mirror:
 
     Path(file).stem == data["id"].replace("-", "_")
 

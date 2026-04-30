@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """One-shot topology reconciliation. Idempotent. Safe to re-run."""
-import yaml
+import json
 import re
 from pathlib import Path
 import shutil
@@ -72,32 +72,33 @@ REPLACE_IN_CONNECTIONS = {
 
 # --- Helpers ---
 
-def load_yaml(path):
+def load_json(path):
     with open(path) as f:
-        return yaml.safe_load(f)
+        return json.load(f)
 
-def save_yaml(path, data):
+def save_json(path, data):
     with open(path, 'w') as f:
-        yaml.dump(data, f, sort_keys=False, allow_unicode=True, default_flow_style=False, width=1000)
+        json.dump(data, f, indent=2, ensure_ascii=False)
+        f.write('\n')
 
-def iter_yaml_files():
-    for p in sorted(DATA_ROOT.rglob('*.yaml')):
+def iter_json_files():
+    for p in sorted(DATA_ROOT.rglob('*.json')):
         yield p
 
 def find_file_by_id(target_id):
-    """Find the YAML file whose 'id' field equals target_id."""
-    for p in iter_yaml_files():
+    """Find the JSON file whose 'id' field equals target_id."""
+    for p in iter_json_files():
         try:
-            data = load_yaml(p)
+            data = load_json(p)
             if data and data.get('id') == target_id:
                 return p
         except Exception:
             pass
     return None
 
-def find_md_mirror(yaml_path):
+def find_md_mirror(json_path):
     """Find the corresponding markdown mirror in prompts/world_vault."""
-    rel = yaml_path.relative_to(DATA_ROOT)
+    rel = json_path.relative_to(DATA_ROOT)
     candidate = VAULT_ROOT / rel.with_suffix('.md')
     if candidate.exists():
         return candidate
@@ -125,22 +126,22 @@ def record(msg):
 # --- Step 1: Move misplaced silverwood_trail ---
 
 def move_silverwood_trail():
-    src_yaml = DATA_ROOT / 'surface/feywood/silverwood_trail.yaml'
-    dst_yaml = DATA_ROOT / 'surface/western_temperate_forest/silverwood_trail.yaml'
+    src_json = DATA_ROOT / 'surface/feywood/silverwood_trail.json'
+    dst_json = DATA_ROOT / 'surface/western_temperate_forest/silverwood_trail.json'
     src_md = VAULT_ROOT / 'surface/feywood/silverwood_trail.md'
     dst_md = VAULT_ROOT / 'surface/western_temperate_forest/silverwood_trail.md'
 
     moved = []
-    if src_yaml.exists() and not dst_yaml.exists():
-        dst_yaml.parent.mkdir(parents=True, exist_ok=True)
-        shutil.move(str(src_yaml), str(dst_yaml))
-        moved.append(f'YAML: {src_yaml} -> {dst_yaml}')
-    elif dst_yaml.exists() and src_yaml.exists():
+    if src_json.exists() and not dst_json.exists():
+        dst_json.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(src_json), str(dst_json))
+        moved.append(f'JSON: {src_json} -> {dst_json}')
+    elif dst_json.exists() and src_json.exists():
         # both exist — prefer dst, remove src
-        src_yaml.unlink()
-        moved.append(f'YAML: removed duplicate {src_yaml}')
-    elif dst_yaml.exists():
-        moved.append(f'YAML: already at destination {dst_yaml}')
+        src_json.unlink()
+        moved.append(f'JSON: removed duplicate {src_json}')
+    elif dst_json.exists():
+        moved.append(f'JSON: already at destination {dst_json}')
 
     if src_md and src_md.exists() and not dst_md.exists():
         dst_md.parent.mkdir(parents=True, exist_ok=True)
@@ -159,9 +160,9 @@ def move_silverwood_trail():
 
 def apply_id_renames():
     # Phase 1: update the 'id' field where the file's current id matches a key
-    for p in iter_yaml_files():
+    for p in iter_json_files():
         try:
-            data = load_yaml(p)
+            data = load_json(p)
         except Exception as e:
             record(f'[skip-parse-error] {p}: {e}')
             continue
@@ -171,17 +172,17 @@ def apply_id_renames():
         if cur_id in ID_RENAMES and cur_id != ID_RENAMES[cur_id]:
             new_id = ID_RENAMES[cur_id]
             data['id'] = new_id
-            save_yaml(p, data)
+            save_json(p, data)
             record(f'[id-rename] {p.name}: {cur_id} -> {new_id}')
             # Update markdown mirror's id field
             md = find_md_mirror(p)
             if md and md.exists():
                 update_md_frontmatter_and_body(md, cur_id, new_id)
 
-    # Phase 2: walk every YAML, update any connection references, parent references, region references
-    for p in iter_yaml_files():
+    # Phase 2: walk every JSON, update any connection references, parent references, region references
+    for p in iter_json_files():
         try:
-            data = load_yaml(p)
+            data = load_json(p)
         except Exception:
             continue
         if not data or not isinstance(data, dict):
@@ -210,7 +211,7 @@ def apply_id_renames():
                 changed = True
 
         if changed:
-            save_yaml(p, data)
+            save_json(p, data)
             record(f'[conn-rewrite] {p.name}: connections/parents normalized')
             md = find_md_mirror(p)
             if md and md.exists():
@@ -226,7 +227,7 @@ def apply_specific_replacements():
         if not fp:
             record(f'[specific-replace] skipped: no file for id={loc_id}')
             continue
-        data = load_yaml(fp)
+        data = load_json(fp)
         conns = data.get('connections', []) or []
         new_conns = []
         changed = False
@@ -245,7 +246,7 @@ def apply_specific_replacements():
             for old_val, new_val in replacements.items():
                 if data.get('parent_location_id') == old_val:
                     data['parent_location_id'] = new_val
-            save_yaml(fp, data)
+            save_json(fp, data)
             record(f'[specific-replace] {loc_id}: {replacements}')
             md = find_md_mirror(fp)
             if md:
@@ -260,11 +261,11 @@ def remove_connections():
         if not fp:
             record(f'[remove-conn] skipped: no file for id={src}')
             continue
-        data = load_yaml(fp)
+        data = load_json(fp)
         conns = data.get('connections', []) or []
         if tgt in conns:
             data['connections'] = [c for c in conns if c != tgt]
-            save_yaml(fp, data)
+            save_json(fp, data)
             record(f'[remove-conn] {src}: removed -> {tgt}')
             md = find_md_mirror(fp)
             if md:
@@ -286,23 +287,23 @@ def reciprocate_pairs():
             record(f'[reciprocate] skipped: no file for id={b}')
             continue
         # Ensure a lists b
-        da = load_yaml(fa)
+        da = load_json(fa)
         ca = da.get('connections', []) or []
         if b not in ca:
             ca.append(b)
             da['connections'] = ca
-            save_yaml(fa, da)
+            save_json(fa, da)
             record(f'[reciprocate] {a}: + {b}')
             md = find_md_mirror(fa)
             if md:
                 add_to_md_connections(md, b)
         # Ensure b lists a
-        db = load_yaml(fb)
+        db = load_json(fb)
         cb = db.get('connections', []) or []
         if a not in cb:
             cb.append(a)
             db['connections'] = cb
-            save_yaml(fb, db)
+            save_json(fb, db)
             record(f'[reciprocate] {b}: + {a}')
             md = find_md_mirror(fb)
             if md:
@@ -341,9 +342,9 @@ def validate():
     conns_map = {}
     errors = []
 
-    for p in iter_yaml_files():
+    for p in iter_json_files():
         try:
-            data = load_yaml(p)
+            data = load_json(p)
             if data and 'id' in data:
                 all_ids.add(data['id'])
                 conns_map[data['id']] = data.get('connections', []) or []

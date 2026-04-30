@@ -1,0 +1,27 @@
+{
+  "id": "platinum-heart",
+  "name": "Platinum Heart",
+  "type": "location",
+  "region_id": "hollow-crown",
+  "settlement_id": "stronghold-of-drakenvale",
+  "parent_location_id": "stronghold-of-drakenvale",
+  "description": "The high sanctum of Solveris at the summit of the Stronghold, an open circular platform of pale platinum-veined stone rising into the sky above the entire Hollow Crown. At its center burns the Platinum Flame, an eternal silver-white light that inspires righteousness and marks the sacred axis of the realm. The Sacred Pools begin here as clear water welling up from the stone itself before descending through the fortress. From the Heart's edge, the whole valley is visible — city, grasslands, lake, distant forests, and the ring of Alpine Peaks beyond. It is where the Oath of the Fallen was first sworn and where the Platinum Warden led the Accord in its founding oath.",
+  "connections": [
+    "stronghold-of-drakenvale",
+    "sacred-pools"
+  ],
+  "tags": [
+    "drakenvale",
+    "stronghold",
+    "sacred",
+    "platinum-flame",
+    "high-sanctum",
+    "platinum-acolytes",
+    "pilgrimage"
+  ],
+  "known_npcs": [
+    "High Acolyte of the Platinum Flame"
+  ],
+  "threat_level": 0,
+  "discovered": true
+}

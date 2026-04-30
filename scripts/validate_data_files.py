@@ -8,8 +8,6 @@ import re
 import sys
 from pathlib import Path
 
-import yaml
-
 DOMAIN_KEYS = {
     "power",
     "agility",
@@ -672,8 +670,8 @@ def _validate_beast_exceptional(path: Path, failures: list[str]) -> None:
         _failures_append(failures, isinstance(row.get("subspecies"), str) and row.get("subspecies").strip(), f"{label}.subspecies must be non-empty string")
 
 
-def _validate_world_yaml(path: Path, failures: list[str]) -> None:
-    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+def _validate_world_json(path: Path, failures: list[str]) -> None:
+    data = json.loads(path.read_text(encoding="utf-8"))
     label = path.relative_to(path.parents[2]).as_posix()
     if not isinstance(data, dict):
         failures.append(f"{label}: expected top-level mapping")
@@ -745,10 +743,10 @@ def main() -> None:
             continue
         _validate_spells(spell_file, failures)
 
-    for world_file in sorted((data_dir / "world").rglob("*.yaml")):
+    for world_file in sorted((data_dir / "world").rglob("*.json")):
         if world_file.name.startswith("_"):
             continue
-        _validate_world_yaml(world_file, failures)
+        _validate_world_json(world_file, failures)
 
     if failures:
         print("❌ Data validation failed")

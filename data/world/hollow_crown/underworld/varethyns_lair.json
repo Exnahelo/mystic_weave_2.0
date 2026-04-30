@@ -1,0 +1,27 @@
+{
+  "id": "varethyns-lair",
+  "name": "Varethyn's Lair",
+  "type": "lair",
+  "region_id": "hollow-crown",
+  "parent_location_id": "crystal-caverns",
+  "description": "The personal sanctum of Varethyn of the Amethyst Gaze, carved into a natural amethyst-laced chamber deep within the Crystal Caverns. A hidden tunnel connects it upward to the Amethyst Vault in the Stronghold's gardens; outward, it opens into the cavern network. The lair is not a hoard in the traditional draconic sense — it is a thinking space, deliberately austere, lit by the slow internal glow of the crystal walls and furnished with what Varethyn has chosen to keep close. Few have seen it. Fewer have been invited.",
+  "connections": [
+    "amethyst-vault",
+    "crystal-caverns"
+  ],
+  "tags": [
+    "drakenvale",
+    "varethyn",
+    "lair",
+    "hidden",
+    "crystal-caverns",
+    "amethyst",
+    "sanctum",
+    "discovery-gated"
+  ],
+  "known_npcs": [
+    "Varethyn of the Amethyst Gaze"
+  ],
+  "threat_level": 1,
+  "discovered": false
+}

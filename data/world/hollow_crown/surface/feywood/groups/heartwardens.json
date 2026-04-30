@@ -1,0 +1,27 @@
+{
+  "id": "heartwardens",
+  "name": "The Heartwardens",
+  "type": "order",
+  "region_id": "hollow-crown",
+  "parent_location_id": "heartwood",
+  "description": "The elite sacred-guardian order of the Heartwood and the Silent Grove. Heartwardens are sworn directly to the Heartwood and are responsible for guarding the Heartwood's inner sanctums, the Silent Grove, and the ceremonies bound to those sites. Membership cuts across noble and common origins; House Heartwood is overrepresented at all levels through generational proximity to the tree, but the order is not house-bound and the name reflects the Heartwood, not the family. Roughly one hundred sworn Heartwardens are maintained at any time, supported by novices in training and emeritus members in honored standing. Service is sworn in century-long terms — ten years of training and renewal at the Silent Grove followed by ninety years of active service — renewable indefinitely. Lethariel Heartwood currently holds Captaincy in emeritus standing.\n",
+  "tags": [
+    "drakenvale",
+    "feywood",
+    "heartwardens",
+    "sacred-guardian",
+    "elven-order",
+    "heartwood-sworn",
+    "silent-grove-trained",
+    "century-oath",
+    "feywood-defense",
+    "cross-house"
+  ],
+  "known_npcs": [
+    "Heartwarden Captain",
+    "Heartwarden on Watch",
+    "Senior Heartwarden Instructor",
+    "Lethariel Heartwood (emeritus)"
+  ],
+  "discovered": false
+}

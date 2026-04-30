@@ -1,0 +1,10 @@
+{
+  "id": "hollow-crown",
+  "name": "Hollow Crown",
+  "type": "region",
+  "description": "Canonical geography-first realm root for the Drakenvale / Hollow Crown interior basin, replacing the old broken region path layout.",
+  "tags": [
+    "hollow-crown",
+    "drakenvale"
+  ]
+}

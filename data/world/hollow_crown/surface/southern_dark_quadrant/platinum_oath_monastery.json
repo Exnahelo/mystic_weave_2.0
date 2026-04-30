@@ -1,0 +1,26 @@
+{
+  "id": "platinum-oath-monastery",
+  "name": "Platinum Oath Monastery",
+  "type": "monastery",
+  "region_id": "hollow-crown",
+  "description": "A fortified monastery built into a natural rock shelf overlooking the Rift of Discord, occupying one of the most geographically defensible positions in Drakenvale. Three sides are sheer cliff face. The fourth is a single narrow approach road that has never been taken by force. The monastery has stood since the final days of the Discordant War - constructed in the months after the Platinum Warden's sacrifice by the surviving members of the Platinum Accord who refused to scatter and refused to forget.",
+  "connections": [
+    "greymantle",
+    "rift-of-discord-edge",
+    "platinum-oath-approach"
+  ],
+  "tags": [
+    "rift-of-discord",
+    "platinum-accord",
+    "monastery",
+    "warden-training",
+    "drakenvale",
+    "lore-significant",
+    "vigil"
+  ],
+  "known_npcs": [
+    "Serevane"
+  ],
+  "threat_level": 3,
+  "discovered": false
+}

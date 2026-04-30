@@ -1,0 +1,25 @@
+{
+  "id": "council-of-elders",
+  "name": "The Council of Elders",
+  "type": "order",
+  "region_id": "hollow-crown",
+  "parent_location_id": "thornveil",
+  "description": "The governing body of the Feywood. The Council of Elders is composed of representatives drawn from the noble houses, additional minor houses, and common-origin elves of significant standing — typically about twenty members at any given time, plus the Elder Druid of the Heartwood as recognized counselor on matters of land. The Council holds the political authority of the Feywood; orders, Halls, and other institutions operate within that authority while exercising substantial day-to-day autonomy. Routine deliberation is conducted in the Council chambers in the Heartwood Approach district of Thornveil; matters of land-weight descend to the Council Chamber beneath the Heartwood itself. Decisions are reached through slow, careful deliberation — months for substantive matters, sometimes years for the most consequential. The Council coordinates with the Drakenvale Council on cross-realm matters under the Oath of the Fallen.\n",
+  "tags": [
+    "drakenvale",
+    "feywood",
+    "council-of-elders",
+    "governing-body",
+    "thornveil-based",
+    "cross-house",
+    "common-origin-inclusive",
+    "oath-mediated"
+  ],
+  "known_npcs": [
+    "Council Member",
+    "Senior Council Member",
+    "Council Speaker",
+    "Elder Druid (counselor)"
+  ],
+  "discovered": false
+}

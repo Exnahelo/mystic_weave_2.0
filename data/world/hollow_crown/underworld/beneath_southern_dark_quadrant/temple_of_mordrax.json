@@ -1,0 +1,27 @@
+{
+  "id": "temple-of-mordrax",
+  "name": "Temple of Mordrax",
+  "type": "sealed-site",
+  "region_id": "hollow-crown",
+  "parent_location_id": "southern-dark-quadrant",
+  "description": "The sealed temple beneath the Shadowed Hollows, raised in ages long before the founding of Drakenvale and inherited by the survivors of the War of the Fallen as a fact of the land they had chosen to settle. Already ancient when the founders gathered, the Temple's existence forced the founding compact to address a question the founders could not avoid; what to do with the place where Mordrax's primal force had once been honored, in a sanctuary that could not honor it. The answer became the Oath of the Fallen's final working — the Temple was sealed, the wards laid through stone and threshold, and the seal made the founding compact's last act. The seal has held for ages, with one catastrophic interruption. The Discordant War began when the Mordraxian Rebels excavated their ceremonial shaft at the Dark Hold to reach the Temple's buried power; it ended when the Platinum Warden's sacrifice collapsed the shaft and the Draconic Council restored the Temple's wards. The seal has held since. The Vigil maintains its wards. The elite Wardens patrol its threshold on rotation. No one living has seen its interior, and the realm's continuing peace depends on that not changing.",
+  "connections": [
+    "southern-dark-quadrant",
+    "shadowed-hollows-proper"
+  ],
+  "tags": [
+    "drakenvale",
+    "temple-of-mordrax",
+    "sealed",
+    "beneath-hollows",
+    "mordrax",
+    "oath-of-the-fallen",
+    "active-seal",
+    "vigil-maintenance",
+    "warden-patrol",
+    "forbidden"
+  ],
+  "known_npcs": [],
+  "threat_level": 4,
+  "discovered": false
+}

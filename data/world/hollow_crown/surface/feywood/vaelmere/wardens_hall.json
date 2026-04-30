@@ -1,0 +1,30 @@
+{
+  "id": "wardens-hall",
+  "name": "The Warden's Hall",
+  "type": "location",
+  "region_id": "hollow-crown",
+  "parent_location_id": "vaelmere",
+  "description": "The office and residence of the Warden of Vaelmere — the settlement's civic authority and host-diplomat for realm visitors. Smaller in scale than Thornveil's equivalent civic spaces but functionally complete for Vaelmere's operational needs. The Hall houses the Warden's working offices, formal receiving spaces for visiting dignitaries, the Warden's own living quarters, and the administrative infrastructure that handles Vaelmere's civic affairs. Not a palace, not a fortified seat; a working civic building in the elven idiom, integrated with Vaelmere's broader social fabric.",
+  "connections": [
+    "vaelmere",
+    "trade-hall",
+    "commons-hearth",
+    "guest-house"
+  ],
+  "tags": [
+    "drakenvale",
+    "feywood",
+    "vaelmere",
+    "wardens-hall",
+    "location",
+    "civic-authority",
+    "host-diplomat",
+    "warden-residence",
+    "administrative-seat"
+  ],
+  "known_npcs": [
+    "Warden of Vaelmere"
+  ],
+  "threat_level": 1,
+  "discovered": false
+}

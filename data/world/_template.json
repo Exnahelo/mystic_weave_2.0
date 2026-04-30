@@ -1,0 +1,19 @@
+{
+  "id": "kebab-case-node-id",
+  "name": "Human Readable Name",
+  "type": "location",
+  "region_id": "hollow_crown",
+  "settlement_id": null,
+  "district_id": null,
+  "parent_location_id": null,
+  "description": "One or two sentence canonical description. This is the runtime-facing text.",
+  "connections": [
+    "connected-node-id"
+  ],
+  "tags": [
+    "hollow-crown"
+  ],
+  "known_npcs": [],
+  "threat_level": 0,
+  "discovered": false
+}

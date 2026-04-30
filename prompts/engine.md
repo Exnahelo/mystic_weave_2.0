@@ -122,7 +122,7 @@ See `prompts/companion-rules.md`. Use `/companion/new`, `/companion/{id}/transit
 1) `prompts/engine.md`
 2) `prompts/world-rules.md`
 3) Core world docs (`world.md`, `geography.md`, `history.md`, `groups.md`, `npcs.md`)
-4) canonical runtime world YAML under `data/world/`
+4) canonical runtime world JSON under `data/world/`
 5) `prompts/reference_archive/*` + design notes
 
 If conflict remains, choose the conservative interpretation for major canon claims and avoid unsupported setting changes; fitting minor local gap-filling remains allowed.

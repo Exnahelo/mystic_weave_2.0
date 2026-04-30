@@ -1,0 +1,25 @@
+{
+  "id": "lantern-and-mule",
+  "name": "The Lantern and Mule",
+  "type": "location",
+  "region_id": "hollow-crown",
+  "settlement_id": "dracelune",
+  "parent_location_id": "dracelune",
+  "description": "A practical traveler’s inn in Dracélune known for decent stew, fair prices, and tolerance for road animals so long as their handlers keep order. Teamsters, carriers, foresters, and messengers favor it over grander rooms with thinner patience.",
+  "connections": [
+    "dracelune"
+  ],
+  "tags": [
+    "hollow-crown",
+    "dracelune",
+    "inn",
+    "lodging",
+    "travelers",
+    "animals-tolerated"
+  ],
+  "known_npcs": [
+    "Hob Denner"
+  ],
+  "threat_level": 0,
+  "discovered": true
+}

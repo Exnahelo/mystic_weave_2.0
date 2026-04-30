@@ -1,0 +1,30 @@
+{
+  "id": "heartwood-estate",
+  "name": "Heartwood Estate",
+  "type": "location",
+  "region_id": "hollow-crown",
+  "parent_location_id": "feywood",
+  "description": "The ancestral woodland seat of House Heartwood — one of two substantial seats the house maintains, complementing the house's Thornveil seat in the Heartwood Approach. Set in the Outer Old-Growth Wild at a distance from Thornveil that reflects the family's sustained relationship with deeper Feywood ecology, the Estate carries the house's wild-connected family life while the Thornveil seat carries its political-ceremonial authority. The Estate is not a fortified manor or monumental hall; it is a cluster of grown-in dwellings and tended spaces integrated with the surrounding old-growth, sized for roughly forty to seventy residents drawn from House Heartwood family, in-laws, bonded staff, and house-raised children across their successive life stages. Lethariel Heartwood is currently in residence in Captain-emeritus standing; the house's current Proving candidate resides here through the preparation phase ahead of the Proving. The Heartwood bow is kept here between Lethariel's active Captaincy rotations; she resumes the Captaincy when the current Proving candidate departs for the Proving. The estate's character is anti-monumental — the same organic-integration aesthetic as Thornveil, carried to a smaller and more wild-adjacent register.\n",
+  "connections": [
+    "feywood",
+    "thornveil",
+    "heartwater-basin"
+  ],
+  "tags": [
+    "drakenvale",
+    "feywood",
+    "heartwood-estate",
+    "noble-estate",
+    "house-heartwood",
+    "outer-wild",
+    "wild-upbringing",
+    "anti-monumental",
+    "lethariel-residence",
+    "heartwood-bow"
+  ],
+  "known_npcs": [
+    "Lethariel Heartwood"
+  ],
+  "threat_level": 1,
+  "discovered": false
+}

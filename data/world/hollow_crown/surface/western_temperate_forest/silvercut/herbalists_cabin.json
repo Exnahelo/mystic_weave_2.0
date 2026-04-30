@@ -1,0 +1,26 @@
+{
+  "id": "herbalists-cabin",
+  "name": "Herbalist's Cabin",
+  "type": "location",
+  "region_id": "hollow-crown",
+  "settlement_id": "silvercut",
+  "parent_location_id": "silvercut",
+  "description": "The village healer's workspace and residence, set on a small managed clearing at Silvercut's southern edge. The cabin holds the medicinal gardens, drying shed, tincture workroom, and a modest patient room for injury care and short convalescence.",
+  "connections": [
+    "silvercut"
+  ],
+  "tags": [
+    "drakenvale",
+    "silvercut",
+    "herbalists-cabin",
+    "western-forest",
+    "healer",
+    "medicine",
+    "herbalism"
+  ],
+  "known_npcs": [
+    "Marren Oake"
+  ],
+  "threat_level": 0,
+  "discovered": true
+}

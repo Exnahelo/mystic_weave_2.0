@@ -1,0 +1,28 @@
+{
+  "id": "greenshields",
+  "name": "The Greenshields",
+  "type": "order",
+  "region_id": "hollow-crown",
+  "parent_location_id": "thornveil",
+  "description": "The Feywood's primary defensive military order. The Greenshields are responsible for settlement defense, daily security, patrols throughout the Feywood interior, and the elven side of the realm-to-realm border. Most Feywood elves who serve in arms serve in the Greenshields. The order maintains approximately six hundred active members across its Thornveil headquarters, its Vaelmere outer-rotation, its border garrison, its interior patrol units, the Ranger branch (the order's specialist arm for outer-range fieldwork), and supporting reserve and training cadre. New members commit to fifty years of initial service, with continued service at-pleasure thereafter; most career Greenshields serve a hundred to several hundred years before transitioning to civilian life or veteran's retirement. House Thornmere is overrepresented in the order at all levels and disproportionately at the Commandership through generational defensive-vinework tradition and Thornveil founding-mythic association; the order is not house-bound. Coordination with the Heartwardens runs at command level; coordination with realm forces runs through Council channels under the Oath of the Fallen.\n",
+  "tags": [
+    "drakenvale",
+    "feywood",
+    "greenshields",
+    "elven-order",
+    "feywood-defense",
+    "settlement-defense",
+    "border-watch",
+    "patrol",
+    "thornveil-headquarters",
+    "vaelmere-outer-rotation",
+    "cross-house"
+  ],
+  "known_npcs": [
+    "Greenshield Commander",
+    "Greenshield Outer-Rotation Captain",
+    "Senior Greenshield Captain",
+    "Greenshield Patrol Officer"
+  ],
+  "discovered": false
+}
