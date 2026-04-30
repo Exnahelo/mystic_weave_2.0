@@ -560,6 +560,7 @@ class ApplyStateDeltaRequest(BaseModel):
     character: CharacterStateDelta = Field(default_factory=CharacterStateDelta)
     world: WorldStateDelta = Field(default_factory=WorldStateDelta)
     log_entry: str
+    time_elapsed: TimeElapsed = Field(default_factory=TimeElapsed)
 
     @model_validator(mode="after")
     def requires_any_delta(self) -> ApplyStateDeltaRequest:
@@ -575,6 +576,7 @@ class SaveStateRequest(BaseModel):
     character: CharacterModel | CharacterStateDelta = Field(default_factory=CharacterStateDelta)
     world: WorldModel | WorldStateDelta = Field(default_factory=WorldStateDelta)
     log_entry: str
+    time_elapsed: TimeElapsed = Field(default_factory=TimeElapsed)
 
 
 class GameStateResponse(BaseModel):

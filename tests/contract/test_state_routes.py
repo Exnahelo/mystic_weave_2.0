@@ -258,6 +258,49 @@ def test_save_accepts_when_turn_advances_with_time_echoed() -> None:
 
 
 @pytest.mark.contract
+def test_save_state_accepts_time_elapsed_field() -> None:
+    """time_elapsed is accepted but not yet consumed by the save route."""
+    stored_world = _world(turn=1, time_of_day="morning")
+    conn = StateRouteConn("sess1", _character(), stored_world)
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1",
+            json={
+                "character": _character(),
+                "world": _world(turn=1, time_of_day="morning"),
+                "log_entry": "Save accepts time elapsed shape.",
+                "time_elapsed": {"steps": 2},
+            },
+        )
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["world"]["time"] == stored_world["time"]
+
+
+@pytest.mark.contract
+def test_save_state_rejects_invalid_time_elapsed() -> None:
+    """time_elapsed validates per its model. steps > 12 should 422."""
+    conn = StateRouteConn("sess1", _character(), _world(turn=1, time_of_day="morning"))
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1",
+            json={
+                "character": _character(),
+                "world": _world(turn=1, time_of_day="morning"),
+                "log_entry": "Invalid time elapsed shape.",
+                "time_elapsed": {"steps": 13},
+            },
+        )
+
+    assert response.status_code == 422
+
+
+@pytest.mark.contract
 def test_save_rejects_time_regression() -> None:
     """The actual GPT bug: time block sent with day=1 (regenerated default) over stored day=4 → 422."""
     # Existing state is already at day 4 of Verdantrise, afternoon.
@@ -400,3 +443,25 @@ def test_delta_accepts_when_turn_advances_with_time_echoed() -> None:
         )
 
     assert response.status_code == 200
+
+
+@pytest.mark.contract
+def test_delta_accepts_time_elapsed_field() -> None:
+    """time_elapsed is accepted but not yet consumed by the delta route."""
+    stored_world = _world(turn=1, time_of_day="morning")
+    conn = StateRouteConn("sess1", _character(), stored_world)
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1/delta",
+            json={
+                "world": {"goal": "survive"},
+                "log_entry": "Delta accepts time elapsed shape.",
+                "time_elapsed": {"steps": 2},
+            },
+        )
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["world"]["time"] == stored_world["time"]

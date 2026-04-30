@@ -1326,6 +1326,9 @@
           "log_entry": {
             "type": "string",
             "title": "Log Entry"
+          },
+          "time_elapsed": {
+            "$ref": "#/components/schemas/TimeElapsed"
           }
         },
         "additionalProperties": false,
@@ -6220,6 +6223,9 @@
           "log_entry": {
             "type": "string",
             "title": "Log Entry"
+          },
+          "time_elapsed": {
+            "$ref": "#/components/schemas/TimeElapsed"
           }
         },
         "additionalProperties": false,
@@ -6529,6 +6535,43 @@
         ],
         "title": "TimeDriftWarning",
         "description": "Emitted when a state save advances the turn counter but does not\nadvance in-world time. Non-blocking; included in response for the\nGPT to observe and self-correct."
+      },
+      "TimeElapsed": {
+        "properties": {
+          "steps": {
+            "type": "integer",
+            "maximum": 12.0,
+            "minimum": 0.0,
+            "title": "Steps",
+            "description": "Time-of-day band advances.",
+            "default": 0
+          },
+          "days": {
+            "type": "integer",
+            "maximum": 30.0,
+            "minimum": 0.0,
+            "title": "Days",
+            "description": "Full day advances.",
+            "default": 0
+          },
+          "until": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "dawn"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Until",
+            "description": "If \"dawn\", advance to next dawn."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "TimeElapsed",
+        "description": "Duration to advance world.time by on a state save.\n\nThree modes:\n- steps: time-of-day band advances (1 step = 1 band, 6 bands per day)\n- days: full day advances\n- until: special anchor advance (\"dawn\" advances to the next dawn)\n\n`until` is mutually exclusive with steps/days. If until is set, steps and\ndays must both be 0."
       },
       "TimeOfDay": {
         "type": "string",
