@@ -85,8 +85,10 @@ Extraction must emit changed fields only (no full-state regeneration).
 
 ### Time/Weather/Moon Runtime Checkpoint
 
-- Maintain `world.time` per `prompts/calendar.md` and `prompts/world-rules.md`; validate enums; derive moon phase from day and never store it.
-- In `world.time` deltas, include only changed fields. Never emit a full defaulted `TimeState`. If unsure of a field, omit it. `day`, `month`, `year`, and `season` are preserved-by-omission.
+- Send `time_elapsed` every save: `{steps: N}` (band advances), `{days: N}`, or `{until: "dawn"}`. Default `{}` = no time passes — valid for fast scenes.
+- Backend computes `day/month/year/time_of_day/season/festival` from prior state + `time_elapsed`. Do not write these.
+- `weather` and `weather_note` remain writable on `world.time`. Change weather only when events warrant per `prompts/calendar.md`.
+- Derive moon phase from `day` for narration; never store it.
 
 ### Economy Runtime Checkpoint
 

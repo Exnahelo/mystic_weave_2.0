@@ -1,6 +1,6 @@
 # Mystic Weave — The Oath Calendar
 
-Version 1.1 — April 2026
+Version 2.0 — April 2026
 Status: Canonical. Upload to GPT builder as a knowledge file.
 
 ---
@@ -136,7 +136,7 @@ The Day of Remembrance defaults to `mist` regardless of other factors.
 
 ## World State Fields
 
-Time, weather, and calendar state are tracked together in `world.time`. Update this block every turn before saving state.
+The `world.time` block is server-computed from prior state plus the duration sent on each save. Do not write derived fields directly.
 
 ```json
 "time": {
@@ -151,18 +151,28 @@ Time, weather, and calendar state are tracked together in `world.time`. Update t
 }
 ```
 
-**Field rules:**
+**Server-computed (do not write):**
 
-- `day` — integer 1–30. Increments at midnight. Resets to 1 on month change.
-- `month` — current month name from the months table above.
-- `year` — integer YP. Increments after The Day of Founding.
-- `time_of_day` — enum: `dawn / morning / midday / afternoon / dusk / night`.
-- `season` — enum: `spring / summer / autumn / winter`. Updates at season boundaries.
-- `festival` — null on ordinary days. Holds the festival name on festival days. Clear at dawn the following day.
-- `weather` — enum: `clear / mist / storm / ash-haze / unnatural`. Update when world events warrant it.
-- `weather_note` — freeform string. Optional context for current weather, e.g. `"Eryndor and Zarkeros in open disagreement at Council"`. Leave empty if no specific cause.
+- `day` — integer 1–30. Resets to 1 on month change.
+- `month` — month name from the months table.
+- `year` — integer YO. Increments after Day of Founding.
+- `time_of_day` — band: `dawn / morning / midday / afternoon / dusk / night`.
+- `season` — derived from `month`.
+- `festival` — auto-set on festival days, cleared otherwise.
 
-**Moon phase is not stored in state.** Derive Vaelthor's phase from `day` using the phase table above whenever needed.
+**Writable through `world.time`:**
+
+- `weather` — enum: `clear / mist / storm / ash-haze / unnatural`. Update only when world events warrant a change.
+- `weather_note` — freeform string. Optional context for current weather. Leave empty if no specific cause.
+
+**To advance time, send `time_elapsed` on the save:**
+
+- `{steps: N}` — N band advances (1 step ≈ 2–3 hours; bounds 0–12)
+- `{days: N}` — N full days (bounds 0–30)
+- `{until: "dawn"}` — skip to the next dawn (mutually exclusive with steps/days)
+- `{}` — no time passes (default; valid for fast scenes such as combat exchanges or dialogue beats)
+
+**Moon phase is not stored.** Derive Vaelthor's phase from `day` using the phase table whenever needed.
 
 ---
 
@@ -174,27 +184,27 @@ Time advances in steps. Each step represents roughly 2–3 hours of in-world tim
 dawn → morning → midday → afternoon → dusk → night → dawn (next day)
 ```
 
-Advancing past `night` increments `day` by 1 and returns to `dawn`.
+Advancing past `night` increments `day` by 1 and returns to `dawn`. The backend handles this rollover, including month, year, season, and festival transitions, when you send `time_elapsed`.
 
 ---
 
 ## Travel Time Reference
 
-Use this table to determine how many time steps a journey costs. Source: `geography.md`.
+Use this table to choose the `time_elapsed` value for a journey. Source: `geography.md`.
 
-| Journey | Time Cost |
+| Journey | time_elapsed |
 |---|---|
-| Within same location (short scene, no travel) | 0–1 step |
-| Short errand within same biome | 1 step |
-| Stronghold to Grasslands border (20–40km) | 2 steps (half day each way) |
-| Stronghold to Platinum Heart (~60km) | Full day — dawn to dusk (4–5 steps) |
-| Stronghold to Temperate Forest edge (~80km) | Full day |
-| Stronghold to Volcanic Highlands (~100km) | 1.5 days |
-| Stronghold to Shadowed Hollows (~150km) | 3.5–4 days |
-| Stronghold to Mystic Wetlands (~180km) | 4–5 days |
-| Stronghold to Alpine Peaks (~200km) | 4–5 days |
-| Overnight travel | Advance to next dawn; increment day |
-| Rest / full sleep | Advance to dawn; increment day |
+| Within same location (short scene, no travel) | `{steps: 0}` or `{steps: 1}` |
+| Short errand within same biome | `{steps: 1}` |
+| Stronghold to Grasslands border (20–40km) | `{steps: 2}` (half day each way) |
+| Stronghold to Platinum Heart (~60km) | `{steps: 4}` or `{steps: 5}` (full day) |
+| Stronghold to Temperate Forest edge (~80km) | full day, e.g. `{steps: 5}` |
+| Stronghold to Volcanic Highlands (~100km) | `{days: 1, steps: 3}` |
+| Stronghold to Shadowed Hollows (~150km) | `{days: 3, steps: 3}` (3.5–4 days) |
+| Stronghold to Mystic Wetlands (~180km) | `{days: 4}` or `{days: 5}` |
+| Stronghold to Alpine Peaks (~200km) | `{days: 4}` or `{days: 5}` |
+| Overnight travel | `{until: "dawn"}` |
+| Rest / full sleep | `{until: "dawn"}` |
 
 Off-path, night travel, or transition zones: add 50–100% to travel time.
 Storm weather in open terrain: add 1–2 steps.
@@ -203,21 +213,19 @@ Storm weather in open terrain: add 1–2 steps.
 
 ## GPT Time Rules (Non-Negotiable)
 
-1. **Always update `world.time` before saving state at the end of a turn.** Time must reflect what actually happened, not what was planned.
+1. **Send `time_elapsed` on every state-write save.** Use `{steps: N}`, `{days: N}`, `{until: "dawn"}`, or `{}` for no advance. Combinations of steps and days are valid; `until` is mutually exclusive with steps/days.
 
-2. **Advance `time_of_day` based on the travel table above.** Do not estimate freely — use the table.
+2. **Choose the duration based on what happened in the scene.** Use the Travel Time Reference for journeys. For non-travel scenes: a brief beat is `{}` or `{steps: 0}`; a meaningful conversation, training, or rest scene is typically `{steps: 1}` or `{steps: 2}`; a long activity is more.
 
-3. **Never offer time-gated content that contradicts current `time_of_day`.** A morning mission cannot be offered at dusk. A nocturnal encounter cannot be presented at midday. If the player returns late, update available options to reflect actual time.
+3. **Do not write `world.time.day`, `month`, `year`, `time_of_day`, `season`, or `festival`.** The backend computes these from prior state + `time_elapsed`. Sending them has no effect now and will be rejected in a future update.
 
-4. **Advance `day` and update `month` when crossing midnight.** After 30 days, advance to the next month. Update `season` at season boundaries.
+4. **`weather` and `weather_note` remain writable** through `world.time`. Update them only when something in the world causes weather to change. Do not change weather arbitrarily. Narrate transitions gradually.
 
-5. **Set `festival` on festival days.** Use the exact name from the Festival Days table. Clear it at the following dawn.
+5. **Never offer time-gated content that contradicts current `time_of_day`.** Read the returned `world.time` after each save — the new state is authoritative. A morning mission cannot be offered at dusk. A nocturnal encounter cannot be presented at midday.
 
 6. **Derive Vaelthor's phase from `day`.** Apply mechanical modifiers only in the specified locations. Reference the phase in narration everywhere else.
 
-7. **Update `weather` only when something causes it to change.** Do not change weather arbitrarily. Narrate transitions gradually.
-
-8. **Narrate time and weather naturally.** Do not announce state field values. Instead: *"By the time you return to the Stronghold, the valley is settling into dusk, the last light catching the platinum walls in orange and gold. A low mist is beginning to roll in from the grasslands — Vaelthor barely visible through it, a waxing crescent low on the horizon."*
+7. **Narrate time and weather naturally.** Do not announce state field values. Instead: *"By the time you return to the Stronghold, the valley is settling into dusk, the last light catching the platinum walls in orange and gold. A low mist is beginning to roll in from the grasslands — Vaelthor barely visible through it, a waxing crescent low on the horizon."*
 
 ---
 
