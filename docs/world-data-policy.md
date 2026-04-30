@@ -9,10 +9,10 @@ enforced in CI.
 
 Two paths:
 
-- `data/world/**/*.yaml` — canonical structured runtime world data
+- `data/world/**/*.json` — canonical structured runtime world data
 - `prompts/world_vault/**/*.md` — 1:1 markdown mirror
 
-Every YAML file under `data/world/` has a markdown mirror at the same
+Every JSON file under `data/world/` has a markdown mirror at the same
 relative path under `prompts/world_vault/`. The pair represents a single
 canonical node.
 
@@ -27,17 +27,17 @@ For every world YAML file and every vault markdown mirror:
 Holds in both directions. A rename of either surface must update the other
 in the same commit. IDs are stable across history; filenames follow them.
 
-### YAML↔Markdown mirror
+### JSON↔Markdown mirror
 
 - Same relative path, same stem, different extension.
-- Frontmatter `id:` equals YAML `id:`.
+- Frontmatter `id:` equals JSON id field.
 - Canonical fields (`name`, `type`, `description`, `connections`,
   `known_npcs`, `tags`, `threat_level`, `discovered`) stay in sync.
   Any edit to one lands in the other in the same commit.
 
 ### Tag hygiene
 
-Tags appear in YAML `tags:` and, for mirrors, in frontmatter `tags:` plus
+Tags appear in JSON tags array and, for mirrors, in frontmatter `tags:` plus
 the `## Tags` markdown section.
 
 - **Case**: `kebab-case` only. No `snake_case`, no mixed case.
@@ -52,7 +52,7 @@ the `## Tags` markdown section.
 | Validator | Owns |
 |---|---|
 | `scripts/validate_naming.py` | filesystem path case rules (delegated to `docs/conventions.md`) |
-| `scripts/validate_data_files.py` | stem↔id for world YAML, tag hygiene for world YAML |
+| `scripts/validate_data_files.py` | stem↔id for world JSON, tag hygiene for world JSON |
 | `scripts/validate_prompts.py` | stem↔id for vault MD, tag hygiene for vault MD, frontmatter↔body sync |
 
 ## CI enforcement
