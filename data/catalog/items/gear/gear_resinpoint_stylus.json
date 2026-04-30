@@ -1,0 +1,48 @@
+{
+  "id": "gear-resinpoint-stylus",
+  "name": "Resinpoint Stylus",
+  "category": "gear",
+  "subcategory": "tool",
+  "schema_version": 1,
+  "description": "A fine-point writing tool of carved Silverbark Ash with a Resinheart-cured tip, used with stain, soot-resin, or plant dye instead of the standard pen-and-ink setup of the realm. The pigment well runs through with regular fieldwork; refills are common in any apothecary or general goods market across the Feywood.",
+  "narrative_effects": [
+    "Supports writing, sketching, and route-marking with elven stain and resin pigments.",
+    "Quieter and more travel-resilient than a realm pen-and-ink kit; no spillable ink bottle to manage.",
+    "Pairs with a Barkleaf Journal as the standard elven field-recordkeeping kit."
+  ],
+  "tags": [
+    "writing",
+    "tool",
+    "elven",
+    "feywood",
+    "resinheart",
+    "silverbark-ash",
+    "field"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 25,
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "apothecary"
+  ],
+  "consumable": true,
+  "charges_max": 30,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

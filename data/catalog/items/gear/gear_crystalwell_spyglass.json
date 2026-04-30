@@ -1,0 +1,48 @@
+{
+  "id": "gear-crystalwell-spyglass",
+  "name": "Crystalwell Spyglass",
+  "category": "gear",
+  "subcategory": "navigation",
+  "schema_version": 1,
+  "description": "A compact elven field optic built from polished crystal and resin-set lenses housed in a Silverbark Ash composite barrel — lighter and quieter than the brass-and-glass spyglasses imported into the realm. The crystal lensing gives clear distance work without the fragility of common glasswork or the weight of metal housing.",
+  "narrative_effects": [
+    "Reduces difficulty of distant visual observation where line of sight is available.",
+    "Lighter and far more durable in the field than realm-side brass spyglasses; less likely to fail under hard travel or weather.",
+    "Standard issue for elven scouts, Heartwarden field watches, and Greenshield ranger circuits."
+  ],
+  "tags": [
+    "observation",
+    "travel",
+    "tool",
+    "elven",
+    "feywood",
+    "ranger",
+    "silverbark-ash"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 3500,
+  "wealth_tier_floor": "comfortable",
+  "market_tags": [
+    "noble-armory",
+    "general-goods"
+  ],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

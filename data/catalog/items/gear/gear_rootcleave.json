@@ -1,0 +1,50 @@
+{
+  "id": "gear-rootcleave",
+  "name": "Rootcleave",
+  "category": "gear",
+  "subcategory": "tool",
+  "schema_version": 1,
+  "description": "An elven multi-tool of fitted Silverbark Ash and forged blade work, combining a hand spade, a curved pruning blade, a slim root knife, and a small bark-lifting hook into one balanced grip. Built for working with forest terrain rather than tearing through it — the standard land-working implement carried by foresters, agroforesters, trail wardens, and gatherers across the Feywood.",
+  "narrative_effects": [
+    "Supports forestry, agroforestry, trail work, foraging, light pruning, root cutting, bark lifting, and small camp shaping in one carried tool.",
+    "Reduces difficulty of fieldwork that would otherwise require swapping between dedicated tools.",
+    "Standard issue for Heartwarden trail crews and elven farmstead practice; recognizable as a working tool, not a weapon."
+  ],
+  "tags": [
+    "tool",
+    "craft",
+    "elven",
+    "feywood",
+    "ranger",
+    "silverbark-ash",
+    "field",
+    "gathering",
+    "woodwork"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 75,
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "blacksmith"
+  ],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

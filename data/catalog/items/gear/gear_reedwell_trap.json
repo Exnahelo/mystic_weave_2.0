@@ -1,0 +1,51 @@
+{
+  "id": "gear-reedwell-trap",
+  "name": "Reedwell Trap",
+  "category": "gear",
+  "subcategory": "tool",
+  "schema_version": 1,
+  "description": "A collapsible woven fish trap of waxed Thornfiber and supple Silverbark Ash ribs, set among reeds and quiet water along basin margins, marsh edges, and slow streams. Funnel-mouthed and weighted at the base, it gathers fish into the holding cone passively while the setter tends to other work — the standard fieldcraft for marsh-edge fishing across the Feywood, far better suited to wet basin terrain than active casting from shore.",
+  "narrative_effects": [
+    "Provides passive marsh-edge and reed-bed fishing without occupying the setter's hands or attention.",
+    "Collapses for travel; deploys cleanly at any reedy water edge with a few minutes of setup.",
+    "Yields modest reliable catch in suitable terrain over a watch or rest period; supports survival rolls for sustained camp food in wet basin and marsh regions.",
+    "Standard fieldcraft for elven foragers and Heartwarden patrol cooks."
+  ],
+  "tags": [
+    "tool",
+    "survival",
+    "elven",
+    "feywood",
+    "ranger",
+    "thornfiber",
+    "silverbark-ash",
+    "gathering",
+    "field"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 55,
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "leatherworker"
+  ],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

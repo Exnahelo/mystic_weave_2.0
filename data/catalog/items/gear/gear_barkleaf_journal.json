@@ -1,0 +1,48 @@
+{
+  "id": "gear-barkleaf-journal",
+  "name": "Barkleaf Journal",
+  "category": "gear",
+  "subcategory": "document",
+  "schema_version": 1,
+  "description": "A field journal of layered bark-paper leaves bound in a weather-resistant Thornfiber wrap. The pages take stain and resin-pigment cleanly, hold up to damp under canopy, and resist tearing when carried in active fieldwork. Standard issue for elven foragers, Heartwarden investigators, and grove-warden recordkeepers.",
+  "narrative_effects": [
+    "Supports journaling, route marking, plant observation, and specimen records under field conditions.",
+    "Resists damp and rough handling far better than realm parchment or paper; sustains legibility across long forest journeys.",
+    "Pairs with a Resinpoint Stylus as the standard elven field-recordkeeping kit."
+  ],
+  "tags": [
+    "writing",
+    "records",
+    "reference",
+    "elven",
+    "feywood",
+    "thornfiber",
+    "field"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 180,
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "tailor"
+  ],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

@@ -1,0 +1,49 @@
+{
+  "id": "gear-hearthnest-pot",
+  "name": "Hearthnest Pot",
+  "category": "gear",
+  "subcategory": "tool",
+  "schema_version": 1,
+  "description": "A compact lidded woodland cookpot of fitted ceramic and Silverbark Ash trim, shaped to nest directly inside a Hearthlight Brazier's coal chamber. The matched fit retains heat efficiently, runs near-silent in use, and produces almost no signature steam — a deliberate camp vessel for quiet kitchen work in the deep wood, not a generic cookpot.",
+  "narrative_effects": [
+    "Supports cooking, water boiling, and small infusions on a Hearthlight Brazier with reduced fuel demand and visible signature.",
+    "Nested fit holds heat between cooking turns; suitable for slow-simmer preparations during a long watch or extended camp.",
+    "Pairs with the Hearthlight Brazier as the standard elven low-signature camp kitchen kit."
+  ],
+  "tags": [
+    "tool",
+    "craft",
+    "camp",
+    "elven",
+    "feywood",
+    "ranger",
+    "silverbark-ash",
+    "field"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 60,
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "blacksmith"
+  ],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

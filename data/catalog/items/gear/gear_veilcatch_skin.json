@@ -1,0 +1,49 @@
+{
+  "id": "gear-veilcatch-skin",
+  "name": "Veilcatch Skin",
+  "category": "gear",
+  "subcategory": "storage",
+  "schema_version": 1,
+  "description": "A Feywood water vessel of waxed barkcloth and resin-sealed Thornfiber, shaped to dock directly into the catch-pouch of a Veilcanopy Shelter. Stores collected dew runoff and rainwater rather than being filled from a stream; a fitted pour-spout and resin stopper let it serve cleanly as a drinking vessel through the day.",
+  "narrative_effects": [
+    "Holds water equivalent to a full waterskin; functions as a waterskin substitute in all narrative and survival contexts.",
+    "Designed to dock with the Veilcanopy Shelter's catch-pouch for direct transfer of collected dew and rainwater without manual decanting.",
+    "Quieter, lower-snag, and more durable than a realm waterskin in dense forest terrain."
+  ],
+  "tags": [
+    "storage",
+    "survival",
+    "elven",
+    "feywood",
+    "ranger",
+    "thornfiber",
+    "resinheart",
+    "field"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 35,
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "tailor"
+  ],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}
