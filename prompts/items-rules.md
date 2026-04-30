@@ -246,13 +246,38 @@ Magical items at T1 and above carry a `magic_field` from the nine canonical fiel
 
 T0 items may omit `magic_field` (they have no active magic). T5 mythic items whose magic does not originate in a single field may also omit it; treat such items as authored exceptions.
 
+### Mechanical Effect
+
+Magical and special items may declare a `mechanical_effect` block specifying their roll-time impact:
+
+- `trigger` — conditions required for the effect (e.g., "hood up, wearer still")
+- `modifier` — adjustment in target-bonus or damage-step form (e.g., "+10 target", "+1 damage step")
+- `applies_to` — categories of checks the effect covers
+- `does_not_apply` — categories the effect explicitly excludes (optional)
+
+The narrator reads `mechanical_effect` directly when adjudicating rolls involving the item. If the trigger condition is met and the situation matches `applies_to`, the modifier applies. If the situation matches `does_not_apply`, the modifier explicitly does not apply.
+
+Items without `mechanical_effect` set carry only their `narrative_effects` and provide no guaranteed roll modifier. The narrator may still assign situational adjudication for such items, but should do so transparently and ideally consistently across sessions.
+
+Until the enchantment-rules arc is authored, default modifier magnitudes by tier:
+
+| Tier | Default modifier |
+|---|---|
+| T0 | none (material-only) |
+| T1 | +5 target |
+| T2 | +10 target |
+| T3 | +15 target |
+| T4 | +20 target |
+
+These are ceilings for incidental effects. An item whose primary purpose is the magical effect may run one bracket higher within its tier (a T1 stealth cloak whose entire point is stealth: +10, not +5).
+
 ### What Tier Does Not Govern
 
 Tier does not currently govern:
 
 * who can craft an item at a given tier
 * time, cost, or process of crafting
-* activation rules (passive vs active vs triggered)
+* activation rules (passive vs active vs triggered) — partially governed by the per-item mechanical_effect.trigger field; full activation framework deferred to the enchantment-rules arc
 * charges, recharge, or stability beyond what the item record specifies
 * whether items can be unmade, damaged, or decay
 
