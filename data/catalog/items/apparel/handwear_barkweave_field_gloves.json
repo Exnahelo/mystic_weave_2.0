@@ -1,0 +1,48 @@
+{
+  "id": "handwear-barkweave-field-gloves",
+  "name": "Barkweave Field Gloves",
+  "category": "apparel",
+  "subcategory": "handwear",
+  "schema_version": 1,
+  "description": "Light field gloves of soft hide, Thornfiber stitching, and flexible Barkweave backing, made for woodland work, riding, and archery. The draw fingers are reinforced and can be folded back or unstrapped for finer handling, letting the gloves shift cleanly between fieldcraft and bow use without changing kit.",
+  "narrative_effects": [
+    "Reinforced draw fingers protect the bowstring hand without compromising release; supports sustained archery without separate shooting gloves.",
+    "Foldable or unstrappable draw fingers permit fine work — knot-tying, herb collection, journal entries, lockwork — without removing the gloves.",
+    "Barkweave backing flexes through climbing, riding, and forest movement where stiffer leather binds.",
+    "Standard issue for elven rangers and the woodland scout traditions of Thornveil and Vaelmere."
+  ],
+  "tags": [
+    "utility",
+    "elven",
+    "feywood",
+    "ranger",
+    "thornfiber",
+    "field"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 80,
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "leatherworker",
+    "tailor"
+  ],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

@@ -1,0 +1,48 @@
+{
+  "id": "bracers-silverbark-ash",
+  "name": "Silverbark Ash Bracers",
+  "category": "apparel",
+  "subcategory": "handwear",
+  "schema_version": 1,
+  "description": "Slim bracers of layered Silverbark Ash and treated hide, shaped to guard the forearm without feeling bulky in brush or on the draw. They protect against bowstring strike, light knocks, and thorn-scrape while keeping the arm free for climbing, riding, and forest work.",
+  "narrative_effects": [
+    "Reduces forearm injury from bowstring strike, branch lash, and thorn-scrape during sustained forest work.",
+    "Composite-wood construction is lighter and quieter in brush than realm leatherwork or steel splint bracers.",
+    "Wearable comfortably under a cloak or above light armor without restricting the draw or close-range knife work.",
+    "Standard issue for elven rangers, Heartwarden trail wardens, and Greenshield archers."
+  ],
+  "tags": [
+    "utility",
+    "elven",
+    "feywood",
+    "ranger",
+    "silverbark-ash",
+    "field"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 120,
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "leatherworker",
+    "general-goods"
+  ],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}
