@@ -1513,6 +1513,38 @@
             "type": "string",
             "title": "Description",
             "default": ""
+          },
+          "tier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tier"
+          },
+          "magic_field": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Magic Field"
+          },
+          "mechanical_effect": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MechanicalEffect"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": true,
@@ -4849,6 +4881,16 @@
             ],
             "title": "Roll Tag"
           },
+          "mechanical_effect": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MechanicalEffect"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "consumable": {
             "type": "boolean",
             "title": "Consumable",
@@ -5119,6 +5161,40 @@
           "kind"
         ],
         "title": "MagicFieldEntry"
+      },
+      "MechanicalEffect": {
+        "properties": {
+          "trigger": {
+            "type": "string",
+            "title": "Trigger",
+            "description": "Required conditions for the effect to be active. Plain prose. Example: 'hood up, wearer still'."
+          },
+          "modifier": {
+            "type": "string",
+            "title": "Modifier",
+            "description": "The mechanical adjustment, in target-bonus form. Example: '+10 target', '-5 target', '+1 damage step'."
+          },
+          "applies_to": {
+            "type": "string",
+            "title": "Applies To",
+            "description": "Categories of checks or situations the effect applies to. Plain prose. Example: 'checks where magical awareness, ward-sense, or entity perception is the primary failure risk'."
+          },
+          "does_not_apply": {
+            "type": "string",
+            "title": "Does Not Apply",
+            "description": "Categories of checks or situations the effect explicitly does not cover. Plain prose. Helps the narrator avoid over-application. Example: 'ordinary sight/scent/hearing; untargeted area effects that do not require registering the wearer'.",
+            "default": ""
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "trigger",
+          "modifier",
+          "applies_to"
+        ],
+        "title": "MechanicalEffect",
+        "description": "Structured mechanical effect on a magical or special item. Distinct from\nnarrative_effects (prose-only); this field is read directly by the\nnarrator to compute roll modifiers and adjudicate item interactions.\n\nThe rules system for tier-driven magical effects is not yet authored.\nUntil then, this field is the canonical source for how a specific\nmagical item modifies play."
       },
       "NewSessionRequest": {
         "properties": {
