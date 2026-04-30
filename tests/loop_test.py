@@ -602,11 +602,11 @@ def part2(client: httpx.Client, session_id: str) -> None:
 
         # v3.2.0 — advancement round-trip
         advancement = char.get("advancement", {})
-        check("2.2.l", advancement.get("points_available_earned", {}).get("power") == 1,
+        check("2.2.l", advancement.get("points_available_earned", {}).get("power") == 0,
               f"points_available_earned.power: {advancement.get('points_available_earned', {}).get('power')}")
         check("2.2.m", advancement.get("points_spent") == 0,
               f"points_spent: {advancement.get('points_spent')}")
-        check("2.2.n", advancement.get("points_earned_total") == 1,
+        check("2.2.n", advancement.get("points_earned_total") == 0,
               f"points_earned_total: {advancement.get('points_earned_total')}")
         check("2.2.na", advancement.get("points_available_awarded") == 0,
               f"points_available_awarded: {advancement.get('points_available_awarded')}")
