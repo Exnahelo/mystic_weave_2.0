@@ -557,6 +557,16 @@ def part2(client: httpx.Client, session_id: str) -> None:
                 "active_tensions": ["Dragon Guard patrol active in the region"],
                 "conclave_status": "unknown",
             },
+            "time": {
+                "day": 1,
+                "month": "Verdantrise",
+                "year": 847,
+                "time_of_day": "afternoon",
+                "season": "spring",
+                "festival": None,
+                "weather": "clear",
+                "weather_note": "",
+            },
         },
         "log_entry": "Krath took 15 damage from a patrol ambush and spotted a Dragon Guard patrol.",
     }
