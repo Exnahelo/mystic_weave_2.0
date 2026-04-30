@@ -6991,12 +6991,14 @@
           "time": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/TimeState"
+                "additionalProperties": true,
+                "type": "object"
               },
               {
                 "type": "null"
               }
-            ]
+            ],
+            "title": "Time"
           },
           "survival": {
             "anyOf": [

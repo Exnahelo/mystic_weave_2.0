@@ -529,7 +529,7 @@ class WorldStateDelta(BaseModel):
     companion_archive: list["ArchivedCompanionEnvelope"] | None = None
     economy: EconomyDelta | None = None
     politics: Politics | None = None
-    time: TimeState | None = None
+    time: dict[str, object] | None = None
     survival: SurvivalState | None = None
     pacing: PacingState | None = None
 
