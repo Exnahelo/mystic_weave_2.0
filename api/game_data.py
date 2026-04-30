@@ -882,11 +882,10 @@ def seed_character(
         "equipment":      {"worn": [], "carried": [], "stashed": []},
         "reputation":     [],
         "advancement": {
-            "points_available_earned": {d: 0 for d in DOMAIN_KEYS},
-            "points_available_awarded": 0,
+            "points_available": 0,
             "points_spent": 0,
             "points_earned_total": 0,
-            "tag_advance_counters": {d: 0 for d in DOMAIN_KEYS},
+            "tag_counter": 0,
         },
     }
 

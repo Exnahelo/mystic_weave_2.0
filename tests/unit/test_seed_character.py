@@ -90,3 +90,9 @@ def test_seed_character_uses_new_advancement_shape() -> None:
     )
 
     assert character["advancement"] == zero_advancement()
+    assert set(character["advancement"]) == {
+        "points_available",
+        "points_spent",
+        "points_earned_total",
+        "tag_counter",
+    }

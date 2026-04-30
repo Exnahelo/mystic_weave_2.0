@@ -23,7 +23,6 @@ from api.database import get_pool
 from api.game_data import validate_application_parent_cap
 from api.models import (
     AdvancementState,
-    DOMAIN_KEYS,
     ApplyStateDeltaRequest,
     CharacterModel,
     Equipment,
@@ -92,12 +91,19 @@ def _normalize_character_state(payload: dict[str, Any]) -> dict[str, Any]:
         normalized["advancement"] = AdvancementState().model_dump()
     else:
         adv = dict(advancement)
-        adv.setdefault("points_available_earned", {d: 0 for d in DOMAIN_KEYS})
-        adv.setdefault("points_available_awarded", 0)
+        adv.setdefault("points_available", 0)
         adv.setdefault("points_spent", 0)
         adv.setdefault("points_earned_total", 0)
-        adv.setdefault("tag_advance_counters", {d: 0 for d in DOMAIN_KEYS})
-        adv.pop("points_available", None)
+        adv.setdefault("tag_counter", 0)
+        # Awarded AP is granted through the normal state-save path: the GPT
+        # includes settled points_available / points_earned_total values in
+        # the next save. No dedicated award_ap endpoint is needed for v4.5.0.
+        for stale_key in (
+            "points_available_earned",
+            "points_available_awarded",
+            "tag_advance_counters",
+        ):
+            adv.pop(stale_key, None)
         normalized["advancement"] = adv
     return normalized
 
@@ -107,12 +113,11 @@ def _apply_tag_advancement_counters(
     delta_character: dict[str, Any],
 ) -> dict[str, Any]:
     """
-    Detect tag tier increases in the delta vs. the existing character and
-    update the advancement.tag_advance_counters and points_available_earned
-    accordingly. Returns the updated advancement dict to be merged.
+    Detect tag tier increases in the delta vs. existing character. Each tier
+    advance increments the single tag_counter. Every 3 advances rolls over
+    to +1 in points_available (counter resets to 0).
 
-    Counters increment by (new_tier - old_tier). Every 3 in a domain
-    converts to +1 earned AP in that domain.
+    Non-canonical tags are skipped defensively.
 
     Caller is responsible for merging the returned advancement dict back
     onto the character.
@@ -120,14 +125,11 @@ def _apply_tag_advancement_counters(
     from api.game_data import get_tag_primary_domain
 
     advancement = dict(existing_character.get("advancement") or {})
-    counters = dict(advancement.get("tag_advance_counters") or {})
-    earned = dict(advancement.get("points_available_earned") or {})
+    counter = int(advancement.get("tag_counter", 0) or 0)
+    available = int(advancement.get("points_available", 0) or 0)
+    earned_total = int(advancement.get("points_earned_total", 0) or 0)
 
-    for domain in DOMAIN_KEYS:
-        counters.setdefault(domain, 0)
-        earned.setdefault(domain, 0)
-
-    earned_total_delta = 0
+    advances = 0
 
     for tag_kind in ("knowledge", "application", "fields"):
         delta_block = delta_character.get(tag_kind) or {}
@@ -143,25 +145,27 @@ def _apply_tag_advancement_counters(
             old_tier = existing_block.get(tag_index, 0) or 0
             if new_tier <= old_tier:
                 continue
-            steps = new_tier - old_tier
-
-            domain = get_tag_primary_domain(tag_index, kind_for_lookup)
-            if domain is None or domain not in counters:
+            if get_tag_primary_domain(tag_index, kind_for_lookup) is None:
                 continue
+            advances += new_tier - old_tier
 
-            counters[domain] += steps
-            while counters[domain] >= 3:
-                counters[domain] -= 3
-                earned[domain] += 1
-                earned_total_delta += 1
+    counter += advances
+    while counter >= 3:
+        counter -= 3
+        available += 1
+        earned_total += 1
 
-    advancement["tag_advance_counters"] = counters
-    advancement["points_available_earned"] = earned
-    advancement["points_earned_total"] = (
-        (advancement.get("points_earned_total") or 0) + earned_total_delta
-    )
-    advancement.setdefault("points_available_awarded", 0)
+    advancement["tag_counter"] = counter
+    advancement["points_available"] = available
+    advancement["points_earned_total"] = earned_total
     advancement.setdefault("points_spent", 0)
+
+    for stale_key in (
+        "points_available_earned",
+        "points_available_awarded",
+        "tag_advance_counters",
+    ):
+        advancement.pop(stale_key, None)
 
     return advancement
 

@@ -122,7 +122,7 @@ def test_state_delta_tag_advance_increments_counter() -> None:
         )
     assert response.status_code == 200
     payload = response.json()
-    assert payload["character"]["advancement"]["tag_advance_counters"]["power"] == 1
+    assert payload["character"]["advancement"]["tag_counter"] == 1
 
 
 @pytest.mark.contract
@@ -136,8 +136,8 @@ def test_state_delta_three_advances_convert_to_earned_ap() -> None:
         response = client.get("/state/sess1")
     assert response.status_code == 200
     payload = response.json()
-    assert payload["character"]["advancement"]["points_available_earned"]["power"] == 1
-    assert payload["character"]["advancement"]["tag_advance_counters"]["power"] == 0
+    assert payload["character"]["advancement"]["points_available"] == 1
+    assert payload["character"]["advancement"]["tag_counter"] == 0
 
 
 @pytest.mark.contract

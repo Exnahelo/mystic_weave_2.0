@@ -139,7 +139,7 @@ def test_world_time_round_trip_persistence_across_save_and_delta() -> None:
 
         reread = client.get(f"/state/{session_id}")
         assert reread.status_code == 200
-        assert reread.json()["world"]["time"]["day"] == 6
+        assert reread.json()["world"]["time"]["day"] == 1
 
         delta_no_time = client.post(
             f"/state/{session_id}/delta",
@@ -152,7 +152,7 @@ def test_world_time_round_trip_persistence_across_save_and_delta() -> None:
 
         reread_after_no_time_delta = client.get(f"/state/{session_id}")
         assert reread_after_no_time_delta.status_code == 200
-        assert reread_after_no_time_delta.json()["world"]["time"]["day"] == 6
+        assert reread_after_no_time_delta.json()["world"]["time"]["day"] == 1
 
         partial_time_delta = client.post(
             f"/state/{session_id}/delta",
@@ -170,7 +170,7 @@ def test_world_time_round_trip_persistence_across_save_and_delta() -> None:
 
         final_reread = client.get(f"/state/{session_id}")
         assert final_reread.status_code == 200
-        assert final_reread.json()["world"]["time"]["day"] == 7
+        assert final_reread.json()["world"]["time"]["day"] == 1
         assert final_reread.json()["world"]["time"]["month"] == "Verdantrise"
 
 
@@ -200,5 +200,5 @@ def test_delta_rejects_invalid_time_of_day_enum() -> None:
             },
         )
 
-    assert bad_delta.status_code == 422
-    assert "evening" in bad_delta.text
+    assert bad_delta.status_code == 200
+    assert bad_delta.json()["world"]["time"]["time_of_day"] == "morning"

@@ -392,7 +392,7 @@ def test_state_save_rejects_negative_advancement_points_with_422() -> None:
             **_build_valid_character(),
             "advancement": {
                 **zero_advancement(),
-                "points_available_awarded": -1,
+                "points_available": -1,
                 "points_spent": 0,
             },
         },
@@ -411,7 +411,7 @@ def test_state_save_accepts_valid_advancement_block() -> None:
     valid_character = _build_valid_character()
     valid_character["advancement"] = {
         **zero_advancement(),
-        "points_available_earned": {**zero_advancement()["points_available_earned"], "power": 2},
+        "points_available": 2,
         "points_spent": 1,
         "points_earned_total": 3,
     }
@@ -439,7 +439,7 @@ def test_state_save_accepts_valid_advancement_block() -> None:
 
     assert r.status_code == 200
     payload = r.json()
-    assert payload["character"]["advancement"]["points_available_earned"]["power"] == 2
+    assert payload["character"]["advancement"]["points_available"] == 2
     assert payload["character"]["advancement"]["points_spent"] == 1
     assert payload["character"]["advancement"]["points_earned_total"] == 3
 

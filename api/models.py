@@ -1,16 +1,16 @@
 """
 models.py — Pydantic v2 models for core game entities.
 
-All models use Pydantic v2 syntax. Designed for Mystic Weave 4.0:
+All models use Pydantic v2 syntax. Designed for Mystic Weave 4.5.0:
 d100 roll-under, domain scores, knowledge/application competency tiers,
-and a four-layer character system built from ancestry, culture,
-background, and focus.
+fungible advancement points, and a four-layer character system built from
+ancestry, culture, background, and focus.
 
 v3.1.0 additions:
   CharacterModel — identity, equipment, reputation blocks
   WorldModel     — economy, politics blocks
 
-v4.0.0 additions:
+v4.5.0 additions:
   CharacterModel — ancestry/culture/fields schema
   Options models — ancestry + culture option payloads
 """
@@ -39,10 +39,6 @@ TagTier = Annotated[
         description="Competency tag tier. Must be an integer from 1 through 5.",
     ),
 ]
-
-
-def _zero_per_domain() -> dict[str, int]:
-    return {d: 0 for d in DOMAIN_KEYS}
 
 
 # ---------------------------------------------------------------------------
@@ -123,43 +119,25 @@ class DomainScores(BaseModel):
 
 class AdvancementState(BaseModel):
     """
-    Per-domain earned AP pools, single awarded AP pool, lifetime totals,
-    and per-domain tag advancement counters.
+    Fungible AP pool, lifetime totals, and a single tag advance counter.
 
-    Earned AP is locked to its source domain (each domain has its own pool).
-    Awarded AP is free-allocation across any domain (single pool).
-    Counters track tag advances per domain; every 3 advances in a domain
-    converts to +1 earned AP in that domain.
+    Tag advances increment tag_counter. Every 3 advances (counter == 3)
+    resets the counter to 0 and adds 1 to points_available. Awarded AP
+    grants drop directly into points_available. Spend draws from
+    points_available with bracketed cost (1/2/3 by score range).
     """
 
-    points_available_earned: dict[str, int] = Field(
-        default_factory=lambda: _zero_per_domain(),
-        description="Per-domain earned AP pools. Keys: power, agility, perception, endurance, intellect, will, presence.",
-    )
-    points_available_awarded: int = 0
+    points_available: int = 0
     points_spent: int = 0
     points_earned_total: int = 0
-    tag_advance_counters: dict[str, int] = Field(
-        default_factory=lambda: _zero_per_domain(),
-        description="Per-domain counters; tag advances increment these. At 3, convert to +1 earned AP in that domain.",
-    )
+    tag_counter: int = Field(default=0, ge=0, le=2)
 
-    @field_validator("points_available_awarded", "points_spent", "points_earned_total")
+    @field_validator("points_available", "points_spent", "points_earned_total")
     @classmethod
     def non_negative_int(cls, v: int) -> int:
         if v < 0:
             raise ValueError("advancement points cannot be negative")
         return v
-
-    @field_validator("points_available_earned", "tag_advance_counters")
-    @classmethod
-    def non_negative_per_domain(cls, v: dict[str, int]) -> dict[str, int]:
-        for domain, val in v.items():
-            if domain not in DOMAIN_KEYS:
-                raise ValueError(f"unknown domain: {domain!r}")
-            if val < 0:
-                raise ValueError(f"advancement value for {domain!r} cannot be negative")
-        return {d: v.get(d, 0) for d in DOMAIN_KEYS}
 
 
 class Alignment(BaseModel):
@@ -583,16 +561,6 @@ class SpendAPRequest(BaseModel):
         gt=0,
         description="Number of domain points to purchase. Must be positive.",
     )
-    use_earned: int = Field(
-        default=0,
-        ge=0,
-        description="AP to draw from earned pool of target_domain. Must not exceed points_available_earned[target_domain].",
-    )
-    use_awarded: int = Field(
-        default=0,
-        ge=0,
-        description="AP to draw from awarded pool. Must not exceed points_available_awarded.",
-    )
 
     @field_validator("target_domain")
     @classmethod
@@ -607,8 +575,6 @@ class SpendAPResponse(BaseModel):
     target_domain: str
     points_purchased: int
     ap_cost_total: int
-    ap_drawn_earned: int
-    ap_drawn_awarded: int
     new_domain_score: int
     advancement: AdvancementState
 

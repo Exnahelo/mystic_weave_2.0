@@ -181,12 +181,14 @@ Risky failure → apply Strain. Dangerous failure → apply Backlash.
 
 Canonical: `prompts/progression-rules.md`.
 
-### Earned AP
+### AP Pool
 
 ```
-Every 3 tag advances within a domain → 1 AP locked to that domain
-Earned AP can ONLY be spent on its source domain.
-Cross-domain tags increment the primary domain only.
+AP lives in a single fungible pool (points_available).
+AP earns from two sources:
+  - Tag-counter rollover: every 3 tag advances → 1 AP (counter resets to 0)
+  - Awarded AP: contract-bound, pre-declared, granted at contract resolution
+AP is spendable on any domain.
 ```
 
 ### Awarded AP Scale
@@ -198,7 +200,8 @@ Cross-domain tags increment the primary domain only.
 | Regional-scale undertaking | 3 |
 | Campaign-defining oath, pact, or arc commitment | 4 |
 
-Awarded AP can be spent on any domain.
+Awarded AP is gated by patron standing — Council-level, oath-bound, world-stakes.
+Mortal-scale errands pay coin and reputation, not AP.
 
 ### Domain Spend Brackets
 
@@ -209,12 +212,6 @@ Awarded AP can be spent on any domain.
 | 71–80 | 3 |
 
 Domain cap: 80. Calculate point-by-point when crossing brackets.
-
-### Domain Push Outcome
-
-When domain push fires, player chooses ONE of:
-- +1 AP in that domain (banked for spend)
-- +1 to that domain's score directly (bypasses bracket cost)
 
 ### Tag Advancement Boundaries
 

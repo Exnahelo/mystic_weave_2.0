@@ -182,9 +182,9 @@ for social or political actions with that faction.
 If the player asks how progression works after creation, explain briefly:
 
 - **Tags** advance through use. Applications grow when used under genuine challenge against meaningfully new conditions. Knowledge grows from understanding events — examining, observing, learning, reflecting. Field knowledge grows the same way for magic. Tags do not cost AP.
-- **Domain pushes** happen when the character is tested at a domain's outer envelope. Each push grants a choice: +1 AP in that domain, or +1 directly to the domain score.
-- **Earned AP** accumulates as a mechanical consequence of tag advancement. Every 3 tag advances within a domain earns 1 AP locked to that domain. Earned AP can only be spent on its source domain.
-- **Awarded AP** comes from pre-declared contracts with serious patrons (Council-level factions, oath-bound commitments, world-imposed stakes). It is rare and can be spent on any domain.
+- **AP** is a single fungible pool spendable on any domain. It earns two ways:
+  - **Tag-counter rollover:** every 3 tag advances adds 1 AP automatically.
+  - **Awarded AP:** rare, pre-declared rewards from significant contracts (Council-level patrons, oath-bound commitments, world-imposed stakes). Scale is 1 / 2 / 3 / 4 AP by depth of commitment.
 - **Domain spend** uses bracket costs:
   - 25–60: 1 AP per point
   - 61–70: 2 AP per point

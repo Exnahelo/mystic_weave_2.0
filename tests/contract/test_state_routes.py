@@ -178,7 +178,7 @@ def test_save_full_state_tag_advance_increments_counter() -> None:
 
     assert response.status_code == 200
     payload = response.json()
-    assert payload["character"]["advancement"]["tag_advance_counters"]["power"] == 1
+    assert payload["character"]["advancement"]["tag_counter"] == 1
 
 
 @pytest.mark.contract

@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "4.4.0"
+    "version": "4.5.0"
   },
   "servers": [
     {
@@ -231,7 +231,7 @@
     "/character/{session_id}/spend_ap": {
       "post": {
         "summary": "Spend Ap",
-        "description": "Spend AP to raise a domain score. Earned AP can only be drawn from the target domain's pool; awarded AP can be drawn for any domain. The two sources may be combined. Bracket costs apply point-by-point: 1 AP per point at scores 25-60, 2 AP at 61-70, 3 AP at 71-80.",
+        "description": "Spend AP to raise a domain score. AP is drawn from the single fungible pool (points_available). Bracket costs apply point-by-point: 1 AP per point at scores 25-60, 2 AP at 61-70, 3 AP at 71-80.",
         "operationId": "spend_ap_character__session_id__spend_ap_post",
         "parameters": [
           {
@@ -1064,17 +1064,9 @@
       },
       "AdvancementState": {
         "properties": {
-          "points_available_earned": {
-            "additionalProperties": {
-              "type": "integer"
-            },
-            "type": "object",
-            "title": "Points Available Earned",
-            "description": "Per-domain earned AP pools. Keys: power, agility, perception, endurance, intellect, will, presence."
-          },
-          "points_available_awarded": {
+          "points_available": {
             "type": "integer",
-            "title": "Points Available Awarded",
+            "title": "Points Available",
             "default": 0
           },
           "points_spent": {
@@ -1087,18 +1079,17 @@
             "title": "Points Earned Total",
             "default": 0
           },
-          "tag_advance_counters": {
-            "additionalProperties": {
-              "type": "integer"
-            },
-            "type": "object",
-            "title": "Tag Advance Counters",
-            "description": "Per-domain counters; tag advances increment these. At 3, convert to +1 earned AP in that domain."
+          "tag_counter": {
+            "type": "integer",
+            "maximum": 2.0,
+            "minimum": 0.0,
+            "title": "Tag Counter",
+            "default": 0
           }
         },
         "type": "object",
         "title": "AdvancementState",
-        "description": "Per-domain earned AP pools, single awarded AP pool, lifetime totals,\nand per-domain tag advancement counters.\n\nEarned AP is locked to its source domain (each domain has its own pool).\nAwarded AP is free-allocation across any domain (single pool).\nCounters track tag advances per domain; every 3 advances in a domain\nconverts to +1 earned AP in that domain."
+        "description": "Fungible AP pool, lifetime totals, and a single tag advance counter.\n\nTag advances increment tag_counter. Every 3 advances (counter == 3)\nresets the counter to 0 and adds 1 to points_available. Awarded AP\ngrants drop directly into points_available. Spend draws from\npoints_available with bracketed cost (1/2/3 by score range)."
       },
       "Alignment": {
         "properties": {
@@ -6366,20 +6357,6 @@
             "exclusiveMinimum": 0.0,
             "title": "Points",
             "description": "Number of domain points to purchase. Must be positive."
-          },
-          "use_earned": {
-            "type": "integer",
-            "minimum": 0.0,
-            "title": "Use Earned",
-            "description": "AP to draw from earned pool of target_domain. Must not exceed points_available_earned[target_domain].",
-            "default": 0
-          },
-          "use_awarded": {
-            "type": "integer",
-            "minimum": 0.0,
-            "title": "Use Awarded",
-            "description": "AP to draw from awarded pool. Must not exceed points_available_awarded.",
-            "default": 0
           }
         },
         "additionalProperties": false,
@@ -6409,14 +6386,6 @@
             "type": "integer",
             "title": "Ap Cost Total"
           },
-          "ap_drawn_earned": {
-            "type": "integer",
-            "title": "Ap Drawn Earned"
-          },
-          "ap_drawn_awarded": {
-            "type": "integer",
-            "title": "Ap Drawn Awarded"
-          },
           "new_domain_score": {
             "type": "integer",
             "title": "New Domain Score"
@@ -6431,8 +6400,6 @@
           "target_domain",
           "points_purchased",
           "ap_cost_total",
-          "ap_drawn_earned",
-          "ap_drawn_awarded",
           "new_domain_score",
           "advancement"
         ],
