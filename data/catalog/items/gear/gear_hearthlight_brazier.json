@@ -1,0 +1,49 @@
+{
+  "id": "gear-hearthlight-brazier",
+  "name": "Hearthlight Brazier",
+  "category": "gear",
+  "subcategory": "tool",
+  "schema_version": 1,
+  "description": "A compact lidded field brazier of bark-laminate, ash-lined ceramic, and a cultivated Hearthlight Fungus inner chamber that supplements the coals with steady, near-glowless warmth. Made for low-light cooking in the deep woods; keeps coals off the forest floor, muffles open flame, catches sparks and ash, and lets travelers heat food or water with far less risk of wildfire or obvious campglow.",
+  "narrative_effects": [
+    "Permits hot food and water preparation in dry forest without the wildfire risk of an open campfire.",
+    "Sharply reduces visible glow and airborne sparks; supports concealed-camp narration.",
+    "Standard kit for elven rangers and Heartwarden Watch rotations operating in the deep wood.",
+    "Shares the cultivated Hearthlight Fungus tradition of Thornveil's lantern craft; sustained warmth between cooking fires reduces fuel demand on extended patrols."
+  ],
+  "tags": [
+    "craft",
+    "camp",
+    "heat",
+    "elven",
+    "feywood",
+    "ranger",
+    "field"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 110,
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "leatherworker"
+  ],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

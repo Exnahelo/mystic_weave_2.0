@@ -1,0 +1,42 @@
+{
+  "id": "gear-saddle",
+  "name": "Saddle",
+  "category": "gear",
+  "subcategory": "tool",
+  "schema_version": 1,
+  "description": "A standard travel saddle of treated leather over a hardwood frame, suited to ordinary mounted travel across realm and Border roads.",
+  "narrative_effects": [
+    "Required equipment for sustained mounted travel without imposing fatigue penalties.",
+    "Standard issue across realm and Border markets; no specialized terrain handling."
+  ],
+  "tags": [
+    "mount",
+    "travel"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 80,
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "leatherworker",
+    "general-goods"
+  ],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

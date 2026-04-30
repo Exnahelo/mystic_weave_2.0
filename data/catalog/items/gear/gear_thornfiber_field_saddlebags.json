@@ -1,0 +1,50 @@
+{
+  "id": "gear-thornfiber-field-saddlebags",
+  "name": "Thornfiber Field Saddlebags",
+  "category": "gear",
+  "subcategory": "storage",
+  "schema_version": 1,
+  "description": "A matched set of low-profile saddlebags woven from waxed Thornfiber and reinforced with treated hide. Separate dry storage, a gatherer's pocket, and a built-in feed sleeve for trail use; designed to carry travel gear without snagging badly in roots, brush, or narrow forest paths.",
+  "narrative_effects": [
+    "Carries a full mounted gear load with reduced snag and noise in dense forest terrain.",
+    "Dedicated dry compartment protects field notes, samples, and consumables from rain and stream crossings.",
+    "Built-in feed sleeve simplifies extended travel without separate feed-bag storage."
+  ],
+  "tags": [
+    "storage",
+    "mount",
+    "travel",
+    "elven",
+    "feywood",
+    "ranger",
+    "gathering",
+    "thornfiber",
+    "field"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 130,
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "leatherworker",
+    "general-goods"
+  ],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

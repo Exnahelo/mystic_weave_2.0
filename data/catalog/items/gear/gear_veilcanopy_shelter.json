@@ -1,0 +1,50 @@
+{
+  "id": "gear-veilcanopy-shelter",
+  "name": "Veilcanopy Shelter",
+  "category": "gear",
+  "subcategory": "survival",
+  "schema_version": 1,
+  "description": "A light, foldable woodland shelter of barkcloth, resin-thread, and flexible Silverbark Ash spars, made for quiet camp in the deep forest. Its sloped canopy sheds rain, breaks up silhouette, and channels morning dew into a fitted catch-pouch sized for a full day's drinking water.",
+  "narrative_effects": [
+    "Counts as adequate weather shelter for one person and a bonded animal in temperate-to-cool conditions.",
+    "Visually breaks up silhouette under canopy; supports concealed-camp narration in forested terrain.",
+    "Morning dew catch yields water equivalent to a full waterskin under typical Feywood conditions; substitutes for a waterskin refill on consecutive forest mornings."
+  ],
+  "tags": [
+    "survival",
+    "camp",
+    "rest",
+    "elven",
+    "feywood",
+    "ranger",
+    "thornfiber",
+    "resinheart",
+    "silverbark-ash"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 95,
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "general-goods",
+    "tailor"
+  ],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

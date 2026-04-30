@@ -1,0 +1,50 @@
+{
+  "id": "gear-briarmane-ranger-saddle",
+  "name": "Briarmane Ranger Saddle",
+  "category": "gear",
+  "subcategory": "tool",
+  "schema_version": 1,
+  "description": "A long-ride forest saddle shaped specifically to the Briarmane Courser's tall, lean build — built on a layered Silverbark Ash frame with treated stag-hide and Thornfiber lash points. Lighter and quieter in brush than a realm saddle, with a deeper thigh contact and slightly forward seat that suits the Briarmane's gait and accommodates the breed's habit of pausing at wardlines without unsettling the rider.",
+  "narrative_effects": [
+    "Required equipment for sustained mounted travel without imposing fatigue penalties.",
+    "Quieter and lower-snag than a realm saddle in dense forest terrain; supports stealthed-approach narration when mounted.",
+    "Specifically fitted to Briarmane Coursers and similar long-legged forest mounts; less optimal on heavier or shorter-bodied breeds.",
+    "Standard issue for Greenshield rangers and the elven scout traditions of Thornveil and Vaelmere."
+  ],
+  "tags": [
+    "mount",
+    "travel",
+    "elven",
+    "feywood",
+    "ranger",
+    "silverbark-ash",
+    "thornfiber",
+    "field"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 200,
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "leatherworker",
+    "general-goods"
+  ],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

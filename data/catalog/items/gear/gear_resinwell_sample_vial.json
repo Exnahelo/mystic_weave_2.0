@@ -1,0 +1,47 @@
+{
+  "id": "gear-resinwell-sample-vial",
+  "name": "Resinwell Sample Vial",
+  "category": "gear",
+  "subcategory": "storage",
+  "schema_version": 1,
+  "description": "A small sealed specimen vial made from layered bark-composite and Resinheart-cured inner lining, used in place of glass for carrying herbs, spores, powders, oils, or other gathered material. Light, durable, and quiet in a travel kit, it protects fragile samples without relying on brittle glasswork.",
+  "narrative_effects": [
+    "Carries a single small specimen — herbs, spores, powders, oils, fragments — in a sealed, travel-resilient container.",
+    "Won't shatter under normal field conditions, where glass would; supports clean sample chain-of-evidence narration.",
+    "Standard kit for druidic gatherers, Heartwarden field investigators, and elven herbalists."
+  ],
+  "tags": [
+    "storage",
+    "elven",
+    "feywood",
+    "gathering",
+    "field",
+    "resinheart"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 10,
+  "wealth_tier_floor": "modest",
+  "market_tags": [
+    "apothecary",
+    "general-goods"
+  ],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}
