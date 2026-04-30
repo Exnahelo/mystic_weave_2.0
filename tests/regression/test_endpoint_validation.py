@@ -1,4 +1,5 @@
 import json
+import re
 from datetime import datetime
 
 import pytest
@@ -251,6 +252,27 @@ def test_session_new_rejects_invalid_wealth_tier_with_422() -> None:
         )
 
     assert r.status_code == 422
+
+
+@pytest.mark.regression
+def test_session_new_returns_16_hex_character_session_id() -> None:
+    app = _make_app_with_router(session.router, FakePool(FakeConn()))
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/session/new",
+            json={
+                "character_name": "Hex",
+                "ancestry": "human",
+                "culture": "drakenvale_city",
+                "focus": "champion",
+                "background": "soldier",
+            },
+        )
+
+    assert r.status_code == 201
+    session_id = r.json()["session_id"]
+    assert re.fullmatch(r"[0-9a-f]{16}", session_id)
 
 
 @pytest.mark.regression

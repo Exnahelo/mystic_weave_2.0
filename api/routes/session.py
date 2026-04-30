@@ -22,8 +22,8 @@ router = APIRouter()
 
 
 def _short_id() -> str:
-    """Generate a short 8-character hex session ID."""
-    return uuid.uuid4().hex[:8]
+    """Generate a short 16-character hex session ID."""
+    return uuid.uuid4().hex[:16]
 
 
 @router.post("/session/new", response_model=NewSessionResponse, status_code=201)
