@@ -1,8 +1,9 @@
 openapi: 3.1.0
 info:
   title: Mystic Weave
-  description: Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API
-    is the memory. d100 roll-under resolution with domain scores and competency tiers.
+  description: Persistent game state backend for a text-based RPG powered by a custom
+    GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution
+    with domain scores and competency tiers.
   version: 4.4.0
 servers:
 - url: https://mysticweave-production.up.railway.app
@@ -35,7 +36,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       summary: Save State
-      description: Save game state, deep-merge character and world updates onto stored state, and append one log entry atomically.
+      description: Save game state, deep-merge character and world updates onto stored
+        state, and append one log entry atomically.
       operationId: save_state_state__session_id__post
       parameters:
       - name: session_id
@@ -66,7 +68,8 @@ paths:
   /state/{session_id}/delta:
     post:
       summary: Save State Delta
-      description: Apply a validated structured state delta to stored game state, then append one log entry atomically.
+      description: Apply a validated structured state delta to stored game state,
+        then append one log entry atomically.
       operationId: save_state_delta_state__session_id__delta_post
       parameters:
       - name: session_id
@@ -128,7 +131,8 @@ paths:
   /character/create:
     post:
       summary: Create Character
-      description: 'Seed a character from game system data and update the session''s character record.
+      description: 'Seed a character from game system data and update the session''s
+        character record.
 
 
         The session must already exist (created via POST /session/new).
@@ -157,9 +161,10 @@ paths:
   /character/{session_id}/spend_ap:
     post:
       summary: Spend Ap
-      description: 'Spend AP to raise a domain score. Earned AP can only be drawn from the target domain''s pool; awarded
-        AP can be drawn for any domain. The two sources may be combined. Bracket costs apply point-by-point: 1 AP per point
-        at scores 25-60, 2 AP at 61-70, 3 AP at 71-80.'
+      description: 'Spend AP to raise a domain score. Earned AP can only be drawn
+        from the target domain''s pool; awarded AP can be drawn for any domain. The
+        two sources may be combined. Bracket costs apply point-by-point: 1 AP per
+        point at scores 25-60, 2 AP at 61-70, 3 AP at 71-80.'
       operationId: spend_ap_character__session_id__spend_ap_post
       parameters:
       - name: session_id
@@ -190,7 +195,8 @@ paths:
   /roll:
     post:
       summary: Roll Dice
-      description: Roll 1d100 against a target and return success state plus degree band.
+      description: Roll 1d100 against a target and return success state plus degree
+        band.
       operationId: roll_dice_roll_post
       requestBody:
         content:
@@ -216,7 +222,8 @@ paths:
       tags:
       - combat
       summary: Compute Max Hp Endpoint
-      description: Compute pre-combat HP from armor and shield catalog values plus skill tiers.
+      description: Compute pre-combat HP from armor and shield catalog values plus
+        skill tiers.
       operationId: compute_max_hp_endpoint_combat_compute_max_hp_post
       requestBody:
         content:
@@ -242,7 +249,8 @@ paths:
       tags:
       - combat
       summary: Resolve Attack Endpoint
-      description: Resolve a single Combat v1.0 attack atomically using backend-authoritative dice.
+      description: Resolve a single Combat v1.0 attack atomically using backend-authoritative
+        dice.
       operationId: resolve_attack_endpoint_combat_resolve_attack_post
       requestBody:
         content:
@@ -266,7 +274,8 @@ paths:
   /location/{location_id}:
     get:
       summary: Get Location
-      description: 'Load location data. The GPT must call this before describing any place.
+      description: 'Load location data. The GPT must call this before describing any
+        place.
 
         Returns 404 if the location does not exist in the database.'
       operationId: get_location_location__location_id__get
@@ -293,7 +302,8 @@ paths:
   /location:
     post:
       summary: Upsert Location
-      description: Create or update a location via UPSERT, and persist valid world-graph connections from the payload.
+      description: Create or update a location via UPSERT, and persist valid world-graph
+        connections from the payload.
       operationId: upsert_location_location_post
       requestBody:
         content:
@@ -398,9 +408,11 @@ paths:
           - armor
           - ammunition
           type: string
-          description: 'Required. Which item catalog to return: mundane, magical, apparel, weapon, armor, or ammunition.'
+          description: 'Required. Which item catalog to return: mundane, magical,
+            apparel, weapon, armor, or ammunition.'
           title: Kind
-        description: 'Required. Which item catalog to return: mundane, magical, apparel, weapon, armor, or ammunition.'
+        description: 'Required. Which item catalog to return: mundane, magical, apparel,
+          weapon, armor, or ammunition.'
       responses:
         '200':
           description: Successful Response
@@ -477,7 +489,8 @@ paths:
   /scene/{session_id}:
     get:
       summary: Get Scene Context
-      description: Build and return compact scene context from persisted state and current location for narration input.
+      description: Build and return compact scene context from persisted state and
+        current location for narration input.
       operationId: get_scene_context_scene__session_id__get
       parameters:
       - name: session_id
@@ -504,7 +517,8 @@ paths:
       tags:
       - tags
       summary: Get Tags
-      description: 'Return the canonical tag vocabularies: knowledge groups, magic fields, applications.'
+      description: 'Return the canonical tag vocabularies: knowledge groups, magic
+        fields, applications.'
       operationId: get_tags_tags_get
       responses:
         '200':
@@ -608,8 +622,8 @@ paths:
       tags:
       - npcs
       summary: Get Npcs
-      description: Return NPC registry entries. Use `tier=named` for tier 1-2 individuals, `tier=roles` for tier 3 role templates,
-        or omit for both.
+      description: Return NPC registry entries. Use `tier=named` for tier 1-2 individuals,
+        `tier=roles` for tier 3 role templates, or omit for both.
       operationId: get_npcs_npcs_get
       parameters:
       - name: tier
@@ -619,9 +633,11 @@ paths:
           anyOf:
           - type: string
           - type: 'null'
-          description: 'Filter by tier category: ''named'' (tier 1-2) or ''roles'' (tier 3). Omit for all.'
+          description: 'Filter by tier category: ''named'' (tier 1-2) or ''roles''
+            (tier 3). Omit for all.'
           title: Tier
-        description: 'Filter by tier category: ''named'' (tier 1-2) or ''roles'' (tier 3). Omit for all.'
+        description: 'Filter by tier category: ''named'' (tier 1-2) or ''roles'' (tier
+          3). Omit for all.'
       responses:
         '200':
           description: Successful Response
@@ -719,7 +735,8 @@ components:
             type: integer
           type: object
           title: Points Available Earned
-          description: 'Per-domain earned AP pools. Keys: power, agility, perception, endurance, intellect, will, presence.'
+          description: 'Per-domain earned AP pools. Keys: power, agility, perception,
+            endurance, intellect, will, presence.'
         points_available_awarded:
           type: integer
           title: Points Available Awarded
@@ -737,7 +754,8 @@ components:
             type: integer
           type: object
           title: Tag Advance Counters
-          description: Per-domain counters; tag advances increment these. At 3, convert to +1 earned AP in that domain.
+          description: Per-domain counters; tag advances increment these. At 3, convert
+            to +1 earned AP in that domain.
       type: object
       title: AdvancementState
       description: 'Per-domain earned AP pools, single awarded AP pool, lifetime totals,
@@ -979,16 +997,25 @@ components:
         knowledge_tags:
           additionalProperties:
             type: integer
+            maximum: 5.0
+            minimum: 1.0
+            description: Competency tag tier. Must be an integer from 1 through 5.
           type: object
           title: Knowledge Tags
         application_tags:
           additionalProperties:
             type: integer
+            maximum: 5.0
+            minimum: 1.0
+            description: Competency tag tier. Must be an integer from 1 through 5.
           type: object
           title: Application Tags
         field_tags:
           additionalProperties:
             type: integer
+            maximum: 5.0
+            minimum: 1.0
+            description: Competency tag tier. Must be an integer from 1 through 5.
           type: object
           title: Field Tags
       type: object
@@ -1059,16 +1086,25 @@ components:
         knowledge:
           additionalProperties:
             type: integer
+            maximum: 5.0
+            minimum: 1.0
+            description: Competency tag tier. Must be an integer from 1 through 5.
           type: object
           title: Knowledge
         application:
           additionalProperties:
             type: integer
+            maximum: 5.0
+            minimum: 1.0
+            description: Competency tag tier. Must be an integer from 1 through 5.
           type: object
           title: Application
         fields:
           additionalProperties:
             type: integer
+            maximum: 5.0
+            minimum: 1.0
+            description: Competency tag tier. Must be an integer from 1 through 5.
           type: object
           title: Fields
         status_effects:
@@ -1131,16 +1167,25 @@ components:
         knowledge:
           additionalProperties:
             type: integer
+            maximum: 5.0
+            minimum: 1.0
+            description: Competency tag tier. Must be an integer from 1 through 5.
           type: object
           title: Knowledge
         application:
           additionalProperties:
             type: integer
+            maximum: 5.0
+            minimum: 1.0
+            description: Competency tag tier. Must be an integer from 1 through 5.
           type: object
           title: Application
         fields:
           additionalProperties:
             type: integer
+            maximum: 5.0
+            minimum: 1.0
+            description: Competency tag tier. Must be an integer from 1 through 5.
           type: object
           title: Fields
         status_effects:
@@ -1191,6 +1236,10 @@ components:
           anyOf:
           - additionalProperties:
               type: integer
+              maximum: 5.0
+              minimum: 1.0
+              description: Competency tag tier. Must be an integer from 1 through
+                5.
             type: object
           - type: 'null'
           title: Knowledge
@@ -1198,6 +1247,10 @@ components:
           anyOf:
           - additionalProperties:
               type: integer
+              maximum: 5.0
+              minimum: 1.0
+              description: Competency tag tier. Must be an integer from 1 through
+                5.
             type: object
           - type: 'null'
           title: Application
@@ -1205,6 +1258,10 @@ components:
           anyOf:
           - additionalProperties:
               type: integer
+              maximum: 5.0
+              minimum: 1.0
+              description: Competency tag tier. Must be an integer from 1 through
+                5.
             type: object
           - type: 'null'
           title: Fields
@@ -1245,7 +1302,18 @@ components:
       additionalProperties: false
       type: object
       title: CharacterStateDelta
-      description: Typed partial character update for extraction-driven turn commits.
+      description: 'Typed partial character update for extraction-driven turn commits.
+
+
+        Note on `advancement`: the delta endpoint recomputes advancement
+
+        authoritatively from existing state and tag-tier transitions. Any
+
+        client-supplied `advancement` value is replaced server-side. The field
+
+        remains on the schema for forward compatibility and round-trip safety,
+
+        but its content has no effect on persisted state.'
     CombatDamageResult:
       properties:
         weapon_base:
@@ -1562,7 +1630,8 @@ components:
       - focus
       - background
       title: CreateCharacterRequest
-      description: Body for POST /character/create — seeds character from game system data.
+      description: Body for POST /character/create — seeds character from game system
+        data.
     CreateCharacterResponse:
       properties:
         session_id:
@@ -2022,16 +2091,25 @@ components:
         knowledge_tags:
           additionalProperties:
             type: integer
+            maximum: 5.0
+            minimum: 1.0
+            description: Competency tag tier. Must be an integer from 1 through 5.
           type: object
           title: Knowledge Tags
         application_tags:
           additionalProperties:
             type: integer
+            maximum: 5.0
+            minimum: 1.0
+            description: Competency tag tier. Must be an integer from 1 through 5.
           type: object
           title: Application Tags
         field_tags:
           additionalProperties:
             type: integer
+            maximum: 5.0
+            minimum: 1.0
+            description: Competency tag tier. Must be an integer from 1 through 5.
           type: object
           title: Field Tags
       type: object
@@ -2093,7 +2171,8 @@ components:
           title: Obligations
       type: object
       title: Economy
-      description: 'Economic state. wealth_tier is the universal abstraction (works for barter
+      description: 'Economic state. wealth_tier is the universal abstraction (works
+        for barter
 
         and currency economies alike). coin is stored as total Copper Drakes (CD)
 
@@ -2195,7 +2274,8 @@ components:
       additionalProperties: false
       type: object
       title: EquipmentDelta
-      description: Sparse equipment update; merges by slot rather than replacing all equipment.
+      description: Sparse equipment update; merges by slot rather than replacing all
+        equipment.
     EquipmentItem:
       properties:
         id:
@@ -3080,16 +3160,25 @@ components:
         knowledge_tags:
           additionalProperties:
             type: integer
+            maximum: 5.0
+            minimum: 1.0
+            description: Competency tag tier. Must be an integer from 1 through 5.
           type: object
           title: Knowledge Tags
         application_tags:
           additionalProperties:
             type: integer
+            maximum: 5.0
+            minimum: 1.0
+            description: Competency tag tier. Must be an integer from 1 through 5.
           type: object
           title: Application Tags
         field_tags:
           additionalProperties:
             type: integer
+            maximum: 5.0
+            minimum: 1.0
+            description: Competency tag tier. Must be an integer from 1 through 5.
           type: object
           title: Field Tags
         signature_tag:
@@ -3217,7 +3306,8 @@ components:
           $ref: '#/components/schemas/Alignment'
       type: object
       title: Identity
-      description: 'Narrative character block. Captured at creation, GPT-readable every session.
+      description: 'Narrative character block. Captured at creation, GPT-readable
+        every session.
 
         All fields optional at creation — can be filled in as play reveals them.'
     Identity-Output:
@@ -3254,7 +3344,8 @@ components:
           $ref: '#/components/schemas/Alignment'
       type: object
       title: Identity
-      description: 'Narrative character block. Captured at creation, GPT-readable every session.
+      description: 'Narrative character block. Captured at creation, GPT-readable
+        every session.
 
         All fields optional at creation — can be filled in as play reveals them.'
     ItemCatalogResponse:
@@ -4305,7 +4396,8 @@ components:
       - location_summary
       - relevant_character_state
       title: SceneContext
-      description: Derived GPT-facing scene payload assembled from full state + location + log.
+      description: Derived GPT-facing scene payload assembled from full state + location
+        + log.
     SceneLocationSummary:
       properties:
         id:
@@ -4373,7 +4465,8 @@ components:
           type: integer
           minimum: 0.0
           title: Use Earned
-          description: AP to draw from earned pool of target_domain. Must not exceed points_available_earned[target_domain].
+          description: AP to draw from earned pool of target_domain. Must not exceed
+            points_available_earned[target_domain].
           default: 0
         use_awarded:
           type: integer

@@ -19,7 +19,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Annotated
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 if TYPE_CHECKING:
@@ -30,6 +30,15 @@ DOMAIN_KEYS: tuple[str, ...] = (
     "power", "agility", "perception", "endurance",
     "intellect", "will", "presence",
 )
+
+TagTier = Annotated[
+    int,
+    Field(
+        ge=1,
+        le=5,
+        description="Competency tag tier. Must be an integer from 1 through 5.",
+    ),
+]
 
 
 def _zero_per_domain() -> dict[str, int]:
@@ -239,9 +248,9 @@ class CharacterModel(BaseModel):
     background:     str   # e.g. "soldier", "acolyte"
     hp:             HP
     domains:        DomainScores
-    knowledge:      dict[str, int] = Field(default_factory=dict)   # tag name → tier (1–5)
-    application:    dict[str, int] = Field(default_factory=dict)   # tag name → tier (1–5)
-    fields:         dict[str, int] = Field(default_factory=dict)   # field name → tier (1–5)
+    knowledge:      dict[str, TagTier] = Field(default_factory=dict)   # tag name → tier (1–5)
+    application:    dict[str, TagTier] = Field(default_factory=dict)   # tag name → tier (1–5)
+    fields:         dict[str, TagTier] = Field(default_factory=dict)   # field name → tier (1–5)
     status_effects: list[str]      = Field(default_factory=list)
     notes:          str            = ""
 
@@ -486,9 +495,9 @@ class CharacterStateDelta(BaseModel):
 
     hp: HP | None = None
     domains: dict[str, int] | None = None
-    knowledge: dict[str, int] | None = None
-    application: dict[str, int] | None = None
-    fields: dict[str, int] | None = None
+    knowledge: dict[str, TagTier] | None = None
+    application: dict[str, TagTier] | None = None
+    fields: dict[str, TagTier] | None = None
     status_effects: list[str] | None = None
     notes: str | None = None
     equipment: EquipmentDelta | None = None
@@ -893,18 +902,18 @@ class CultureOption(BaseModel):
     name: str
     description: str = ""
     domain_bonuses: dict[str, int] = Field(default_factory=dict)
-    knowledge_tags: dict[str, int] = Field(default_factory=dict)
-    application_tags: dict[str, int] = Field(default_factory=dict)
-    field_tags: dict[str, int] = Field(default_factory=dict)
+    knowledge_tags: dict[str, TagTier] = Field(default_factory=dict)
+    application_tags: dict[str, TagTier] = Field(default_factory=dict)
+    field_tags: dict[str, TagTier] = Field(default_factory=dict)
 
 
 class FocusOption(BaseModel):
     index:            str
     name:             str
     description:      str             = ""
-    knowledge_tags:   dict[str, int]  = Field(default_factory=dict)   # tag name → starting tier
-    application_tags: dict[str, int]  = Field(default_factory=dict)   # tag name → starting tier
-    field_tags:       dict[str, int]  = Field(default_factory=dict)
+    knowledge_tags:   dict[str, TagTier] = Field(default_factory=dict)   # tag name → starting tier
+    application_tags: dict[str, TagTier] = Field(default_factory=dict)   # tag name → starting tier
+    field_tags:       dict[str, TagTier] = Field(default_factory=dict)
     signature_tag:    str | None      = None
 
 
@@ -913,9 +922,9 @@ class BackgroundOption(BaseModel):
     name:             str
     description:      str             = ""
     domain_bonuses:   dict[str, int]  = Field(default_factory=dict)
-    knowledge_tags:   dict[str, int]  = Field(default_factory=dict)   # tag name → starting tier
-    application_tags: dict[str, int]  = Field(default_factory=dict)   # tag name → starting tier
-    field_tags:       dict[str, int]  = Field(default_factory=dict)
+    knowledge_tags:   dict[str, TagTier] = Field(default_factory=dict)   # tag name → starting tier
+    application_tags: dict[str, TagTier] = Field(default_factory=dict)   # tag name → starting tier
+    field_tags:       dict[str, TagTier] = Field(default_factory=dict)
 
 
 class ItemOption(BaseModel):

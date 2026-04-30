@@ -239,6 +239,27 @@ def test_openapi_contract_character_delta_includes_fields_dict() -> None:
 
 
 @pytest.mark.contract
+def test_openapi_contract_tag_tier_maps_are_constrained_to_one_through_five() -> None:
+    spec = app.openapi()
+    schemas = spec["components"]["schemas"]
+
+    character_properties = schemas["CharacterModel-Input"]["properties"]
+    delta_properties = schemas["CharacterStateDelta"]["properties"]
+
+    for property_name in ("knowledge", "application", "fields"):
+        tag_map_schema = character_properties[property_name]
+        assert tag_map_schema["additionalProperties"]["minimum"] == 1
+        assert tag_map_schema["additionalProperties"]["maximum"] == 5
+
+        nullable_tag_map_schema = delta_properties[property_name]
+        object_variant = next(
+            option for option in nullable_tag_map_schema["anyOf"] if option.get("type") == "object"
+        )
+        assert object_variant["additionalProperties"]["minimum"] == 1
+        assert object_variant["additionalProperties"]["maximum"] == 5
+
+
+@pytest.mark.contract
 def test_openapi_contract_world_delta_uses_sparse_economy_schema() -> None:
     spec = app.openapi()
     economy_property = spec["components"]["schemas"]["WorldStateDelta"]["properties"]["economy"]
