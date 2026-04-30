@@ -19,7 +19,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
-from typing import TYPE_CHECKING, Annotated
+from typing import TYPE_CHECKING, Annotated, Literal
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 if TYPE_CHECKING:
@@ -389,6 +389,30 @@ class TimeState(BaseModel):
         if v < 1:
             raise ValueError("year must be at least 1")
         return v
+
+
+class TimeElapsed(BaseModel):
+    """Duration to advance world.time by on a state save.
+
+    Three modes:
+    - steps: time-of-day band advances (1 step = 1 band, 6 bands per day)
+    - days: full day advances
+    - until: special anchor advance ("dawn" advances to the next dawn)
+
+    `until` is mutually exclusive with steps/days. If until is set, steps and
+    days must both be 0.
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    steps: int = Field(0, ge=0, le=12, description="Time-of-day band advances.")
+    days: int = Field(0, ge=0, le=30, description="Full day advances.")
+    until: Literal["dawn"] | None = Field(None, description='If "dawn", advance to next dawn.')
+
+    @model_validator(mode="after")
+    def validate_combination(self) -> "TimeElapsed":
+        if self.until is not None and (self.steps or self.days):
+            raise ValueError("`until` cannot be combined with non-zero steps or days")
+        return self
 
 
 class TimeDriftWarning(BaseModel):
