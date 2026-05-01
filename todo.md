@@ -119,6 +119,7 @@ Designed or partially designed; held until arc system v1 lands live-play validat
 - [ ] Services subsystem (`data/catalog/services/`)
 - [ ] Vendors subsystem (`data/catalog/vendors/`)
 - [ ] Crafting subsystem (`data/catalog/crafting/recipes.json`, `stations.json` beyond `materials.json`)
+- [ ] Bestiary content. Authoring source exists at `prompts/future_development/fauna.md` (biome-scoped fauna palette, names only). Schema decision pending — would feed future bestiary/combat/encounter system work.
 
 ---
 
