@@ -33,11 +33,12 @@ If you walk in cold and only read one section, read the Arc System v1 section. T
 - [ ] PR 2: Move vocabulary registries (`natural_abilities.json`,
   `learned_commands.json`, `tactical_roles.json`) into
   `data/catalog/registries/companion_*.json`. Update consumers.
-- [ ] Author ecology data for non-Feywood biomes (10 creatures currently
-  have `creature_companion` facet but no `ecology` facet):
+- [x] Author ecology data for non-Feywood biomes (10 creatures previously
+  had `creature_companion` facet but no `ecology` facet) — completed 2026-05-01 in this batch.
   - alpine_peaks: frostclaw_bear, cliffang_wolf
   - draconic_grasslands: goldmane_courser, windcrown_hawk
-  - temperate_forest: silvermoss_wolf, working_hound
+  - temperate_forest: silvermoss_wolf
+  - generalist: working_hound
   - volcanic_highlands: ash_hound, embersail_hawk
   - wetlands: mist_hound, bogwing_crane
 - [ ] Future facets: `combat`, `harvest`. Schema reserves the slots; not
@@ -60,7 +61,6 @@ Candidates for next active arc, in approximate priority order:
 
 ### Active
 
-- [ ] **Wire `data/environment/`** (`feywood_animals.json`, `feywood_plants.json`) into code. Currently authored but unread. Decide read pattern: pre-load into game_data like `data/companions/`, or load on demand from a new endpoint.
 - [ ] **Cross-reference materials ↔ ecology**: items reference materials (silverbark-ash, thornroot-stalker-hide, etc.); materials reference biomes; environment files reference creatures whose materials we catalog. The links exist conceptually but aren't formalized. Decide if this needs a structured cross-reference layer or stays narrative-only.
 
 ### Catalog stabilization follow-ups
