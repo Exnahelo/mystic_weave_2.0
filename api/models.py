@@ -19,7 +19,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
-from typing import TYPE_CHECKING, Annotated, Literal
+from typing import TYPE_CHECKING, Annotated, Any, Literal
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 if TYPE_CHECKING:
@@ -237,6 +237,207 @@ class CharacterModel(BaseModel):
     equipment:      Equipment      = Field(default_factory=Equipment)
     reputation:     list[ReputationEntry] = Field(default_factory=list)
     advancement:    AdvancementState = Field(default_factory=AdvancementState)
+
+
+# ---------------------------------------------------------------------------
+# Arc model
+# ---------------------------------------------------------------------------
+
+ArcStakeScale = Literal["local", "situational", "regional", "campaign"]
+ArcOriginType = Literal["declared", "emergent", "derived"]
+ArcState = Literal[
+    "proposed",
+    "available",
+    "in_progress",
+    "at_scope_cap",
+    "ready_to_close",
+    "complete",
+    "failed",
+    "abandoned",
+    "replaced_by_successor",
+    "merged_into_parent",
+]
+ArcPrimaryType = Literal[
+    "task_local",
+    "contract_delicate",
+    "mission_multi_leg",
+    "undertaking_regional",
+    "arc_campaign",
+]
+ArcAPOwnership = Literal["parent", "child", "none"]
+ArcFailureSettlementPolicy = Literal["default", "no_rewards", "non_ap_only"]
+
+
+class ArcCondition(BaseModel):
+    """A single condition in an arc condition set."""
+    model_config = ConfigDict(extra="forbid")
+
+    type: str = Field(description="Condition type from the registry condition_types list.")
+    payload: dict[str, Any] = Field(default_factory=dict)
+
+
+class ArcConditionSet(BaseModel):
+    """Logical grouping of arc conditions for closure or failure evaluation."""
+    model_config = ConfigDict(extra="forbid")
+
+    all_of: list[ArcCondition] = Field(default_factory=list)
+    any_of: list[ArcCondition] = Field(default_factory=list)
+    none_of: list[ArcCondition] = Field(default_factory=list)
+
+
+class ArcEscalationRules(BaseModel):
+    """Escalation policy for an arc reaching scope cap."""
+    model_config = ConfigDict(extra="forbid")
+
+    escalation_allowed: bool = True
+    spawn_new_arc_allowed: bool = True
+    auto_escalate_on_hard_cap: bool = False
+    max_escalation_depth: int = Field(default=2, ge=0, le=5)
+    allowed_target_types: list[ArcPrimaryType] = Field(default_factory=list)
+
+
+class ArcBudget(BaseModel):
+    """Scope budget for an arc, derived from primary type defaults."""
+    model_config = ConfigDict(extra="forbid")
+
+    resolved_scene_soft_cap: int = Field(ge=1)
+    resolved_scene_hard_cap: int = Field(ge=1)
+    location_soft_cap: int = Field(ge=1)
+    location_hard_cap: int = Field(ge=1)
+    encounter_density_hint: int | None = None
+    expected_duration_turns: int | None = None
+
+    @model_validator(mode="after")
+    def validate_soft_caps(self) -> "ArcBudget":
+        if self.resolved_scene_soft_cap > self.resolved_scene_hard_cap:
+            raise ValueError("resolved_scene_soft_cap cannot exceed resolved_scene_hard_cap")
+        if self.location_soft_cap > self.location_hard_cap:
+            raise ValueError("location_soft_cap cannot exceed location_hard_cap")
+        return self
+
+
+class ArcConsumption(BaseModel):
+    """Tracks how much of the budget the arc has consumed."""
+    model_config = ConfigDict(extra="forbid")
+
+    resolved_scenes_used: int = Field(default=0, ge=0)
+    locations_visited: list[str] = Field(default_factory=list)
+    turns_spent: int = Field(default=0, ge=0)
+    discoveries_logged: int = Field(default=0, ge=0)
+    major_conflicts_resolved: int = Field(default=0, ge=0)
+    escalations_used: int = Field(default=0, ge=0)
+
+
+class ArcAPAward(BaseModel):
+    """AP award envelope for an arc reward."""
+    model_config = ConfigDict(extra="forbid")
+
+    min: int = Field(ge=0)
+    max: int = Field(ge=0)
+    fixed: bool = False
+
+
+class ArcReputationEnvelope(BaseModel):
+    """Reputation channel bounds for an arc reward."""
+    model_config = ConfigDict(extra="forbid")
+
+    max_positive_delta: int = Field(default=0, ge=0)
+    max_negative_delta: int = Field(default=0, ge=0)
+    affected_factions: list[str] = Field(default_factory=list)
+
+
+class ArcEconomyEnvelope(BaseModel):
+    """Economy channel bounds for an arc reward."""
+    model_config = ConfigDict(extra="forbid")
+
+    coin_cd_min: int | None = None
+    coin_cd_max: int | None = None
+    barter_allowed: bool = True
+    obligation_allowed: bool = True
+
+
+class ArcItemAccessEnvelope(BaseModel):
+    """Item and access channel bounds for an arc reward."""
+    model_config = ConfigDict(extra="forbid")
+
+    mundane_item_tier_max: int | None = None
+    magical_item_tier_max: int | None = None
+    unique_item_allowed: bool = False
+    institutional_access_allowed: bool = False
+
+
+class ArcLeverageEnvelope(BaseModel):
+    """Leverage channel bounds for an arc reward."""
+    model_config = ConfigDict(extra="forbid")
+
+    obligation_slots_max: int = Field(default=0, ge=0)
+    secret_or_evidence_grade_max: int | None = None
+
+
+class ArcRewardEnvelope(BaseModel):
+    """Full reward channel envelope for an arc."""
+    model_config = ConfigDict(extra="forbid")
+
+    ap_award: ArcAPAward
+    reputation: ArcReputationEnvelope = Field(default_factory=ArcReputationEnvelope)
+    economy: ArcEconomyEnvelope = Field(default_factory=ArcEconomyEnvelope)
+    items_access: ArcItemAccessEnvelope = Field(default_factory=ArcItemAccessEnvelope)
+    leverage: ArcLeverageEnvelope = Field(default_factory=ArcLeverageEnvelope)
+
+
+class ArcFlags(BaseModel):
+    """Boolean flags governing arc behavior."""
+    model_config = ConfigDict(extra="forbid")
+
+    formal_contract_qualified: bool = False
+    ap_ownership: ArcAPOwnership = "none"
+    failure_settlement_policy: ArcFailureSettlementPolicy = "default"
+
+
+class ArcTimestamps(BaseModel):
+    """Lifecycle timestamps for an arc."""
+    model_config = ConfigDict(extra="forbid")
+
+    created_at: datetime
+    accepted_at: datetime | None = None
+    last_progressed_at: datetime | None = None
+    closed_at: datetime | None = None
+
+
+class Arc(BaseModel):
+    """
+    Backend-typed higher-level objective record.
+
+    See prompts/arc-rules.md (to be authored in Commit 6) for the narrator-facing
+    rules. See todo.md "Arc System v1" section for the full design.
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    id: str
+    session_id: str
+    title: str
+    summary: str
+    primary_type: ArcPrimaryType
+    subtype: str
+    stake_scale: ArcStakeScale
+    origin_type: ArcOriginType
+    parent_arc_id: str | None = None
+    spawned_arc_ids: list[str] = Field(default_factory=list)
+    state: ArcState
+    patron_faction: str | None = None
+    patron_npc_id: str | None = None
+    target_locations: list[str] = Field(default_factory=list)
+    closure_conditions: ArcConditionSet = Field(default_factory=ArcConditionSet)
+    failure_conditions: ArcConditionSet = Field(default_factory=ArcConditionSet)
+    escalation_rules: ArcEscalationRules = Field(default_factory=ArcEscalationRules)
+    budget: ArcBudget
+    rewards: ArcRewardEnvelope
+    consumption: ArcConsumption = Field(default_factory=ArcConsumption)
+    flags: ArcFlags = Field(default_factory=ArcFlags)
+    timestamps: ArcTimestamps
+    notes: list[str] = Field(default_factory=list)
+    merge_source_arc_ids: list[str] = Field(default_factory=list)
+    consequence_events_emitted: list[str] = Field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------

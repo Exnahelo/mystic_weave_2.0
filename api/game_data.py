@@ -49,6 +49,7 @@ _BEAST_DATA_FILES = (
     "companions/tactical_roles.json",
 )
 _CATALOG_ITEMS_DIR = _DATA_DIR / "catalog" / "items"
+_ARC_TYPES_REGISTRY = "catalog/registries/arc_types.json"
 _NPC_DATA_DIR = _DATA_DIR / "npcs"
 _MAGIC_DIR = _DATA_DIR / "magic"
 _PROMPTS_DIR = Path(__file__).parent.parent / "prompts"
@@ -194,6 +195,81 @@ def filter_catalog_by_kind(kind: str) -> list[dict[str, Any]]:
             out.append(project_catalog_to_item_option(item))
 
     return out
+
+
+# ---------------------------------------------------------------------------
+# Arc registry
+# ---------------------------------------------------------------------------
+
+@lru_cache(maxsize=1)
+def load_arc_types() -> dict[str, Any]:
+    """Load the Arc System v1 type registry."""
+    data = _load_json(_ARC_TYPES_REGISTRY)
+    if not isinstance(data, dict):
+        raise ValueError("arc_types.json must contain a top-level object")
+    if data.get("schema_version") != 1:
+        raise ValueError("arc_types.json schema_version must be 1")
+
+    types = data.get("types")
+    if not isinstance(types, list):
+        raise ValueError("arc_types.json types must be a list")
+
+    type_ids: list[str] = []
+    type_defaults: dict[str, dict[str, Any]] = {}
+    for entry in types:
+        if not isinstance(entry, dict):
+            raise ValueError("arc_types.json types entries must be objects")
+        type_id = entry.get("id")
+        if not isinstance(type_id, str) or not type_id:
+            raise ValueError("arc_types.json type entries must include a non-empty id")
+        if type_id in type_defaults:
+            raise ValueError(f"arc_types.json duplicate type id: {type_id}")
+        type_ids.append(type_id)
+        type_defaults[type_id] = dict(entry)
+
+    return {
+        **data,
+        "type_ids": type_ids,
+        "type_defaults": type_defaults,
+    }
+
+
+def list_arc_type_ids() -> list[str]:
+    """Return valid arc primary type IDs."""
+    return list(load_arc_types()["type_ids"])
+
+
+def get_arc_type_defaults(type_id: str) -> dict[str, Any]:
+    """Return calibrated default envelope for an arc primary type."""
+    defaults = load_arc_types()["type_defaults"]
+    if type_id not in defaults:
+        raise ValueError(f"Unknown arc type: {type_id!r}. Valid: {sorted(defaults)}")
+    return dict(defaults[type_id])
+
+
+def list_arc_state_ids() -> list[str]:
+    """Return valid arc state IDs."""
+    return list(load_arc_types()["states"])
+
+
+def list_arc_stake_scales() -> list[str]:
+    """Return valid arc stake scales."""
+    return list(load_arc_types()["stake_scales"])
+
+
+def list_arc_origin_types() -> list[str]:
+    """Return valid arc origin types."""
+    return list(load_arc_types()["origin_types"])
+
+
+def list_arc_subtypes() -> list[str]:
+    """Return valid arc subtypes."""
+    return list(load_arc_types()["subtypes"])
+
+
+def list_arc_condition_types() -> list[str]:
+    """Return valid arc condition types."""
+    return list(load_arc_types()["condition_types"])
 
 
 # ---------------------------------------------------------------------------
