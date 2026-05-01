@@ -17,243 +17,15 @@ If you walk in cold and only read one section, read the Arc System v1 section. T
 
 ---
 
-## ACTIVE ARCHITECTURAL ARC: Arc System v1
+## ACTIVE ARCHITECTURAL ARC
 
-### Why this exists
+*No active architectural arc currently. Arc System v1 closed 2026-04-30. Next architectural work pending live-play validation of v1 (2–4 week window).*
 
-The GPT-driven game has a recurring structural failure: anywhere the rules give the narrator discretion over mechanical outcomes, the narrator drifts. Examples surfaced in recent play:
+Candidates for next active arc, in approximate priority order:
 
-- The Stalkerhide Cloak's `mechanical_effect` field was ignored twice in close succession until the player explicitly forced application. We addressed the immediate symptom by strengthening the prompt-level enumeration rule, but the underlying pattern is broader.
-- Mission closure for Thinwatch Spring undercredited Sylvara across multiple reward tracks. The narrator gave Druidry 3 in the middle of the arc, then closed the mission with "no further rewards" because it incorrectly collapsed the field/knowledge/application/AP/reputation tracks into a single yes/no question.
-- Historic mission drift: in past play, simple dungeon arcs expanded indefinitely because nothing constrained scope.
-
-These are the same problem at three different layers. The fix at every layer is the same: **remove narrator discretion over mechanics, give the backend authority over structure, leave the narrator the creative work.**
-
-The arc system is the structural answer to this class of problems. Once the GPT cannot continue past hard cap without an explicit transition, cannot close an arc without calling settle, and cannot improvise reward enumeration because the backend computes it, the entire class of drift bugs becomes structurally impossible at the type level.
-
-This is months-of-work scope, but it's the highest-leverage architectural fix available to the project right now. Everything else (enchantment-rules arc, scene-level structure, encounter budgeting, etc.) is more tractable once arcs exist.
-
-### Locked design decisions
-
-These are settled and not revisitable without explicit re-design:
-
-```json
-{
-  "ap_policy": {
-    "mode": "formal_contract_only",
-    "formal_contract_provenance": "strict",
-    "formal_contract_inheritance_via_introducer_or_trust_chain": false
-  },
-  "state_model_v1": {
-    "accepted_state_present": false,
-    "active_state_name": "in_progress",
-    "merged_into_parent_terminal_for_child": true
-  },
-  "failure_policy_v1": {
-    "partial_ap_on_failure": false
-  },
-  "location_counting_v1": {
-    "basis": "canonical_location_ids_only"
-  }
-}
-```
-
-**What "strict provenance" means in practice:** an arc is `formal_contract_qualified: true` only if it was created with an explicit patron (NPC or faction), an explicit objective, and an expected return or deliverable. Trust-network introductions, family connections, social proximity, and emergent problem discovery do **not** confer formal status. Sylvara finding Thinwatch Spring on her own initiative in the western wilds is emergent, regardless of who introduced her to Mereth. Only emergent arcs that get formally chartered (returned to a patron and explicitly tasked) become AP-eligible.
-
-**What this changes about play:** under the arc system, players who want AP from an investigation must convert it into a formal contract with a patron before pursuing it. This is a deliberate game-design pressure toward engaging with the world's social structures. Emergent threads still pay out in tag advancement, reputation, evidence, leverage, and economy — they just don't pay AP.
-
-### Calibrated type defaults
-
-These are the per-type envelope numbers, calibrated against Sylvara's actual play history (Heartwater chain, Thinwatch Spring):
-
-```json
-{
-  "task_local": {
-    "stake_scale_default": "local",
-    "ap_award": { "min": 0, "max": 1, "fixed": false },
-    "scene_soft_cap": 2,
-    "scene_hard_cap": 4,
-    "location_soft_cap": 1,
-    "location_hard_cap": 2
-  },
-  "contract_delicate": {
-    "stake_scale_default": "situational",
-    "ap_award": { "min": 1, "max": 1, "fixed": true },
-    "scene_soft_cap": 4,
-    "scene_hard_cap": 6,
-    "location_soft_cap": 2,
-    "location_hard_cap": 3
-  },
-  "mission_multi_leg": {
-    "stake_scale_default": "situational",
-    "ap_award": { "min": 1, "max": 2, "fixed": false },
-    "scene_soft_cap": 6,
-    "scene_hard_cap": 10,
-    "location_soft_cap": 3,
-    "location_hard_cap": 5
-  },
-  "undertaking_regional": {
-    "stake_scale_default": "regional",
-    "ap_award": { "min": 2, "max": 3, "fixed": false },
-    "scene_soft_cap": 10,
-    "scene_hard_cap": 16,
-    "location_soft_cap": 4,
-    "location_hard_cap": 7
-  },
-  "arc_campaign": {
-    "stake_scale_default": "campaign",
-    "ap_award": { "min": 3, "max": 4, "fixed": false },
-    "scene_soft_cap": 16,
-    "scene_hard_cap": 24,
-    "location_soft_cap": 6,
-    "location_hard_cap": 12
-  }
-}
-```
-
-### State machine (v1)
-
-```
-proposed → available → in_progress → at_scope_cap → ready_to_close → complete
-                                                  ↘                ↘
-                                                   failed           failed
-                       in_progress → ready_to_close → failed
-                       in_progress → abandoned
-                       in_progress → replaced_by_successor
-                       in_progress → merged_into_parent (terminal for child)
-```
-
-`at_scope_cap` is the most important state. When the resolved-scene count hits the type's hard cap, the arc enters `at_scope_cap` and ordinary continuation is refused by the backend. The narrator must propose a transition: `ready_to_close`, `failed`, `replaced_by_successor`, or `merged_into_parent`. This is the structural lever that prevents mission drift.
-
-### Migration policy
-
-Legacy sessions (Sylvara's existing play) remain untyped. **No retroactive arc reconstruction.** The arc system applies to new arcs only, created after Commit 2 lands. Sylvara's first new arc post-Thinwatch becomes the first typed arc in the system.
-
-### Implementation plan: 6 commits, sequential
-
-#### Commit 1 — `feat(arc): add arc data model and persistence`
-
-**Goal:** core schema, no behavior yet.
-
-- `api/models.py`: `Arc`, `ArcBudget`, `ArcConsumption`, `ArcRewardEnvelope`, `ArcConditionSet`, `ArcCondition`, `ArcEscalationRules`, `ArcFlags`, `ArcTimestamps`, all sub-models per the locked design
-- Postgres migration: new `arcs` table, JSONB columns for nested structures, indexed on `session_id` and `state`
-- `data/catalog/registries/arc_types.json`: type definitions, calibrated defaults, condition vocabulary, state enum (read-only registry data per the catalog convention)
-- Read-only repository layer in `api/repositories/arc_repository.py`
-
-No endpoints yet. No business logic. Just the bones.
-
-**Acceptance:** migration runs clean, `Arc.model_validate` works on a sample payload, registry loads with all 5 types and 20+ condition types, validators pass, OpenAPI regen clean.
-
-**Estimate:** 1–2 days.
-
-#### Commit 2 — `feat(arc): add create and read endpoints with provenance validation`
-
-**Goal:** arc creation with full validation, lookup, basic state read.
-
-- `POST /arc/{session_id}/create` — validates type, applies calibrated defaults from registry, enforces strict provenance for `formal_contract_qualified: true`
-- `GET /arc/{session_id}` — list arcs for session
-- `GET /arc/{session_id}/{arc_id}` — single arc detail
-- `GET /arc/{session_id}/active` — filter to `in_progress` and `at_scope_cap`
-- Provenance validator: `patron_npc_id_or_patron_faction_present` + `explicit_objective_present` + `expected_return_or_deliverable_present` all required for formal status
-
-**Acceptance:** create endpoint rejects payloads missing required formal-contract fields when `formal_contract_qualified: true`. Read endpoints return correct shape. Contract tests cover happy path plus each insufficient-for-formal-status rejection case (introduction-only, trust-network-only, social-proximity-only, family-connection-only, problem-discovery-without-explicit-tasking).
-
-**Estimate:** 1 day.
-
-#### Commit 3 — `feat(arc): state machine transitions with cap enforcement` ⭐ P0
-
-**Goal:** the heart of the system. Without this, the rest is descriptive rather than prescriptive.
-
-- `POST /arc/{session_id}/{arc_id}/transition` — validates against state machine matrix, enforces closure conditions on `ready_to_close`, enforces failure conditions on `failed`, refuses `in_progress → in_progress` once at hard cap
-- `POST /arc/{session_id}/{arc_id}/progress` — consumes resolved scene event, increments `resolved_scenes_used`, updates `locations_visited`, checks soft and hard caps, transitions to `at_scope_cap` when hard cap hit
-- State machine validation engine: encodes the allowed transition matrix from the design
-- Audit log entries written for every transition
-
-**Acceptance:**
-- Hard cap enforcement test: create `mission_multi_leg`, progress 11 scenes, 11th progress call returns transition-required error rather than incrementing
-- Soft cap test: at scene 7 of `mission_multi_leg`, progress succeeds but response includes warning flag
-- State matrix tests: all illegal transitions rejected with clear error
-- Closure condition test: `ready_to_close` rejected if conditions not satisfied
-- Failure condition test: `failed` rejected if conditions not satisfied
-
-**Estimate:** 2 days. State machine logic is fiddly; cap enforcement is the most-tested commit.
-
-#### Commit 4 — `feat(arc): spawn, settle, and merge endpoints`
-
-**Goal:** parent/child relationships and reward settlement.
-
-- `POST /arc/{session_id}/{arc_id}/spawn` — creates child arc with parent reference, validates parent state allows spawning, enforces AP envelope partition (parent retains AP unless `ap_ownership: child` explicitly set)
-- `POST /arc/{session_id}/{arc_id}/settle` — final reward computation, validates rewards against envelope, writes terminal state, enforces `partial_ap_on_failure: false`
-- Merge handling: `merged_into_parent` transition contributes to parent's settlement record, child becomes terminal
-- Reward channel non-overlap validation between parent and active children
-
-**Acceptance:**
-- Spawn test: parent `undertaking_regional` spawns three children, each with own envelope
-- Settle test: `complete` settles AP within envelope, rejects out-of-envelope payouts
-- Failure-AP test: failed arc with `awarded_ap > 0` rejected
-- Merge test: child `merged_into_parent` contributes to parent's `merge_source_arc_ids` list and emits no own AP
-
-**Estimate:** 1–2 days.
-
-#### Commit 5 — `feat(arc): integrate with progression, reputation, and economy systems`
-
-**Goal:** wire arc settlement into existing game machinery.
-
-- Settlement endpoint calls into existing AP progression code, not a parallel implementation
-- Reputation deltas apply via existing reputation update logic, bounded by envelope
-- Economy deltas apply via existing economy logic
-- Tag advancement remains scene-bound and independent (per locked decision: scene-bound tag advancement is allowed regardless of arc origin or AP eligibility)
-- Consequence event emission: closure produces `consequence_events_emitted` list as world-state events
-
-**Acceptance:**
-- Integration tests: full lifecycle from create through settle produces correct character and world state changes
-- Reputation cap tests: envelope max enforced
-- Tag-vs-AP independence test: emergent arc resolved scenes still advance tags despite zero AP eligibility
-
-**Estimate:** 1 day. Mostly wiring.
-
-#### Commit 6 — `feat(prompts): require arc enumeration on mission-shaped events`
-
-**Goal:** prompt-level enforcement parallel to the `mechanical_effect` enumeration pattern that already landed.
-
-- `prompts/engine.md`: when narrating an event that introduces a higher-level objective, narrator must call `/arc/create` before continuing. When closing an arc, narrator must call `/arc/settle` and report the returned envelope. When hard cap fires, narrator must call `/transition` rather than continue narration.
-- `prompts/progression-rules.md`: replace contract-bound AP language with arc-bound AP language under the locked AP policy. Reference arc system as authoritative source of awarded AP envelope.
-- `prompts/scene-structure.md`: reference arc cap warnings as primary scope-management mechanism (this prompt already exists)
-- New top-level prompt `prompts/arc-rules.md`: 600–800 lines, mirrors `magic-rules.md` and `items-rules.md` shape, documents the type system, lifecycle, and procedure for the narrator
-
-Verify `wc -c prompts/engine.md` stays under 8000.
-
-**Acceptance:** prompt validation passes, all updated prompts internally consistent, OpenAPI regen clean, full test suite green, engine.md under 8000 bytes.
-
-**Estimate:** 1 day.
-
-### Total estimate
-
-7–9 days of focused implementation work. Roughly 2 weeks at a normal cadence with normal interruptions.
-
-### What this delivers when complete
-
-- The narrator cannot continue past hard cap without explicit transition
-- The narrator cannot close an arc without calling settle
-- Settle returns the envelope, so reward enumeration is automatic
-- Reward tracks are independent and individually settled — no cross-track collapse
-- Spawn is the expected flow for arcs crossing structural boundaries
-- Mission drift becomes structurally impossible at the type level
-
-The narrator's discretion over mechanical adjudication of arcs is removed. It retains full discretion over fiction *within* validated arc bounds.
-
-### Out of scope for v1
-
-Per the locked design:
-
-- Backend scene records and scene boundary validation (scene resolution remains GPT-judged)
-- Encounter-level or beat-level budgeting
-- Evidence-grade subsystem (uses generic `world_flag_present` for now)
-- Multi-parent arcs
-- Automatic arc creation from narration parser (narrator must explicitly call create)
-- Retroactive arc construction for legacy sessions
-
-These are candidates for v2 if the v1 system reveals their need.
+- **Enchantment-rules arc** — design draft exists at `/mnt/user-data/outputs/enchantment-rules-design-draft.md`. Deferred pending arc system v1 live-play validation. See "Deferred pending arc system v1" section below.
+- **Backend scene records** — currently scene boundary remains GPT-judged per Arc System v1 design. If live play reveals the GPT undercounting or overcounting scenes by enough to break envelope enforcement, scene records may become necessary. Out of v1 scope; candidate for v2 if needed.
+- **Companion subsystem expansion** — currently minimal; expansion candidates not yet scoped.
 
 ---
 
@@ -317,9 +89,9 @@ These are designed or partially designed but explicitly held until arc system la
 
 **Status:** design draft exists at `/mnt/user-data/outputs/enchantment-rules-design-draft.md` (321 lines). All five open questions have recommended answers. Implementation plan covers 5 commits.
 
-**Why deferred:** the enchantment-rules arc adds activation modes, charges, recharge mechanisms, stability/decay, crafting rules, and stacking/conflict to magical items. Under the arc system, magical items become reward channel outputs of arc settlement. Some of the design decisions in the enchantment draft (how rare is enchantment? routine PC activity or rare narrative beat?) are best answered after seeing how arc-driven reward channels behave in real play.
+**Why deferred:** Arc System v1 is implementation-complete (2026-04-30) but not yet validated through live play. Some enchantment-rules design decisions (how rare is enchantment? routine PC activity or rare narrative beat?) are best answered after observing how arc-driven reward channels behave in real use.
 
-**When to revisit:** once arc system v1 has been live for enough sessions to validate the reward envelope behavior. Probably 2–4 weeks of play after v1 lands.
+**When to revisit:** once arc system v1 has been validated through 2-4 weeks of play. Watch specifically for: whether GPT correctly distinguishes formal/emergent at creation, whether calibrated envelopes feel right, whether hard-cap enforcement produces clean transitions or creates friction.
 
 **Risk if deferred too long:** GPT continues to lack a structural framework for how enchanted items are created, sustained, and contested. Current `mechanical_effect` field handles application; nothing handles lifecycle. Stalkerhide-class adjudication issues are addressed; Stalkerhide-creation-class issues are not.
 
@@ -342,6 +114,7 @@ These are designed or partially designed but explicitly held until arc system la
 
 ## RECENTLY COMPLETED (for context)
 
+- 2026-04-30 — **Arc System v1 complete**. Backend-authoritative arc framework governing scope, lifecycle, reward legality, and pacing for higher-level objectives. Six commits across foundation, endpoints, state machine, spawn/settle, progression integration, and prompt enforcement, plus two refactors and a GPT-facing OpenAPI spec trim to fit the 30-operation Actions cap. Locked decisions: formal-contract-only AP with strict provenance, calibrated envelope defaults validated against Sylvara's play history, scene-bound tag advancement preserved, parent/child spawn-as-expected, no retroactive arc reconstruction for legacy sessions. Activation requires re-uploading four prompts and the trimmed OpenAPI spec to GPT Builder. See commits 007dc14 → 3eb8066.
 - 2026-04-30 — GPT-facing OpenAPI trim added: `schemas/openapi.json` remains the full canonical API contract; `schemas/openapi.gpt.json` is the ≤30-operation GPT Builder Actions subset.
 - 2026-04-30 — `mechanical_effect` field for magical items: schema, catalog population, prompt enforcement, follow-up contract test fix
 - 2026-04-30 — Stalkerhide cloak rebuilt: dropped "wearer still" trigger, split modifier into `+10 magical / +5 mundane`, fixed `does_not_apply` to no longer exclude ambient Feywood phenomena
