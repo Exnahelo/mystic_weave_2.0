@@ -34,7 +34,7 @@ class StateRouteConn:
         self.session_id = session_id
         self.character = character
         self.world = world
-        self.log: list[str] = []
+        self.log: list = []
         self.updated_at = datetime.now()
 
     async def fetchrow(self, query, *args):
@@ -50,7 +50,10 @@ class StateRouteConn:
             self.session_id = args[0]
             self.character = json.loads(args[1])
             self.world = json.loads(args[2])
-            self.log.extend(json.loads(args[4]))
+            if len(args) > 4:
+                self.log.extend(json.loads(args[4]))
+            elif "log         = game_states.log" not in query:
+                self.log = json.loads(args[3])
             self.updated_at = datetime.now()
             return {
                 "session_id": self.session_id,
@@ -385,6 +388,72 @@ def test_save_preserves_incoming_weather() -> None:
     assert time["weather_note"] == "hard rain"
     assert time["day"] == 1
     assert time["time_of_day"] == "morning"
+
+
+@pytest.mark.contract
+def test_save_state_delta_omitted_log_entry_does_not_append() -> None:
+    conn = StateRouteConn("sess1", _character(), _world(turn=1, time_of_day="morning"))
+    conn.log = ["Existing legacy entry."]
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1/delta",
+            json={
+                "character": {"notes": "quiet state maintenance"},
+                "world": {},
+            },
+        )
+
+    assert response.status_code == 200
+    assert conn.log == ["Existing legacy entry."]
+    assert response.json()["log"] == ["Existing legacy entry."]
+
+
+@pytest.mark.contract
+def test_save_state_typed_log_entry_round_trips() -> None:
+    conn = StateRouteConn("sess1", _character(), _world(turn=1, time_of_day="morning"))
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1",
+            json={
+                "character": _character(),
+                "world": {"goal": "survive"},
+                "log_entry": {"type": "narrative_non_arc", "text": "A rare quiet beat."},
+            },
+        )
+        get_response = client.get("/state/sess1")
+
+    assert response.status_code == 200
+    assert get_response.status_code == 200
+    assert get_response.json()["log"][-1] == {"type": "narrative_non_arc", "text": "A rare quiet beat."}
+
+
+@pytest.mark.contract
+def test_save_state_mixed_legacy_and_typed_log_entries_round_trip() -> None:
+    conn = StateRouteConn("sess1", _character(), _world(turn=1, time_of_day="morning"))
+    conn.log = ["Existing legacy entry."]
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1",
+            json={
+                "character": _character(),
+                "world": {"goal": "survive"},
+                "log_entry": {"type": "compression", "text": "Compressed travel beats."},
+            },
+        )
+        get_response = client.get("/state/sess1")
+
+    assert response.status_code == 200
+    assert get_response.status_code == 200
+    assert get_response.json()["log"] == [
+        "Existing legacy entry.",
+        {"type": "compression", "text": "Compressed travel beats."},
+    ]
 
 
 @pytest.mark.contract

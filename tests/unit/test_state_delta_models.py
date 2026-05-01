@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 
-from api.models import ApplyStateDeltaRequest, CharacterModel
+from api.models import ApplyStateDeltaRequest, CharacterModel, SaveStateRequest, TypedLogEntry
 from api.routes.state import validate_delta
 
 
@@ -115,3 +115,53 @@ def test_validate_delta_rejects_blank_log_entry() -> None:
     )
     with pytest.raises(ValueError, match="log_entry is required"):
         validate_delta(body)
+
+
+def test_typed_log_entry_accepts_valid_enum_value():
+    entry = TypedLogEntry(type="world_change", text="Companion added: id_x")
+    assert entry.type == "world_change"
+    assert entry.text == "Companion added: id_x"
+
+
+def test_typed_log_entry_rejects_unknown_type():
+    with pytest.raises(ValidationError):
+        TypedLogEntry(type="closure_summary", text="not yet")
+
+
+def test_typed_log_entry_rejects_empty_text():
+    with pytest.raises(ValidationError):
+        TypedLogEntry(type="world_change", text="")
+
+
+def test_apply_state_delta_request_accepts_omitted_log_entry():
+    req = ApplyStateDeltaRequest.model_validate({
+        "character": {"hp": {"current": 50}},
+        "world": {},
+    })
+    assert req.log_entry is None
+
+
+def test_apply_state_delta_request_accepts_string_log_entry():
+    req = ApplyStateDeltaRequest.model_validate({
+        "character": {"hp": {"current": 50}},
+        "world": {},
+        "log_entry": "Legacy plain text entry.",
+    })
+    assert req.log_entry == "Legacy plain text entry."
+
+
+def test_apply_state_delta_request_accepts_typed_log_entry():
+    req = ApplyStateDeltaRequest.model_validate({
+        "character": {"hp": {"current": 50}},
+        "world": {},
+        "log_entry": {"type": "narrative_non_arc", "text": "A rare non-arc beat."},
+    })
+    assert isinstance(req.log_entry, TypedLogEntry)
+    assert req.log_entry.type == "narrative_non_arc"
+
+
+def test_save_state_request_accepts_typed_log_entry():
+    req = SaveStateRequest.model_validate({
+        "log_entry": {"type": "compression", "text": "Compressed travel beats."},
+    })
+    assert isinstance(req.log_entry, TypedLogEntry)

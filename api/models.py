@@ -772,13 +772,32 @@ class WorldStateDelta(BaseModel):
         return any(v is not None for v in self.model_dump(exclude_none=False).values())
 
 
+class TypedLogEntry(BaseModel):
+    """A typed log entry for non-arc beats and admin/correction records.
+
+    Plain strings remain valid log entries for legacy callers. Typed entries
+    are the forward-only path for non-arc structural categories.
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    type: Literal[
+        "narrative_non_arc",
+        "world_change",
+        "admin_correction",
+        "inventory_normalization",
+        "time_correction",
+        "compression",
+    ]
+    text: str = Field(..., min_length=1)
+
+
 class ApplyStateDeltaRequest(BaseModel):
     """Body for POST /state/{session_id}/delta"""
     model_config = ConfigDict(extra="forbid")
 
     character: CharacterStateDelta = Field(default_factory=CharacterStateDelta)
     world: WorldStateDelta = Field(default_factory=WorldStateDelta)
-    log_entry: str
+    log_entry: str | TypedLogEntry | None = None
     time_elapsed: TimeElapsed = Field(default_factory=TimeElapsed)
 
     @model_validator(mode="after")
@@ -794,7 +813,7 @@ class SaveStateRequest(BaseModel):
 
     character: CharacterModel | CharacterStateDelta = Field(default_factory=CharacterStateDelta)
     world: WorldModel | WorldStateDelta = Field(default_factory=WorldStateDelta)
-    log_entry: str
+    log_entry: str | TypedLogEntry | None = None
     time_elapsed: TimeElapsed = Field(default_factory=TimeElapsed)
 
 
@@ -803,7 +822,7 @@ class GameStateResponse(BaseModel):
     session_id: str
     character:  CharacterModel
     world:      WorldModel
-    log:        list[str]
+    log:        list[str | TypedLogEntry]
     updated_at: datetime | None = None
 
 
