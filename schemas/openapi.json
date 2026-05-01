@@ -645,7 +645,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Arc"
+                  "$ref": "#/components/schemas/ArcSettleResponse"
                 }
               }
             }
@@ -2694,6 +2694,38 @@
         ],
         "title": "ArcSettleRequest",
         "description": "Payload for settling a complete or failed arc."
+      },
+      "ArcSettleResponse": {
+        "properties": {
+          "arc": {
+            "$ref": "#/components/schemas/Arc"
+          },
+          "consequence_events": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Consequence Events"
+          },
+          "character_updated": {
+            "type": "boolean",
+            "title": "Character Updated",
+            "default": true
+          },
+          "world_updated": {
+            "type": "boolean",
+            "title": "World Updated",
+            "default": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "arc",
+          "consequence_events"
+        ],
+        "title": "ArcSettleResponse",
+        "description": "Response from a settle call, including consequence events."
       },
       "ArcSettlementResult": {
         "properties": {

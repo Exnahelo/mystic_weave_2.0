@@ -34,6 +34,8 @@ class ArcTransitionConn:
     def __init__(self) -> None:
         self.rows: list[dict] = []
         self.transitions: list[dict] = []
+        self.character: dict | None = _character_state()
+        self.world: dict | None = _world_state()
 
     async def execute(self, query, *args):
         if "INSERT INTO arcs" in query:
@@ -58,9 +60,21 @@ class ArcTransitionConn:
                     "triggering_event": args[8],
                 }
             )
+        elif "UPDATE game_states SET character" in query:
+            self.character = json.loads(args[0])
+        elif "UPDATE game_states SET world" in query:
+            self.world = json.loads(args[0])
         return "OK"
 
     async def fetchrow(self, query, *args):
+        if "SELECT character FROM game_states" in query:
+            if self.character is None:
+                return None
+            return {"character": json.dumps(self.character)}
+        if "SELECT world FROM game_states" in query:
+            if self.world is None:
+                return None
+            return {"world": json.dumps(self.world)}
         if "WHERE session_id = $1 AND id = $2" in query:
             for row in self.rows:
                 if row["session_id"] == args[0] and row["id"] == args[1]:
@@ -85,6 +99,43 @@ class ArcTransitionConn:
         if "WHERE session_id = $1" in query:
             return [{"data": row["data"]} for row in self.rows if row["session_id"] == args[0]]
         return []
+
+
+def _character_state() -> dict:
+    return {
+        "name": "Sylvara",
+        "ancestry": "human",
+        "culture": "drakenvale_city",
+        "focus": "devoted",
+        "background": "soldier",
+        "hp": {"current": 100, "max": 100},
+        "domains": {"power": 45, "agility": 35, "perception": 35, "endurance": 43, "intellect": 25, "will": 47, "presence": 55},
+        "knowledge": {},
+        "application": {},
+        "fields": {},
+        "status_effects": [],
+        "notes": "",
+        "identity": {"origin": "", "motivations": [], "quirks": [], "bonds": [], "flaws": [], "wound": "", "alignment": {"order": "neutral", "intent": "neutral", "ethos_note": ""}},
+        "equipment": {"worn": [], "carried": [], "stashed": []},
+        "reputation": [],
+        "advancement": {"points_available": 0, "points_spent": 0, "points_earned_total": 0, "tag_counter": 0},
+    }
+
+
+def _world_state(coin: int = 1000) -> dict:
+    return {
+        "location": "test-loc-alpha",
+        "threat": "none",
+        "goal": "survive",
+        "turn": 1,
+        "companions": [],
+        "companion_archive": [],
+        "economy": {"wealth_tier": "modest", "coin": coin, "trade_goods": [], "obligations": []},
+        "politics": {"faction_memberships": [], "active_obligations": [], "legal_standing": "unknown", "known_leverage": [], "active_tensions": [], "conclave_status": "unknown"},
+        "time": {"day": 1, "month": "Verdantrise", "year": 847, "time_of_day": "morning", "season": "spring", "festival": None, "weather": "clear", "weather_note": ""},
+        "survival": {"hunger": "sated", "hydration": "hydrated", "fatigue": "rested", "load": "normal"},
+        "pacing": {"tension": 3, "last_consequence_weight": "local", "turns_since_social_beat": 0, "turns_since_discovery": 0, "turn_count": 1},
+    }
 
 
 def _make_app(conn: ArcTransitionConn) -> FastAPI:

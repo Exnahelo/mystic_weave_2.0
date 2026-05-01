@@ -32,6 +32,8 @@ from api.models import (
     ArcTransitionLogEntry,
 )
 from api.repositories.arc_repository import ArcRepository
+from api.repositories.state_repository import StateRepository
+from api.services.arc_settlement import apply_arc_settlement
 
 router = APIRouter(prefix="/arc", tags=["arc"])
 
@@ -128,6 +130,16 @@ class ArcProgressResponse(BaseModel):
     hard_cap_reached: bool
     auto_transitioned_to_at_scope_cap: bool
     warning: str | None = None
+
+
+class ArcSettleResponse(BaseModel):
+    """Response from a settle call, including consequence events."""
+    model_config = ConfigDict(extra="forbid")
+
+    arc: Arc
+    consequence_events: list[str]
+    character_updated: bool = True
+    world_updated: bool = True
 
 
 def _plain_validation_errors(err: ValidationError) -> list[dict[str, Any]]:
@@ -593,13 +605,13 @@ async def spawn_child_arc(
     return child
 
 
-@router.post("/{session_id}/{arc_id}/settle", response_model=Arc)
+@router.post("/{session_id}/{arc_id}/settle", response_model=ArcSettleResponse)
 async def settle_arc(
     session_id: str,
     arc_id: str,
     req: ArcSettleRequest,
     repo: ArcRepository = Depends(get_arc_repository),
-) -> Arc:
+) -> ArcSettleResponse:
     """Settle rewards for an arc and transition it to complete or failed."""
     arc = await repo.get_by_id(session_id, arc_id)
     if arc is None:
@@ -642,6 +654,28 @@ async def settle_arc(
             },
         )
 
+    children = await repo.list_children(session_id, arc_id)
+    for child in children:
+        if child.flags.ap_ownership == "child" and child.state not in (
+            "complete",
+            "failed",
+            "abandoned",
+            "replaced_by_successor",
+            "merged_into_parent",
+        ):
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail={
+                    "error": "child_ap_unsettled",
+                    "message": (
+                        f"Cannot settle parent arc while child {child.id} owns AP and is "
+                        f"not yet terminal. Settle the child first."
+                    ),
+                    "blocking_child_id": child.id,
+                    "blocking_child_state": child.state,
+                },
+            )
+
     if req.awarded_ap > 0:
         if not arc.flags.formal_contract_qualified:
             raise HTTPException(
@@ -668,7 +702,6 @@ async def settle_arc(
                 },
             )
         if not arc.parent_arc_id:
-            children = await repo.list_children(session_id, arc_id)
             if any(child.flags.ap_ownership == "child" for child in children):
                 raise HTTPException(
                     status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
@@ -750,6 +783,26 @@ async def settle_arc(
     new_timestamps.last_progressed_at = now
     new_timestamps.closed_at = now
 
+    state_repo = StateRepository(repo._pool)
+    character = await state_repo.get_character(session_id)
+    world = await state_repo.get_world(session_id)
+
+    if character is None or world is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Session state not found for {session_id}",
+        )
+
+    updated_character, updated_world, consequence_events = await apply_arc_settlement(
+        arc=arc,
+        character=character,
+        world=world,
+    )
+    await state_repo.update_character(session_id, updated_character)
+    await state_repo.update_world(session_id, updated_world)
+
+    arc.consequence_events_emitted = consequence_events
+
     await repo.update_state_and_consumption(
         arc_id=arc_id,
         new_state=new_state,
@@ -778,7 +831,12 @@ async def settle_arc(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Arc {arc_id} not found in session {session_id}",
         )
-    return updated
+    return ArcSettleResponse(
+        arc=updated,
+        consequence_events=consequence_events,
+        character_updated=True,
+        world_updated=True,
+    )
 
 
 @router.post("/{session_id}/{arc_id}/progress", response_model=ArcProgressResponse)
