@@ -37,6 +37,22 @@
     "temperament": "Steady, stoic, tolerant of discomfort. Bonds closely with handlers and is notably unbothered by smoke, ash, or heat that would distress other working dogs."
   },
   "description": "A broad, muscular hound with dark grey coat and pale ash-flecked markings across the shoulders. Ash hounds are working dogs bred across the Volcanic Highlands for patrol, guard duty, and tracking in conditions that would defeat ordinary hounds. Their endurance in heat and ash is famous; their tempers are reliably steady even when surrounded by hazard.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "predator",
+    "cultural_role": "working dog of Highland settlements; ash- and heat-tolerant",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "domestic_provisioning",
+      "ash_tolerant_small_game"
+    ],
+    "primary_predators": [],
+    "size": "medium",
+    "trophic_tier": 2,
+    "zones": [
+      "volcanic_highlands_settled"
+    ]
+  },
   "id": "ash_hound",
   "kind": "fauna",
   "name": "Ash Hound",

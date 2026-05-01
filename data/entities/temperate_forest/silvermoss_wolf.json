@@ -36,6 +36,23 @@
     "temperament": "Steady, unflashy, dependable. A practical working wolf for handlers who need reliable pack coordination without Feywood strangeness."
   },
   "description": "The common wolf of the Temperate Forest \u2014 grey-coated with faint silver-moss highlights along the back and flanks. Silvermoss wolves are the ordinary wolves of the realm's well-settled forests: capable hunters, good pack coordinators, and reliable companions for rangers and hunters who work the standard woodland territories.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "predator",
+    "cultural_role": "ordinary wolf of well-settled forests; reliable working canid",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "forest_deer",
+      "forest_hares",
+      "small_forest_mammals"
+    ],
+    "primary_predators": [],
+    "size": "medium",
+    "trophic_tier": 3,
+    "zones": [
+      "temperate_forest_general"
+    ]
+  },
   "id": "silvermoss_wolf",
   "kind": "fauna",
   "name": "Silvermoss Wolf",

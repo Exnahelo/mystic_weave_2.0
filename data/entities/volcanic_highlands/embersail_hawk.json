@@ -37,6 +37,23 @@
     "temperament": "Bold, high-energy, quick to act. Works well under difficult conditions but demands a firm handler."
   },
   "description": "A rust-and-black raptor native to the thermal updrafts of the Volcanic Highlands. Embersail hawks ride the long hot currents above the lava fields with exceptional endurance, and their plumage carries a faint ember-glow at the wingtips in low light. They are prized messengers and scouts for the Stronghold and its surrounding settlements, particularly along routes where other birds suffer from heat and ash.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "predator",
+    "cultural_role": "thermal-current raptor of the lava fields; bold and high-energy",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "heat_zone_rodents",
+      "lava_field_small_birds"
+    ],
+    "primary_predators": [],
+    "size": "small",
+    "trophic_tier": 3,
+    "zones": [
+      "thermal_uplands",
+      "lava_field_margins"
+    ]
+  },
   "id": "embersail_hawk",
   "kind": "fauna",
   "name": "Embersail Hawk",

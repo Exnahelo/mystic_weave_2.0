@@ -40,6 +40,23 @@
     "temperament": "Slow, deliberate, and deeply patient. A frostclaw bear bonds rarely, but its loyalty once given is absolute. Aggressive only when protecting a bonded companion."
   },
   "description": "A massive pale-furred bear of the high peaks, built for cold and stone. Frostclaw bears are rare companions \u2014 they bond slowly, and even more slowly consent to human company \u2014 but those who earn the bond have a companion whose strength and stability are almost unmatched in the realm. They are equally capable on climbing routes and on open stone, and their coat sheds snow and ice cleanly.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "predator",
+    "cultural_role": "rare apex bonded companion of the high peaks; almost never sought casually",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "alpine_herbivores",
+      "seasonal_fish",
+      "carrion"
+    ],
+    "primary_predators": [],
+    "size": "large",
+    "trophic_tier": 4,
+    "zones": [
+      "high_peaks_above_treeline"
+    ]
+  },
   "id": "frostclaw_bear",
   "kind": "fauna",
   "name": "Frostclaw Bear",

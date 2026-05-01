@@ -36,6 +36,22 @@
     "temperament": "Good-natured, adaptable, eager. A general-purpose companion and helper across all settled regions of the realm."
   },
   "description": "The baseline working hound of the realm \u2014 no regional distinction, no special lineage. Found in every settlement across every biome, used for tracking, herding, guarding, and companionship. Reliable, affordable, and emotionally steady; the most common starting companion for new rangers and travellers.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "predator",
+    "cultural_role": "baseline working dog of settled regions; the most common starter companion",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "domestic_provisioning",
+      "hunted_small_game"
+    ],
+    "primary_predators": [],
+    "size": "medium",
+    "trophic_tier": 2,
+    "zones": [
+      "settled_regions_anywhere"
+    ]
+  },
   "id": "working_hound",
   "kind": "fauna",
   "name": "Working Hound",

@@ -37,6 +37,23 @@
     "temperament": "Bright, fast-responding, and notably trainable. Windcrowns bond readily and work well with handlers who value clear communication."
   },
   "description": "A large grasslands hawk with pale gold and white plumage and distinctive crested feathers at the crown. Windcrown hawks are common scouts and messenger birds across the Grasslands, favored for the speed and distance of their flight and their unusually good response to handler signals.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "predator",
+    "cultural_role": "scouting and messenger raptor of the Grasslands",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "small_grasslands_rodents",
+      "small_grasslands_birds"
+    ],
+    "primary_predators": [],
+    "size": "small",
+    "trophic_tier": 3,
+    "zones": [
+      "open_grasslands_central",
+      "grasslands_uplands"
+    ]
+  },
   "id": "windcrown_hawk",
   "kind": "fauna",
   "name": "Windcrown Hawk",

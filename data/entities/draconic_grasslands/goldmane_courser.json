@@ -35,6 +35,23 @@
     "temperament": "Proud, willing, intelligent. A goldmane responds strongly to consistent handling and holds bonds over remarkable spans of time."
   },
   "description": "A tall, lean courser of the Draconic Grasslands, bred for speed across open ground. Goldmanes are named for their distinctive pale gold manes and tails, which lighten further with age. They are the realm's most prestigious riding horses and carry strong ceremonial associations; goldmanes of exceptional lineage are recorded in the Stronghold's breeding rolls.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "herbivore",
+    "cultural_role": "regional courser breed of the open grasslands; valued for sustained speed",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "grasses",
+      "cured_hay",
+      "grain_provisioning"
+    ],
+    "primary_predators": [],
+    "size": "large",
+    "trophic_tier": 1,
+    "zones": [
+      "open_grasslands_central"
+    ]
+  },
   "id": "goldmane_courser",
   "kind": "fauna",
   "name": "Goldmane Courser",
