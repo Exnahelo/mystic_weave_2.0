@@ -130,30 +130,6 @@ Designed or partially designed; held until arc system v1 lands live-play validat
 
 ---
 
-## RECENTLY COMPLETED (for context)
-
-- 2026-04-30 — **Arc System v1 complete**. Backend-authoritative arc framework governing scope, lifecycle, reward legality, and pacing for higher-level objectives. Six commits across foundation, endpoints, state machine, spawn/settle, progression integration, and prompt enforcement, plus two refactors and a GPT-facing OpenAPI spec trim to fit the 30-operation Actions cap. Locked decisions: formal-contract-only AP with strict provenance, calibrated envelope defaults validated against Sylvara's play history, scene-bound tag advancement preserved, parent/child spawn-as-expected, no retroactive arc reconstruction for legacy sessions. Activation requires re-uploading four prompts and the trimmed OpenAPI spec to GPT Builder. See commits 007dc14 → 3eb8066.
-- 2026-04-30 — GPT-facing OpenAPI trim added: `schemas/openapi.json` remains the full canonical API contract; `schemas/openapi.gpt.json` is the ≤30-operation GPT Builder Actions subset.
-- 2026-04-30 — `mechanical_effect` field for magical items: schema, catalog population, prompt enforcement, follow-up contract test fix
-- 2026-04-30 — Stalkerhide cloak rebuilt: dropped "wearer still" trigger, split modifier into `+10 magical / +5 mundane`, fixed `does_not_apply` to no longer exclude ambient Feywood phenomena
-- 2026-04-30 — Sylvara character reset under fungible AP system (4cca988): domains rebuilt, advancement layer corrected, 9 spell entries removed from `application`, AP recomputed at 22 earned + 2 awarded = 24, allocated to power+10 / perception+3 / will+3 / presence+4
-- 2026-04-30 — 15 elven catalog items added across three commits: 6 items including baseline saddle (`7b86b0a`), 7 items (`3d2b043`), 2 apparel items (`23f6e2c`)
-- 2026-04-30 — Time-as-delta architecture migration (6 commits): GPT no longer writes absolute time; sends `time_elapsed` deltas; backend computes day/month/year/time_of_day/season/festival deterministically
-- 2026-04-30 — YAML→JSON migration for `data/world/` (94 files) and OpenAPI spec
-- 2026-04-30 — Five-finding security/correctness audit closed (F1–F5): full-state save advancement bypass, delta endpoint advancement leak, tag tier validation, stale location edges, session ID collision
-- 2026-04-30 — `exclude_unset` fix on delta endpoint resolved silent time clobbering bug
-- 2026-04-29 / `abe1d83` — Production verifier version assertion now derives from `schemas/openapi.yaml` and fails loudly on schema/version drift
-- 2026-04-29 / `abe1d83` — Production verifier coverage expanded for `/options` key parity, `/tags` shape/non-empty values, and usable `data_fingerprint`
-- 2026-04-29 / `c72b3ab` — README character-option and layer-version drift reconciled
-- Foundation reset to canonical Mystic Weave item schema (`731b9ab`)
-- API v4.4.0 with `/catalog/items/{item_id}` endpoint (`ec1d3b9`)
-- items-rules.md v2.0 + economy-rules.md v1.1 (`3b14353`)
-- Weapon curation pass — 36 items (`248af6c`)
-- Armor + shield + ammunition curation pass — 42 items (`7e94340`)
-- JSON Schema export tooling (`1e6e07c`)
-
----
-
 ## 🚫 RESTRICTED FUTURE BUILDS
 
 These items are not buildable within the current architecture without significant rebuild. Documented for future planning.
