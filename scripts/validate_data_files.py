@@ -72,13 +72,15 @@ def _failures_append(failures: list[str], condition: bool, message: str) -> None
         failures.append(message)
 
 
-def _load_json(path: Path) -> list[dict]:
+def _load_json(path: Path) -> list[dict] | dict:
     if path.name.startswith("_"):
         return []
     with path.open("r", encoding="utf-8") as f:
         payload = json.load(f)
+    if isinstance(payload, dict):
+        return payload
     if not isinstance(payload, list):
-        raise ValueError(f"{path.name}: expected top-level list")
+        raise ValueError(f"{path.name}: expected top-level list or object")
     return [
         row for row in payload
         if not (isinstance(row, dict) and str(row.get("index", "")).startswith("_"))
@@ -168,7 +170,7 @@ def _validate_field_tags(label: str, field_tags: object, failures: list[str]) ->
 def _validate_knowledge_groups(path: Path, failures: list[str]) -> None:
     rows = _load_tag_file(path)
     seen_indices: set[str] = set()
-    _failures_append(failures, len(rows) == 30, f"{path.name}: expected 30 entries")
+    _failures_append(failures, len(rows) == 26, f"{path.name}: expected 26 entries")
 
     for i, row in enumerate(rows):
         label = f"{path.name}[{i}]"
@@ -197,10 +199,11 @@ def _validate_knowledge_groups(path: Path, failures: list[str]) -> None:
 
 
 def _validate_magic_fields(path: Path, failures: list[str]) -> None:
-    rows = _load_tag_file(path)
+    data = _load_json(path)
+    rows = data.get("magic_fields") if isinstance(data, dict) else []
     seen_indices: set[str] = set()
     _failures_append(failures, len(rows) == 9, f"{path.name}: expected 9 entries")
-    indices = {row.get("index") for row in rows if isinstance(row, dict)}
+    indices = {row.get("id") for row in rows if isinstance(row, dict)}
     _failures_append(failures, "druidry" in indices, f"{path.name}: druidry entry missing")
     _failures_append(failures, "nature" not in indices, f"{path.name}: nature entry must be absent")
 
@@ -209,13 +212,13 @@ def _validate_magic_fields(path: Path, failures: list[str]) -> None:
         _failures_append(failures, isinstance(row, dict), f"{label}: expected object")
         if not isinstance(row, dict):
             continue
-        idx = row.get("index")
+        idx = row.get("id")
         if isinstance(idx, str) and idx.startswith("_"):
             continue
-        _failures_append(failures, isinstance(idx, str) and idx, f"{label}.index must be non-empty string")
-        _validate_snake_case(f"{label}.index", idx, failures)
+        _failures_append(failures, isinstance(idx, str) and idx, f"{label}.id must be non-empty string")
+        _validate_snake_case(f"{label}.id", idx, failures)
         if isinstance(idx, str):
-            _failures_append(failures, idx not in seen_indices, f"{label}.index duplicated: {idx}")
+            _failures_append(failures, idx not in seen_indices, f"{label}.id duplicated: {idx}")
             seen_indices.add(idx)
         _failures_append(failures, row.get("primary_domain") in DOMAIN_KEYS, f"{label}.primary_domain must be one of {sorted(DOMAIN_KEYS)}")
         secondary = row.get("secondary_domain")
@@ -233,7 +236,7 @@ def _validate_magic_fields(path: Path, failures: list[str]) -> None:
 def _validate_applications(path: Path, failures: list[str]) -> None:
     rows = _load_tag_file(path)
     seen_indices: set[str] = set()
-    _failures_append(failures, len(rows) == 148, f"{path.name}: expected 148 entries")
+    _failures_append(failures, len(rows) == 153, f"{path.name}: expected 153 entries")
 
     for i, row in enumerate(rows):
         label = f"{path.name}[{i}]"
@@ -839,12 +842,14 @@ def main() -> None:
 
     global VALID_KNOWLEDGE_GROUPS, VALID_MAGIC_FIELDS, VALID_APPLICATIONS, VALID_BEAST_NATURAL_ABILITIES
     VALID_KNOWLEDGE_GROUPS = {g["index"] for g in _load_tag_file(data_dir / "tags" / "knowledge_groups.json")}
-    VALID_MAGIC_FIELDS = {f["index"] for f in _load_tag_file(data_dir / "tags" / "magic_fields.json")}
+    magic_fields_registry = _load_json(data_dir / "catalog" / "registries" / "magic_fields.json")
+    magic_field_rows = magic_fields_registry.get("magic_fields", []) if isinstance(magic_fields_registry, dict) else []
+    VALID_MAGIC_FIELDS = {f["id"] for f in magic_field_rows if isinstance(f, dict)}
     VALID_APPLICATIONS = {a["index"] for a in _load_tag_file(data_dir / "tags" / "applications.json")}
 
     failures: list[str] = []
     _validate_knowledge_groups(data_dir / "tags" / "knowledge_groups.json", failures)
-    _validate_magic_fields(data_dir / "tags" / "magic_fields.json", failures)
+    _validate_magic_fields(data_dir / "catalog" / "registries" / "magic_fields.json", failures)
     _validate_applications(data_dir / "tags" / "applications.json", failures)
     _validate_ancestries(data_dir / "characters" / "ancestry.json", failures)
     _validate_cultures(data_dir / "characters" / "culture.json", failures)

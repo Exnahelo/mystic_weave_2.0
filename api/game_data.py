@@ -27,7 +27,7 @@ _DATA_FILES = (
 )
 _TAG_REGISTRY_FILES = (
     "tags/knowledge_groups.json",
-    "tags/magic_fields.json",
+    "catalog/registries/magic_fields.json",
     "tags/applications.json",
 )
 _SPELL_DATA_FILES = (
@@ -422,59 +422,66 @@ def list_backgrounds() -> list[dict[str, Any]]:
 # ---------------------------------------------------------------------------
 
 def list_knowledge_groups() -> list[dict[str, Any]]:
-    """Return all mundane knowledge group entries."""
+    """Return all mundane knowledge group entries from the bare-list tags file."""
     data = _load_json("tags/knowledge_groups.json")
-    if not isinstance(data, dict):
-        return []
-    return list(data.values())
+    if isinstance(data, list):
+        return [e for e in data if isinstance(e, dict)]
+    if isinstance(data, dict):
+        return list(data.values())
+    return []
 
 
 def get_knowledge_group(index: str) -> dict[str, Any]:
     """Return a specific knowledge group by index."""
-    data = _load_json("tags/knowledge_groups.json")
-    if index not in data:
-        raise ValueError(f"Unknown knowledge group: {index!r}. Valid: {sorted(data.keys())}")
-    return data[index]
+    for entry in list_knowledge_groups():
+        if entry.get("index") == index:
+            return entry
+    raise ValueError(f"Unknown knowledge group: {index!r}.")
 
 
 def list_magic_fields() -> list[dict[str, Any]]:
-    """Return all magic field entries."""
-    data = _load_json("tags/magic_fields.json")
+    """Return all magic field entries from the wrapped catalog registry."""
+    data = _load_json("catalog/registries/magic_fields.json")
     if not isinstance(data, dict):
         return []
-    return list(data.values())
+    if data.get("schema_version") != 1:
+        return []
+    rows = data.get("magic_fields")
+    return rows if isinstance(rows, list) else []
 
 
-def get_magic_field(index: str) -> dict[str, Any]:
-    """Return a specific magic field by index."""
-    data = _load_json("tags/magic_fields.json")
-    if index not in data:
-        raise ValueError(f"Unknown magic field: {index!r}. Valid: {sorted(data.keys())}")
-    return data[index]
+def get_magic_field(field_id: str) -> dict[str, Any]:
+    """Return a specific magic field by id."""
+    for entry in list_magic_fields():
+        if isinstance(entry, dict) and entry.get("id") == field_id:
+            return entry
+    raise ValueError(f"Unknown magic field: {field_id!r}.")
 
 
 def list_applications() -> list[dict[str, Any]]:
-    """Return all application entries."""
+    """Return all application entries from the bare-list tags file."""
     data = _load_json("tags/applications.json")
-    if not isinstance(data, dict):
-        return []
-    return list(data.values())
+    if isinstance(data, list):
+        return [e for e in data if isinstance(e, dict)]
+    if isinstance(data, dict):
+        return list(data.values())
+    return []
 
 
 def get_application(index: str) -> dict[str, Any]:
     """Return a specific application by index."""
-    data = _load_json("tags/applications.json")
-    if index not in data:
-        raise ValueError(f"Unknown application: {index!r}. Valid: {sorted(data.keys())}")
-    return data[index]
+    for entry in list_applications():
+        if entry.get("index") == index:
+            return entry
+    raise ValueError(f"Unknown application: {index!r}.")
 
 
 def get_application_group(app_index: str) -> str | None:
     """Return the parent group/field index for an application, or None."""
-    data = _load_json("tags/applications.json")
-    if app_index not in data:
-        return None
-    return data[app_index].get("group")
+    for entry in list_applications():
+        if entry.get("index") == app_index:
+            return entry.get("group")
+    return None
 
 
 def get_tag_primary_domain(tag_index: str, tag_kind: str) -> str | None:
@@ -491,26 +498,36 @@ def get_tag_primary_domain(tag_index: str, tag_kind: str) -> str | None:
     """
     if tag_kind == "knowledge":
         data = _load_json("tags/knowledge_groups.json")
-    elif tag_kind == "application":
-        data = _load_json("tags/applications.json")
-    elif tag_kind == "field":
-        data = _load_json("tags/magic_fields.json")
-    else:
-        return None
-
-    if isinstance(data, list):
-        for entry in data:
-            if isinstance(entry, dict) and entry.get("index") == tag_index:
+        if isinstance(data, list):
+            for entry in data:
+                if isinstance(entry, dict) and entry.get("index") == tag_index:
+                    return entry.get("primary_domain")
+            return None
+        if isinstance(data, dict):
+            entry = data.get(tag_index)
+            if isinstance(entry, dict):
                 return entry.get("primary_domain")
         return None
-
-    if isinstance(data, dict):
-        entry = data.get(tag_index)
-        if isinstance(entry, dict):
-            return entry.get("primary_domain")
+    elif tag_kind == "application":
+        data = _load_json("tags/applications.json")
+        if isinstance(data, list):
+            for entry in data:
+                if isinstance(entry, dict) and entry.get("index") == tag_index:
+                    return entry.get("primary_domain")
+            return None
+        if isinstance(data, dict):
+            entry = data.get(tag_index)
+            if isinstance(entry, dict):
+                return entry.get("primary_domain")
         return None
-
-    return None
+    elif tag_kind == "field":
+        # Wrapped registry; entries use 'id'
+        for entry in list_magic_fields():
+            if isinstance(entry, dict) and entry.get("id") == tag_index:
+                return entry.get("primary_domain")
+        return None
+    else:
+        return None
 
 
 def validate_application_parent_cap(
