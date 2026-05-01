@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "natural_abilities": [
+    {
+      "id": "keen_senses",
+      "name": "Keen Senses",
+      "kind": "passive",
+      "description": "One-sentence ability description.",
+      "effect_note": "Optional mechanical or narration guidance."
+    }
+  ]
+}

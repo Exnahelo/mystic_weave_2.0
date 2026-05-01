@@ -1,8 +1,0 @@
-[
-  { "id": "mount", "display_name": "Mount", "description": "Ridden for travel, combat, or labor." },
-  { "id": "pack", "display_name": "Pack", "description": "Carries goods, supplies, or burdens." },
-  { "id": "scout", "display_name": "Scout", "description": "Moves ahead of the party for observation, tracking, or early warning." },
-  { "id": "guard", "display_name": "Guard", "description": "Watches a position, person, or object; responds to threat." },
-  { "id": "hunter", "display_name": "Hunter", "description": "Pursues game or adversaries; engages in combat when directed." },
-  { "id": "companion", "display_name": "Companion", "description": "General-purpose presence; emotional and social bond primary." }
-]

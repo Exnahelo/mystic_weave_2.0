@@ -808,19 +808,42 @@ def list_exceptional_catalog() -> list[dict[str, Any]]:
     return data
 
 
+def _load_companion_registry(filename: str, inner_key: str) -> list[dict[str, Any]]:
+    """Load a wrapped companion vocabulary registry and return the inner list.
+
+    Expects the standard catalog-registry wrapper with schema_version: 1
+    and an inner array under `inner_key`. Returns an empty list on missing
+    or malformed input rather than raising — preserves prior loader behavior
+    of failing soft for runtime callers.
+    """
+    data = _load_json(filename)
+    if not isinstance(data, dict):
+        return []
+    if data.get("schema_version") != 1:
+        return []
+    rows = data.get(inner_key)
+    return rows if isinstance(rows, list) else []
+
+
 def list_natural_abilities() -> list[dict[str, Any]]:
-    data = _load_json("companions/natural_abilities.json")
-    return data if isinstance(data, list) else []
+    return _load_companion_registry(
+        "catalog/registries/companion_natural_abilities.json",
+        "natural_abilities",
+    )
 
 
 def list_learned_commands() -> list[dict[str, Any]]:
-    data = _load_json("companions/learned_commands.json")
-    return data if isinstance(data, list) else []
+    return _load_companion_registry(
+        "catalog/registries/companion_learned_commands.json",
+        "learned_commands",
+    )
 
 
 def list_tactical_roles() -> list[dict[str, Any]]:
-    data = _load_json("companions/tactical_roles.json")
-    return data if isinstance(data, list) else []
+    return _load_companion_registry(
+        "catalog/registries/companion_tactical_roles.json",
+        "tactical_roles",
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -913,9 +936,9 @@ def data_fingerprint() -> str:
 
     for filename in (
         "companions/exceptional.json",
-        "companions/natural_abilities.json",
-        "companions/learned_commands.json",
-        "companions/tactical_roles.json",
+        "catalog/registries/companion_natural_abilities.json",
+        "catalog/registries/companion_learned_commands.json",
+        "catalog/registries/companion_tactical_roles.json",
     ):
         path = _DATA_DIR / filename
         if not path.exists():

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "learned_commands": [
+    { "id": "heel", "display_name": "Heel", "description": "Move to and remain at the handler's side." },
+    { "id": "stay", "display_name": "Stay", "description": "Remain in position until released." },
+    { "id": "come", "display_name": "Come", "description": "Return to the handler." },
+    { "id": "guard", "display_name": "Guard", "description": "Watch and defend a specified location, object, or person." },
+    { "id": "track", "display_name": "Track", "description": "Follow a given scent, sound, or sight cue." },
+    { "id": "pursue", "display_name": "Pursue", "description": "Chase and harry a specified target without engaging lethally." },
+    { "id": "return", "display_name": "Return", "description": "Break from current task and come back to handler." },
+    { "id": "quiet", "display_name": "Quiet", "description": "Cease vocalizing; maintain silent presence." },
+    { "id": "attack", "display_name": "Attack", "description": "Engage a specified target with natural weapons." },
+    { "id": "retrieve", "display_name": "Retrieve", "description": "Bring a specified object to the handler." },
+    { "id": "scout_ahead", "display_name": "Scout Ahead", "description": "Move forward along the current path, observe, and return if threat is detected." },
+    { "id": "hold_ground", "display_name": "Hold Ground", "description": "Maintain position and resist movement until released." }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "natural_abilities": [
+    { "id": "scent_tracking", "display_name": "Scent Tracking", "description": "Can follow scent trails over significant distance and age." },
+    { "id": "keen_senses", "display_name": "Keen Senses", "description": "Detects subtle environmental change faster than typical for the species group." },
+    { "id": "pack_hunter", "display_name": "Pack Hunter", "description": "Coordinates effectively with other predators; benefits from group tactics." },
+    { "id": "darkvision", "display_name": "Darkvision", "description": "Sees in low-light conditions nearly as well as in daylight." },
+    { "id": "nature_blending", "display_name": "Nature Blending", "description": "Coat or plumage breaks up its outline against natural terrain." },
+    { "id": "fey_resilience", "display_name": "Fey Resilience", "description": "Unusually resistant to enchantment, illusion, and fear effects." },
+    { "id": "observant_cognition", "display_name": "Observant Cognition", "description": "Notably more perceptive and deliberate than its species baseline." },
+    { "id": "flight", "display_name": "Flight", "description": "Sustained aerial movement." },
+    { "id": "swimming", "display_name": "Swimming", "description": "Moves effectively through water." },
+    { "id": "climbing", "display_name": "Climbing", "description": "Moves effectively on vertical or broken terrain." },
+    { "id": "damp_resistance", "display_name": "Damp Resistance", "description": "Tolerates cold wet conditions that would impair most working animals." },
+    { "id": "heat_resistance", "display_name": "Heat Resistance", "description": "Tolerates high ambient temperatures without significant impairment." },
+    { "id": "cold_resistance", "display_name": "Cold Resistance", "description": "Tolerates low ambient temperatures without significant impairment." },
+    { "id": "ash_tolerance", "display_name": "Ash Tolerance", "description": "Handles smoke, ash, and airborne particulate without sensory impairment." },
+    { "id": "powerful_build", "display_name": "Powerful Build", "description": "Can carry, push, or restrain loads disproportionate to body size." },
+    { "id": "endurance_runner", "display_name": "Endurance Runner", "description": "Maintains pace over long distance better than species baseline." },
+    { "id": "endurance_flyer", "display_name": "Endurance Flyer", "description": "Maintains flight over long distance better than species baseline." },
+    { "id": "long_lived", "display_name": "Long-Lived", "description": "Meaningfully longer lifespan than a mortal animal of its species." },
+    { "id": "venomous", "display_name": "Venomous", "description": "Possesses a venom delivered via bite, sting, or other natural mechanism." },
+    { "id": "camouflage", "display_name": "Camouflage", "description": "Actively adjusts appearance to match immediate surroundings." },
+    { "id": "amphibious", "display_name": "Amphibious", "description": "Operates equally well in water and on land without penalty." },
+    { "id": "silent_movement", "display_name": "Silent Movement", "description": "Moves with notably reduced sound for its size." },
+    { "id": "magic_sensing", "display_name": "Magic Sensing", "description": "Detects nearby magical phenomena via instinctive awareness." },
+    { "id": "bond_memory", "display_name": "Bond Memory", "description": "Remembers faces, scents, and commands of a bonded handler across unusual spans of time." },
+    { "id": "territory_sense", "display_name": "Territory Sense", "description": "Maintains strong awareness of its claimed territory and intrusions within it." }
+  ]
+}
