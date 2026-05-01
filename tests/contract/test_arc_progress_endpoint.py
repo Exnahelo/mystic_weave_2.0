@@ -24,6 +24,7 @@ def _payload() -> dict[str, object]:
         "subtype": "investigation",
         "stake_scale": "situational",
         "origin_type": "emergent",
+        "closure_conditions": {"all_of": [{"type": "resolved_scene_count_at_least", "payload": {"count": 0}}]},
     }
 
 

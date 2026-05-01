@@ -37,7 +37,7 @@ class ArcTransitionConn:
 
     async def execute(self, query, *args):
         if "INSERT INTO arcs" in query:
-            self.rows.append({"id": args[0], "session_id": args[1], "state": args[3], "data": args[5]})
+            self.rows.append({"id": args[0], "session_id": args[1], "state": args[3], "parent_arc_id": args[4], "data": args[5]})
         elif "UPDATE arcs" in query:
             for row in self.rows:
                 if row["id"] == args[3]:
@@ -77,6 +77,13 @@ class ArcTransitionConn:
                 entry for entry in self.transitions
                 if entry["arc_id"] == args[0]
             ]
+        if "parent_arc_id = $2" in query:
+            return [
+                {"data": row["data"]} for row in self.rows
+                if row["session_id"] == args[0] and row.get("parent_arc_id") == args[1]
+            ]
+        if "WHERE session_id = $1" in query:
+            return [{"data": row["data"]} for row in self.rows if row["session_id"] == args[0]]
         return []
 
 
@@ -95,6 +102,7 @@ def _payload() -> dict[str, object]:
         "subtype": "investigation",
         "stake_scale": "situational",
         "origin_type": "emergent",
+        "closure_conditions": {"all_of": [{"type": "resolved_scene_count_at_least", "payload": {"count": 0}}]},
     }
 
 

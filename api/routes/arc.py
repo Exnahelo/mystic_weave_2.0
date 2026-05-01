@@ -3,19 +3,21 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Any
+from typing import Any, Literal
 import uuid
 
 import asyncpg
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
+from api.arc_conditions import ConditionEvaluationError, evaluate_condition_set, is_empty
 from api.arc_state_machine import get_allowed_transitions, is_active, is_terminal, is_transition_allowed
 from api.database import get_pool
 from api.game_data import get_arc_type_default_envelope
 from api.models import (
     Arc,
     ArcAPAward,
+    ArcAPOwnership,
     ArcBudget,
     ArcConditionSet,
     ArcEscalationRules,
@@ -23,6 +25,7 @@ from api.models import (
     ArcOriginType,
     ArcPrimaryType,
     ArcRewardEnvelope,
+    ArcSettlementResult,
     ArcState,
     ArcStakeScale,
     ArcTimestamps,
@@ -64,6 +67,45 @@ class ArcTransitionRequest(BaseModel):
     to_state: ArcState
     reason: str = Field(min_length=1, max_length=500)
     triggering_event: str | None = None
+    world_flags: dict[str, Any] | None = None
+    force: bool = False
+
+
+class ArcSpawnRequest(BaseModel):
+    """Payload for spawning a child arc from a parent."""
+    model_config = ConfigDict(extra="forbid")
+
+    child_title: str = Field(min_length=1, max_length=200)
+    child_summary: str = Field(min_length=1, max_length=2000)
+    child_primary_type: ArcPrimaryType
+    child_subtype: str
+    child_stake_scale: ArcStakeScale
+    child_origin_type: ArcOriginType = "derived"
+    child_patron_faction: str | None = None
+    child_patron_npc_id: str | None = None
+    child_target_locations: list[str] = Field(default_factory=list)
+    child_closure_conditions: ArcConditionSet = Field(default_factory=ArcConditionSet)
+    child_failure_conditions: ArcConditionSet = Field(default_factory=ArcConditionSet)
+    child_formal_contract_qualified: bool = False
+    child_explicit_objective: str | None = None
+    child_expected_return: str | None = None
+    ap_ownership: ArcAPOwnership = "parent"
+    reason: str = Field(min_length=1, max_length=500)
+
+
+class ArcSettleRequest(BaseModel):
+    """Payload for settling a complete or failed arc."""
+    model_config = ConfigDict(extra="forbid")
+
+    outcome: Literal["complete", "failed"]
+    awarded_ap: int = Field(default=0, ge=0)
+    reputation_changes: list[dict[str, Any]] = Field(default_factory=list)
+    coin_cd_awarded: int = Field(default=0, ge=0)
+    coin_cd_forfeit: int = Field(default=0, ge=0)
+    obligations_added: list[dict[str, Any]] = Field(default_factory=list)
+    items_awarded: list[str] = Field(default_factory=list)
+    leverage_gained: list[str] = Field(default_factory=list)
+    notes: str | None = None
 
 
 class ArcProgressRequest(BaseModel):
@@ -186,6 +228,13 @@ def build_arc_from_request(session_id: str, req: ArcCreateRequest) -> Arc:
     )
 
 
+def _raise_condition_error(exc: ConditionEvaluationError) -> None:
+    raise HTTPException(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        detail={"error": "condition_evaluation_error", "message": str(exc)},
+    )
+
+
 @router.post("/{session_id}/create", response_model=Arc)
 async def create_arc(
     session_id: str,
@@ -247,7 +296,8 @@ async def transition_arc(
     Request an arc state transition.
 
     Enforces the Arc System v1 transition matrix and rejects stale
-    from_state values. Closure/failure condition evaluation lands with settle.
+    from_state values. Closure and authored failure conditions are evaluated
+    before persistence for ready_to_close and failed transitions.
     """
     arc = await repo.get_by_id(session_id, arc_id)
     if arc is None:
@@ -285,6 +335,72 @@ async def transition_arc(
             },
         )
 
+    if req.to_state == "ready_to_close":
+        if is_empty(arc.closure_conditions):
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail={
+                    "error": "no_closure_conditions",
+                    "message": (
+                        "Cannot transition to 'ready_to_close' without authored closure conditions. "
+                        "Define closure_conditions at arc creation or use 'abandoned' to drop the arc."
+                    ),
+                },
+            )
+        try:
+            closure_met = evaluate_condition_set(
+                arc.closure_conditions,
+                arc,
+                world_flags=req.world_flags or {},
+            )
+        except ConditionEvaluationError as exc:
+            _raise_condition_error(exc)
+        if not closure_met:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail={
+                    "error": "closure_conditions_unmet",
+                    "message": (
+                        "Closure conditions not satisfied. Either complete the conditions, "
+                        "set the relevant world_flags in the transition request, or transition "
+                        "to 'failed' or 'abandoned' instead."
+                    ),
+                    "closure_conditions": arc.closure_conditions.model_dump(),
+                },
+            )
+
+    if req.to_state == "failed":
+        if not is_empty(arc.failure_conditions):
+            try:
+                failure_met = evaluate_condition_set(
+                    arc.failure_conditions,
+                    arc,
+                    world_flags=req.world_flags or {},
+                )
+            except ConditionEvaluationError as exc:
+                _raise_condition_error(exc)
+            if not failure_met and not req.force:
+                raise HTTPException(
+                    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                    detail={
+                        "error": "failure_conditions_unmet_no_force",
+                        "message": (
+                            "Authored failure conditions not satisfied. Pass 'force: true' "
+                            "to override and record an unforeseen failure."
+                        ),
+                        "failure_conditions": arc.failure_conditions.model_dump(),
+                    },
+                )
+
+    if req.to_state == "merged_into_parent" and not arc.parent_arc_id:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={
+                "error": "no_parent_to_merge_into",
+                "message": "Cannot transition to merged_into_parent on an arc without a parent.",
+            },
+        )
+
     now = datetime.now(timezone.utc)
     new_timestamps = arc.timestamps.model_copy()
     new_timestamps.last_progressed_at = now
@@ -309,6 +425,350 @@ async def transition_arc(
             resolved_scenes_at_transition=arc.consumption.resolved_scenes_used,
             locations_visited_at_transition=list(arc.consumption.locations_visited),
             triggering_event=req.triggering_event or "manual_transition",
+        )
+    )
+
+    if req.to_state == "merged_into_parent" and arc.parent_arc_id:
+        parent = await repo.get_by_id(session_id, arc.parent_arc_id)
+        if parent is not None and arc_id not in parent.merge_source_arc_ids:
+            parent.merge_source_arc_ids.append(arc_id)
+            await repo.update_state_and_consumption(
+                arc_id=arc.parent_arc_id,
+                new_state=parent.state,
+                consumption=parent.consumption,
+                timestamps=parent.timestamps,
+                full_arc=parent,
+            )
+
+    updated = await repo.get_by_id(session_id, arc_id)
+    if updated is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Arc {arc_id} not found in session {session_id}",
+        )
+    return updated
+
+
+@router.post("/{session_id}/{arc_id}/spawn", response_model=Arc)
+async def spawn_child_arc(
+    session_id: str,
+    arc_id: str,
+    req: ArcSpawnRequest,
+    repo: ArcRepository = Depends(get_arc_repository),
+) -> Arc:
+    """Spawn a child arc from a parent arc."""
+    parent = await repo.get_by_id(session_id, arc_id)
+    if parent is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Arc {arc_id} not found in session {session_id}",
+        )
+
+    if parent.state not in ("in_progress", "at_scope_cap"):
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={
+                "error": "parent_not_in_spawnable_state",
+                "message": (
+                    f"Parent arc must be in 'in_progress' or 'at_scope_cap' to spawn a child. "
+                    f"Current state: '{parent.state}'."
+                ),
+                "parent_state": parent.state,
+            },
+        )
+
+    if req.child_formal_contract_qualified:
+        missing = []
+        if not (req.child_patron_npc_id or req.child_patron_faction):
+            missing.append("patron_npc_id or patron_faction")
+        if not req.child_explicit_objective or not req.child_explicit_objective.strip():
+            missing.append("explicit_objective")
+        if not req.child_expected_return or not req.child_expected_return.strip():
+            missing.append("expected_return")
+        if missing:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail={
+                    "error": "insufficient_provenance",
+                    "message": (
+                        "child_formal_contract_qualified=true requires explicit patron, "
+                        "objective, and expected return on the child."
+                    ),
+                    "missing_fields": missing,
+                },
+            )
+
+    if not parent.flags.formal_contract_qualified and req.ap_ownership == "parent":
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={
+                "error": "emergent_parent_no_ap_to_partition",
+                "message": (
+                    "Parent arc is emergent (not formal_contract_qualified). It has no AP "
+                    "envelope to retain. Set ap_ownership='child' if the child is formal, "
+                    "or 'none' if both are emergent."
+                ),
+            },
+        )
+    if not req.child_formal_contract_qualified and req.ap_ownership == "child":
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={
+                "error": "emergent_child_cannot_own_ap",
+                "message": (
+                    "Child arc is emergent. Emergent arcs cannot own AP envelopes. "
+                    "Set ap_ownership='parent' (if parent is formal) or 'none'."
+                ),
+            },
+        )
+
+    envelope_defaults = get_arc_type_default_envelope(req.child_primary_type)
+    budget = ArcBudget(
+        resolved_scene_soft_cap=envelope_defaults["scene_soft_cap"],
+        resolved_scene_hard_cap=envelope_defaults["scene_hard_cap"],
+        location_soft_cap=envelope_defaults["location_soft_cap"],
+        location_hard_cap=envelope_defaults["location_hard_cap"],
+    )
+    if req.child_formal_contract_qualified and req.ap_ownership == "child":
+        ap_award = ArcAPAward(
+            min=envelope_defaults["ap_award_min"],
+            max=envelope_defaults["ap_award_max"],
+            fixed=envelope_defaults["ap_award_fixed"],
+        )
+    else:
+        ap_award = ArcAPAward(min=0, max=0, fixed=False)
+
+    now = datetime.now(timezone.utc)
+    child = Arc(
+        id=f"arc-{uuid.uuid4().hex[:16]}",
+        session_id=session_id,
+        title=req.child_title,
+        summary=req.child_summary,
+        primary_type=req.child_primary_type,
+        subtype=req.child_subtype,
+        stake_scale=req.child_stake_scale,
+        origin_type=req.child_origin_type,
+        parent_arc_id=arc_id,
+        state="proposed",
+        patron_faction=req.child_patron_faction,
+        patron_npc_id=req.child_patron_npc_id,
+        target_locations=req.child_target_locations,
+        closure_conditions=req.child_closure_conditions,
+        failure_conditions=req.child_failure_conditions,
+        budget=budget,
+        rewards=ArcRewardEnvelope(ap_award=ap_award),
+        flags=ArcFlags(
+            formal_contract_qualified=req.child_formal_contract_qualified,
+            ap_ownership=req.ap_ownership,
+        ),
+        timestamps=ArcTimestamps(created_at=now),
+    )
+
+    await repo.create(child)
+
+    if child.id not in parent.spawned_arc_ids:
+        parent.spawned_arc_ids.append(child.id)
+    await repo.update_state_and_consumption(
+        arc_id=arc_id,
+        new_state=parent.state,
+        consumption=parent.consumption,
+        timestamps=parent.timestamps,
+        full_arc=parent,
+    )
+
+    await repo.append_transition_log(
+        ArcTransitionLogEntry(
+            arc_id=arc_id,
+            session_id=session_id,
+            from_state=parent.state,
+            to_state=parent.state,
+            reason=f"Spawned child arc {child.id}: {req.reason}",
+            transitioned_at=now,
+            resolved_scenes_at_transition=parent.consumption.resolved_scenes_used,
+            locations_visited_at_transition=list(parent.consumption.locations_visited),
+            triggering_event="spawn",
+        )
+    )
+
+    return child
+
+
+@router.post("/{session_id}/{arc_id}/settle", response_model=Arc)
+async def settle_arc(
+    session_id: str,
+    arc_id: str,
+    req: ArcSettleRequest,
+    repo: ArcRepository = Depends(get_arc_repository),
+) -> Arc:
+    """Settle rewards for an arc and transition it to complete or failed."""
+    arc = await repo.get_by_id(session_id, arc_id)
+    if arc is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Arc {arc_id} not found in session {session_id}",
+        )
+
+    if req.outcome == "complete" and arc.state != "ready_to_close":
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={
+                "error": "arc_not_ready_to_close",
+                "message": (
+                    f"Cannot settle as complete unless arc is in 'ready_to_close' state. "
+                    f"Current state: '{arc.state}'. Transition to ready_to_close first."
+                ),
+                "current_state": arc.state,
+            },
+        )
+    if req.outcome == "failed" and arc.state not in ("in_progress", "at_scope_cap", "ready_to_close"):
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={
+                "error": "arc_not_in_failable_state",
+                "message": (
+                    f"Cannot settle as failed unless arc is in 'in_progress', 'at_scope_cap', "
+                    f"or 'ready_to_close'. Current state: '{arc.state}'."
+                ),
+                "current_state": arc.state,
+            },
+        )
+
+    if req.outcome == "failed" and req.awarded_ap > 0:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail={
+                "error": "ap_on_failure_not_allowed",
+                "message": "Failed arcs cannot award AP per the v1 locked policy (partial_ap_on_failure: false).",
+            },
+        )
+
+    if req.awarded_ap > 0:
+        if not arc.flags.formal_contract_qualified:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail={
+                    "error": "emergent_arc_no_ap",
+                    "message": "Emergent arcs (formal_contract_qualified: false) cannot award AP per the v1 locked policy.",
+                },
+            )
+        if arc.flags.ap_ownership == "none":
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail={
+                    "error": "no_ap_ownership",
+                    "message": "Arc has ap_ownership='none' and cannot award AP.",
+                },
+            )
+        if arc.parent_arc_id and arc.flags.ap_ownership == "parent":
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail={
+                    "error": "ap_owned_by_parent",
+                    "message": "AP for this objective branch is owned by the parent arc. Settle the parent arc to award AP.",
+                },
+            )
+        if not arc.parent_arc_id:
+            children = await repo.list_children(session_id, arc_id)
+            if any(child.flags.ap_ownership == "child" for child in children):
+                raise HTTPException(
+                    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                    detail={
+                        "error": "ap_owned_by_child",
+                        "message": "AP for this objective branch is owned by a child arc. Settle the child arc to award AP.",
+                    },
+                )
+        if req.awarded_ap < arc.rewards.ap_award.min or req.awarded_ap > arc.rewards.ap_award.max:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail={
+                    "error": "ap_outside_envelope",
+                    "message": (
+                        f"awarded_ap {req.awarded_ap} is outside envelope "
+                        f"[{arc.rewards.ap_award.min}, {arc.rewards.ap_award.max}]."
+                    ),
+                    "envelope_min": arc.rewards.ap_award.min,
+                    "envelope_max": arc.rewards.ap_award.max,
+                },
+            )
+
+    for rep_change in req.reputation_changes:
+        delta = rep_change.get("delta", 0)
+        if delta > 0 and delta > arc.rewards.reputation.max_positive_delta:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail={
+                    "error": "reputation_positive_outside_envelope",
+                    "faction": rep_change.get("faction"),
+                    "delta": delta,
+                    "envelope_max_positive": arc.rewards.reputation.max_positive_delta,
+                },
+            )
+        if delta < 0 and abs(delta) > arc.rewards.reputation.max_negative_delta:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail={
+                    "error": "reputation_negative_outside_envelope",
+                    "faction": rep_change.get("faction"),
+                    "delta": delta,
+                    "envelope_max_negative": arc.rewards.reputation.max_negative_delta,
+                },
+            )
+
+    if (
+        req.coin_cd_awarded > 0
+        and arc.rewards.economy.coin_cd_max is not None
+        and req.coin_cd_awarded > arc.rewards.economy.coin_cd_max
+    ):
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail={
+                "error": "coin_outside_envelope",
+                "awarded": req.coin_cd_awarded,
+                "envelope_max": arc.rewards.economy.coin_cd_max,
+            },
+        )
+
+    now = datetime.now(timezone.utc)
+    settlement = ArcSettlementResult(
+        arc_id=arc_id,
+        outcome=req.outcome,
+        awarded_ap=req.awarded_ap,
+        reputation_changes=req.reputation_changes,
+        coin_cd_awarded=req.coin_cd_awarded,
+        coin_cd_forfeit=req.coin_cd_forfeit,
+        obligations_added=req.obligations_added,
+        items_awarded=req.items_awarded,
+        leverage_gained=req.leverage_gained,
+        settled_at=now,
+        notes=req.notes,
+    )
+
+    from_state = arc.state
+    arc.settlement = settlement
+    new_state = "complete" if req.outcome == "complete" else "failed"
+    new_timestamps = arc.timestamps.model_copy()
+    new_timestamps.last_progressed_at = now
+    new_timestamps.closed_at = now
+
+    await repo.update_state_and_consumption(
+        arc_id=arc_id,
+        new_state=new_state,
+        consumption=arc.consumption,
+        timestamps=new_timestamps,
+        full_arc=arc,
+    )
+
+    await repo.append_transition_log(
+        ArcTransitionLogEntry(
+            arc_id=arc_id,
+            session_id=session_id,
+            from_state=from_state,
+            to_state=new_state,
+            reason=f"Arc settled as {req.outcome}: AP={req.awarded_ap}, coin={req.coin_cd_awarded}",
+            transitioned_at=now,
+            resolved_scenes_at_transition=arc.consumption.resolved_scenes_used,
+            locations_visited_at_transition=list(arc.consumption.locations_visited),
+            triggering_event="settle",
         )
     )
 

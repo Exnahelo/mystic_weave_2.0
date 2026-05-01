@@ -385,6 +385,29 @@ class ArcRewardEnvelope(BaseModel):
     leverage: ArcLeverageEnvelope = Field(default_factory=ArcLeverageEnvelope)
 
 
+class ArcSettlementResult(BaseModel):
+    """
+    Computed reward result from arc settlement.
+
+    Records what was actually awarded within the envelope, for audit
+    and for downstream integration with progression/reputation/economy
+    systems (Commit 5 wires these in).
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    arc_id: str
+    outcome: Literal["complete", "failed"]
+    awarded_ap: int = Field(default=0, ge=0)
+    reputation_changes: list[dict[str, Any]] = Field(default_factory=list)
+    coin_cd_awarded: int = Field(default=0, ge=0)
+    coin_cd_forfeit: int = Field(default=0, ge=0)
+    obligations_added: list[dict[str, Any]] = Field(default_factory=list)
+    items_awarded: list[str] = Field(default_factory=list)
+    leverage_gained: list[str] = Field(default_factory=list)
+    settled_at: datetime
+    notes: str | None = None
+
+
 class ArcFlags(BaseModel):
     """Boolean flags governing arc behavior."""
     model_config = ConfigDict(extra="forbid")
@@ -432,6 +455,7 @@ class Arc(BaseModel):
     escalation_rules: ArcEscalationRules = Field(default_factory=ArcEscalationRules)
     budget: ArcBudget
     rewards: ArcRewardEnvelope
+    settlement: ArcSettlementResult | None = None
     consumption: ArcConsumption = Field(default_factory=ArcConsumption)
     flags: ArcFlags = Field(default_factory=ArcFlags)
     timestamps: ArcTimestamps

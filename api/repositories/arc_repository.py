@@ -82,20 +82,28 @@ class ArcRepository:
         new_state: ArcState,
         consumption: ArcConsumption,
         timestamps: ArcTimestamps,
+        full_arc: Arc | None = None,
     ) -> None:
         """
         Update an arc's state, consumption, and timestamps atomically.
 
-        Used by both /transition (state changes) and /progress (consumption
-        updates that may trigger automatic at_scope_cap transition).
+        If full_arc is provided, it is used as the source of truth for the
+        serialized data column. This is required when updating list fields
+        like spawned_arc_ids, merge_source_arc_ids, or settlement that aren't
+        covered by the state/consumption/timestamps tuple.
         """
-        arc = await self.get_by_id_unsafe(arc_id)
-        if arc is None:
-            raise ArcNotFoundError(arc_id)
-
-        arc.state = new_state
-        arc.consumption = consumption
-        arc.timestamps = timestamps
+        if full_arc is None:
+            arc = await self.get_by_id_unsafe(arc_id)
+            if arc is None:
+                raise ArcNotFoundError(arc_id)
+            arc.state = new_state
+            arc.consumption = consumption
+            arc.timestamps = timestamps
+        else:
+            arc = full_arc
+            arc.state = new_state
+            arc.consumption = consumption
+            arc.timestamps = timestamps
 
         async with self._pool.acquire() as conn:
             await conn.execute(

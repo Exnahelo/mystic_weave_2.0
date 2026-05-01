@@ -483,7 +483,7 @@
           "arc"
         ],
         "summary": "Transition Arc",
-        "description": "Request an arc state transition.\n\nEnforces the Arc System v1 transition matrix and rejects stale\nfrom_state values. Closure/failure condition evaluation lands with settle.",
+        "description": "Request an arc state transition.\n\nEnforces the Arc System v1 transition matrix and rejects stale\nfrom_state values. Closure and authored failure conditions are evaluated\nbefore persistence for ready_to_close and failed transitions.",
         "operationId": "transition_arc_arc__session_id___arc_id__transition_post",
         "parameters": [
           {
@@ -511,6 +511,130 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ArcTransitionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Arc"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/arc/{session_id}/{arc_id}/spawn": {
+      "post": {
+        "tags": [
+          "arc"
+        ],
+        "summary": "Spawn Child Arc",
+        "description": "Spawn a child arc from a parent arc.",
+        "operationId": "spawn_child_arc_arc__session_id___arc_id__spawn_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "arc_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Arc Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArcSpawnRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Arc"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/arc/{session_id}/{arc_id}/settle": {
+      "post": {
+        "tags": [
+          "arc"
+        ],
+        "summary": "Settle Arc",
+        "description": "Settle rewards for an arc and transition it to complete or failed.",
+        "operationId": "settle_arc_arc__session_id___arc_id__settle_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "arc_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Arc Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArcSettleRequest"
               }
             }
           }
@@ -1783,6 +1907,16 @@
           "rewards": {
             "$ref": "#/components/schemas/ArcRewardEnvelope"
           },
+          "settlement": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ArcSettlementResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "consumption": {
             "$ref": "#/components/schemas/ArcConsumption"
           },
@@ -2483,6 +2617,314 @@
         "title": "ArcRewardEnvelope",
         "description": "Full reward channel envelope for an arc."
       },
+      "ArcSettleRequest": {
+        "properties": {
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "complete",
+              "failed"
+            ],
+            "title": "Outcome"
+          },
+          "awarded_ap": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Awarded Ap",
+            "default": 0
+          },
+          "reputation_changes": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Reputation Changes"
+          },
+          "coin_cd_awarded": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Coin Cd Awarded",
+            "default": 0
+          },
+          "coin_cd_forfeit": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Coin Cd Forfeit",
+            "default": 0
+          },
+          "obligations_added": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Obligations Added"
+          },
+          "items_awarded": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Items Awarded"
+          },
+          "leverage_gained": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Leverage Gained"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "outcome"
+        ],
+        "title": "ArcSettleRequest",
+        "description": "Payload for settling a complete or failed arc."
+      },
+      "ArcSettlementResult": {
+        "properties": {
+          "arc_id": {
+            "type": "string",
+            "title": "Arc Id"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "complete",
+              "failed"
+            ],
+            "title": "Outcome"
+          },
+          "awarded_ap": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Awarded Ap",
+            "default": 0
+          },
+          "reputation_changes": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Reputation Changes"
+          },
+          "coin_cd_awarded": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Coin Cd Awarded",
+            "default": 0
+          },
+          "coin_cd_forfeit": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Coin Cd Forfeit",
+            "default": 0
+          },
+          "obligations_added": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Obligations Added"
+          },
+          "items_awarded": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Items Awarded"
+          },
+          "leverage_gained": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Leverage Gained"
+          },
+          "settled_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Settled At"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "arc_id",
+          "outcome",
+          "settled_at"
+        ],
+        "title": "ArcSettlementResult",
+        "description": "Computed reward result from arc settlement.\n\nRecords what was actually awarded within the envelope, for audit\nand for downstream integration with progression/reputation/economy\nsystems (Commit 5 wires these in)."
+      },
+      "ArcSpawnRequest": {
+        "properties": {
+          "child_title": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Child Title"
+          },
+          "child_summary": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Child Summary"
+          },
+          "child_primary_type": {
+            "type": "string",
+            "enum": [
+              "task_local",
+              "contract_delicate",
+              "mission_multi_leg",
+              "undertaking_regional",
+              "arc_campaign"
+            ],
+            "title": "Child Primary Type"
+          },
+          "child_subtype": {
+            "type": "string",
+            "title": "Child Subtype"
+          },
+          "child_stake_scale": {
+            "type": "string",
+            "enum": [
+              "local",
+              "situational",
+              "regional",
+              "campaign"
+            ],
+            "title": "Child Stake Scale"
+          },
+          "child_origin_type": {
+            "type": "string",
+            "enum": [
+              "declared",
+              "emergent",
+              "derived"
+            ],
+            "title": "Child Origin Type",
+            "default": "derived"
+          },
+          "child_patron_faction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Child Patron Faction"
+          },
+          "child_patron_npc_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Child Patron Npc Id"
+          },
+          "child_target_locations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Child Target Locations"
+          },
+          "child_closure_conditions": {
+            "$ref": "#/components/schemas/ArcConditionSet"
+          },
+          "child_failure_conditions": {
+            "$ref": "#/components/schemas/ArcConditionSet"
+          },
+          "child_formal_contract_qualified": {
+            "type": "boolean",
+            "title": "Child Formal Contract Qualified",
+            "default": false
+          },
+          "child_explicit_objective": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Child Explicit Objective"
+          },
+          "child_expected_return": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Child Expected Return"
+          },
+          "ap_ownership": {
+            "type": "string",
+            "enum": [
+              "parent",
+              "child",
+              "none"
+            ],
+            "title": "Ap Ownership",
+            "default": "parent"
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "child_title",
+          "child_summary",
+          "child_primary_type",
+          "child_subtype",
+          "child_stake_scale",
+          "reason"
+        ],
+        "title": "ArcSpawnRequest",
+        "description": "Payload for spawning a child arc from a parent."
+      },
       "ArcTimestamps": {
         "properties": {
           "created_at": {
@@ -2585,6 +3027,23 @@
               }
             ],
             "title": "Triggering Event"
+          },
+          "world_flags": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "World Flags"
+          },
+          "force": {
+            "type": "boolean",
+            "title": "Force",
+            "default": false
           }
         },
         "additionalProperties": false,
