@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "4.6.0"
+    "version": "4.7.0"
   },
   "servers": [
     {
@@ -1940,6 +1940,13 @@
             "type": "array",
             "title": "Notes"
           },
+          "log": {
+            "items": {
+              "$ref": "#/components/schemas/ArcBeatLogEntry"
+            },
+            "type": "array",
+            "title": "Log"
+          },
           "merge_source_arc_ids": {
             "items": {
               "type": "string"
@@ -2000,6 +2007,37 @@
         ],
         "title": "ArcAPAward",
         "description": "AP award envelope for an arc reward."
+      },
+      "ArcBeatLogEntry": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Text"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "progress",
+              "transition"
+            ],
+            "title": "Source"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "text",
+          "timestamp",
+          "source"
+        ],
+        "title": "ArcBeatLogEntry",
+        "description": "A single beat recorded on an arc's per-arc log.\n\nBeats are the original-resolution narrative records of an arc's progress.\nThey are appended on /progress and /transition when the narrator supplies\na beat string. Used as forensic detail for arc audit and as the source\nmaterial for closure summaries (though closure summaries are assembled\nfrom settlement reward channels, not from beat text)."
       },
       "ArcBudget": {
         "properties": {
@@ -2524,6 +2562,19 @@
               }
             ],
             "title": "Notes"
+          },
+          "beat": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Beat"
           }
         },
         "additionalProperties": false,
@@ -3083,6 +3134,19 @@
             "type": "boolean",
             "title": "Force",
             "default": false
+          },
+          "beat": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Beat"
           }
         },
         "additionalProperties": false,
@@ -6374,7 +6438,8 @@
                   "type": "string"
                 },
                 {
-                  "$ref": "#/components/schemas/TypedLogEntry"
+                  "additionalProperties": true,
+                  "type": "object"
                 }
               ]
             },
@@ -6394,6 +6459,7 @@
             "title": "Updated At"
           }
         },
+        "additionalProperties": false,
         "type": "object",
         "required": [
           "session_id",
@@ -8448,7 +8514,8 @@
               "admin_correction",
               "inventory_normalization",
               "time_correction",
-              "compression"
+              "compression",
+              "closure_summary"
             ],
             "title": "Type"
           },
@@ -8456,6 +8523,18 @@
             "type": "string",
             "minLength": 1,
             "title": "Text"
+          },
+          "payload": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payload"
           }
         },
         "additionalProperties": false,
@@ -8465,7 +8544,7 @@
           "text"
         ],
         "title": "TypedLogEntry",
-        "description": "A typed log entry for non-arc beats and admin/correction records.\n\nPlain strings remain valid log entries for legacy callers. Typed entries\nare the forward-only path for non-arc structural categories."
+        "description": "A typed log entry for non-arc beats, admin records, and arc closure summaries.\n\nPlain strings remain valid log entries for legacy callers. Typed entries\nare the forward-only path for non-arc structural categories and for\nbackend-assembled closure summaries."
       },
       "ValidationError": {
         "properties": {

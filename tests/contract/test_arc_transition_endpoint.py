@@ -36,6 +36,7 @@ class ArcTransitionConn:
         self.transitions: list[dict] = []
         self.character: dict | None = _character_state()
         self.world: dict | None = _world_state()
+        self.log: list[dict] = []
 
     async def execute(self, query, *args):
         if "INSERT INTO arcs" in query:
@@ -64,6 +65,12 @@ class ArcTransitionConn:
             self.character = json.loads(args[0])
         elif "UPDATE game_states SET world" in query:
             self.world = json.loads(args[0])
+        elif "UPDATE game_states SET log" in query:
+            # StateRepository.append_log_entry issues:
+            # UPDATE game_states SET log = log || $1::jsonb, updated_at = now() WHERE session_id = $2
+            # args[0] is a JSON-encoded list containing one entry to append.
+            appended = json.loads(args[0])
+            self.log.extend(appended)
         return "OK"
 
     async def fetchrow(self, query, *args):
@@ -75,6 +82,16 @@ class ArcTransitionConn:
             if self.world is None:
                 return None
             return {"world": json.dumps(self.world)}
+        if "SELECT session_id, character, world, log, updated_at" in query:
+            if self.character is None or self.world is None:
+                return None
+            return {
+                "session_id": args[0],
+                "character": json.dumps(self.character),
+                "world": json.dumps(self.world),
+                "log": json.dumps(self.log),
+                "updated_at": None,
+            }
         if "WHERE session_id = $1 AND id = $2" in query:
             for row in self.rows:
                 if row["session_id"] == args[0] and row["id"] == args[1]:
@@ -168,6 +185,30 @@ def _transition(client: TestClient, arc_id: str, from_state: str, to_state: str,
         f"/arc/{session_id}/{arc_id}/transition",
         json={"from_state": from_state, "to_state": to_state, "reason": f"{from_state}->{to_state}"},
     )
+
+
+@pytest.mark.contract
+def test_transition_with_beat_appends_arc_log_entry() -> None:
+    conn = ArcTransitionConn()
+    app = _make_app(conn)
+    with TestClient(app) as client:
+        arc = _create(client)
+        response = client.post(
+            f"/arc/sess-transition/{arc['id']}/transition",
+            json={
+                "from_state": "proposed",
+                "to_state": "available",
+                "reason": "accepted",
+                "beat": "Player accepted the contract.",
+            },
+        )
+        fetched = client.get(f"/arc/sess-transition/{arc['id']}")
+
+    assert response.status_code == 200
+    body = fetched.json()
+    assert len(body["log"]) == 1
+    assert body["log"][0]["text"] == "Player accepted the contract."
+    assert body["log"][0]["source"] == "transition"
 
 
 @pytest.mark.contract

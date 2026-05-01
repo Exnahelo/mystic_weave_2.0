@@ -29,3 +29,24 @@ written after the schema change.
 `log_entry: null` (or omitted). Saves with no log entry persist state
 without appending to the log. Use this for the omit categories enumerated
 in `prompts/engine.md` §5.
+
+## `closure_summary` — added in 4.7.0
+
+Backend-assembled. The narrator does NOT write `closure_summary` entries; they
+are emitted by `POST /arc/{session_id}/{arc_id}/settle` after a successful
+arc settlement.
+
+Shape:
+
+- `type`: `"closure_summary"`
+- `text`: brief one-line summary, e.g. `"Arc 'Heartwater Basin Investigation' settled as complete: 2 AP, 3 reputation change(s)"`
+- `payload`: structured dict with the full settlement record. Fields:
+  - `arc_id`, `arc_title`, `outcome`, `settled_at`
+  - `awarded_ap`, `coin_cd_awarded`, `coin_cd_forfeit`
+  - `items_awarded`, `leverage_gained`, `reputation_changes`, `obligations_added`
+  - `consequence_events`
+  - `resolved_scenes_used`, `locations_visited`
+
+Per-arc beat logs (added in 4.7.0) hold full original beats. The
+`closure_summary` entry on `game_states.log` is the compact, structured
+record. Both layers preserve provenance; neither replaces the other.

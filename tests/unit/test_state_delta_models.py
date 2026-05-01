@@ -125,12 +125,40 @@ def test_typed_log_entry_accepts_valid_enum_value():
 
 def test_typed_log_entry_rejects_unknown_type():
     with pytest.raises(ValidationError):
-        TypedLogEntry(type="closure_summary", text="not yet")
+        TypedLogEntry(type="unknown_type", text="not valid")
 
 
 def test_typed_log_entry_rejects_empty_text():
     with pytest.raises(ValidationError):
         TypedLogEntry(type="world_change", text="")
+
+
+def test_typed_log_entry_closure_summary_requires_payload():
+    with pytest.raises(ValidationError):
+        TypedLogEntry(type="closure_summary", text="No payload provided.")
+
+
+def test_typed_log_entry_closure_summary_rejects_empty_payload():
+    with pytest.raises(ValidationError):
+        TypedLogEntry(type="closure_summary", text="Empty payload.", payload={})
+
+
+def test_typed_log_entry_closure_summary_accepts_payload():
+    entry = TypedLogEntry(
+        type="closure_summary",
+        text="Arc settled.",
+        payload={"arc_id": "arc_x", "outcome": "complete"},
+    )
+    assert entry.payload == {"arc_id": "arc_x", "outcome": "complete"}
+
+
+def test_typed_log_entry_world_change_rejects_payload():
+    with pytest.raises(ValidationError):
+        TypedLogEntry(
+            type="world_change",
+            text="Companion added.",
+            payload={"id": "ignored"},
+        )
 
 
 def test_apply_state_delta_request_accepts_omitted_log_entry():

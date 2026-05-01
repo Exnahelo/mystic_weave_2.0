@@ -427,6 +427,22 @@ class ArcTimestamps(BaseModel):
     closed_at: datetime | None = None
 
 
+class ArcBeatLogEntry(BaseModel):
+    """A single beat recorded on an arc's per-arc log.
+
+    Beats are the original-resolution narrative records of an arc's progress.
+    They are appended on /progress and /transition when the narrator supplies
+    a beat string. Used as forensic detail for arc audit and as the source
+    material for closure summaries (though closure summaries are assembled
+    from settlement reward channels, not from beat text).
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    text: str = Field(..., min_length=1)
+    timestamp: datetime
+    source: Literal["progress", "transition"]
+
+
 class Arc(BaseModel):
     """
     Backend-typed higher-level objective record.
@@ -460,6 +476,7 @@ class Arc(BaseModel):
     flags: ArcFlags = Field(default_factory=ArcFlags)
     timestamps: ArcTimestamps
     notes: list[str] = Field(default_factory=list)
+    log: list[ArcBeatLogEntry] = Field(default_factory=list)
     merge_source_arc_ids: list[str] = Field(default_factory=list)
     consequence_events_emitted: list[str] = Field(default_factory=list)
 
@@ -474,7 +491,6 @@ class Arc(BaseModel):
                 f"Invalid arc subtype {v!r}. Must be one of: {sorted(valid_subtypes)}"
             )
         return v
-
 
 class ArcTransitionLogEntry(BaseModel):
     """
@@ -773,10 +789,11 @@ class WorldStateDelta(BaseModel):
 
 
 class TypedLogEntry(BaseModel):
-    """A typed log entry for non-arc beats and admin/correction records.
+    """A typed log entry for non-arc beats, admin records, and arc closure summaries.
 
     Plain strings remain valid log entries for legacy callers. Typed entries
-    are the forward-only path for non-arc structural categories.
+    are the forward-only path for non-arc structural categories and for
+    backend-assembled closure summaries.
     """
     model_config = ConfigDict(extra="forbid")
 
@@ -787,9 +804,22 @@ class TypedLogEntry(BaseModel):
         "inventory_normalization",
         "time_correction",
         "compression",
+        "closure_summary",
     ]
     text: str = Field(..., min_length=1)
+    payload: dict[str, Any] | None = None
 
+    @model_validator(mode="after")
+    def payload_consistent_with_type(self) -> TypedLogEntry:
+        if self.type == "closure_summary":
+            if self.payload is None or not self.payload:
+                raise ValueError("closure_summary requires a non-empty payload")
+        else:
+            if self.payload is not None:
+                raise ValueError(
+                    f"payload is only valid for type='closure_summary', got type={self.type!r}"
+                )
+        return self
 
 class ApplyStateDeltaRequest(BaseModel):
     """Body for POST /state/{session_id}/delta"""
@@ -819,11 +849,25 @@ class SaveStateRequest(BaseModel):
 
 class GameStateResponse(BaseModel):
     """Response for GET /state/{session_id}"""
+    model_config = ConfigDict(extra="forbid")
+
     session_id: str
     character:  CharacterModel
     world:      WorldModel
-    log:        list[str | TypedLogEntry]
+    log:        list[str | dict[str, Any]]
     updated_at: datetime | None = None
+
+    @model_validator(mode="after")
+    def omit_none_typed_log_payloads(self) -> GameStateResponse:
+        normalized_log: list[str | dict[str, Any]] = []
+        for entry in self.log:
+            if isinstance(entry, dict):
+                typed_entry = TypedLogEntry.model_validate(entry)
+                normalized_log.append(typed_entry.model_dump(exclude_none=True))
+            else:
+                normalized_log.append(entry)
+        self.log = normalized_log
+        return self
 
 
 class SpendAPRequest(BaseModel):
