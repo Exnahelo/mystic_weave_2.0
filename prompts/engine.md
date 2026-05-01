@@ -30,11 +30,7 @@ Narration is prose-only. Extraction is structured state delta + `log_entry` only
 Offer 2–4 choices; movement options must come from `GET /location/{location_id}/connections`. Reflect tags, identity, companions, and state.
 
 ### Narration Discipline
-Do not end at a non-decision point. End only at: (1) a genuine decision with at least two meaningful options, (2) a meaningful state change (arrival, discovery, confrontation, etc.), or (3) an explicit time-skip handoff: if nothing decision-worthy approaches, state time passes, advance time, and wait for the next trigger.
-
-Not stopping points: routine activity continuing; the player's stated course still being executed; no meaningful situation change. If you would ask "what would you like to do?" when no new choice appeared, advance time (preferred) or extend to a real decision point.
-
-Do not call `/progress` on filler. A scene resolves only when something materially changed through player action. Time passing alone is not resolved. If you cannot identify what changed, do not increment scene consumption.
+End only at a genuine decision (≥2 meaningful options), meaningful state change, or explicit time-skip handoff. Routine continuation, executing a stated course, and "what do you want to do?" with no new choice are not stopping points — advance time or extend to a real decision. Do not call `/progress` on filler; a scene resolves only when something materially changed through player action.
 
 ### 3) Resolve Risk
 **Standard:** choose 1 domain, group, application; `roll_tag` is contextual. Apply `difficulty-rules.md`, faction rep; never stack tags; call `POST /roll`.
@@ -44,10 +40,10 @@ Do not call `/progress` on filler. A scene resolves only when something material
 Party rep: `mean(known) * (known_count / party_size)`; none => `+0`; round toward 0; never infer missing. Ties: failure risk, lower domain, strongest tag.
 
 ### Item Mechanical Effects
-Before rolls, enumerate worn/active items with `mechanical_effect`; state trigger/applies/excludes/modifier. Do not skip applicable modifiers. If questioned, answer from `mechanical_effect`.
+Before rolls, enumerate worn/active items with `mechanical_effect`; apply triggered modifiers and answer questions from the field directly.
 
 ### Arc System Enforcement
-For higher-level objectives: create patron/emergent threads with `/arc/{session_id}/create`; after each resolved active-arc scene call `/progress` (if auto hard cap, `/transition` before continuing); lifecycle changes require `/transition`; location/faction/subtype/scope boundaries require `/spawn`; terminal transitions require `/settle`. At settlement enumerate AP, reputation, economy, items, leverage, obligations; empty channels are explicit zeros/lists. Skipping warranted arc calls is structural error. See `arc-rules.md`.
+For higher-level objectives: create patron/emergent threads with `/arc/{session_id}/create`; after each resolved active-arc scene call `/progress` (if auto hard cap, `/transition` before continuing); lifecycle changes require `/transition`. When a structural boundary is crossed, choose: **spawn** (new arc parallel to parent), **replace** (original objective moot, successor takes over), or **merge** (emergent child resolves into parent) — default is spawn; see `arc-rules.md` Spawn vs Replace vs Merge. Terminal transitions require `/settle`; enumerate all reward channels (zeros/empty lists are explicit). Skipping warranted arc calls is structural error.
 
 ### 4) Narrate Outcome
 Use roll exactly: 1 = crit success; success by 20+ = strong; by 1–19 = success; fail by 1–10 = partial; by 11+ = failure; 100 = crit failure.
@@ -78,7 +74,7 @@ Follow `economy-rules.md`; ground buy/find inventory in `GET /catalog/items`; ke
 Maintain `world.survival`; update only at deterministic triggers (travel, exertion, deprivation, resupply, rest/recovery), not routine low-impact action; persist band changes.
 
 ### Progression Runtime Checkpoint
-Apply `progression-rules.md`. Adjudicate tag advancement per resolved scene using layer-matched triggers; at most one tag advances per scene; require player confirmation before saving new tags. Backend handles tag-counter rollover AP, awarded AP, parent-cap enforcement, and spend math. Magical field knowledge requires domain gate (40/50/60/70/80→T1–T5). If disputed, do not commit.
+Apply `progression-rules.md`. Adjudicate tag advancement per resolved scene using layer-matched triggers; at most one tag per scene; player confirms new tags before save. Backend handles counter rollover, awarded AP, parent-cap, and spend math. Disputed → do not commit.
 
 ## Companions
 Use `/companion/new`, `/companion/{id}/transition`, and `/state/{session_id}/delta`. Reliability = composure + training_level + bond_level + context.

@@ -32,6 +32,7 @@ from api.models import (
     SurvivalState,
     TimeState,
     TypedLogEntry,
+    WeatherState,
     WorldModel,
 )
 from api.time_advance import advance_time
@@ -270,7 +271,10 @@ def apply_delta(current_state: dict[str, Any], delta: ApplyStateDeltaRequest) ->
 
     incoming_time = world_delta.get("time") if isinstance(world_delta.get("time"), dict) else {}
     if "weather" in incoming_time:
-        new_time = new_time.model_copy(update={"weather": incoming_time["weather"]})
+        weather_val = incoming_time["weather"]
+        if isinstance(weather_val, str):
+            weather_val = WeatherState(weather_val)
+        new_time = new_time.model_copy(update={"weather": weather_val})
     if "weather_note" in incoming_time:
         new_time = new_time.model_copy(update={"weather_note": incoming_time["weather_note"]})
 
@@ -388,7 +392,10 @@ async def save_state(
 
             incoming_time = world_json.get("time") if isinstance(world_json.get("time"), dict) else {}
             if "weather" in incoming_time:
-                new_time = new_time.model_copy(update={"weather": incoming_time["weather"]})
+                weather_val = incoming_time["weather"]
+                if isinstance(weather_val, str):
+                    weather_val = WeatherState(weather_val)
+                new_time = new_time.model_copy(update={"weather": weather_val})
             if "weather_note" in incoming_time:
                 new_time = new_time.model_copy(update={"weather_note": incoming_time["weather_note"]})
 

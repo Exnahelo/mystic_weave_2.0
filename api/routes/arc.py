@@ -46,6 +46,7 @@ from api.schemas.arc_schemas import (
 from api.services.arc_settlement import apply_arc_settlement
 
 router = APIRouter(prefix="/arc", tags=["arc"])
+HTTP_422_UNPROCESSABLE_CONTENT = 422
 
 
 SUBTYPE_DEFAULT_CLOSURE_CONDITIONS: dict[str, dict[str, Any]] = {
@@ -133,7 +134,7 @@ def validate_provenance(req: ArcCreateRequest) -> None:
 
     if missing:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=HTTP_422_UNPROCESSABLE_CONTENT,
             detail={
                 "error": "insufficient_provenance",
                 "message": (
@@ -235,7 +236,7 @@ def build_arc_from_request(
 
 def _raise_condition_error(exc: ConditionEvaluationError) -> None:
     raise HTTPException(
-        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        status_code=HTTP_422_UNPROCESSABLE_CONTENT,
         detail={"error": "condition_evaluation_error", "message": str(exc)},
     )
 
@@ -328,7 +329,7 @@ async def transition_arc(
 
     if not is_transition_allowed(req.from_state, req.to_state):
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=HTTP_422_UNPROCESSABLE_CONTENT,
             detail={
                 "error": "illegal_transition",
                 "message": (
@@ -344,7 +345,7 @@ async def transition_arc(
     if req.to_state == "ready_to_close":
         if is_empty(arc.closure_conditions):
             raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                status_code=HTTP_422_UNPROCESSABLE_CONTENT,
                 detail={
                     "error": "no_closure_conditions",
                     "message": (
@@ -363,7 +364,7 @@ async def transition_arc(
             _raise_condition_error(exc)
         if not closure_met:
             raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                status_code=HTTP_422_UNPROCESSABLE_CONTENT,
                 detail={
                     "error": "closure_conditions_unmet",
                     "message": (
@@ -387,7 +388,7 @@ async def transition_arc(
                 _raise_condition_error(exc)
             if not failure_met and not req.force:
                 raise HTTPException(
-                    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                    status_code=HTTP_422_UNPROCESSABLE_CONTENT,
                     detail={
                         "error": "failure_conditions_unmet_no_force",
                         "message": (
@@ -511,7 +512,7 @@ async def spawn_child_arc(
             missing.append("expected_return")
         if missing:
             raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                status_code=HTTP_422_UNPROCESSABLE_CONTENT,
                 detail={
                     "error": "insufficient_provenance",
                     "message": (
@@ -659,7 +660,7 @@ async def settle_arc(
 
     if req.outcome == "failed" and req.awarded_ap > 0:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=HTTP_422_UNPROCESSABLE_CONTENT,
             detail={
                 "error": "ap_on_failure_not_allowed",
                 "message": "Failed arcs cannot award AP per the v1 locked policy (partial_ap_on_failure: false).",
@@ -691,7 +692,7 @@ async def settle_arc(
     if req.awarded_ap > 0:
         if not arc.flags.formal_contract_qualified:
             raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                status_code=HTTP_422_UNPROCESSABLE_CONTENT,
                 detail={
                     "error": "emergent_arc_no_ap",
                     "message": "Emergent arcs (formal_contract_qualified: false) cannot award AP per the v1 locked policy.",
@@ -699,7 +700,7 @@ async def settle_arc(
             )
         if arc.flags.ap_ownership == "none":
             raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                status_code=HTTP_422_UNPROCESSABLE_CONTENT,
                 detail={
                     "error": "no_ap_ownership",
                     "message": "Arc has ap_ownership='none' and cannot award AP.",
@@ -707,7 +708,7 @@ async def settle_arc(
             )
         if arc.parent_arc_id and arc.flags.ap_ownership == "parent":
             raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                status_code=HTTP_422_UNPROCESSABLE_CONTENT,
                 detail={
                     "error": "ap_owned_by_parent",
                     "message": "AP for this objective branch is owned by the parent arc. Settle the parent arc to award AP.",
@@ -716,7 +717,7 @@ async def settle_arc(
         if not arc.parent_arc_id:
             if any(child.flags.ap_ownership == "child" for child in children):
                 raise HTTPException(
-                    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                    status_code=HTTP_422_UNPROCESSABLE_CONTENT,
                     detail={
                         "error": "ap_owned_by_child",
                         "message": "AP for this objective branch is owned by a child arc. Settle the child arc to award AP.",
@@ -724,7 +725,7 @@ async def settle_arc(
                 )
         if req.awarded_ap < arc.rewards.ap_award.min or req.awarded_ap > arc.rewards.ap_award.max:
             raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                status_code=HTTP_422_UNPROCESSABLE_CONTENT,
                 detail={
                     "error": "ap_outside_envelope",
                     "message": (
@@ -740,7 +741,7 @@ async def settle_arc(
         delta = rep_change.get("delta", 0)
         if delta > 0 and delta > arc.rewards.reputation.max_positive_delta:
             raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                status_code=HTTP_422_UNPROCESSABLE_CONTENT,
                 detail={
                     "error": "reputation_positive_outside_envelope",
                     "faction": rep_change.get("faction"),
@@ -750,7 +751,7 @@ async def settle_arc(
             )
         if delta < 0 and abs(delta) > arc.rewards.reputation.max_negative_delta:
             raise HTTPException(
-                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                status_code=HTTP_422_UNPROCESSABLE_CONTENT,
                 detail={
                     "error": "reputation_negative_outside_envelope",
                     "faction": rep_change.get("faction"),
@@ -765,7 +766,7 @@ async def settle_arc(
         and req.coin_cd_awarded > arc.rewards.economy.coin_cd_max
     ):
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=HTTP_422_UNPROCESSABLE_CONTENT,
             detail={
                 "error": "coin_outside_envelope",
                 "awarded": req.coin_cd_awarded,

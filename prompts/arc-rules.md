@@ -397,6 +397,34 @@ The parent settles only after the required children settle or merge.
 
 ---
 
+## Spawn vs Replace vs Merge
+
+When a structural boundary is crossed during play, three responses exist. Picking the right one is what keeps the arc registry honest.
+
+**Spawn (default).** A new bounded scope opens alongside the parent. Both arcs persist; both have their own closure conditions; the parent may depend on child outcomes but remains its own arc. Use spawn when the new work is distinct from the parent's path, when both could succeed independently, or when a patron formally tasks a sub-objective.
+
+Test: *Are both arcs needed? Could either succeed without the other?* → if yes, spawn.
+
+**Replace.** The original arc's objective has become moot, impossible, or fundamentally redirected, but a successor objective emerges from the same situation. The original arc closes with `replaced_by_successor`. A new arc takes its place. Use replace when the original closure conditions can no longer be met but a new shape of the same broad mandate is now in motion.
+
+Test: *Has the original objective become unachievable, with a new objective emerging from the same situation?* → if yes, replace. Do not replace just because the path is harder; replace only when the original objective itself has shifted.
+
+**Merge.** An emergent or distinct child arc turns out to be serving the parent's closure conditions rather than its own. The child closes with `merged_into_parent`; its progress and rewards apply to the parent. Use merge when an apparently-distinct thread is actually a sub-component of an existing arc, recognized only after work began.
+
+Test: *Is this arc serving the parent's closure rather than its own?* → if yes, merge. Do not merge just because the arcs are related; merge only when one is genuinely subordinate.
+
+When uncertain, default to spawn. Spawning preserves the most narrative state and the most bounded scope. Replace and merge each erase one arc's identity; that should require evidence, not convenience.
+
+Boundary cases:
+
+- New patron formally tasks a sub-objective → spawn (formal child of parent).
+- Mid-investigation lead dies, but a different lead emerges → replace (failed lead → new lead).
+- Emergent thread turns out to be solving the parent's actual problem → merge.
+- Player pursues a side-objective that doesn't bear on the main arc → spawn (independent).
+- Two arcs converge on the same outcome and one becomes redundant → merge the redundant one into the kept one.
+
+---
+
 ## Lifecycle States
 
 ```text

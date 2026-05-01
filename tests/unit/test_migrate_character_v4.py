@@ -130,5 +130,5 @@ def test_migrate_character_document_validates_output() -> None:
 def test_get_database_url_exits_cleanly_when_missing(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delenv("DATABASE_URL", raising=False)
 
-    with pytest.raises(SystemExit, match="DATABASE_URL environment variable not set\."):
+    with pytest.raises(SystemExit, match=r"DATABASE_URL environment variable not set\."):
         get_database_url()
