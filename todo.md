@@ -7,53 +7,45 @@ Last updated: 2026-05-01
 This is the project's primary work-tracking document. Anyone — Daniel, Cline, Claude, a future contributor — should be able to read this and understand:
 
 1. What's the next thing to work on
-2. What recent context they need to be effective
-3. What's deferred and why
-4. What's structurally blocked and won't be addressed soon
+2. What's deferred and why
+3. What's structurally blocked and won't be addressed soon
 
-The top section (Active Architectural Arc) is the single most important piece of work currently scoped. Everything below it is either follow-up to that work, smaller independent improvements, or deferred items waiting on capacity or prerequisites.
-
-If you walk in cold and only read one section, read the Arc System v1 section. That's where the project is going next.
+If you walk in cold and only read one section, read **Current Focus**.
 
 ---
 
-## ACTIVE ARCHITECTURAL ARC
+## CURRENT FOCUS
 
-### Entity registry consolidation
+**Live-play validation of Arc System v1.**
 
-- [x] PR 1: Consolidate creatures + Feywood fauna + Feywood flora into
-  `data/entities/`. Per-entity files, biome-grouped subdirs.
-  - [x] Architecture doc at `docs/entity-registry.md`
-  - [x] Templates at `data/entities/_template_*.json`
-  - [x] Migration via `scripts/migrate_entities_pr1.py` (deleted post-merge)
-  - [x] Loader rewrite in `api/game_data.py`
-  - [x] Validator extensions in `scripts/validate_data_files.py`
-  - [x] Clarification note in `data/companions/exceptional.json`
-  - [x] Cleanup: removed `data/environment/` and `data/companions/creatures.json`
-- [ ] PR 2: Move vocabulary registries (`natural_abilities.json`,
-  `learned_commands.json`, `tactical_roles.json`) into
-  `data/catalog/registries/companion_*.json`. Update consumers.
-- [x] Author ecology data for non-Feywood biomes (10 creatures previously
-  had `creature_companion` facet but no `ecology` facet) — completed 2026-05-01 in this batch.
-  - alpine_peaks: frostclaw_bear, cliffang_wolf
-  - draconic_grasslands: goldmane_courser, windcrown_hawk
-  - temperate_forest: silvermoss_wolf
-  - generalist: working_hound
-  - volcanic_highlands: ash_hound, embersail_hawk
-  - wetlands: mist_hound, bogwing_crane
-- [ ] Future facets: `combat`, `harvest`. Schema reserves the slots; not
-  authored in PR 1.
-- [ ] Future endpoint: `/catalog/entities` with `kind=` filter. Currently
-  only `/catalog/creatures` is exposed (sources from filtered entities).
+Arc System v1 closed 2026-04-30. Catalog stabilization batch closed 2026-05-01. Engine prompt refinement and warning cleanup landed 2026-05-01. The system is now in observation mode.
 
-Arc System v1 closed 2026-04-30. Live-play validation remains pending
-(2–4 week window).
+Watch for during live play:
 
-Candidates for next active arc, in approximate priority order:
+- Whether the GPT correctly distinguishes formal vs emergent at arc creation
+- Whether calibrated AP envelopes feel right in practice
+- Whether hard-cap enforcement produces clean transitions or creates friction
+- Whether the spawn vs replace vs merge decision tree (added 2026-05-01) is followed
+- Whether the typed log entry system reduces session log bloat
+- Whether tag advancement counters increment correctly under the per-domain pattern
 
-- **Enchantment-rules arc** — design draft exists at `/mnt/user-data/outputs/enchantment-rules-design-draft.md`. Deferred pending arc system v1 live-play validation. See "Deferred pending arc system v1" section below.
-- **Backend scene records** — currently scene boundary remains GPT-judged per Arc System v1 design. If live play reveals the GPT undercounting or overcounting scenes by enough to break envelope enforcement, scene records may become necessary. Out of v1 scope; candidate for v2 if needed.
-- **Companion subsystem expansion** — currently minimal; expansion candidates not yet scoped.
+A 2–4 week observation window is recommended before designing the next major architectural arc.
+
+Candidates for next active arc, in approximate priority order (deferred until observations land):
+
+- **Enchantment-rules arc** — design draft exists at `/mnt/user-data/outputs/enchantment-rules-design-draft.md`. See "Deferred Pending Arc System v1" section below.
+- **NPC persistence (Phase A)** — design doc at `docs/design/npc-persistence-design.md` awaiting review.
+- **Backend scene records** — currently scene boundary remains GPT-judged per Arc System v1 design. If live play reveals scene undercount/overcount breaking envelope enforcement, this becomes necessary.
+- **Companion subsystem expansion** — not yet scoped.
+
+---
+
+## ENTITY REGISTRY — REMAINING WORK
+
+PR 1 (consolidation) and PR 2 (companion vocab registry move) are complete. Two future items remain:
+
+- [ ] Future facets: `combat`, `harvest`. Schema reserves the slots; not authored in PR 1.
+- [ ] Future endpoint: `/catalog/entities` with `kind=` filter. Currently only `/catalog/creatures` is exposed (sources from filtered entities).
 
 ---
 
