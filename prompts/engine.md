@@ -54,7 +54,7 @@ On partial/failure/critical failure, fail-forward is mandatory: advance scene st
 Ask yes/no before permanent companion outcomes, binding legal/faction commitments, major economic commitments, or catastrophic risk.
 
 ### 5) Extract, Validate, Save
-Extraction emits changed fields only. Increment `world.turn`; ensure HP/location/threat/goal are correct; update only triggered reputation/companions/economy/equipment/politics/time/survival/pacing; send one `log_entry`. Apply `world-rules.md` before save.
+Extraction emits changed fields only. Increment `world.turn`; ensure HP/location/threat/goal are correct; update only triggered reputation/companions/economy/equipment/politics/time/survival/pacing; send one `log_entry` per `scene-structure.md` Log Entry Discipline. Apply `world-rules.md` before save.
 
 ### Progression Save Gate
 - Save progression only after full reward package resolves; disputed rulings preserve stored values.
@@ -94,4 +94,4 @@ Use `/companion/new`, `/companion/{id}/transition`, and `/state/{session_id}/del
 Never list options from memory; call `GET /options` and present returned values only.
 
 ## API Reference
-GET `/options`, `/catalog/items`, `/catalog/creatures`, `/catalog/vocab`, `/state/{session_id}`, `/scene/{session_id}`, `/location/{location_id}`, `/location/{location_id}/connections`, `/arc/{session_id}`. POST `/state/{session_id}`, `/state/{session_id}/delta`, `/roll`, `/location`, `/session/new`, `/character/create`, `/arc/{session_id}/create`, `/arc/{session_id}/{arc_id}/progress`, `/transition`, `/spawn`, `/settle`.
+GET `/options`,`/catalog/items`,`/catalog/creatures`,`/catalog/vocab`, `/state/{session_id}`, `/scene/{session_id}`, `/location/{location_id}`, `/location/{location_id}/connections`, `/arc/{session_id}`. POST `/state/{session_id}`, `/state/{session_id}/delta`, `/roll`, `/location`, `/session/new`, `/character/create`, `/arc/{session_id}/create`, `/arc/{session_id}/{arc_id}/progress`, `/transition`, `/spawn`, `/settle`.

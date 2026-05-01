@@ -89,3 +89,34 @@ Examples:
 In these cases:
 - tag advancement may be adjudicated per resolved scene
 - AP waits until the consequence chain resolves
+
+---
+
+## Log Entry Discipline
+
+The `log_entry` is for narrative state, not state already tracked in structured fields. Character HP, equipment, coin, AP, tag tiers, and calendar are read directly from their dedicated fields; do not narrate them again in the log.
+
+**Include in the log:**
+- new discoveries
+- decisions that changed direction
+- major NPC conversations
+- confirmed links between people, places, or factions
+- escalations
+- handoffs to authorities
+- closures of active arcs
+- newly opened live threads
+
+**Exclude from the log:**
+- calendar or time corrections
+- inventory normalizations or purchases
+- coin totals and spend
+- AP awards, tag advancement, point increases
+- "state correction" lines that do not change the fiction
+- routine rest, eat, or trance beats unless they matter to pacing
+- blow-by-blow combat unless the fight changes the arc
+
+Per-arc beats belong on the Arc record via `/arc/.../progress` or `/arc/.../transition`, not the global log. The global `log_entry` is for non-arc narrative state and arc-level outcomes (closure summaries, transitions visible to the wider world).
+
+Use typed log entries when they apply: `closure_summary` for arc closures (with structured payload), `compression` for synthesizing prior beats, `narrative_non_arc` for narrative beats outside any active arc, `world_change` for durable world state changes.
+
+When in doubt, ask: would another instance of the narrator, reading this log fresh tomorrow, need this entry to know what is going on in the story? If no — exclude. If the answer is in a structured field — exclude.
