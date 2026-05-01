@@ -342,6 +342,7 @@ These are designed or partially designed but explicitly held until arc system la
 
 ## RECENTLY COMPLETED (for context)
 
+- 2026-04-30 — GPT-facing OpenAPI trim added: `schemas/openapi.json` remains the full canonical API contract; `schemas/openapi.gpt.json` is the ≤30-operation GPT Builder Actions subset.
 - 2026-04-30 — `mechanical_effect` field for magical items: schema, catalog population, prompt enforcement, follow-up contract test fix
 - 2026-04-30 — Stalkerhide cloak rebuilt: dropped "wearer still" trigger, split modifier into `+10 magical / +5 mundane`, fixed `does_not_apply` to no longer exclude ambient Feywood phenomena
 - 2026-04-30 — Sylvara character reset under fungible AP system (4cca988): domains rebuilt, advancement layer corrected, 9 spell entries removed from `application`, AP recomputed at 22 earned + 2 awarded = 24, allocated to power+10 / perception+3 / will+3 / presence+4
