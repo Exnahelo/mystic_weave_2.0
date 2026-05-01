@@ -60,6 +60,39 @@ def test_progress_happy_path_single_progress() -> None:
 
 
 @pytest.mark.contract
+def test_progress_with_beat_appends_arc_log_entry() -> None:
+    conn = ArcTransitionConn()
+    app = _make_app(conn)
+    with TestClient(app) as client:
+        arc = _create_and_start(client)
+        response = _progress(
+            client,
+            arc["id"],
+            {"beat": "Confirmed cache at Aldershade Shelf."},
+        )
+        fetched = client.get(f"/arc/sess-progress/{arc['id']}")
+
+    assert response.status_code == 200
+    body = fetched.json()
+    assert len(body["log"]) == 1
+    assert body["log"][0]["text"] == "Confirmed cache at Aldershade Shelf."
+    assert body["log"][0]["source"] == "progress"
+
+
+@pytest.mark.contract
+def test_progress_without_beat_leaves_log_unchanged() -> None:
+    conn = ArcTransitionConn()
+    app = _make_app(conn)
+    with TestClient(app) as client:
+        arc = _create_and_start(client)
+        response = _progress(client, arc["id"])
+        fetched = client.get(f"/arc/sess-progress/{arc['id']}")
+
+    assert response.status_code == 200
+    assert fetched.json()["log"] == []
+
+
+@pytest.mark.contract
 def test_progress_soft_cap_warning() -> None:
     conn = ArcTransitionConn()
     app = _make_app(conn)

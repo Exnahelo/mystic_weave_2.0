@@ -6,7 +6,7 @@ import pytest
 from pydantic import ValidationError
 
 import api.game_data as game_data
-from api.models import Arc, ArcBudget, ArcConsumption, ArcTransitionLogEntry
+from api.models import Arc, ArcBeatLogEntry, ArcBudget, ArcConsumption, ArcTransitionLogEntry
 
 
 def _minimal_arc_payload(**overrides: object) -> dict[str, object]:
@@ -37,6 +37,10 @@ def _minimal_arc_payload(**overrides: object) -> dict[str, object]:
     return payload
 
 
+def _build_minimal_arc() -> Arc:
+    return Arc.model_validate(_minimal_arc_payload())
+
+
 @pytest.fixture(autouse=True)
 def clear_arc_registry_cache() -> None:
     game_data.load_arc_types.cache_clear()
@@ -54,6 +58,59 @@ def test_minimal_valid_arc_construction_succeeds() -> None:
     assert arc.primary_type == "mission_multi_leg"
     assert arc.consumption.resolved_scenes_used == 0
     assert arc.flags.ap_ownership == "none"
+
+
+@pytest.mark.unit
+def test_arc_beat_log_entry_accepts_progress_source():
+    entry = ArcBeatLogEntry(
+        text="Confirmed Aldershade cache.",
+        timestamp=datetime.now(timezone.utc),
+        source="progress",
+    )
+    assert entry.source == "progress"
+
+
+@pytest.mark.unit
+def test_arc_beat_log_entry_rejects_invalid_source():
+    with pytest.raises(ValidationError):
+        ArcBeatLogEntry(
+            text="Bad source.",
+            timestamp=datetime.now(timezone.utc),
+            source="settle",
+        )
+
+
+@pytest.mark.unit
+def test_arc_beat_log_entry_rejects_empty_text():
+    with pytest.raises(ValidationError):
+        ArcBeatLogEntry(
+            text="",
+            timestamp=datetime.now(timezone.utc),
+            source="progress",
+        )
+
+
+@pytest.mark.unit
+def test_arc_log_field_defaults_to_empty_list():
+    arc = _build_minimal_arc()
+    assert arc.log == []
+
+
+@pytest.mark.unit
+def test_arc_log_field_round_trips_through_model_dump_json():
+    arc = _build_minimal_arc()
+    arc.log.append(
+        ArcBeatLogEntry(
+            text="Beat one.",
+            timestamp=datetime.now(timezone.utc),
+            source="progress",
+        )
+    )
+    serialized = arc.model_dump_json()
+    restored = Arc.model_validate_json(serialized)
+    assert len(restored.log) == 1
+    assert restored.log[0].text == "Beat one."
+    assert restored.log[0].source == "progress"
 
 
 @pytest.mark.unit

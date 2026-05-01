@@ -56,7 +56,7 @@ def _serialize_log_entry(entry: str | TypedLogEntry | None) -> str | None:
     if entry is None:
         return None
     if isinstance(entry, TypedLogEntry):
-        return json.dumps([entry.model_dump()])
+        return json.dumps([entry.model_dump(exclude_none=True)])
     return json.dumps([entry])
 
 

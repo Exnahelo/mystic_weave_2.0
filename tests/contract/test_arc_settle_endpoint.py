@@ -66,6 +66,98 @@ def test_settle_happy_path_formal_arc_complete_records_settlement() -> None:
 
 
 @pytest.mark.contract
+def test_settle_complete_appends_closure_summary_to_state_log() -> None:
+    conn = ArcTransitionConn()
+    with TestClient(_app(conn)) as client:
+        arc = _create_start_ready(client)
+        response = client.post(
+            f"/arc/sess-settle/{arc['id']}/settle",
+            json={
+                "outcome": "complete",
+                "awarded_ap": 2,
+                "items_awarded": ["item_alpha"],
+                "leverage_gained": ["lev_one"],
+                "notes": "complete",
+            },
+        )
+    assert response.status_code == 200
+
+    closure_entries = [e for e in conn.log if e.get("type") == "closure_summary"]
+    assert len(closure_entries) == 1, f"expected exactly one closure_summary entry, got {conn.log}"
+
+    entry = closure_entries[-1]
+    assert entry["text"]
+    assert "complete" in entry["text"]
+
+    payload = entry["payload"]
+    assert payload["arc_id"] == arc["id"]
+    assert payload["arc_title"] == arc["title"]
+    assert payload["outcome"] == "complete"
+    assert payload["awarded_ap"] == 2
+    assert payload["items_awarded"] == ["item_alpha"]
+    assert payload["leverage_gained"] == ["lev_one"]
+    assert payload["coin_cd_awarded"] == 0
+    assert payload["coin_cd_forfeit"] == 0
+    assert "settled_at" in payload
+    assert "consequence_events" in payload
+    assert "resolved_scenes_used" in payload
+    assert "locations_visited" in payload
+
+
+@pytest.mark.contract
+def test_settle_failed_appends_closure_summary_to_state_log() -> None:
+    conn = ArcTransitionConn()
+    with TestClient(_app(conn)) as client:
+        arc = _create_start_in_progress(client)
+        response = client.post(
+            f"/arc/sess-settle/{arc['id']}/settle",
+            json={"outcome": "failed", "awarded_ap": 0},
+        )
+    assert response.status_code == 200
+
+    closure_entries = [e for e in conn.log if e.get("type") == "closure_summary"]
+    assert len(closure_entries) == 1, f"expected exactly one closure_summary entry, got {conn.log}"
+
+    entry = closure_entries[-1]
+    assert "failed" in entry["text"]
+    assert entry["payload"]["outcome"] == "failed"
+    assert entry["payload"]["awarded_ap"] == 0
+
+
+@pytest.mark.contract
+def test_settle_closure_summary_payload_reproduces_reward_channels() -> None:
+    conn = ArcTransitionConn()
+    with TestClient(_app(conn)) as client:
+        arc = _create_start_ready(client)
+        response = client.post(
+            f"/arc/sess-settle/{arc['id']}/settle",
+            json={
+                "outcome": "complete",
+                "awarded_ap": 1,
+                "reputation_changes": [
+                    {"faction": "House Heartwood", "delta": 1},
+                ],
+                "coin_cd_awarded": 50,
+                "items_awarded": ["item_a", "item_b"],
+                "leverage_gained": ["lev_one", "lev_two"],
+                "obligations_added": [{"to": "House Vaelaryn", "kind": "favor_owed"}],
+                "notes": "channel reproduction",
+            },
+        )
+    assert response.status_code == 200
+
+    closure_entries = [e for e in conn.log if e.get("type") == "closure_summary"]
+    assert len(closure_entries) == 1
+    payload = closure_entries[-1]["payload"]
+
+    assert payload["reputation_changes"] == [{"faction": "House Heartwood", "delta": 1}]
+    assert payload["items_awarded"] == ["item_a", "item_b"]
+    assert payload["leverage_gained"] == ["lev_one", "lev_two"]
+    assert payload["obligations_added"] == [{"to": "House Vaelaryn", "kind": "favor_owed"}]
+    assert payload["coin_cd_awarded"] == 50
+
+
+@pytest.mark.contract
 def test_settle_failed_happy_path_no_ap() -> None:
     conn = ArcTransitionConn()
     with TestClient(_app(conn)) as client:

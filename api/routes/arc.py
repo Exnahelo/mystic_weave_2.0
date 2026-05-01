@@ -17,6 +17,7 @@ from api.game_data import get_arc_type_default_envelope
 from api.models import (
     Arc,
     ArcAPAward,
+    ArcBeatLogEntry,
     ArcBudget,
     ArcConditionSet,
     ArcEconomyEnvelope,
@@ -29,6 +30,7 @@ from api.models import (
     ArcSettlementResult,
     ArcTimestamps,
     ArcTransitionLogEntry,
+    TypedLogEntry,
 )
 from api.repositories.arc_repository import ArcRepository
 from api.repositories.state_repository import StateRepository
@@ -410,12 +412,31 @@ async def transition_arc(
     new_timestamps.last_progressed_at = now
     if is_terminal(req.to_state):
         new_timestamps.closed_at = now
-    await repo.update_arc(
-        arc_id=arc_id,
-        new_state=req.to_state,
-        consumption=arc.consumption,
-        timestamps=new_timestamps,
-    )
+
+    if req.beat is not None:
+        arc.log.append(
+            ArcBeatLogEntry(
+                text=req.beat,
+                timestamp=now,
+                source="transition",
+            )
+        )
+        arc.state = req.to_state
+        arc.timestamps = new_timestamps
+        await repo.update_arc(
+            arc_id=arc_id,
+            new_state=req.to_state,
+            consumption=arc.consumption,
+            timestamps=new_timestamps,
+            full_arc=arc,
+        )
+    else:
+        await repo.update_arc(
+            arc_id=arc_id,
+            new_state=req.to_state,
+            consumption=arc.consumption,
+            timestamps=new_timestamps,
+        )
 
     await repo.append_transition_log(
         ArcTransitionLogEntry(
@@ -802,6 +823,48 @@ async def settle_arc(
         full_arc=arc,
     )
 
+    closure_payload: dict[str, Any] = {
+        "arc_id": arc_id,
+        "arc_title": arc.title,
+        "outcome": req.outcome,
+        "settled_at": now.isoformat(),
+        "awarded_ap": req.awarded_ap,
+        "reputation_changes": list(req.reputation_changes),
+        "coin_cd_awarded": req.coin_cd_awarded,
+        "coin_cd_forfeit": req.coin_cd_forfeit,
+        "items_awarded": list(req.items_awarded),
+        "leverage_gained": list(req.leverage_gained),
+        "obligations_added": list(req.obligations_added),
+        "consequence_events": list(consequence_events),
+        "resolved_scenes_used": arc.consumption.resolved_scenes_used,
+        "locations_visited": list(arc.consumption.locations_visited),
+    }
+
+    closure_text_parts = [
+        f"Arc '{arc.title}' settled as {req.outcome}",
+    ]
+    if req.awarded_ap > 0:
+        closure_text_parts.append(f"{req.awarded_ap} AP")
+    if req.coin_cd_awarded > 0:
+        closure_text_parts.append(f"{req.coin_cd_awarded} CD awarded")
+    if req.coin_cd_forfeit > 0:
+        closure_text_parts.append(f"{req.coin_cd_forfeit} CD forfeit")
+    if req.items_awarded:
+        closure_text_parts.append(f"{len(req.items_awarded)} item(s)")
+    if req.leverage_gained:
+        closure_text_parts.append(f"{len(req.leverage_gained)} leverage")
+    if req.reputation_changes:
+        closure_text_parts.append(f"{len(req.reputation_changes)} reputation change(s)")
+    closure_text = ": ".join([closure_text_parts[0], ", ".join(closure_text_parts[1:])]) \
+        if len(closure_text_parts) > 1 else closure_text_parts[0]
+
+    closure_entry = TypedLogEntry(
+        type="closure_summary",
+        text=closure_text,
+        payload=closure_payload,
+    )
+    await state_repo.append_log_entry(session_id, closure_entry)
+
     await repo.append_transition_log(
         ArcTransitionLogEntry(
             arc_id=arc_id,
@@ -907,12 +970,32 @@ async def progress_arc(
     now = datetime.now(timezone.utc)
     new_timestamps = arc.timestamps.model_copy()
     new_timestamps.last_progressed_at = now
-    await repo.update_arc(
-        arc_id=arc_id,
-        new_state=new_state,
-        consumption=new_consumption,
-        timestamps=new_timestamps,
-    )
+
+    if req.beat is not None:
+        arc.log.append(
+            ArcBeatLogEntry(
+                text=req.beat,
+                timestamp=now,
+                source="progress",
+            )
+        )
+        arc.state = new_state
+        arc.consumption = new_consumption
+        arc.timestamps = new_timestamps
+        await repo.update_arc(
+            arc_id=arc_id,
+            new_state=new_state,
+            consumption=new_consumption,
+            timestamps=new_timestamps,
+            full_arc=arc,
+        )
+    else:
+        await repo.update_arc(
+            arc_id=arc_id,
+            new_state=new_state,
+            consumption=new_consumption,
+            timestamps=new_timestamps,
+        )
 
     if auto_transitioned:
         await repo.append_transition_log(

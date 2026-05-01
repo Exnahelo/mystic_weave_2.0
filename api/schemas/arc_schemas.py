@@ -49,6 +49,7 @@ class ArcTransitionRequest(BaseModel):
     triggering_event: str | None = None
     world_flags: dict[str, Any] | None = None
     force: bool = False
+    beat: str | None = Field(default=None, min_length=1, max_length=2000)
 
 
 class ArcSpawnRequest(BaseModel):
@@ -97,6 +98,7 @@ class ArcProgressRequest(BaseModel):
     discovery_logged: bool = False
     major_conflict_resolved: bool = False
     notes: str | None = None
+    beat: str | None = Field(default=None, min_length=1, max_length=2000)
 
 
 class ArcProgressResponse(BaseModel):

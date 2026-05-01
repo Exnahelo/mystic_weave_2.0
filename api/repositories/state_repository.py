@@ -4,7 +4,7 @@ import json
 
 import asyncpg
 
-from api.models import CharacterModel, WorldModel
+from api.models import CharacterModel, TypedLogEntry, WorldModel
 from api.routes.state import _normalize_character_state, _normalize_world_state
 
 
@@ -51,5 +51,19 @@ class StateRepository:
             await conn.execute(
                 "UPDATE game_states SET world = $1::jsonb, updated_at = now() WHERE session_id = $2",
                 world.model_dump_json(),
+                session_id,
+            )
+
+    async def append_log_entry(self, session_id: str, entry: TypedLogEntry) -> None:
+        """Append a typed log entry to game_states.log for the given session.
+
+        Used by backend-driven log writes (e.g., arc closure summaries).
+        Atomic single-statement append; preserves all existing entries.
+        """
+        entry_json = json.dumps([entry.model_dump(exclude_none=True)])
+        async with self._pool.acquire() as conn:
+            await conn.execute(
+                "UPDATE game_states SET log = log || $1::jsonb, updated_at = now() WHERE session_id = $2",
+                entry_json,
                 session_id,
             )
