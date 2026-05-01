@@ -198,6 +198,10 @@
       "description": ""
     },
     {
+      "id": "communication",
+      "description": "Item enables or represents message-passing, signaling, or remote communication."
+    },
+    {
       "id": "composite-treatment",
       "description": "Item is built around Feywood composite treatment (resins, mineral washes, treated fibers). See data/catalog/crafting/materials.json."
     },
@@ -462,6 +466,10 @@
       "description": ""
     },
     {
+      "id": "heartroot",
+      "description": "Item is made from or bound to the living heartroot of an old Feywood tree."
+    },
+    {
       "id": "heartwood-bow",
       "description": ""
     },
@@ -654,6 +662,10 @@
       "description": ""
     },
     {
+      "id": "household-bound",
+      "description": "Item is issued by and relationally bound to a specific household or institution."
+    },
+    {
       "id": "non-tradeable",
       "description": ""
     },
@@ -744,6 +756,10 @@
     {
       "id": "rare",
       "description": ""
+    },
+    {
+      "id": "rare-magical",
+      "description": "Item is an uncommon or rare magical object with limited circulation."
     },
     {
       "id": "ration",
@@ -996,6 +1012,10 @@
     {
       "id": "trade-export",
       "description": ""
+    },
+    {
+      "id": "token",
+      "description": "Small symbolic, credential, or relational object carried as proof, link, or permission."
     },
     {
       "id": "trader",
