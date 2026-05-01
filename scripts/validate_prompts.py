@@ -15,6 +15,7 @@ REQUIRED_PROMPTS = {
     "prompts/character-creation.md": ["# Mystic Weave", "## Character Creation Flow", "## API Fields for Character Creation"],
     "prompts/world-rules.md": ["#", "##"],
     "prompts/economy-rules.md": ["# Mystic Weave — Economy Rules", "## Coin Economy Rules", "## Barter Economy Rules"],
+    "prompts/arc-rules.md": ["# Mystic Weave — Arc Rules", "## Arc Types", "## Required Backend Calls"],
     "prompts/world.md": ["# Drakenvale", "## Governance", "## Reference Files"],
     "prompts/geography.md": ["# Drakenvale — Geography", "## Formation", "## Major Regions"],
     "prompts/history.md": ["#", "##"],
