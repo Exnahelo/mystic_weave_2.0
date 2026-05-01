@@ -6,7 +6,7 @@ import pytest
 from pydantic import ValidationError
 
 import api.game_data as game_data
-from api.models import Arc, ArcBudget, ArcConsumption
+from api.models import Arc, ArcBudget, ArcConsumption, ArcTransitionLogEntry
 
 
 def _minimal_arc_payload(**overrides: object) -> dict[str, object]:
@@ -168,3 +168,44 @@ def test_subtype_validator_accepts_all_registry_values() -> None:
     for subtype in game_data.list_arc_subtypes():
         arc = Arc.model_validate(_minimal_arc_payload(subtype=subtype))
         assert arc.subtype == subtype
+
+
+@pytest.mark.unit
+def test_arc_transition_log_entry_validates() -> None:
+    entry = ArcTransitionLogEntry(
+        arc_id="arc-test-001",
+        session_id="test-session",
+        from_state="proposed",
+        to_state="available",
+        reason="test transition",
+        transitioned_at=datetime.now(timezone.utc),
+        resolved_scenes_at_transition=0,
+    )
+
+    assert entry.arc_id == "arc-test-001"
+
+    with pytest.raises(ValidationError):
+        ArcTransitionLogEntry(
+            arc_id="arc-test-001",
+            session_id="test-session",
+            from_state="proposed",
+            to_state="available",
+            reason="bad",
+            transitioned_at=datetime.now(timezone.utc),
+            resolved_scenes_at_transition=-1,
+        )
+
+
+@pytest.mark.unit
+def test_arc_transition_log_entry_rejects_extra_fields() -> None:
+    with pytest.raises(ValidationError):
+        ArcTransitionLogEntry(
+            arc_id="arc-test-001",
+            session_id="test-session",
+            from_state="proposed",
+            to_state="available",
+            reason="test transition",
+            transitioned_at=datetime.now(timezone.utc),
+            resolved_scenes_at_transition=0,
+            unexpected="value",
+        )

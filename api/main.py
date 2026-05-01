@@ -12,6 +12,7 @@ from typing import AsyncGenerator
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.openapi.utils import get_openapi
 
 from api.database import close_pool, create_pool
 from api.game_data import (
@@ -22,7 +23,7 @@ from api.game_data import (
     list_cultures,
     list_focus,
 )
-from api.models import HealthResponse, VersionResponse
+from api.models import ArcTransitionLogEntry, HealthResponse, VersionResponse
 from api.routes import advancement, arc, catalog, character, combat, companion, location, npcs, options, roll, scene, session, state, tags
 
 
@@ -50,6 +51,27 @@ app = FastAPI(
     ],
     lifespan=lifespan,
 )
+
+
+def custom_openapi() -> dict:
+    """Generate OpenAPI and include standalone audit-log schemas."""
+    if app.openapi_schema:
+        return app.openapi_schema
+    schema = get_openapi(
+        title=app.title,
+        version=app.version,
+        description=app.description,
+        routes=app.routes,
+        servers=app.servers,
+    )
+    schema.setdefault("components", {}).setdefault("schemas", {})[
+        "ArcTransitionLogEntry"
+    ] = ArcTransitionLogEntry.model_json_schema(ref_template="#/components/schemas/{model}")
+    app.openapi_schema = schema
+    return app.openapi_schema
+
+
+app.openapi = custom_openapi
 
 # Allow all origins — required for GPT builder Actions to reach the API
 app.add_middleware(

@@ -477,6 +477,130 @@
         }
       }
     },
+    "/arc/{session_id}/{arc_id}/transition": {
+      "post": {
+        "tags": [
+          "arc"
+        ],
+        "summary": "Transition Arc",
+        "description": "Request an arc state transition.\n\nEnforces the Arc System v1 transition matrix and rejects stale\nfrom_state values. Closure/failure condition evaluation lands with settle.",
+        "operationId": "transition_arc_arc__session_id___arc_id__transition_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "arc_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Arc Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArcTransitionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Arc"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/arc/{session_id}/{arc_id}/progress": {
+      "post": {
+        "tags": [
+          "arc"
+        ],
+        "summary": "Progress Arc",
+        "description": "Record resolved-scene/location progress on an in-progress arc.\n\nUpdates consumption and auto-transitions to at_scope_cap when a hard cap\nis reached. Further progress is refused while at_scope_cap.",
+        "operationId": "progress_arc_arc__session_id___arc_id__progress_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "arc_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Arc Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArcProgressRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArcProgressResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/roll": {
       "post": {
         "summary": "Roll Dice",
@@ -2221,6 +2345,91 @@
         "title": "ArcLeverageEnvelope",
         "description": "Leverage channel bounds for an arc reward."
       },
+      "ArcProgressRequest": {
+        "properties": {
+          "resolved_scene_occurred": {
+            "type": "boolean",
+            "title": "Resolved Scene Occurred",
+            "default": true
+          },
+          "location_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location Id"
+          },
+          "discovery_logged": {
+            "type": "boolean",
+            "title": "Discovery Logged",
+            "default": false
+          },
+          "major_conflict_resolved": {
+            "type": "boolean",
+            "title": "Major Conflict Resolved",
+            "default": false
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ArcProgressRequest",
+        "description": "Payload for resolved-scene progress events."
+      },
+      "ArcProgressResponse": {
+        "properties": {
+          "arc": {
+            "$ref": "#/components/schemas/Arc"
+          },
+          "soft_cap_reached": {
+            "type": "boolean",
+            "title": "Soft Cap Reached"
+          },
+          "hard_cap_reached": {
+            "type": "boolean",
+            "title": "Hard Cap Reached"
+          },
+          "auto_transitioned_to_at_scope_cap": {
+            "type": "boolean",
+            "title": "Auto Transitioned To At Scope Cap"
+          },
+          "warning": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Warning"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "arc",
+          "soft_cap_reached",
+          "hard_cap_reached",
+          "auto_transitioned_to_at_scope_cap"
+        ],
+        "title": "ArcProgressResponse",
+        "description": "Response from a progress call."
+      },
       "ArcReputationEnvelope": {
         "properties": {
           "max_positive_delta": {
@@ -2325,6 +2534,68 @@
         ],
         "title": "ArcTimestamps",
         "description": "Lifecycle timestamps for an arc."
+      },
+      "ArcTransitionRequest": {
+        "properties": {
+          "from_state": {
+            "type": "string",
+            "enum": [
+              "proposed",
+              "available",
+              "in_progress",
+              "at_scope_cap",
+              "ready_to_close",
+              "complete",
+              "failed",
+              "abandoned",
+              "replaced_by_successor",
+              "merged_into_parent"
+            ],
+            "title": "From State"
+          },
+          "to_state": {
+            "type": "string",
+            "enum": [
+              "proposed",
+              "available",
+              "in_progress",
+              "at_scope_cap",
+              "ready_to_close",
+              "complete",
+              "failed",
+              "abandoned",
+              "replaced_by_successor",
+              "merged_into_parent"
+            ],
+            "title": "To State"
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Reason"
+          },
+          "triggering_event": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Triggering Event"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "from_state",
+          "to_state",
+          "reason"
+        ],
+        "title": "ArcTransitionRequest",
+        "description": "Payload for arc state transitions."
       },
       "ArchivedCompanionEnvelope-Input": {
         "properties": {
@@ -8064,6 +8335,96 @@
         "type": "object",
         "title": "WorldStateDelta",
         "description": "Typed partial world update for extraction-driven turn commits."
+      },
+      "ArcTransitionLogEntry": {
+        "additionalProperties": false,
+        "description": "Immutable audit record for a single arc state transition.\n\nPersisted to the arc_transitions table. Used for drift debugging,\nsettlement reconstruction, and lifecycle analytics.",
+        "properties": {
+          "arc_id": {
+            "title": "Arc Id",
+            "type": "string"
+          },
+          "session_id": {
+            "title": "Session Id",
+            "type": "string"
+          },
+          "from_state": {
+            "enum": [
+              "proposed",
+              "available",
+              "in_progress",
+              "at_scope_cap",
+              "ready_to_close",
+              "complete",
+              "failed",
+              "abandoned",
+              "replaced_by_successor",
+              "merged_into_parent"
+            ],
+            "title": "From State",
+            "type": "string"
+          },
+          "to_state": {
+            "enum": [
+              "proposed",
+              "available",
+              "in_progress",
+              "at_scope_cap",
+              "ready_to_close",
+              "complete",
+              "failed",
+              "abandoned",
+              "replaced_by_successor",
+              "merged_into_parent"
+            ],
+            "title": "To State",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "transitioned_at": {
+            "format": "date-time",
+            "title": "Transitioned At",
+            "type": "string"
+          },
+          "resolved_scenes_at_transition": {
+            "minimum": 0,
+            "title": "Resolved Scenes At Transition",
+            "type": "integer"
+          },
+          "locations_visited_at_transition": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Locations Visited At Transition",
+            "type": "array"
+          },
+          "triggering_event": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Triggering Event"
+          }
+        },
+        "required": [
+          "arc_id",
+          "session_id",
+          "from_state",
+          "to_state",
+          "reason",
+          "transitioned_at",
+          "resolved_scenes_at_transition"
+        ],
+        "title": "ArcTransitionLogEntry",
+        "type": "object"
       }
     }
   }

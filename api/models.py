@@ -452,6 +452,26 @@ class Arc(BaseModel):
         return v
 
 
+class ArcTransitionLogEntry(BaseModel):
+    """
+    Immutable audit record for a single arc state transition.
+
+    Persisted to the arc_transitions table. Used for drift debugging,
+    settlement reconstruction, and lifecycle analytics.
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    arc_id: str
+    session_id: str
+    from_state: ArcState
+    to_state: ArcState
+    reason: str
+    transitioned_at: datetime
+    resolved_scenes_at_transition: int = Field(ge=0)
+    locations_visited_at_transition: list[str] = Field(default_factory=list)
+    triggering_event: str | None = None  # "progress_call", "manual_transition", "spawn", etc.
+
+
 # ---------------------------------------------------------------------------
 # World sub-models
 # ---------------------------------------------------------------------------
