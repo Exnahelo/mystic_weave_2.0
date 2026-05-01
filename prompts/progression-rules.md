@@ -17,7 +17,7 @@ Mystic Weave has three progression mechanics:
 | AP (fungible pool) | Tag-counter rollover OR awarded AP grant | Single pool, spendable on any domain |
 | Domain spend | AP spend by player | Target domain, bracketed cost |
 
-Tag advancement is adjudicated per **resolved scene**. AP earning is mechanical (the backend converts every 3 tag advances into 1 AP). Awarded AP is contract-bound and resolves when the contract resolves.
+Tag advancement is adjudicated per **resolved scene**. AP earning is mechanical (the backend converts every 3 tag advances into 1 AP). Awarded AP is arc-bound and reserved for formal-contract-qualified arcs.
 
 The terms **beat**, **encounter**, **scene**, **job**, and **contract** are not interchangeable. Use scene-structure vocabulary precisely.
 
@@ -86,23 +86,23 @@ AP lives in a single fungible pool — `points_available` on the character's adv
 
 Every tag tier advance increments a single `tag_counter`. When the counter reaches 3, it resets to 0 and the pool gains 1 AP. Knowledge, application, and field advances all count equally. The backend handles all counter math; the GPT does not compute it.
 
-### Awarded AP (contract-bound)
+### Awarded AP (arc-bound)
 
-Awarded AP is rare, pre-declared, and granted when a significant contract resolves.
+Awarded AP is arc-bound and reserved for formal-contract-qualified arcs. It resolves through the `/arc/{arc_id}/settle` endpoint when an arc transitions to `complete`. Emergent arcs (those without explicit patron, objective, and expected return at creation) cannot earn AP per the v1 locked policy. See `arc-rules.md` for the full arc system procedure.
 
 **Rules:**
 
-- **Pre-declared.** AP awards must be on the table before the work, as part of the contract or commitment. Retroactive AP awards are not permitted.
-- **Failure default.** If the character fails to complete the contract, no AP is granted unless the contract specifies partial payout.
+- **Pre-declared through arc creation.** AP awards must be within the arc's formal reward envelope before the work. Retroactive AP awards are not permitted.
+- **Failure default.** Failed arcs grant 0 AP in v1. Non-AP consequences still settle through `/arc/{arc_id}/settle`.
 
-**Standing required.** Not every quest-giver can offer AP. AP awards come from forces with the standing or stake to genuinely shape a person:
+**Formal provenance required.** Not every quest-giver can offer AP. AP requires explicit patron, objective, and expected return at arc creation. The patron or stake should be weighty enough to genuinely shape a person:
 
 - Council-level factions or institutional patrons of comparable weight
 - Named figures of regional or higher significance acting in their capacity
 - Oath-bound commitments and binding pacts
 - World-imposed stakes (a god's task, a sworn duty, a binding magical contract)
 
-Mortal-scale errands and routine commercial work pay coin and reputation, not AP. A hedge wizard offering 5 AP for a lost cat is not legitimate; the economy depends on this gate holding.
+Mortal-scale errands, emergent discoveries, and routine commercial work pay coin, reputation, access, leverage, or items, not AP. A hedge wizard offering 5 AP for a lost cat is not legitimate; the economy depends on this gate holding.
 
 **Scale:**
 
@@ -115,7 +115,7 @@ Mortal-scale errands and routine commercial work pay coin and reputation, not AP
 
 Higher awards are possible in extraordinary cases but should be authored explicitly, not formula-derived.
 
-**Stacking.** Awarded AP does not replace coin, reputation, or favor. A Council contract pays all of them. Awarded AP is what makes a contract meaningful when the character no longer needs the coin or the reputation.
+**Stacking.** Awarded AP does not replace coin, reputation, favor, items, leverage, or obligations. Arc settlement enumerates each reward channel independently.
 
 ---
 
@@ -144,7 +144,7 @@ The reward package may include:
 - tag advancement
 - newly proposed tags (requires player confirmation)
 - tag-counter increments and AP rollover (mechanical, but reflected in the same save)
-- awarded AP grant (if a contract resolved this scene)
+- awarded AP grant (if a formal-contract-qualified arc settles through `/arc/{arc_id}/settle`)
 - AP spend (if the player chooses to spend at resolution)
 
 Progression-related state is **not stable enough to save** until the reward package is settled.
@@ -170,7 +170,7 @@ When a scene resolves:
 
 1. Determine whether the **scene** is resolved for tag-adjudication purposes (per `scene-structure.md`).
 2. Evaluate tag advancement triggers in order: application, knowledge, field. At most one fires.
-3. If a contract or commitment resolved this scene and that contract specified an AP award, grant the awarded AP per the contract terms.
+3. If a formal-contract-qualified arc closes, resolve awarded AP through the arc settlement procedure in `arc-rules.md`.
 4. If the player chooses to spend AP at resolution, resolve that spend in the same sequence.
 5. Ask for player confirmation if a new tag would be added.
 6. If the player disputes any reward element, pause progression-related save.
