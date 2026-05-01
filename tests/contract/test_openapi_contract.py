@@ -231,7 +231,15 @@ def test_openapi_contract_tag_tier_maps_are_constrained_to_one_through_five() ->
     spec = app.openapi()
     schemas = spec["components"]["schemas"]
 
-    character_properties = schemas.get("CharacterModel", schemas["CharacterModel-Input"])["properties"]
+    if "CharacterModel" in schemas:
+        character_properties = schemas["CharacterModel"]["properties"]
+    elif "CharacterModel-Input" in schemas:
+        character_properties = schemas["CharacterModel-Input"]["properties"]
+    else:
+        raise AssertionError(
+            "Neither 'CharacterModel' nor 'CharacterModel-Input' found in OpenAPI schemas. "
+            f"Available keys: {sorted(schemas.keys())}"
+        )
     delta_properties = schemas["CharacterStateDelta"]["properties"]
 
     for property_name in ("knowledge", "application", "fields"):
