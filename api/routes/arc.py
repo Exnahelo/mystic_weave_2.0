@@ -418,8 +418,7 @@ async def transition_arc(
     new_timestamps.last_progressed_at = now
     if is_terminal(req.to_state):
         new_timestamps.closed_at = now
-
-    await repo.update_state_and_consumption(
+    await repo.update_arc(
         arc_id=arc_id,
         new_state=req.to_state,
         consumption=arc.consumption,
@@ -444,7 +443,7 @@ async def transition_arc(
         parent = await repo.get_by_id(session_id, arc.parent_arc_id)
         if parent is not None and arc_id not in parent.merge_source_arc_ids:
             parent.merge_source_arc_ids.append(arc_id)
-            await repo.update_state_and_consumption(
+            await repo.update_arc(
                 arc_id=arc.parent_arc_id,
                 new_state=parent.state,
                 consumption=parent.consumption,
@@ -580,7 +579,7 @@ async def spawn_child_arc(
 
     if child.id not in parent.spawned_arc_ids:
         parent.spawned_arc_ids.append(child.id)
-    await repo.update_state_and_consumption(
+    await repo.update_arc(
         arc_id=arc_id,
         new_state=parent.state,
         consumption=parent.consumption,
@@ -803,7 +802,7 @@ async def settle_arc(
 
     arc.consequence_events_emitted = consequence_events
 
-    await repo.update_state_and_consumption(
+    await repo.update_arc(
         arc_id=arc_id,
         new_state=new_state,
         consumption=arc.consumption,
@@ -916,8 +915,7 @@ async def progress_arc(
     now = datetime.now(timezone.utc)
     new_timestamps = arc.timestamps.model_copy()
     new_timestamps.last_progressed_at = now
-
-    await repo.update_state_and_consumption(
+    await repo.update_arc(
         arc_id=arc_id,
         new_state=new_state,
         consumption=new_consumption,

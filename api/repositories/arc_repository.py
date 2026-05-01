@@ -76,7 +76,7 @@ class ArcRepository:
                 return None
             return Arc.model_validate(_coerce_jsonb_data(row["data"]))
 
-    async def update_state_and_consumption(
+    async def update_arc(
         self,
         arc_id: str,
         new_state: ArcState,
