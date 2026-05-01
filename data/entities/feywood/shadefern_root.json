@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "An edible root native to the Feywood's low-light understory. Shadefern is cultivated in Thornveil's shaded understory plots and noble compounds; it serves as the Feywood's primary starch source for soups, mash, and travel food.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "herb",
+    "cultural_role": "soups, mash, travel food, household starch source",
+    "ecological_role": "edible root in low-light systems",
+    "harvest_status": "cultivated",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "root",
+    "zones": [
+      "thornveil_civic_forest",
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "shadefern_root",
+  "kind": "flora",
+  "name": "Shadefern Root",
+  "tags": [
+    "herb",
+    "root",
+    "shadefern",
+    "starch",
+    "travel_food"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "A Feywood-amplified lineage of High Oak produced under sustained Heartwood influence. Elderoaks dominate Thornveil's older groves and the Outer Wild's climax stands. Their scale and age-span exceed any realm-side oak; individuals carry house-records in their growth that trained elven readers parse as living archive.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "canopy",
+    "cultural_role": "structural and symbolic; oldest Thornveil groves",
+    "ecological_role": "climax canopy dominant; Heartwood-conditioned variant of High Oak",
+    "harvest_status": "restricted",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "tree",
+    "zones": [
+      "thornveil_civic_forest",
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "elderoak",
+  "kind": "flora",
+  "name": "Elderoak",
+  "tags": [
+    "oak",
+    "canopy",
+    "climax",
+    "heartwood_conditioned",
+    "symbolic"
+  ]
+}

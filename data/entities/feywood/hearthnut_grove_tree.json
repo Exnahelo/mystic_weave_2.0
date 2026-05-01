@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "The quiet backbone food species of the Feywood. Hearthnut produces the nuts, oil, meal, and flour-equivalent that sustain elven subsistence through winter. Hearthnut groves are tended at Thornveil, Vaelmere, noble estates, and the Feywood Edge; the species is central to elven food culture in a way realm observers often underestimate.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "food_tree",
+    "cultural_role": "winter food-security staple; flour, meal, oil",
+    "ecological_role": "major nut producer; canopy squirrel and songbird forage",
+    "harvest_status": "cultivated",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "nut",
+    "zones": [
+      "thornveil_civic_forest",
+      "feywood_edge"
+    ]
+  },
+  "id": "hearthnut_grove_tree",
+  "kind": "flora",
+  "name": "Hearthnut Grove Tree",
+  "tags": [
+    "food_tree",
+    "nut",
+    "hearthnut",
+    "staple",
+    "winter_food"
+  ]
+}

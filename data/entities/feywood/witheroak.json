@@ -1,0 +1,28 @@
+{
+  "biome": "feywood",
+  "description": "A rare variant of High Oak that appears when the Feywood is under sustained strain \u2014 dark-grained, dense, ritually significant. Its presence itself is a health-register indicator. Druids mark witheroak when it appears; living witheroak wood is never exported and is used only for specific ceremonial purposes during Feywood strain.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "canopy",
+    "cultural_role": "ritual marking; health-register indicator; specific ceremonial use",
+    "ecological_role": "rare variant appearing under sustained Feywood strain",
+    "harvest_status": "restricted",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "tree",
+    "zones": [
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "witheroak",
+  "kind": "flora",
+  "name": "Witheroak",
+  "tags": [
+    "oak",
+    "witheroak",
+    "health_indicator",
+    "ritual",
+    "strain_responsive"
+  ]
+}

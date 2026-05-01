@@ -1,0 +1,31 @@
+{
+  "biome": "feywood",
+  "description": "A ceremonial flower paired with Oathvine, cultivated at Heartwood observance margins, noble family sacred plots, and Grove-adjacent ritual spaces. Oathbloom is the canonical source of ceremonial infusion used in oath-marking events \u2014 Heartwarden oaths, marriage oaths, house oaths, induction observances. The infusion is not a trade good; it is made and consumed in the context of the oath itself. A shared Oathbloom draught is the ceremony embodied. Tended by the druid order and by the houses at their own oath-plots.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "sacred",
+    "cultural_role": "canonical source of oath-marking ceremonial infusion; never exported",
+    "ecological_role": "ceremonial flower; paired with Oathvine",
+    "harvest_status": "restricted",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "flower",
+    "zones": [
+      "heartwood_core",
+      "outer_old_growth_wild",
+      "silent_grove_enclave"
+    ]
+  },
+  "id": "oathbloom",
+  "kind": "flora",
+  "name": "Oathbloom",
+  "tags": [
+    "flower",
+    "sacred",
+    "oathbloom",
+    "ceremonial",
+    "oath_infusion",
+    "non_exportable"
+  ]
+}

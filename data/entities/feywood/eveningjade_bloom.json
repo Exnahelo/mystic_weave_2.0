@@ -1,0 +1,28 @@
+{
+  "biome": "feywood",
+  "description": "A ceremonial flower tied to the Heartwood's canonical Evening-Jade light quality. Eveningjade grows alongside Dawngold at the Heartwood's margins and in select sacred plantings; the two together reinforce the named light cycles in ceremonial and symbolic practice.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "sacred",
+    "cultural_role": "sacred observance; paired with Dawngold in Heartwood light-cycle reinforcement",
+    "ecological_role": "ceremonial flower tied to the Heartwood's Evening-Jade light quality",
+    "harvest_status": "sacred",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "flower",
+    "zones": [
+      "heartwood_core"
+    ]
+  },
+  "id": "eveningjade_bloom",
+  "kind": "flora",
+  "name": "Eveningjade Bloom",
+  "tags": [
+    "flower",
+    "sacred",
+    "eveningjade",
+    "heartwood_light",
+    "ceremonial"
+  ]
+}

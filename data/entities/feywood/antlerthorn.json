@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "A thorned browse shrub common in the outer wild and lighter Feywood-edge margins. Antlerthorn is one of the defining forage plants for silverbough hart and Feywoodhorn stag, and its dense growth creates cover corridors along old game paths. Elven hunters read antlerthorn damage patterns as a sign of herd movement and seasonal pressure.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "shrub",
+    "cultural_role": "boundary hedge and hunt-lore marker in the outer wild",
+    "ecological_role": "thorned browse shrub; major cervid forage and cover",
+    "harvest_status": "wild",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "browse_thorn",
+    "zones": [
+      "outer_old_growth_wild",
+      "feywood_edge"
+    ]
+  },
+  "id": "antlerthorn",
+  "kind": "flora",
+  "name": "Antlerthorn",
+  "tags": [
+    "shrub",
+    "thorn",
+    "browse",
+    "cervid_forage",
+    "outer_wild"
+  ]
+}

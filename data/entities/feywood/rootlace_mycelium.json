@@ -1,0 +1,34 @@
+{
+  "biome": "feywood",
+  "description": "The foundational fungal network underlying all Feywood soils. Rootlace handles nutrient distribution between canopy trees and understory plants, carries decomposition-chain continuity, and serves as the biological substrate through which the Heartwood's root-memory network extends beyond its physical roots. Druids read Rootlace disturbance patterns to monitor Feywood-wide stress from localized observation.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "fungus",
+    "cultural_role": "substrate through which the Heartwood's root-memory operates",
+    "ecological_role": "foundational fungal network; nutrient exchange; root-memory substrate",
+    "harvest_status": "unharvestable",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "network",
+    "zones": [
+      "heartwood_core",
+      "thornveil_civic_forest",
+      "heartwater_basin",
+      "outer_old_growth_wild",
+      "silent_grove_enclave",
+      "feywood_edge",
+      "border_threshold_woods"
+    ]
+  },
+  "id": "rootlace_mycelium",
+  "kind": "flora",
+  "name": "Rootlace Mycelium",
+  "tags": [
+    "fungus",
+    "mycelium",
+    "rootlace",
+    "network",
+    "root_memory"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "biome": "feywood",
+  "description": "The Feywood's corvid, glossy dark grey in coloring. Intelligent and commonly seen around noble estates and Thornveil's outskirts. Greymantles are the Feywood's observers; elven tradition holds that a greymantle watching a person intently warrants reflection. A companion candidate for patient handlers; the bond is cognitive rather than obedient.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "bird",
+    "cultural_role": "the Feywood's observers; watching a person intently is a cultural signal",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "carrion",
+      "insects",
+      "seeds",
+      "small_prey"
+    ],
+    "primary_predators": [],
+    "size": "small",
+    "trophic_tier": 3,
+    "zones": [
+      "thornveil_civic_forest",
+      "outer_old_growth_wild",
+      "feywood_edge"
+    ]
+  },
+  "id": "greymantle_crow",
+  "kind": "fauna",
+  "name": "Greymantle Crow",
+  "tags": [
+    "bird",
+    "corvid",
+    "greymantle",
+    "intelligent",
+    "observer",
+    "companion_candidate"
+  ]
+}

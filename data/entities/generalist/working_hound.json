@@ -1,0 +1,47 @@
+{
+  "biome": "generalist",
+  "creature_companion": {
+    "age_category": "adult",
+    "base_domains": {
+      "composure": 38,
+      "instinct": 38,
+      "physical": 34
+    },
+    "base_hp": {
+      "current": 24,
+      "max": 24
+    },
+    "carrying_capacity": "small",
+    "description": "The baseline working hound of the realm \u2014 no regional distinction, no special lineage. Found in every settlement across every biome, used for tracking, herding, guarding, and companionship. Reliable, affordable, and emotionally steady; the most common starting companion for new rangers and travellers.",
+    "display_name": "Working Hound",
+    "movement_modes": [
+      "walk",
+      "swim"
+    ],
+    "natural_abilities": [
+      "scent_tracking"
+    ],
+    "natural_weapons": [
+      "bite"
+    ],
+    "size": "medium",
+    "size_note": null,
+    "species": "hound",
+    "subspecies": "working_hound",
+    "tactical_roles_defaults": [
+      "companion",
+      "scout",
+      "guard"
+    ],
+    "temperament": "Good-natured, adaptable, eager. A general-purpose companion and helper across all settled regions of the realm."
+  },
+  "description": "The baseline working hound of the realm \u2014 no regional distinction, no special lineage. Found in every settlement across every biome, used for tracking, herding, guarding, and companionship. Reliable, affordable, and emotionally steady; the most common starting companion for new rangers and travellers.",
+  "id": "working_hound",
+  "kind": "fauna",
+  "name": "Working Hound",
+  "tags": [
+    "hound",
+    "generalist",
+    "companion"
+  ]
+}

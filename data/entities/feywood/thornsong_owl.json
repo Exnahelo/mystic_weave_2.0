@@ -1,0 +1,34 @@
+{
+  "biome": "feywood",
+  "description": "A small-to-medium woodland owl associated with watchfulness in Feywood tradition. Thornsong calls carry an omen quality in cultural register without rising to Hollowcrown significance.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "bird",
+    "cultural_role": "omen bird; watchfulness",
+    "primary_diet": [
+      "dormouse",
+      "shrewsong"
+    ],
+    "primary_diet_categories": [
+      "small_birds",
+      "insects"
+    ],
+    "primary_predators": [],
+    "size": "small",
+    "trophic_tier": 3,
+    "zones": [
+      "outer_old_growth_wild",
+      "thornveil_civic_forest"
+    ]
+  },
+  "id": "thornsong_owl",
+  "kind": "fauna",
+  "name": "Thornsong Owl",
+  "tags": [
+    "bird",
+    "owl",
+    "thornsong",
+    "omen",
+    "watchful"
+  ]
+}

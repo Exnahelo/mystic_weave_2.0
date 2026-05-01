@@ -1,0 +1,48 @@
+{
+  "biome": "wetlands",
+  "creature_companion": {
+    "age_category": "adult",
+    "base_domains": {
+      "composure": 40,
+      "instinct": 44,
+      "physical": 30
+    },
+    "base_hp": {
+      "current": 16,
+      "max": 16
+    },
+    "carrying_capacity": "none",
+    "description": "A long-legged wading bird with broad, quiet wings and plumage in muted greens and soft greys that disappears into reed and mist. Bogwing cranes are rare companion birds, usually paired with wetlands trackers or scholars. They are not hunters in the raptor sense but excellent sentinels; their alarm cry carries for great distances across open water.",
+    "display_name": "Bogwing Crane",
+    "movement_modes": [
+      "walk",
+      "fly",
+      "swim"
+    ],
+    "natural_abilities": [
+      "keen_senses",
+      "flight",
+      "damp_resistance"
+    ],
+    "natural_weapons": [
+      "bite"
+    ],
+    "size": "medium",
+    "size_note": "tall but light-framed",
+    "species": "crane",
+    "subspecies": "bogwing_crane",
+    "tactical_roles_defaults": [
+      "scout"
+    ],
+    "temperament": "Wary, observant, slow to trust but intensely loyal once bonded. Tends to alert a handler to nearby movement long before it would be visible otherwise."
+  },
+  "description": "A long-legged wading bird with broad, quiet wings and plumage in muted greens and soft greys that disappears into reed and mist. Bogwing cranes are rare companion birds, usually paired with wetlands trackers or scholars. They are not hunters in the raptor sense but excellent sentinels; their alarm cry carries for great distances across open water.",
+  "id": "bogwing_crane",
+  "kind": "fauna",
+  "name": "Bogwing Crane",
+  "tags": [
+    "crane",
+    "wetlands",
+    "companion"
+  ]
+}

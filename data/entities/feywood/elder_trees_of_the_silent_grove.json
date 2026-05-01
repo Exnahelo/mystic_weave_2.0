@@ -1,0 +1,28 @@
+{
+  "biome": "feywood",
+  "description": "Several dozen individuals of indeterminate species, older than any other old-growth in the Feywood. The Elder Trees predate the Heartwood's central role and form the foundational substrate of the Feywood's root-memory network. Never harvested.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "collective",
+    "cultural_role": "sacred; older than any other old-growth; never harvested",
+    "ecological_role": "foundational substrate of the Feywood's root-memory network",
+    "harvest_status": "unharvestable",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "sacred",
+    "zones": [
+      "silent_grove_enclave"
+    ]
+  },
+  "id": "elder_trees_of_the_silent_grove",
+  "kind": "flora",
+  "name": "The Elder Trees of the Silent Grove",
+  "tags": [
+    "elder_trees",
+    "silent_grove",
+    "sacred",
+    "collective",
+    "species_indeterminate"
+  ]
+}

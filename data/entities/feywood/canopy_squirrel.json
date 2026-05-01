@@ -1,0 +1,37 @@
+{
+  "biome": "feywood",
+  "description": "A small arboreal rodent critical to Hearthnut and oak mast dispersal. Canopy squirrels are abundant around Thornveil's Hearthnut groves and through the mature Outer Wild canopy.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "small_fauna",
+    "cultural_role": "nut and seed dispersal, especially around Hearthnut",
+    "primary_diet": [
+      "hearthnut_grove_tree",
+      "summerpear_bough"
+    ],
+    "primary_diet_categories": [
+      "elderoak_mast"
+    ],
+    "primary_predators": [
+      "silverback_marten",
+      "mistwing_hawk",
+      "thornsong_owl"
+    ],
+    "size": "tiny",
+    "trophic_tier": 2,
+    "zones": [
+      "thornveil_civic_forest",
+      "outer_old_growth_wild",
+      "feywood_edge"
+    ]
+  },
+  "id": "canopy_squirrel",
+  "kind": "fauna",
+  "name": "Canopy Squirrel",
+  "tags": [
+    "small_fauna",
+    "rodent",
+    "canopy_squirrel",
+    "seed_disperser"
+  ]
+}

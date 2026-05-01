@@ -1,0 +1,35 @@
+{
+  "biome": "feywood",
+  "description": "An omnivorous boar of the deeper wild. A Feywood hunt quarry secondary to Feywoodhorn Stag in symbolic weight; boar meat is a more practical elven protein source than ceremonial occasion.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "omnivore",
+    "cultural_role": "elven hunt quarry; less symbolically weighty than Feywoodhorn",
+    "primary_diet": [
+      "hearthnut_grove_tree",
+      "dewberry_bramble",
+      "shadefern_root",
+      "heartmorel"
+    ],
+    "primary_diet_categories": [],
+    "primary_predators": [
+      "moonthorn_wolf",
+      "mossveil_cat",
+      "oldroot_bear"
+    ],
+    "size": "large",
+    "trophic_tier": 3,
+    "zones": [
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "boar_of_the_briar",
+  "kind": "fauna",
+  "name": "Boar of the Briar",
+  "tags": [
+    "omnivore",
+    "boar",
+    "briar_boar",
+    "hunt_quarry"
+  ]
+}

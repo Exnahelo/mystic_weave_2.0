@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "A pale-barked beech lineage shaped by sustained Heartwood-field exposure. Silverbeech favors shaded mature interiors and the margins of the Silent Grove. Its pale wood carries a distinctive ambient-field resonance that trained elves can feel.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "canopy",
+    "cultural_role": "associated with mature Feywood interiors; ceremonial connotations",
+    "ecological_role": "Feywood-conditioned beech; shade-favoring climax associate",
+    "harvest_status": "restricted",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "tree",
+    "zones": [
+      "thornveil_civic_forest",
+      "outer_old_growth_wild",
+      "silent_grove_enclave"
+    ]
+  },
+  "id": "silverbeech",
+  "kind": "flora",
+  "name": "Silverbeech",
+  "tags": [
+    "beech",
+    "canopy",
+    "silverbeech",
+    "heartwood_conditioned"
+  ]
+}

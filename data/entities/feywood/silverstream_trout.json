@@ -1,0 +1,35 @@
+{
+  "biome": "feywood",
+  "description": "The primary Heartwater Basin fish and a standard elven protein source. Silverstream population health is a Turning indicator; thinning populations in the shallows register before broader decline visible above water.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "aquatic",
+    "cultural_role": "primary elven protein source; health-indicator via population density",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "aquatic_insects",
+      "smaller_fish"
+    ],
+    "primary_predators": [
+      "oldroot_bear",
+      "cranemoor_heron",
+      "feywood_otter",
+      "lakepike"
+    ],
+    "size": "small",
+    "trophic_tier": 3,
+    "zones": [
+      "heartwater_basin"
+    ]
+  },
+  "id": "silverstream_trout",
+  "kind": "fauna",
+  "name": "Silverstream Trout",
+  "tags": [
+    "aquatic",
+    "fish",
+    "silverstream",
+    "protein_staple",
+    "health_indicator"
+  ]
+}

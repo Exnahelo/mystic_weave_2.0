@@ -1,0 +1,33 @@
+{
+  "biome": "feywood",
+  "description": "A small insectivore named for its distinctive high whistling call at dusk. Shrewsongs are beloved of elven children; their call is one of the ambient sounds of Thornveil cluster gardens during warm seasons.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "small_fauna",
+    "cultural_role": "beloved of elven children; dusk-whistle call is a domestic-garden soundmark",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "insects",
+      "small_invertebrates"
+    ],
+    "primary_predators": [
+      "winterweasel",
+      "thornsong_owl"
+    ],
+    "size": "tiny",
+    "trophic_tier": 2,
+    "zones": [
+      "thornveil_civic_forest",
+      "feywood_edge"
+    ]
+  },
+  "id": "shrewsong",
+  "kind": "fauna",
+  "name": "Shrewsong",
+  "tags": [
+    "small_fauna",
+    "shrewsong",
+    "insectivore",
+    "domestic_presence"
+  ]
+}

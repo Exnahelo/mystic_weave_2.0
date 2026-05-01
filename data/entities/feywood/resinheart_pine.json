@@ -1,0 +1,28 @@
+{
+  "biome": "feywood",
+  "description": "An edge and upland conifer, more common where the ambient field is thinner and light stronger. Resinheart Pine produces the resin used across the Feywood for sealant, incense, and waterproofing applications; it is a significant export category.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "canopy",
+    "cultural_role": "resin, sealant, incense, waterproofing",
+    "ecological_role": "edge and upland conifer",
+    "harvest_status": "wild",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "tree",
+    "zones": [
+      "feywood_edge",
+      "border_threshold_woods"
+    ]
+  },
+  "id": "resinheart_pine",
+  "kind": "flora",
+  "name": "Resinheart Pine",
+  "tags": [
+    "pine",
+    "conifer",
+    "resin_producer",
+    "edge_species"
+  ]
+}

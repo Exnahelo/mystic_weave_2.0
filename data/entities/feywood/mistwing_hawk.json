@@ -1,0 +1,71 @@
+{
+  "biome": "feywood",
+  "creature_companion": {
+    "age_category": "adult",
+    "base_domains": {
+      "composure": 38,
+      "instinct": 48,
+      "physical": 32
+    },
+    "base_hp": {
+      "current": 14,
+      "max": 14
+    },
+    "carrying_capacity": "none",
+    "description": "A slim raptor whose wings carry a faint pale mist-sheen at dawn and dusk, breaking up its outline against the canopy. Mistwing hawks are prized by Feywood rangers as scouts and messenger birds. Their plumage blends naturally with the mossy, luminous qualities of the forest, and their flight is notably quieter than that of ordinary raptors.",
+    "display_name": "Mistwing Hawk",
+    "movement_modes": [
+      "walk",
+      "fly"
+    ],
+    "natural_abilities": [
+      "keen_senses",
+      "flight",
+      "nature_blending",
+      "fey_resilience"
+    ],
+    "natural_weapons": [
+      "claw",
+      "bite"
+    ],
+    "size": "small",
+    "size_note": null,
+    "species": "hawk",
+    "subspecies": "mistwing_hawk",
+    "tactical_roles_defaults": [
+      "scout"
+    ],
+    "temperament": "Swift, quiet, precise. Prefers silence to hunting cries. Responds well to subtle signals from a handler."
+  },
+  "description": "A day raptor widespread across the Feywood. Mistwings carry canonical messenger symbolism in Feywood tradition and are prized by rangers as scouts and message birds. See `mistwing_hawk` in `data/companions/creatures.json` for the companion profile.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "bird",
+    "cultural_role": "messenger symbolism; widespread day raptor",
+    "primary_diet": [
+      "feywood_hare",
+      "dormouse"
+    ],
+    "primary_diet_categories": [
+      "small_birds"
+    ],
+    "primary_predators": [],
+    "size": "small",
+    "trophic_tier": 4,
+    "zones": [
+      "thornveil_civic_forest",
+      "outer_old_growth_wild",
+      "feywood_edge"
+    ]
+  },
+  "id": "mistwing_hawk",
+  "kind": "fauna",
+  "name": "Mistwing Hawk",
+  "tags": [
+    "bird",
+    "raptor",
+    "mistwing",
+    "messenger",
+    "companion_capable"
+  ]
+}

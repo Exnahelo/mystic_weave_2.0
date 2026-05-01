@@ -1,0 +1,31 @@
+{
+  "biome": "feywood",
+  "description": "The primary decomposer beetle in Feywood leaf litter. Soilkeepers maintain the detrital cycle supporting Rootlace Mycelium's nutrient exchange role.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "insect",
+    "cultural_role": null,
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "leaf_litter",
+      "decomposition_organic_matter"
+    ],
+    "primary_predators": [],
+    "size": "tiny",
+    "trophic_tier": 2,
+    "zones": [
+      "thornveil_civic_forest",
+      "outer_old_growth_wild",
+      "silent_grove_enclave"
+    ]
+  },
+  "id": "soilkeeper_beetle",
+  "kind": "fauna",
+  "name": "Soilkeeper Beetle",
+  "tags": [
+    "insect",
+    "decomposer",
+    "soilkeeper",
+    "leaf_litter"
+  ]
+}

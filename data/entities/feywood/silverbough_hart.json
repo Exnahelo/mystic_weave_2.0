@@ -1,0 +1,34 @@
+{
+  "biome": "feywood",
+  "description": "A major old-wild browsing cervid feeding on mid-canopy foliage, antlerthorn, veilvine, and tender shoots. The Silverbough Hart is hunted by the elves \u2014 respected but not sacred \u2014 with hunt rarer than Feywoodhorn Stag due to lower population. Antlers from naturally-shed or naturally-died individuals are used for ceremonial items.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "herbivore",
+    "cultural_role": "significant respected hunt animal; natural death antlers used ceremonially",
+    "primary_diet": [
+      "antlerthorn",
+      "veilvine"
+    ],
+    "primary_diet_categories": [
+      "elderoak_mast"
+    ],
+    "primary_predators": [
+      "moonthorn_wolf",
+      "thornroot_stalker"
+    ],
+    "size": "large",
+    "trophic_tier": 2,
+    "zones": [
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "silverbough_hart",
+  "kind": "fauna",
+  "name": "Silverbough Hart",
+  "tags": [
+    "herbivore",
+    "cervid",
+    "silverbough",
+    "seed_disperser"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "A fast-growing flexible cane-vine gathered from the Heartwater Basin margins and the Feywood Edge. Thornfiber is the canonical elven fiber for basketry, binding, training apparatus, and light framework construction. A significant trade export in refined forms.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "cane",
+    "cultural_role": "basketry, binding, training apparatus, light framework",
+    "ecological_role": "fast-growing flexible cane-vine",
+    "harvest_status": "cultivated",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "fiber",
+    "zones": [
+      "heartwater_basin",
+      "feywood_edge"
+    ]
+  },
+  "id": "thornfiber_cane",
+  "kind": "flora",
+  "name": "Thornfiber Cane",
+  "tags": [
+    "cane",
+    "fiber",
+    "thornfiber",
+    "basketry",
+    "binding"
+  ]
+}

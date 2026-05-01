@@ -1,0 +1,28 @@
+{
+  "biome": "feywood",
+  "description": "A singular ancient tree of deciduous form, girth beyond a dozen adults' linked reach. Species indeterminate \u2014 not identified with any realm tree lineage. The Heartwood is the living center of the Feywood and the anchor of its ambient relational field. The Feywood is the Heartwood and the Heartwood is the Feywood. Never harvested in any form.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "sacred",
+    "cultural_role": "sacred center of elven civilization",
+    "ecological_role": "living center and ambient-field anchor of the Feywood",
+    "harvest_status": "unharvestable",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "unique",
+    "zones": [
+      "heartwood_core"
+    ]
+  },
+  "id": "the_heartwood",
+  "kind": "flora",
+  "name": "The Heartwood",
+  "tags": [
+    "heartwood",
+    "sacred",
+    "unique",
+    "living_center",
+    "species_indeterminate"
+  ]
+}

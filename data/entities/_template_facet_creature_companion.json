@@ -1,0 +1,32 @@
+{
+  "_note": "Template for the optional creature_companion facet. The biome field is not included here; it is inherited from the top-level entity.",
+  "species": "wolf",
+  "subspecies": "example_entity_id",
+  "display_name": "Example Entity Name",
+  "size": "medium",
+  "size_note": "medium; example build",
+  "age_category": "adult",
+  "tactical_roles_defaults": [
+    "hunter"
+  ],
+  "natural_abilities": [
+    "scent_tracking"
+  ],
+  "natural_weapons": [
+    "bite"
+  ],
+  "movement_modes": [
+    "walk"
+  ],
+  "carrying_capacity": "small",
+  "base_domains": {
+    "physical": 40,
+    "instinct": 40,
+    "composure": 40
+  },
+  "base_hp": {
+    "current": 20,
+    "max": 20
+  },
+  "temperament": "Short behavior note for companion handling."
+}

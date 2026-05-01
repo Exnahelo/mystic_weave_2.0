@@ -1,0 +1,37 @@
+{
+  "biome": "feywood",
+  "description": "A widespread browse-opportunist across the Feywood's lighter zones. Common prey for duskpetal fox, mossfoot hound, and the Feywood's smaller raptors.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "small_fauna",
+    "cultural_role": null,
+    "primary_diet": [
+      "shadefern_root"
+    ],
+    "primary_diet_categories": [
+      "understory_browse"
+    ],
+    "primary_predators": [
+      "duskpetal_fox",
+      "mossfoot_hound",
+      "thornsong_owl",
+      "mistwing_hawk"
+    ],
+    "size": "small",
+    "trophic_tier": 2,
+    "zones": [
+      "thornveil_civic_forest",
+      "feywood_edge",
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "feywood_hare",
+  "kind": "fauna",
+  "name": "Feywood Hare",
+  "tags": [
+    "small_fauna",
+    "lagomorph",
+    "feywood_hare",
+    "widespread"
+  ]
+}

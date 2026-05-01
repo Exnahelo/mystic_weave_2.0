@@ -1,0 +1,31 @@
+{
+  "biome": "feywood",
+  "description": "A larger woodland owl of the deeper Feywood forests. Cross-palette species \u2014 canonically shared with the Temperate Forest palette and present in the Feywood via cross-Border range.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "bird",
+    "cultural_role": "cross-palette species; Temperate Forest range",
+    "primary_diet": [
+      "dormouse"
+    ],
+    "primary_diet_categories": [
+      "feywood_hare_young",
+      "small_birds"
+    ],
+    "primary_predators": [],
+    "size": "medium",
+    "trophic_tier": 3,
+    "zones": [
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "boughowl",
+  "kind": "fauna",
+  "name": "Boughowl",
+  "tags": [
+    "bird",
+    "owl",
+    "boughowl",
+    "cross_palette"
+  ]
+}

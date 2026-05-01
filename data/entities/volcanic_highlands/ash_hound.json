@@ -1,0 +1,48 @@
+{
+  "biome": "volcanic_highlands",
+  "creature_companion": {
+    "age_category": "adult",
+    "base_domains": {
+      "composure": 40,
+      "instinct": 42,
+      "physical": 42
+    },
+    "base_hp": {
+      "current": 30,
+      "max": 30
+    },
+    "carrying_capacity": "small",
+    "description": "A broad, muscular hound with dark grey coat and pale ash-flecked markings across the shoulders. Ash hounds are working dogs bred across the Volcanic Highlands for patrol, guard duty, and tracking in conditions that would defeat ordinary hounds. Their endurance in heat and ash is famous; their tempers are reliably steady even when surrounded by hazard.",
+    "display_name": "Ash Hound",
+    "movement_modes": [
+      "walk"
+    ],
+    "natural_abilities": [
+      "scent_tracking",
+      "keen_senses",
+      "heat_resistance",
+      "ash_tolerance"
+    ],
+    "natural_weapons": [
+      "bite"
+    ],
+    "size": "medium",
+    "size_note": null,
+    "species": "hound",
+    "subspecies": "ash_hound",
+    "tactical_roles_defaults": [
+      "guard",
+      "hunter"
+    ],
+    "temperament": "Steady, stoic, tolerant of discomfort. Bonds closely with handlers and is notably unbothered by smoke, ash, or heat that would distress other working dogs."
+  },
+  "description": "A broad, muscular hound with dark grey coat and pale ash-flecked markings across the shoulders. Ash hounds are working dogs bred across the Volcanic Highlands for patrol, guard duty, and tracking in conditions that would defeat ordinary hounds. Their endurance in heat and ash is famous; their tempers are reliably steady even when surrounded by hazard.",
+  "id": "ash_hound",
+  "kind": "fauna",
+  "name": "Ash Hound",
+  "tags": [
+    "hound",
+    "volcanic_highlands",
+    "companion"
+  ]
+}

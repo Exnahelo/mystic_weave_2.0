@@ -1,0 +1,37 @@
+{
+  "biome": "feywood",
+  "description": "A small understory rodent, common prey across the Feywood. Ubiquitous in cluster gardens, cultivated plots, and the broader forest understory.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "small_fauna",
+    "cultural_role": null,
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "seeds",
+      "berries",
+      "insects"
+    ],
+    "primary_predators": [
+      "duskpetal_fox",
+      "winterweasel",
+      "thornsong_owl",
+      "mistwing_hawk"
+    ],
+    "size": "tiny",
+    "trophic_tier": 2,
+    "zones": [
+      "thornveil_civic_forest",
+      "outer_old_growth_wild",
+      "feywood_edge"
+    ]
+  },
+  "id": "dormouse",
+  "kind": "fauna",
+  "name": "Dormouse",
+  "tags": [
+    "small_fauna",
+    "rodent",
+    "dormouse",
+    "common_prey"
+  ]
+}

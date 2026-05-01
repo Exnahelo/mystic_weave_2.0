@@ -1,0 +1,28 @@
+{
+  "biome": "feywood",
+  "description": "A ceremonial flower tied to the Heartwood's canonical Dawn-Gold light quality. Dawngold grows at the Heartwood's margins and in select sacred plantings. Paired with Eveningjade as reinforcement of the named light cycles; used in observance and symbolic language.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "sacred",
+    "cultural_role": "sacred observance; paired with Eveningjade in Heartwood light-cycle reinforcement",
+    "ecological_role": "ceremonial flower tied to the Heartwood's Dawn-Gold light quality",
+    "harvest_status": "sacred",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "flower",
+    "zones": [
+      "heartwood_core"
+    ]
+  },
+  "id": "dawngold_bloom",
+  "kind": "flora",
+  "name": "Dawngold Bloom",
+  "tags": [
+    "flower",
+    "sacred",
+    "dawngold",
+    "heartwood_light",
+    "ceremonial"
+  ]
+}

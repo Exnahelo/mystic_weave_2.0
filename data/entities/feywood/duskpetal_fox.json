@@ -1,0 +1,38 @@
+{
+  "biome": "feywood",
+  "description": "A small predator/omnivore of the Thornveil margins, Vaelmere edge, estate surrounds, and outer wild. Duskpetal foxes are a bridge species between inhabited and wild spaces; they feature prominently in Feywood folklore. A small but genuine companion candidate for handlers with patience.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "small_fauna",
+    "cultural_role": "bridge species between inhabited and wild spaces; common in folklore",
+    "primary_diet": [
+      "feywood_hare",
+      "dormouse",
+      "dewberry_bramble"
+    ],
+    "primary_diet_categories": [
+      "insects"
+    ],
+    "primary_predators": [
+      "mossveil_cat",
+      "mistwing_hawk"
+    ],
+    "size": "small",
+    "trophic_tier": 3,
+    "zones": [
+      "thornveil_civic_forest",
+      "feywood_edge",
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "duskpetal_fox",
+  "kind": "fauna",
+  "name": "Duskpetal Fox",
+  "tags": [
+    "small_fauna",
+    "canid",
+    "duskpetal",
+    "omnivore",
+    "folklore"
+  ]
+}

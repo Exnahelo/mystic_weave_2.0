@@ -1,0 +1,31 @@
+{
+  "biome": "feywood",
+  "description": "A bioluminescent insect \u2014 the canonical firefly of the Feywood. Stardrift brightness and abundance correlate with Heartwood health; emergences diminish under Turning and cease under Stillfall. Their seasonal spectacle is one of the Feywood's named natural events.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "insect",
+    "cultural_role": "bioluminescent firefly; brightness correlates with Heartwood health",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "decomposition_organic_matter"
+    ],
+    "primary_predators": [],
+    "size": "tiny",
+    "trophic_tier": 2,
+    "zones": [
+      "thornveil_civic_forest",
+      "outer_old_growth_wild",
+      "heartwater_basin"
+    ]
+  },
+  "id": "stardrift_beetle",
+  "kind": "fauna",
+  "name": "Stardrift Beetle",
+  "tags": [
+    "insect",
+    "bioluminescent",
+    "stardrift",
+    "health_indicator",
+    "firefly_analog"
+  ]
+}

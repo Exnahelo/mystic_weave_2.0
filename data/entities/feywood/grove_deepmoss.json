@@ -1,0 +1,28 @@
+{
+  "biome": "feywood",
+  "description": "The signature ground cover of the Silent Grove Enclave. Grove Deepmoss changes slowly, and its shift is among the last indicators to register in the Feywood's seven-stage decline order \u2014 any visible change in Grove Deepmoss signals deep instability. Druidic use only, in tiny amounts if at all.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "moss",
+    "cultural_role": "slow-change sign of deeper instability; druidic-use-only",
+    "ecological_role": "signature ground cover of the Silent Grove",
+    "harvest_status": "sacred",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "sacred",
+    "zones": [
+      "silent_grove_enclave"
+    ]
+  },
+  "id": "grove_deepmoss",
+  "kind": "flora",
+  "name": "Grove Deepmoss",
+  "tags": [
+    "moss",
+    "grove_deepmoss",
+    "silent_grove",
+    "sacred",
+    "health_indicator"
+  ]
+}

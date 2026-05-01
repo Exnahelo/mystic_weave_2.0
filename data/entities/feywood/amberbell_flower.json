@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "A bell-flower species supporting Honeybound bees and other pollinators. Amberbell is a seasonal bloom marker and a common flavoring in Feywood wines; its appearance through the warm season is one of the Feywood's visible thresholds.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "herb",
+    "cultural_role": "common wine flavoring",
+    "ecological_role": "bell-flower pollinator species; seasonal bloom marker",
+    "harvest_status": "wild",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "pollinator",
+    "zones": [
+      "thornveil_civic_forest",
+      "feywood_edge"
+    ]
+  },
+  "id": "amberbell_flower",
+  "kind": "flora",
+  "name": "Amberbell Flower",
+  "tags": [
+    "flower",
+    "amberbell",
+    "pollinator",
+    "wine_flavoring",
+    "seasonal_marker"
+  ]
+}

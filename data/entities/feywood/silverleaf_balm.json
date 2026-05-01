@@ -1,0 +1,30 @@
+{
+  "biome": "feywood",
+  "description": "A foundational medicinal herb of Feywood medicine. Silverleaf preparations yield salves, wound wash, and calming infusions; the herb is cultivated in Thornveil's tended plots and across noble estates. Refined preparations are a recognized Vaelmere trade export.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "herb",
+    "cultural_role": "healer's staple; salves, wound wash, calming infusions; trade export",
+    "ecological_role": "medicinal herb; pollinator support",
+    "harvest_status": "cultivated",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "medicinal",
+    "zones": [
+      "thornveil_civic_forest",
+      "outer_old_growth_wild",
+      "feywood_edge"
+    ]
+  },
+  "id": "silverleaf_balm",
+  "kind": "flora",
+  "name": "Silverleaf Balm",
+  "tags": [
+    "herb",
+    "medicinal",
+    "silverleaf",
+    "healer_staple",
+    "trade_export"
+  ]
+}

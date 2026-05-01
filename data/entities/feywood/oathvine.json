@@ -1,0 +1,30 @@
+{
+  "biome": "feywood",
+  "description": "A ceremonial flowering climber used in house rites, oath observances, memorial plantings, and funeral rites. Oathvine and Oathbloom are the paired ceremonial flora marking elven oath-life. House Heartwood maintains Oathvine at the Estate and at the Thornveil seat; each family's oath-plot carries Oathvine growth patterns that read as the living record of the house's vows across generations.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "vine",
+    "cultural_role": "ceremonial; paired with Oathbloom; records family oaths across generations",
+    "ecological_role": "flowering climbing vine; pollinator support",
+    "harvest_status": "restricted",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "ceremonial_flowering",
+    "zones": [
+      "heartwood_core",
+      "thornveil_civic_forest",
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "oathvine",
+  "kind": "flora",
+  "name": "Oathvine",
+  "tags": [
+    "vine",
+    "ceremonial",
+    "oathvine",
+    "family_record",
+    "flowering"
+  ]
+}

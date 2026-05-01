@@ -1,0 +1,35 @@
+{
+  "biome": "feywood",
+  "description": "An amphibian chorus species whose evening chorus is ambient canonical sound of the Heartwater Basin margins. The Heartpond frog chorus is among the Feywood's primary health-indicator signals; silence in warm-season evenings where chorus should be is a significant druidic alert.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "aquatic",
+    "cultural_role": "chorus species; primary health-indicator monitored by druids",
+    "primary_diet": [
+      "briar_stinger"
+    ],
+    "primary_diet_categories": [
+      "aquatic_insects"
+    ],
+    "primary_predators": [
+      "cranemoor_heron",
+      "feywood_otter",
+      "silverstream_trout"
+    ],
+    "size": "tiny",
+    "trophic_tier": 2,
+    "zones": [
+      "heartwater_basin"
+    ]
+  },
+  "id": "heartpond_frog",
+  "kind": "fauna",
+  "name": "Heartpond Frog",
+  "tags": [
+    "aquatic",
+    "amphibian",
+    "heartpond_frog",
+    "chorus_species",
+    "health_indicator"
+  ]
+}

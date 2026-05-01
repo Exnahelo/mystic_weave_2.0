@@ -1,0 +1,19 @@
+{
+  "_note": "Template for the optional ecology facet. Copy this object into an entity under the 'ecology' key when needed.",
+  "category": "predator",
+  "trophic_tier": 3,
+  "size": "medium",
+  "zones": [
+    "example_zone"
+  ],
+  "primary_diet": [
+    "example_prey_id"
+  ],
+  "primary_diet_categories": [
+    "example_forage_pattern"
+  ],
+  "primary_predators": [],
+  "cultural_role": "Short description of ecological or cultural significance.",
+  "canonical_tier": "primary",
+  "harvest_status": "wild"
+}

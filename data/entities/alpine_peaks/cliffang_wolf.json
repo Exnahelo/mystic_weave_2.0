@@ -1,0 +1,50 @@
+{
+  "biome": "alpine_peaks",
+  "creature_companion": {
+    "age_category": "adult",
+    "base_domains": {
+      "composure": 38,
+      "instinct": 46,
+      "physical": 44
+    },
+    "base_hp": {
+      "current": 30,
+      "max": 30
+    },
+    "carrying_capacity": "small",
+    "description": "A lean, long-limbed wolf of the high passes, named for its comfort on broken stone and narrow ledges. Cliffang wolves are smaller than Feywood wolves but tougher and more agile in vertical terrain; their paws are noticeably broader and more sure-footed than those of lowland wolves.",
+    "display_name": "Cliffang Wolf",
+    "movement_modes": [
+      "walk",
+      "climb"
+    ],
+    "natural_abilities": [
+      "scent_tracking",
+      "pack_hunter",
+      "keen_senses",
+      "cold_resistance",
+      "climbing"
+    ],
+    "natural_weapons": [
+      "bite"
+    ],
+    "size": "medium",
+    "size_note": null,
+    "species": "wolf",
+    "subspecies": "cliffang_wolf",
+    "tactical_roles_defaults": [
+      "hunter",
+      "scout"
+    ],
+    "temperament": "Hardy, alert, energetic. Works well in small coordinated groups and handles cold travel exceptionally well."
+  },
+  "description": "A lean, long-limbed wolf of the high passes, named for its comfort on broken stone and narrow ledges. Cliffang wolves are smaller than Feywood wolves but tougher and more agile in vertical terrain; their paws are noticeably broader and more sure-footed than those of lowland wolves.",
+  "id": "cliffang_wolf",
+  "kind": "fauna",
+  "name": "Cliffang Wolf",
+  "tags": [
+    "wolf",
+    "alpine_peaks",
+    "companion"
+  ]
+}

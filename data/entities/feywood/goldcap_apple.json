@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "A hardy long-keeping cultivated fruit grown at Vaelmere, Thornveil's outer groves, and noble estates. Goldcap is the canonical source of Goldcap cider \u2014 a core forest-wine tradition \u2014 and also produces vinegar and preserves. Among the Feywood's most recognized trade exports.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "food_tree",
+    "cultural_role": "cider, vinegar, preserves, trade export",
+    "ecological_role": "hardy long-keeping cultivated fruit",
+    "harvest_status": "cultivated",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "fruit",
+    "zones": [
+      "thornveil_civic_forest",
+      "feywood_edge"
+    ]
+  },
+  "id": "goldcap_apple",
+  "kind": "flora",
+  "name": "Goldcap Apple",
+  "tags": [
+    "food_tree",
+    "fruit",
+    "goldcap",
+    "cider",
+    "trade_export"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "biome": "feywood",
+  "description": "The Feywood's canonical bioluminescent understory fungus, visible even in daylight at the Border. Hearthlight brightness correlates with ambient-field strength and serves as the primary visible indicator of Feywood health. Its dimming is one of the earliest visible Turning signals; its steady glow under Standing Green provides ambient illumination under heavy canopy.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "fungus",
+    "cultural_role": "primary visible health-register indicator; ambient illumination",
+    "ecological_role": "canonical bioluminescent understory species",
+    "harvest_status": "wild",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "bioluminescent",
+    "zones": [
+      "border_threshold_woods",
+      "feywood_edge",
+      "thornveil_civic_forest",
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "hearthlight_fungus",
+  "kind": "flora",
+  "name": "Hearthlight Fungus",
+  "tags": [
+    "fungus",
+    "bioluminescent",
+    "hearthlight",
+    "health_indicator",
+    "ambient_light"
+  ]
+}

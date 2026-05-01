@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "A slow-growing bark and stone lichen of the Silent Grove, sacred stones, and cool shaded margins. Winterglass is a moisture and air-quality indicator, and its careful harvest yields dyes, ritual-marking ink, and fine medicinal preparations.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "lichen",
+    "cultural_role": "dye, ritual marking ink, fine medicinal preparations",
+    "ecological_role": "bark and stone lichen; moisture and air-quality indicator",
+    "harvest_status": "restricted",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "slow_growth",
+    "zones": [
+      "silent_grove_enclave",
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "winterglass_lichen",
+  "kind": "flora",
+  "name": "Winterglass Lichen",
+  "tags": [
+    "lichen",
+    "winterglass",
+    "slow_growth",
+    "dye",
+    "ritual_ink"
+  ]
+}

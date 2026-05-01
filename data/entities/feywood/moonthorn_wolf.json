@@ -1,0 +1,75 @@
+{
+  "biome": "feywood",
+  "creature_companion": {
+    "age_category": "adult",
+    "base_domains": {
+      "composure": 45,
+      "instinct": 50,
+      "physical": 42
+    },
+    "base_hp": {
+      "current": 30,
+      "max": 30
+    },
+    "carrying_capacity": "small",
+    "description": "A liminal forest wolf touched by the enchanted stillness of the Feywood. Slightly larger than a common wolf but far leaner and more elegant than a dire wolf, it moves with deliberate control rather than brute force. Its eyes are bright in low light, its senses are exceptionally sharp, and its coat naturally breaks up its outline among moss, bark, and shadow. Feywood wolves are known for their restraint, uncanny awareness, and unusual resistance to enchantment, illusion, and panic. They are not hulking predators, but intelligent woodland hunters shaped by old magic and the quiet discipline of enchanted places.",
+    "display_name": "Moonthorn Wolf",
+    "movement_modes": [
+      "walk",
+      "swim"
+    ],
+    "natural_abilities": [
+      "scent_tracking",
+      "pack_hunter",
+      "keen_senses",
+      "darkvision",
+      "nature_blending",
+      "fey_resilience"
+    ],
+    "natural_weapons": [
+      "bite"
+    ],
+    "size": "medium",
+    "size_note": "upper end of medium; lean build",
+    "species": "wolf",
+    "subspecies": "moonthorn_wolf",
+    "tactical_roles_defaults": [
+      "hunter",
+      "scout"
+    ],
+    "temperament": "Reserved, observant, uncannily self-controlled. Moves with deliberate intent; watches and assesses before acting. Resistant to enchantment and panic."
+  },
+  "description": "The principal Feywood pack predator and the defining canid of the outer wild. Colloquially \"Feywood wolves.\" Moonthorn packs hunt Feywoodhorn stag, rootback elk, boar of the briar, and briarmane courser; they take silverbough hart rarely. In exceptional circumstances a moonthorn wolf may form a deep life-bond with an individual elf \u2014 the relationship is pack, not domestication. House Heartwood has had bonded moonthorn wolves across generations (Ash is Sylvara's bonded wolf). See `moonthorn_wolf` in `data/companions/creatures.json` for the companion profile.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "predator",
+    "cultural_role": "Feywood's defining canid; exceptional elven life-bonds (Ash)",
+    "primary_diet": [
+      "feywoodhorn_stag",
+      "rootback_elk",
+      "boar_of_the_briar",
+      "briarmane_courser"
+    ],
+    "primary_diet_categories": [],
+    "primary_predators": [
+      "thornroot_stalker"
+    ],
+    "size": "medium",
+    "trophic_tier": 4,
+    "zones": [
+      "outer_old_growth_wild",
+      "feywood_edge"
+    ]
+  },
+  "id": "moonthorn_wolf",
+  "kind": "fauna",
+  "name": "Moonthorn Wolf",
+  "tags": [
+    "predator",
+    "canid",
+    "moonthorn",
+    "apex",
+    "pack",
+    "bondable_exceptional"
+  ]
+}

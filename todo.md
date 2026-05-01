@@ -1,6 +1,6 @@
 # Mystic Weave — TODO
 
-Last updated: 2026-04-30
+Last updated: 2026-05-01
 
 ## How to read this document
 
@@ -19,7 +19,34 @@ If you walk in cold and only read one section, read the Arc System v1 section. T
 
 ## ACTIVE ARCHITECTURAL ARC
 
-*No active architectural arc currently. Arc System v1 closed 2026-04-30. Next architectural work pending live-play validation of v1 (2–4 week window).*
+### Entity registry consolidation
+
+- [x] PR 1: Consolidate creatures + Feywood fauna + Feywood flora into
+  `data/entities/`. Per-entity files, biome-grouped subdirs.
+  - [x] Architecture doc at `docs/entity-registry.md`
+  - [x] Templates at `data/entities/_template_*.json`
+  - [x] Migration via `scripts/migrate_entities_pr1.py` (deleted post-merge)
+  - [x] Loader rewrite in `api/game_data.py`
+  - [x] Validator extensions in `scripts/validate_data_files.py`
+  - [x] Clarification note in `data/companions/exceptional.json`
+  - [x] Cleanup: removed `data/environment/` and `data/companions/creatures.json`
+- [ ] PR 2: Move vocabulary registries (`natural_abilities.json`,
+  `learned_commands.json`, `tactical_roles.json`) into
+  `data/catalog/registries/companion_*.json`. Update consumers.
+- [ ] Author ecology data for non-Feywood biomes (10 creatures currently
+  have `creature_companion` facet but no `ecology` facet):
+  - alpine_peaks: frostclaw_bear, cliffang_wolf
+  - draconic_grasslands: goldmane_courser, windcrown_hawk
+  - temperate_forest: silvermoss_wolf, working_hound
+  - volcanic_highlands: ash_hound, embersail_hawk
+  - wetlands: mist_hound, bogwing_crane
+- [ ] Future facets: `combat`, `harvest`. Schema reserves the slots; not
+  authored in PR 1.
+- [ ] Future endpoint: `/catalog/entities` with `kind=` filter. Currently
+  only `/catalog/creatures` is exposed (sources from filtered entities).
+
+Arc System v1 closed 2026-04-30. Live-play validation remains pending
+(2–4 week window).
 
 Candidates for next active arc, in approximate priority order:
 

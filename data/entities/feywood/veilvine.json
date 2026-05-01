@@ -1,0 +1,28 @@
+{
+  "biome": "feywood",
+  "description": "A climbing vine whose distinctive seasonal color shift precedes broader canopy color change. Druids monitor Veilvine as an early-warning indicator of Turning onset; its color transition registers days to weeks before the larger forest follows.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "vine",
+    "cultural_role": "early-warning Turning indicator monitored by druids",
+    "ecological_role": "climbing vine with distinctive seasonal color shift",
+    "harvest_status": "wild",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "indicator",
+    "zones": [
+      "outer_old_growth_wild",
+      "thornveil_civic_forest"
+    ]
+  },
+  "id": "veilvine",
+  "kind": "flora",
+  "name": "Veilvine",
+  "tags": [
+    "vine",
+    "veilvine",
+    "seasonal_indicator",
+    "turning_indicator"
+  ]
+}
