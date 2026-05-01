@@ -1,0 +1,47 @@
+{
+  "id": "gear-longbough-quiver",
+  "name": "Longbough Quiver",
+  "category": "gear",
+  "subcategory": "storage",
+  "schema_version": 1,
+  "description": "An elven-made quiver shaped from supple Longbough bark and lined with cured leaf-leather, fitted specifically to the length and balance of Longbough arrows. Worn at the hip or angled across the back depending on stance, with a soft draw-lip that prevents the fletching from snagging on a quick pull.",
+  "narrative_effects": [
+    "Sized and weighted for Longbough arrows. Standard arrows fit but ride loose; the draw is faster and quieter with the matched ammunition.",
+    "The bark sheath holds its shape across years of use without cracking. Elven archers who carry one rarely replace it.",
+    "Minor Vaelmere export, like the bow and arrows it accompanies. Outside elven hands it is uncommon enough that other archers recognize it on sight."
+  ],
+  "tags": [
+    "storage",
+    "weapon-support",
+    "ranged",
+    "longbough",
+    "elven",
+    "feywood"
+  ],
+  "roll_tag": null,
+  "rarity": "uncommon",
+  "legality": "open",
+  "value_cd": 80,
+  "wealth_tier_floor": "modest",
+  "market_tags": [],
+  "consumable": false,
+  "charges_max": null,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [
+    "arrows-longbough",
+    "longbow-longbough"
+  ],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}
