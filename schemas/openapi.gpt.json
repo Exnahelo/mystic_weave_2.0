@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave (GPT Actions)",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "4.5.0"
+    "version": "4.6.0"
   },
   "servers": [
     {
@@ -1630,7 +1630,17 @@
             "$ref": "#/components/schemas/WorldStateDelta"
           },
           "log_entry": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "#/components/schemas/TypedLogEntry"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Log Entry"
           },
           "time_elapsed": {
@@ -1639,9 +1649,6 @@
         },
         "additionalProperties": false,
         "type": "object",
-        "required": [
-          "log_entry"
-        ],
         "title": "ApplyStateDeltaRequest",
         "description": "Body for POST /state/{session_id}/delta"
       },
@@ -6230,7 +6237,14 @@
           },
           "log": {
             "items": {
-              "type": "string"
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "$ref": "#/components/schemas/TypedLogEntry"
+                }
+              ]
             },
             "type": "array",
             "title": "Log"
@@ -7904,7 +7918,17 @@
             "title": "World"
           },
           "log_entry": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "#/components/schemas/TypedLogEntry"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Log Entry"
           },
           "time_elapsed": {
@@ -7913,9 +7937,6 @@
         },
         "additionalProperties": false,
         "type": "object",
-        "required": [
-          "log_entry"
-        ],
         "title": "SaveStateRequest",
         "description": "Body for POST /state/{session_id}"
       },
@@ -8284,6 +8305,35 @@
           "trigger"
         ],
         "title": "TransitionCompanionRequest"
+      },
+      "TypedLogEntry": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "narrative_non_arc",
+              "world_change",
+              "admin_correction",
+              "inventory_normalization",
+              "time_correction",
+              "compression"
+            ],
+            "title": "Type"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Text"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "title": "TypedLogEntry",
+        "description": "A typed log entry for non-arc beats and admin/correction records.\n\nPlain strings remain valid log entries for legacy callers. Typed entries\nare the forward-only path for non-arc structural categories."
       },
       "ValidationError": {
         "properties": {

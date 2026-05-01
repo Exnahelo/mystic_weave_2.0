@@ -31,6 +31,7 @@ from api.models import (
     SaveStateRequest,
     SurvivalState,
     TimeState,
+    TypedLogEntry,
     WorldModel,
 )
 from api.time_advance import advance_time
@@ -48,6 +49,15 @@ def _plain_validation_errors(err: ValidationError) -> list[dict[str, Any]]:
             clone["ctx"] = {k: str(v) for k, v in ctx.items()}
         cleaned.append(clone)
     return cleaned
+
+
+def _serialize_log_entry(entry: str | TypedLogEntry | None) -> str | None:
+    """Serialize a log entry into the JSONB array form, or None to skip append."""
+    if entry is None:
+        return None
+    if isinstance(entry, TypedLogEntry):
+        return json.dumps([entry.model_dump()])
+    return json.dumps([entry])
 
 
 def _deep_merge(base: dict[str, Any], incoming: dict[str, Any]) -> dict[str, Any]:
@@ -219,7 +229,7 @@ def _merge_equipment_slots(base: dict[str, Any], incoming: dict[str, Any]) -> di
 
 def validate_delta(delta: ApplyStateDeltaRequest) -> None:
     """Validate delta-level invariants before state application."""
-    if not delta.log_entry.strip():
+    if isinstance(delta.log_entry, str) and not delta.log_entry.strip():
         raise ValueError("log_entry is required")
     if not delta.character.has_updates() and not delta.world.has_updates():
         raise ValueError("delta must change state")
@@ -346,7 +356,13 @@ async def save_state(
     """
     incoming_character = body.character.model_dump(exclude_unset=True, by_alias=True)
     world_json = body.world.model_dump(exclude_unset=True)
-    log_entry_json = json.dumps([body.log_entry])
+    log_payload = _serialize_log_entry(body.log_entry)
+    if log_payload is None:
+        insert_log = json.dumps([])
+        update_clause = "log         = game_states.log"
+    else:
+        insert_log = log_payload
+        update_clause = "log         = game_states.log || $5::jsonb"
 
     async with pool.acquire() as conn:
         # Load existing state to merge against
@@ -398,23 +414,27 @@ async def save_state(
         merged_character_json = validated_character.model_dump(by_alias=True)
         validated_world_json = validated_world.model_dump()
 
-        row = await conn.fetchrow(
-            """
+        sql = f"""
             INSERT INTO game_states (session_id, character, world, log, updated_at)
             VALUES ($1, $2::jsonb, $3::jsonb, $4::jsonb, now())
             ON CONFLICT (session_id) DO UPDATE
               SET character   = EXCLUDED.character,
                   world       = EXCLUDED.world,
-                  log         = game_states.log || $5::jsonb,
+                  {update_clause},
                   updated_at  = now()
             RETURNING session_id, character, world, log, updated_at
-            """,
+            """
+
+        params = [
             session_id,
             json.dumps(merged_character_json),
             json.dumps(validated_world_json),
-            json.dumps([body.log_entry]),   # initial log on INSERT
-            log_entry_json,                 # appended entry on UPDATE
-        )
+            insert_log,
+        ]
+        if log_payload is not None:
+            params.append(log_payload)
+
+        row = await conn.fetchrow(sql, *params)
 
     try:
         response_character = CharacterModel.model_validate(
@@ -447,7 +467,13 @@ async def save_state_delta(
     pool: asyncpg.Pool = Depends(get_pool),
 ) -> GameStateResponse:
     """Apply partial typed state updates and persist validated full state."""
-    log_entry_json = json.dumps([body.log_entry])
+    log_payload = _serialize_log_entry(body.log_entry)
+    if log_payload is None:
+        insert_log = json.dumps([])
+        update_clause = "log         = game_states.log"
+    else:
+        insert_log = log_payload
+        update_clause = "log         = game_states.log || $5::jsonb"
 
     async with pool.acquire() as conn:
         existing_row = await conn.fetchrow(
@@ -472,23 +498,27 @@ async def save_state_delta(
         except ValidationError as e:
             raise HTTPException(status_code=422, detail=_plain_validation_errors(e))
 
-        row = await conn.fetchrow(
-            """
+        sql = f"""
             INSERT INTO game_states (session_id, character, world, log, updated_at)
             VALUES ($1, $2::jsonb, $3::jsonb, $4::jsonb, now())
             ON CONFLICT (session_id) DO UPDATE
               SET character   = EXCLUDED.character,
                   world       = EXCLUDED.world,
-                  log         = game_states.log || $5::jsonb,
+                  {update_clause},
                   updated_at  = now()
             RETURNING session_id, character, world, log, updated_at
-            """,
+            """
+
+        params = [
             session_id,
             json.dumps(applied["character"]),
             json.dumps(applied["world"]),
-            json.dumps([body.log_entry]),   # initial log on INSERT
-            log_entry_json,                 # appended entry on UPDATE
-        )
+            insert_log,
+        ]
+        if log_payload is not None:
+            params.append(log_payload)
+
+        row = await conn.fetchrow(sql, *params)
 
     try:
         response_character = CharacterModel.model_validate(

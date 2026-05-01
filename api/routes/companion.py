@@ -24,7 +24,7 @@ from api.companions import (
     generate_companion_id,
 )
 from api.database import get_pool
-from api.models import CharacterModel, WorldModel
+from api.models import CharacterModel, TypedLogEntry, WorldModel
 from api.routes.state import _normalize_character_state
 from api.schemas.companion_schemas import CompanionResponse, CreateCompanionRequest, TransitionCompanionRequest
 
@@ -72,9 +72,9 @@ async def _persist_world_update(
     session_id: str,
     character: CharacterModel,
     world: WorldModel,
-    log_entry: str,
+    log_entry: TypedLogEntry,
 ) -> None:
-    log_entry_json = json.dumps([log_entry])
+    log_entry_json = json.dumps([log_entry.model_dump()])
     await conn.fetchrow(
         """
         INSERT INTO game_states (session_id, character, world, log, updated_at)
@@ -89,7 +89,7 @@ async def _persist_world_update(
         session_id,
         json.dumps(character.model_dump(by_alias=True)),
         json.dumps(world.model_dump()),
-        json.dumps([log_entry]),
+        log_entry_json,
         log_entry_json,
     )
 
@@ -141,7 +141,13 @@ async def create_companion(
         existing_ids = {entry.id for entry in world.companions}
         companion_id = generate_companion_id(body.handler_id, derived_slug, existing_ids)
         world.companions.append(_companion_to_record(companion_id, body.companion))
-        await _persist_world_update(conn, body.session_id, character, world, f"Companion added: {companion_id}")
+        await _persist_world_update(
+            conn,
+            body.session_id,
+            character,
+            world,
+            TypedLogEntry(type="world_change", text=f"Companion added: {companion_id}"),
+        )
 
     return CompanionResponse(companion_id=companion_id, companion=body.companion, archived=False)
 
@@ -186,7 +192,7 @@ async def transition_companion(
             body.session_id,
             character,
             world,
-            f"Companion transitioned: {existing_companion.id}",
+            TypedLogEntry(type="world_change", text=f"Companion transitioned: {existing_companion.id}"),
         )
 
     return CompanionResponse(companion_id=existing_companion.id, companion=new_companion, archived=False)

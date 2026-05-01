@@ -33,7 +33,7 @@ class CompanionRouteConn:
         self.session_id = session_id
         self.character = character
         self.world = world
-        self.log: list[str] = []
+        self.log: list = []
 
     async def fetchrow(self, query, *args):
         if "SELECT character, world FROM game_states" in query:
@@ -201,7 +201,8 @@ def _exceptional_payload() -> dict:
 
 @pytest.mark.contract
 def test_post_companion_new_valid_creature_returns_generated_id() -> None:
-    app = _make_app(FakePool(CompanionRouteConn("sess1", _character(), _world())))
+    conn = CompanionRouteConn("sess1", _character(), _world())
+    app = _make_app(FakePool(conn))
     with TestClient(app) as client:
         response = client.post(
             "/companion/new",
@@ -215,6 +216,8 @@ def test_post_companion_new_valid_creature_returns_generated_id() -> None:
     assert response.status_code == 201
     payload = response.json()
     assert payload["companion_id"] == "sylvara_heartwood_moonthorn_wolf"
+    assert conn.log[-1]["type"] == "world_change"
+    assert conn.log[-1]["text"].startswith("Companion added:")
 
 
 @pytest.mark.contract
