@@ -53,64 +53,62 @@ PR 1 (consolidation) and PR 2 (companion vocab registry move) are complete. Two 
 
 ### Active
 
-- [ ] **Cross-reference materials ↔ ecology**: items reference materials (silverbark-ash, thornroot-stalker-hide, etc.); materials reference biomes; environment files reference creatures whose materials we catalog. The links exist conceptually but aren't formalized. Decide if this needs a structured cross-reference layer or stays narrative-only.
+- [ ] **Cross-reference materials ↔ ecology**: items reference materials (silverbark-ash, thornroot-stalker-hide, etc.); materials reference biomes; entity files reference creatures whose materials we catalog. The links exist conceptually but aren't formalized. Decide if this needs a structured cross-reference layer or stays narrative-only.
 
 ### Catalog stabilization follow-ups
 
-- [ ] Audit `data/catalog/registries/` for orphan tags (defined but never used) and missing tags (used in items but not registered).
-- [ ] Decide intent of `data/catalog/crafting/materials.json`. Crafting subsystem is documented as deferred but `materials.json` exists.
-- [ ] Resolve singular vs plural directory naming inconsistency (`weapon/` vs `weapons/`, `shield/` vs `shields/`). See `docs/items-schema.md`.
-- [ ] Review parallel namespaces against `docs/items-schema.md` "What Lives Outside data/catalog/" section. Decide whether to consolidate or keep separate, one namespace at a time:
-  - `data/tags/` vs `data/catalog/registries/`
+- [ ] Review remaining parallel namespaces. `data/tags/magic_fields.json` was consolidated into `data/catalog/registries/magic_fields.json` 2026-05-01. The remaining parallels:
+  - `data/tags/applications.json` and `data/tags/knowledge_groups.json` still separate from `data/catalog/registries/`. These have rich content (8+ fields per entry); deliberate consolidation pass needed if pursued.
   - `data/economy/` vs `data/catalog/economy/`
   - `data/magic/`, `data/companions/`, `data/characters/`, `data/npcs/`
 
 ### Item schema follow-ups
 
-- [ ] Author next batch of items (10–20 mundane) — gear, ammunition, apparel coverage gaps.
+- [ ] Author next batch of items (10–20 mundane) — gear, ammunition, apparel coverage gaps. Items in progress at prior session close: short sword, hand axe, studded leather armor, Thornroot stalker-derived item.
 - [ ] JSON Schema export: emit `data/catalog/schemas/*.schema.json` from Pydantic models for non-Python consumers (GPT builder).
 - [ ] Pricing rules engine: design and implement `economy/price_rules.json` so future items can use computed pricing rather than authored `value_cd`.
+- [ ] Mundane catalog sub-filtering: response size approaching ~80KB threshold; sub-filter `kind=mundane` before it crosses.
 
 ---
 
 ## LORE / WORLDBUILDING
 
 - [ ] **Institutional structure for Feywood** is implied by the catalog (Heartwardens, Greenshields, House Thornmere, House Ironsap) but not yet authored canonically. Sketch governance and access hierarchy when the catalog hints make it necessary.
-- [ ] `data/world/` continues catching up to `prompts/world_vault/`. The vault is the leading edge; data files lag. This is ongoing authoring work, not a single task.
+- [ ] `data/world/` continues catching up to `prompts/world_vault/`. The vault is the leading edge; data files lag. Ongoing authoring work, not a single task.
 
 ---
 
 ## PROMPT ARCHITECTURE
 
-- [ ] **Decide on prompt restructuring strategy** — slot pressure is real (~16 of 20 used). Options identified:
+- [ ] **Pre-test review pass on prompts** — read each prompt file looking for stale references, contradictions with the current backend contract, and inconsistencies that have accumulated. Higher leverage if done before extended observation period rather than after.
+- [ ] **Decide on prompt restructuring strategy** — slot pressure is real (~17 of 20 used after `arc-rules.md` added). Options identified:
   1. Hybrid model — extract structured data (denomination tables, regional mappings, vocabularies) to JSON; leave reasoning prose in markdown. Saves ~30% per file. Lower payoff.
   2. Fold smaller rules files (economy-rules, difficulty-rules) into existing larger files like `world.md`. Frees full slots.
   3. Consolidate cross-referencing rules into a single `play-rules.md`. Items, economy, and difficulty all reference each other; merge might improve coherence.
 
-  Decision deferred — not urgent until slot count climbs further. **Note:** the arc system will add `prompts/arc-rules.md`, pushing slot count to ~17. Re-evaluate after arc system v1 lands.
+  Decision deferred — not urgent until slot count climbs further.
 
 ---
 
 ## CI / PROCESS DEBT
 
-- [ ] Configure branch protection on main: require Lint+Unit+Contract, Integration+Loop Test, Item Catalog Validation, and Pre-Deploy Contract+Smoke Bundle status checks before merge. (User must do this in GitHub UI; not scriptable.)
-- [ ] Set up failure notification on main CI (GitHub email-on-failure or Slack webhook). Main CI was red for 30+ runs without anyone noticing in the past.
-- [ ] Audit recent direct-to-main pushes: commit `0c4b579b` ("Renames Feywood Glade to Feywood in all content") corrupted `tests/unit/test_companion_models.py` via sloppy find-replace and merged anyway. Investigate whether mass-rename commits go through PR review.
+(User indicated CI/process debt is resolved as of late 2026-04. Items below are watch-items only; close if confirmed.)
+
+- [ ] Confirm branch protection on main is configured: require Lint+Unit+Contract, Integration+Loop Test, Item Catalog Validation, and Pre-Deploy Contract+Smoke Bundle status checks before merge. (Manual GitHub UI configuration.)
+- [ ] Confirm failure notification on main CI is configured.
 - [ ] Update GitHub Actions to Node.js 24 before Sept 16 2026 deprecation.
 
 ---
 
 ## DEFERRED PENDING ARC SYSTEM v1
 
-These are designed or partially designed but explicitly held until arc system lands. They are likely to need revision once we see how the arc system behaves in actual play.
+Designed or partially designed; held until arc system v1 lands live-play validation. Likely to need revision once observations come in.
 
 ### Enchantment-rules arc
 
 **Status:** design draft exists at `/mnt/user-data/outputs/enchantment-rules-design-draft.md` (321 lines). All five open questions have recommended answers. Implementation plan covers 5 commits.
 
-**Why deferred:** Arc System v1 is implementation-complete (2026-04-30) but not yet validated through live play. Some enchantment-rules design decisions (how rare is enchantment? routine PC activity or rare narrative beat?) are best answered after observing how arc-driven reward channels behave in real use.
-
-**When to revisit:** once arc system v1 has been validated through 2-4 weeks of play. Watch specifically for: whether GPT correctly distinguishes formal/emergent at creation, whether calibrated envelopes feel right, whether hard-cap enforcement produces clean transitions or creates friction.
+**When to revisit:** once arc system v1 has been validated through 2–4 weeks of play. Watch specifically for: whether GPT correctly distinguishes formal/emergent at creation, whether calibrated envelopes feel right, whether hard-cap enforcement produces clean transitions or creates friction.
 
 **Risk if deferred too long:** GPT continues to lack a structural framework for how enchanted items are created, sustained, and contested. Current `mechanical_effect` field handles application; nothing handles lifecycle. Stalkerhide-class adjudication issues are addressed; Stalkerhide-creation-class issues are not.
 
