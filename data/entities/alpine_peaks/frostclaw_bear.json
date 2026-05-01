@@ -12,7 +12,7 @@
       "max": 60
     },
     "carrying_capacity": "medium",
-    "description": "A massive pale-furred bear of the high peaks, built for cold and stone. Frostclaw bears are rare companions \u2014 they bond slowly, and even more slowly consent to human company \u2014 but those who earn the bond have a companion whose strength and stability are almost unmatched in the realm. They are equally capable on climbing routes and on open stone, and their coat sheds snow and ice cleanly.",
+    "description": "A massive pale-furred bear of the high peaks, built for cold and stone. Frostclaw bears are rare companions — they bond slowly, and even more slowly consent to human company — but those who earn the bond have a companion whose strength and stability are almost unmatched in the realm. They are equally capable on climbing routes and on open stone, and their coat sheds snow and ice cleanly.",
     "display_name": "Frostclaw Bear",
     "movement_modes": [
       "walk",
@@ -39,22 +39,22 @@
     ],
     "temperament": "Slow, deliberate, and deeply patient. A frostclaw bear bonds rarely, but its loyalty once given is absolute. Aggressive only when protecting a bonded companion."
   },
-  "description": "A massive pale-furred bear of the high peaks, built for cold and stone. Frostclaw bears are rare companions \u2014 they bond slowly, and even more slowly consent to human company \u2014 but those who earn the bond have a companion whose strength and stability are almost unmatched in the realm. They are equally capable on climbing routes and on open stone, and their coat sheds snow and ice cleanly.",
+  "description": "A massive pale-furred bear of the high peaks, built for cold and stone. Frostclaw bears are rare companions — they bond slowly, and even more slowly consent to human company — but those who earn the bond have a companion whose strength and stability are almost unmatched in the realm. They are equally capable on climbing routes and on open stone, and their coat sheds snow and ice cleanly.",
   "ecology": {
     "canonical_tier": "primary",
     "category": "predator",
-    "cultural_role": "rare apex bonded companion of the high peaks; almost never sought casually",
+    "cultural_role": "apex predator of the high peaks; rare bonded mount among Heartwarden Captains and elite climbers",
     "primary_diet": [],
     "primary_diet_categories": [
-      "alpine_herbivores",
-      "seasonal_fish",
+      "alpine_fauna",
+      "high_altitude_browse",
       "carrion"
     ],
     "primary_predators": [],
     "size": "large",
     "trophic_tier": 4,
     "zones": [
-      "high_peaks_above_treeline"
+      "alpine_peaks"
     ]
   },
   "id": "frostclaw_bear",

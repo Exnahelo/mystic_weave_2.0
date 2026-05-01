@@ -40,14 +40,13 @@
   },
   "description": "A lean, long-limbed wolf of the high passes, named for its comfort on broken stone and narrow ledges. Cliffang wolves are smaller than Feywood wolves but tougher and more agile in vertical terrain; their paws are noticeably broader and more sure-footed than those of lowland wolves.",
   "ecology": {
-    "canonical_tier": "primary",
+    "canonical_tier": "secondary",
     "category": "predator",
-    "cultural_role": "pack canid of broken stone passes; common Alpine companion",
+    "cultural_role": "pack canid of the cliffs; steady mount and tracker for high-altitude work",
     "primary_diet": [],
     "primary_diet_categories": [
-      "alpine_herbivores",
-      "mountain_goats",
-      "rock_hares"
+      "alpine_fauna",
+      "small_alpine_browsers"
     ],
     "primary_predators": [
       "frostclaw_bear"
@@ -55,8 +54,7 @@
     "size": "medium",
     "trophic_tier": 3,
     "zones": [
-      "high_passes_broken_stone",
-      "ledge_country"
+      "alpine_peaks"
     ]
   },
   "id": "cliffang_wolf",

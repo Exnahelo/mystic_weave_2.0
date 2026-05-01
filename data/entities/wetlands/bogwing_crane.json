@@ -38,20 +38,20 @@
   },
   "description": "A long-legged wading bird with broad, quiet wings and plumage in muted greens and soft greys that disappears into reed and mist. Bogwing cranes are rare companion birds, usually paired with wetlands trackers or scholars. They are not hunters in the raptor sense but excellent sentinels; their alarm cry carries for great distances across open water.",
   "ecology": {
-    "canonical_tier": "primary",
-    "category": "predator",
-    "cultural_role": "alert wading companion of deep marsh; rare paired-tracker bird",
+    "canonical_tier": "secondary",
+    "category": "bird",
+    "cultural_role": "long-legged wetland predator; ceremonial significance in marsh-dwelling cultures",
     "primary_diet": [],
     "primary_diet_categories": [
-      "marsh_fish_small",
-      "frogs",
-      "marsh_insects"
+      "aquatic_fauna",
+      "wetland_invertebrates",
+      "marshland_fish"
     ],
     "primary_predators": [],
-    "size": "medium",
-    "trophic_tier": 2,
+    "size": "large",
+    "trophic_tier": 3,
     "zones": [
-      "deep_marsh_reedbeds"
+      "wetlands"
     ]
   },
   "id": "bogwing_crane",

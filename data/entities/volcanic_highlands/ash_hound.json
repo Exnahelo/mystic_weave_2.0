@@ -38,19 +38,19 @@
   },
   "description": "A broad, muscular hound with dark grey coat and pale ash-flecked markings across the shoulders. Ash hounds are working dogs bred across the Volcanic Highlands for patrol, guard duty, and tracking in conditions that would defeat ordinary hounds. Their endurance in heat and ash is famous; their tempers are reliably steady even when surrounded by hazard.",
   "ecology": {
-    "canonical_tier": "primary",
+    "canonical_tier": "secondary",
     "category": "predator",
-    "cultural_role": "working dog of Highland settlements; ash- and heat-tolerant",
+    "cultural_role": "tracker and hunter of the volcanic highlands; resilient to ash and heat",
     "primary_diet": [],
     "primary_diet_categories": [
-      "domestic_provisioning",
-      "ash_tolerant_small_game"
+      "highland_fauna",
+      "carrion"
     ],
     "primary_predators": [],
     "size": "medium",
-    "trophic_tier": 2,
+    "trophic_tier": 3,
     "zones": [
-      "volcanic_highlands_settled"
+      "volcanic_highlands"
     ]
   },
   "id": "ash_hound",

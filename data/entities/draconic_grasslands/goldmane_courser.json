@@ -38,18 +38,17 @@
   "ecology": {
     "canonical_tier": "primary",
     "category": "herbivore",
-    "cultural_role": "regional courser breed of the open grasslands; valued for sustained speed",
+    "cultural_role": "premier riding species of the grasslands; ceremonial significance among House riders",
     "primary_diet": [],
     "primary_diet_categories": [
-      "grasses",
-      "cured_hay",
-      "grain_provisioning"
+      "grassland_browse",
+      "open_steppe_forage"
     ],
     "primary_predators": [],
     "size": "large",
-    "trophic_tier": 1,
+    "trophic_tier": 2,
     "zones": [
-      "open_grasslands_central"
+      "draconic_grasslands"
     ]
   },
   "id": "goldmane_courser",

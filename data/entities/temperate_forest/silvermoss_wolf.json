@@ -12,7 +12,7 @@
       "max": 28
     },
     "carrying_capacity": "small",
-    "description": "The common wolf of the Temperate Forest \u2014 grey-coated with faint silver-moss highlights along the back and flanks. Silvermoss wolves are the ordinary wolves of the realm's well-settled forests: capable hunters, good pack coordinators, and reliable companions for rangers and hunters who work the standard woodland territories.",
+    "description": "The common wolf of the Temperate Forest — grey-coated with faint silver-moss highlights along the back and flanks. Silvermoss wolves are the ordinary wolves of the realm's well-settled forests: capable hunters, good pack coordinators, and reliable companions for rangers and hunters who work the standard woodland territories.",
     "display_name": "Silvermoss Wolf",
     "movement_modes": [
       "walk",
@@ -35,22 +35,21 @@
     ],
     "temperament": "Steady, unflashy, dependable. A practical working wolf for handlers who need reliable pack coordination without Feywood strangeness."
   },
-  "description": "The common wolf of the Temperate Forest \u2014 grey-coated with faint silver-moss highlights along the back and flanks. Silvermoss wolves are the ordinary wolves of the realm's well-settled forests: capable hunters, good pack coordinators, and reliable companions for rangers and hunters who work the standard woodland territories.",
+  "description": "The common wolf of the Temperate Forest — grey-coated with faint silver-moss highlights along the back and flanks. Silvermoss wolves are the ordinary wolves of the realm's well-settled forests: capable hunters, good pack coordinators, and reliable companions for rangers and hunters who work the standard woodland territories.",
   "ecology": {
-    "canonical_tier": "primary",
+    "canonical_tier": "secondary",
     "category": "predator",
-    "cultural_role": "ordinary wolf of well-settled forests; reliable working canid",
+    "cultural_role": "pack canid of the temperate forest; quiet hunter and steady mount",
     "primary_diet": [],
     "primary_diet_categories": [
-      "forest_deer",
-      "forest_hares",
-      "small_forest_mammals"
+      "forest_fauna",
+      "small_browsers"
     ],
     "primary_predators": [],
     "size": "medium",
     "trophic_tier": 3,
     "zones": [
-      "temperate_forest_general"
+      "temperate_forest"
     ]
   },
   "id": "silvermoss_wolf",

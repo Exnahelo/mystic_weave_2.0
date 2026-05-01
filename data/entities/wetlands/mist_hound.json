@@ -39,19 +39,20 @@
   },
   "description": "A broad-chested hound with short, water-shedding fur and slightly webbed paws, bred across the wetlands settlements for tracking in marsh and reed country. Mist hounds handle mud, cold, and standing water better than most working dogs and are known for an almost eerie persistence on a scent trail.",
   "ecology": {
-    "canonical_tier": "primary",
+    "canonical_tier": "secondary",
     "category": "predator",
-    "cultural_role": "tracking dog of marsh and reed country; tolerant of cold standing water",
+    "cultural_role": "tracker of the marshes and reedflats; valued for scent in damp terrain",
     "primary_diet": [],
     "primary_diet_categories": [
-      "domestic_provisioning",
-      "marsh_small_game"
+      "wetland_fauna",
+      "aquatic_prey",
+      "marshland_browsers"
     ],
     "primary_predators": [],
     "size": "medium",
-    "trophic_tier": 2,
+    "trophic_tier": 3,
     "zones": [
-      "wetlands_marsh_reedland"
+      "wetlands"
     ]
   },
   "id": "mist_hound",
