@@ -33,6 +33,8 @@ A **job** or **contract** is a higher-level objective that may span multiple sce
 A job is not automatically one scene.
 A job may contain several resolved scenes.
 
+Higher-level scope governance — when an arc crosses its scene budget, when scope expands, when missions decompose into multi-leg objectives — is handled by the arc system. See `arc-rules.md`. Scene-level pacing remains as documented here.
+
 ## Consequence Chain
 
 A **consequence chain** is the full linked sequence of outcomes that belongs to one continuing stake structure.
