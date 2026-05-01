@@ -37,13 +37,14 @@ def _create_start(client: TestClient, payload: dict[str, object]) -> dict:
 
 
 @pytest.mark.contract
-def test_ready_to_close_with_no_closure_conditions_rejected() -> None:
+def test_ready_to_close_with_defaulted_closure_conditions_unmet_rejected() -> None:
     conn = ArcTransitionConn()
     with TestClient(_app(conn)) as client:
         arc = _create_start(client, _payload())
         response = client.post(f"/arc/sess-closure/{arc['id']}/transition", json={"from_state": "in_progress", "to_state": "ready_to_close", "reason": "ready"})
     assert response.status_code == 422
-    assert response.json()["detail"]["error"] == "no_closure_conditions"
+    assert response.json()["detail"]["error"] == "closure_conditions_unmet"
+    assert response.json()["detail"]["closure_conditions"]["any_of"]
 
 
 @pytest.mark.contract

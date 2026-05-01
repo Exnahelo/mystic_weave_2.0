@@ -127,9 +127,9 @@ def test_settle_reputation_bounds() -> None:
     conn = ArcTransitionConn()
     with TestClient(_app(conn)) as client:
         arc = _create_start_ready(client)
-        bad = client.post(f"/arc/sess-settle/{arc['id']}/settle", json={"outcome": "complete", "awarded_ap": 1, "reputation_changes": [{"faction": "f", "delta": 1}]})
+        bad = client.post(f"/arc/sess-settle/{arc['id']}/settle", json={"outcome": "complete", "awarded_ap": 1, "reputation_changes": [{"faction": "f", "delta": 20}]})
         arc2 = _create_start_ready(client)
-        good = client.post(f"/arc/sess-settle/{arc2['id']}/settle", json={"outcome": "complete", "awarded_ap": 1, "reputation_changes": [{"faction": "f", "delta": 0}]})
+        good = client.post(f"/arc/sess-settle/{arc2['id']}/settle", json={"outcome": "complete", "awarded_ap": 1, "reputation_changes": [{"faction": "f", "delta": 10}]})
     assert bad.status_code == 422
     assert bad.json()["detail"]["error"] == "reputation_positive_outside_envelope"
     assert good.status_code == 200
@@ -151,11 +151,6 @@ def test_settlement_updates_character_reputation() -> None:
     conn = ArcTransitionConn()
     with TestClient(_app(conn)) as client:
         arc = _create_start_ready(client)
-        # The default envelope allows zero reputation; widen in stored arc data for this integration assertion.
-        stored = next(row for row in conn.rows if row["id"] == arc["id"])
-        data = __import__("json").loads(stored["data"])
-        data["rewards"]["reputation"]["max_positive_delta"] = 10
-        stored["data"] = __import__("json").dumps(data)
         response = client.post(f"/arc/sess-settle/{arc['id']}/settle", json={"outcome": "complete", "awarded_ap": 1, "reputation_changes": [{"faction": "House Heartwood", "delta": 5}]})
     assert response.status_code == 200
     assert conn.character["reputation"][0]["faction"] == "House Heartwood"
@@ -167,10 +162,6 @@ def test_settlement_updates_world_economy_coin() -> None:
     conn = ArcTransitionConn()
     with TestClient(_app(conn)) as client:
         arc = _create_start_ready(client)
-        stored = next(row for row in conn.rows if row["id"] == arc["id"])
-        data = __import__("json").loads(stored["data"])
-        data["rewards"]["economy"]["coin_cd_max"] = 500
-        stored["data"] = __import__("json").dumps(data)
         response = client.post(f"/arc/sess-settle/{arc['id']}/settle", json={"outcome": "complete", "awarded_ap": 1, "coin_cd_awarded": 500})
     assert response.status_code == 200
     assert conn.world["economy"]["coin"] == 1500
@@ -181,10 +172,6 @@ def test_emergent_arc_settlement_updates_state_but_not_ap() -> None:
     conn = ArcTransitionConn()
     with TestClient(_app(conn)) as client:
         arc = _create_start_ready(client, formal=False)
-        stored = next(row for row in conn.rows if row["id"] == arc["id"])
-        data = __import__("json").loads(stored["data"])
-        data["rewards"]["reputation"]["max_positive_delta"] = 10
-        stored["data"] = __import__("json").dumps(data)
         response = client.post(f"/arc/sess-settle/{arc['id']}/settle", json={"outcome": "complete", "reputation_changes": [{"faction": "Greenshields", "delta": 5}]})
     assert response.status_code == 200
     assert conn.character["advancement"]["points_available"] == 0
@@ -196,13 +183,38 @@ def test_failed_arc_settlement_applies_non_ap_rewards() -> None:
     conn = ArcTransitionConn()
     with TestClient(_app(conn)) as client:
         arc = _create_start_in_progress(client)
-        stored = next(row for row in conn.rows if row["id"] == arc["id"])
-        data = __import__("json").loads(stored["data"])
-        data["rewards"]["reputation"]["max_negative_delta"] = 10
-        stored["data"] = __import__("json").dumps(data)
         response = client.post(f"/arc/sess-settle/{arc['id']}/settle", json={"outcome": "failed", "reputation_changes": [{"faction": "House Heartwood", "delta": -5}]})
     assert response.status_code == 200
     assert conn.character["reputation"][0]["standing"] == -5
+
+
+@pytest.mark.contract
+def test_settle_mission_multi_leg_reputation_within_new_envelope_succeeds() -> None:
+    conn = ArcTransitionConn()
+    with TestClient(_app(conn)) as client:
+        arc = _create_start_ready(client)
+        response = client.post(f"/arc/sess-settle/{arc['id']}/settle", json={"outcome": "complete", "awarded_ap": 1, "reputation_changes": [{"faction": "Heartwardens", "delta": 10}]})
+    assert response.status_code == 200
+
+
+@pytest.mark.contract
+def test_settle_mission_multi_leg_reputation_exceeds_new_envelope_rejected() -> None:
+    conn = ArcTransitionConn()
+    with TestClient(_app(conn)) as client:
+        arc = _create_start_ready(client)
+        response = client.post(f"/arc/sess-settle/{arc['id']}/settle", json={"outcome": "complete", "awarded_ap": 1, "reputation_changes": [{"faction": "Heartwardens", "delta": 20}]})
+    assert response.status_code == 422
+    assert response.json()["detail"]["error"] == "reputation_positive_outside_envelope"
+
+
+@pytest.mark.contract
+def test_emergent_arc_can_settle_reputation_with_default_envelope() -> None:
+    conn = ArcTransitionConn()
+    with TestClient(_app(conn)) as client:
+        arc = _create_start_ready(client, formal=False)
+        response = client.post(f"/arc/sess-settle/{arc['id']}/settle", json={"outcome": "complete", "reputation_changes": [{"faction": "Greenshields", "delta": 5}]})
+    assert response.status_code == 200
+    assert conn.character["reputation"][0]["standing"] == 5
 
 
 @pytest.mark.contract

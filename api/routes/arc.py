@@ -18,8 +18,13 @@ from api.models import (
     Arc,
     ArcAPAward,
     ArcBudget,
+    ArcConditionSet,
+    ArcEconomyEnvelope,
     ArcEscalationRules,
     ArcFlags,
+    ArcItemAccessEnvelope,
+    ArcLeverageEnvelope,
+    ArcReputationEnvelope,
     ArcRewardEnvelope,
     ArcSettlementResult,
     ArcTimestamps,
@@ -39,6 +44,52 @@ from api.schemas.arc_schemas import (
 from api.services.arc_settlement import apply_arc_settlement
 
 router = APIRouter(prefix="/arc", tags=["arc"])
+
+
+SUBTYPE_DEFAULT_CLOSURE_CONDITIONS: dict[str, dict[str, Any]] = {
+    "investigation": {
+        "any_of": [
+            {"type": "report_delivered", "payload": {"flag_id": "report_delivered"}},
+            {"type": "evidence_chain_complete", "payload": {"flag_id": "evidence_chain_complete"}},
+            {"type": "decision_made", "payload": {"flag_id": "decision_made"}},
+        ]
+    },
+    "recovery": {
+        "any_of": [
+            {"type": "target_item_recovered", "payload": {"flag_id": "target_recovered"}},
+            {"type": "target_destroyed", "payload": {"flag_id": "target_destroyed"}},
+            {"type": "decision_made", "payload": {"flag_id": "recovery_resolved"}},
+        ]
+    },
+    "containment": {
+        "any_of": [
+            {"type": "threat_state_changed", "payload": {"flag_id": "threat_contained"}},
+            {"type": "report_delivered", "payload": {"flag_id": "containment_report"}},
+            {"type": "world_flag_present", "payload": {"flag": "containment_resolved"}},
+        ]
+    },
+    "delivery": {"any_of": [{"type": "target_delivered", "payload": {"flag_id": "target_delivered"}}]},
+    "escort": {"any_of": [{"type": "target_survived", "payload": {"flag_id": "escort_complete"}}]},
+    "diplomatic": {
+        "any_of": [
+            {"type": "decision_made", "payload": {"flag_id": "diplomatic_resolution"}},
+            {"type": "faction_state_changed", "payload": {"flag_id": "faction_state_changed"}},
+        ]
+    },
+    "surveillance": {
+        "any_of": [
+            {"type": "report_delivered", "payload": {"flag_id": "surveillance_report"}},
+            {"type": "evidence_chain_complete", "payload": {"flag_id": "surveillance_complete"}},
+        ]
+    },
+    "seizure": {"any_of": [{"type": "target_secured", "payload": {"flag_id": "target_seized"}}]},
+    "_default": {
+        "any_of": [
+            {"type": "decision_made", "payload": {"flag_id": "arc_resolution"}},
+            {"type": "world_flag_present", "payload": {"flag": "arc_resolved"}},
+        ]
+    },
+}
 
 
 def _plain_validation_errors(err: ValidationError) -> list[dict[str, Any]]:
@@ -93,7 +144,23 @@ def validate_provenance(req: ArcCreateRequest) -> None:
         )
 
 
-def build_arc_from_request(session_id: str, req: ArcCreateRequest) -> Arc:
+def ensure_closure_conditions(req: ArcCreateRequest) -> ArcConditionSet:
+    """Return authored closure conditions, or subtype defaults when empty."""
+    if not is_empty(req.closure_conditions):
+        return req.closure_conditions
+
+    default_template = SUBTYPE_DEFAULT_CLOSURE_CONDITIONS.get(
+        req.subtype,
+        SUBTYPE_DEFAULT_CLOSURE_CONDITIONS["_default"],
+    )
+    return ArcConditionSet.model_validate(default_template)
+
+
+def build_arc_from_request(
+    session_id: str,
+    req: ArcCreateRequest,
+    closure_conditions: ArcConditionSet | None = None,
+) -> Arc:
     """Construct an Arc from a create request, applying registry defaults."""
     envelope_defaults = get_arc_type_default_envelope(req.primary_type)
 
@@ -107,6 +174,31 @@ def build_arc_from_request(session_id: str, req: ArcCreateRequest) -> Arc:
         min=envelope_defaults["ap_award_min"] if req.formal_contract_qualified else 0,
         max=envelope_defaults["ap_award_max"] if req.formal_contract_qualified else 0,
         fixed=envelope_defaults["ap_award_fixed"],
+    )
+    reputation_envelope = ArcReputationEnvelope(
+        max_positive_delta=envelope_defaults["reputation_max_positive_delta"],
+        max_negative_delta=envelope_defaults["reputation_max_negative_delta"],
+        affected_factions=[],
+    )
+    economy_envelope = ArcEconomyEnvelope(
+        coin_cd_max=envelope_defaults["economy_coin_cd_max"],
+        barter_allowed=True,
+        obligation_allowed=True,
+    )
+    items_envelope = ArcItemAccessEnvelope(
+        magical_item_tier_max=envelope_defaults["items_magical_tier_max"],
+        mundane_item_tier_max=envelope_defaults["items_mundane_tier_max"],
+    )
+    leverage_envelope = ArcLeverageEnvelope(
+        obligation_slots_max=envelope_defaults["leverage_obligation_slots_max"],
+        secret_or_evidence_grade_max=envelope_defaults["leverage_evidence_grade_max"],
+    )
+    rewards = ArcRewardEnvelope(
+        ap_award=ap_award,
+        reputation=reputation_envelope,
+        economy=economy_envelope,
+        items_access=items_envelope,
+        leverage=leverage_envelope,
     )
     flags = ArcFlags(
         formal_contract_qualified=req.formal_contract_qualified,
@@ -128,11 +220,11 @@ def build_arc_from_request(session_id: str, req: ArcCreateRequest) -> Arc:
         patron_faction=req.patron_faction,
         patron_npc_id=req.patron_npc_id,
         target_locations=req.target_locations,
-        closure_conditions=req.closure_conditions,
+        closure_conditions=closure_conditions or req.closure_conditions,
         failure_conditions=req.failure_conditions,
         escalation_rules=req.escalation_rules or ArcEscalationRules(),
         budget=budget,
-        rewards=ArcRewardEnvelope(ap_award=ap_award),
+        rewards=rewards,
         flags=flags,
         timestamps=ArcTimestamps(created_at=now),
         notes=req.notes,
@@ -154,8 +246,9 @@ async def create_arc(
 ) -> Arc:
     """Create a new arc with strict provenance validation."""
     validate_provenance(req)
+    closure_conditions = ensure_closure_conditions(req)
     try:
-        arc = build_arc_from_request(session_id, req)
+        arc = build_arc_from_request(session_id, req, closure_conditions)
     except ValidationError as exc:
         raise HTTPException(status_code=422, detail=_plain_validation_errors(exc))
     await repo.create(arc)

@@ -10,7 +10,14 @@
       "scene_soft_cap": 2,
       "scene_hard_cap": 4,
       "location_soft_cap": 1,
-      "location_hard_cap": 2
+      "location_hard_cap": 2,
+      "reputation_max_positive_delta": 5,
+      "reputation_max_negative_delta": 5,
+      "economy_coin_cd_max": 100,
+      "items_magical_tier_max": null,
+      "items_mundane_tier_max": 1,
+      "leverage_obligation_slots_max": 0,
+      "leverage_evidence_grade_max": 1
     },
     {
       "id": "contract_delicate",
@@ -21,7 +28,14 @@
       "scene_soft_cap": 4,
       "scene_hard_cap": 6,
       "location_soft_cap": 2,
-      "location_hard_cap": 3
+      "location_hard_cap": 3,
+      "reputation_max_positive_delta": 10,
+      "reputation_max_negative_delta": 10,
+      "economy_coin_cd_max": 500,
+      "items_magical_tier_max": null,
+      "items_mundane_tier_max": 2,
+      "leverage_obligation_slots_max": 1,
+      "leverage_evidence_grade_max": 1
     },
     {
       "id": "mission_multi_leg",
@@ -32,7 +46,14 @@
       "scene_soft_cap": 6,
       "scene_hard_cap": 10,
       "location_soft_cap": 3,
-      "location_hard_cap": 5
+      "location_hard_cap": 5,
+      "reputation_max_positive_delta": 15,
+      "reputation_max_negative_delta": 15,
+      "economy_coin_cd_max": 1500,
+      "items_magical_tier_max": 1,
+      "items_mundane_tier_max": 2,
+      "leverage_obligation_slots_max": 1,
+      "leverage_evidence_grade_max": 2
     },
     {
       "id": "undertaking_regional",
@@ -43,7 +64,14 @@
       "scene_soft_cap": 10,
       "scene_hard_cap": 16,
       "location_soft_cap": 4,
-      "location_hard_cap": 7
+      "location_hard_cap": 7,
+      "reputation_max_positive_delta": 25,
+      "reputation_max_negative_delta": 25,
+      "economy_coin_cd_max": 5000,
+      "items_magical_tier_max": 2,
+      "items_mundane_tier_max": 3,
+      "leverage_obligation_slots_max": 2,
+      "leverage_evidence_grade_max": 3
     },
     {
       "id": "arc_campaign",
@@ -54,7 +82,14 @@
       "scene_soft_cap": 16,
       "scene_hard_cap": 24,
       "location_soft_cap": 6,
-      "location_hard_cap": 12
+      "location_hard_cap": 12,
+      "reputation_max_positive_delta": 50,
+      "reputation_max_negative_delta": 50,
+      "economy_coin_cd_max": 25000,
+      "items_magical_tier_max": 3,
+      "items_mundane_tier_max": 4,
+      "leverage_obligation_slots_max": 3,
+      "leverage_evidence_grade_max": 4
     }
   ],
   "stake_scales": ["local", "situational", "regional", "campaign"],

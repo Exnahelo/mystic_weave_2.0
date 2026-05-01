@@ -109,6 +109,10 @@ def test_create_emergent_arc_happy_path_zero_ap() -> None:
     assert body["state"] == "proposed"
     assert body["rewards"]["ap_award"] == {"min": 0, "max": 0, "fixed": False}
     assert body["flags"]["formal_contract_qualified"] is False
+    assert body["rewards"]["reputation"]["max_positive_delta"] == 15
+    assert body["rewards"]["economy"]["coin_cd_max"] == 1500
+    assert body["rewards"]["items_access"]["magical_item_tier_max"] == 1
+    assert body["rewards"]["leverage"]["secret_or_evidence_grade_max"] == 2
 
 
 @pytest.mark.contract
@@ -127,6 +131,33 @@ def test_create_formal_contract_happy_path_awards_default_ap() -> None:
     assert body["rewards"]["ap_award"] == {"min": 1, "max": 2, "fixed": False}
     assert body["flags"]["formal_contract_qualified"] is True
     assert body["flags"]["ap_ownership"] == "parent"
+
+
+@pytest.mark.contract
+def test_create_empty_closure_conditions_populates_subtype_default() -> None:
+    response, _ = _post(_payload(closure_conditions={}))
+
+    assert response.status_code == 200
+    closure_conditions = response.json()["closure_conditions"]
+    assert closure_conditions["any_of"] == [
+        {"type": "report_delivered", "payload": {"flag_id": "report_delivered"}},
+        {"type": "evidence_chain_complete", "payload": {"flag_id": "evidence_chain_complete"}},
+        {"type": "decision_made", "payload": {"flag_id": "decision_made"}},
+    ]
+
+
+@pytest.mark.contract
+def test_create_authored_closure_conditions_are_preserved() -> None:
+    authored = {
+        "all_of": [
+            {"type": "world_flag_present", "payload": {"flag": "custom_resolution"}}
+        ]
+    }
+    response, _ = _post(_payload(closure_conditions=authored))
+
+    assert response.status_code == 200
+    assert response.json()["closure_conditions"]["all_of"] == authored["all_of"]
+    assert response.json()["closure_conditions"]["any_of"] == []
 
 
 @pytest.mark.contract

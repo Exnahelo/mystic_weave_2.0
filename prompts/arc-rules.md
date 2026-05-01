@@ -528,6 +528,10 @@ After creation, transition according to play state if needed.
 
 Call after each resolved scene that advances an active arc.
 
+**Scene resolution criterion.** A resolved scene is one in which something materially changed in the situation through player action. Time passing alone is not a resolved scene. Routine activity that produces no narrative consequence is not a resolved scene. If you are about to call /progress and cannot identify what materially changed, do not call it.
+
+**Time-skip discipline.** When the arc is in a waiting period (waiting for an NPC arrival, waiting for a message reply, waiting for a scheduled event), do not narrate filler scenes to fill the time. State that time passes and wait for the next meaningful trigger. /progress should not fire during these periods.
+
 Progress increments scene count, updates locations visited, and checks caps.
 
 Payload should state whether a resolved scene occurred and include location when relevant.

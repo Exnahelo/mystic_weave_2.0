@@ -240,7 +240,7 @@ def list_arc_type_ids() -> list[str]:
 
 
 def get_arc_type_defaults(type_id: str) -> dict[str, Any]:
-    """Return calibrated default envelope for an arc primary type."""
+    """Return calibrated defaults for an arc primary type."""
     defaults = load_arc_types()["type_defaults"]
     if type_id not in defaults:
         raise ValueError(f"Unknown arc type: {type_id!r}. Valid: {sorted(defaults)}")
@@ -248,8 +248,25 @@ def get_arc_type_defaults(type_id: str) -> dict[str, Any]:
 
 
 def get_arc_type_default_envelope(type_id: str) -> dict[str, Any]:
-    """Return calibrated default envelope for an arc primary type."""
-    return get_arc_type_defaults(type_id)
+    """Return the full calibrated reward/budget envelope for an arc primary type."""
+    defaults = get_arc_type_defaults(type_id)
+    keys = (
+        "ap_award_min",
+        "ap_award_max",
+        "ap_award_fixed",
+        "scene_soft_cap",
+        "scene_hard_cap",
+        "location_soft_cap",
+        "location_hard_cap",
+        "reputation_max_positive_delta",
+        "reputation_max_negative_delta",
+        "economy_coin_cd_max",
+        "items_magical_tier_max",
+        "items_mundane_tier_max",
+        "leverage_obligation_slots_max",
+        "leverage_evidence_grade_max",
+    )
+    return {key: defaults[key] for key in keys}
 
 
 def list_arc_state_ids() -> list[str]:
