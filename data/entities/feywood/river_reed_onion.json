@@ -1,0 +1,28 @@
+{
+  "biome": "feywood",
+  "description": "A riparian culinary plant cultivated along the Heartwater Basin margins, streamside plots, and estate water margins. River Reed Onion is a Feywood kitchen staple; its riparian cultivation is one of the Basin's continuous human-use activities.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "herb",
+    "cultural_role": "standard elven riparian cultivation; household kitchen staple",
+    "ecological_role": "riparian culinary plant",
+    "harvest_status": "cultivated",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "culinary",
+    "zones": [
+      "heartwater_basin"
+    ]
+  },
+  "id": "river_reed_onion",
+  "kind": "flora",
+  "name": "River Reed Onion",
+  "tags": [
+    "herb",
+    "culinary",
+    "river_reed_onion",
+    "riparian",
+    "cultivated"
+  ]
+}

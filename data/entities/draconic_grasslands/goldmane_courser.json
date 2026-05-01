@@ -1,0 +1,46 @@
+{
+  "biome": "draconic_grasslands",
+  "creature_companion": {
+    "age_category": "adult",
+    "base_domains": {
+      "composure": 44,
+      "instinct": 36,
+      "physical": 48
+    },
+    "base_hp": {
+      "current": 45,
+      "max": 45
+    },
+    "carrying_capacity": "large",
+    "description": "A tall, lean courser of the Draconic Grasslands, bred for speed across open ground. Goldmanes are named for their distinctive pale gold manes and tails, which lighten further with age. They are the realm's most prestigious riding horses and carry strong ceremonial associations; goldmanes of exceptional lineage are recorded in the Stronghold's breeding rolls.",
+    "display_name": "Goldmane Courser",
+    "movement_modes": [
+      "walk",
+      "swim"
+    ],
+    "natural_abilities": [
+      "keen_senses",
+      "endurance_runner"
+    ],
+    "natural_weapons": [
+      "hoof"
+    ],
+    "size": "large",
+    "size_note": "tall, lean, bred for speed",
+    "species": "horse",
+    "subspecies": "goldmane_courser",
+    "tactical_roles_defaults": [
+      "mount"
+    ],
+    "temperament": "Proud, willing, intelligent. A goldmane responds strongly to consistent handling and holds bonds over remarkable spans of time."
+  },
+  "description": "A tall, lean courser of the Draconic Grasslands, bred for speed across open ground. Goldmanes are named for their distinctive pale gold manes and tails, which lighten further with age. They are the realm's most prestigious riding horses and carry strong ceremonial associations; goldmanes of exceptional lineage are recorded in the Stronghold's breeding rolls.",
+  "id": "goldmane_courser",
+  "kind": "fauna",
+  "name": "Goldmane Courser",
+  "tags": [
+    "horse",
+    "draconic_grasslands",
+    "companion"
+  ]
+}

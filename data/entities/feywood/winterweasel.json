@@ -1,0 +1,35 @@
+{
+  "biome": "feywood",
+  "description": "A small mustelid whose coat whitens in late Turning. The Winterweasel is a canonical seasonal indicator; druids and long-tenured elves watch its coat change as a marker of the Feywood's seasonal state.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "small_fauna",
+    "cultural_role": "canonical seasonal indicator (coat whitens in late Turning)",
+    "primary_diet": [
+      "dormouse",
+      "shrewsong"
+    ],
+    "primary_diet_categories": [
+      "insects"
+    ],
+    "primary_predators": [
+      "mistwing_hawk",
+      "thornsong_owl"
+    ],
+    "size": "tiny",
+    "trophic_tier": 3,
+    "zones": [
+      "outer_old_growth_wild",
+      "feywood_edge"
+    ]
+  },
+  "id": "winterweasel",
+  "kind": "fauna",
+  "name": "Winterweasel",
+  "tags": [
+    "small_fauna",
+    "mustelid",
+    "winterweasel",
+    "seasonal_indicator"
+  ]
+}

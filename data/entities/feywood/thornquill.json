@@ -1,0 +1,33 @@
+{
+  "biome": "feywood",
+  "description": "A small spiny understory mammal of the deeper wild. Thornquills forage quietly; their spines deter most predators short of the apex tier.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "small_fauna",
+    "cultural_role": null,
+    "primary_diet": [
+      "redveil_shelf"
+    ],
+    "primary_diet_categories": [
+      "understory_browse"
+    ],
+    "primary_predators": [
+      "mossveil_cat",
+      "mossfoot_hound"
+    ],
+    "size": "small",
+    "trophic_tier": 2,
+    "zones": [
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "thornquill",
+  "kind": "fauna",
+  "name": "Thornquill",
+  "tags": [
+    "small_fauna",
+    "thornquill",
+    "spiny_mammal",
+    "understory"
+  ]
+}

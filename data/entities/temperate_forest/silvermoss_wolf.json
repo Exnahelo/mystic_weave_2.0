@@ -1,0 +1,47 @@
+{
+  "biome": "temperate_forest",
+  "creature_companion": {
+    "age_category": "adult",
+    "base_domains": {
+      "composure": 38,
+      "instinct": 44,
+      "physical": 40
+    },
+    "base_hp": {
+      "current": 28,
+      "max": 28
+    },
+    "carrying_capacity": "small",
+    "description": "The common wolf of the Temperate Forest \u2014 grey-coated with faint silver-moss highlights along the back and flanks. Silvermoss wolves are the ordinary wolves of the realm's well-settled forests: capable hunters, good pack coordinators, and reliable companions for rangers and hunters who work the standard woodland territories.",
+    "display_name": "Silvermoss Wolf",
+    "movement_modes": [
+      "walk",
+      "swim"
+    ],
+    "natural_abilities": [
+      "scent_tracking",
+      "pack_hunter",
+      "keen_senses"
+    ],
+    "natural_weapons": [
+      "bite"
+    ],
+    "size": "medium",
+    "size_note": null,
+    "species": "wolf",
+    "subspecies": "silvermoss_wolf",
+    "tactical_roles_defaults": [
+      "hunter"
+    ],
+    "temperament": "Steady, unflashy, dependable. A practical working wolf for handlers who need reliable pack coordination without Feywood strangeness."
+  },
+  "description": "The common wolf of the Temperate Forest \u2014 grey-coated with faint silver-moss highlights along the back and flanks. Silvermoss wolves are the ordinary wolves of the realm's well-settled forests: capable hunters, good pack coordinators, and reliable companions for rangers and hunters who work the standard woodland territories.",
+  "id": "silvermoss_wolf",
+  "kind": "fauna",
+  "name": "Silvermoss Wolf",
+  "tags": [
+    "wolf",
+    "temperate_forest",
+    "companion"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "_note": "Template only. Filenames beginning with '_' are skipped by loaders. Facets are optional by role, but each real entity must include at least one facet.",
+  "id": "example_entity_id",
+  "name": "Example Entity Name",
+  "kind": "fauna",
+  "biome": "feywood",
+  "tags": [
+    "example",
+    "feywood"
+  ],
+  "description": "Short GPT-facing description of the entity.",
+  "ecology": {
+    "_note": "Optional facet. Use when this entity participates in biome ecology, food webs, zones, or harvest policy.",
+    "category": "predator",
+    "trophic_tier": 3,
+    "size": "medium",
+    "zones": [
+      "example_zone"
+    ],
+    "primary_diet": [
+      "example_prey_id"
+    ],
+    "primary_diet_categories": [
+      "example_forage_pattern"
+    ],
+    "primary_predators": [],
+    "cultural_role": "Short description of how local cultures understand or use this entity.",
+    "canonical_tier": "primary",
+    "harvest_status": "wild"
+  },
+  "creature_companion": {
+    "_note": "Optional facet. Use when this entity can be represented as a creature companion. The biome is inherited from the top-level entity.",
+    "species": "wolf",
+    "subspecies": "example_entity_id",
+    "display_name": "Example Entity Name",
+    "size": "medium",
+    "size_note": "medium; example build",
+    "age_category": "adult",
+    "tactical_roles_defaults": [
+      "hunter"
+    ],
+    "natural_abilities": [
+      "scent_tracking"
+    ],
+    "natural_weapons": [
+      "bite"
+    ],
+    "movement_modes": [
+      "walk"
+    ],
+    "carrying_capacity": "small",
+    "base_domains": {
+      "physical": 40,
+      "instinct": 40,
+      "composure": 40
+    },
+    "base_hp": {
+      "current": 20,
+      "max": 20
+    },
+    "temperament": "Short behavior note for companion handling."
+  }
+}

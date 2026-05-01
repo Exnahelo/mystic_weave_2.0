@@ -1,0 +1,32 @@
+{
+  "biome": "feywood",
+  "description": "The apex fish of the Heartwater Basin's lake. Large, ambush-feeding, rare but known. Older elven fishers speak of specific lakepike holding specific water for generations.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "aquatic",
+    "cultural_role": "apex freshwater predator; specific individuals remembered across generations",
+    "primary_diet": [
+      "silverstream_trout"
+    ],
+    "primary_diet_categories": [
+      "smaller_fish",
+      "aquatic_fauna"
+    ],
+    "primary_predators": [],
+    "size": "large",
+    "trophic_tier": 4,
+    "zones": [
+      "heartwater_basin"
+    ]
+  },
+  "id": "lakepike",
+  "kind": "fauna",
+  "name": "Lakepike",
+  "tags": [
+    "aquatic",
+    "fish",
+    "lakepike",
+    "apex",
+    "ambush"
+  ]
+}

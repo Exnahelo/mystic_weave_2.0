@@ -1,0 +1,27 @@
+{
+  "biome": "feywood",
+  "description": "A dense hardwood of the deep wild, harvested only from natural fall or sanctioned selective cut. Ironroot is the structural wood of choice for shield cores, load-bearing construction, and tools expected to last across generations.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "canopy",
+    "cultural_role": "load-bearing wood, shield cores, long-service tools",
+    "ecological_role": "dense slow-growing canopy species",
+    "harvest_status": "restricted",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "tree",
+    "zones": [
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "ironroot_hardwood",
+  "kind": "flora",
+  "name": "Ironroot Hardwood",
+  "tags": [
+    "hardwood",
+    "dense",
+    "load_bearing",
+    "shield_core"
+  ]
+}

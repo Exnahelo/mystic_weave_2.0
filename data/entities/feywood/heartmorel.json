@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "An edible decomposer fungus seasonal to the Feywood's mature forest. Heartmorel is the canonical Feywood culinary fungus; preserved Heartmorel is a minor but recognized Vaelmere trade export.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "fungus",
+    "cultural_role": "signature Feywood culinary fungus; Vaelmere trade export",
+    "ecological_role": "edible decomposer fungus",
+    "harvest_status": "wild",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "edible",
+    "zones": [
+      "outer_old_growth_wild",
+      "thornveil_civic_forest"
+    ]
+  },
+  "id": "heartmorel",
+  "kind": "flora",
+  "name": "Heartmorel",
+  "tags": [
+    "fungus",
+    "edible",
+    "heartmorel",
+    "culinary",
+    "trade_export"
+  ]
+}

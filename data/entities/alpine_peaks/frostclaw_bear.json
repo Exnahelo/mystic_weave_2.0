@@ -1,0 +1,51 @@
+{
+  "biome": "alpine_peaks",
+  "creature_companion": {
+    "age_category": "adult",
+    "base_domains": {
+      "composure": 42,
+      "instinct": 40,
+      "physical": 55
+    },
+    "base_hp": {
+      "current": 60,
+      "max": 60
+    },
+    "carrying_capacity": "medium",
+    "description": "A massive pale-furred bear of the high peaks, built for cold and stone. Frostclaw bears are rare companions \u2014 they bond slowly, and even more slowly consent to human company \u2014 but those who earn the bond have a companion whose strength and stability are almost unmatched in the realm. They are equally capable on climbing routes and on open stone, and their coat sheds snow and ice cleanly.",
+    "display_name": "Frostclaw Bear",
+    "movement_modes": [
+      "walk",
+      "climb",
+      "swim"
+    ],
+    "natural_abilities": [
+      "keen_senses",
+      "cold_resistance",
+      "climbing",
+      "powerful_build"
+    ],
+    "natural_weapons": [
+      "bite",
+      "claw"
+    ],
+    "size": "large",
+    "size_note": null,
+    "species": "bear",
+    "subspecies": "frostclaw_bear",
+    "tactical_roles_defaults": [
+      "guard",
+      "mount"
+    ],
+    "temperament": "Slow, deliberate, and deeply patient. A frostclaw bear bonds rarely, but its loyalty once given is absolute. Aggressive only when protecting a bonded companion."
+  },
+  "description": "A massive pale-furred bear of the high peaks, built for cold and stone. Frostclaw bears are rare companions \u2014 they bond slowly, and even more slowly consent to human company \u2014 but those who earn the bond have a companion whose strength and stability are almost unmatched in the realm. They are equally capable on climbing routes and on open stone, and their coat sheds snow and ice cleanly.",
+  "id": "frostclaw_bear",
+  "kind": "fauna",
+  "name": "Frostclaw Bear",
+  "tags": [
+    "bear",
+    "alpine_peaks",
+    "companion"
+  ]
+}

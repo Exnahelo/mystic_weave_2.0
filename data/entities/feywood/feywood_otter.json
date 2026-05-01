@@ -1,0 +1,35 @@
+{
+  "biome": "feywood",
+  "description": "Common along Heartwater Basin shallows and reed-margins. Feywood otters live in small family groups and are handled gently by the elves who share their water. A companion candidate for handlers with sustained relationship to Basin work.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "aquatic",
+    "cultural_role": "common along Basin shallows; family groups; handled gently by elves",
+    "primary_diet": [
+      "silverstream_trout",
+      "heartpond_frog"
+    ],
+    "primary_diet_categories": [
+      "aquatic_insects"
+    ],
+    "primary_predators": [
+      "lakepike",
+      "mossveil_cat"
+    ],
+    "size": "small",
+    "trophic_tier": 3,
+    "zones": [
+      "heartwater_basin"
+    ]
+  },
+  "id": "feywood_otter",
+  "kind": "fauna",
+  "name": "Feywood Otter",
+  "tags": [
+    "aquatic",
+    "mustelid",
+    "feywood_otter",
+    "family_group",
+    "companion_candidate"
+  ]
+}

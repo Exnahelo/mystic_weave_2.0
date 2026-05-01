@@ -1,0 +1,48 @@
+{
+  "biome": "draconic_grasslands",
+  "creature_companion": {
+    "age_category": "adult",
+    "base_domains": {
+      "composure": 38,
+      "instinct": 50,
+      "physical": 34
+    },
+    "base_hp": {
+      "current": 16,
+      "max": 16
+    },
+    "carrying_capacity": "none",
+    "description": "A large grasslands hawk with pale gold and white plumage and distinctive crested feathers at the crown. Windcrown hawks are common scouts and messenger birds across the Grasslands, favored for the speed and distance of their flight and their unusually good response to handler signals.",
+    "display_name": "Windcrown Hawk",
+    "movement_modes": [
+      "walk",
+      "fly"
+    ],
+    "natural_abilities": [
+      "keen_senses",
+      "flight",
+      "endurance_flyer"
+    ],
+    "natural_weapons": [
+      "claw",
+      "bite"
+    ],
+    "size": "small",
+    "size_note": "large for a common raptor",
+    "species": "hawk",
+    "subspecies": "windcrown_hawk",
+    "tactical_roles_defaults": [
+      "scout"
+    ],
+    "temperament": "Bright, fast-responding, and notably trainable. Windcrowns bond readily and work well with handlers who value clear communication."
+  },
+  "description": "A large grasslands hawk with pale gold and white plumage and distinctive crested feathers at the crown. Windcrown hawks are common scouts and messenger birds across the Grasslands, favored for the speed and distance of their flight and their unusually good response to handler signals.",
+  "id": "windcrown_hawk",
+  "kind": "fauna",
+  "name": "Windcrown Hawk",
+  "tags": [
+    "hawk",
+    "draconic_grasslands",
+    "companion"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "A major shade-tolerant canopy species, widespread across the mature Feywood. Grey Beech hosts substantial Rootlace Mycelium connection and provides the wood most favored for finishing work in interior living spaces.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "canopy",
+    "cultural_role": "fine wood for quiet interior construction",
+    "ecological_role": "shade canopy; fungal network host",
+    "harvest_status": "wild",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "tree",
+    "zones": [
+      "thornveil_civic_forest",
+      "outer_old_growth_wild",
+      "silent_grove_enclave"
+    ]
+  },
+  "id": "grey_beech",
+  "kind": "flora",
+  "name": "Grey Beech",
+  "tags": [
+    "beech",
+    "canopy",
+    "shade",
+    "fungal_host"
+  ]
+}

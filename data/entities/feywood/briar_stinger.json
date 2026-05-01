@@ -1,0 +1,32 @@
+{
+  "biome": "feywood",
+  "description": "A biting-insect nuisance active in warm-season evenings near Heartwater Basin margins. Briar-stingers are localized; Basin residents know to accommodate and the broader Feywood is not affected.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "insect",
+    "cultural_role": "warm-season evening nuisance near Basin margins",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "blood_feeding",
+      "plant_matter"
+    ],
+    "primary_predators": [
+      "heartpond_frog",
+      "feywood_otter"
+    ],
+    "size": "tiny",
+    "trophic_tier": 2,
+    "zones": [
+      "heartwater_basin"
+    ]
+  },
+  "id": "briar_stinger",
+  "kind": "fauna",
+  "name": "Briar-Stinger",
+  "tags": [
+    "insect",
+    "briar_stinger",
+    "biting",
+    "seasonal_nuisance"
+  ]
+}

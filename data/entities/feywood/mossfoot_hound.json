@@ -1,0 +1,35 @@
+{
+  "biome": "feywood",
+  "description": "A pack-forming smaller canid of the outer wild \u2014 a mid-tier apex in its territory, below moonthorn wolf range. Mossfoots are more approachable than moonthorns and serve as companion candidates for Feywood handlers who cannot or do not seek the deeper exceptional bond moonthorns represent.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "predator",
+    "cultural_role": "pack canid below moonthorn wolf in territory",
+    "primary_diet": [
+      "feywood_hare"
+    ],
+    "primary_diet_categories": [
+      "boar_of_the_briar_young",
+      "feywoodhorn_stag_calves"
+    ],
+    "primary_predators": [
+      "moonthorn_wolf",
+      "mossveil_cat"
+    ],
+    "size": "medium",
+    "trophic_tier": 3,
+    "zones": [
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "mossfoot_hound",
+  "kind": "fauna",
+  "name": "Mossfoot Hound",
+  "tags": [
+    "predator",
+    "canid",
+    "mossfoot",
+    "pack",
+    "companion_candidate"
+  ]
+}

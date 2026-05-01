@@ -1,0 +1,28 @@
+{
+  "biome": "feywood",
+  "description": "A flowering climber with faintly sweet scent, common around Thornveil residences. Sweetbriar is the Feywood's domestic ornamental climber, widely planted in family gardens and cluster common spaces.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "vine",
+    "cultural_role": "domestic ornamental; common around Thornveil residences",
+    "ecological_role": "flowering climber; pollinator support",
+    "harvest_status": "cultivated",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "ornamental",
+    "zones": [
+      "thornveil_civic_forest"
+    ]
+  },
+  "id": "sweetbriar",
+  "kind": "flora",
+  "name": "Sweetbriar",
+  "tags": [
+    "vine",
+    "sweetbriar",
+    "flowering",
+    "ornamental",
+    "domestic"
+  ]
+}

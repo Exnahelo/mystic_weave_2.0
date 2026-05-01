@@ -1,0 +1,33 @@
+{
+  "biome": "feywood",
+  "description": "A major omnivore of berry zones, nut groves, fungal grounds, and riparian margins. Oldroots primarily eat plant mass and fish; they take Feywoodhorn stag calves and injured animals opportunistically. Respected old-forest strength; not lightly hunted. Seasonal visits to the Heartwater Basin during fish runs are canonical.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "omnivore",
+    "cultural_role": "respected old-forest strength; not lightly hunted",
+    "primary_diet": [
+      "dewberry_bramble",
+      "hearthnut_grove_tree",
+      "heartmorel",
+      "silverstream_trout"
+    ],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "size": "large",
+    "trophic_tier": 4,
+    "zones": [
+      "outer_old_growth_wild",
+      "heartwater_basin"
+    ]
+  },
+  "id": "oldroot_bear",
+  "kind": "fauna",
+  "name": "Oldroot Bear",
+  "tags": [
+    "omnivore",
+    "bear",
+    "oldroot",
+    "apex",
+    "seasonal_forager"
+  ]
+}

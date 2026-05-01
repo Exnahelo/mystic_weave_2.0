@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "An aromatic culinary herb with mild medicinal properties, cultivated widely across the Feywood's domestic gardens. Dawnmint supports tea, scenting, cooking, and household medicine; its preparations are a minor trade export.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "herb",
+    "cultural_role": "tea, scenting, cooking, household medicine",
+    "ecological_role": "aromatic culinary herb",
+    "harvest_status": "cultivated",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "culinary_medicinal",
+    "zones": [
+      "thornveil_civic_forest",
+      "feywood_edge"
+    ]
+  },
+  "id": "dawnmint",
+  "kind": "flora",
+  "name": "Dawnmint",
+  "tags": [
+    "herb",
+    "aromatic",
+    "dawnmint",
+    "culinary",
+    "household_medicine"
+  ]
+}

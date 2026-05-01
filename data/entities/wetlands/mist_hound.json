@@ -1,0 +1,49 @@
+{
+  "biome": "wetlands",
+  "creature_companion": {
+    "age_category": "adult",
+    "base_domains": {
+      "composure": 38,
+      "instinct": 42,
+      "physical": 38
+    },
+    "base_hp": {
+      "current": 26,
+      "max": 26
+    },
+    "carrying_capacity": "small",
+    "description": "A broad-chested hound with short, water-shedding fur and slightly webbed paws, bred across the wetlands settlements for tracking in marsh and reed country. Mist hounds handle mud, cold, and standing water better than most working dogs and are known for an almost eerie persistence on a scent trail.",
+    "display_name": "Mist Hound",
+    "movement_modes": [
+      "walk",
+      "swim"
+    ],
+    "natural_abilities": [
+      "scent_tracking",
+      "keen_senses",
+      "swimming",
+      "damp_resistance"
+    ],
+    "natural_weapons": [
+      "bite"
+    ],
+    "size": "medium",
+    "size_note": null,
+    "species": "hound",
+    "subspecies": "mist_hound",
+    "tactical_roles_defaults": [
+      "scout",
+      "hunter"
+    ],
+    "temperament": "Quiet, tireless, patient. Suited to long slow tracking work. Accepts wet, cold, and uncomfortable conditions without complaint."
+  },
+  "description": "A broad-chested hound with short, water-shedding fur and slightly webbed paws, bred across the wetlands settlements for tracking in marsh and reed country. Mist hounds handle mud, cold, and standing water better than most working dogs and are known for an almost eerie persistence on a scent trail.",
+  "id": "mist_hound",
+  "kind": "fauna",
+  "name": "Mist Hound",
+  "tags": [
+    "hound",
+    "wetlands",
+    "companion"
+  ]
+}

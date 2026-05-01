@@ -1,1 +1,5 @@
-[]
+[
+  {
+    "_note": "Exceptional companions are a relationship shape, not an entity type. This file defines contract templates for alliances with entities that join the party under terms beyond ordinary creature-bonding or sapient recruitment — divine agents on temporary loan, dragons during specific arcs, sentient objects with their own agendas. The being itself is defined in data/entities/; this file describes the shape of the alliance. Most exceptional companions are arc-bounded; persistent cases (e.g. a sentient boat) are valid but rare. Sapient NPCs joining as full party members go through the sapient companion path, not here. Creatures bonding through ordinary training go through the creature_companion facet on their entity, not here."
+  }
+]

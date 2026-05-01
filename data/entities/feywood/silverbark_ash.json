@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "A resilient ash lineage straighter and more flexible than realm-side ash. Silverbark Ash is the canonical elven wood for spear shafts, training weapons, and light frameworks. Harvested from sanctioned deadfall and occasional selective cut.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "canopy",
+    "cultural_role": "spear shafts, training weapons, light frameworks",
+    "ecological_role": "mid-canopy; edge stabilizer; flexible growth",
+    "harvest_status": "wild",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "tree",
+    "zones": [
+      "thornveil_civic_forest",
+      "outer_old_growth_wild",
+      "feywood_edge"
+    ]
+  },
+  "id": "silverbark_ash",
+  "kind": "flora",
+  "name": "Silverbark Ash",
+  "tags": [
+    "ash",
+    "mid_canopy",
+    "weapon_wood",
+    "flexible"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "biome": "feywood",
+  "creature_companion": {
+    "age_category": "adult",
+    "base_domains": {
+      "composure": 48,
+      "instinct": 42,
+      "physical": 44
+    },
+    "base_hp": {
+      "current": 42,
+      "max": 42
+    },
+    "carrying_capacity": "large",
+    "description": "A tall, lean courser native to the Feywood \u2014 named for the dark thorn-and-silver pattern that runs down its mane and tail. Briarmanes carry riders through the Feywood with a steadiness no ordinary horse can match, threading between silverwood trunks and across ancient root paths as though the ground were an open field. Their coats shift slightly with the forest light, and their eyes carry the same bright low-light sharpness as other Feywood-touched creatures. Feywood rangers, envoys, and long-riders prize them above any other mount. They are rare outside the Feywood.",
+    "display_name": "Briarmane Courser",
+    "movement_modes": [
+      "walk",
+      "swim"
+    ],
+    "natural_abilities": [
+      "keen_senses",
+      "endurance_runner",
+      "nature_blending",
+      "fey_resilience",
+      "bond_memory"
+    ],
+    "natural_weapons": [
+      "hoof"
+    ],
+    "size": "large",
+    "size_note": "tall, lean, unusually graceful",
+    "species": "horse",
+    "subspecies": "briarmane_courser",
+    "tactical_roles_defaults": [
+      "mount"
+    ],
+    "temperament": "Steady, attentive, unusually composed. Moves through dense forest terrain without the nervousness that afflicts most horses in close country. Bonds slowly but deeply; remembers handlers over exceptional spans of time."
+  },
+  "description": "A tall, lean courser of the Feywood \u2014 named for the dark thorn-and-silver pattern running down its mane and tail. Briarmanes are admired for their speed and the ambient-field-sensitivity they share with other Feywood-touched creatures. Occasional hunt quarry when unbonded; canonically companion-capable. See `briarmane_courser` in `data/companions/creatures.json` for the companion profile.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "herbivore",
+    "cultural_role": "prestige elven mount; prized bond animal; Feywood's signature courser",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "meadow_browse",
+      "canopy_shoots"
+    ],
+    "primary_predators": [
+      "moonthorn_wolf",
+      "mossveil_cat"
+    ],
+    "size": "large",
+    "trophic_tier": 2,
+    "zones": [
+      "feywood_edge",
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "briarmane_courser",
+  "kind": "fauna",
+  "name": "Briarmane Courser",
+  "tags": [
+    "herbivore",
+    "equine",
+    "briarmane",
+    "companion_capable",
+    "mount"
+  ]
+}

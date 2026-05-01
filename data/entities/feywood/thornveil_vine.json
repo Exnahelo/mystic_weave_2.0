@@ -1,0 +1,30 @@
+{
+  "biome": "feywood",
+  "description": "The climbing thorn-vine that gives Thornveil its name \u2014 historically the living thorn-veil maintained around the Heartwood in the city's founding era. Used today as protective planting around select sacred boundaries and managed civic plantings.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "vine",
+    "cultural_role": "Thornveil's name-origin; protective planting around sacred sites",
+    "ecological_role": "climbing thorn-vine; pollinator support; cover and barrier",
+    "harvest_status": "restricted",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "climbing_thorn",
+    "zones": [
+      "heartwood_core",
+      "thornveil_civic_forest"
+    ]
+  },
+  "id": "thornveil_vine",
+  "kind": "flora",
+  "name": "Thornveil Vine",
+  "tags": [
+    "vine",
+    "thorn",
+    "thornveil",
+    "protective",
+    "barrier",
+    "pollinator_support"
+  ]
+}

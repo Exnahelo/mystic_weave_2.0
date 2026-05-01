@@ -1,0 +1,31 @@
+{
+  "biome": "feywood",
+  "description": "A semi-domesticated / semi-wild dairy bovid kept at household scale across the Feywood. Hearthgoats provide milk and cheese; their husbandry is low-intensity and family-scale. Household hearthgoats form genuine personal attachments to keeping families across generations.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "herbivore",
+    "cultural_role": "semi-domesticated dairy animal; household-scale husbandry; personal family bonds",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "household_forage",
+      "tended_browse"
+    ],
+    "primary_predators": [],
+    "size": "medium",
+    "trophic_tier": 2,
+    "zones": [
+      "thornveil_civic_forest",
+      "feywood_edge"
+    ]
+  },
+  "id": "hearthgoat",
+  "kind": "fauna",
+  "name": "Hearthgoat",
+  "tags": [
+    "herbivore",
+    "caprid",
+    "hearthgoat",
+    "domesticated",
+    "dairy"
+  ]
+}

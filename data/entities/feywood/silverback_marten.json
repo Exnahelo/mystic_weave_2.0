@@ -1,0 +1,35 @@
+{
+  "biome": "feywood",
+  "description": "A mid-size mustelid of Heartwater Basin margins and Outer Old-Growth Wild. Silverbacks are agile and secretive; they forage aquatic and arboreal prey alike.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "small_fauna",
+    "cultural_role": null,
+    "primary_diet": [
+      "silverstream_trout",
+      "canopy_squirrel"
+    ],
+    "primary_diet_categories": [
+      "small_birds"
+    ],
+    "primary_predators": [
+      "mossveil_cat",
+      "mistwing_hawk"
+    ],
+    "size": "small",
+    "trophic_tier": 3,
+    "zones": [
+      "heartwater_basin",
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "silverback_marten",
+  "kind": "fauna",
+  "name": "Silverback Marten",
+  "tags": [
+    "small_fauna",
+    "mustelid",
+    "silverback_marten",
+    "riparian"
+  ]
+}

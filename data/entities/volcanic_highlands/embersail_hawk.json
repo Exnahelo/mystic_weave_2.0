@@ -1,0 +1,48 @@
+{
+  "biome": "volcanic_highlands",
+  "creature_companion": {
+    "age_category": "adult",
+    "base_domains": {
+      "composure": 36,
+      "instinct": 48,
+      "physical": 34
+    },
+    "base_hp": {
+      "current": 16,
+      "max": 16
+    },
+    "carrying_capacity": "none",
+    "description": "A rust-and-black raptor native to the thermal updrafts of the Volcanic Highlands. Embersail hawks ride the long hot currents above the lava fields with exceptional endurance, and their plumage carries a faint ember-glow at the wingtips in low light. They are prized messengers and scouts for the Stronghold and its surrounding settlements, particularly along routes where other birds suffer from heat and ash.",
+    "display_name": "Embersail Hawk",
+    "movement_modes": [
+      "walk",
+      "fly"
+    ],
+    "natural_abilities": [
+      "keen_senses",
+      "flight",
+      "heat_resistance"
+    ],
+    "natural_weapons": [
+      "claw",
+      "bite"
+    ],
+    "size": "small",
+    "size_note": "slightly larger than common raptors",
+    "species": "hawk",
+    "subspecies": "embersail_hawk",
+    "tactical_roles_defaults": [
+      "scout"
+    ],
+    "temperament": "Bold, high-energy, quick to act. Works well under difficult conditions but demands a firm handler."
+  },
+  "description": "A rust-and-black raptor native to the thermal updrafts of the Volcanic Highlands. Embersail hawks ride the long hot currents above the lava fields with exceptional endurance, and their plumage carries a faint ember-glow at the wingtips in low light. They are prized messengers and scouts for the Stronghold and its surrounding settlements, particularly along routes where other birds suffer from heat and ash.",
+  "id": "embersail_hawk",
+  "kind": "fauna",
+  "name": "Embersail Hawk",
+  "tags": [
+    "hawk",
+    "volcanic_highlands",
+    "companion"
+  ]
+}

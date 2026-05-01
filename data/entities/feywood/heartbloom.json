@@ -1,0 +1,28 @@
+{
+  "biome": "feywood",
+  "description": "A rare pollinator flower of the Heartwood's understory, found only or almost only within the Heartwood Core. Heartbloom is an object of sacred observance; it is never casually harvested.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "sacred",
+    "cultural_role": "sacred observance; never casually harvested",
+    "ecological_role": "rare pollinator flower of the Heartwood understory",
+    "harvest_status": "sacred",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "flower",
+    "zones": [
+      "heartwood_core"
+    ]
+  },
+  "id": "heartbloom",
+  "kind": "flora",
+  "name": "Heartbloom",
+  "tags": [
+    "flower",
+    "sacred",
+    "heartbloom",
+    "heartwood_understory",
+    "pollinator"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "biome": "feywood",
+  "description": "A large heron-analog wading the Heartwater Basin margins. Cranemoors are canonical waterline sentinels; early departure from the Basin is a Turning indicator druids watch for.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "bird",
+    "cultural_role": "waterline sentinel; departure is a Turning indicator",
+    "primary_diet": [
+      "silverstream_trout",
+      "heartpond_frog"
+    ],
+    "primary_diet_categories": [
+      "aquatic_insects"
+    ],
+    "primary_predators": [],
+    "size": "medium",
+    "trophic_tier": 3,
+    "zones": [
+      "heartwater_basin"
+    ]
+  },
+  "id": "cranemoor_heron",
+  "kind": "fauna",
+  "name": "Cranemoor Heron",
+  "tags": [
+    "bird",
+    "heron",
+    "cranemoor",
+    "waterline_sentinel",
+    "seasonal_indicator"
+  ]
+}

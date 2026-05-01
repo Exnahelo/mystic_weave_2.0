@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "A cultivated soft-fruit tree providing fresh fruit, preserves, dried stores, and wine base across the Feywood. Summerpear orchards are a standard feature of elven estates and cluster gardens.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "food_tree",
+    "cultural_role": "fresh fruit, preserves, dried stores, wine base",
+    "ecological_role": "cultivated soft-fruit tree",
+    "harvest_status": "cultivated",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "fruit",
+    "zones": [
+      "thornveil_civic_forest",
+      "feywood_edge"
+    ]
+  },
+  "id": "summerpear_bough",
+  "kind": "flora",
+  "name": "Summerpear Bough",
+  "tags": [
+    "food_tree",
+    "fruit",
+    "summerpear",
+    "wine_base",
+    "cultivated"
+  ]
+}

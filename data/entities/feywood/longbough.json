@@ -1,0 +1,27 @@
+{
+  "biome": "feywood",
+  "description": "The canonical wood of elven longbows. Longbough is never cut from living standing timber; material comes only from trees that naturally fall or that offer themselves through druidic sign. Sylvara's longbow is Longbough. The Heartwood bow carried by Lethariel is Longbough crafted from a limb offered in connection with the Heartwood branch sign before the Discordant War.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "canopy",
+    "cultural_role": "canonical elven longbow wood; harvested only from offered limbs or natural fall",
+    "ecological_role": "uncommon canopy species; exceptionally long-lived individuals",
+    "harvest_status": "sacred",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "tree",
+    "zones": [
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "longbough",
+  "kind": "flora",
+  "name": "Longbough",
+  "tags": [
+    "longbough",
+    "bow_wood",
+    "sacred_harvest",
+    "living_artifact_source"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "biome": "feywood",
+  "description": "A medicinal shelf fungus harvested from fallen timber. Redveil preparations are used in fever remedies and wound preparations across the Feywood's medicinal tradition.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "fungus",
+    "cultural_role": "fever remedies, wound preparations",
+    "ecological_role": "medicinal shelf fungus on fallen timber",
+    "harvest_status": "wild",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "medicinal",
+    "zones": [
+      "outer_old_growth_wild",
+      "thornveil_civic_forest"
+    ]
+  },
+  "id": "redveil_shelf",
+  "kind": "flora",
+  "name": "Redveil Shelf",
+  "tags": [
+    "fungus",
+    "medicinal",
+    "redveil_shelf",
+    "fever_remedy"
+  ]
+}

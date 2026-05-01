@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "An edge berry shrub providing major forage for birds, duskpetal fox, oldroot bear, and elven gatherers. Dewberry is a canonical forest-wine base and a common preserve ingredient.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "shrub",
+    "cultural_role": "wine base; preserves",
+    "ecological_role": "edge berry shrub; major forage for birds, foxes, bears, gatherers",
+    "harvest_status": "wild",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "berry",
+    "zones": [
+      "feywood_edge",
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "dewberry_bramble",
+  "kind": "flora",
+  "name": "Dewberry Bramble",
+  "tags": [
+    "shrub",
+    "berry",
+    "dewberry",
+    "wine_base",
+    "edge_species"
+  ]
+}

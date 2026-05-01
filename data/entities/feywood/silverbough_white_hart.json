@@ -1,0 +1,30 @@
+{
+  "biome": "feywood",
+  "description": "An extremely rare all-white variant of the Silverbough Hart lineage. Deep old-wild only. A sacred sighting; never hunted or pursued. Appearances may be absent for generations. The White Hart is a significant omen in the Feywood's cultural tradition.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "mythic",
+    "cultural_role": "sacred; never hunted or pursued; appearances absent for generations",
+    "primary_diet": [
+      "antlerthorn",
+      "veilvine"
+    ],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "size": "large",
+    "trophic_tier": 2,
+    "zones": [
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "silverbough_white_hart",
+  "kind": "fauna",
+  "name": "Silverbough White Hart",
+  "tags": [
+    "mythic",
+    "sacred",
+    "white_hart",
+    "silverbough",
+    "never_hunted"
+  ]
+}

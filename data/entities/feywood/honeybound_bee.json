@@ -1,0 +1,32 @@
+{
+  "biome": "feywood",
+  "description": "The Feywood's primary pollinator, producing distinctive Feywood honey \u2014 a minor trade good and the key ingredient in honey mead. Honeybound hives are wild; elves tend them loosely but do not domesticate. Honeybound health is a separately trackable register among the Feywood's health indicators.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "insect",
+    "cultural_role": "primary Feywood pollinator; honey and wax production; honey mead base",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "flower_nectar",
+      "pollen"
+    ],
+    "primary_predators": [],
+    "size": "tiny",
+    "trophic_tier": 2,
+    "zones": [
+      "thornveil_civic_forest",
+      "outer_old_growth_wild",
+      "feywood_edge"
+    ]
+  },
+  "id": "honeybound_bee",
+  "kind": "fauna",
+  "name": "Honeybound Bee",
+  "tags": [
+    "insect",
+    "pollinator",
+    "honeybound",
+    "honey_producer",
+    "separately_tracked_health"
+  ]
+}

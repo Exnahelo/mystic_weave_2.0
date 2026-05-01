@@ -1,0 +1,29 @@
+{
+  "biome": "feywood",
+  "description": "The Feywood's dominant oak lineage, basin-analog grown to older, broader proportions under the Feywood's conditions. Long-lived and habitat-rich; its mast supports silverbough hart, Feywoodhorn stag, and the canopy squirrel population across the outer wild.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "canopy",
+    "cultural_role": "structural wood for sanctioned deadfall harvest",
+    "ecological_role": "major canopy tree; mast producer; habitat support",
+    "harvest_status": "wild",
+    "primary_diet": [],
+    "primary_diet_categories": [],
+    "primary_predators": [],
+    "subcategory": "tree",
+    "zones": [
+      "thornveil_civic_forest",
+      "outer_old_growth_wild",
+      "feywood_edge"
+    ]
+  },
+  "id": "high_oak",
+  "kind": "flora",
+  "name": "High Oak",
+  "tags": [
+    "oak",
+    "canopy",
+    "mast_producer",
+    "habitat"
+  ]
+}

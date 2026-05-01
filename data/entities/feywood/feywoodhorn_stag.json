@@ -1,0 +1,37 @@
+{
+  "biome": "feywood",
+  "description": "The more numerous major cervid of the Feywood. Feywoodhorn are grazer-browsers feeding on whispergrass, low-canopy foliage, and antlerthorn. Primary elven hunt animal \u2014 respected but not sacred \u2014 and the canonical proving-hunt quarry.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "herbivore",
+    "cultural_role": "primary elven hunt animal; proving-hunt quarry",
+    "primary_diet": [
+      "antlerthorn"
+    ],
+    "primary_diet_categories": [
+      "whispergrass",
+      "low_canopy_foliage"
+    ],
+    "primary_predators": [
+      "moonthorn_wolf",
+      "mossveil_cat",
+      "thornroot_stalker"
+    ],
+    "size": "large",
+    "trophic_tier": 2,
+    "zones": [
+      "outer_old_growth_wild",
+      "feywood_edge"
+    ]
+  },
+  "id": "feywoodhorn_stag",
+  "kind": "fauna",
+  "name": "Feywoodhorn Stag",
+  "tags": [
+    "herbivore",
+    "cervid",
+    "feywoodhorn",
+    "primary_hunt",
+    "proving_quarry"
+  ]
+}

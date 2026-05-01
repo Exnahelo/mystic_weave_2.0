@@ -1,0 +1,33 @@
+{
+  "biome": "feywood",
+  "description": "A solitary ambush predator of the denser Outer Old-Growth Wild, estate-border forest, and shadowed understory. Mossveils take Feywoodhorn stag, smaller deer, foxes, and briarmane courser young. They are the Feywood's emblem of quiet danger, patience, and unseen movement.",
+  "ecology": {
+    "canonical_tier": "primary",
+    "category": "predator",
+    "cultural_role": "emblem of quiet danger, patience, unseen movement",
+    "primary_diet": [
+      "feywoodhorn_stag",
+      "duskpetal_fox"
+    ],
+    "primary_diet_categories": [
+      "briarmane_courser_young"
+    ],
+    "primary_predators": [],
+    "size": "large",
+    "trophic_tier": 4,
+    "zones": [
+      "outer_old_growth_wild"
+    ]
+  },
+  "id": "mossveil_cat",
+  "kind": "fauna",
+  "name": "Mossveil Cat",
+  "tags": [
+    "predator",
+    "feline",
+    "mossveil",
+    "apex",
+    "solitary",
+    "ambush"
+  ]
+}

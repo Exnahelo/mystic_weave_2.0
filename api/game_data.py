@@ -41,14 +41,8 @@ _SPELL_DATA_FILES = (
     "magic/sacred.json",
     "magic/warding.json",
 )
-_BEAST_DATA_FILES = (
-    "companions/creatures.json",
-    "companions/exceptional.json",
-    "companions/natural_abilities.json",
-    "companions/learned_commands.json",
-    "companions/tactical_roles.json",
-)
 _CATALOG_ITEMS_DIR = _DATA_DIR / "catalog" / "items"
+_ENTITIES_DIR = _DATA_DIR / "entities"
 _ARC_TYPES_REGISTRY = "catalog/registries/arc_types.json"
 _NPC_DATA_DIR = _DATA_DIR / "npcs"
 _MAGIC_DIR = _DATA_DIR / "magic"
@@ -755,12 +749,47 @@ def combat_rules_fingerprint() -> str:
 # Companion / beast catalogs
 # ---------------------------------------------------------------------------
 
+@lru_cache(maxsize=1)
+def _load_entities() -> dict[str, dict[str, Any]]:
+    """Load entity files from data/entities/**/*.json, keyed by id."""
+    entities: dict[str, dict[str, Any]] = {}
+    if not _ENTITIES_DIR.exists():
+        return entities
+    for path in sorted(_ENTITIES_DIR.rglob("*.json")):
+        if path.name.startswith("_"):
+            continue
+        with open(path, "r", encoding="utf-8") as f:
+            entity = json.load(f)
+        if not isinstance(entity, dict):
+            raise ValueError(f"Entity file must contain an object: {path}")
+        entity_id = entity.get("id")
+        if not isinstance(entity_id, str) or not entity_id:
+            raise ValueError(f"Entity file missing id: {path}")
+        if entity_id in entities:
+            raise ValueError(f"Duplicate entity id: {entity_id}")
+        entities[entity_id] = entity
+    return entities
+
+
+def _project_entity_to_creature(entity: dict[str, Any]) -> dict[str, Any]:
+    facet = entity.get("creature_companion")
+    if not isinstance(facet, dict):
+        raise ValueError(f"Entity lacks creature_companion facet: {entity.get('id')!r}")
+    return {
+        **facet,
+        "biome": entity.get("biome"),
+        "size": facet.get("size") or (entity.get("ecology", {}).get("size") if isinstance(entity.get("ecology"), dict) else None),
+        "description": entity.get("description", facet.get("description", "")),
+    }
+
 def list_creature_catalog() -> list[dict[str, Any]]:
-    """Return all starter creature entries."""
-    data = _load_json("companions/creatures.json")
-    if not isinstance(data, list):
-        return []
-    return data
+    """Return creature companion entries projected from the entity registry."""
+    creatures = [
+        _project_entity_to_creature(entity)
+        for entity in _load_entities().values()
+        if "creature_companion" in entity
+    ]
+    return sorted(creatures, key=lambda row: row["subspecies"])
 
 
 def get_creature(subspecies: str) -> dict[str, Any]:
@@ -869,7 +898,25 @@ def data_fingerprint() -> str:
     Exposed by GET /version for deployment/contract sanity checks.
     """
     hasher = hashlib.sha256()
-    for filename in (*_DATA_FILES, *_BEAST_DATA_FILES):
+    for filename in _DATA_FILES:
+        path = _DATA_DIR / filename
+        if not path.exists():
+            continue
+        with open(path, "rb") as f:
+            hasher.update(f.read())
+
+    for path in sorted(_ENTITIES_DIR.rglob("*.json")) if _ENTITIES_DIR.exists() else []:
+        if path.name.startswith("_"):
+            continue
+        with open(path, "rb") as f:
+            hasher.update(f.read())
+
+    for filename in (
+        "companions/exceptional.json",
+        "companions/natural_abilities.json",
+        "companions/learned_commands.json",
+        "companions/tactical_roles.json",
+    ):
         path = _DATA_DIR / filename
         if not path.exists():
             continue

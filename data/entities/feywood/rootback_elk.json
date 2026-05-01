@@ -1,0 +1,34 @@
+{
+  "biome": "feywood",
+  "description": "A heavy browser of wetter old-growth margins, basin-edge clearings, and Heartwater Basin outskirts. Rarely hunted by elves. Cross-palette species \u2014 canonically present in the Temperate Forest as well as the Feywood via cross-Border range.",
+  "ecology": {
+    "canonical_tier": "secondary",
+    "category": "herbivore",
+    "cultural_role": "rarely hunted; cross-palette species with Temperate Forest range",
+    "primary_diet": [],
+    "primary_diet_categories": [
+      "riparian_browse",
+      "wet_meadow_forage"
+    ],
+    "primary_predators": [
+      "moonthorn_wolf",
+      "thornroot_stalker"
+    ],
+    "size": "large",
+    "trophic_tier": 2,
+    "zones": [
+      "heartwater_basin",
+      "feywood_edge"
+    ]
+  },
+  "id": "rootback_elk",
+  "kind": "fauna",
+  "name": "Rootback Elk",
+  "tags": [
+    "herbivore",
+    "cervid",
+    "rootback_elk",
+    "cross_palette",
+    "riparian_browser"
+  ]
+}
