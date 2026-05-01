@@ -247,6 +247,11 @@ def get_arc_type_defaults(type_id: str) -> dict[str, Any]:
     return dict(defaults[type_id])
 
 
+def get_arc_type_default_envelope(type_id: str) -> dict[str, Any]:
+    """Return calibrated default envelope for an arc primary type."""
+    return get_arc_type_defaults(type_id)
+
+
 def list_arc_state_ids() -> list[str]:
     """Return valid arc state IDs."""
     return list(load_arc_types()["states"])
@@ -257,14 +262,29 @@ def list_arc_stake_scales() -> list[str]:
     return list(load_arc_types()["stake_scales"])
 
 
+def get_arc_stake_scales() -> set[str]:
+    """Return valid arc stake scales as a set."""
+    return set(list_arc_stake_scales())
+
+
 def list_arc_origin_types() -> list[str]:
     """Return valid arc origin types."""
     return list(load_arc_types()["origin_types"])
 
 
+def get_arc_origin_types() -> set[str]:
+    """Return valid arc origin types as a set."""
+    return set(list_arc_origin_types())
+
+
 def list_arc_subtypes() -> list[str]:
     """Return valid arc subtypes."""
     return list(load_arc_types()["subtypes"])
+
+
+def get_arc_subtypes() -> set[str]:
+    """Return valid arc subtypes as a set."""
+    return set(list_arc_subtypes())
 
 
 def list_arc_condition_types() -> list[str]:

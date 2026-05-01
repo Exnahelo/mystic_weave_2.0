@@ -439,6 +439,18 @@ class Arc(BaseModel):
     merge_source_arc_ids: list[str] = Field(default_factory=list)
     consequence_events_emitted: list[str] = Field(default_factory=list)
 
+    @field_validator("subtype")
+    @classmethod
+    def subtype_must_be_in_registry(cls, v: str) -> str:
+        from api.game_data import get_arc_subtypes
+
+        valid_subtypes = get_arc_subtypes()
+        if v not in valid_subtypes:
+            raise ValueError(
+                f"Invalid arc subtype {v!r}. Must be one of: {sorted(valid_subtypes)}"
+            )
+        return v
+
 
 # ---------------------------------------------------------------------------
 # World sub-models

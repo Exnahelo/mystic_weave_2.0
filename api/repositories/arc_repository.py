@@ -16,10 +16,30 @@ def _coerce_jsonb_data(data: Any) -> Any:
 
 
 class ArcRepository:
-    """Read-only repository for Arc records. Write operations land in later commits."""
+    """Repository for Arc records."""
 
     def __init__(self, pool: asyncpg.Pool):
         self._pool = pool
+
+    async def create(self, arc: Arc) -> None:
+        """Insert a new Arc record. Raises if ID collision."""
+        async with self._pool.acquire() as conn:
+            await conn.execute(
+                """
+                INSERT INTO arcs (
+                    id, session_id, primary_type, state, parent_arc_id, data,
+                    created_at, updated_at
+                )
+                VALUES ($1, $2, $3, $4, $5, $6::jsonb, $7, $7)
+                """,
+                arc.id,
+                arc.session_id,
+                arc.primary_type,
+                arc.state,
+                arc.parent_arc_id,
+                arc.model_dump_json(),
+                arc.timestamps.created_at,
+            )
 
     async def get_by_id(self, session_id: str, arc_id: str) -> Optional[Arc]:
         """Fetch a single arc by ID, scoped to session."""

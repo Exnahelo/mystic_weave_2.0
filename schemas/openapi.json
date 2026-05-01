@@ -278,6 +278,205 @@
         }
       }
     },
+    "/arc/{session_id}/create": {
+      "post": {
+        "tags": [
+          "arc"
+        ],
+        "summary": "Create Arc",
+        "description": "Create a new arc with strict provenance validation.",
+        "operationId": "create_arc_arc__session_id__create_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArcCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Arc"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/arc/{session_id}": {
+      "get": {
+        "tags": [
+          "arc"
+        ],
+        "summary": "List Session Arcs",
+        "description": "List all arcs for a session.",
+        "operationId": "list_session_arcs_arc__session_id__get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Arc"
+                  },
+                  "title": "Response List Session Arcs Arc  Session Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/arc/{session_id}/active": {
+      "get": {
+        "tags": [
+          "arc"
+        ],
+        "summary": "List Active Arcs",
+        "description": "List arcs in active states (in_progress, at_scope_cap).",
+        "operationId": "list_active_arcs_arc__session_id__active_get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Arc"
+                  },
+                  "title": "Response List Active Arcs Arc  Session Id  Active Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/arc/{session_id}/{arc_id}": {
+      "get": {
+        "tags": [
+          "arc"
+        ],
+        "summary": "Get Arc",
+        "description": "Fetch a single arc by ID, scoped to session.",
+        "operationId": "get_arc_arc__session_id___arc_id__get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "arc_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Arc Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Arc"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/roll": {
       "post": {
         "summary": "Roll Dice",
@@ -1329,6 +1528,803 @@
         ],
         "title": "ApplyStateDeltaRequest",
         "description": "Body for POST /state/{session_id}/delta"
+      },
+      "Arc": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          },
+          "primary_type": {
+            "type": "string",
+            "enum": [
+              "task_local",
+              "contract_delicate",
+              "mission_multi_leg",
+              "undertaking_regional",
+              "arc_campaign"
+            ],
+            "title": "Primary Type"
+          },
+          "subtype": {
+            "type": "string",
+            "title": "Subtype"
+          },
+          "stake_scale": {
+            "type": "string",
+            "enum": [
+              "local",
+              "situational",
+              "regional",
+              "campaign"
+            ],
+            "title": "Stake Scale"
+          },
+          "origin_type": {
+            "type": "string",
+            "enum": [
+              "declared",
+              "emergent",
+              "derived"
+            ],
+            "title": "Origin Type"
+          },
+          "parent_arc_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Arc Id"
+          },
+          "spawned_arc_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Spawned Arc Ids"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "proposed",
+              "available",
+              "in_progress",
+              "at_scope_cap",
+              "ready_to_close",
+              "complete",
+              "failed",
+              "abandoned",
+              "replaced_by_successor",
+              "merged_into_parent"
+            ],
+            "title": "State"
+          },
+          "patron_faction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Patron Faction"
+          },
+          "patron_npc_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Patron Npc Id"
+          },
+          "target_locations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Target Locations"
+          },
+          "closure_conditions": {
+            "$ref": "#/components/schemas/ArcConditionSet"
+          },
+          "failure_conditions": {
+            "$ref": "#/components/schemas/ArcConditionSet"
+          },
+          "escalation_rules": {
+            "$ref": "#/components/schemas/ArcEscalationRules"
+          },
+          "budget": {
+            "$ref": "#/components/schemas/ArcBudget"
+          },
+          "rewards": {
+            "$ref": "#/components/schemas/ArcRewardEnvelope"
+          },
+          "consumption": {
+            "$ref": "#/components/schemas/ArcConsumption"
+          },
+          "flags": {
+            "$ref": "#/components/schemas/ArcFlags"
+          },
+          "timestamps": {
+            "$ref": "#/components/schemas/ArcTimestamps"
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Notes"
+          },
+          "merge_source_arc_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Merge Source Arc Ids"
+          },
+          "consequence_events_emitted": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Consequence Events Emitted"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "session_id",
+          "title",
+          "summary",
+          "primary_type",
+          "subtype",
+          "stake_scale",
+          "origin_type",
+          "state",
+          "budget",
+          "rewards",
+          "timestamps"
+        ],
+        "title": "Arc",
+        "description": "Backend-typed higher-level objective record.\n\nSee prompts/arc-rules.md (to be authored in Commit 6) for the narrator-facing\nrules. See todo.md \"Arc System v1\" section for the full design."
+      },
+      "ArcAPAward": {
+        "properties": {
+          "min": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Min"
+          },
+          "max": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Max"
+          },
+          "fixed": {
+            "type": "boolean",
+            "title": "Fixed",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "min",
+          "max"
+        ],
+        "title": "ArcAPAward",
+        "description": "AP award envelope for an arc reward."
+      },
+      "ArcBudget": {
+        "properties": {
+          "resolved_scene_soft_cap": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Resolved Scene Soft Cap"
+          },
+          "resolved_scene_hard_cap": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Resolved Scene Hard Cap"
+          },
+          "location_soft_cap": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Location Soft Cap"
+          },
+          "location_hard_cap": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Location Hard Cap"
+          },
+          "encounter_density_hint": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Encounter Density Hint"
+          },
+          "expected_duration_turns": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected Duration Turns"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "resolved_scene_soft_cap",
+          "resolved_scene_hard_cap",
+          "location_soft_cap",
+          "location_hard_cap"
+        ],
+        "title": "ArcBudget",
+        "description": "Scope budget for an arc, derived from primary type defaults."
+      },
+      "ArcCondition": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "description": "Condition type from the registry condition_types list."
+          },
+          "payload": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Payload"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "title": "ArcCondition",
+        "description": "A single condition in an arc condition set."
+      },
+      "ArcConditionSet": {
+        "properties": {
+          "all_of": {
+            "items": {
+              "$ref": "#/components/schemas/ArcCondition"
+            },
+            "type": "array",
+            "title": "All Of"
+          },
+          "any_of": {
+            "items": {
+              "$ref": "#/components/schemas/ArcCondition"
+            },
+            "type": "array",
+            "title": "Any Of"
+          },
+          "none_of": {
+            "items": {
+              "$ref": "#/components/schemas/ArcCondition"
+            },
+            "type": "array",
+            "title": "None Of"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ArcConditionSet",
+        "description": "Logical grouping of arc conditions for closure or failure evaluation."
+      },
+      "ArcConsumption": {
+        "properties": {
+          "resolved_scenes_used": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Resolved Scenes Used",
+            "default": 0
+          },
+          "locations_visited": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Locations Visited"
+          },
+          "turns_spent": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Turns Spent",
+            "default": 0
+          },
+          "discoveries_logged": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Discoveries Logged",
+            "default": 0
+          },
+          "major_conflicts_resolved": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Major Conflicts Resolved",
+            "default": 0
+          },
+          "escalations_used": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Escalations Used",
+            "default": 0
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ArcConsumption",
+        "description": "Tracks how much of the budget the arc has consumed."
+      },
+      "ArcCreateRequest": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Title"
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Summary"
+          },
+          "primary_type": {
+            "type": "string",
+            "enum": [
+              "task_local",
+              "contract_delicate",
+              "mission_multi_leg",
+              "undertaking_regional",
+              "arc_campaign"
+            ],
+            "title": "Primary Type"
+          },
+          "subtype": {
+            "type": "string",
+            "title": "Subtype"
+          },
+          "stake_scale": {
+            "type": "string",
+            "enum": [
+              "local",
+              "situational",
+              "regional",
+              "campaign"
+            ],
+            "title": "Stake Scale"
+          },
+          "origin_type": {
+            "type": "string",
+            "enum": [
+              "declared",
+              "emergent",
+              "derived"
+            ],
+            "title": "Origin Type"
+          },
+          "parent_arc_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Arc Id"
+          },
+          "patron_faction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Patron Faction"
+          },
+          "patron_npc_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Patron Npc Id"
+          },
+          "target_locations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Target Locations"
+          },
+          "closure_conditions": {
+            "$ref": "#/components/schemas/ArcConditionSet"
+          },
+          "failure_conditions": {
+            "$ref": "#/components/schemas/ArcConditionSet"
+          },
+          "escalation_rules": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ArcEscalationRules"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "formal_contract_qualified": {
+            "type": "boolean",
+            "title": "Formal Contract Qualified",
+            "default": false
+          },
+          "explicit_objective": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Explicit Objective"
+          },
+          "expected_return": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expected Return"
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Notes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "title",
+          "summary",
+          "primary_type",
+          "subtype",
+          "stake_scale",
+          "origin_type"
+        ],
+        "title": "ArcCreateRequest",
+        "description": "Payload for arc creation."
+      },
+      "ArcEconomyEnvelope": {
+        "properties": {
+          "coin_cd_min": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coin Cd Min"
+          },
+          "coin_cd_max": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Coin Cd Max"
+          },
+          "barter_allowed": {
+            "type": "boolean",
+            "title": "Barter Allowed",
+            "default": true
+          },
+          "obligation_allowed": {
+            "type": "boolean",
+            "title": "Obligation Allowed",
+            "default": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ArcEconomyEnvelope",
+        "description": "Economy channel bounds for an arc reward."
+      },
+      "ArcEscalationRules": {
+        "properties": {
+          "escalation_allowed": {
+            "type": "boolean",
+            "title": "Escalation Allowed",
+            "default": true
+          },
+          "spawn_new_arc_allowed": {
+            "type": "boolean",
+            "title": "Spawn New Arc Allowed",
+            "default": true
+          },
+          "auto_escalate_on_hard_cap": {
+            "type": "boolean",
+            "title": "Auto Escalate On Hard Cap",
+            "default": false
+          },
+          "max_escalation_depth": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Max Escalation Depth",
+            "default": 2
+          },
+          "allowed_target_types": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "task_local",
+                "contract_delicate",
+                "mission_multi_leg",
+                "undertaking_regional",
+                "arc_campaign"
+              ]
+            },
+            "type": "array",
+            "title": "Allowed Target Types"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ArcEscalationRules",
+        "description": "Escalation policy for an arc reaching scope cap."
+      },
+      "ArcFlags": {
+        "properties": {
+          "formal_contract_qualified": {
+            "type": "boolean",
+            "title": "Formal Contract Qualified",
+            "default": false
+          },
+          "ap_ownership": {
+            "type": "string",
+            "enum": [
+              "parent",
+              "child",
+              "none"
+            ],
+            "title": "Ap Ownership",
+            "default": "none"
+          },
+          "failure_settlement_policy": {
+            "type": "string",
+            "enum": [
+              "default",
+              "no_rewards",
+              "non_ap_only"
+            ],
+            "title": "Failure Settlement Policy",
+            "default": "default"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ArcFlags",
+        "description": "Boolean flags governing arc behavior."
+      },
+      "ArcItemAccessEnvelope": {
+        "properties": {
+          "mundane_item_tier_max": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mundane Item Tier Max"
+          },
+          "magical_item_tier_max": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Magical Item Tier Max"
+          },
+          "unique_item_allowed": {
+            "type": "boolean",
+            "title": "Unique Item Allowed",
+            "default": false
+          },
+          "institutional_access_allowed": {
+            "type": "boolean",
+            "title": "Institutional Access Allowed",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ArcItemAccessEnvelope",
+        "description": "Item and access channel bounds for an arc reward."
+      },
+      "ArcLeverageEnvelope": {
+        "properties": {
+          "obligation_slots_max": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Obligation Slots Max",
+            "default": 0
+          },
+          "secret_or_evidence_grade_max": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Secret Or Evidence Grade Max"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ArcLeverageEnvelope",
+        "description": "Leverage channel bounds for an arc reward."
+      },
+      "ArcReputationEnvelope": {
+        "properties": {
+          "max_positive_delta": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Max Positive Delta",
+            "default": 0
+          },
+          "max_negative_delta": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Max Negative Delta",
+            "default": 0
+          },
+          "affected_factions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Affected Factions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ArcReputationEnvelope",
+        "description": "Reputation channel bounds for an arc reward."
+      },
+      "ArcRewardEnvelope": {
+        "properties": {
+          "ap_award": {
+            "$ref": "#/components/schemas/ArcAPAward"
+          },
+          "reputation": {
+            "$ref": "#/components/schemas/ArcReputationEnvelope"
+          },
+          "economy": {
+            "$ref": "#/components/schemas/ArcEconomyEnvelope"
+          },
+          "items_access": {
+            "$ref": "#/components/schemas/ArcItemAccessEnvelope"
+          },
+          "leverage": {
+            "$ref": "#/components/schemas/ArcLeverageEnvelope"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "ap_award"
+        ],
+        "title": "ArcRewardEnvelope",
+        "description": "Full reward channel envelope for an arc."
+      },
+      "ArcTimestamps": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "accepted_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accepted At"
+          },
+          "last_progressed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Progressed At"
+          },
+          "closed_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Closed At"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "created_at"
+        ],
+        "title": "ArcTimestamps",
+        "description": "Lifecycle timestamps for an arc."
       },
       "ArchivedCompanionEnvelope-Input": {
         "properties": {

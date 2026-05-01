@@ -155,3 +155,16 @@ def test_registry_loader_calibrated_defaults_match_json_file() -> None:
     assert game_data.load_arc_types()["types"] == raw["types"]
     for entry in raw["types"]:
         assert game_data.get_arc_type_defaults(entry["id"]) == entry
+
+
+@pytest.mark.unit
+def test_subtype_validator_rejects_unregistered_values() -> None:
+    with pytest.raises(ValidationError):
+        Arc.model_validate(_minimal_arc_payload(subtype="made_up"))
+
+
+@pytest.mark.unit
+def test_subtype_validator_accepts_all_registry_values() -> None:
+    for subtype in game_data.list_arc_subtypes():
+        arc = Arc.model_validate(_minimal_arc_payload(subtype=subtype))
+        assert arc.subtype == subtype

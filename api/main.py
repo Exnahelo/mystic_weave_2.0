@@ -23,7 +23,7 @@ from api.game_data import (
     list_focus,
 )
 from api.models import HealthResponse, VersionResponse
-from api.routes import advancement, catalog, character, combat, companion, location, npcs, options, roll, scene, session, state, tags
+from api.routes import advancement, arc, catalog, character, combat, companion, location, npcs, options, roll, scene, session, state, tags
 
 
 @asynccontextmanager
@@ -65,6 +65,7 @@ app.include_router(state.router)
 app.include_router(session.router)
 app.include_router(character.router)
 app.include_router(advancement.router)
+app.include_router(arc.router)
 app.include_router(roll.router)
 app.include_router(combat.router)
 app.include_router(location.router)
