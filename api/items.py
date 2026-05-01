@@ -25,7 +25,7 @@ Rarity = Literal["common", "uncommon", "rare", "very-rare", "legendary", "unique
 
 Legality = Literal["open", "restricted", "contraband"]
 
-WealthTierFloor = Literal["destitute", "modest", "comfortable", "wealthy", "affluent"]
+WealthTierFloor = Literal["destitute", "modest", "comfortable", "wealthy", "affluent", "patrician"]
 
 ToolRole = Literal["permission", "difficulty-shift"]
 
