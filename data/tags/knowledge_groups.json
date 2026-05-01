@@ -350,73 +350,17 @@
     "kind": "mundane"
   },
   {
-    "index": "light_armor",
-    "name": "Light Armor",
-    "primary_domain": "agility",
-    "secondary_domain": null,
-    "domain_note": null,
-    "description": "Wearing and fighting effectively in flexible light protective gear — padded, leather, studded leather, hide. Preserves agility and movement while providing basic protection.",
+    "index": "armor",
+    "name": "Armor",
+    "primary_domain": "endurance",
+    "secondary_domain": "agility",
+    "domain_note": "Endurance for wear and load; Agility for retained mobility.",
+    "description": "Knowledge of armor types, fitting, maintenance, and operational use across construction styles.",
+    "kind": "mundane",
     "examples": [
-      "Move at speed in padded armor",
-      "Keep light-armor flexibility in close combat",
-      "Shed studded leather for a swim if needed"
-    ],
-    "kind": "mundane"
-  },
-  {
-    "index": "medium_armor",
-    "name": "Medium Armor",
-    "primary_domain": "power",
-    "secondary_domain": "endurance",
-    "domain_note": "Power for managing weight, Endurance for sustained wear.",
-    "description": "Wearing and fighting in moderate weight-and-coverage armor — chain shirts, scale mail, breastplates, chain mail. Balances protection with mobility cost.",
-    "examples": [
-      "Advance steadily in chain mail",
-      "Hold a position in scale",
-      "Stand through repeated impacts in a breastplate"
-    ],
-    "kind": "mundane"
-  },
-  {
-    "index": "heavy_armor",
-    "name": "Heavy Armor",
-    "primary_domain": "power",
-    "secondary_domain": "endurance",
-    "domain_note": "Power for movement under load, Endurance for sustained wear.",
-    "description": "Wearing and fighting in high-protection, high-weight armor — splint, plate. Trades mobility for near-maximal protection; requires conditioning to operate effectively.",
-    "examples": [
-      "Hold a choke point in plate",
-      "Walk a long road in splint without breaking down",
-      "Turn weight into unstoppable pressure in a charge"
-    ],
-    "kind": "mundane"
-  },
-  {
-    "index": "shields",
-    "name": "Shields",
-    "primary_domain": "power",
-    "secondary_domain": null,
-    "domain_note": null,
-    "description": "Using shields defensively and offensively — blocking, parrying, bashing, line-holding. Distinct from armor; shields are active defensive equipment that require their own technique.",
-    "examples": [
-      "Catch an arrow on the shield's edge",
-      "Shield-rush someone off a staircase",
-      "Hold a shield wall against heavy pressure"
-    ],
-    "kind": "mundane"
-  },
-  {
-    "index": "unarmored",
-    "name": "Unarmored",
-    "primary_domain": "agility",
-    "secondary_domain": null,
-    "domain_note": null,
-    "description": "Fighting without armor — relying on mobility, evasion, and body awareness in place of protective gear. Some characters canonically build around this state.",
-    "examples": [
-      "Fight unarmored through reflex and read",
-      "Rely on speed and positioning instead of armor",
-      "Shed armor before a water crossing or climb"
-    ],
-    "kind": "mundane"
+      "Identify the construction class of an unfamiliar piece of armor",
+      "Adjust fit and padding for a forced march",
+      "Recognize maintenance damage before it becomes failure"
+    ]
   }
 ]

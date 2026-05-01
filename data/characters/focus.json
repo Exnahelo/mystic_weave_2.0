@@ -21,16 +21,17 @@
     "description": "Protector — holds the line, shields allies, absorbs pressure.",
     "signature_tag": "discipline",
     "knowledge_tags": {
+      "armor": 1,
       "discipline": 2,
-      "shields": 1,
-      "heavy_armor": 1,
       "melee": 1,
       "reach": 1
     },
     "application_tags": {
       "courage": 2,
       "fear_mastery": 1,
-      "resolve": 1
+      "heavy_armor": 1,
+      "resolve": 1,
+      "shields": 1
     },
     "field_tags": {}
   },
@@ -92,14 +93,15 @@
     "description": "Spiritual warrior — faith, authority, sacred practice made functional.",
     "signature_tag": "discipline",
     "knowledge_tags": {
-      "discipline": 2,
-      "shields": 1,
-      "medium_armor": 1
+      "armor": 1,
+      "discipline": 2
     },
     "application_tags": {
       "command": 1,
       "courage": 1,
-      "ritual_structure": 1
+      "medium_armor": 1,
+      "ritual_structure": 1,
+      "shields": 1
     },
     "field_tags": {
       "sacred": 1
