@@ -566,6 +566,37 @@ def _validate_simple_catalog(path: Path, failures: list[str]) -> list[dict]:
     return rows
 
 
+def _validate_wrapped_simple_catalog(path: Path, inner_key: str, failures: list[str]) -> list[dict]:
+    """Validate a wrapped catalog-registry file and validate its inner list with simple-catalog rules."""
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        _failures_append(failures, False, f"{path.name}: expected object with schema_version and {inner_key}")
+        return []
+    if data.get("schema_version") != 1:
+        _failures_append(failures, False, f"{path.name}: schema_version must be 1")
+    rows = data.get(inner_key)
+    if not isinstance(rows, list):
+        _failures_append(failures, False, f"{path.name}: {inner_key} must be a list")
+        return []
+
+    seen_ids: set[str] = set()
+    for i, row in enumerate(rows):
+        label = f"{path.name}.{inner_key}[{i}]"
+        _failures_append(failures, isinstance(row, dict), f"{label}: expected object")
+        if not isinstance(row, dict):
+            continue
+        required = {"id", "display_name", "description"}
+        _failures_append(failures, required.issubset(row.keys()), f"{label}: missing one of {sorted(required)}")
+        item_id = row.get("id")
+        _validate_snake_case(f"{label}.id", item_id, failures)
+        if isinstance(item_id, str):
+            _failures_append(failures, item_id not in seen_ids, f"{label}.id duplicated: {item_id}")
+            seen_ids.add(item_id)
+        _failures_append(failures, isinstance(row.get("display_name"), str) and row.get("display_name").strip(), f"{label}.display_name must be non-empty string")
+        _failures_append(failures, isinstance(row.get("description"), str) and row.get("description").strip(), f"{label}.description must be non-empty string")
+    return rows
+
+
 def _validate_creature_companion_row(label: str, row: dict, failures: list[str], *, require_biome: bool) -> None:
     required_keys = {
         "species",
@@ -827,11 +858,17 @@ def main() -> None:
                 continue
             _validate_items_roll_tags(item_file, failures)
 
-    beast_dir = data_dir / "companions"
-    natural_ability_rows = _validate_simple_catalog(beast_dir / "natural_abilities.json", failures)
+    registry_dir = data_dir / "catalog" / "registries"
+    natural_ability_rows = _validate_wrapped_simple_catalog(
+        registry_dir / "companion_natural_abilities.json",
+        "natural_abilities",
+        failures,
+    )
     VALID_BEAST_NATURAL_ABILITIES = {row["id"] for row in natural_ability_rows if isinstance(row, dict) and isinstance(row.get("id"), str)}
-    _validate_simple_catalog(beast_dir / "learned_commands.json", failures)
-    _validate_simple_catalog(beast_dir / "tactical_roles.json", failures)
+    _validate_wrapped_simple_catalog(registry_dir / "companion_learned_commands.json", "learned_commands", failures)
+    _validate_wrapped_simple_catalog(registry_dir / "companion_tactical_roles.json", "tactical_roles", failures)
+
+    beast_dir = data_dir / "companions"
     _validate_beast_exceptional(beast_dir / "exceptional.json", failures)
     _validate_entity_files(data_dir, failures)
 

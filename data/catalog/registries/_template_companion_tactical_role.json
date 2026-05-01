@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "tactical_roles": [
+    {
+      "id": "scout",
+      "name": "Scout",
+      "description": "Short role summary.",
+      "use_cases": ["advance warning", "route finding"]
+    }
+  ]
+}
