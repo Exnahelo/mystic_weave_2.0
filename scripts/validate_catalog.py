@@ -31,9 +31,9 @@ REGISTRY_KEYS = {
 }
 
 CATEGORY_DIRS = {
-    "weapon": "weapon",
+    "weapon": "weapons",
     "armor": "armor",
-    "shield": "shield",
+    "shield": "shields",
     "ammunition": "ammunition",
     "apparel": "apparel",
     "gear": "gear",
