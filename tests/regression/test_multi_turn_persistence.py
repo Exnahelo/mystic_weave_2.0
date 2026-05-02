@@ -365,31 +365,6 @@ def test_delta_save_validation_failure_does_not_commit_state_or_log() -> None:
 
 
 @pytest.mark.regression
-def test_delta_save_persists_draconic_traits() -> None:
-    session_id = "deltadraconic1"
-    conn = MultiTurnFakeConn(session_id, _base_character(), _base_world())
-    app = _make_app(FakePool(conn))
-
-    with TestClient(app) as client:
-        r = client.post(
-            f"/state/{session_id}/delta",
-            json={
-                "character": {"draconic_traits": ["dragon_breath", "scaled_hide"]},
-                "log_entry": "Draconic traits updated.",
-            },
-        )
-
-        assert r.status_code == 200
-        payload = r.json()
-        assert payload["character"]["draconic_traits"] == ["dragon_breath", "scaled_hide"]
-
-        loaded = client.get(f"/state/{session_id}")
-
-    assert loaded.status_code == 200
-    assert loaded.json()["character"]["draconic_traits"] == ["dragon_breath", "scaled_hide"]
-
-
-@pytest.mark.regression
 def test_delta_save_updates_coin_without_overwriting_other_economy_fields() -> None:
     session_id = "deltaeconomy1"
     conn = MultiTurnFakeConn(session_id, _base_character(), _base_world())

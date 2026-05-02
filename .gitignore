@@ -5,6 +5,7 @@ __pycache__/
 *.db
 reports/
 .env
+.claude
 
 # Editor and workspace state — local only, not tracked
 .vscode/settings.json

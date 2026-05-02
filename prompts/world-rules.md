@@ -327,10 +327,6 @@ Dangerous Use: on any failure, use Backlash outcomes.
 
 **Catastrophic Failure** — Roll 100 in Dangerous Use, or forbidden magic. Permanent, irreversible, character-scale consequences.
 
-### Breath Weapon (Innate, Not Learned Magic)
-
-Draconic breath is an innate species capability, not a learned spell. It does not use the spell threshold table. It does not require a magical field knowledge tag. Use `dragon_breath` as the application tag and resolve with the **standard competency roll formula** using Will or Power based on intent.
-
 ---
 
 ## Advancement

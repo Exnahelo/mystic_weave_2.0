@@ -624,18 +624,6 @@
     ]
   },
   {
-    "index": "dragon_breath",
-    "name": "Dragon Breath",
-    "group": "ranged",
-    "primary_domain": "will",
-    "domain_note": "Will for controlled channeling, Power for raw output.",
-    "description": "Channeling innate draconic breath with control rather than pure force.",
-    "examples": [
-      "Exhale a fire cone without catching allies",
-      "Sustain a lightning line through panic"
-    ]
-  },
-  {
     "index": "tactics",
     "name": "Tactics",
     "group": "warfare",

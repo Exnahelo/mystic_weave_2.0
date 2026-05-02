@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave (GPT Actions)",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "4.7.0"
+    "version": "4.8.0"
   },
   "servers": [
     {
@@ -3263,13 +3263,6 @@
             "type": "string",
             "title": "Ancestry"
           },
-          "draconic_traits": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Draconic Traits"
-          },
           "culture": {
             "type": "string",
             "title": "Culture"
@@ -3369,13 +3362,6 @@
           "ancestry": {
             "type": "string",
             "title": "Ancestry"
-          },
-          "draconic_traits": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Draconic Traits"
           },
           "culture": {
             "type": "string",
@@ -3602,20 +3588,6 @@
                 "type": "null"
               }
             ]
-          },
-          "draconic_traits": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Draconic Traits"
           }
         },
         "additionalProperties": false,

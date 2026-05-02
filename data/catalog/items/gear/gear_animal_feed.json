@@ -1,0 +1,41 @@
+{
+  "id": "gear-animal-feed",
+  "name": "Animal Feed (per day)",
+  "category": "gear",
+  "subcategory": "survival",
+  "schema_version": 1,
+  "description": "A one-day feed ration for a mount or working animal. Generic mix suitable for the common riding and pack species.",
+  "narrative_effects": [
+    "Required to avoid hunger penalties for mounts and working animals during extended travel without grazing or other forage."
+  ],
+  "tags": [
+    "consumable",
+    "survival",
+    "mount"
+  ],
+  "roll_tag": null,
+  "rarity": "common",
+  "legality": "open",
+  "value_cd": 3,
+  "wealth_tier_floor": "destitute",
+  "market_tags": [
+    "general-goods"
+  ],
+  "consumable": true,
+  "charges_max": 1,
+  "knowledge_tag": null,
+  "application_tag": null,
+  "base_damage": null,
+  "weapon_handedness": null,
+  "armor_floor": null,
+  "armor_ceiling": null,
+  "ammo_class": null,
+  "used_with": [],
+  "bundle_size": null,
+  "damage_modifier": null,
+  "recoverable": true,
+  "special_effect_tag": null,
+  "tier": null,
+  "magic_field": null,
+  "tool_role": null
+}

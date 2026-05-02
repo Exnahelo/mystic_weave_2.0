@@ -236,7 +236,7 @@ def _validate_magic_fields(path: Path, failures: list[str]) -> None:
 def _validate_applications(path: Path, failures: list[str]) -> None:
     rows = _load_tag_file(path)
     seen_indices: set[str] = set()
-    _failures_append(failures, len(rows) == 153, f"{path.name}: expected 153 entries")
+    _failures_append(failures, len(rows) == 152, f"{path.name}: expected 152 entries")
 
     for i, row in enumerate(rows):
         label = f"{path.name}[{i}]"

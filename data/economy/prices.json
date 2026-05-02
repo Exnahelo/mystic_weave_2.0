@@ -792,6 +792,14 @@
     "description": "Baseline settled-region price for a piece of chalk."
   },
   {
+    "id": "price_animal_feed_01",
+    "name": "Animal Feed (per day)",
+    "price_group": "basic_gear",
+    "price_cd": 3,
+    "rarity": "common",
+    "description": "Baseline settled-region price for one day of generic animal feed for mounts or working animals."
+  },
+  {
     "id": "price_ink_01",
     "name": "Ink (vial)",
     "price_group": "basic_gear",
