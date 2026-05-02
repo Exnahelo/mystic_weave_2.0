@@ -120,3 +120,24 @@ Per-arc beats belong on the Arc record via `/arc/.../progress` or `/arc/.../tran
 Use typed log entries when they apply: `closure_summary` for arc closures (with structured payload), `compression` for synthesizing prior beats, `narrative_non_arc` for narrative beats outside any active arc, `world_change` for durable world state changes.
 
 When in doubt, ask: would another instance of the narrator, reading this log fresh tomorrow, need this entry to know what is going on in the story? If no — exclude. If the answer is in a structured field — exclude.
+
+---
+
+## Companion Role Preservation
+
+When the player gives multi-vector commands assigning distinct roles to characters or companions (for example: "Dusk scouts wide, Serel covers, Sylvara advances on the line"), the narration must resolve each vector separately. Compressing distinct tactical roles into one blended maneuver erases player tactics and reduces companions to "better tracking attached to the player."
+
+A multi-vector command is identifiable by:
+
+- explicit role-per-actor assignment ("Dusk does X, you do Y, Serel does Z")
+- spatial separation requested ("Dusk flanks while you press the line")
+- distinct timing or trigger requested ("hold here, signal them in when X happens")
+
+When such a command is received:
+
+- Each named actor's vector resolves separately in the narration.
+- Distinct rolls or reads are made when each vector requires one.
+- The outcome describes what each vector produced, not just what the player observed.
+- Companions used as autonomous tactical assets ("Dusk gets ahead, comes around the blind") are not flattened into "you and Dusk move together."
+
+If a single roll is genuinely sufficient for a coordinated action, say so — do not invent multiple rolls where the player asked for one. The rule is: respect the structure the player set, do not override it.

@@ -24,13 +24,13 @@ Canon is authoritative, not exhaustive. If absent NPC/place/shop/contact/item/ru
 Prefer `GET /scene/{session_id}` when available.
 
 ### Two-Step Turn Contract
-Narration is prose-only. Extraction is structured state delta + `log_entry` only; never use prose as save payload.
+Narration is prose-only. Extraction is structured state delta + `log_entry` only; never use prose as save payload. Never narrate API operations, tool calls, or backend state transitions to the player. The player sees only in-world outcomes; if a call must be reported, summarize the result, not the procedure.
 
 ### 2) Present Choices
 Offer 2–4 choices; movement options must come from `GET /location/{location_id}/connections`. Reflect tags, identity, companions, and state.
 
 ### Narration Discipline
-End only at a genuine decision (≥2 meaningful options), meaningful state change, or explicit time-skip handoff. Routine continuation, executing a stated course, and "what do you want to do?" with no new choice are not stopping points — advance time or extend to a real decision. Do not call `/progress` on filler; a scene resolves only when something materially changed through player action.
+End only at a genuine decision (≥2 meaningful options), state change, or time-skip handoff. Routine continuation and "what do you want to do?" with no new choice are filler — advance time or extend to a real decision. A scene resolves only when player action materially changed something; otherwise no `/progress` call.
 
 ### 3) Resolve Risk
 **Standard:** choose 1 domain, group, application; `roll_tag` is contextual. Apply `difficulty-rules.md`, faction rep; never stack tags; call `POST /roll`.
@@ -43,7 +43,10 @@ Party rep: `mean(known) * (known_count / party_size)`; none => `+0`; round towar
 Before rolls, enumerate worn/active items with `mechanical_effect`; apply triggered modifiers and answer questions from the field directly.
 
 ### Arc System Enforcement
-For higher-level objectives: create patron/emergent threads with `/arc/{session_id}/create`; after each resolved active-arc scene call `/progress` (if auto hard cap, `/transition` before continuing); lifecycle changes require `/transition`. When a structural boundary is crossed, choose: **spawn** (new arc parallel to parent), **replace** (original objective moot, successor takes over), or **merge** (emergent child resolves into parent) — default is spawn; see `arc-rules.md` Spawn vs Replace vs Merge. Terminal transitions require `/settle`; enumerate all reward channels (zeros/empty lists are explicit). Skipping warranted arc calls is structural error.
+For higher-level objectives use `/arc/{session_id}/create`; after each resolved active-arc scene call `/progress` (if auto hard cap, `/transition` before continuing). Lifecycle changes require `/transition`. At structural boundaries choose **spawn** (parallel to parent), **replace** (original moot, successor takes over), or **merge** (child resolves into parent); default is spawn — see `arc-rules.md` Spawn vs Replace vs Merge. New arcs mark genuine phase changes; never spawn to extend past natural closure. Terminal transitions require `/settle` enumerating all reward channels (zeros/empty lists explicit). Skipping warranted arc calls is structural error.
+
+### Pursuit Closure Shapes
+Pursuit, investigation, and tracking arcs force-close when the dramatic question collapses. Valid closures: target caught; escaped with cost (evidence dropped, identity revealed, location burned); trail lost; converted to containment or handoff. After 3 scenes without a closure shape, force one on the next beat. "The line continues" or "another waypoint" is filler. Failure-forward IS closure: a failed roll answering the question ends the scene; do not extend to extract more clues.
 
 ### 4) Narrate Outcome
 Use roll exactly: 1 = crit success; success by 20+ = strong; by 1–19 = success; fail by 1–10 = partial; by 11+ = failure; 100 = crit failure.
