@@ -257,3 +257,98 @@ class ProgressionCommitResponse(BaseModel):
     log_entry_index: int = Field(
         description="Index of the new log entry recording this advancement"
     )
+
+
+# ---------------------------------------------------------------------------
+# Scene record models (Brief 19)
+# ---------------------------------------------------------------------------
+
+class DeclareSceneResolutionRequest(BaseModel):
+    """Request payload for /scene/declare_resolution."""
+    model_config = ConfigDict(extra="forbid")
+
+    session_id: str
+    scene_summary: str | None = Field(default=None, max_length=2000)
+    scene_actions: list[SceneAction] = Field(
+        default_factory=list,
+        description="Structured actions taken during the scene",
+        max_length=20,
+    )
+    location_id: str | None = Field(
+        default=None,
+        description=(
+            "Where the scene resolved; if omitted, server reads world.location "
+            "at time of resolution."
+        ),
+    )
+    arc_progressed_ids: list[str] = Field(
+        default_factory=list,
+        description="Active arc IDs this scene contributed to. Server validates each exists.",
+        max_length=10,
+    )
+
+
+class ArcEnvelopeStatus(BaseModel):
+    """One arc's envelope state at scene-resolution time."""
+    model_config = ConfigDict(extra="forbid")
+
+    arc_id: str
+    title: str
+    state: str
+    resolved_scenes_used: int
+    resolved_scene_soft_cap: int
+    resolved_scene_hard_cap: int
+    locations_visited: int
+    location_soft_cap: int
+    location_hard_cap: int
+    soft_cap_approaching: bool = Field(description="True if at or beyond soft cap")
+    hard_cap_reached: bool = Field(
+        description="True if at hard cap; transition to ready_to_close suggested"
+    )
+
+
+class DeclareSceneResolutionResponse(BaseModel):
+    """Response from /scene/declare_resolution."""
+    model_config = ConfigDict(extra="forbid")
+
+    scene_id: str
+    session_id: str
+    resolved_at: str = Field(description="ISO timestamp")
+    location_id: str | None
+    turn_at_resolution: int | None
+    arc_envelope_status: list[ArcEnvelopeStatus] = Field(
+        description="Status of all active arcs after this scene's contribution"
+    )
+    suggestions: list[str] = Field(
+        default_factory=list,
+        description="Suggest-level guidance: e.g., 'arc_X soft cap approaching, consider settling'",
+    )
+
+
+class SceneRecord(BaseModel):
+    """Full scene record returned by GET endpoints."""
+    model_config = ConfigDict(extra="forbid")
+
+    scene_id: str
+    session_id: str
+    resolved_at: str
+    scene_summary: str | None
+    scene_actions: list[dict[str, Any]] = Field(description="Raw scene actions as recorded")
+    tag_advance_committed: str | None
+    arc_progressed_ids: list[str]
+    location_id: str | None
+    turn_at_resolution: int | None
+    time_at_resolution: dict[str, Any] | None
+
+
+class SceneRecordsListResponse(BaseModel):
+    """Paginated list of scene records for a session."""
+    model_config = ConfigDict(extra="forbid")
+
+    session_id: str
+    records: list[SceneRecord]
+    has_more: bool
+    next_cursor: str | None = Field(
+        default=None,
+        description="Opaque cursor for the next page; None if no more.",
+    )

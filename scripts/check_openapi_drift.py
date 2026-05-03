@@ -22,9 +22,13 @@ GPT_SPEC_EXCLUSIONS = {
     ("get", "/catalog/vocab"),
     ("get", "/catalog/creatures"),
     ("get", "/tags"),
-    # See scripts/regenerate_openapi.py for rationale on these two.
+    # See scripts/regenerate_openapi.py for rationale on these.
     ("post", "/state/{session_id}"),
     ("get", "/companion/{companion_id}"),
+    # Brief 19 slot trade and admin-only reads.
+    ("post", "/character/{session_id}/spend_ap"),
+    ("get", "/scene/record/{session_id}/{scene_id}"),
+    ("get", "/scene/records/{session_id}"),
 }
 IGNORED_PATHS = {"/"}
 IGNORED_APP_ONLY_PATHS = {"/version"}

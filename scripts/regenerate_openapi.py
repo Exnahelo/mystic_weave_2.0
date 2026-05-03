@@ -38,6 +38,13 @@ GPT_SPEC_EXCLUSIONS = [
     # already returned in world.companions on every state load. Excluded
     # from the GPT subset to free a slot.
     ("get", "/companion/{companion_id}"),
+    # Brief 19 slot trade: spend_ap is a player-UX flow that the narrator
+    # never needs to invoke. Out of GPT subset; remains in openapi.json
+    # for admin/UX tooling.
+    ("post", "/character/{session_id}/spend_ap"),
+    # Brief 19 admin reads: orchestrator/operator only.
+    ("get", "/scene/record/{session_id}/{scene_id}"),
+    ("get", "/scene/records/{session_id}"),
 ]
 
 

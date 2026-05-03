@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "5.2.0"
+    "version": "5.3.0"
   },
   "servers": [
     {
@@ -1575,6 +1575,171 @@
         }
       }
     },
+    "/scene/declare_resolution": {
+      "post": {
+        "tags": [
+          "scene"
+        ],
+        "summary": "Declare Scene Resolution",
+        "description": "Record a scene boundary. Generates scene_id, persists structured actions and arc-progression contributions, returns envelope status for active arcs with suggest-level guidance for soft/hard caps.",
+        "operationId": "declare_scene_resolution_scene_declare_resolution_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeclareSceneResolutionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeclareSceneResolutionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scene/record/{session_id}/{scene_id}": {
+      "get": {
+        "tags": [
+          "scene"
+        ],
+        "summary": "Get Scene Record",
+        "description": "Read a single scene record. Internal/admin use; not in GPT spec.",
+        "operationId": "get_scene_record_scene_record__session_id___scene_id__get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "scene_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Scene Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SceneRecord"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scene/records/{session_id}": {
+      "get": {
+        "tags": [
+          "scene"
+        ],
+        "summary": "List Scene Records",
+        "description": "Paginated list of scene records. Internal/admin use; not in GPT spec.",
+        "operationId": "list_scene_records_scene_records__session_id__get",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SceneRecordsListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/": {
       "get": {
         "tags": [
@@ -2616,6 +2781,73 @@
         "type": "object",
         "title": "ArcEconomyEnvelope",
         "description": "Economy channel bounds for an arc reward."
+      },
+      "ArcEnvelopeStatus": {
+        "properties": {
+          "arc_id": {
+            "type": "string",
+            "title": "Arc Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "state": {
+            "type": "string",
+            "title": "State"
+          },
+          "resolved_scenes_used": {
+            "type": "integer",
+            "title": "Resolved Scenes Used"
+          },
+          "resolved_scene_soft_cap": {
+            "type": "integer",
+            "title": "Resolved Scene Soft Cap"
+          },
+          "resolved_scene_hard_cap": {
+            "type": "integer",
+            "title": "Resolved Scene Hard Cap"
+          },
+          "locations_visited": {
+            "type": "integer",
+            "title": "Locations Visited"
+          },
+          "location_soft_cap": {
+            "type": "integer",
+            "title": "Location Soft Cap"
+          },
+          "location_hard_cap": {
+            "type": "integer",
+            "title": "Location Hard Cap"
+          },
+          "soft_cap_approaching": {
+            "type": "boolean",
+            "title": "Soft Cap Approaching",
+            "description": "True if at or beyond soft cap"
+          },
+          "hard_cap_reached": {
+            "type": "boolean",
+            "title": "Hard Cap Reached",
+            "description": "True if at hard cap; transition to ready_to_close suggested"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "arc_id",
+          "title",
+          "state",
+          "resolved_scenes_used",
+          "resolved_scene_soft_cap",
+          "resolved_scene_hard_cap",
+          "locations_visited",
+          "location_soft_cap",
+          "location_hard_cap",
+          "soft_cap_approaching",
+          "hard_cap_reached"
+        ],
+        "title": "ArcEnvelopeStatus",
+        "description": "One arc's envelope state at scene-resolution time."
       },
       "ArcEscalationRules": {
         "properties": {
@@ -5084,6 +5316,164 @@
           "name"
         ],
         "title": "CultureOption"
+      },
+      "DeclareSceneResolutionRequest": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "scene_summary": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scene Summary"
+          },
+          "scene_actions": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/SpellCastAction"
+                },
+                {
+                  "$ref": "#/components/schemas/WeaponAttackAction"
+                },
+                {
+                  "$ref": "#/components/schemas/SocialRollAction"
+                },
+                {
+                  "$ref": "#/components/schemas/PerceptionRollAction"
+                },
+                {
+                  "$ref": "#/components/schemas/MovementAction"
+                },
+                {
+                  "$ref": "#/components/schemas/DefenseAction"
+                },
+                {
+                  "$ref": "#/components/schemas/GenericRollAction"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                  "defense": "#/components/schemas/DefenseAction",
+                  "generic_roll": "#/components/schemas/GenericRollAction",
+                  "movement": "#/components/schemas/MovementAction",
+                  "perception_roll": "#/components/schemas/PerceptionRollAction",
+                  "social_roll": "#/components/schemas/SocialRollAction",
+                  "spell_cast": "#/components/schemas/SpellCastAction",
+                  "weapon_attack": "#/components/schemas/WeaponAttackAction"
+                }
+              }
+            },
+            "type": "array",
+            "maxItems": 20,
+            "title": "Scene Actions",
+            "description": "Structured actions taken during the scene"
+          },
+          "location_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location Id",
+            "description": "Where the scene resolved; if omitted, server reads world.location at time of resolution."
+          },
+          "arc_progressed_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 10,
+            "title": "Arc Progressed Ids",
+            "description": "Active arc IDs this scene contributed to. Server validates each exists."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "session_id"
+        ],
+        "title": "DeclareSceneResolutionRequest",
+        "description": "Request payload for /scene/declare_resolution."
+      },
+      "DeclareSceneResolutionResponse": {
+        "properties": {
+          "scene_id": {
+            "type": "string",
+            "title": "Scene Id"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "resolved_at": {
+            "type": "string",
+            "title": "Resolved At",
+            "description": "ISO timestamp"
+          },
+          "location_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location Id"
+          },
+          "turn_at_resolution": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Turn At Resolution"
+          },
+          "arc_envelope_status": {
+            "items": {
+              "$ref": "#/components/schemas/ArcEnvelopeStatus"
+            },
+            "type": "array",
+            "title": "Arc Envelope Status",
+            "description": "Status of all active arcs after this scene's contribution"
+          },
+          "suggestions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Suggestions",
+            "description": "Suggest-level guidance: e.g., 'arc_X soft cap approaching, consider settling'"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "scene_id",
+          "session_id",
+          "resolved_at",
+          "location_id",
+          "turn_at_resolution",
+          "arc_envelope_status"
+        ],
+        "title": "DeclareSceneResolutionResponse",
+        "description": "Response from /scene/declare_resolution."
       },
       "DefenseAction": {
         "properties": {
@@ -9117,6 +9507,150 @@
         ],
         "title": "SceneLocationSummary",
         "description": "Compact location payload for turn narration."
+      },
+      "SceneRecord": {
+        "properties": {
+          "scene_id": {
+            "type": "string",
+            "title": "Scene Id"
+          },
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "resolved_at": {
+            "type": "string",
+            "title": "Resolved At"
+          },
+          "scene_summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scene Summary"
+          },
+          "scene_actions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Scene Actions",
+            "description": "Raw scene actions as recorded"
+          },
+          "tag_advance_committed": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tag Advance Committed"
+          },
+          "arc_progressed_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Arc Progressed Ids"
+          },
+          "location_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location Id"
+          },
+          "turn_at_resolution": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Turn At Resolution"
+          },
+          "time_at_resolution": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time At Resolution"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "scene_id",
+          "session_id",
+          "resolved_at",
+          "scene_summary",
+          "scene_actions",
+          "tag_advance_committed",
+          "arc_progressed_ids",
+          "location_id",
+          "turn_at_resolution",
+          "time_at_resolution"
+        ],
+        "title": "SceneRecord",
+        "description": "Full scene record returned by GET endpoints."
+      },
+      "SceneRecordsListResponse": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "records": {
+            "items": {
+              "$ref": "#/components/schemas/SceneRecord"
+            },
+            "type": "array",
+            "title": "Records"
+          },
+          "has_more": {
+            "type": "boolean",
+            "title": "Has More"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor",
+            "description": "Opaque cursor for the next page; None if no more."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "session_id",
+          "records",
+          "has_more"
+        ],
+        "title": "SceneRecordsListResponse",
+        "description": "Paginated list of scene records for a session."
       },
       "SceneRelevantCharacterState": {
         "properties": {

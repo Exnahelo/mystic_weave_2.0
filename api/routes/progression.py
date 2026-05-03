@@ -247,6 +247,36 @@ async def _load_character(pool: asyncpg.Pool, session_id: str) -> dict[str, Any]
     return json.loads(raw) if isinstance(raw, str) else raw
 
 
+async def _check_scene_already_advanced(
+    pool: asyncpg.Pool,
+    session_id: str,
+    scene_id: str,
+) -> str | None:
+    """Return tag_advance_committed if the scene exists and was advanced, else None.
+
+    Raises 422 when the scene_id is provided but doesn't exist for this session.
+    Brief 19 wires this into /progression/scan and /progression/commit so the
+    optional scene_id parameter Brief 18 added becomes meaningful.
+    """
+    async with pool.acquire() as conn:
+        row = await conn.fetchrow(
+            "SELECT tag_advance_committed FROM scene_records "
+            "WHERE scene_id = $1 AND session_id = $2",
+            scene_id,
+            session_id,
+        )
+    if row is None:
+        raise HTTPException(
+            status_code=422,
+            detail={
+                "error": "unknown_scene_id",
+                "scene_id": scene_id,
+                "session_id": session_id,
+            },
+        )
+    return row["tag_advance_committed"]
+
+
 # ---------------------------------------------------------------------------
 # /progression/scan
 # ---------------------------------------------------------------------------
@@ -268,6 +298,15 @@ async def progression_scan(
     """Validate proposed advances against scene actions; return ranked candidates."""
     character = await _load_character(pool, body.session_id)
 
+    # Brief 19: if scene_id is provided, check whether the scene already
+    # received a tag advance. If so, all candidates are marked ineligible
+    # (one-tag-per-scene enforcement at the validation layer).
+    already_advanced_tag: str | None = None
+    if body.scene_id:
+        already_advanced_tag = await _check_scene_already_advanced(
+            pool, body.session_id, body.scene_id
+        )
+
     seen_tags: set[str] = set()
     raw_candidates: list[tuple[str, str, str, FitStrength]] = []
     for i, action in enumerate(body.scene_actions):
@@ -281,6 +320,8 @@ async def progression_scan(
         _build_candidate_tag(tag, kind, parent, fit, character)
         for tag, kind, parent, fit in raw_candidates
     ]
+    if already_advanced_tag is not None:
+        candidates = [c.model_copy(update={"eligible": False}) for c in candidates]
     candidates.sort(
         key=lambda c: (
             _STRENGTH_RANK[c.fit.strength],
@@ -318,6 +359,9 @@ async def progression_scan(
             source_action_index=None,
         )
         evaluated = _build_candidate_tag(tag, kind, parent, synthetic_fit, character)
+        # Brief 19: scene already advanced -> nothing is eligible.
+        if already_advanced_tag is not None:
+            evaluated = evaluated.model_copy(update={"eligible": False})
 
         if not evaluated.eligible:
             validation = "invalid"
@@ -357,6 +401,8 @@ async def progression_scan(
         warnings.append("no_proposed_advances")
     if not body.scene_actions:
         warnings.append("no_scene_actions")
+    if already_advanced_tag is not None:
+        warnings.append("scene_already_advanced")
 
     return ProgressionScanResponse(
         session_id=body.session_id,
@@ -403,6 +449,35 @@ async def progression_commit(
             character = json.loads(raw_char) if isinstance(raw_char, str) else dict(raw_char)
             raw_log = row["log"]
             log_arr = json.loads(raw_log) if isinstance(raw_log, str) else list(raw_log)
+
+            # Brief 19: optional scene_id enforces one-tag-per-scene at the DB.
+            # Lock the scene row alongside the game_state row so a concurrent
+            # commit on the same scene loses cleanly.
+            if body.scene_id:
+                scene_row = await conn.fetchrow(
+                    "SELECT tag_advance_committed FROM scene_records "
+                    "WHERE scene_id = $1 AND session_id = $2 FOR UPDATE",
+                    body.scene_id,
+                    body.session_id,
+                )
+                if scene_row is None:
+                    raise HTTPException(
+                        status_code=422,
+                        detail={
+                            "error": "unknown_scene_id",
+                            "scene_id": body.scene_id,
+                            "session_id": body.session_id,
+                        },
+                    )
+                if scene_row["tag_advance_committed"] is not None:
+                    raise HTTPException(
+                        status_code=409,
+                        detail={
+                            "error": "scene_already_advanced",
+                            "existing_tag": scene_row["tag_advance_committed"],
+                            "scene_id": body.scene_id,
+                        },
+                    )
 
             lookup = _registry_lookup(body.tag)
             if lookup is None:
@@ -559,6 +634,17 @@ async def progression_commit(
                 json.dumps(new_log),
                 body.session_id,
             )
+
+            # Brief 19: stamp the scene record with the committed tag inside
+            # the same transaction so the one-tag-per-scene guarantee is
+            # atomic with the character mutation.
+            if body.scene_id:
+                await conn.execute(
+                    "UPDATE scene_records SET tag_advance_committed = $1 "
+                    "WHERE scene_id = $2",
+                    body.tag,
+                    body.scene_id,
+                )
 
     return ProgressionCommitResponse(
         session_id=body.session_id,

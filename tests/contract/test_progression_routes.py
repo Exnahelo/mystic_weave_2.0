@@ -52,7 +52,7 @@ class ProgressionConn:
 
     Records the latest character/log on every UPDATE so tests can assert
     post-commit state. Supports SELECT (with or without FOR UPDATE) and
-    UPDATE statements.
+    UPDATE statements. Brief 19 added scene_records lookups + updates.
     """
 
     def __init__(self, session_id: str | None, character: dict | None, log: list | None = None):
@@ -60,6 +60,14 @@ class ProgressionConn:
         self.character = character
         self.log = log if log is not None else []
         self.updated_at = datetime.now()
+        # scene_id -> {"session_id", "tag_advance_committed"}
+        self.scene_records: dict[str, dict[str, Any]] = {}
+
+    def add_scene(self, scene_id: str, session_id: str, tag_advance_committed: str | None = None) -> None:
+        self.scene_records[scene_id] = {
+            "session_id": session_id,
+            "tag_advance_committed": tag_advance_committed,
+        }
 
     def transaction(self):
         return _TxCtx()
@@ -78,6 +86,13 @@ class ProgressionConn:
                 "log": json.dumps(self.log),
             }
 
+        if "SELECT tag_advance_committed FROM scene_records" in query:
+            scene_id, session_id = args[0], args[1]
+            row = self.scene_records.get(scene_id)
+            if row is None or row["session_id"] != session_id:
+                return None
+            return {"tag_advance_committed": row["tag_advance_committed"]}
+
         return None
 
     async def execute(self, query: str, *args):
@@ -85,6 +100,12 @@ class ProgressionConn:
             self.character = json.loads(args[0])
             self.log = json.loads(args[1])
             self.updated_at = datetime.now()
+            return "UPDATE 1"
+        if "UPDATE scene_records SET tag_advance_committed" in query:
+            tag, scene_id = args[0], args[1]
+            row = self.scene_records.get(scene_id)
+            if row is not None:
+                row["tag_advance_committed"] = tag
             return "UPDATE 1"
         return None
 
@@ -356,8 +377,13 @@ def test_scan_empty_actions_warning() -> None:
 
 @pytest.mark.contract
 def test_scan_scene_id_echoed_unchanged() -> None:
-    """Brief 18 echoes scene_id verbatim; Brief 19 will give it semantics."""
+    """Scan returns the submitted scene_id verbatim when it exists.
+
+    (Brief 18 only echoed it; Brief 19 also validates it and rejects unknown
+    ids with 422. This test guarantees the round-trip for valid ids.)
+    """
     conn = ProgressionConn("sess1", _druid_character())
+    conn.add_scene("scene-abc-123", "sess1", tag_advance_committed=None)
     app = _make_app(FakePool(conn))
 
     with TestClient(app) as client:
@@ -597,3 +623,158 @@ def test_commit_404_unknown_session() -> None:
         r = client.post("/progression/commit", json={"session_id": "missing", "tag": "hauling"})
 
     assert r.status_code == 404
+
+
+# ---------------------------------------------------------------------------
+# Brief 19: scene_id wiring
+# ---------------------------------------------------------------------------
+
+@pytest.mark.contract
+def test_scan_with_scene_id_no_prior_advance() -> None:
+    """Scene exists but no prior advance: candidates are eligible normally."""
+    conn = ProgressionConn("sess1", _druid_character())
+    conn.add_scene("scene-X", "sess1", tag_advance_committed=None)
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/progression/scan",
+            json={
+                "session_id": "sess1",
+                "scene_id": "scene-X",
+                "scene_actions": [{"type": "spell_cast", "spell": "seedwake", "outcome": "success"}],
+                "proposed_advances": [{"tag": "seedwake"}],
+            },
+        )
+
+    assert r.status_code == 200
+    body = r.json()
+    assert body["scene_id"] == "scene-X"
+    assert "scene_already_advanced" not in body["warnings"]
+    seedwake = next(c for c in body["candidates_ranked"] if c["tag"] == "seedwake")
+    assert seedwake["eligible"] is True
+    assert body["proposed_evaluation"][0]["validation"] == "proposed_match"
+
+
+@pytest.mark.contract
+def test_scan_with_scene_id_already_advanced() -> None:
+    """Scene already has tag_advance_committed: every candidate ineligible + warning."""
+    conn = ProgressionConn("sess1", _druid_character())
+    conn.add_scene("scene-X", "sess1", tag_advance_committed="seedwake")
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/progression/scan",
+            json={
+                "session_id": "sess1",
+                "scene_id": "scene-X",
+                "scene_actions": [{"type": "spell_cast", "spell": "sap_mend", "outcome": "success"}],
+                "proposed_advances": [{"tag": "sap_mend"}],
+            },
+        )
+
+    assert r.status_code == 200
+    body = r.json()
+    assert "scene_already_advanced" in body["warnings"]
+    assert all(c["eligible"] is False for c in body["candidates_ranked"])
+    assert body["proposed_evaluation"][0]["validation"] == "invalid"
+
+
+@pytest.mark.contract
+def test_scan_with_unknown_scene_id_422() -> None:
+    """Submitting a scene_id that doesn't exist for the session -> 422."""
+    conn = ProgressionConn("sess1", _druid_character())
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/progression/scan",
+            json={
+                "session_id": "sess1",
+                "scene_id": "scene-not-real",
+                "scene_actions": [],
+                "proposed_advances": [],
+            },
+        )
+
+    assert r.status_code == 422
+    assert r.json()["detail"]["error"] == "unknown_scene_id"
+
+
+@pytest.mark.contract
+def test_commit_with_scene_id_records_advance() -> None:
+    """Commit updates scene_records.tag_advance_committed inside the same tx."""
+    conn = ProgressionConn("sess1", _druid_character())
+    conn.add_scene("scene-X", "sess1", tag_advance_committed=None)
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/progression/commit",
+            json={"session_id": "sess1", "scene_id": "scene-X", "tag": "hauling"},
+        )
+
+    assert r.status_code == 200
+    assert conn.scene_records["scene-X"]["tag_advance_committed"] == "hauling"
+    assert conn.character["knowledge"]["athletics"]["applications"]["hauling"] == 2
+
+
+@pytest.mark.contract
+def test_commit_with_scene_id_already_advanced_409() -> None:
+    """Second commit on a scene that already has a tag rejected with 409 Conflict."""
+    conn = ProgressionConn("sess1", _druid_character())
+    conn.add_scene("scene-X", "sess1", tag_advance_committed="hauling")
+    starting_character = json.loads(json.dumps(conn.character))
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/progression/commit",
+            json={"session_id": "sess1", "scene_id": "scene-X", "tag": "seedwake"},
+        )
+
+    assert r.status_code == 409
+    detail = r.json()["detail"]
+    assert detail["error"] == "scene_already_advanced"
+    assert detail["existing_tag"] == "hauling"
+    # Character was not mutated.
+    assert conn.character == starting_character
+
+
+@pytest.mark.contract
+def test_commit_with_unknown_scene_id_422() -> None:
+    """Submitting a scene_id that doesn't exist -> 422 unknown_scene_id."""
+    conn = ProgressionConn("sess1", _druid_character())
+    starting_character = json.loads(json.dumps(conn.character))
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/progression/commit",
+            json={"session_id": "sess1", "scene_id": "scene-not-real", "tag": "hauling"},
+        )
+
+    assert r.status_code == 422
+    assert r.json()["detail"]["error"] == "unknown_scene_id"
+    assert conn.character == starting_character
+
+
+@pytest.mark.contract
+def test_commit_with_scene_id_atomic_on_validation_error() -> None:
+    """If commit fails after the scene check, scene record stays unchanged."""
+    conn = ProgressionConn("sess1", _druid_character())
+    conn.add_scene("scene-X", "sess1", tag_advance_committed=None)
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        # Tag the character doesn't hold; should 422 after the scene check passes.
+        r = client.post(
+            "/progression/commit",
+            json={"session_id": "sess1", "scene_id": "scene-X", "tag": "climbing"},
+        )
+
+    assert r.status_code == 422
+    # Scene record was not stamped.
+    assert conn.scene_records["scene-X"]["tag_advance_committed"] is None
+
