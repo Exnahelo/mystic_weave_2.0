@@ -39,6 +39,22 @@ def _load_repo_spec() -> dict:
         return json.load(f)
 
 
+def _read_readme_version(repo_root: Path) -> str | None:
+    """Extract the canonical version from README.md.
+
+    README references the version multiple times. The 'Current backend/schema
+    version' line is the canonical reference.
+    """
+    readme_path = repo_root / "README.md"
+    if not readme_path.exists():
+        return None
+    content = readme_path.read_text(encoding="utf-8")
+    match = re.search(r"\*\*Current backend/schema version:\*\*\s*([\d.]+)", content)
+    if match:
+        return match.group(1)
+    return None
+
+
 def _load_gpt_spec() -> dict:
     spec_path = Path(__file__).resolve().parents[1] / "schemas" / "openapi.gpt.json"
     with open(spec_path, "r", encoding="utf-8") as f:
@@ -127,6 +143,14 @@ def main() -> None:
             f"repo={repo_spec.get('info', {}).get('version')} "
             f"app={app_spec.get('info', {}).get('version')}"
         )
+
+    readme_version = _read_readme_version(Path(__file__).resolve().parents[1])
+    if readme_version is not None:
+        spec_version = repo_spec.get("info", {}).get("version")
+        if readme_version != spec_version:
+            issues.append(
+                f"README version mismatch: README={readme_version} spec={spec_version}"
+            )
 
     repo_ops = _operation_map(repo_spec)
     app_ops = _operation_map(app_spec)

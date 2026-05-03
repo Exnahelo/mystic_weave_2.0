@@ -1,6 +1,6 @@
 # Mystic Weave — The Oath Calendar
 
-Version 2.0 — April 2026
+Version 2.1 — May 2026
 Status: Canonical. Upload to GPT builder as a knowledge file.
 
 ---
@@ -9,9 +9,9 @@ Status: Canonical. Upload to GPT builder as a knowledge file.
 
 The Oath Calendar marks time from the day the Oath of the Fallen was sworn — the moment Drakenvale was founded. Years are reckoned in **Years of the Oath (YO)**. Year 1 begins on the day the Oath was sworn. The current campaign year is set at session start.
 
-**Structure:** 12 months × 30 days + 6 festival days = 366 days per year.
+**Structure:** 12 months × 30 days = 360 days per year.
 
-Festival days fall at solstices and equinoxes. They are not part of any month and are observed as rest days across Drakenvale — no commerce, no petitions, ceremonies only.
+Festivals fall on specific days within months — they mark solstices, equinoxes, and significant remembrances. Festival days are observed across Drakenvale as rest days: no commerce, no petitions, ceremonies only. Each festival sits on a named (month, day), not between months.
 
 ---
 
@@ -36,16 +36,16 @@ Festival days fall at solstices and equinoxes. They are not part of any month an
 
 ## Festival Days
 
-Festival days fall between months at solstices and equinoxes. They are intercalary — outside the month count.
+Festival days fall on specific named days within months. They mark solstices, equinoxes, and significant remembrances. Each festival is observed across Drakenvale as a rest day.
 
-| Name | Placement | Season Boundary | Observance |
+| Name | Calendar Day | Season Boundary | Observance |
 |---|---|---|---|
-| **The Day of Founding** | Between Deepwarden and Ashwake | Winter Solstice — Year's End | Honors the swearing of the Oath of the Fallen. Formal ceremonies at the Platinum Heart. The Platinum Flame burns at full intensity. Solemn. The most significant day in the Drakenvale calendar. |
-| **New Year's Dawn** | First day of Ashwake (day after Founding Day) | Winter Solstice — Year's Start | Community gatherings. Oaths renewed. New ventures announced publicly. Warm and informal counterpart to the solemn Founding Day. The two together form the winter solstice observance. |
-| **The Verdant Gate** | Between Mistbreak and Verdantrise | Spring Equinox | Marks the valley's renewal. Platinum Acolytes bless the Sacred Pools. The Draconic Grasslands ceremonially opened for dragon gatherings. The Trial of Wings season is announced. |
-| **Highscale** | Between Goldmere and Scaletide | Summer Solstice | Festival of Wings — aerial displays across all alignments. Trial of Wings season opens formally. The most festive day of the year. Commerce, competition, celebration. |
-| **Highharvestide** | Between Amberveil and Ashenfall | Autumn Equinox | Harvest of magical flora and forge materials assessed. The SSTC's primary coordination day for external trade. Gifts exchanged. |
-| **The Day of Remembrance** | Between Dimlight and Ironmoor | Mid-Autumn | Honors the Platinum Warden's sacrifice and all who fell in the Discordant War. Completely solemn. No commerce. No petitions. Warden vigils at the Rift of Discord and Temple of Mordrax perimeter. The Platinum Flame dims to a single point of light at dusk and is relit at dawn. |
+| **The Day of Founding** | Deepwarden 30 | Winter Solstice — Year's End | Honors the swearing of the Oath of the Fallen. Formal ceremonies at the Platinum Heart. The Platinum Flame burns at full intensity. Solemn. The most significant day in the Drakenvale calendar. |
+| **New Year's Dawn** | Ashwake 1 | Winter Solstice — Year's Start | Community gatherings. Oaths renewed. New ventures announced publicly. Warm and informal counterpart to the solemn Founding Day. The two together form the winter solstice observance. |
+| **The Verdant Gate** | Verdantrise 1 | Spring Equinox | Marks the valley's renewal. Platinum Acolytes bless the Sacred Pools. The Draconic Grasslands ceremonially opened for dragon gatherings. The Trial of Wings season is announced. |
+| **Highscale** | Scaletide 1 | Summer Solstice | Festival of Wings — aerial displays across all alignments. Trial of Wings season opens formally. The most festive day of the year. Commerce, competition, celebration. |
+| **Highharvestide** | Ashenfall 1 | Autumn Equinox | Harvest of magical flora and forge materials assessed. The SSTC's primary coordination day for external trade. Gifts exchanged. |
+| **The Day of Remembrance** | Ironmoor 1 | Mid-Autumn | Honors the Platinum Warden's sacrifice and all who fell in the Discordant War. Completely solemn. No commerce. No petitions. Warden vigils at the Rift of Discord and Temple of Mordrax perimeter. The Platinum Flame dims to a single point of light at dusk and is relit at dawn. |
 
 ---
 

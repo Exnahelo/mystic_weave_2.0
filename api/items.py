@@ -16,6 +16,8 @@ from typing import Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from api.models import MechanicalEffect
+
 
 # ---------- closed vocabularies (Literal types; registries are runtime truth) ----------
 
@@ -43,34 +45,6 @@ class WeaponHandedness(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
     hands: WeaponHands
-
-
-class MechanicalEffect(BaseModel):
-    """
-    Structured mechanical effect on a magical or special item. Distinct from
-    narrative_effects (prose-only); this field is read directly by the
-    narrator to compute roll modifiers and adjudicate item interactions.
-
-    The rules system for tier-driven magical effects is not yet authored.
-    Until then, this field is the canonical source for how a specific
-    magical item modifies play.
-    """
-
-    model_config = ConfigDict(extra="forbid")
-
-    trigger: str = Field(
-        description="Required conditions for the effect to be active. Plain prose. Example: 'hood up, wearer still'."
-    )
-    modifier: str = Field(
-        description="The mechanical adjustment, in target-bonus form. Example: '+10 target', '-5 target', '+1 damage step'."
-    )
-    applies_to: str = Field(
-        description="Categories of checks or situations the effect applies to. Plain prose. Example: 'checks where magical awareness, ward-sense, or entity perception is the primary failure risk'."
-    )
-    does_not_apply: str = Field(
-        default="",
-        description="Categories of checks or situations the effect explicitly does not cover. Plain prose. Helps the narrator avoid over-application. Example: 'ordinary sight/scent/hearing; untargeted area effects that do not require registering the wearer'."
-    )
 
 
 # ---------- top-level Item ----------

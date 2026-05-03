@@ -59,6 +59,59 @@ WORLD_META_TAGS = {"canonical", "canonical-realm", "placeholder", "TODO", "draft
 FRONTMATTER_RE = re.compile(r"^---\n(.*?)\n---\n", re.DOTALL)
 TAG_SECTION_RE = re.compile(r"^## Tags\n\n((?:- .+\n)+)", re.MULTILINE)
 
+ENGINE_BYTE_CEILING = 8000
+MIRROR_IGNORE_STEMS = {Path("README")}
+
+
+def _check_engine_byte_ceiling(repo_root: Path) -> list[str]:
+    """Assert prompts/engine.md is at or under the GPT Builder upload ceiling."""
+    engine_path = repo_root / "prompts" / "engine.md"
+    if not engine_path.exists():
+        return [f"engine.md not found at {engine_path}"]
+    size = engine_path.stat().st_size
+    if size > ENGINE_BYTE_CEILING:
+        return [
+            f"prompts/engine.md is {size} bytes; ceiling is {ENGINE_BYTE_CEILING}. "
+            "GPT Builder upload will fail."
+        ]
+    return []
+
+
+def _check_data_vault_mirror(repo_root: Path) -> list[str]:
+    """Assert data/world/**/*.json and prompts/world_vault/**/*.md are paired."""
+    data_root = repo_root / "data" / "world"
+    vault_root = repo_root / "prompts" / "world_vault"
+    if not data_root.exists() or not vault_root.exists():
+        return [
+            f"mirror check skipped: data_root={data_root.exists()}, "
+            f"vault_root={vault_root.exists()}"
+        ]
+
+    data_stems = {
+        p.relative_to(data_root).with_suffix("")
+        for p in data_root.rglob("*.json")
+    } - MIRROR_IGNORE_STEMS
+    vault_stems = {
+        p.relative_to(vault_root).with_suffix("")
+        for p in vault_root.rglob("*.md")
+    } - MIRROR_IGNORE_STEMS
+
+    only_in_data = sorted(data_stems - vault_stems)
+    only_in_vault = sorted(vault_stems - data_stems)
+
+    failures = []
+    if only_in_data:
+        failures.append(
+            "data/world/ files without prompts/world_vault/ pair: "
+            f"{[str(p) for p in only_in_data]}"
+        )
+    if only_in_vault:
+        failures.append(
+            "prompts/world_vault/ files without data/world/ pair: "
+            f"{[str(p) for p in only_in_vault]}"
+        )
+    return failures
+
 
 def _validate_vault_markdown(repo_root: Path, failures: list[str]) -> None:
     vault_root = repo_root / "prompts" / "world_vault"
@@ -173,6 +226,8 @@ def main() -> None:
                 )
 
     _validate_vault_markdown(repo_root, failures)
+    failures.extend(_check_engine_byte_ceiling(repo_root))
+    failures.extend(_check_data_vault_mirror(repo_root))
 
     if failures:
         print("❌ Prompt validation failed")

@@ -35,6 +35,10 @@ from api.models import (
     WeatherState,
     WorldModel,
 )
+from api.sql.game_state_sql import (
+    GAME_STATE_UPSERT_PRESERVE_LOG,
+    GAME_STATE_UPSERT_WITH_LOG_APPEND,
+)
 from api.time_advance import advance_time
 
 router = APIRouter()
@@ -363,10 +367,10 @@ async def save_state(
     log_payload = _serialize_log_entry(body.log_entry)
     if log_payload is None:
         insert_log = json.dumps([])
-        update_clause = "log         = game_states.log"
+        sql = GAME_STATE_UPSERT_PRESERVE_LOG
     else:
         insert_log = log_payload
-        update_clause = "log         = game_states.log || $5::jsonb"
+        sql = GAME_STATE_UPSERT_WITH_LOG_APPEND
 
     async with pool.acquire() as conn:
         # Load existing state to merge against
@@ -421,17 +425,6 @@ async def save_state(
         merged_character_json = validated_character.model_dump(by_alias=True)
         validated_world_json = validated_world.model_dump()
 
-        sql = f"""
-            INSERT INTO game_states (session_id, character, world, log, updated_at)
-            VALUES ($1, $2::jsonb, $3::jsonb, $4::jsonb, now())
-            ON CONFLICT (session_id) DO UPDATE
-              SET character   = EXCLUDED.character,
-                  world       = EXCLUDED.world,
-                  {update_clause},
-                  updated_at  = now()
-            RETURNING session_id, character, world, log, updated_at
-            """
-
         params = [
             session_id,
             json.dumps(merged_character_json),
@@ -477,10 +470,10 @@ async def save_state_delta(
     log_payload = _serialize_log_entry(body.log_entry)
     if log_payload is None:
         insert_log = json.dumps([])
-        update_clause = "log         = game_states.log"
+        sql = GAME_STATE_UPSERT_PRESERVE_LOG
     else:
         insert_log = log_payload
-        update_clause = "log         = game_states.log || $5::jsonb"
+        sql = GAME_STATE_UPSERT_WITH_LOG_APPEND
 
     async with pool.acquire() as conn:
         existing_row = await conn.fetchrow(
@@ -504,17 +497,6 @@ async def save_state_delta(
             raise HTTPException(status_code=422, detail=str(e))
         except ValidationError as e:
             raise HTTPException(status_code=422, detail=_plain_validation_errors(e))
-
-        sql = f"""
-            INSERT INTO game_states (session_id, character, world, log, updated_at)
-            VALUES ($1, $2::jsonb, $3::jsonb, $4::jsonb, now())
-            ON CONFLICT (session_id) DO UPDATE
-              SET character   = EXCLUDED.character,
-                  world       = EXCLUDED.world,
-                  {update_clause},
-                  updated_at  = now()
-            RETURNING session_id, character, world, log, updated_at
-            """
 
         params = [
             session_id,
