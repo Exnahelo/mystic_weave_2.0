@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave (GPT Actions)",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "5.1.2"
+    "version": "5.1.3"
   },
   "servers": [
     {
@@ -28,54 +28,6 @@
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GameStateResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Save State",
-        "description": "Save game state, deep-merge character and world updates onto stored state, and append one log entry atomically.",
-        "operationId": "save_state_state__session_id__post",
-        "parameters": [
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Session Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaveStateRequest"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -1272,64 +1224,6 @@
         }
       }
     },
-    "/companion/{companion_id}": {
-      "get": {
-        "summary": "Get Companion",
-        "operationId": "get_companion_companion__companion_id__get",
-        "parameters": [
-          {
-            "name": "companion_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Companion Id"
-            }
-          },
-          {
-            "name": "session_id",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Session Id"
-            }
-          },
-          {
-            "name": "include_archived",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": false,
-              "title": "Include Archived"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CompanionResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/npcs": {
       "get": {
         "tags": [
@@ -1365,6 +1259,49 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/NpcRegistryResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/registry/{name}": {
+      "get": {
+        "tags": [
+          "registry"
+        ],
+        "summary": "Get Registry Entry",
+        "description": "Look up a single entity by canonical name across applications, knowledge groups, magic fields, and spells. Returns the matching record with a kind discriminator, or 404 with closest-match suggestions. Use to verify a tag's classification before state mutation.",
+        "operationId": "get_registry_entry_registry__name__get",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistryEntry"
                 }
               }
             }
@@ -7494,6 +7431,41 @@
         "type": "object",
         "title": "Politics",
         "description": "World-level relational and political state.\nNot a subsystem — a lightweight store for the GPT to track active context."
+      },
+      "RegistryEntry": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The canonical name of the entity."
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "application",
+              "knowledge_group",
+              "magic_field",
+              "spell"
+            ],
+            "title": "Kind",
+            "description": "Which registry the entity belongs to."
+          },
+          "data": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Data",
+            "description": "The full registry record. Shape varies by kind."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "kind",
+          "data"
+        ],
+        "title": "RegistryEntry",
+        "description": "A single registry entry with kind discriminator."
       },
       "ReputationEntry": {
         "properties": {

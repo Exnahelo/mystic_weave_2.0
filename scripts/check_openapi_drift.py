@@ -22,6 +22,9 @@ GPT_SPEC_EXCLUSIONS = {
     ("get", "/catalog/vocab"),
     ("get", "/catalog/creatures"),
     ("get", "/tags"),
+    # See scripts/regenerate_openapi.py for rationale on these two.
+    ("post", "/state/{session_id}"),
+    ("get", "/companion/{companion_id}"),
 }
 IGNORED_PATHS = {"/"}
 IGNORED_APP_ONLY_PATHS = {"/version"}

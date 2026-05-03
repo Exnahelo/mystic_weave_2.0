@@ -29,6 +29,15 @@ GPT_SPEC_EXCLUSIONS = [
     ("get", "/catalog/vocab"),
     ("get", "/catalog/creatures"),
     ("get", "/tags"),
+    # POST /state/{session_id} is the full-record save used by migration
+    # scripts and admin tooling. The narrator GPT must use /delta during
+    # play so that field-level merge semantics apply; full overwrite would
+    # let the GPT clobber state. Excluded from the GPT subset only.
+    ("post", "/state/{session_id}"),
+    # GET /companion/{companion_id} is GPT-redundant: companions are
+    # already returned in world.companions on every state load. Excluded
+    # from the GPT subset to free a slot.
+    ("get", "/companion/{companion_id}"),
 ]
 
 

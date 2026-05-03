@@ -458,6 +458,23 @@ def get_magic_field(field_id: str) -> dict[str, Any]:
     raise ValueError(f"Unknown magic field: {field_id!r}.")
 
 
+def list_spells() -> list[dict[str, Any]]:
+    """Return the canonical spell registry across all magic fields.
+
+    Each spell is a dict with keys: index, name, field, tier, primary_domain,
+    alternate_domain, description. _load_json converts lists-of-indexed-dicts
+    into dicts keyed by index, so we accept both shapes for resilience.
+    """
+    spells: list[dict[str, Any]] = []
+    for spell_file in _SPELL_DATA_FILES:
+        data = _load_json(spell_file)
+        if isinstance(data, dict):
+            spells.extend(v for v in data.values() if isinstance(v, dict))
+        elif isinstance(data, list):
+            spells.extend(e for e in data if isinstance(e, dict))
+    return spells
+
+
 def list_applications() -> list[dict[str, Any]]:
     """Return all application entries from the bare-list tags file."""
     data = _load_json("tags/applications.json")
