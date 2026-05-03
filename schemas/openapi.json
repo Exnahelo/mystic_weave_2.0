@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "5.1.3"
+    "version": "5.2.0"
   },
   "servers": [
     {
@@ -1474,6 +1474,90 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RegistryEntry"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/progression/scan": {
+      "post": {
+        "tags": [
+          "progression"
+        ],
+        "summary": "Progression Scan",
+        "description": "Validate proposed advances against scene actions and character state. Returns ranked candidates with fit strength, parent-cap and registry checks, and proposed-vs-strongest comparison. No state mutation.",
+        "operationId": "progression_scan_progression_scan_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressionScanRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressionScanResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/progression/commit": {
+      "post": {
+        "tags": [
+          "progression"
+        ],
+        "summary": "Progression Commit",
+        "description": "Atomically commit one tag advance. Validates registry membership, tag held, not at max tier; auto-bumps parent when needed. Applies tier increase, runs counter-rollover (every 3 advances -> +1 AP), appends a typed log entry. Returns updated advancement state.",
+        "operationId": "progression_commit_progression_commit_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressionCommitRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressionCommitResponse"
                 }
               }
             }
@@ -3479,6 +3563,85 @@
         ],
         "title": "BondLinks"
       },
+      "CandidateTag": {
+        "properties": {
+          "tag": {
+            "type": "string",
+            "title": "Tag"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "application",
+              "knowledge_group",
+              "magic_field",
+              "spell"
+            ],
+            "title": "Kind"
+          },
+          "parent": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent",
+            "description": "Parent group/field for applications/spells; None for top-level"
+          },
+          "current_tier": {
+            "type": "integer",
+            "title": "Current Tier",
+            "description": "Character's current tier for this tag (0 if not yet held)"
+          },
+          "proposed_new_tier": {
+            "type": "integer",
+            "title": "Proposed New Tier",
+            "description": "Tier after advance (current + 1)"
+          },
+          "fit": {
+            "$ref": "#/components/schemas/FitStrength"
+          },
+          "parent_cap_ok": {
+            "type": "boolean",
+            "title": "Parent Cap Ok",
+            "description": "Whether parent-cap allows this advance"
+          },
+          "held_by_character": {
+            "type": "boolean",
+            "title": "Held By Character",
+            "description": "Whether the character has this tag at all"
+          },
+          "at_max_tier": {
+            "type": "boolean",
+            "title": "At Max Tier",
+            "description": "Whether tag is already at max tier (5)"
+          },
+          "eligible": {
+            "type": "boolean",
+            "title": "Eligible",
+            "description": "True if the advance is structurally valid (held, not at max, parent-cap ok)"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "tag",
+          "kind",
+          "parent",
+          "current_tier",
+          "proposed_new_tier",
+          "fit",
+          "parent_cap_ok",
+          "held_by_character",
+          "at_max_tier",
+          "eligible"
+        ],
+        "title": "CandidateTag",
+        "description": "A tag the backend identified as a plausible advance for this scene."
+      },
       "CatalogItemDetailResponse": {
         "properties": {
           "id": {
@@ -4921,6 +5084,38 @@
           "name"
         ],
         "title": "CultureOption"
+      },
+      "DefenseAction": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "defense",
+            "title": "Type",
+            "default": "defense"
+          },
+          "application": {
+            "type": "string",
+            "title": "Application",
+            "description": "Canonical defense application index (armor type, etc.)"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "success",
+              "partial",
+              "failure"
+            ],
+            "title": "Outcome"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "application",
+          "outcome"
+        ],
+        "title": "DefenseAction",
+        "description": "A character defended (took a hit, parried, dodged)."
       },
       "DomainScores": {
         "properties": {
@@ -6424,6 +6619,44 @@
         ],
         "title": "FatigueState"
       },
+      "FitStrength": {
+        "properties": {
+          "strength": {
+            "type": "string",
+            "enum": [
+              "explicit",
+              "implicit",
+              "contextual"
+            ],
+            "title": "Strength"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason",
+            "description": "Short explanation of why this tag is a candidate"
+          },
+          "source_action_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Action Index",
+            "description": "Index in scene_actions[] that produced this candidate; None if scene-summary-derived or narrator-proposed."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "strength",
+          "reason"
+        ],
+        "title": "FitStrength",
+        "description": "Why a candidate tag matches the scene actions."
+      },
       "FocusOption": {
         "properties": {
           "index": {
@@ -6538,6 +6771,38 @@
         ],
         "title": "GameStateResponse",
         "description": "Response for GET /state/{session_id}"
+      },
+      "GenericRollAction": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "generic_roll",
+            "title": "Type",
+            "default": "generic_roll"
+          },
+          "application": {
+            "type": "string",
+            "title": "Application",
+            "description": "Any canonical application index"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "success",
+              "partial",
+              "failure"
+            ],
+            "title": "Outcome"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "application",
+          "outcome"
+        ],
+        "title": "GenericRollAction",
+        "description": "A roll that doesn't fit other action types. Application explicitly named."
       },
       "HP": {
         "properties": {
@@ -7221,6 +7486,38 @@
         "title": "MechanicalEffect",
         "description": "Structured mechanical effect on a magical or special item. Distinct from\nnarrative_effects (prose-only); this field is read directly by the\nnarrator to compute roll modifiers and adjudicate item interactions.\n\nThe rules system for tier-driven magical effects is not yet authored.\nUntil then, this field is the canonical source for how a specific\nmagical item modifies play."
       },
+      "MovementAction": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "movement",
+            "title": "Type",
+            "default": "movement"
+          },
+          "application": {
+            "type": "string",
+            "title": "Application",
+            "description": "Canonical mobility application index (e.g., 'evasion', 'parkour')"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "success",
+              "partial",
+              "failure"
+            ],
+            "title": "Outcome"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "application",
+          "outcome"
+        ],
+        "title": "MovementAction",
+        "description": "A character moved with notable conditions. Maps to mobility/stealth tag."
+      },
       "NewSessionRequest": {
         "properties": {
           "character_name": {
@@ -7625,6 +7922,38 @@
         "title": "PacingState",
         "description": "Lightweight pacing guidance block for scene cadence and intensity."
       },
+      "PerceptionRollAction": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "perception_roll",
+            "title": "Type",
+            "default": "perception_roll"
+          },
+          "application": {
+            "type": "string",
+            "title": "Application",
+            "description": "Canonical perception application index (e.g., 'spoor_reading')"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "success",
+              "partial",
+              "failure"
+            ],
+            "title": "Outcome"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "application",
+          "outcome"
+        ],
+        "title": "PerceptionRollAction",
+        "description": "A character made a perception/awareness roll."
+      },
       "Politics": {
         "properties": {
           "faction_memberships": {
@@ -7669,6 +7998,342 @@
         "type": "object",
         "title": "Politics",
         "description": "World-level relational and political state.\nNot a subsystem — a lightweight store for the GPT to track active context."
+      },
+      "ProgressionCommitRequest": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "tag": {
+            "type": "string",
+            "title": "Tag",
+            "description": "Canonical tag index to advance by 1 tier"
+          },
+          "rationale": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rationale"
+          },
+          "scene_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scene Id",
+            "description": "Optional scene record ID; reserved for Brief 19"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "session_id",
+          "tag"
+        ],
+        "title": "ProgressionCommitRequest",
+        "description": "Request payload for /progression/commit. One advance, atomic."
+      },
+      "ProgressionCommitResponse": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "tag": {
+            "type": "string",
+            "title": "Tag"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "application",
+              "knowledge_group",
+              "magic_field",
+              "spell"
+            ],
+            "title": "Kind"
+          },
+          "new_tier": {
+            "type": "integer",
+            "title": "New Tier"
+          },
+          "advancement_after": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Advancement After",
+            "description": "The character's advancement block after the commit"
+          },
+          "parent_bumped": {
+            "type": "boolean",
+            "title": "Parent Bumped",
+            "description": "True if parent group/field was auto-bumped to satisfy parent-cap"
+          },
+          "parent_tag": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Tag",
+            "description": "If parent_bumped, the parent tag that was bumped"
+          },
+          "log_entry_index": {
+            "type": "integer",
+            "title": "Log Entry Index",
+            "description": "Index of the new log entry recording this advancement"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "session_id",
+          "tag",
+          "kind",
+          "new_tier",
+          "advancement_after",
+          "parent_bumped",
+          "log_entry_index"
+        ],
+        "title": "ProgressionCommitResponse",
+        "description": "Response from /progression/commit. Includes updated advancement state."
+      },
+      "ProgressionScanRequest": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id",
+            "description": "Active session ID"
+          },
+          "scene_actions": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/SpellCastAction"
+                },
+                {
+                  "$ref": "#/components/schemas/WeaponAttackAction"
+                },
+                {
+                  "$ref": "#/components/schemas/SocialRollAction"
+                },
+                {
+                  "$ref": "#/components/schemas/PerceptionRollAction"
+                },
+                {
+                  "$ref": "#/components/schemas/MovementAction"
+                },
+                {
+                  "$ref": "#/components/schemas/DefenseAction"
+                },
+                {
+                  "$ref": "#/components/schemas/GenericRollAction"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                  "defense": "#/components/schemas/DefenseAction",
+                  "generic_roll": "#/components/schemas/GenericRollAction",
+                  "movement": "#/components/schemas/MovementAction",
+                  "perception_roll": "#/components/schemas/PerceptionRollAction",
+                  "social_roll": "#/components/schemas/SocialRollAction",
+                  "spell_cast": "#/components/schemas/SpellCastAction",
+                  "weapon_attack": "#/components/schemas/WeaponAttackAction"
+                }
+              }
+            },
+            "type": "array",
+            "maxItems": 20,
+            "title": "Scene Actions",
+            "description": "Structured actions taken during the scene (max 20)"
+          },
+          "proposed_advances": {
+            "items": {
+              "$ref": "#/components/schemas/ProposedAdvance"
+            },
+            "type": "array",
+            "maxItems": 3,
+            "title": "Proposed Advances",
+            "description": "Tags the narrator proposes to advance (typically 0-1)"
+          },
+          "scene_summary": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scene Summary",
+            "description": "Free-text scene summary for logging/context (not parsed)"
+          },
+          "scene_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scene Id",
+            "description": "Optional scene record ID. Reserved for Brief 19's scene record subsystem; has no effect in Brief 18 except being echoed in the response. When Brief 19 lands, this enables one-tag-per-scene enforcement."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "session_id"
+        ],
+        "title": "ProgressionScanRequest",
+        "description": "Request payload for /progression/scan."
+      },
+      "ProgressionScanResponse": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "scene_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scene Id"
+          },
+          "candidates_ranked": {
+            "items": {
+              "$ref": "#/components/schemas/CandidateTag"
+            },
+            "type": "array",
+            "title": "Candidates Ranked",
+            "description": "Candidates sorted by fit strength (explicit > implicit > contextual)"
+          },
+          "proposed_evaluation": {
+            "items": {
+              "$ref": "#/components/schemas/ProposedEvaluation"
+            },
+            "type": "array",
+            "title": "Proposed Evaluation"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Warnings",
+            "description": "Non-blocking warnings (e.g., 'no_proposed_advances')"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "session_id",
+          "scene_id",
+          "candidates_ranked",
+          "proposed_evaluation"
+        ],
+        "title": "ProgressionScanResponse",
+        "description": "Response from /progression/scan. Pure validation, no state mutation."
+      },
+      "ProposedAdvance": {
+        "properties": {
+          "tag": {
+            "type": "string",
+            "title": "Tag",
+            "description": "The canonical tag index to advance"
+          },
+          "rationale": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rationale",
+            "description": "Optional narrator-side rationale; logged but not validated"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "tag"
+        ],
+        "title": "ProposedAdvance",
+        "description": "A tag the narrator proposes to advance after the scene resolved."
+      },
+      "ProposedEvaluation": {
+        "properties": {
+          "tag": {
+            "type": "string",
+            "title": "Tag"
+          },
+          "in_candidates": {
+            "type": "boolean",
+            "title": "In Candidates"
+          },
+          "eligible": {
+            "type": "boolean",
+            "title": "Eligible"
+          },
+          "validation": {
+            "type": "string",
+            "enum": [
+              "proposed_match",
+              "omits_strongest",
+              "invalid",
+              "unknown_tag"
+            ],
+            "title": "Validation"
+          },
+          "strongest_omitted": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Strongest Omitted"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "tag",
+          "in_candidates",
+          "eligible",
+          "validation"
+        ],
+        "title": "ProposedEvaluation",
+        "description": "Result of evaluating one ProposedAdvance against the candidate set."
       },
       "RegistryEntry": {
         "properties": {
@@ -8488,6 +9153,71 @@
         "title": "SceneRelevantCharacterState",
         "description": "Narration-relevant subset of character/world state."
       },
+      "SocialRollAction": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "social_roll",
+            "title": "Type",
+            "default": "social_roll"
+          },
+          "application": {
+            "type": "string",
+            "title": "Application",
+            "description": "Canonical social application index (e.g., 'persuasion', 'command')"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "success",
+              "partial",
+              "failure"
+            ],
+            "title": "Outcome"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "application",
+          "outcome"
+        ],
+        "title": "SocialRollAction",
+        "description": "A character made a social roll. Maps to specific social tag (explicit)."
+      },
+      "SpellCastAction": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "spell_cast",
+            "title": "Type",
+            "default": "spell_cast"
+          },
+          "spell": {
+            "type": "string",
+            "title": "Spell",
+            "description": "Canonical spell index (e.g., 'seedwake')"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "success",
+              "partial",
+              "failure"
+            ],
+            "title": "Outcome",
+            "description": "Roll outcome; influences fit strength on failure"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "spell",
+          "outcome"
+        ],
+        "title": "SpellCastAction",
+        "description": "A character cast a spell. Maps to spell tag (explicit) and field (implicit)."
+      },
       "SpendAPRequest": {
         "properties": {
           "target_domain": {
@@ -8737,7 +9467,8 @@
               "inventory_normalization",
               "time_correction",
               "compression",
-              "closure_summary"
+              "closure_summary",
+              "progression"
             ],
             "title": "Type"
           },
@@ -8864,6 +9595,38 @@
           "affluent"
         ],
         "title": "WealthTier"
+      },
+      "WeaponAttackAction": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "weapon_attack",
+            "title": "Type",
+            "default": "weapon_attack"
+          },
+          "weapon": {
+            "type": "string",
+            "title": "Weapon",
+            "description": "Canonical weapon application index (e.g., 'longbow')"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "success",
+              "partial",
+              "failure"
+            ],
+            "title": "Outcome"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "weapon",
+          "outcome"
+        ],
+        "title": "WeaponAttackAction",
+        "description": "A character attacked with a weapon. Maps to weapon tag (explicit) and combat group (implicit)."
       },
       "WeatherState": {
         "type": "string",

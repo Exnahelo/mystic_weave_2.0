@@ -1,0 +1,259 @@
+"""Progression scan / commit models.
+
+Structured action types declared by the narrator at scene boundaries.
+Each action type maps to a set of candidate tags via hardcoded fit rules
+in api/routes/progression.py.
+"""
+
+from __future__ import annotations
+
+from typing import Annotated, Any, Literal, Union
+
+from pydantic import BaseModel, ConfigDict, Field
+
+
+# ---------------------------------------------------------------------------
+# Scene action types — discriminated union on `type`
+# ---------------------------------------------------------------------------
+
+class SpellCastAction(BaseModel):
+    """A character cast a spell. Maps to spell tag (explicit) and field (implicit)."""
+    model_config = ConfigDict(extra="forbid")
+
+    type: Literal["spell_cast"] = "spell_cast"
+    spell: str = Field(description="Canonical spell index (e.g., 'seedwake')")
+    outcome: Literal["success", "partial", "failure"] = Field(
+        description="Roll outcome; influences fit strength on failure"
+    )
+
+
+class WeaponAttackAction(BaseModel):
+    """A character attacked with a weapon. Maps to weapon tag (explicit) and combat group (implicit)."""
+    model_config = ConfigDict(extra="forbid")
+
+    type: Literal["weapon_attack"] = "weapon_attack"
+    weapon: str = Field(description="Canonical weapon application index (e.g., 'longbow')")
+    outcome: Literal["success", "partial", "failure"]
+
+
+class SocialRollAction(BaseModel):
+    """A character made a social roll. Maps to specific social tag (explicit)."""
+    model_config = ConfigDict(extra="forbid")
+
+    type: Literal["social_roll"] = "social_roll"
+    application: str = Field(
+        description="Canonical social application index (e.g., 'persuasion', 'command')"
+    )
+    outcome: Literal["success", "partial", "failure"]
+
+
+class PerceptionRollAction(BaseModel):
+    """A character made a perception/awareness roll."""
+    model_config = ConfigDict(extra="forbid")
+
+    type: Literal["perception_roll"] = "perception_roll"
+    application: str = Field(
+        description="Canonical perception application index (e.g., 'spoor_reading')"
+    )
+    outcome: Literal["success", "partial", "failure"]
+
+
+class MovementAction(BaseModel):
+    """A character moved with notable conditions. Maps to mobility/stealth tag."""
+    model_config = ConfigDict(extra="forbid")
+
+    type: Literal["movement"] = "movement"
+    application: str = Field(
+        description="Canonical mobility application index (e.g., 'evasion', 'parkour')"
+    )
+    outcome: Literal["success", "partial", "failure"]
+
+
+class DefenseAction(BaseModel):
+    """A character defended (took a hit, parried, dodged)."""
+    model_config = ConfigDict(extra="forbid")
+
+    type: Literal["defense"] = "defense"
+    application: str = Field(
+        description="Canonical defense application index (armor type, etc.)"
+    )
+    outcome: Literal["success", "partial", "failure"]
+
+
+class GenericRollAction(BaseModel):
+    """A roll that doesn't fit other action types. Application explicitly named."""
+    model_config = ConfigDict(extra="forbid")
+
+    type: Literal["generic_roll"] = "generic_roll"
+    application: str = Field(description="Any canonical application index")
+    outcome: Literal["success", "partial", "failure"]
+
+
+SceneAction = Annotated[
+    Union[
+        SpellCastAction,
+        WeaponAttackAction,
+        SocialRollAction,
+        PerceptionRollAction,
+        MovementAction,
+        DefenseAction,
+        GenericRollAction,
+    ],
+    Field(discriminator="type"),
+]
+
+
+# ---------------------------------------------------------------------------
+# Scan request / response
+# ---------------------------------------------------------------------------
+
+class ProposedAdvance(BaseModel):
+    """A tag the narrator proposes to advance after the scene resolved."""
+    model_config = ConfigDict(extra="forbid")
+
+    tag: str = Field(description="The canonical tag index to advance")
+    rationale: str | None = Field(
+        default=None,
+        description="Optional narrator-side rationale; logged but not validated",
+        max_length=500,
+    )
+
+
+class ProgressionScanRequest(BaseModel):
+    """Request payload for /progression/scan."""
+    model_config = ConfigDict(extra="forbid")
+
+    session_id: str = Field(description="Active session ID")
+    scene_actions: list[SceneAction] = Field(
+        default_factory=list,
+        description="Structured actions taken during the scene (max 20)",
+        max_length=20,
+    )
+    proposed_advances: list[ProposedAdvance] = Field(
+        default_factory=list,
+        description="Tags the narrator proposes to advance (typically 0-1)",
+        max_length=3,
+    )
+    scene_summary: str | None = Field(
+        default=None,
+        description="Free-text scene summary for logging/context (not parsed)",
+        max_length=2000,
+    )
+    scene_id: str | None = Field(
+        default=None,
+        description=(
+            "Optional scene record ID. Reserved for Brief 19's scene record "
+            "subsystem; has no effect in Brief 18 except being echoed in the "
+            "response. When Brief 19 lands, this enables one-tag-per-scene "
+            "enforcement."
+        ),
+    )
+
+
+class FitStrength(BaseModel):
+    """Why a candidate tag matches the scene actions."""
+    model_config = ConfigDict(extra="forbid")
+
+    strength: Literal["explicit", "implicit", "contextual"]
+    reason: str = Field(description="Short explanation of why this tag is a candidate")
+    source_action_index: int | None = Field(
+        default=None,
+        description=(
+            "Index in scene_actions[] that produced this candidate; None if "
+            "scene-summary-derived or narrator-proposed."
+        ),
+    )
+
+
+class CandidateTag(BaseModel):
+    """A tag the backend identified as a plausible advance for this scene."""
+    model_config = ConfigDict(extra="forbid")
+
+    tag: str
+    kind: Literal["application", "knowledge_group", "magic_field", "spell"]
+    parent: str | None = Field(
+        description="Parent group/field for applications/spells; None for top-level"
+    )
+    current_tier: int = Field(
+        description="Character's current tier for this tag (0 if not yet held)"
+    )
+    proposed_new_tier: int = Field(description="Tier after advance (current + 1)")
+    fit: FitStrength
+    parent_cap_ok: bool = Field(description="Whether parent-cap allows this advance")
+    held_by_character: bool = Field(description="Whether the character has this tag at all")
+    at_max_tier: bool = Field(description="Whether tag is already at max tier (5)")
+    eligible: bool = Field(
+        description="True if the advance is structurally valid (held, not at max, parent-cap ok)"
+    )
+
+
+class ProposedEvaluation(BaseModel):
+    """Result of evaluating one ProposedAdvance against the candidate set."""
+    model_config = ConfigDict(extra="forbid")
+
+    tag: str
+    in_candidates: bool
+    eligible: bool
+    validation: Literal[
+        "proposed_match",
+        "omits_strongest",
+        "invalid",
+        "unknown_tag",
+    ]
+    strongest_omitted: list[str] | None = None
+
+
+class ProgressionScanResponse(BaseModel):
+    """Response from /progression/scan. Pure validation, no state mutation."""
+    model_config = ConfigDict(extra="forbid")
+
+    session_id: str
+    scene_id: str | None
+    candidates_ranked: list[CandidateTag] = Field(
+        description="Candidates sorted by fit strength (explicit > implicit > contextual)"
+    )
+    proposed_evaluation: list[ProposedEvaluation]
+    warnings: list[str] = Field(
+        default_factory=list,
+        description="Non-blocking warnings (e.g., 'no_proposed_advances')",
+    )
+
+
+# ---------------------------------------------------------------------------
+# Commit request / response
+# ---------------------------------------------------------------------------
+
+class ProgressionCommitRequest(BaseModel):
+    """Request payload for /progression/commit. One advance, atomic."""
+    model_config = ConfigDict(extra="forbid")
+
+    session_id: str
+    tag: str = Field(description="Canonical tag index to advance by 1 tier")
+    rationale: str | None = Field(default=None, max_length=500)
+    scene_id: str | None = Field(
+        default=None,
+        description="Optional scene record ID; reserved for Brief 19",
+    )
+
+
+class ProgressionCommitResponse(BaseModel):
+    """Response from /progression/commit. Includes updated advancement state."""
+    model_config = ConfigDict(extra="forbid")
+
+    session_id: str
+    tag: str
+    kind: Literal["application", "knowledge_group", "magic_field", "spell"]
+    new_tier: int
+    advancement_after: dict[str, Any] = Field(
+        description="The character's advancement block after the commit"
+    )
+    parent_bumped: bool = Field(
+        description="True if parent group/field was auto-bumped to satisfy parent-cap"
+    )
+    parent_tag: str | None = Field(
+        default=None,
+        description="If parent_bumped, the parent tag that was bumped",
+    )
+    log_entry_index: int = Field(
+        description="Index of the new log entry recording this advancement"
+    )

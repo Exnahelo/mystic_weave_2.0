@@ -600,6 +600,7 @@ class TypedLogEntry(BaseModel):
         "time_correction",
         "compression",
         "closure_summary",
+        "progression",
     ]
     text: str = Field(..., min_length=1)
     payload: dict[str, Any] | None = None
