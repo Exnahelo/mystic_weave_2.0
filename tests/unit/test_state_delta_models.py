@@ -133,14 +133,16 @@ def test_typed_log_entry_rejects_empty_text():
         TypedLogEntry(type="world_change", text="")
 
 
-def test_typed_log_entry_closure_summary_requires_payload():
-    with pytest.raises(ValidationError):
-        TypedLogEntry(type="closure_summary", text="No payload provided.")
+def test_typed_log_entry_closure_summary_accepts_no_payload():
+    """closure_summary without payload is valid; payload is optional."""
+    entry = TypedLogEntry(type="closure_summary", text="Arc closed.")
+    assert entry.payload is None
 
 
-def test_typed_log_entry_closure_summary_rejects_empty_payload():
-    with pytest.raises(ValidationError):
-        TypedLogEntry(type="closure_summary", text="Empty payload.", payload={})
+def test_typed_log_entry_closure_summary_accepts_empty_payload():
+    """closure_summary with empty payload is now valid (was forbidden pre-Brief 12)."""
+    entry = TypedLogEntry(type="closure_summary", text="Arc closed.", payload={})
+    assert entry.payload == {}
 
 
 def test_typed_log_entry_closure_summary_accepts_payload():

@@ -809,14 +809,10 @@ class TypedLogEntry(BaseModel):
 
     @model_validator(mode="after")
     def payload_consistent_with_type(self) -> TypedLogEntry:
-        if self.type == "closure_summary":
-            if self.payload is None or not self.payload:
-                raise ValueError("closure_summary requires a non-empty payload")
-        else:
-            if self.payload is not None:
-                raise ValueError(
-                    f"payload is only valid for type='closure_summary', got type={self.type!r}"
-                )
+        if self.type != "closure_summary" and self.payload is not None:
+            raise ValueError(
+                f"payload is only valid for type='closure_summary', got type={self.type!r}"
+            )
         return self
 
 class ApplyStateDeltaRequest(BaseModel):

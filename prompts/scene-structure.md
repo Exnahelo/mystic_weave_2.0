@@ -117,7 +117,7 @@ The `log_entry` is for narrative state, not state already tracked in structured 
 
 Per-arc beats belong on the Arc record via `/arc/.../progress` or `/arc/.../transition`, not the global log. The global `log_entry` is for non-arc narrative state and arc-level outcomes (closure summaries, transitions visible to the wider world).
 
-Use typed log entries when they apply: `closure_summary` for arc closures (with structured payload), `compression` for synthesizing prior beats, `narrative_non_arc` for narrative beats outside any active arc, `world_change` for durable world state changes.
+Use typed log entries when they apply: `closure_summary` for arc closures (the narrator MAY add a structured payload when archival completeness matters; otherwise omit — the arc record already holds the structured ledger), `compression` for synthesizing prior beats, `narrative_non_arc` for narrative beats outside any active arc, `world_change` for durable world state changes.
 
 When in doubt, ask: would another instance of the narrator, reading this log fresh tomorrow, need this entry to know what is going on in the story? If no — exclude. If the answer is in a structured field — exclude.
 
