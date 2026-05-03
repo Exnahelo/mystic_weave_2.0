@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "5.1.1"
+    "version": "5.1.2"
   },
   "servers": [
     {
@@ -133,6 +133,56 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GameStateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/state/{session_id}/annotation": {
+      "post": {
+        "summary": "Annotate State",
+        "description": "Append a canon-correction annotation to the session log without mutating gameplay state. Recorded as an admin_correction TypedLogEntry prefixed with its category.",
+        "operationId": "annotate_state_state__session_id__annotation_post",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnnotationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnotationResponse"
                 }
               }
             }
@@ -1536,7 +1586,7 @@
         },
         "type": "object",
         "title": "AdvancementState",
-        "description": "Fungible AP pool, lifetime totals, and a single tag advance counter.\n\nTag advances increment tag_counter. Every 3 advances (counter == 3)\nresets the counter to 0 and adds 1 to points_available. Awarded AP\ngrants drop directly into points_available. Spend draws from\npoints_available with bracketed cost (1/2/3 by score range)."
+        "description": "Fungible AP pool, lifetime totals, and a single tag advance counter.\n\nTag advances increment tag_counter. Every 3 advances (counter == 3)\nresets the counter to 0 and adds 1 to points_available. Awarded AP\ngrants drop directly into points_available. Spend draws from\npoints_available with bracketed cost (1/2/3 by score range).\n\nAll four fields are server-authoritative and recomputed during state\ndelta merges. Clients submitting these values via /state/{id}/delta\nor /state/{id} will have them overwritten by the server-side\nrecompute. The fields appear on inbound payloads only for round-trip\nsafety — treat them as effectively read-only from the client's\nperspective. AP is earned (counter rollover, awarded grants) and\nspent (`/character/{id}/spend_ap`); it is not authored."
       },
       "Alignment": {
         "properties": {
@@ -1701,6 +1751,64 @@
           "description"
         ],
         "title": "AncestryTrait"
+      },
+      "AnnotationRequest": {
+        "properties": {
+          "annotation": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Annotation"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "canon_correction",
+              "operational_constraint",
+              "rule_clarification",
+              "narrator_correction"
+            ],
+            "title": "Category"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "annotation",
+          "category"
+        ],
+        "title": "AnnotationRequest",
+        "description": "Body for POST /state/{session_id}/annotation.\n\nA canon correction or operational note that does NOT mutate gameplay state.\nStored as a TypedLogEntry of type 'admin_correction' on the session log.\nUse this for factual/canon corrections, session-local operational notes,\nrule clarifications, and narrator self-corrections — anything where the\ngameplay /delta endpoint would reject the payload as a no-op."
+      },
+      "AnnotationResponse": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "annotation_id": {
+            "type": "string",
+            "title": "Annotation Id"
+          },
+          "appended_to_log": {
+            "type": "boolean",
+            "title": "Appended To Log",
+            "default": true
+          },
+          "log_entry_index": {
+            "type": "integer",
+            "title": "Log Entry Index"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "session_id",
+          "annotation_id",
+          "log_entry_index"
+        ],
+        "title": "AnnotationResponse",
+        "description": "Response for POST /state/{session_id}/annotation."
       },
       "ApplicationEntry": {
         "properties": {
@@ -3664,7 +3772,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "Round-trip safety field. Accepted in delta payloads to allow full-record round-trips, but server-recomputed during merge. Setting values here will be overwritten by the recompute. Treat as effectively read-only."
           }
         },
         "additionalProperties": false,

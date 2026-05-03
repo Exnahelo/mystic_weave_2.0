@@ -34,3 +34,15 @@ GAME_STATE_UPSERT_PRESERVE_LOG = """
           updated_at  = now()
     RETURNING session_id, character, world, log, updated_at
     """
+
+# UPDATE that appends one log entry without touching character or world.
+# Used by /state/{session_id}/annotation for canon corrections that don't
+# mutate gameplay state. Returns NULL if the session doesn't exist.
+# Bound parameters: $1 session_id, $2 entry_jsonb (single-element array).
+GAME_STATE_LOG_APPEND_ONLY = """
+    UPDATE game_states
+       SET log        = log || $2::jsonb,
+           updated_at = now()
+     WHERE session_id = $1
+    RETURNING session_id, log, updated_at
+    """

@@ -106,6 +106,14 @@ class AdvancementState(BaseModel):
     resets the counter to 0 and adds 1 to points_available. Awarded AP
     grants drop directly into points_available. Spend draws from
     points_available with bracketed cost (1/2/3 by score range).
+
+    All four fields are server-authoritative and recomputed during state
+    delta merges. Clients submitting these values via /state/{id}/delta
+    or /state/{id} will have them overwritten by the server-side
+    recompute. The fields appear on inbound payloads only for round-trip
+    safety — treat them as effectively read-only from the client's
+    perspective. AP is earned (counter rollover, awarded grants) and
+    spent (`/character/{id}/spend_ap`); it is not authored.
     """
 
     points_available: int = 0
@@ -356,7 +364,15 @@ class CharacterStateDelta(BaseModel):
     notes: str | None = None
     equipment: EquipmentDelta | None = None
     reputation: list[ReputationEntry] | None = None
-    advancement: AdvancementState | None = None
+    advancement: AdvancementState | None = Field(
+        default=None,
+        description=(
+            "Round-trip safety field. Accepted in delta payloads to allow "
+            "full-record round-trips, but server-recomputed during merge. "
+            "Setting values here will be overwritten by the recompute. "
+            "Treat as effectively read-only."
+        ),
+    )
 
     def has_updates(self) -> bool:
         return any(v is not None for v in self.model_dump(exclude_none=False).values())

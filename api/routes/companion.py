@@ -31,15 +31,7 @@ from api.schemas.companion_schemas import CompanionResponse, CreateCompanionRequ
 router = APIRouter()
 
 
-def _plain_validation_errors(err: ValidationError) -> list[dict[str, Any]]:
-    cleaned: list[dict[str, Any]] = []
-    for item in err.errors():
-        clone = dict(item)
-        ctx = clone.get("ctx")
-        if isinstance(ctx, dict):
-            clone["ctx"] = {k: str(v) for k, v in ctx.items()}
-        cleaned.append(clone)
-    return cleaned
+from api.routes._helpers import plain_validation_errors as _plain_validation_errors
 
 
 def _character_id_from_character(character: CharacterModel) -> str:

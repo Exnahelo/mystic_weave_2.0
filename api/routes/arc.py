@@ -95,16 +95,7 @@ SUBTYPE_DEFAULT_CLOSURE_CONDITIONS: dict[str, dict[str, Any]] = {
 }
 
 
-def _plain_validation_errors(err: ValidationError) -> list[dict[str, Any]]:
-    """Return JSON-serializable pydantic errors without exception objects."""
-    cleaned: list[dict[str, Any]] = []
-    for item in err.errors():
-        clone = dict(item)
-        ctx = clone.get("ctx")
-        if isinstance(ctx, dict):
-            clone["ctx"] = {k: str(v) for k, v in ctx.items()}
-        cleaned.append(clone)
-    return cleaned
+from api.routes._helpers import plain_validation_errors as _plain_validation_errors
 
 
 def get_arc_repository(pool: asyncpg.Pool = Depends(get_pool)) -> ArcRepository:

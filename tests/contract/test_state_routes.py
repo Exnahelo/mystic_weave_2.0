@@ -63,6 +63,18 @@ class StateRouteConn:
                 "updated_at": self.updated_at,
             }
 
+        if "UPDATE game_states" in query and "RETURNING session_id, log, updated_at" in query:
+            # GAME_STATE_LOG_APPEND_ONLY — annotation endpoint.
+            if self.session_id is None or args[0] != self.session_id:
+                return None
+            self.log.extend(json.loads(args[1]))
+            self.updated_at = datetime.now()
+            return {
+                "session_id": self.session_id,
+                "log": json.dumps(self.log),
+                "updated_at": self.updated_at,
+            }
+
         if "SELECT session_id, character, world, log, updated_at FROM game_states" in query:
             if self.session_id is None or args[0] != self.session_id or self.character is None or self.world is None:
                 return None
@@ -484,3 +496,103 @@ def test_save_advances_into_festival_day() -> None:
     assert time["season"] == "winter"
     assert time["festival"] == "New Year's Dawn"
 
+
+# --- /state/{session_id}/annotation contract -------------------------------
+
+@pytest.mark.contract
+def test_annotation_appends_to_log() -> None:
+    """Annotation appends an admin_correction TypedLogEntry to the log."""
+    conn = StateRouteConn("sess1", _character(), _world())
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1/annotation",
+            json={
+                "annotation": "House Vaelaryn was renamed to House Heartwood mid-session.",
+                "category": "canon_correction",
+            },
+        )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["session_id"] == "sess1"
+    assert body["appended_to_log"] is True
+    assert body["log_entry_index"] == 0
+    assert isinstance(body["annotation_id"], str) and body["annotation_id"]
+
+    # Log now contains a typed admin_correction entry whose text carries the
+    # category prefix and the annotation body.
+    assert len(conn.log) == 1
+    entry = conn.log[0]
+    assert entry["type"] == "admin_correction"
+    assert entry["text"].startswith("[canon_correction] ")
+    assert "House Heartwood" in entry["text"]
+
+
+@pytest.mark.contract
+def test_annotation_rejects_unknown_session() -> None:
+    """Unknown session_id returns 404."""
+    conn = StateRouteConn(None, None, None)
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/missing/annotation",
+            json={"annotation": "test", "category": "canon_correction"},
+        )
+
+    assert response.status_code == 404
+
+
+@pytest.mark.contract
+def test_annotation_rejects_empty_string() -> None:
+    """Empty annotation string returns 422."""
+    conn = StateRouteConn("sess1", _character(), _world())
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1/annotation",
+            json={"annotation": "", "category": "canon_correction"},
+        )
+
+    assert response.status_code == 422
+
+
+@pytest.mark.contract
+def test_annotation_rejects_unknown_category() -> None:
+    """Category outside the literal set returns 422."""
+    conn = StateRouteConn("sess1", _character(), _world())
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1/annotation",
+            json={"annotation": "test", "category": "made_up_category"},
+        )
+
+    assert response.status_code == 422
+
+
+@pytest.mark.contract
+def test_annotation_does_not_mutate_character_or_world() -> None:
+    """Annotation must touch only the log, never character or world JSONB."""
+    starting_character = _character()
+    starting_world = _world()
+    conn = StateRouteConn("sess1", starting_character, starting_world)
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1/annotation",
+            json={
+                "annotation": "Operational note: token cadence reset.",
+                "category": "operational_constraint",
+            },
+        )
+
+    assert response.status_code == 200
+    # Character and world remain bit-identical to what was stored before the call.
+    assert conn.character == starting_character
+    assert conn.world == starting_world

@@ -42,7 +42,7 @@ app = FastAPI(
         "The GPT is the narrator; this API is the memory. "
         "d100 roll-under resolution with domain scores and competency tiers."
     ),
-    version="5.1.1",
+    version="5.1.2",
     servers=[
         {
             "url": "https://mysticweave-production.up.railway.app",

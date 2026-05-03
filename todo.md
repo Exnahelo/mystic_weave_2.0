@@ -1,6 +1,6 @@
 # Mystic Weave — TODO
 
-Last updated: 2026-05-02
+Last updated: 2026-05-03
 
 ## How to read this document
 
@@ -16,22 +16,23 @@ If you walk in cold and only read one section, read **Current Focus**.
 
 ## CURRENT FOCUS
 
-**New-Sylvara character creation walkthrough + GPT prompt re-upload.**
+**Backend Authority Arc (active).**
 
-The architecture-cleanup arc is complete (Briefs 8–11, SHA `9331f9e`). Production DB is wiped and seeded clean. CI now enforces: engine.md byte ceiling, data↔vault mirror parity, README version sync, calendar canon parity, arc registry parity. Repo is in the cleanest state it's been in this session.
+Sylvara has been authored against the v5.1 schema and live play has resumed. The May 2 session debrief surfaced that the narrator GPT cannot reliably handle the volume of rule-following currently asked of it: progression workflow drifted, arc structure decisions slipped, parent-cap and registry classification leaned on memory rather than authority, and admin-correction-only updates couldn't be expressed against the existing `/delta` endpoint.
 
-Two operational steps remain before resuming live play:
+The strategic response is to move enforcement and rules-application from the narrator GPT into the backend. The narrator's job collapses to prose, dialogue, and pacing; structure becomes the backend's responsibility. Three phases (Briefs 16–23) installed below as the active plan.
 
-1. **Re-upload prompts to GPT Builder.** Specifically `engine.md`, `scene-structure.md`, `world-rules.md`, and `calendar.md`. The narrator GPT is currently running on stale prompts (pre-Brief-7 narrator discipline rules; pre-Brief-9 dragon_breath/draconic_traits removal; pre-Brief-11 calendar alignment).
-
-2. **New Sylvara character creation + standing integration.** Walk through `/character/create` against the cleaned production DB. Verify the resulting character record has no legacy field artifacts. Then write Sylvara's lightweight standing data (generic group references — Heartwardens, Greenshields, Western Rangers, House Heartwood, House Vaelaryn, Sacred Grove — no named NPCs, no contaminated location data) as a state delta.
-
-After that, live play resumes from a clean baseline.
+If a future brief changes plan, retire that brief's section here rather than letting the arc plan rot.
 
 ---
 
 ## RECENTLY COMPLETED
 
+- **Brief 16 — Backend hygiene + annotation endpoint (2026-05-03).** `POST /state/{session_id}/annotation` for canon corrections that don't mutate gameplay state. `AdvancementState` server-recompute behavior documented in docstrings. `_plain_validation_errors` consolidated into `api/routes/_helpers.py`; `WorldModel` defaults in `session.py` use `WorldModel().model_dump()`. todo.md rewritten with Backend Authority Arc as active focus. API bumped to 5.1.2.
+- **Brief 15 — `seed_character` parent-tier bump (2026-05-03, 5.1.0 → 5.1.1).** When stacking pushed an application tier above its parent group's stacked tier, `seed_character` now bumps the parent up to match. Prevents 500s on `/session/new` for combinations like elf/feywood_wilds/warden/outlander where ecology stacks to T3 but nature only to T2. Smoke-checked across all 6336 ancestry × culture × focus × background combos: zero failures. New regression test added.
+- **Brief 14 — Retire `armor` knowledge group; promote `light_armor`/`medium_armor`/`heavy_armor`/`shields` (2026-05-02, 5.0.0 → 5.1.0).** Registry data correction: `armor` group deleted; the four armor classes become knowledge groups; type-specific armors (`padded`, `chain_shirt`, `plate`, etc.) become applications under their class; `unarmored` reparented to `martial_arts`. Catalog items, creation templates, prompt docs, and combat registries (`combat_knowledge.json`, `combat_applications.json`) all aligned. Combat code untouched.
+- **Brief 13 — Nested character schema (2026-05-02, 4.8.0 → 5.0.0, SHA `4c6d218`).** `CharacterModel` knowledge groups visibly contain their applications and magic fields visibly contain their spells. New `KnowledgeGroupRecord` and `MagicFieldRecord` (and `-Delta` variants) with structural parent-cap validators. Package split: `api/models.py` → `api/models/{__init__.py, character.py}`. v4→v5 migration script + idempotent chained migration in `migrate_character_v4`. Twelve test files updated.
+- **Brief 12 — `closure_summary` log payload optional (SHA `6f6356d`).** Arc record holds the structured settlement ledger; the closure_summary log entry no longer requires a payload. Cleans up the small UX wart where every closure_summary forced an empty `payload: {}`.
 - **Brief 11 — Architecture cleanup (2026-05-02, SHA `9331f9e`).** Calendar aligned to 360-day model in `prompts/calendar.md`; engine.md byte ceiling enforced in `validate_prompts.py`; data↔vault mirror parity enforced; README version synced 4.4.0 → 4.8.0 + drift check added; `MechanicalEffect` consolidated; state.py UPSERT SQL extracted to `api/sql/game_state_sql.py`; calendar parity test (3 assertions) and arc registry parity test (4 assertions) added. `StateRepository` retained as the arc-settlement state-mutation interface.
 - **Brief 10 — Backend wipe + reseed (2026-05-02).** Production DB cleared (sessions/arcs/runtime locations); reseeded from `data/world/`. SHA `a5b424b` live at the time. Single-pass plan after discovering `.env` and Railway point at the same database.
 - **Brief 9 — Pre-wipe cleanup (2026-05-02, SHA `a5b424b`).** Retired `draconic_traits` from `CharacterModel` and `CharacterStateDelta`; retired `dragon_breath` application tag entirely; removed Breath Weapon section from `world-rules.md`; deleted dead regression test; deleted `repair_structured_state.py`, `reconcile_topology.py`, orphan v4 fixture; added `chalk` and `gear-animal-feed` catalog items + price entry. API bumped to 4.8.0.
@@ -39,6 +40,35 @@ After that, live play resumes from a clean baseline.
 - **Architecture review (2026-05-02, SHA `09e3a66`).** Structural-choice review at `docs/audit/architecture_review_2026-05-02.md`. Picks up above the system audit. Surfaced the 360-vs-366-day calendar disagreement, unenforced engine.md ceiling, unenforced data↔vault mirror, README staleness, MechanicalEffect duplication, half-built (later: narrow-purpose) repository pattern.
 - **Brief 7 — Narrator discipline (2026-05-01, SHA `ec87627`).** Backend-narration suppression rule, Pursuit Closure Shapes section, Companion Role Preservation section. engine.md tightened to 7,998 bytes (under 8,000 ceiling).
 - **Brief 6 — Log entry discipline (2026-05-01, SHA `28d6b75a`).** Typed log entries with keep/exclude rules in `scene-structure.md`; engine.md pointer; weather Pydantic warnings suppressed; FastAPI HTTP_422 deprecations cleaned up; SyntaxWarning in test fixed.
+
+---
+
+## BACKEND AUTHORITY ARC (active)
+
+The May 2 debrief made it clear: the narrator cannot reliably enforce structure across 17+ prompt files. The fix is structural — move enforcement into the backend so the narrator focuses on prose. Three phases, eight briefs (16–23).
+
+### Phase 1 — Foundation hygiene (Briefs 16–17)
+
+Lay groundwork: small endpoints and registry exposure that the later enforcement phases depend on. Patch-level versions; no schema breaks.
+
+- [x] **Brief 16 — Backend hygiene + annotation endpoint.** Adds `POST /state/{session_id}/annotation` for canon corrections that don't mutate gameplay state. Cleans up `AdvancementState` docstrings, helper duplication, and `WorldModel` defaults. Refreshes this todo. Lands as 5.1.2.
+- [ ] **Brief 17 — Registry endpoints.** `/registry/applications/{name}`, `/registry/knowledge_groups/{name}`, `/registry/spells/{name}`, `/registry/magic_fields/{name}` (or one consolidated `/registry/{kind}/{name}` if GPT spec slot pressure forces). Backend becomes the source of truth for tag classification — "what's the parent of `shortsword`?" stops requiring narrator memory. Likely 5.2.0.
+
+### Phase 2 — Enforcement migration (Briefs 18–20)
+
+Move the structure-heavy workflows the narrator demonstrably can't run reliably into backend endpoints. Each brief in this phase should reduce prompt content as a side effect.
+
+- [ ] **Brief 18 — Progression scan endpoint.** `/progression/scan` validates proposed scene-bound advances server-side. Replaces the prompt-side progression workflow (broad scan → parent-cap check → strongest fit → competitive choice) that the May 2 debrief showed the GPT cannot reliably execute. Likely 5.3.0.
+- [ ] **Brief 19 — Backend scene records.** Scene boundaries become server-known events with a dedicated table. Activates the previously-deferred "Backend scene records" item: enables real envelope enforcement (caps, locations-visited, scenes-since-last-progression) instead of GPT-judged scene counting. Probable 5.4.0 (schema change).
+- [ ] **Brief 20 — Origin vs phase clarification.** Rules + mechanism for emergent → formal arc conversion when phase shifts trigger institutional uptake. Clarifies AP eligibility and prevents "emergent forever" as a permanent escape hatch. Activates the deferred "Whether the GPT correctly distinguishes formal vs emergent" observation.
+
+### Phase 3 — Prompt collapse + catalog unification (Briefs 21–23)
+
+With backend enforcement in place, prompts can shrink dramatically. Catalog and registry parallels can be unified now that backend authority replaces redundant prose.
+
+- [ ] **Brief 21 — Prompt content audit and shrink.** Retire content the backend now serves. Aim for a much smaller prompt set — many slot-pressure decisions in current `## PROMPT ARCHITECTURE` become moot.
+- [ ] **Brief 22 — Registry / catalog unification.** Resolve `data/tags/` ↔ `data/catalog/registries/` parallels, `data/economy/` ↔ `data/catalog/economy/`, etc. Single source per category. Absorbs the existing "Catalog stabilization follow-ups" items.
+- [ ] **Brief 23 — Log management strategy.** Periodic compression, retention, or move admin corrections out of the gameplay log. Addresses log bloat surfaced in the May 2 debrief and gives `/state/{session_id}/annotation` (Brief 16) a more permanent home if the log-append substrate proves cramped.
 
 ---
 
@@ -57,7 +87,9 @@ PR 1 (consolidation) and PR 2 (companion vocab registry move) are complete. Two 
 
 - [ ] **Cross-reference materials ↔ ecology**: items reference materials (silverbark-ash, thornroot-stalker-hide, etc.); materials reference biomes; entity files reference creatures whose materials we catalog. The links exist conceptually but aren't formalized. Decide if this needs a structured cross-reference layer or stays narrative-only.
 
-### Catalog stabilization follow-ups
+### Catalog stabilization follow-ups (now Brief 22 territory)
+
+The items below are the unification target for Brief 22 in the Backend Authority Arc.
 
 - [ ] Review remaining parallel namespaces. `data/tags/magic_fields.json` was consolidated into `data/catalog/registries/magic_fields.json` 2026-05-01. The remaining parallels:
   - `data/tags/applications.json` and `data/tags/knowledge_groups.json` still separate from `data/catalog/registries/`. These have rich content (8+ fields per entry); deliberate consolidation pass needed if pursued.
@@ -82,14 +114,10 @@ PR 1 (consolidation) and PR 2 (companion vocab registry move) are complete. Two 
 
 ## PROMPT ARCHITECTURE
 
-- [ ] **Pre-test review pass on prompts** — read each prompt file looking for stale references, contradictions with the current backend contract, and inconsistencies that have accumulated. Some of this was addressed in Brief 11 (calendar canon, world-rules dragon_breath retirement); a broader sweep would catch remaining accretion.
-- [ ] **GPT Builder upload checklist documentation** — the architecture review (2026-05-02) flagged this as a Notable gap. `operational-runbook.md` covers Postgres, Railway, contract drift, smoke bundles — but no section on GPT-side artifacts. When prompts change, the human must remember to re-upload. Add a short section to the runbook listing which files trigger which uploads.
-- [ ] **Decide on prompt restructuring strategy** — slot pressure is real (~17 of 20 used after `arc-rules.md` added). Options identified:
-  1. Hybrid model — extract structured data (denomination tables, regional mappings, vocabularies) to JSON; leave reasoning prose in markdown. Saves ~30% per file. Lower payoff.
-  2. Fold smaller rules files (economy-rules, difficulty-rules) into existing larger files like `world.md`. Frees full slots.
-  3. Consolidate cross-referencing rules into a single `play-rules.md`. Items, economy, and difficulty all reference each other; merge might improve coherence.
+The Backend Authority Arc reframes most of this section: Brief 21 will subsume the restructuring decision once backend enforcement absorbs current prompt content.
 
-  Decision deferred — not urgent until slot count climbs further.
+- [ ] **Pre-test review pass on prompts** — read each prompt file looking for stale references, contradictions with the current backend contract, and inconsistencies that have accumulated. Some of this was addressed in Brief 11 (calendar canon, world-rules dragon_breath retirement); a broader sweep would catch remaining accretion. Brief 21 will likely absorb this.
+- [ ] **GPT Builder upload checklist documentation** — the architecture review (2026-05-02) flagged this as a Notable gap. `operational-runbook.md` covers Postgres, Railway, contract drift, smoke bundles — but no section on GPT-side artifacts. When prompts change, the human must remember to re-upload. Add a short section to the runbook listing which files trigger which uploads.
 
 ---
 
@@ -98,11 +126,11 @@ PR 1 (consolidation) and PR 2 (companion vocab registry move) are complete. Two 
 Items from `docs/audit/architecture_review_2026-05-02.md` not addressed in Brief 11. Listed in roughly descending value.
 
 - [ ] **Add `source` column to `locations` table.** Currently runtime-created locations are indistinguishable from canonical seed rows, so the only wipe option is `TRUNCATE locations CASCADE` followed by reseed (which is what Brief 10 did). Adding a `source` column (`'seed' | 'runtime'`) would enable per-tier wipes. Migration + seed_locations.py update + POST /location update. Not urgent but valuable for future targeted resets.
-- [ ] **Calendar vocabulary triplication elimination.** Month names + season map + festivals appear in `api/time_advance.py:8-31`, `prompts/calendar.md:22-48`, and as defaults in `api/models.py:621-622` and `api/routes/session.py:84-91`. Brief 11's parity test catches the most dangerous case (months and seasons); full elimination would require centralizing the source.
-- [ ] **AdvancementState writability mismatch docstring update.** `CharacterStateDelta.advancement` accepts `AdvancementState | None` for "round-trip safety," but the route layer recomputes counters server-side — the value is effectively read-only. Docstring at `api/models.py:743-766` documents this; the schema does not surface it. Consumers reading the OpenAPI schema may believe they can set advancement values directly.
+- [ ] **Calendar vocabulary triplication elimination.** Month names + season map + festivals appear in `api/time_advance.py:8-31`, `prompts/calendar.md:22-48`, and as defaults in `api/models/__init__.py` and `api/routes/session.py`. Brief 11's parity test catches the most dangerous case (months and seasons); full elimination would require centralizing the source.
+- [x] **AdvancementState writability mismatch docstring update.** Addressed in Brief 16: docstring updates on `AdvancementState` and `CharacterStateDelta.advancement` document server-recompute behavior so consumers reading the OpenAPI schema don't believe they can set advancement values directly.
 - [ ] **GPT-side spec validation against live GPT.** No equivalent of `verify_production_contract.py` exists for the GPT — i.e., no script that checks "the schema GPT Builder is actually serving matches `openapi.gpt.json`." Production verifier covers the API but not the GPT actions registration.
 - [ ] **pytest filterwarnings configuration.** `pytest.ini` doesn't set `filterwarnings`. Brief 6 fixed weather Pydantic warnings by code change; the next deprecation/serializer warning will accumulate silently. Adding `filterwarnings = error::DeprecationWarning:pydantic` would convert the next one into a CI failure.
-- [ ] **Marginal duplications.** `_plain_validation_errors` helper duplicated verbatim in 3 routes; `WorldModel` defaults reimplemented by hand in `api/routes/session.py:66-92`. Both are low drift risk; clean up when convenient.
+- [x] **Marginal duplications.** Addressed in Brief 16: `_plain_validation_errors` consolidated into `api/routes/_helpers.py`; `WorldModel` defaults in `session.py` now use `WorldModel().model_dump()` rather than a hand-built dict.
 
 ---
 
@@ -118,32 +146,32 @@ Items from `docs/audit/architecture_review_2026-05-02.md` not addressed in Brief
 
 ## DEFERRED PENDING ARC SYSTEM v1 OBSERVATIONS
 
-Held until a sustained period of live play under Brief 7's narrator discipline rules and Brief 11's calendar canon. Watch for during live play:
+The May 2 session provided substantial observations. Two items below are now activated as part of the Backend Authority Arc:
 
-- Whether the GPT correctly distinguishes formal vs emergent at arc creation
+- "Backend scene records" → activated as **Brief 19**
+- "Whether the GPT correctly distinguishes formal vs emergent at arc creation" → activated by **Brief 20**
+
+The remaining observations stay deferred pending more sustained play under the post-arc enforcement model:
+
 - Whether calibrated AP envelopes feel right in practice
 - Whether hard-cap enforcement produces clean transitions or creates friction
 - Whether the spawn vs replace vs merge decision tree (added 2026-05-01) is followed
 - Whether Brief 7's Pursuit Closure Shapes rule actually prevents narrator drift on chase/investigation arcs
-- Whether the typed log entry system reduces session log bloat
-- Whether tag advancement counters increment correctly under the per-domain pattern
+- Whether the typed log entry system reduces session log bloat (related: Brief 23 log management)
+- Whether tag advancement counters increment correctly under the per-domain pattern (related: Brief 18 progression scan)
 - Whether companion role-separation is honored on multi-vector commands
 
 ### Enchantment-rules arc
 
 **Status:** design draft exists at `/mnt/user-data/outputs/enchantment-rules-design-draft.md` (321 lines). All five open questions have recommended answers. Implementation plan covers 5 commits.
 
-**When to revisit:** once arc system v1 has been validated through 2–4 weeks of play.
+**When to revisit:** once arc system v1 has been validated through 2–4 weeks of play under the new backend authority model.
 
 **Risk if deferred too long:** GPT continues to lack a structural framework for how enchanted items are created, sustained, and contested. Current `mechanical_effect` field handles application; nothing handles lifecycle.
 
 ### NPC persistence (Phase A)
 
 **Status:** design doc at `docs/design/npc-persistence-design.md` awaiting review.
-
-### Backend scene records
-
-**Status:** currently scene boundary remains GPT-judged per Arc System v1 design. If live play reveals scene undercount/overcount breaking envelope enforcement, this becomes necessary.
 
 ### Companion subsystem expansion
 
@@ -153,14 +181,16 @@ Held until a sustained period of live play under Brief 7's narrator discipline r
 
 ## SUBSYSTEMS DEFERRED (LARGER ARCS)
 
+The Backend Authority Arc reframes several of these. Notes inline.
+
 - [ ] Services subsystem (`data/catalog/services/`)
 - [ ] Vendors subsystem (`data/catalog/vendors/`)
 - [ ] Crafting subsystem (`data/catalog/crafting/recipes.json`, `stations.json` beyond `materials.json`)
 - [ ] Bestiary content. Authoring source exists at `prompts/future_development/fauna.md` (biome-scoped fauna palette, names only). Schema decision pending — would feed future bestiary/combat/encounter system work.
-- [ ] **HP / armor system reassessment.** Flagged twice in dev session notes as "still kind of a mess." Needs a focused design pass to surface what specifically feels wrong before attempting a fix.
-- [ ] **Magic progression mechanic.** Counter-based advancement (cast spell N times to bank advancement progress) plus failure-tier system for caster-tier-vs-spell-tier mismatches. Real mechanic gap; design conversation pending.
-- [ ] **Planning vs dice — making contingencies matter.** Currently a clean plan can still be blown up by a single bad roll, even when contingencies were declared. System design problem at the same scale as Arc System v1.
-- [ ] **Storage architecture review.** Single `game_states` row holding character + world + log JSONB hits scaling friction as content grows (sapient companions, expanded reputation, longer session logs). Splitting into separate tables/columns reduces coupling but is a substantial migration. Defer until response-size pressure becomes pain rather than projected pain.
+- [ ] **HP / armor system reassessment.** Flagged twice in dev session notes as "still kind of a mess." Needs a focused design pass to surface what specifically feels wrong before attempting a fix. Reframes after Phase 2: with backend enforcement in place, the HP/armor reassessment becomes a backend redesign rather than a prompt-rules redesign.
+- [ ] **Magic progression mechanic.** Counter-based advancement (cast spell N times to bank advancement progress) plus failure-tier system for caster-tier-vs-spell-tier mismatches. Real mechanic gap; design conversation pending. Reframes as a backend endpoint design after Brief 18 (progression scan) lands.
+- [ ] **Planning vs dice — making contingencies matter.** Currently a clean plan can still be blown up by a single bad roll, even when contingencies were declared. System design problem at the same scale as Arc System v1. Reframes as a backend mechanism after Phase 2 — contingency-recognition logic is exactly the kind of structure the narrator can't reliably handle.
+- [ ] **Storage architecture review.** Single `game_states` row holding character + world + log JSONB hits scaling friction as content grows (sapient companions, expanded reputation, longer session logs). Splitting into separate tables/columns reduces coupling but is a substantial migration. Connects to **Brief 23** (log management) — the log column in particular is the early pressure point.
 
 ---
 

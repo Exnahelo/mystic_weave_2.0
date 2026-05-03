@@ -62,37 +62,17 @@ async def new_session(
     if body.equipment is not None:
         validated_character.equipment = body.equipment
 
-    # Build initial world state
-    world: dict = {
-        "location":   body.starting_location,
-        "threat":     body.threat,
-        "goal":       body.goal,
-        "turn":       1,
-        "companions": [c.model_dump() for c in body.companions] if body.companions else [],
-        "companion_archive": [],
-        "economy":    body.starting_economy.model_dump(),
-        "politics": {
-            "faction_memberships":  [],
-            "active_obligations":   [],
-            "legal_standing":       "unknown",
-            "known_leverage":       [],
-            "active_tensions":      [],
-            "conclave_status":      "unknown",
-        },
-        "time": {
-            "day":          1,
-            "month":        "Verdantrise",
-            "year":         847,
-            "time_of_day":  "morning",
-            "season":       "spring",
-            "festival":     None,
-            "weather":      "clear",
-            "weather_note": "",
-        },
-    }
-    
+    # Build initial world state. WorldModel supplies defaults for turn,
+    # companion_archive, politics, time, survival, and pacing — only the
+    # session-specific fields are passed explicitly.
     try:
-        validated_world = WorldModel.model_validate(world)
+        validated_world = WorldModel(
+            location=body.starting_location,
+            threat=body.threat,
+            goal=body.goal,
+            companions=list(body.companions) if body.companions else [],
+            economy=body.starting_economy,
+        )
     except ValidationError as e:
         raise HTTPException(status_code=422, detail=e.errors())
 

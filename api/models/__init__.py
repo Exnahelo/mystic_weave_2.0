@@ -638,6 +638,36 @@ class SaveStateRequest(BaseModel):
     time_elapsed: TimeElapsed = Field(default_factory=TimeElapsed)
 
 
+class AnnotationRequest(BaseModel):
+    """Body for POST /state/{session_id}/annotation.
+
+    A canon correction or operational note that does NOT mutate gameplay state.
+    Stored as a TypedLogEntry of type 'admin_correction' on the session log.
+    Use this for factual/canon corrections, session-local operational notes,
+    rule clarifications, and narrator self-corrections — anything where the
+    gameplay /delta endpoint would reject the payload as a no-op.
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    annotation: str = Field(min_length=1, max_length=2000)
+    category: Literal[
+        "canon_correction",
+        "operational_constraint",
+        "rule_clarification",
+        "narrator_correction",
+    ]
+
+
+class AnnotationResponse(BaseModel):
+    """Response for POST /state/{session_id}/annotation."""
+    model_config = ConfigDict(extra="forbid")
+
+    session_id: str
+    annotation_id: str
+    appended_to_log: bool = True
+    log_entry_index: int
+
+
 class GameStateResponse(BaseModel):
     """Response for GET /state/{session_id}"""
     model_config = ConfigDict(extra="forbid")

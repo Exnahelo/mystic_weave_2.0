@@ -12,6 +12,7 @@ the previous save rather than wiped. Only fields explicitly sent are updated.
 from __future__ import annotations
 
 import json
+import uuid
 from typing import Any
 
 
@@ -22,6 +23,8 @@ from pydantic import ValidationError
 from api.database import get_pool
 from api.models import (
     AdvancementState,
+    AnnotationRequest,
+    AnnotationResponse,
     ApplyStateDeltaRequest,
     CharacterModel,
     Equipment,
@@ -35,24 +38,14 @@ from api.models import (
     WorldModel,
 )
 from api.sql.game_state_sql import (
+    GAME_STATE_LOG_APPEND_ONLY,
     GAME_STATE_UPSERT_PRESERVE_LOG,
     GAME_STATE_UPSERT_WITH_LOG_APPEND,
 )
+from api.routes._helpers import plain_validation_errors as _plain_validation_errors
 from api.time_advance import advance_time
 
 router = APIRouter()
-
-
-def _plain_validation_errors(err: ValidationError) -> list[dict[str, Any]]:
-    """Return JSON-serializable pydantic errors without python exception objects."""
-    cleaned: list[dict[str, Any]] = []
-    for item in err.errors():
-        clone = dict(item)
-        ctx = clone.get("ctx")
-        if isinstance(ctx, dict):
-            clone["ctx"] = {k: str(v) for k, v in ctx.items()}
-        cleaned.append(clone)
-    return cleaned
 
 
 def _serialize_log_entry(entry: str | TypedLogEntry | None) -> str | None:
@@ -561,4 +554,48 @@ async def save_state_delta(
         world=response_world,
         log=json.loads(row["log"]),
         updated_at=row["updated_at"],
+    )
+
+
+@router.post(
+    "/state/{session_id}/annotation",
+    response_model=AnnotationResponse,
+    description=(
+        "Append a canon-correction annotation to the session log without "
+        "mutating gameplay state. Recorded as an admin_correction TypedLogEntry "
+        "prefixed with its category."
+    ),
+)
+async def annotate_state(
+    session_id: str,
+    body: AnnotationRequest,
+    pool: asyncpg.Pool = Depends(get_pool),
+) -> AnnotationResponse:
+    """Append a canon/operational annotation to the session log.
+
+    Distinct from /delta: that endpoint requires actual character/world state
+    mutation and rejects no-op payloads. Use /annotation for canon corrections,
+    operational notes, rule clarifications, and narrator self-corrections —
+    anything that records a fact about the session without changing gameplay
+    state.
+    """
+    annotation_id = uuid.uuid4().hex
+    typed_entry = TypedLogEntry(
+        type="admin_correction",
+        text=f"[{body.category}] {body.annotation}",
+    )
+    entry_payload = json.dumps([typed_entry.model_dump(exclude_none=True)])
+
+    async with pool.acquire() as conn:
+        row = await conn.fetchrow(GAME_STATE_LOG_APPEND_ONLY, session_id, entry_payload)
+        if row is None:
+            raise HTTPException(status_code=404, detail="session not found")
+
+        log_entries = json.loads(row["log"])
+
+    return AnnotationResponse(
+        session_id=row["session_id"],
+        annotation_id=annotation_id,
+        appended_to_log=True,
+        log_entry_index=len(log_entries) - 1,
     )
