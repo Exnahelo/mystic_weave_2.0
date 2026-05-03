@@ -131,3 +131,30 @@ def test_seed_character_produces_nested_knowledge() -> None:
 
     # Round-trips through CharacterModel — proves the seeded shape is valid v5.
     CharacterModel.model_validate(character)
+
+
+@pytest.mark.unit
+def test_seed_character_bumps_parent_tier_when_application_exceeds() -> None:
+    """When stacked application tier exceeds the stacked parent group tier,
+    the seeder bumps the parent up to the application's tier.
+
+    Regression: elf/feywood_wilds/warden/outlander stacks ecology to T3 across
+    three layers, but only one layer grants nature (T1, stacking to T2). Brief
+    13's structural parent-cap rejected the result with a 500. Brief 15 fixes
+    the seeder.
+    """
+    from api.models import CharacterModel
+
+    character = seed_character(
+        name="Sylvara",
+        ancestry_index="elf",
+        culture_index="feywood_wilds",
+        focus_index="warden",
+        background_index="outlander",
+    )
+
+    assert character["knowledge"]["nature"]["applications"]["ecology"] == 3
+    assert character["knowledge"]["nature"]["tier"] >= 3
+
+    # Whole record validates under v5 parent-cap.
+    CharacterModel.model_validate(character)

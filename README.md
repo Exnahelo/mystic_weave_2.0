@@ -30,12 +30,12 @@ Python 3.13 · FastAPI · uvicorn · asyncpg · Pydantic v2 · Postgres on Railw
 - **9 focus archetypes** — Champion, Sentinel, Stalker, Wayfinder, Arcanist, Devoted, Speaker, Warden, Druid
 - **8 backgrounds** — Soldier, Scholar, Criminal, Noble, Outlander, Artisan, Acolyte, Performer
 
-**Character layers** (v5.1.0)
+**Character layers** (v5.1.1)
 - **Identity** — origin, motivations, quirks, bonds, flaws, wound, alignment (two-axis enum + ethos note)
 - **Equipment** — worn / carried / stashed slots, optional `roll_tag` linking items to application tags
 - **Reputation** — per-faction standing (−100 to +100); party reputation computed by GPT at resolution time
 
-**World layers** (v5.1.0)
+**World layers** (v5.1.1)
 - **Companions** — lightweight companion schema with identity, optional stat block, disposition, and faction standing
 - **Economy** — wealth tier (universal) + raw coin (currency regions); trade goods and obligations
 - **Politics** — faction memberships, active obligations, legal standing, leverage, tensions, Conclave status
@@ -107,7 +107,7 @@ Reference: `world-topology-baseline.md`
 ```
 api/
   main.py              # FastAPI app — version string here (keep in sync with openapi.json)
-  models/              # Pydantic v2 models package (schema/release version 5.1.0)
+  models/              # Pydantic v2 models package (schema/release version 5.1.1)
     __init__.py        # World, arc, options, request/response models + re-exports
     character.py       # Character record models (HP, Domains, KnowledgeGroupRecord, MagicFieldRecord, etc.)
   game_data.py         # Game system data loader + seed_character
@@ -170,7 +170,7 @@ prompts/               # GPT prompt corpus + markdown world-vault mirrors
   npcs.md
   design-notes.md      # Internal — do NOT upload to GPT builder
 schemas/
-  openapi.json         # OpenAPI document format 3.1.0, schema/release version 5.1.0 — upload to GPT builder Actions
+  openapi.json         # OpenAPI document format 3.1.0, schema/release version 5.1.1 — upload to GPT builder Actions
 scripts/
   seed_locations.py    # Seed canonical structured world data from data/world/ into DB
   verify_production_contract.py  # Validate production against repo expectations
@@ -289,4 +289,4 @@ When you change models or routes, run `python3 scripts/regenerate_openapi.py` to
 
 Both must stay in sync. The contract test and production verifier derive their expected version from `schemas/openapi.json`.
 
-**Current backend/schema version:** 5.1.0
+**Current backend/schema version:** 5.1.1

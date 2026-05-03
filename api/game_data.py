@@ -1056,6 +1056,12 @@ def seed_character(
             # Auto-add the parent at app_tier — the minimum that satisfies
             # the parent-cap rule for this application.
             knowledge[parent_group] = {"tier": app_tier, "applications": {}}
+        elif knowledge[parent_group]["tier"] < app_tier:
+            # Stacking produced an application above its parent's authored
+            # tier; bump the parent so the v5 structural parent-cap is
+            # satisfied. No-op when authored tiers already accommodate the
+            # application.
+            knowledge[parent_group]["tier"] = app_tier
         knowledge[parent_group]["applications"][app] = app_tier
 
     magic: dict[str, dict[str, Any]] = {
