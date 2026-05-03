@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-import json
-
 import asyncpg
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import ValidationError
 
 from api.database import get_pool
 from api.models import CharacterModel, LocationData, SceneContext, WorldModel
+from api.repositories.state_repository import StateRepository
+from api.routes._helpers import get_state_repository
 from api.routes.state import _normalize_character_state
 from api.scene_context import build_scene_context
 
@@ -26,28 +26,26 @@ router = APIRouter()
 )
 async def get_scene_context(
     session_id: str,
+    repo: StateRepository = Depends(get_state_repository),
     pool: asyncpg.Pool = Depends(get_pool),
 ) -> SceneContext:
-    async with pool.acquire() as conn:
-        state_row = await conn.fetchrow(
-            "SELECT session_id, character, world, log FROM game_states WHERE session_id = $1",
-            session_id,
+    state = await repo.get_state_full(session_id)
+    if state is None:
+        raise HTTPException(status_code=404, detail="session not found")
+
+    try:
+        character = CharacterModel.model_validate(
+            _normalize_character_state(state.character)
+        )
+        world = WorldModel.model_validate(state.world)
+    except ValidationError as e:
+        raise HTTPException(
+            status_code=500,
+            detail={"message": "stored game state is invalid", "errors": e.errors()},
         )
 
-        if state_row is None:
-            raise HTTPException(status_code=404, detail="session not found")
-
-        try:
-            character = CharacterModel.model_validate(
-                _normalize_character_state(json.loads(state_row["character"]))
-            )
-            world = WorldModel.model_validate(json.loads(state_row["world"]))
-        except ValidationError as e:
-            raise HTTPException(
-                status_code=500,
-                detail={"message": "stored game state is invalid", "errors": e.errors()},
-            )
-
+    # Locations don't yet have a repository; fetch via the pool dependency.
+    async with pool.acquire() as conn:
         location_row = await conn.fetchrow(
             "SELECT data FROM locations WHERE id = $1",
             world.location,
@@ -57,7 +55,7 @@ async def get_scene_context(
         raise HTTPException(status_code=404, detail=f"current location not found: {world.location}")
 
     try:
-        location = LocationData.model_validate(json.loads(location_row["data"]))
+        location = LocationData.model_validate(location_row["data"])
     except ValidationError as e:
         raise HTTPException(
             status_code=500,
@@ -65,9 +63,9 @@ async def get_scene_context(
         )
 
     return build_scene_context(
-        session_id=state_row["session_id"],
+        session_id=state.session_id,
         character=character,
         world=world,
         location=location,
-        log=json.loads(state_row["log"]),
+        log=state.log,
     )

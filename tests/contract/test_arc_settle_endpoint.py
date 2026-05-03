@@ -361,9 +361,9 @@ def test_settle_child_first_then_parent_succeeds() -> None:
         parent = _create_start_in_progress(client, session_id="sess-settle")
         child = client.post(f"/arc/sess-settle/{parent['id']}/spawn", json={"child_title": "Child", "child_summary": "Child arc", "child_primary_type": "task_local", "child_subtype": "investigation", "child_stake_scale": "local", "child_formal_contract_qualified": True, "child_patron_npc_id": "npc", "child_explicit_objective": "do", "child_expected_return": "report", "ap_ownership": "child", "reason": "split"}).json()
         stored_child = next(row for row in conn.rows if row["id"] == child["id"])
-        child_data = __import__("json").loads(stored_child["data"])
+        child_data = stored_child["data"]  # codec stores parsed dict
         child_data["closure_conditions"] = {"all_of": [{"type": "resolved_scene_count_at_least", "payload": {"count": 0}}], "any_of": [], "none_of": []}
-        stored_child["data"] = __import__("json").dumps(child_data)
+        stored_child["data"] = child_data
         for from_state, to_state in [("proposed", "available"), ("available", "in_progress"), ("in_progress", "ready_to_close")]:
             assert client.post(f"/arc/sess-settle/{child['id']}/transition", json={"from_state": from_state, "to_state": to_state, "reason": "advance"}).status_code == 200
         assert client.post(f"/arc/sess-settle/{child['id']}/settle", json={"outcome": "complete", "awarded_ap": 1}).status_code == 200

@@ -1,4 +1,6 @@
 import pytest
+import json
+
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
@@ -43,7 +45,7 @@ class LocationConn:
             return {
                 "id": location_id,
                 "name": args[1],
-                "data": args[2],
+                "data": json.loads(args[2]) if isinstance(args[2], str) else args[2],
                 "updated_at": None,
             }
         return None

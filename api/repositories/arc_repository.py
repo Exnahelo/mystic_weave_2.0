@@ -18,9 +18,11 @@ class ArcNotFoundError(Exception):
 
 
 def _coerce_jsonb_data(data: Any) -> Any:
-    """Handle asyncpg JSONB codecs returning either text or decoded objects."""
-    if isinstance(data, str):
-        return json.loads(data)
+    """Passthrough kept for callsite stability — pool registers a JSONB codec
+    so asyncpg always returns parsed Python objects. Retained because Brief
+    19.5 only swept routes; arc_repository's call sites get inlined when this
+    module is next significantly touched.
+    """
     return data
 
 

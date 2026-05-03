@@ -47,9 +47,9 @@ class FakeConn:
                 return None
             return {
                 "session_id": args[0],
-                "character": json.dumps(self.select_character),
-                "world": json.dumps(self.select_world),
-                "log": json.dumps([]),
+                "character": self.select_character,
+                "world": self.select_world,
+                "log": [],
                 "updated_at": datetime.now(),
             }
 
@@ -57,23 +57,23 @@ class FakeConn:
             if self.select_character is None or self.select_world is None:
                 return None
             return {
-                "character": json.dumps(self.select_character),
-                "world": json.dumps(self.select_world),
+                "character": self.select_character,
+                "world": self.select_world,
             }
 
         if "SELECT character FROM game_states" in query:
             if self.select_character is None:
                 return None
-            return {"character": json.dumps(self.select_character)}
+            return {"character": self.select_character}
 
         if "RETURNING session_id, character, world, log, updated_at" in query:
             if self.upsert_row is not None:
                 return self.upsert_row
             return {
                 "session_id": args[0],
-                "character": args[1],
-                "world": args[2],
-                "log": args[4],
+                "character": json.loads(args[1]),
+                "world": json.loads(args[2]),
+                "log": json.loads(args[4]) if isinstance(args[4], str) else args[4],
                 "updated_at": datetime.now(),
             }
 
@@ -88,9 +88,9 @@ class SessionDeltaFlowConn:
         if "INSERT INTO game_states (session_id, character, world, log, updated_at)" in query and "'[]'::jsonb" in query:
             self.rows[args[0]] = {
                 "session_id": args[0],
-                "character": args[1],
-                "world": args[2],
-                "log": json.dumps([]),
+                "character": json.loads(args[1]),
+                "world": json.loads(args[2]),
+                "log": [],
             }
         return "OK"
 
@@ -104,9 +104,9 @@ class SessionDeltaFlowConn:
         if "RETURNING session_id, character, world, log, updated_at" in query:
             sid = args[0]
             row = self.rows[sid]
-            row["character"] = args[1]
-            row["world"] = args[2]
-            row["log"] = json.dumps(json.loads(row["log"]) + json.loads(args[4]))
+            row["character"] = json.loads(args[1])
+            row["world"] = json.loads(args[2])
+            row["log"] = row["log"] + json.loads(args[4])
             return {
                 "session_id": sid,
                 "character": row["character"],
@@ -420,9 +420,9 @@ def test_state_save_accepts_valid_advancement_block() -> None:
         select_character=_build_valid_character(),
         upsert_row={
             "session_id": "abc12345",
-            "character": json.dumps(valid_character),
-            "world": json.dumps(_build_valid_world()),
-            "log": json.dumps(["advancement persisted"]),
+            "character": valid_character,
+            "world": _build_valid_world(),
+            "log": ["advancement persisted"],
             "updated_at": datetime.now(),
         },
     )

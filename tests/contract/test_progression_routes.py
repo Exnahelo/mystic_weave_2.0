@@ -76,14 +76,25 @@ class ProgressionConn:
         if "SELECT character FROM game_states" in query:
             if self.session_id is None or args[0] != self.session_id or self.character is None:
                 return None
-            return {"character": json.dumps(self.character)}
+            return {"character": self.character}
+
+        if "SELECT session_id, character, world, log, updated_at" in query and "FROM game_states" in query:
+            if self.session_id is None or args[0] != self.session_id or self.character is None:
+                return None
+            return {
+                "session_id": self.session_id,
+                "character": self.character,
+                "world": {},
+                "log": self.log,
+                "updated_at": self.updated_at,
+            }
 
         if "SELECT character, log FROM game_states" in query:
             if self.session_id is None or args[0] != self.session_id or self.character is None:
                 return None
             return {
-                "character": json.dumps(self.character),
-                "log": json.dumps(self.log),
+                "character": self.character,
+                "log": self.log,
             }
 
         if "SELECT tag_advance_committed FROM scene_records" in query:

@@ -65,7 +65,7 @@ async def spend_ap(
             if row is None:
                 raise HTTPException(status_code=404, detail="session not found")
 
-            character = json.loads(row["character"])
+            character = row["character"]
             domains = character.get("domains") or {}
             advancement_dict = character.get("advancement") or {}
 

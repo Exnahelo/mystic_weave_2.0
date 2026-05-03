@@ -41,7 +41,7 @@ class DeltaConn:
         if "SELECT character, world FROM game_states" in query:
             if args[0] != self.session_id:
                 return None
-            return {"character": json.dumps(self.character), "world": json.dumps(self.world)}
+            return {"character": self.character, "world": self.world}
 
         if "RETURNING session_id, character, world, log, updated_at" in query:
             self.character = json.loads(args[1])
@@ -50,18 +50,18 @@ class DeltaConn:
             self.updated_at = datetime.now()
             return {
                 "session_id": self.session_id,
-                "character": json.dumps(self.character),
-                "world": json.dumps(self.world),
-                "log": json.dumps(self.log),
+                "character": self.character,
+                "world": self.world,
+                "log": self.log,
                 "updated_at": self.updated_at,
             }
 
         if "SELECT session_id, character, world, log, updated_at FROM game_states" in query:
             return {
                 "session_id": self.session_id,
-                "character": json.dumps(self.character),
-                "world": json.dumps(self.world),
-                "log": json.dumps(self.log),
+                "character": self.character,
+                "world": self.world,
+                "log": self.log,
                 "updated_at": self.updated_at,
             }
 

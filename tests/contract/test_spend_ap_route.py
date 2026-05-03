@@ -49,7 +49,7 @@ class SpendConn:
         if "SELECT character FROM game_states" in query:
             if self.character is None:
                 return None
-            return {"character": json.dumps(self.character)}
+            return {"character": self.character}
         return None
 
     async def execute(self, query, *args):

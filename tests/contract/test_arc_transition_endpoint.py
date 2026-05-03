@@ -40,12 +40,12 @@ class ArcTransitionConn:
 
     async def execute(self, query, *args):
         if "INSERT INTO arcs" in query:
-            self.rows.append({"id": args[0], "session_id": args[1], "state": args[3], "parent_arc_id": args[4], "data": args[5]})
+            self.rows.append({"id": args[0], "session_id": args[1], "state": args[3], "parent_arc_id": args[4], "data": json.loads(args[5])})
         elif "UPDATE arcs" in query:
             for row in self.rows:
                 if row["id"] == args[3]:
                     row["state"] = args[0]
-                    row["data"] = args[1]
+                    row["data"] = json.loads(args[1])
                     break
         elif "INSERT INTO arc_transitions" in query:
             self.transitions.append(
@@ -57,7 +57,7 @@ class ArcTransitionConn:
                     "reason": args[4],
                     "transitioned_at": args[5],
                     "resolved_scenes_at_transition": args[6],
-                    "locations_visited_at_transition": args[7],
+                    "locations_visited_at_transition": json.loads(args[7]),
                     "triggering_event": args[8],
                 }
             )
@@ -77,19 +77,19 @@ class ArcTransitionConn:
         if "SELECT character FROM game_states" in query:
             if self.character is None:
                 return None
-            return {"character": json.dumps(self.character)}
+            return {"character": self.character}
         if "SELECT world FROM game_states" in query:
             if self.world is None:
                 return None
-            return {"world": json.dumps(self.world)}
+            return {"world": self.world}
         if "SELECT session_id, character, world, log, updated_at" in query:
             if self.character is None or self.world is None:
                 return None
             return {
                 "session_id": args[0],
-                "character": json.dumps(self.character),
-                "world": json.dumps(self.world),
-                "log": json.dumps(self.log),
+                "character": self.character,
+                "world": self.world,
+                "log": self.log,
                 "updated_at": None,
             }
         if "WHERE session_id = $1 AND id = $2" in query:

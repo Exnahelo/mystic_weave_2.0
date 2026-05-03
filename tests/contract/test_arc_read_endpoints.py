@@ -44,7 +44,7 @@ class ArcRouteConn:
                     "primary_type": args[2],
                     "state": args[3],
                     "parent_arc_id": args[4],
-                    "data": args[5],
+                    "data": json.loads(args[5]),
                     "created_at": args[6],
                 }
             )
@@ -101,9 +101,9 @@ def _set_row_state(conn: ArcRouteConn, arc_id: str, state: str) -> None:
     for row in conn.rows:
         if row["id"] == arc_id:
             row["state"] = state
-            data = json.loads(row["data"])
+            data = row["data"]  # codec stores parsed dict
             data["state"] = state
-            row["data"] = Arc.model_validate(data).model_dump_json()
+            row["data"] = Arc.model_validate(data).model_dump()
             return
     raise AssertionError(f"arc row not found: {arc_id}")
 

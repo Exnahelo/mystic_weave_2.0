@@ -39,6 +39,13 @@ from api.models.progression import (
     ProgressionScanResponse,
     ProposedEvaluation,
 )
+from api.repositories.state_repository import StateRepository
+from api.routes._helpers import (
+    at_max_tier,
+    get_state_repository,
+    session_not_found,
+    tag_not_held,
+)
 
 router = APIRouter()
 
@@ -234,17 +241,12 @@ def _build_candidate_tag(
     )
 
 
-async def _load_character(pool: asyncpg.Pool, session_id: str) -> dict[str, Any]:
-    """Load character JSONB from the session row. 404 if not found."""
-    async with pool.acquire() as conn:
-        row = await conn.fetchrow(
-            "SELECT character FROM game_states WHERE session_id = $1",
-            session_id,
-        )
-    if row is None:
-        raise HTTPException(status_code=404, detail={"error": "session_not_found"})
-    raw = row["character"]
-    return json.loads(raw) if isinstance(raw, str) else raw
+async def _load_character(repo: StateRepository, session_id: str) -> dict[str, Any]:
+    """Load character JSONB via the StateRepository. 404 if not found."""
+    state = await repo.get_state_full(session_id)
+    if state is None:
+        raise session_not_found()
+    return state.character
 
 
 async def _check_scene_already_advanced(
@@ -293,10 +295,11 @@ async def _check_scene_already_advanced(
 )
 async def progression_scan(
     body: ProgressionScanRequest,
+    repo: StateRepository = Depends(get_state_repository),
     pool: asyncpg.Pool = Depends(get_pool),
 ) -> ProgressionScanResponse:
     """Validate proposed advances against scene actions; return ranked candidates."""
-    character = await _load_character(pool, body.session_id)
+    character = await _load_character(repo, body.session_id)
 
     # Brief 19: if scene_id is provided, check whether the scene already
     # received a tag advance. If so, all candidates are marked ineligible
@@ -443,12 +446,10 @@ async def progression_commit(
                 body.session_id,
             )
             if row is None:
-                raise HTTPException(status_code=404, detail={"error": "session_not_found"})
+                raise session_not_found()
 
-            raw_char = row["character"]
-            character = json.loads(raw_char) if isinstance(raw_char, str) else dict(raw_char)
-            raw_log = row["log"]
-            log_arr = json.loads(raw_log) if isinstance(raw_log, str) else list(raw_log)
+            character = dict(row["character"])
+            log_arr = list(row["log"])
 
             # Brief 19: optional scene_id enforces one-tag-per-scene at the DB.
             # Lock the scene row alongside the game_state row so a concurrent
@@ -513,19 +514,12 @@ async def progression_commit(
                     )
                 apps = kgroup["applications"]
                 if body.tag not in apps:
-                    raise HTTPException(
-                        status_code=422,
-                        detail={
-                            "error": "tag_not_held",
-                            "message": f"Character does not hold application '{body.tag}'.",
-                        },
+                    raise tag_not_held(
+                        f"Character does not hold application '{body.tag}'."
                     )
                 current = apps[body.tag]
                 if current >= 5:
-                    raise HTTPException(
-                        status_code=422,
-                        detail={"error": "at_max_tier", "current_tier": current},
-                    )
+                    raise at_max_tier(current)
                 new_tier = current + 1
                 parent_tier = kgroup.get("tier", 0)
                 if new_tier > parent_tier:

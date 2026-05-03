@@ -40,8 +40,19 @@ class CompanionRouteConn:
             if args[0] != self.session_id:
                 return None
             return {
-                "character": json.dumps(self.character),
-                "world": json.dumps(self.world),
+                "character": self.character,
+                "world": self.world,
+            }
+
+        if "SELECT session_id, character, world, log, updated_at" in query and "FROM game_states" in query:
+            if args[0] != self.session_id:
+                return None
+            return {
+                "session_id": self.session_id,
+                "character": self.character,
+                "world": self.world,
+                "log": self.log,
+                "updated_at": None,
             }
 
         if "INSERT INTO game_states" in query and "RETURNING session_id" in query:

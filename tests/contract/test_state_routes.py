@@ -42,8 +42,8 @@ class StateRouteConn:
             if self.session_id is None or args[0] != self.session_id or self.character is None or self.world is None:
                 return None
             return {
-                "character": json.dumps(self.character),
-                "world": json.dumps(self.world),
+                "character": self.character,
+                "world": self.world,
             }
 
         if "RETURNING session_id, character, world, log, updated_at" in query:
@@ -57,9 +57,9 @@ class StateRouteConn:
             self.updated_at = datetime.now()
             return {
                 "session_id": self.session_id,
-                "character": json.dumps(self.character),
-                "world": json.dumps(self.world),
-                "log": json.dumps(self.log),
+                "character": self.character,
+                "world": self.world,
+                "log": self.log,
                 "updated_at": self.updated_at,
             }
 
@@ -71,7 +71,7 @@ class StateRouteConn:
             self.updated_at = datetime.now()
             return {
                 "session_id": self.session_id,
-                "log": json.dumps(self.log),
+                "log": self.log,
                 "updated_at": self.updated_at,
             }
 
@@ -80,9 +80,9 @@ class StateRouteConn:
                 return None
             return {
                 "session_id": self.session_id,
-                "character": json.dumps(self.character),
-                "world": json.dumps(self.world),
-                "log": json.dumps(self.log),
+                "character": self.character,
+                "world": self.world,
+                "log": self.log,
                 "updated_at": self.updated_at,
             }
 

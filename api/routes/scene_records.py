@@ -24,6 +24,7 @@ import asyncpg
 from fastapi import APIRouter, Depends, HTTPException, Query
 
 from api.database import get_pool
+from api.routes._helpers import scene_not_found, session_not_found
 from api.models.progression import (
     ArcEnvelopeStatus,
     DeclareSceneResolutionRequest,
@@ -73,9 +74,7 @@ async def _gather_arc_envelope_status(
 
     status_list: list[ArcEnvelopeStatus] = []
     for arc_row in arcs:
-        raw = arc_row["data"]
-        arc_data = json.loads(raw) if isinstance(raw, str) else raw
-
+        arc_data = arc_row["data"]
         arc_id = arc_row["id"]
         budget = arc_data.get("budget", {}) or {}
         scene_soft = budget.get("resolved_scene_soft_cap", 0) or 0
@@ -136,15 +135,6 @@ def _build_suggestions(envelope_status: list[ArcEnvelopeStatus]) -> list[str]:
     return suggestions
 
 
-def _coerce_jsonb(value: Any) -> Any:
-    """asyncpg may return JSONB as str or already-decoded; normalize."""
-    if value is None:
-        return None
-    if isinstance(value, (dict, list)):
-        return value
-    return json.loads(value)
-
-
 # ---------------------------------------------------------------------------
 # POST /scene/declare_resolution
 # ---------------------------------------------------------------------------
@@ -171,11 +161,8 @@ async def declare_scene_resolution(
                 body.session_id,
             )
             if row is None:
-                raise HTTPException(
-                    status_code=404,
-                    detail={"error": "session_not_found", "session_id": body.session_id},
-                )
-            world = _coerce_jsonb(row["world"]) or {}
+                raise session_not_found(body.session_id)
+            world = row["world"] or {}
 
             unknown = await _validate_arc_ids(conn, body.session_id, body.arc_progressed_ids)
             if unknown:
@@ -248,12 +235,12 @@ def _row_to_scene_record(row: Any) -> SceneRecord:
         session_id=row["session_id"],
         resolved_at=resolved_at.isoformat() if hasattr(resolved_at, "isoformat") else str(resolved_at),
         scene_summary=row["scene_summary"],
-        scene_actions=_coerce_jsonb(row["scene_actions"]) or [],
+        scene_actions=row["scene_actions"] or [],
         tag_advance_committed=row["tag_advance_committed"],
-        arc_progressed_ids=_coerce_jsonb(row["arc_progressed_ids"]) or [],
+        arc_progressed_ids=row["arc_progressed_ids"] or [],
         location_id=row["location_id"],
         turn_at_resolution=row["turn_at_resolution"],
-        time_at_resolution=_coerce_jsonb(row["time_at_resolution"]),
+        time_at_resolution=row["time_at_resolution"],
     )
 
 
@@ -280,7 +267,7 @@ async def get_scene_record(
             session_id, scene_id,
         )
     if row is None:
-        raise HTTPException(status_code=404, detail={"error": "scene_record_not_found"})
+        raise scene_not_found(session_id, scene_id)
     return _row_to_scene_record(row)
 
 

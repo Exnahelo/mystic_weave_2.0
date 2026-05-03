@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 from datetime import datetime, timezone
 
 import pytest
@@ -42,7 +44,7 @@ class ArcRouteConn:
                     "primary_type": args[2],
                     "state": args[3],
                     "parent_arc_id": args[4],
-                    "data": args[5],
+                    "data": json.loads(args[5]),
                     "created_at": args[6],
                 }
             )

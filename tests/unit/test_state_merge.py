@@ -102,8 +102,8 @@ def _current_state() -> dict:
         }
     )
     return {
-        "character": character.model_dump_json(by_alias=True),
-        "world": world.model_dump_json(),
+        "character": character.model_dump(by_alias=True),
+        "world": world.model_dump(),
     }
 
 

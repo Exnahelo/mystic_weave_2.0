@@ -174,12 +174,12 @@ def test_scene_context_shape_and_log_truncation() -> None:
     conn = SceneConn(
         state_row={
             "session_id": "abc12345",
-            "character": json.dumps(_character()),
-            "world": json.dumps(_world()),
-            "log": json.dumps(log_entries),
+            "character": _character(),
+            "world": _world(),
+            "log": log_entries,
             "updated_at": datetime.now(),
         },
-        location_row={"data": json.dumps(_location_data())},
+        location_row={"data": _location_data()},
     )
     app = _make_app(FakePool(conn))
 
@@ -201,12 +201,12 @@ def test_scene_context_omits_full_world_payload() -> None:
     conn = SceneConn(
         state_row={
             "session_id": "abc12345",
-            "character": json.dumps(_character()),
-            "world": json.dumps(_world()),
-            "log": json.dumps(["one", "two"]),
+            "character": _character(),
+            "world": _world(),
+            "log": ["one", "two"],
             "updated_at": datetime.now(),
         },
-        location_row={"data": json.dumps(_location_data())},
+        location_row={"data": _location_data()},
     )
     app = _make_app(FakePool(conn))
 

@@ -91,7 +91,7 @@ class SceneConn:
             world = self.sessions.get(args[0])
             if world is None:
                 return None
-            return {"world": json.dumps(world)}
+            return {"world": world}
 
         if "SELECT resolved_at FROM scene_records WHERE scene_id" in query:
             row = self.records.get(args[0])
@@ -137,7 +137,7 @@ class SceneConn:
         if "SELECT id, data FROM arcs" in query and "state = 'in_progress'" in query:
             session_id = args[0]
             return [
-                {"id": arc_id, "data": json.dumps(info["data"])}
+                {"id": arc_id, "data": info["data"]}
                 for arc_id, info in self.arcs.items()
                 if info["session_id"] == session_id and info["state"] == "in_progress"
             ]
@@ -193,9 +193,9 @@ class SceneConn:
             "session_id": row["session_id"],
             "resolved_at": row["resolved_at"],
             "scene_summary": row.get("scene_summary"),
-            "scene_actions": json.dumps(row.get("scene_actions") or []),
+            "scene_actions": row.get("scene_actions" or []),
             "tag_advance_committed": row.get("tag_advance_committed"),
-            "arc_progressed_ids": json.dumps(row.get("arc_progressed_ids") or []),
+            "arc_progressed_ids": row.get("arc_progressed_ids" or []),
             "location_id": row.get("location_id"),
             "turn_at_resolution": row.get("turn_at_resolution"),
             "time_at_resolution": (

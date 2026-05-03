@@ -42,19 +42,19 @@ class MultiTurnFakeConn:
         if "SELECT session_id, character, world, log, updated_at FROM game_states" in query:
             return {
                 "session_id": self.session_id,
-                "character": json.dumps(self.character),
-                "world": json.dumps(self.world),
-                "log": json.dumps(self.log),
+                "character": self.character,
+                "world": self.world,
+                "log": self.log,
                 "updated_at": self.updated_at,
             }
 
         if "SELECT character FROM game_states" in query:
-            return {"character": json.dumps(self.character)}
+            return {"character": self.character}
 
         if "SELECT character, world FROM game_states" in query:
             return {
-                "character": json.dumps(self.character),
-                "world": json.dumps(self.world),
+                "character": self.character,
+                "world": self.world,
             }
 
         if "RETURNING session_id, character, world, log, updated_at" in query:
@@ -71,9 +71,9 @@ class MultiTurnFakeConn:
             self.updated_at = datetime.now()
             return {
                 "session_id": self.session_id,
-                "character": json.dumps(self.character),
-                "world": json.dumps(self.world),
-                "log": json.dumps(self.log),
+                "character": self.character,
+                "world": self.world,
+                "log": self.log,
                 "updated_at": self.updated_at,
             }
 

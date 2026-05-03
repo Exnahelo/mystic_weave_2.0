@@ -25,13 +25,15 @@ from api.companions import (
 )
 from api.database import get_pool
 from api.models import CharacterModel, TypedLogEntry, WorldModel
+from api.repositories.state_repository import StateRepository
+from api.routes._helpers import (
+    get_state_repository,
+    plain_validation_errors as _plain_validation_errors,
+)
 from api.routes.state import _normalize_character_state
 from api.schemas.companion_schemas import CompanionResponse, CreateCompanionRequest, TransitionCompanionRequest
 
 router = APIRouter()
-
-
-from api.routes._helpers import plain_validation_errors as _plain_validation_errors
 
 
 def _character_id_from_character(character: CharacterModel) -> str:
@@ -48,9 +50,9 @@ async def _load_session_state(conn: asyncpg.Connection, session_id: str) -> tupl
 
     try:
         character = CharacterModel.model_validate(
-            _normalize_character_state(json.loads(row["character"]))
+            _normalize_character_state(row["character"])
         )
-        world = WorldModel.model_validate(json.loads(row["world"]))
+        world = WorldModel.model_validate(row["world"])
     except ValidationError as err:
         raise HTTPException(
             status_code=500,
@@ -195,10 +197,18 @@ async def get_companion(
     companion_id: str,
     session_id: str = Query(...),
     include_archived: bool = Query(False),
-    pool: asyncpg.Pool = Depends(get_pool),
+    repo: StateRepository = Depends(get_state_repository),
 ) -> CompanionResponse:
-    async with pool.acquire() as conn:
-        _, world = await _load_session_state(conn, session_id)
+    state = await repo.get_state_full(session_id)
+    if state is None:
+        raise HTTPException(status_code=404, detail="session not found")
+    try:
+        world = WorldModel.model_validate(state.world)
+    except ValidationError as err:
+        raise HTTPException(
+            status_code=500,
+            detail={"message": "stored game state is invalid", "errors": _plain_validation_errors(err)},
+        )
 
     for entry in world.companions:
         if entry.id == companion_id:

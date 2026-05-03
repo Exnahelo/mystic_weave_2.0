@@ -45,7 +45,7 @@ async def get_location(
     return LocationResponse(
         id=row["id"],
         name=row["name"],
-        data=json.loads(row["data"]),
+        data=row["data"],
         updated_at=row["updated_at"],
     )
 
@@ -156,7 +156,7 @@ async def upsert_location(
     return LocationResponse(
         id=row["id"],
         name=row["name"],
-        data=json.loads(row["data"]),
+        data=row["data"],
         updated_at=row["updated_at"],
     )
 

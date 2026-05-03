@@ -294,8 +294,8 @@ def apply_delta(current_state: dict[str, Any], delta: ApplyStateDeltaRequest) ->
     character_delta = delta.character.model_dump(exclude_unset=True, by_alias=True)
     world_delta = delta.world.model_dump(exclude_unset=True)
 
-    existing_character = json.loads(current_state["character"])
-    existing_world = json.loads(current_state["world"])
+    existing_character = current_state["character"]
+    existing_world = current_state["world"]
 
     new_advancement = _apply_advancement_and_validate_caps(existing_character, character_delta)
     character_delta["advancement"] = new_advancement
@@ -354,9 +354,9 @@ async def load_state(
 
     try:
         character = CharacterModel.model_validate(
-            _normalize_character_state(json.loads(row["character"]))
+            _normalize_character_state(row["character"])
         )
-        world = WorldModel.model_validate(json.loads(row["world"]))
+        world = WorldModel.model_validate(row["world"])
     except ValidationError as e:
         raise HTTPException(status_code=500, detail={"message": "stored game state is invalid", "errors": e.errors()})
 
@@ -364,7 +364,7 @@ async def load_state(
         session_id=row["session_id"],
         character=character,
         world=world,
-        log=json.loads(row["log"]),
+        log=row["log"],
         updated_at=row["updated_at"],
     )
 
@@ -410,8 +410,8 @@ async def save_state(
             session_id,
         )
         if existing_row is not None:
-            existing_character: dict[str, Any] = json.loads(existing_row["character"])
-            existing_world: dict[str, Any] = json.loads(existing_row["world"])
+            existing_character: dict[str, Any] = existing_row["character"]
+            existing_world: dict[str, Any] = existing_row["world"]
 
             # Run advancement counters and parent-cap validation against the
             # incoming payload before merge, mirroring the delta endpoint.
@@ -469,9 +469,9 @@ async def save_state(
 
     try:
         response_character = CharacterModel.model_validate(
-            _normalize_character_state(json.loads(row["character"]))
+            _normalize_character_state(row["character"])
         )
-        response_world = WorldModel.model_validate(json.loads(row["world"]))
+        response_world = WorldModel.model_validate(row["world"])
     except ValidationError as e:
         raise HTTPException(status_code=500, detail={"message": "stored game state is invalid", "errors": e.errors()})
 
@@ -479,7 +479,7 @@ async def save_state(
         session_id=row["session_id"],
         character=response_character,
         world=response_world,
-        log=json.loads(row["log"]),
+        log=row["log"],
         updated_at=row["updated_at"],
     )
 
@@ -542,9 +542,9 @@ async def save_state_delta(
 
     try:
         response_character = CharacterModel.model_validate(
-            _normalize_character_state(json.loads(row["character"]))
+            _normalize_character_state(row["character"])
         )
-        response_world = WorldModel.model_validate(json.loads(row["world"]))
+        response_world = WorldModel.model_validate(row["world"])
     except ValidationError as e:
         raise HTTPException(status_code=500, detail={"message": "stored game state is invalid", "errors": e.errors()})
 
@@ -552,7 +552,7 @@ async def save_state_delta(
         session_id=row["session_id"],
         character=response_character,
         world=response_world,
-        log=json.loads(row["log"]),
+        log=row["log"],
         updated_at=row["updated_at"],
     )
 
@@ -591,7 +591,7 @@ async def annotate_state(
         if row is None:
             raise HTTPException(status_code=404, detail="session not found")
 
-        log_entries = json.loads(row["log"])
+        log_entries = row["log"]
 
     return AnnotationResponse(
         session_id=row["session_id"],
