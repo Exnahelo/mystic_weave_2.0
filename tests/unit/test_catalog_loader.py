@@ -51,8 +51,8 @@ def _armor_item(item_id: str) -> dict:
     item = _base_item(item_id)
     item["category"] = "armor"
     item["tags"] = ["armor"]
-    item["knowledge_tag"] = "armor"
-    item["application_tag"] = "light_armor"
+    item["knowledge_tag"] = "light_armor"
+    item["application_tag"] = "leather"
     item["armor_floor"] = 10
     item["armor_ceiling"] = 20
     return item

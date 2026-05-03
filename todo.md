@@ -108,7 +108,9 @@ Items from `docs/audit/architecture_review_2026-05-02.md` not addressed in Brief
 
 ## REFACTORING (INCREMENTAL)
 
-- [ ] **`api/models.py` incremental split.** 1400-line kitchen sink. Per project policy: when any model in `models.py` next needs significant changes, that model moves to a new file as part of the same change. Concrete trigger: arc model edits → pull into `api/models/arc.py`. Same for character / world / item / advancement when each is next touched. Do not propose a single brief that splits the whole file at once.
+- [ ] **`api/models.py` incremental split.** 1400-line kitchen sink. Per project policy: when any model in `models.py` next needs significant changes, that model moves to a new file as part of the same change. Concrete trigger: arc model edits → pull into `api/models/arc.py`. Same for character / world / item / advancement when each is next touched. Do not propose a single brief that splits the whole file at once. **Brief 13 (2026-05-02) extracted `character.py`; remaining models still in `__init__.py`.**
+
+- [ ] **v5 → v5.1 armor migration (only if any v5-shaped record carrying `knowledge.armor` ever appears).** Brief 14 (2026-05-02, 5.0.0 → 5.1.0) retired the `armor` knowledge group. Production DB was empty when the brief landed, so no migration script was authored. If a v5 character record with `knowledge.armor` ever surfaces (e.g., a stale fixture, an exported snapshot, an import from another environment), the cleanup is: rewrite `knowledge.armor.applications.{light_armor,medium_armor,heavy_armor}` to top-level groups; move type-specific applications under the new parents (`padded` → `light_armor`, etc.); move `unarmored` to `martial_arts`; delete `knowledge.armor`. Sketch a script under `scripts/migrate_character_armor.py` if/when needed.
 
 ---
 

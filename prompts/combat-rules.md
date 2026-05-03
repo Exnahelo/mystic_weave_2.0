@@ -70,14 +70,16 @@ The application tag is the specific implement or class within the family. Weapon
 - light_crossbow
 - whip
 
-Armor applications are:
+Armor knowledge groups (each with type-specific applications nested under it):
 
-- light_armor
-- medium_armor
-- heavy_armor
-- shields
+- `light_armor` — applications: `padded`, `leather`, `studded_leather`, `hide`
+- `medium_armor` — applications: `chain_shirt`, `scale_mail`, `breastplate`
+- `heavy_armor` — applications: `chain_mail`, `splint`, `plate`
+- `shields` — applications: `shield` (additional shield types may be added later)
 
-A character may understand a combat family through knowledge without being equally practiced in every application within that family.
+The `unarmored` application sits under the `martial_arts` knowledge group.
+
+A character may understand an armor class through the knowledge group without being equally practiced in every specific armor type within it.
 
 ### Weapon Matching Rule
 
@@ -165,10 +167,10 @@ shield_contribution = shield_floor + (shield_ceiling − shield_floor) × (shiel
 
 Where:
 - `armor_floor` and `armor_ceiling` are from the worn armor's catalog entry.
-- `armor_tier` is the character's application tier for the armor class in use (`light_armor`, `medium_armor`, `heavy_armor`). T0 if untrained.
+- `armor_tier` is the character's **knowledge group** tier for the armor class in use — read from `character.knowledge.{light_armor|medium_armor|heavy_armor}.tier`. T0 if untrained. (The application tier of the specific armor type — `padded`, `chain_shirt`, `plate`, etc. — is parent-cap'd to the group tier and available for narrative texture, but `armor_tier` for HP computation is the group tier.)
 - `shield_floor` and `shield_ceiling` are from the shield catalog entry (5 and 30).
-- `shield_tier` is the character's application tier for `shields`. T0 if untrained. Omit the entire shield contribution if no shield is equipped.
-- Unarmored contributes no HP (floor=0, ceiling=0). Unarmored defense is evasion-based, applied to Roll 1 instead via the `martial_arts` knowledge tier.
+- `shield_tier` is the character's knowledge group tier for `shields` — read from `character.knowledge.shields.tier`. T0 if untrained. Omit the entire shield contribution if no shield is equipped.
+- Unarmored contributes no HP (floor=0, ceiling=0). Unarmored defense is evasion-based, applied to Roll 1 instead via the `martial_arts` knowledge tier (the `unarmored` application sits under `martial_arts`).
 
 ### Dual Wielding
 
@@ -267,4 +269,4 @@ Until fuller combat rules are finalized, follow these principles:
 
 ## Summary
 
-Combat v1.0 defines backend-authoritative resolution using two rolls per attack, fixed-threshold hit mechanics mirrored from magic spell resolution, a contested-roll damage model with agility-based reduction, and pre-combat HP derived from armor and shield floor/ceiling values combined with skill tier. Ammunition is a damage modifier, not a proficiency layer. Weapon and armor knowledge follows the canonical taxonomy: `close_combat`, `melee`, `reach`, `ranged`, `mechanical`, `unconventional`, `martial_arts`, and `armor` as knowledge groups, with armor applications `light_armor`, `medium_armor`, `heavy_armor`, `shields`. Additional combat subsystems (positioning, magic in combat, mounted combat, etc.) remain placeholders for future canonization.
+Combat v1.0 defines backend-authoritative resolution using two rolls per attack, fixed-threshold hit mechanics mirrored from magic spell resolution, a contested-roll damage model with agility-based reduction, and pre-combat HP derived from armor and shield floor/ceiling values combined with skill tier. Ammunition is a damage modifier, not a proficiency layer. Weapon and armor knowledge follows the canonical taxonomy: `close_combat`, `melee`, `reach`, `ranged`, `mechanical`, `unconventional`, `martial_arts`, `light_armor`, `medium_armor`, `heavy_armor`, and `shields` as knowledge groups, with type-specific armor applications nested under each armor class (e.g., `padded`/`leather`/`studded_leather`/`hide` under `light_armor`). The `unarmored` application sits under `martial_arts`. Additional combat subsystems (positioning, magic in combat, mounted combat, etc.) remain placeholders for future canonization.

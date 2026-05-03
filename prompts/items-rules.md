@@ -72,7 +72,7 @@ Items are divided into six structural categories. Magical-ness is a property car
 
 `data/catalog/items/armor/`
 
-* armor categories (light_armor / medium_armor / heavy_armor / unarmored)
+* armor knowledge groups: `light_armor`, `medium_armor`, `heavy_armor` (each with type-specific applications nested: `padded`/`leather`/etc.). The `unarmored` application sits under `martial_arts`.
 * armor floor and ceiling (HP contribution range)
 * mobility and protection framing
 

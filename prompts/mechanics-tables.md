@@ -368,15 +368,21 @@ Craft (Intellect), Engineering (Intellect), Lore (Intellect),
 Influence (Presence), Performance (Presence), Discipline (Will),
 Arcana (Intellect)
 
-### Combat Knowledge Groups (Canonical, 8)
+### Combat Knowledge Groups (Canonical, 11)
 
 Canonical: `prompts/combat-rules.md`.
 
-`close_combat`, `melee`, `reach`, `ranged`, `mechanical`, `unconventional`, `martial_arts`, `armor`
+`close_combat`, `melee`, `reach`, `ranged`, `mechanical`, `unconventional`, `martial_arts`, `light_armor`, `medium_armor`, `heavy_armor`, `shields`
 
-### Armor Applications (Canonical, 5)
+### Armor Applications
 
-`light_armor`, `medium_armor`, `heavy_armor`, `shields`, `unarmored`
+Type-specific applications nested under their armor-class knowledge group:
+
+- `light_armor` → `padded`, `leather`, `studded_leather`, `hide`
+- `medium_armor` → `chain_shirt`, `scale_mail`, `breastplate`
+- `heavy_armor` → `chain_mail`, `splint`, `plate`
+- `shields` → `shield`
+- `martial_arts` → `unarmored`
 
 ### Magical Fields (9)
 

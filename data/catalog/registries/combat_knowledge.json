@@ -30,8 +30,20 @@
       "description": "Disciplined unarmed combat traditions; includes unarmored fighting."
     },
     {
-      "id": "armor",
-      "description": "Armor and shield handling."
+      "id": "light_armor",
+      "description": "Light armor handling: padded, leather, studded leather, hide."
+    },
+    {
+      "id": "medium_armor",
+      "description": "Medium armor handling: chain shirt, scale mail, breastplate."
+    },
+    {
+      "id": "heavy_armor",
+      "description": "Heavy armor handling: chain mail, splint, plate."
+    },
+    {
+      "id": "shields",
+      "description": "Shield handling: blocking, deflection, shield-based attacks."
     }
   ]
 }

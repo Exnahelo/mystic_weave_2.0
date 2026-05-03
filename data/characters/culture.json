@@ -113,12 +113,11 @@
       "presence": 0
     },
     "knowledge_tags": {
-      "armor": 1,
+      "heavy_armor": 1,
       "survival": 1
     },
     "application_tags": {
       "hauling": 1,
-      "heavy_armor": 1,
       "intimidation_posture": 1,
       "privation_endurance": 1
     },

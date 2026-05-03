@@ -26,8 +26,48 @@
       "knowledge_group": "reach"
     },
     {
-      "id": "heavy_armor",
-      "knowledge_group": "armor"
+      "id": "padded",
+      "knowledge_group": "light_armor"
+    },
+    {
+      "id": "leather",
+      "knowledge_group": "light_armor"
+    },
+    {
+      "id": "studded_leather",
+      "knowledge_group": "light_armor"
+    },
+    {
+      "id": "hide",
+      "knowledge_group": "light_armor"
+    },
+    {
+      "id": "chain_shirt",
+      "knowledge_group": "medium_armor"
+    },
+    {
+      "id": "scale_mail",
+      "knowledge_group": "medium_armor"
+    },
+    {
+      "id": "breastplate",
+      "knowledge_group": "medium_armor"
+    },
+    {
+      "id": "chain_mail",
+      "knowledge_group": "heavy_armor"
+    },
+    {
+      "id": "splint",
+      "knowledge_group": "heavy_armor"
+    },
+    {
+      "id": "plate",
+      "knowledge_group": "heavy_armor"
+    },
+    {
+      "id": "shield",
+      "knowledge_group": "shields"
     },
     {
       "id": "heavy_crossbow",
@@ -36,10 +76,6 @@
     {
       "id": "knife",
       "knowledge_group": "close_combat"
-    },
-    {
-      "id": "light_armor",
-      "knowledge_group": "armor"
     },
     {
       "id": "light_crossbow",
@@ -54,16 +90,8 @@
       "knowledge_group": "melee"
     },
     {
-      "id": "medium_armor",
-      "knowledge_group": "armor"
-    },
-    {
       "id": "net",
       "knowledge_group": "unconventional"
-    },
-    {
-      "id": "shields",
-      "knowledge_group": "armor"
     },
     {
       "id": "shortbow",
@@ -87,7 +115,7 @@
     },
     {
       "id": "unarmored",
-      "knowledge_group": "armor"
+      "knowledge_group": "martial_arts"
     },
     {
       "id": "whip",

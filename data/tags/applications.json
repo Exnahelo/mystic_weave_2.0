@@ -1622,7 +1622,7 @@
   {
     "index": "padded",
     "name": "Padded Armor",
-    "group": "armor",
+    "group": "light_armor",
     "primary_domain": "agility",
     "domain_note": null,
     "description": "Wearing padded armor — the lightest protective layer, providing minimal protection while preserving mobility.",
@@ -1634,7 +1634,7 @@
   {
     "index": "leather",
     "name": "Leather Armor",
-    "group": "armor",
+    "group": "light_armor",
     "primary_domain": "agility",
     "domain_note": null,
     "description": "Wearing leather armor — flexible, quiet, moderately protective; favored by rangers and scouts.",
@@ -1646,7 +1646,7 @@
   {
     "index": "studded_leather",
     "name": "Studded Leather",
-    "group": "armor",
+    "group": "light_armor",
     "primary_domain": "agility",
     "domain_note": null,
     "description": "Wearing studded leather armor — reinforced with metal studs for greater protection at a small mobility cost.",
@@ -1658,7 +1658,7 @@
   {
     "index": "hide",
     "name": "Hide Armor",
-    "group": "armor",
+    "group": "light_armor",
     "primary_domain": "agility",
     "domain_note": null,
     "description": "Wearing hide armor — thick animal hides treated for protection; favored in wilderness cultures and primitive contexts.",
@@ -1670,7 +1670,7 @@
   {
     "index": "chain_shirt",
     "name": "Chain Shirt",
-    "group": "armor",
+    "group": "medium_armor",
     "primary_domain": "power",
     "domain_note": null,
     "description": "Wearing a chain shirt — upper-body mail providing solid protection without full weight of chain mail.",
@@ -1682,7 +1682,7 @@
   {
     "index": "scale_mail",
     "name": "Scale Mail",
-    "group": "armor",
+    "group": "medium_armor",
     "primary_domain": "power",
     "domain_note": null,
     "description": "Wearing scale mail — overlapping metal scales on backing, solid protection with acceptable mobility.",
@@ -1694,7 +1694,7 @@
   {
     "index": "breastplate",
     "name": "Breastplate",
-    "group": "armor",
+    "group": "medium_armor",
     "primary_domain": "power",
     "domain_note": null,
     "description": "Wearing a breastplate — rigid chest protection combined with lighter limb coverage.",
@@ -1706,7 +1706,7 @@
   {
     "index": "chain_mail",
     "name": "Chain Mail",
-    "group": "armor",
+    "group": "heavy_armor",
     "primary_domain": "power",
     "domain_note": null,
     "description": "Wearing full chain mail — interlocking metal rings providing comprehensive protection at significant weight.",
@@ -1718,7 +1718,7 @@
   {
     "index": "splint",
     "name": "Splint Armor",
-    "group": "armor",
+    "group": "heavy_armor",
     "primary_domain": "power",
     "domain_note": null,
     "description": "Wearing splint armor — vertical metal strips riveted to leather backing, strong protection approaching plate.",
@@ -1730,7 +1730,7 @@
   {
     "index": "plate",
     "name": "Plate Armor",
-    "group": "armor",
+    "group": "heavy_armor",
     "primary_domain": "power",
     "domain_note": null,
     "description": "Wearing full plate armor — articulated metal plates covering the entire body, maximal protection at maximum weight.",
@@ -1742,7 +1742,7 @@
   {
     "index": "shield",
     "name": "Shield",
-    "group": "armor",
+    "group": "shields",
     "primary_domain": "power",
     "domain_note": null,
     "description": "Using a shield — blocking, parrying, bashing, and line-holding with any shield type. Specific size and type are narrative descriptors.",
@@ -1754,65 +1754,13 @@
   {
     "index": "unarmored",
     "name": "Unarmored",
-    "group": "armor",
+    "group": "martial_arts",
     "primary_domain": "agility",
     "domain_note": null,
     "description": "Fighting without armor — relying on mobility, evasion, and body awareness in place of protective gear.",
     "examples": [
       "Slip a strike by movement rather than protection",
       "Fight freely without the burden of worn armor"
-    ]
-  },
-  {
-    "index": "heavy_armor",
-    "name": "Heavy Armor",
-    "group": "armor",
-    "primary_domain": "endurance",
-    "domain_note": "Endurance for sustained load; Power for forceful movement.",
-    "description": "Wearing, moving in, and operating effectively in heavy plate or splint construction.",
-    "examples": [
-      "Maintain pace in plate over a forced march",
-      "Recover footing after a heavy hit",
-      "Stay upright when knocked off-balance"
-    ]
-  },
-  {
-    "index": "light_armor",
-    "name": "Light Armor",
-    "group": "armor",
-    "primary_domain": "agility",
-    "domain_note": "Agility for unrestricted movement; Endurance for prolonged wear.",
-    "description": "Wearing, moving in, and operating effectively in padded, leather, or studded leather construction.",
-    "examples": [
-      "Move silently in studded leather",
-      "Maintain mobility through extended ranging",
-      "Avoid encumbrance in close work"
-    ]
-  },
-  {
-    "index": "medium_armor",
-    "name": "Medium Armor",
-    "group": "armor",
-    "primary_domain": "endurance",
-    "domain_note": "Endurance for sustained wear; Agility for retained mobility under load.",
-    "description": "Wearing, moving in, and operating effectively in chain shirt, scale, or breastplate construction.",
-    "examples": [
-      "Hold formation in chain over a long engagement",
-      "Recover from a fall in scale",
-      "Mount and dismount without breaking rhythm"
-    ]
-  },
-  {
-    "index": "shields",
-    "name": "Shields",
-    "group": "armor",
-    "primary_domain": "power",
-    "domain_note": "Power for active blocking; Agility for shield positioning.",
-    "description": "Active use of a shield for blocking, deflection, and shield-based attacks.",
-    "examples": [
-      "Block an incoming swing",
-      "Bash with a shield rim",
-      "Maintain a shield wall in formation"
     ]
   },
   {

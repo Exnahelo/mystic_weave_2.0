@@ -170,7 +170,7 @@ def _validate_field_tags(label: str, field_tags: object, failures: list[str]) ->
 def _validate_knowledge_groups(path: Path, failures: list[str]) -> None:
     rows = _load_tag_file(path)
     seen_indices: set[str] = set()
-    _failures_append(failures, len(rows) == 26, f"{path.name}: expected 26 entries")
+    _failures_append(failures, len(rows) == 29, f"{path.name}: expected 29 entries")
 
     for i, row in enumerate(rows):
         label = f"{path.name}[{i}]"
@@ -236,7 +236,7 @@ def _validate_magic_fields(path: Path, failures: list[str]) -> None:
 def _validate_applications(path: Path, failures: list[str]) -> None:
     rows = _load_tag_file(path)
     seen_indices: set[str] = set()
-    _failures_append(failures, len(rows) == 152, f"{path.name}: expected 152 entries")
+    _failures_append(failures, len(rows) == 148, f"{path.name}: expected 148 entries")
 
     for i, row in enumerate(rows):
         label = f"{path.name}[{i}]"

@@ -216,8 +216,11 @@ Weapon and armor combat use the following canonical knowledge groups:
 - `ranged`
 - `mechanical`
 - `unconventional`
-- `martial_arts` — includes unarmored fighting
-- `armor` — knowledge group with the following applications: `light_armor`, `medium_armor`, `heavy_armor`, `shields`
+- `martial_arts` — applications include `unarmored`
+- `light_armor` — applications: `padded`, `leather`, `studded_leather`, `hide`
+- `medium_armor` — applications: `chain_shirt`, `scale_mail`, `breastplate`
+- `heavy_armor` — applications: `chain_mail`, `splint`, `plate`
+- `shields` — applications: `shield` (additional shield types may be added later)
 
 Do not introduce legacy or alternate weapon and armor tag names during character creation.
 

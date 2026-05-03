@@ -350,17 +350,59 @@
     "kind": "mundane"
   },
   {
-    "index": "armor",
-    "name": "Armor",
+    "index": "light_armor",
+    "name": "Light Armor",
     "primary_domain": "endurance",
     "secondary_domain": "agility",
-    "domain_note": "Endurance for wear and load; Agility for retained mobility.",
-    "description": "Knowledge of armor types, fitting, maintenance, and operational use across construction styles.",
+    "domain_note": "Endurance for wear; Agility for retained mobility.",
+    "description": "Knowledge of light-armor construction (padded, leather, studded leather, hide), fitting, maintenance, and field use. Specific armor types are applications under this group.",
     "kind": "mundane",
     "examples": [
-      "Identify the construction class of an unfamiliar piece of armor",
-      "Adjust fit and padding for a forced march",
-      "Recognize maintenance damage before it becomes failure"
+      "Repair a torn leather strap mid-march without compromising fit",
+      "Recognize the difference between worn studded leather and reinforced hide at a glance",
+      "Layer padded under another light piece without overheating"
+    ]
+  },
+  {
+    "index": "medium_armor",
+    "name": "Medium Armor",
+    "primary_domain": "endurance",
+    "secondary_domain": "agility",
+    "domain_note": "Endurance for sustained load; Agility for kept mobility.",
+    "description": "Knowledge of medium-armor construction (chain shirt, scale mail, breastplate), fitting, maintenance, and operational use. Specific armor types are applications under this group.",
+    "kind": "mundane",
+    "examples": [
+      "Diagnose a slipped scale before it cuts the wearer",
+      "Adjust a breastplate's straps to clear a deep breath",
+      "Re-link a small section of chain shirt in the field"
+    ]
+  },
+  {
+    "index": "heavy_armor",
+    "name": "Heavy Armor",
+    "primary_domain": "endurance",
+    "secondary_domain": "agility",
+    "domain_note": "Endurance for the load itself; Agility for what mobility remains.",
+    "description": "Knowledge of heavy-armor construction (chain mail, splint, plate), fitting, maintenance, and operational wear. Specific armor types are applications under this group.",
+    "kind": "mundane",
+    "examples": [
+      "Spot a hairline crack in a plate cuirass before it spreads",
+      "Re-pin a splint section without removing the suit",
+      "Manage exertion in full plate over a long approach"
+    ]
+  },
+  {
+    "index": "shields",
+    "name": "Shields",
+    "primary_domain": "endurance",
+    "secondary_domain": "agility",
+    "domain_note": "Endurance for absorbing impact; Agility for active deflection.",
+    "description": "Knowledge of shield construction, grip, stance, and active defense. Specific shield types (e.g., tower, buckler) are applications under this group; the generic 'shield' application covers any shield.",
+    "kind": "mundane",
+    "examples": [
+      "Brace a shield against a charging weight without rolling the wrist",
+      "Catch a downward blow on the rim to deflect rather than absorb",
+      "Choose grip-on-strap vs. grip-in-hand for the kind of fight expected"
     ]
   }
 ]
