@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "4.8.0"
+    "version": "5.0.0"
   },
   "servers": [
     {
@@ -3415,33 +3415,17 @@
           },
           "knowledge": {
             "additionalProperties": {
-              "type": "integer",
-              "maximum": 5.0,
-              "minimum": 1.0,
-              "description": "Competency tag tier. Must be an integer from 1 through 5."
+              "$ref": "#/components/schemas/KnowledgeGroupRecord"
             },
             "type": "object",
             "title": "Knowledge"
           },
-          "application": {
+          "magic": {
             "additionalProperties": {
-              "type": "integer",
-              "maximum": 5.0,
-              "minimum": 1.0,
-              "description": "Competency tag tier. Must be an integer from 1 through 5."
+              "$ref": "#/components/schemas/MagicFieldRecord"
             },
             "type": "object",
-            "title": "Application"
-          },
-          "fields": {
-            "additionalProperties": {
-              "type": "integer",
-              "maximum": 5.0,
-              "minimum": 1.0,
-              "description": "Competency tag tier. Must be an integer from 1 through 5."
-            },
-            "type": "object",
-            "title": "Fields"
+            "title": "Magic"
           },
           "status_effects": {
             "items": {
@@ -3515,33 +3499,17 @@
           },
           "knowledge": {
             "additionalProperties": {
-              "type": "integer",
-              "maximum": 5.0,
-              "minimum": 1.0,
-              "description": "Competency tag tier. Must be an integer from 1 through 5."
+              "$ref": "#/components/schemas/KnowledgeGroupRecord"
             },
             "type": "object",
             "title": "Knowledge"
           },
-          "application": {
+          "magic": {
             "additionalProperties": {
-              "type": "integer",
-              "maximum": 5.0,
-              "minimum": 1.0,
-              "description": "Competency tag tier. Must be an integer from 1 through 5."
+              "$ref": "#/components/schemas/MagicFieldRecord"
             },
             "type": "object",
-            "title": "Application"
-          },
-          "fields": {
-            "additionalProperties": {
-              "type": "integer",
-              "maximum": 5.0,
-              "minimum": 1.0,
-              "description": "Competency tag tier. Must be an integer from 1 through 5."
-            },
-            "type": "object",
-            "title": "Fields"
+            "title": "Magic"
           },
           "status_effects": {
             "items": {
@@ -3615,10 +3583,7 @@
             "anyOf": [
               {
                 "additionalProperties": {
-                  "type": "integer",
-                  "maximum": 5.0,
-                  "minimum": 1.0,
-                  "description": "Competency tag tier. Must be an integer from 1 through 5."
+                  "$ref": "#/components/schemas/KnowledgeGroupDelta"
                 },
                 "type": "object"
               },
@@ -3628,14 +3593,11 @@
             ],
             "title": "Knowledge"
           },
-          "application": {
+          "magic": {
             "anyOf": [
               {
                 "additionalProperties": {
-                  "type": "integer",
-                  "maximum": 5.0,
-                  "minimum": 1.0,
-                  "description": "Competency tag tier. Must be an integer from 1 through 5."
+                  "$ref": "#/components/schemas/MagicFieldDelta"
                 },
                 "type": "object"
               },
@@ -3643,24 +3605,7 @@
                 "type": "null"
               }
             ],
-            "title": "Application"
-          },
-          "fields": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "type": "integer",
-                  "maximum": 5.0,
-                  "minimum": 1.0,
-                  "description": "Competency tag tier. Must be an integer from 1 through 5."
-                },
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Fields"
+            "title": "Magic"
           },
           "status_effects": {
             "anyOf": [
@@ -3725,7 +3670,7 @@
         "additionalProperties": false,
         "type": "object",
         "title": "CharacterStateDelta",
-        "description": "Typed partial character update for extraction-driven turn commits.\n\nNote on `advancement`: the delta endpoint recomputes advancement\nauthoritatively from existing state and tag-tier transitions. Any\nclient-supplied `advancement` value is replaced server-side. The field\nremains on the schema for forward compatibility and round-trip safety,\nbut its content has no effect on persisted state."
+        "description": "Typed partial character update for extraction-driven turn commits.\n\nv5 shape: knowledge and magic deltas carry partial nested records. A\npartial knowledge update sends the full group record (or a subset of\nits fields); the merge layer deep-merges it onto the stored record.\n\nNote on `advancement`: the delta endpoint recomputes advancement\nauthoritatively from existing state and tag-tier transitions. Any\nclient-supplied `advancement` value is replaced server-side. The field\nremains on the schema for forward compatibility and round-trip safety,\nbut its content has no effect on persisted state."
       },
       "CombatDamageResult": {
         "properties": {
@@ -6744,6 +6689,41 @@
         ],
         "title": "ItemOption"
       },
+      "KnowledgeGroupDelta": {
+        "properties": {
+          "tier": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 5.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tier"
+          },
+          "applications": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Applications"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "KnowledgeGroupDelta",
+        "description": "Partial knowledge group update for delta payloads.\n\nBoth fields optional: a delta can advance the parent tier alone, push\nnew application tiers alone, or do both. Parent-cap enforcement runs\nat full-record validation post-merge, not on the delta itself."
+      },
       "KnowledgeGroupEntry": {
         "properties": {
           "index": {
@@ -6805,6 +6785,30 @@
           "kind"
         ],
         "title": "KnowledgeGroupEntry"
+      },
+      "KnowledgeGroupRecord": {
+        "properties": {
+          "tier": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Tier"
+          },
+          "applications": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Applications"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "tier"
+        ],
+        "title": "KnowledgeGroupRecord",
+        "description": "A knowledge group held by a character, with its applications nested.\n\nThe group's tier acts as a structural cap on each nested application's\ntier; advancement that would push an application above its parent group\nfails at model construction."
       },
       "LoadState": {
         "type": "string",
@@ -6910,6 +6914,41 @@
         ],
         "title": "LocationResponse"
       },
+      "MagicFieldDelta": {
+        "properties": {
+          "tier": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 5.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tier"
+          },
+          "spells": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "integer"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Spells"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "MagicFieldDelta",
+        "description": "Partial magic field update for delta payloads.\n\nBoth fields optional. Parent-cap enforcement runs at full-record\nvalidation post-merge."
+      },
       "MagicFieldEntry": {
         "properties": {
           "index": {
@@ -6971,6 +7010,30 @@
           "kind"
         ],
         "title": "MagicFieldEntry"
+      },
+      "MagicFieldRecord": {
+        "properties": {
+          "tier": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Tier"
+          },
+          "spells": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Spells"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "tier"
+        ],
+        "title": "MagicFieldRecord",
+        "description": "A magic field held by a character, with its known spells nested.\n\nThe field's tier acts as a structural cap on each spell's per-character\nmastery tier; advancement that would push a spell above its parent\nfield fails at model construction."
       },
       "MechanicalEffect": {
         "properties": {

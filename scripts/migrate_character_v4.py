@@ -58,8 +58,15 @@ def migrate_character_payload(character: dict[str, Any]) -> tuple[dict[str, Any]
 
 
 def migrate_character_document(character: dict[str, Any]) -> tuple[dict[str, Any], bool, bool, CharacterModel]:
-    """Pure transform for a stored character payload plus post-migration validation."""
+    """Pure transform for a stored character payload plus post-migration validation.
+
+    Chains the v4 flat-field transform into the v5 nested-record transform
+    (Brief 13) before validating against the current CharacterModel.
+    """
+    from scripts.migrate_character_v5 import migrate_character_v4_to_v5
+
     migrated, changed, used_default_culture = migrate_character_payload(character)
+    migrated = migrate_character_v4_to_v5(migrated)
     validated = CharacterModel.model_validate(migrated)
     return migrated, changed, used_default_culture, validated
 

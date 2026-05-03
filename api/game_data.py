@@ -488,14 +488,27 @@ def get_tag_primary_domain(tag_index: str, tag_kind: str) -> str | None:
     """
     Return the primary_domain of a tag by its index and kind.
 
-    tag_kind: 'knowledge' | 'application' | 'field'
+    tag_kind: 'knowledge' | 'application' | 'field' | 'spell'
 
-    For applications, primary_domain comes directly from the application entry.
-    For knowledge groups and magic fields, it comes from the group/field entry.
+    For applications and spells, primary_domain comes directly from the
+    catalog entry. For knowledge groups and magic fields, it comes from
+    the group/field entry.
 
     Returns None if the tag is not found in the registry. Callers should
     treat None as "skip counter increment for this tag" — defensive, not fatal.
     """
+    if tag_kind == "spell":
+        for spell_file in _SPELL_DATA_FILES:
+            data = _load_json(spell_file)
+            entry: dict[str, Any] | None = None
+            if isinstance(data, dict):
+                candidate = data.get(tag_index)
+                if isinstance(candidate, dict):
+                    entry = candidate
+            if entry is not None:
+                primary = entry.get("primary_domain")
+                return primary if isinstance(primary, str) else None
+        return None
     if tag_kind == "knowledge":
         data = _load_json("tags/knowledge_groups.json")
         if isinstance(data, list):
@@ -529,47 +542,6 @@ def get_tag_primary_domain(tag_index: str, tag_kind: str) -> str | None:
     else:
         return None
 
-
-def validate_application_parent_cap(
-    character: dict[str, Any],
-    delta_application: dict[str, int],
-) -> None:
-    """
-    Enforce: an application tag may not exceed the tier of its parent knowledge group.
-
-    Exception: if the application is already above its parent (seeded above at creation),
-    it does not regress, but cannot advance further until the parent catches up.
-
-    Raises ValueError with a descriptive message on violation.
-    """
-    knowledge = character.get("knowledge") or {}
-    existing_application = character.get("application") or {}
-
-    for app_index, new_tier in delta_application.items():
-        if not isinstance(new_tier, int):
-            continue
-
-        parent_group = get_application_group(app_index)
-        if parent_group is None:
-            continue
-
-        parent_tier = knowledge.get(parent_group, 0) or 0
-        old_tier = existing_application.get(app_index, 0) or 0
-
-        if old_tier > parent_tier:
-            if new_tier > old_tier:
-                raise ValueError(
-                    f"application {app_index!r} is at T{old_tier} (seeded above "
-                    f"parent {parent_group!r} at T{parent_tier}); cannot advance "
-                    f"to T{new_tier} until parent catches up"
-                )
-            continue
-
-        if new_tier > parent_tier:
-            raise ValueError(
-                f"application {app_index!r} cannot advance to T{new_tier}: "
-                f"parent knowledge group {parent_group!r} is at T{parent_tier}"
-            )
 
 def get_catalog_item(item_id: str, category: str | None = None) -> dict[str, Any]:
     """Return a canonical catalog item by ID, optionally constrained by category."""
@@ -1045,9 +1017,13 @@ def seed_character(
             raise ValueError(f"Domain {domain!r} cannot exceed 80. Got {score}.")
 
     # --- Competency and field tags ---
-    knowledge: dict[str, int] = {}
-    application: dict[str, int] = {}
-    fields: dict[str, int] = {}
+    # Layered creation templates (culture/background/focus) declare flat
+    # knowledge/application/field dicts. Stack them, then transform into the
+    # v5 nested shape: knowledge groups visibly contain their applications,
+    # magic fields visibly contain their (initially empty) spells dict.
+    flat_knowledge: dict[str, int] = {}
+    flat_application: dict[str, int] = {}
+    flat_fields: dict[str, int] = {}
 
     def _stack_tags(target: dict[str, int], source: dict[str, int]) -> None:
         for tag, tier in source.items():
@@ -1058,13 +1034,34 @@ def seed_character(
 
     for trait in ancestry.get("traits", []):
         application_tag = trait.get("application_tag")
-        if application_tag and application_tag not in application:
-            application[application_tag] = 1
+        if application_tag and application_tag not in flat_application:
+            flat_application[application_tag] = 1
 
     for layer in (culture, background, focus):
-        _stack_tags(knowledge, layer.get("knowledge_tags", {}))
-        _stack_tags(application, layer.get("application_tags", {}))
-        _stack_tags(fields, layer.get("field_tags", {}))
+        _stack_tags(flat_knowledge, layer.get("knowledge_tags", {}))
+        _stack_tags(flat_application, layer.get("application_tags", {}))
+        _stack_tags(flat_fields, layer.get("field_tags", {}))
+
+    knowledge: dict[str, dict[str, Any]] = {
+        group: {"tier": tier, "applications": {}}
+        for group, tier in flat_knowledge.items()
+    }
+    for app, app_tier in flat_application.items():
+        parent_group = get_application_group(app)
+        if parent_group is None:
+            raise ValueError(
+                f"application {app!r} has no parent group in applications.json"
+            )
+        if parent_group not in knowledge:
+            # Auto-add the parent at app_tier — the minimum that satisfies
+            # the parent-cap rule for this application.
+            knowledge[parent_group] = {"tier": app_tier, "applications": {}}
+        knowledge[parent_group]["applications"][app] = app_tier
+
+    magic: dict[str, dict[str, Any]] = {
+        field: {"tier": tier, "spells": {}}
+        for field, tier in flat_fields.items()
+    }
 
     # --- Assemble character dict ---
     character: dict[str, Any] = {
@@ -1076,8 +1073,7 @@ def seed_character(
         "hp":             {"current": 100, "max": 100},
         "domains":        domains,
         "knowledge":      knowledge,
-        "application":    application,
-        "fields":         fields,
+        "magic":          magic,
         "status_effects": [],
         "notes":          "",
         # v3.1.0 narrative and inventory blocks

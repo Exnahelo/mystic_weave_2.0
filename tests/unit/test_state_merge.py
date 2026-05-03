@@ -8,21 +8,46 @@ from api.routes.state import _deep_merge, apply_delta
 def test_deep_merge_preserves_unsent_fields_and_recurses() -> None:
     base = {
         "hp": {"current": 90, "max": 100},
-        "knowledge": {"discipline": 2, "courage": 1},
+        "knowledge": {
+            "discipline": {"tier": 2, "applications": {"focus": 1}},
+            "courage": {"tier": 1, "applications": {}},
+        },
         "notes": "existing",
     }
     incoming = {
         "hp": {"current": 80},
-        "knowledge": {"discipline": 3},
+        "knowledge": {"discipline": {"tier": 3}},
     }
 
     merged = _deep_merge(base, incoming)
 
     assert merged["hp"]["current"] == 80
     assert merged["hp"]["max"] == 100
-    assert merged["knowledge"]["discipline"] == 3
-    assert merged["knowledge"]["courage"] == 1
+    assert merged["knowledge"]["discipline"]["tier"] == 3
+    # Nested applications under discipline are preserved through partial update
+    assert merged["knowledge"]["discipline"]["applications"] == {"focus": 1}
+    assert merged["knowledge"]["courage"]["tier"] == 1
     assert merged["notes"] == "existing"
+
+
+@pytest.mark.unit
+def test_deep_merge_recurses_into_application_leaves() -> None:
+    """Deep-merge updates a single nested application without replacing siblings."""
+    base = {
+        "knowledge": {
+            "tracking": {
+                "tier": 2,
+                "applications": {"spoor_reading": 1, "quarry_habits": 2},
+            }
+        }
+    }
+    incoming = {"knowledge": {"tracking": {"applications": {"spoor_reading": 2}}}}
+    merged = _deep_merge(base, incoming)
+    assert merged["knowledge"]["tracking"]["tier"] == 2
+    assert merged["knowledge"]["tracking"]["applications"] == {
+        "spoor_reading": 2,
+        "quarry_habits": 2,
+    }
 
 
 @pytest.mark.unit
@@ -53,9 +78,11 @@ def _current_state() -> dict:
                 "will": 38,
                 "presence": 28,
             },
-            "knowledge": {"discipline": 2},
-            "application": {"melee": 2},
-            "fields": {"sacred": 1},
+            "knowledge": {
+                "discipline": {"tier": 2, "applications": {}},
+                "martial_arts": {"tier": 2, "applications": {"melee": 2}},
+            },
+            "magic": {"sacred": {"tier": 1, "spells": {}}},
             "status_effects": ["bruised"],
             "notes": "existing",
             "equipment": {
@@ -85,14 +112,17 @@ def test_apply_delta_correctly_merges_character_fields() -> None:
     current = _current_state()
     delta = ApplyStateDeltaRequest.model_validate(
         {
-            "character": {"hp": {"current": 75, "max": 100}, "knowledge": {"discipline": 3}},
+            "character": {
+                "hp": {"current": 75, "max": 100},
+                "knowledge": {"discipline": {"tier": 3}},
+            },
             "log_entry": "took a hit",
         }
     )
     applied = apply_delta(current, delta)
     assert applied["character"]["hp"]["current"] == 75
     assert applied["character"]["hp"]["max"] == 100
-    assert applied["character"]["knowledge"]["discipline"] == 3
+    assert applied["character"]["knowledge"]["discipline"]["tier"] == 3
     assert applied["character"]["notes"] == "existing"
 
 

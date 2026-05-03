@@ -18,34 +18,90 @@ def test_apply_state_delta_accepts_partial_character_only() -> None:
 
 
 @pytest.mark.unit
-def test_apply_state_delta_accepts_fields_dict() -> None:
+def test_apply_state_delta_accepts_magic_dict() -> None:
     body = ApplyStateDeltaRequest.model_validate(
         {
-            "character": {"fields": {"sacred": 2, "warding": 1}},
+            "character": {
+                "magic": {
+                    "sacred": {"tier": 2},
+                    "warding": {"tier": 1, "spells": {"alarm_sigil": 1}},
+                }
+            },
             "log_entry": "delta",
         }
     )
-    assert body.character.fields == {"sacred": 2, "warding": 1}
+    assert body.character.magic["sacred"].tier == 2
+    assert body.character.magic["warding"].spells == {"alarm_sigil": 1}
+
+
+@pytest.mark.unit
+def test_apply_state_delta_accepts_partial_knowledge_without_tier() -> None:
+    """A delta can advance applications without restating the parent tier."""
+    body = ApplyStateDeltaRequest.model_validate(
+        {
+            "character": {"knowledge": {"tracking": {"applications": {"spoor_reading": 3}}}},
+            "log_entry": "advance child only",
+        }
+    )
+    assert body.character.knowledge["tracking"].tier is None
+    assert body.character.knowledge["tracking"].applications == {"spoor_reading": 3}
+
+
+@pytest.mark.unit
+def test_apply_state_delta_rejects_legacy_application_field() -> None:
+    """v4 flat `application` field is no longer accepted on the delta."""
+    with pytest.raises(ValidationError):
+        ApplyStateDeltaRequest.model_validate(
+            {"character": {"application": {"tracking": 1}}, "log_entry": "legacy"}
+        )
+
+
+@pytest.mark.unit
+def test_apply_state_delta_rejects_legacy_fields_field() -> None:
+    """v4 flat `fields` field is no longer accepted on the delta."""
+    with pytest.raises(ValidationError):
+        ApplyStateDeltaRequest.model_validate(
+            {"character": {"fields": {"sacred": 1}}, "log_entry": "legacy"}
+        )
 
 
 @pytest.mark.unit
 def test_apply_state_delta_rejects_tag_tiers_outside_one_to_five() -> None:
-    for tag_block in ("knowledge", "application", "fields"):
-        with pytest.raises(ValidationError):
-            ApplyStateDeltaRequest.model_validate(
-                {
-                    "character": {tag_block: {"tracking": 0}},
-                    "log_entry": "bad tag tier",
-                }
-            )
+    # Knowledge group tier out of range
+    with pytest.raises(ValidationError):
+        ApplyStateDeltaRequest.model_validate(
+            {
+                "character": {"knowledge": {"tracking": {"tier": 0, "applications": {}}}},
+                "log_entry": "bad tag tier",
+            }
+        )
+    with pytest.raises(ValidationError):
+        ApplyStateDeltaRequest.model_validate(
+            {
+                "character": {"knowledge": {"tracking": {"tier": 6, "applications": {}}}},
+                "log_entry": "bad tag tier",
+            }
+        )
 
-        with pytest.raises(ValidationError):
-            ApplyStateDeltaRequest.model_validate(
-                {
-                    "character": {tag_block: {"tracking": 6}},
-                    "log_entry": "bad tag tier",
-                }
-            )
+    # Application tier out of range
+    with pytest.raises(ValidationError):
+        ApplyStateDeltaRequest.model_validate(
+            {
+                "character": {
+                    "knowledge": {"tracking": {"tier": 3, "applications": {"spoor_reading": 0}}}
+                },
+                "log_entry": "bad tag tier",
+            }
+        )
+
+    # Magic field tier out of range
+    with pytest.raises(ValidationError):
+        ApplyStateDeltaRequest.model_validate(
+            {
+                "character": {"magic": {"sacred": {"tier": 6}}},
+                "log_entry": "bad tag tier",
+            }
+        )
 
 
 @pytest.mark.unit
@@ -68,13 +124,24 @@ def test_character_model_rejects_tag_tiers_outside_one_to_five() -> None:
         },
     }
 
-    CharacterModel.model_validate({**base_character, "knowledge": {"wilderness": 5}})
+    CharacterModel.model_validate(
+        {**base_character, "knowledge": {"wilderness": {"tier": 5, "applications": {}}}}
+    )
 
     with pytest.raises(ValidationError):
-        CharacterModel.model_validate({**base_character, "knowledge": {"wilderness": 0}})
+        CharacterModel.model_validate(
+            {**base_character, "knowledge": {"wilderness": {"tier": 0, "applications": {}}}}
+        )
 
     with pytest.raises(ValidationError):
-        CharacterModel.model_validate({**base_character, "application": {"tracking": 6}})
+        CharacterModel.model_validate(
+            {
+                **base_character,
+                "knowledge": {
+                    "tracking": {"tier": 3, "applications": {"spoor_reading": 6}}
+                },
+            }
+        )
 
 
 @pytest.mark.unit

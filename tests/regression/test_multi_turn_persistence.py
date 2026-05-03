@@ -104,8 +104,11 @@ def _base_character() -> dict:
             "will": 47,
             "presence": 55,
         },
-        "knowledge": {"discipline": 2, "courage": 1},
-        "application": {"sacred_rites": 1, "shields_armor": 1},
+        "knowledge": {
+            "discipline": {"tier": 2, "applications": {"sacred_rites": 1}},
+            "courage": {"tier": 1, "applications": {"shields_armor": 1}},
+        },
+        "magic": {},
         "status_effects": [],
         "notes": "",
         "identity": {
@@ -405,7 +408,7 @@ def test_delta_save_updates_coin_without_overwriting_other_economy_fields() -> N
 
 
 @pytest.mark.regression
-def test_full_save_partial_payload_preserves_knowledge_and_application() -> None:
+def test_full_save_partial_payload_preserves_knowledge_and_magic() -> None:
     session_id = "fullsave1"
     base_character = _base_character()
     base_world = _base_world()
@@ -434,7 +437,7 @@ def test_full_save_partial_payload_preserves_knowledge_and_application() -> None
     assert body["character"]["hp"]["current"] == 88
     assert body["character"]["notes"] == "Partial full-save update."
     assert body["character"]["knowledge"] == base_character["knowledge"]
-    assert body["character"]["application"] == base_character["application"]
+    assert body["character"]["magic"] == base_character["magic"]
     assert body["world"]["turn"] == 2
     assert body["world"]["threat"] == "medium"
     assert body["world"]["goal"] == base_world["goal"]

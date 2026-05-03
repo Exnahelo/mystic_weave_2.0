@@ -102,8 +102,7 @@ def _character() -> dict:
             "presence": 55,
         },
         "knowledge": {},
-        "application": {},
-        "fields": {},
+        "magic": {},
         "status_effects": [],
         "notes": "",
         "identity": {
@@ -162,12 +161,12 @@ def _world(turn: int = 1, time_of_day: str = "morning") -> dict:
 @pytest.mark.contract
 def test_save_full_state_tag_advance_increments_counter() -> None:
     character = _character()
-    character["knowledge"]["athletics"] = 1
+    character["knowledge"]["athletics"] = {"tier": 1, "applications": {}}
     conn = StateRouteConn("sess1", character, _world(turn=1, time_of_day="morning"))
     app = _make_app(FakePool(conn))
 
     incoming_character = _character()
-    incoming_character["knowledge"]["athletics"] = 2
+    incoming_character["knowledge"]["athletics"] = {"tier": 2, "applications": {}}
 
     with TestClient(app) as client:
         response = client.post(
@@ -186,15 +185,15 @@ def test_save_full_state_tag_advance_increments_counter() -> None:
 
 @pytest.mark.contract
 def test_save_full_state_application_beyond_parent_returns_422() -> None:
+    """Parent-cap violations are caught at CharacterModel construction (v5 structural)."""
     character = _character()
-    character["knowledge"]["athletics"] = 1
-    character["application"]["hauling"] = 1
+    character["knowledge"]["athletics"] = {"tier": 1, "applications": {"hauling": 1}}
     conn = StateRouteConn("sess1", character, _world(turn=1, time_of_day="morning"))
     app = _make_app(FakePool(conn))
 
     incoming_character = _character()
-    incoming_character["knowledge"]["athletics"] = 1
-    incoming_character["application"]["hauling"] = 3
+    # Application 'hauling' at tier 3 with parent group 'athletics' at tier 1 — invalid.
+    incoming_character["knowledge"]["athletics"] = {"tier": 1, "applications": {"hauling": 3}}
 
     with TestClient(app) as client:
         response = client.post(
@@ -207,8 +206,6 @@ def test_save_full_state_application_beyond_parent_returns_422() -> None:
         )
 
     assert response.status_code == 422
-    body = response.json()
-    assert body["detail"]["message"] == "parent-cap violation"
 
 @pytest.mark.contract
 def test_save_state_rejects_invalid_time_elapsed() -> None:

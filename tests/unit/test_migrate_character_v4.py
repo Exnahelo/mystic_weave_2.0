@@ -107,8 +107,8 @@ def test_migrate_character_document_validates_output() -> None:
             "will": 45,
             "presence": 50,
         },
-        "knowledge": {"discipline": 2},
-        "application": {"sacred_rites": 1},
+        "knowledge": {"athletics": 2},
+        "application": {"hauling": 1},
         "status_effects": [],
         "notes": "",
         "identity": {},
@@ -124,6 +124,11 @@ def test_migrate_character_document_validates_output() -> None:
     assert validated.ancestry == "drakari"
     assert validated.culture == DEFAULT_CULTURE
     assert migrated["ancestry"] == validated.ancestry
+    # Document migration chains through the v5 transform; flat shape is gone.
+    assert "application" not in migrated
+    assert "fields" not in migrated
+    assert validated.knowledge["athletics"].tier == 2
+    assert validated.knowledge["athletics"].applications["hauling"] == 1
 
 
 @pytest.mark.unit

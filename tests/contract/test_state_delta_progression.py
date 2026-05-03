@@ -84,9 +84,8 @@ def _character() -> dict:
         "background": "soldier",
         "hp": {"current": 100, "max": 100},
         "domains": {"power": 45, "agility": 35, "perception": 35, "endurance": 43, "intellect": 25, "will": 47, "presence": 55},
-        "knowledge": {"athletics": 1},
-        "application": {"hauling": 1},
-        "fields": {},
+        "knowledge": {"athletics": {"tier": 1, "applications": {"hauling": 1}}},
+        "magic": {},
         "status_effects": [],
         "notes": "",
         "identity": {"origin": "", "motivations": [], "quirks": [], "bonds": [], "flaws": [], "wound": "", "alignment": {"order": "neutral", "intent": "neutral", "ethos_note": ""}},
@@ -118,7 +117,10 @@ def test_state_delta_tag_advance_increments_counter() -> None:
     with TestClient(app) as client:
         response = client.post(
             "/state/sess1/delta",
-            json={"character": {"knowledge": {"athletics": 2}}, "log_entry": "advance"},
+            json={
+                "character": {"knowledge": {"athletics": {"tier": 2}}},
+                "log_entry": "advance",
+            },
         )
     assert response.status_code == 200
     payload = response.json()
@@ -130,9 +132,27 @@ def test_state_delta_three_advances_convert_to_earned_ap() -> None:
     conn = DeltaConn(_character(), _world())
     app = _make_app(FakePool(conn))
     with TestClient(app) as client:
-        client.post("/state/sess1/delta", json={"character": {"knowledge": {"athletics": 2}}, "log_entry": "advance1"})
-        client.post("/state/sess1/delta", json={"character": {"application": {"hauling": 2}}, "log_entry": "advance2"})
-        client.post("/state/sess1/delta", json={"character": {"knowledge": {"athletics": 3}}, "log_entry": "advance3"})
+        client.post(
+            "/state/sess1/delta",
+            json={
+                "character": {"knowledge": {"athletics": {"tier": 2}}},
+                "log_entry": "advance1",
+            },
+        )
+        client.post(
+            "/state/sess1/delta",
+            json={
+                "character": {"knowledge": {"athletics": {"applications": {"hauling": 2}}}},
+                "log_entry": "advance2",
+            },
+        )
+        client.post(
+            "/state/sess1/delta",
+            json={
+                "character": {"knowledge": {"athletics": {"tier": 3}}},
+                "log_entry": "advance3",
+            },
+        )
         response = client.get("/state/sess1")
     assert response.status_code == 200
     payload = response.json()
@@ -142,28 +162,17 @@ def test_state_delta_three_advances_convert_to_earned_ap() -> None:
 
 @pytest.mark.contract
 def test_state_delta_application_beyond_parent_returns_422() -> None:
+    """Parent-cap is enforced at CharacterModel construction (v5 structural)."""
     character = _character()
-    character["knowledge"]["athletics"] = 1
-    character["application"]["hauling"] = 1
+    character["knowledge"]["athletics"] = {"tier": 1, "applications": {"hauling": 1}}
     app = _make_app(FakePool(DeltaConn(character, _world())))
     with TestClient(app) as client:
         response = client.post(
             "/state/sess1/delta",
-            json={"character": {"application": {"hauling": 2}}, "log_entry": "bad advance"},
-        )
-    assert response.status_code == 422
-
-
-@pytest.mark.contract
-def test_state_delta_seeded_above_application_cannot_advance_further() -> None:
-    character = _character()
-    character["knowledge"]["athletics"] = 1
-    character["application"]["hauling"] = 2
-    app = _make_app(FakePool(DeltaConn(character, _world())))
-    with TestClient(app) as client:
-        response = client.post(
-            "/state/sess1/delta",
-            json={"character": {"application": {"hauling": 3}}, "log_entry": "bad seeded advance"},
+            json={
+                "character": {"knowledge": {"athletics": {"applications": {"hauling": 2}}}},
+                "log_entry": "bad advance",
+            },
         )
     assert response.status_code == 422
 

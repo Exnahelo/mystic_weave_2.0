@@ -141,8 +141,8 @@ def _build_valid_character() -> dict:
             "will": 47,
             "presence": 55,
         },
-        "knowledge": {"discipline": 2},
-        "application": {"sacred_rites": 1},
+        "knowledge": {"discipline": {"tier": 2, "applications": {"sacred_rites": 1}}},
+        "magic": {},
         "status_effects": [],
         "notes": "",
         "identity": {

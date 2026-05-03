@@ -30,7 +30,7 @@ This document is the authoritative, step-by-step reference for character creatio
 
 1. Present the focus archetype list from `GET /options` with descriptions and starting tags.
 2. Player chooses a focus. Any ancestry can choose any focus.
-3. Magical fields are valid field-tag choices and use the same tier math/progression rules as knowledge groups. Canonical fields: `Sacred`, `Warding`, `Binding`, `Elemental`, `Druidry`, `Illusion`, `Runecraft`, `Alchemy`, `Necromancy`. Field knowledge tiers are gated by the field's primary domain score — see `prompts/magic-rules.md`.
+3. Magical fields use the same tier math/progression rules as knowledge groups. Canonical fields: `Sacred`, `Warding`, `Binding`, `Elemental`, `Druidry`, `Illusion`, `Runecraft`, `Alchemy`, `Necromancy`. Each field is recorded on the character with its tier and a `spells` map; per-character spell mastery is capped by the field's tier (parent-cap rule, structural). Field knowledge tiers are gated by the field's primary domain score — see `prompts/magic-rules.md`.
 4. If ancestry is drakari, confirm the inherited magical field and the two T1 spells were established at Stage 1 step 5. Drakari magical inheritance is fixed at creation; it is not deferred to play.
 
 ### Stage 5 — Adjustment Points
@@ -198,9 +198,9 @@ If the player asks how progression works after creation, explain briefly:
 When multiple layers grant the same tag, the tag advances by +1 tier per additional source, up to Tier 5.
 
 Characters gain:
-- **knowledge groups** for broad competency
-- **applications** for specific trained expression
-- **field tags** for magical field access
+- **knowledge groups** for broad competency. Each group's record holds its tier and a nested `applications` map.
+- **applications** for specific trained expression. Each application's tier is capped by its parent group's tier.
+- **magic fields** for magical field access. Each field's record holds its tier and a nested `spells` map. Per-character spell mastery is capped by the parent field's tier.
 
 For a normal non-spell roll, use **one knowledge group tier + one application tier**. Do not stack multiple groups or multiple applications into the same roll.
 

@@ -20,7 +20,6 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import ValidationError
 
 from api.database import get_pool
-from api.game_data import validate_application_parent_cap
 from api.models import (
     AdvancementState,
     ApplyStateDeltaRequest,
@@ -97,10 +96,11 @@ def _normalize_character_state(payload: dict[str, Any]) -> dict[str, Any]:
     normalized = dict(payload)
     if not isinstance(normalized.get("knowledge"), dict):
         normalized["knowledge"] = {}
-    if not isinstance(normalized.get("application"), dict):
-        normalized["application"] = {}
-    if not isinstance(normalized.get("fields"), dict):
-        normalized["fields"] = {}
+    if not isinstance(normalized.get("magic"), dict):
+        normalized["magic"] = {}
+    # Strip legacy v4 flat fields if a stale payload still carries them.
+    normalized.pop("application", None)
+    normalized.pop("fields", None)
     advancement = normalized.get("advancement")
     if not isinstance(advancement, dict):
         normalized["advancement"] = AdvancementState().model_dump()
@@ -132,6 +132,9 @@ def _apply_tag_advancement_counters(
     advance increments the single tag_counter. Every 3 advances rolls over
     to +1 in points_available (counter resets to 0).
 
+    Walks the v5 nested shape: knowledge groups carry their applications,
+    magic fields carry their spells. Group/field tier advances and child
+    (application/spell) tier advances both contribute one advance per tier.
     Non-canonical tags are skipped defensively.
 
     Caller is responsible for merging the returned advancement dict back
@@ -146,23 +149,67 @@ def _apply_tag_advancement_counters(
 
     advances = 0
 
-    for tag_kind in ("knowledge", "application", "fields"):
-        delta_block = delta_character.get(tag_kind) or {}
-        existing_block = existing_character.get(tag_kind) or {}
-        if not isinstance(delta_block, dict) or not isinstance(existing_block, dict):
-            continue
+    # --- Knowledge groups + their nested applications ---
+    delta_knowledge = delta_character.get("knowledge") or {}
+    existing_knowledge = existing_character.get("knowledge") or {}
+    if isinstance(delta_knowledge, dict) and isinstance(existing_knowledge, dict):
+        for group_name, group_block in delta_knowledge.items():
+            if not isinstance(group_block, dict):
+                continue
+            existing_group = existing_knowledge.get(group_name) or {}
+            existing_group = existing_group if isinstance(existing_group, dict) else {}
 
-        kind_for_lookup = "field" if tag_kind == "fields" else tag_kind
+            new_group_tier = group_block.get("tier")
+            if isinstance(new_group_tier, int):
+                old_group_tier = existing_group.get("tier", 0) or 0
+                if new_group_tier > old_group_tier:
+                    if get_tag_primary_domain(group_name, "knowledge") is not None:
+                        advances += new_group_tier - old_group_tier
 
-        for tag_index, new_tier in delta_block.items():
-            if not isinstance(new_tier, int):
+            delta_apps = group_block.get("applications") or {}
+            existing_apps = existing_group.get("applications") or {}
+            if isinstance(delta_apps, dict):
+                for app, new_app_tier in delta_apps.items():
+                    if not isinstance(new_app_tier, int):
+                        continue
+                    old_app_tier = existing_apps.get(app, 0) if isinstance(existing_apps, dict) else 0
+                    old_app_tier = old_app_tier or 0
+                    if new_app_tier <= old_app_tier:
+                        continue
+                    if get_tag_primary_domain(app, "application") is None:
+                        continue
+                    advances += new_app_tier - old_app_tier
+
+    # --- Magic fields + their nested spells ---
+    delta_magic = delta_character.get("magic") or {}
+    existing_magic = existing_character.get("magic") or {}
+    if isinstance(delta_magic, dict) and isinstance(existing_magic, dict):
+        for field_name, field_block in delta_magic.items():
+            if not isinstance(field_block, dict):
                 continue
-            old_tier = existing_block.get(tag_index, 0) or 0
-            if new_tier <= old_tier:
-                continue
-            if get_tag_primary_domain(tag_index, kind_for_lookup) is None:
-                continue
-            advances += new_tier - old_tier
+            existing_field = existing_magic.get(field_name) or {}
+            existing_field = existing_field if isinstance(existing_field, dict) else {}
+
+            new_field_tier = field_block.get("tier")
+            if isinstance(new_field_tier, int):
+                old_field_tier = existing_field.get("tier", 0) or 0
+                if new_field_tier > old_field_tier:
+                    if get_tag_primary_domain(field_name, "field") is not None:
+                        advances += new_field_tier - old_field_tier
+
+            delta_spells = field_block.get("spells") or {}
+            existing_spells = existing_field.get("spells") or {}
+            if isinstance(delta_spells, dict):
+                for spell, new_spell_tier in delta_spells.items():
+                    if not isinstance(new_spell_tier, int):
+                        continue
+                    old_spell_tier = existing_spells.get(spell, 0) if isinstance(existing_spells, dict) else 0
+                    old_spell_tier = old_spell_tier or 0
+                    if new_spell_tier <= old_spell_tier:
+                        continue
+                    if get_tag_primary_domain(spell, "spell") is None:
+                        continue
+                    advances += new_spell_tier - old_spell_tier
 
     counter += advances
     while counter >= 3:
@@ -190,24 +237,15 @@ def _apply_advancement_and_validate_caps(
     incoming_character: dict[str, Any],
 ) -> dict[str, Any]:
     """
-    Run the shared advancement-counter update and parent-cap validation
-    used by both /state/{session_id} (full save) and /state/{session_id}/delta.
+    Run the shared advancement-counter update used by both
+    /state/{session_id} (full save) and /state/{session_id}/delta.
 
-    `incoming_character` is treated as a delta-shaped dict: only fields present
-    contribute to counter increments. Returns the updated advancement dict.
-    Raises HTTPException(422) on parent-cap violation.
+    Parent-cap enforcement is structural in v5: KnowledgeGroupRecord and
+    MagicFieldRecord raise at model construction if a child tier exceeds
+    its parent. The wrapper remains for symmetry and to keep the call site
+    in `apply_delta` legible.
     """
-    new_advancement = _apply_tag_advancement_counters(existing_character, incoming_character)
-    application_block = incoming_character.get("application")
-    if isinstance(application_block, dict) and application_block:
-        try:
-            validate_application_parent_cap(existing_character, application_block)
-        except ValueError as exc:
-            raise HTTPException(
-                status_code=422,
-                detail={"message": "parent-cap violation", "error": str(exc)},
-            )
-    return new_advancement
+    return _apply_tag_advancement_counters(existing_character, incoming_character)
 
 
 def _normalize_world_state(payload: dict[str, Any]) -> dict[str, Any]:

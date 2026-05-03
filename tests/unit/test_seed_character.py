@@ -20,10 +20,12 @@ def test_seed_character_applies_adjustments_and_tags() -> None:
     assert character["domains"]["will"] == 56
     assert character["domains"]["endurance"] == 48
     assert character["domains"]["presence"] == 54
-    assert character["knowledge"]["discipline"] == 2
+    assert character["knowledge"]["discipline"]["tier"] == 2
     # Drakari ancestry no longer grants application tags via traits
     # (Magical Inheritance is a creation-time choice, not a fixed grant)
-    assert "dragon_breath" not in character["application"]
+    assert "application" not in character
+    for group in character["knowledge"].values():
+        assert "dragon_breath" not in group["applications"]
 
 
 @pytest.mark.unit
@@ -36,7 +38,9 @@ def test_seed_character_populates_stacked_fields() -> None:
         background_index="acolyte",
     )
 
-    assert character["fields"]["sacred"] == 3
+    assert character["magic"]["sacred"]["tier"] == 3
+    assert character["magic"]["sacred"]["spells"] == {}
+    assert "fields" not in character
 
 
 @pytest.mark.unit
@@ -96,3 +100,34 @@ def test_seed_character_uses_new_advancement_shape() -> None:
         "points_earned_total",
         "tag_counter",
     }
+
+
+@pytest.mark.unit
+def test_seed_character_produces_nested_knowledge() -> None:
+    """v5 shape: knowledge is dict[group, {tier, applications}]; no flat application/fields."""
+    from api.models import CharacterModel
+
+    character = seed_character(
+        name="Sylvara",
+        ancestry_index="drakari",
+        culture_index="drakenvale_city",
+        focus_index="stalker",
+        background_index="outlander",
+    )
+
+    assert "application" not in character
+    assert "fields" not in character
+    assert isinstance(character["knowledge"], dict)
+    assert isinstance(character["magic"], dict)
+
+    for group_name, group_block in character["knowledge"].items():
+        assert isinstance(group_block, dict)
+        assert "tier" in group_block
+        assert "applications" in group_block
+        for app_tier in group_block["applications"].values():
+            assert app_tier <= group_block["tier"], (
+                f"application under {group_name} exceeds parent tier"
+            )
+
+    # Round-trips through CharacterModel — proves the seeded shape is valid v5.
+    CharacterModel.model_validate(character)

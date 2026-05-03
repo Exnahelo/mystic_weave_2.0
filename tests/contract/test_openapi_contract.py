@@ -215,44 +215,36 @@ def test_openapi_contract_has_state_delta_schema_components() -> None:
 
 
 @pytest.mark.contract
-def test_openapi_contract_character_delta_includes_fields_dict() -> None:
+def test_openapi_contract_character_delta_includes_magic_dict() -> None:
+    """v5: CharacterStateDelta carries `magic` (replaces flat `fields`)."""
     spec = app.openapi()
     properties = spec["components"]["schemas"]["CharacterStateDelta"]["properties"]
 
-    assert "fields" in properties
-    fields_schema = properties["fields"]
-    assert "anyOf" in fields_schema
-    object_variant = next(option for option in fields_schema["anyOf"] if option.get("type") == "object")
-    assert object_variant["additionalProperties"]["type"] == "integer"
+    assert "magic" in properties
+    assert "fields" not in properties
+    assert "application" not in properties
+
+    magic_schema = properties["magic"]
+    assert "anyOf" in magic_schema
 
 
 @pytest.mark.contract
-def test_openapi_contract_tag_tier_maps_are_constrained_to_one_through_five() -> None:
+def test_openapi_contract_nested_records_carry_tier_constraints() -> None:
+    """KnowledgeGroupRecord and MagicFieldRecord enforce tier in [1,5]."""
     spec = app.openapi()
     schemas = spec["components"]["schemas"]
 
-    if "CharacterModel" in schemas:
-        character_properties = schemas["CharacterModel"]["properties"]
-    elif "CharacterModel-Input" in schemas:
-        character_properties = schemas["CharacterModel-Input"]["properties"]
-    else:
-        raise AssertionError(
-            "Neither 'CharacterModel' nor 'CharacterModel-Input' found in OpenAPI schemas. "
-            f"Available keys: {sorted(schemas.keys())}"
-        )
-    delta_properties = schemas["CharacterStateDelta"]["properties"]
+    knowledge_schema = schemas.get("KnowledgeGroupRecord")
+    assert knowledge_schema is not None, "KnowledgeGroupRecord must appear in the OpenAPI spec"
+    knowledge_tier = knowledge_schema["properties"]["tier"]
+    assert knowledge_tier["minimum"] == 1
+    assert knowledge_tier["maximum"] == 5
 
-    for property_name in ("knowledge", "application", "fields"):
-        tag_map_schema = character_properties[property_name]
-        assert tag_map_schema["additionalProperties"]["minimum"] == 1
-        assert tag_map_schema["additionalProperties"]["maximum"] == 5
-
-        nullable_tag_map_schema = delta_properties[property_name]
-        object_variant = next(
-            option for option in nullable_tag_map_schema["anyOf"] if option.get("type") == "object"
-        )
-        assert object_variant["additionalProperties"]["minimum"] == 1
-        assert object_variant["additionalProperties"]["maximum"] == 5
+    magic_schema = schemas.get("MagicFieldRecord")
+    assert magic_schema is not None, "MagicFieldRecord must appear in the OpenAPI spec"
+    magic_tier = magic_schema["properties"]["tier"]
+    assert magic_tier["minimum"] == 1
+    assert magic_tier["maximum"] == 5
 
 
 @pytest.mark.contract

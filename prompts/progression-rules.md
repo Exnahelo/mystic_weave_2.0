@@ -70,11 +70,9 @@ Magical fields advance under the same trigger structure as knowledge groups, app
 
 ### Parent-cap rule
 
-An application tag may not exceed the tier of its parent knowledge group.
+An application tag may not exceed the tier of its parent knowledge group, and a spell mastery tier may not exceed the tier of its parent magical field. Both caps are structural in v5: the character record nests applications under their group and spells under their field, and any record where a child tier exceeds its parent fails validation.
 
-Exception: if an application was seeded above its parent at character creation (for example, a Focus granted the application at T2 while the parent knowledge is T1), the application does not regress, but cannot advance further until the parent catches up.
-
-The backend enforces this rule at write time. The GPT verifies the cap at adjudication time and either advances the parent first if the scene supports that, or selects a different candidate.
+The backend enforces this rule at model construction time, so any save or delta that would push a child above its parent rejects with a 422 before persisting. The GPT verifies the cap at adjudication time and either advances the parent first if the scene supports that, or selects a different candidate.
 
 ---
 
@@ -178,8 +176,8 @@ When a scene resolves:
 
 The backend handles:
 
-- tag-counter increment and rollover to AP
-- parent-cap enforcement on application tier writes
+- tag-counter increment and rollover to AP (group and child tier advances both count)
+- parent-cap enforcement on application and spell tier writes (structural, at model construction)
 - domain bracket cost math on AP spend
 
 The GPT does not compute these. It announces what triggered, asks any required player choices, and submits the resolved reward package.

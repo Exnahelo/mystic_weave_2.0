@@ -211,7 +211,7 @@ Knowledge groups are the broad competency layer. Tiers 1–5, each tier adds +1 
 
 ### Applications (specific trained execution)
 
-Applications sit under a parent knowledge group. Tiers 1–5, each tier adds +1 to target number. Use one relevant group tier + one relevant application tier for a normal non-spell roll.
+Applications sit under a parent knowledge group, recorded as a `applications` map nested inside the group's record on the character. Tiers 1–5, each tier adds +1 to target number. The application's tier is structurally capped by the parent group's tier (parent-cap rule, enforced at model construction). Use one relevant group tier + one relevant application tier for a normal non-spell roll.
 
 Examples:
 - **Athletics** → hauling, climbing, swimming, forced_movement, grappling
@@ -223,7 +223,7 @@ Applications do not replace groups; they narrow how the character expresses that
 
 ### Magical Fields
 
-Magical fields are parallel to knowledge groups and follow the same tier math (+1 per tier), but they additionally gate spell access.
+Magical fields are parallel to knowledge groups and follow the same tier math (+1 per tier), but they additionally gate spell access. Each field's record on the character holds its tier and a nested `spells` map; per-character spell mastery is structurally capped by the field's tier — the same parent-cap mechanic as knowledge groups and applications.
 Canonical full specification: `prompts/magic-rules.md`.
 
 | Field | Primary Domain | Governs |
