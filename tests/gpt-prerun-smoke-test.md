@@ -17,8 +17,12 @@ Smoke test. Step out of narrator role. No fiction, no in-character framing. Run 
 
 For each call, report:
 - Endpoint and operationId
-- Status code and key response fields (or status + error body if failed)
+- Whether the call succeeded (2xx response with expected fields) or failed
+- For successes: the key response fields verifying the criterion
+- For failures: the response body or error fragment you received
 - PASS or FAIL based on the criteria stated for that step
+
+NOTE on negative tests: the OpenAI Actions wrapper does not always surface HTTP status codes. For negative tests, PASS means a non-success response with an error message containing the expected fragment. Do not fail a negative test solely because the status code wasn't visible — match on the error message content instead.
 
 If any call fails, do not stop the test — note the failure and continue. The point is to exercise the whole surface and surface ALL broken endpoints in one run. The only exception: if Phase 1 (session setup) fails, stop — subsequent phases need a session_id.
 
@@ -32,52 +36,54 @@ PHASE 1 — SESSION SETUP
       "focus": "warden",
       "background": "outlander"
     }
-    PASS: 200, response includes a session_id (16-char hex).
+    PASS: 2xx, response includes a session_id (16-char hex).
     Record the session_id; use it for all subsequent calls.
 
 1.2 GET /state/{session_id}
-    PASS: 200, response includes character, world, log fields. Character name is "smoke_test_runner".
+    PASS: 2xx, response includes character, world, log fields. Character name is "smoke_test_runner".
 
 1.3 GET /options
-    PASS: 200, response includes ancestries, cultures, focuses, backgrounds.
+    PASS: 2xx, response includes ancestries, cultures, focuses, backgrounds keys.
 
 PHASE 2 — REFERENCE DATA
 
-2.1 GET /catalog/items
-    PASS: 200, response is non-empty list or paginated structure.
+2.1 GET /catalog/items?kind=mundane
+    PASS: 2xx, response is a structured catalog (bucketed by item type — mundane_items, etc.).
+    (Valid kind values: mundane, magical, apparel, weapon, armor, ammunition.)
 
-2.2 GET /catalog/items/{some_item_id} for an item from 2.1
-    PASS: 200, response includes the item details.
+2.2 GET /catalog/items/{some_item_id} for any item_id from 2.1's response
+    PASS: 2xx, response includes the item details.
 
-2.3 GET /registry/{name} — try "tags", "applications", or another known registry
-    PASS: 200 with populated result, OR clean 404 with structured error if name doesn't exist.
+2.3 GET /registry/ecology
+    PASS: 2xx, response is a registry entry. (The /registry endpoint is single-entry lookup, not enumeration.)
 
 2.4 GET /npcs
-    PASS: 200.
+    PASS: 2xx.
 
 PHASE 3 — WORLD/LOCATION
 
 3.1 GET /location/vaelmere
-    PASS: 200, response includes location data.
+    PASS: 2xx, response includes location data.
 
 3.2 GET /location/vaelmere/connections
-    PASS: 200, response includes connections list.
+    PASS: 2xx, response includes connections list.
 
 PHASE 4 — CORE GAMEPLAY LOOP
 
-4.1 POST /roll with {"sides": 20}
-    PASS: 200, response includes a roll result in [1, 20].
+4.1 POST /roll with {"target": 10, "reason": "smoke_test probe"}
+    PASS: 2xx, response includes fields: roll, target, success, margin, degree.
+    (The /roll endpoint resolves d100 rolls against a target. roll is in [1, 100], degree is one of the standard outcome bands.)
 
-4.2 POST /narrator/scene_resolved with this body:
+4.2 POST /narrator/scene_resolved with this body — sets a real location for later /scene tests:
     {
       "session_id": "<session_id>",
-      "scene_summary": "smoke_test: character surveys surroundings.",
+      "scene_summary": "smoke_test: character arrives at vaelmere.",
       "scene_actions": [],
-      "world_changes": {},
+      "world_changes": {"location": "vaelmere"},
       "character_changes": {},
       "time_elapsed": {"steps": 1}
     }
-    PASS: 200. state_after.world.time advanced by one band. changes_applied includes "scene_recorded" and "time_advanced".
+    PASS: 2xx. state_after.world.location == "vaelmere". changes_applied includes "scene_recorded", "world.location", and "time_advanced".
 
 4.3 POST /state/{session_id}/delta with this body:
     {
@@ -85,19 +91,26 @@ PHASE 4 — CORE GAMEPLAY LOOP
       "log_entry": {"type": "narrative_non_arc", "text": "smoke_test: pacing tension nudged"},
       "time_elapsed": {}
     }
-    PASS: 200. Response state shows world.pacing.tension == 4. Verify with a follow-up GET /state/{session_id} that this persisted.
+    PASS: 2xx. Response state shows world.pacing.tension == 4. Verify with a follow-up GET /state/{session_id} that this persisted.
 
 4.4 POST /state/{session_id}/annotation with:
-    {"category": "operational", "text": "smoke_test: annotation probe"}
-    PASS: 200. Verify the annotation appears in /state/{session_id} log.
+    {"annotation": "smoke_test: annotation probe", "category": "operational_constraint"}
+    PASS: 2xx.
+    (Body field is `annotation`, not `text`. Valid categories: canon_correction, operational_constraint, rule_clarification, narrator_correction.)
 
 4.5 GET /scene/{session_id}
-    PASS: 200, response includes recent_log without validation errors. (This endpoint had a known list[str] vs typed-log shape issue — flag if it returns 500 or a Pydantic validation error.)
+    PASS: 2xx, response includes location_summary, recent_log, relevant_character_state.
+    location_summary.id should be "vaelmere" (from 4.2).
+
+4.6 GET /scene on a fresh session — degraded location handling.
+    Create a SECOND session via POST /session/new (same body shape as 1.1, character_name "smoke_test_runner_2"). Immediately call GET /scene/{new_session_id} BEFORE setting any location.
+    PASS: 2xx. location_summary.id is "unknown" or location_summary.name indicates no location is set. Empty visible_entities and available_opportunities are expected.
+    (If this returns 404 with "current location not found: unknown", the /scene degradation fix has not landed — flag as FAIL.)
 
 PHASE 5 — ARCS
 
 5.1 GET /arc/{session_id}
-    PASS: 200, returns list (likely empty for a fresh session).
+    PASS: 2xx, returns list (likely empty for a fresh session).
 
 5.2 POST /arc/{session_id}/create with this minimal payload:
     {
@@ -108,70 +121,85 @@ PHASE 5 — ARCS
       "stake_scale": "local",
       "origin_type": "emergent"
     }
-    PASS: 200, response includes new arc with id and state.
-    Record the arc_id.
+    PASS: 2xx, response includes new arc with id and state.
+    Record the arc_id. The new arc starts in state "proposed".
 
 5.3 GET /arc/{session_id}/{arc_id}
-    PASS: 200, returns the arc.
+    PASS: 2xx, returns the arc.
 
 5.4 GET /arc/{session_id}/active
-    PASS: 200, includes the new arc.
+    PASS: 2xx. Note: a freshly-created arc is in state "proposed" and will NOT appear in /active until transitioned. Empty list here is expected at this point.
 
-5.5 POST /arc/{session_id}/{arc_id}/progress with a minimal progress event
-    (use the OpenAPI schema for the request body — typically a beat description and small envelope cost).
-    PASS: 200.
+5.5 POST /arc/{session_id}/{arc_id}/transition to move the arc to in_progress:
+    {"from_state": "proposed", "to_state": "in_progress", "reason": "smoke_test transition"}
+    PASS: 2xx, arc state becomes "in_progress".
 
-5.6 POST /arc/{session_id}/{arc_id}/transition with a valid state transition
-    (consult OpenAPI for valid target states from "in_progress").
-    PASS: 200.
+5.6 GET /arc/{session_id}/active again
+    PASS: 2xx, list now includes the arc.
 
-5.7 POST /arc/{session_id}/{arc_id}/settle with a valid settlement payload.
-    PASS: 200, arc state becomes "settled" or terminal equivalent.
+5.7 POST /arc/{session_id}/{arc_id}/progress
+    {"resolved_scene_occurred": true, "notes": "smoke_test progress"}
+    PASS: 2xx.
 
-5.8 POST /arc/{session_id}/{arc_id}/spawn — try spawning a child arc from the now-settled parent
-    OR from a separate active parent if 5.7 closed the only arc. (Skip with note if no eligible parent.)
-    PASS: 200 if attempted, with new child arc returned.
+5.8 POST /arc/{session_id}/{arc_id}/spawn — spawn a child arc:
+    {
+      "child_title": "smoke_test child arc",
+      "child_summary": "smoke_test child for spawn verification",
+      "child_primary_type": "task_local",
+      "child_subtype": "investigation",
+      "child_stake_scale": "local",
+      "ap_ownership": "child",
+      "reason": "smoke_test spawn"
+    }
+    PASS: 2xx, new child arc returned.
+
+5.9 POST /arc/{session_id}/{arc_id}/settle
+    {"outcome": "complete", "notes": "smoke_test settle"}
+    PASS: 2xx, parent arc state becomes "settled" or terminal equivalent.
 
 PHASE 6 — COMBAT
 
-6.1 POST /combat/compute_max_hp with the test character's identity
-    (use what you have from /state/{session_id}).
-    PASS: 200, response includes a numeric max_hp.
+6.1 POST /combat/compute_max_hp with a minimal valid payload:
+    {"armor_id": "studded-leather-feywood-ranger", "armor_tier": 1}
+    PASS: 2xx, response includes a numeric max_hp.
 
-6.2 POST /combat/resolve_attack with a minimal attacker/defender setup using the test character
-    (use any reasonable target — generic creature or NPC reference).
-    PASS: 200, response includes resolved attack outcome with hit/miss and damage if hit.
+6.2 POST /combat/resolve_attack with a minimal valid payload:
+    {"weapon_id": "moonthorn-hunting-knife", "weapon_tier": 1, "defender_is_unarmored": true}
+    PASS: 2xx, response includes resolved attack outcome (hit/miss, damage if hit).
 
 PHASE 7 — COMPANIONS
 
-7.1 POST /companion/new with a minimal companion payload tied to the test session.
-    PASS: 200, response includes companion_id.
-    Record the companion_id.
+7.1 POST /companion/new with a minimal payload. The companion sub-object schema is non-trivial; consult the OpenAPI schema for the `tier` chosen and construct accordingly. Suggested tier="creature" with a minimal valid companion object.
+    PASS: 2xx, response includes companion_id. Record the companion_id.
+    SKIP this step (and 7.2) with a clear reason if the companion sub-schema is too complex to construct without further investigation. Do NOT attempt with an invented or incomplete payload.
 
-7.2 POST /companion/{companion_id}/transition with a valid transition (consult OpenAPI for valid target states).
-    PASS: 200.
+7.2 POST /companion/{companion_id}/transition with a valid TransitionCompanionRequest payload (session_id, new_companion, trigger).
+    PASS: 2xx.
+    SKIPPED if 7.1 was skipped.
 
 PHASE 8 — NEGATIVE TESTS (error contracts)
 
-These verify that error paths return correct status codes and structured bodies. A negative test FAILS if the call unexpectedly succeeds (silent bug) or returns the wrong error shape.
+These verify that error paths return the correct error MESSAGES. PASS = non-success response with an error message containing the expected fragment. The wrapper may not surface status codes; match on message content.
+
+A negative test FAILS if the call unexpectedly succeeds (silent bug — a real problem) or returns an error message that doesn't match the expected validation.
 
 8.1 GET /state/intentionally_nonexistent_session_xyz
-    PASS: 404 with structured error body. FAIL if 200 (silent bug) or 500.
+    PASS: error response with "session not found" or equivalent. FAIL if 2xx (silent bug) or if error message is missing/unrelated.
 
 8.2 POST /state/{session_id}/delta with empty payload:
     {"character": {}, "world": {}, "time_elapsed": {}}
-    PASS: 422 with error indicating delta requires changes.
+    PASS: error response with message containing "must include at least one character or world change" (or close paraphrase).
 
 8.3 POST /state/{session_id}/delta with conflicting time_elapsed:
     {"world": {"pacing": {"tension": 5}}, "time_elapsed": {"until": "dawn", "steps": 3}}
-    PASS: 422 with error about until being mutually exclusive with steps/days.
+    PASS: error response with message about "until" being mutually exclusive with steps/days.
 
 8.4 POST /state/{session_id}/delta with empty log_entry text:
     {"world": {"pacing": {"tension": 5}}, "log_entry": {"type": "narrative_non_arc", "text": ""}, "time_elapsed": {}}
-    PASS: 422 with error about empty text (or schema rejection at the platform layer).
+    PASS: error response indicating empty/too-short text is invalid.
 
 8.5 POST /narrator/scene_resolved with a parent-cap violation:
-    The test character starts with all knowledge groups at tier 1 and applications at tier 1. Submit a scene_actions entry that would advance an application past parent. For example:
+    The test character starts with all knowledge groups at tier 1 and applications at tier 1. Submit:
     {
       "session_id": "<session_id>",
       "scene_summary": "smoke_test: parent-cap negative test",
@@ -180,27 +208,27 @@ These verify that error paths return correct status codes and structured bodies.
       "character_changes": {},
       "time_elapsed": {}
     }
-    PASS: 200. candidates_ranked shows etiquette with parent_cap_ok: false, eligible: false. The endpoint MUST NOT 500 — it should return the structured rejection.
+    PASS: 2xx response. candidates_ranked includes etiquette with parent_cap_ok: false, eligible: false. The endpoint MUST NOT return an error — it should return the structured rejection in candidates_ranked.
+    FAIL if 5xx (this is the bug we're guarding against), or if etiquette is marked eligible in candidates_ranked (silent parent-cap violation).
 
 FINAL REPORT
 
 After all phases, produce in this order:
 
 PHASE RESULTS TABLE
-- Per phase: PASS count / FAIL count / skipped count.
-- Each FAIL: which step, what failed, response status and body fragment.
+- Per phase: PASS count / FAIL count / SKIPPED count.
+- Each FAIL: which step, what failed, response body fragment.
 
 CRITICAL FAILURES (non-empty list, or "none")
-- Any 500.
-- Any unexpected error shape (missing body, non-JSON, malformed status).
-- Any negative test that incorrectly passed (false success — these are silent bugs).
-- Any contract drift: response shape differs from the OpenAPI schema you used.
+- Any 5xx confirmed in response.
+- Any negative test that incorrectly passed (false success — silent bug).
+- Any contract drift you found that's NOT already noted in the test (i.e., a response shape that didn't match what this test expected, beyond what the test description warned about).
 
 CONTRACT DRIFT INDICATORS
-- Per call where actual response shape differed from the OpenAPI schema: which call, which field, what was different.
+- Per call where actual response shape differed from this test's expectations: which call, which field, what was different. (This helps maintain the smoke test itself — if the schema has shifted, the test needs updating.)
 
 BOTTOM LINE
 - One sentence: did the system pass enough to start a real session?
 - One sentence: which phase, if any, blocks production play, and what would need fixing.
 
-Tone: clinical, specific, evidence-based. No retrospective polishing. If you couldn't complete a phase because a prior call failed, say so plainly — don't fabricate downstream data.
+Tone: clinical, specific, evidence-based. No retrospective polishing. If you couldn't complete a phase because a prior call failed, say so plainly — don't fabricate downstream data. If you couldn't construct a payload because the schema is too complex (e.g., 7.1 companion), mark SKIPPED with a clear reason rather than attempting and failing.
