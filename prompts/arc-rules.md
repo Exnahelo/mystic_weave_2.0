@@ -43,6 +43,43 @@ The narrator does not have discretion to skip the lifecycle calls.
 
 ---
 
+## Narrator Decision Procedure
+
+Run this procedure at every arc-shaped event, scope change, and closure. The GPT does not have discretion to skip steps.
+
+### When a higher-level objective enters play
+
+Before continuing narration, answer in writing (in the scene_summary or in your reasoning):
+
+1. Is this larger than one scene? If no — STOP. This is not an arc.
+2. Is there a patron? Name them or write "none."
+3. Is the explicit objective stated? Write it in one sentence or write "objective not yet explicit."
+4. Is the expected return named? Write what completion delivers, or write "return not yet explicit."
+5. If patron + objective + return are all explicit: `formal_contract_qualified: true`. This arc CAN earn AP.
+6. If any of the three is missing: `formal_contract_qualified: false`. This arc CANNOT earn AP. Set `ap_ownership: "none"`.
+7. Call `POST /arc/{session_id}/create` with the values from steps 2–6 explicit in the payload.
+8. Only after `/create` returns success: continue narration.
+
+### When scope changes during play
+
+After every resolved scene, check `arc_envelope_status` in the response. For each active arc:
+
+1. Did `phase_shift_candidate` fire? If yes, evaluate against Phase Change Indicators. If institutional phase has begun, spawn a formal child arc via `/spawn` before continuing.
+2. Did `hard_cap_reached` fire? If yes, transition to closure path immediately — do not narrate past hard cap.
+3. Did `soft_cap_approaching` fire? Plan closure within next 1–2 scenes.
+4. Did the principal patron, primary objective, or stake structure change materially? If yes, spawn rather than extending the parent.
+
+### When closing an arc
+
+1. Verify all closure conditions are satisfied (or all failure conditions for failure path).
+2. Call `/transition` to `ready_to_close` (or `failed`).
+3. Fill in the Settlement Enumeration Template (next section). Every channel gets a value, even if zero.
+4. Call `/settle` with the enumerated values.
+5. Only after `/settle` returns success: narrate the settled outcome.
+6. Do not collapse channels into "no further reward."
+
+---
+
 ## Backend Authority
 
 Arc envelope tracking — scenes used, locations visited, soft/hard cap conditions, phase-shift candidacy for emergent arcs — is computed by the backend and surfaced in `arc_envelope_status` on every scene-resolved response. The narrator does not count scenes, locations, or contributions manually. The orchestrator routes scene contributions to active arcs via `arc_progressed_ids`.
@@ -760,61 +797,6 @@ When `soft_cap_approaching` becomes true, the orchestrator emits a closure sugge
 ## Relationship to Pacing
 
 Scene compression still applies. Routine travel or repeated low-novelty actions should not become extra resolved scenes merely to fill arc budget. Arc budget is not a quota; it is a maximum scope envelope. Do not declare scene resolutions for filler; do not omit `arc_progressed_ids` for a genuinely advanced arc just because an envelope is near cap.
-
----
-
-## Narrator Checklist
-
-At the start of a higher-level objective:
-
-- Is this larger than one scene?
-- Is there a patron?
-- Is the objective explicit?
-- Is the expected return explicit?
-- Is the arc formal-contract-qualified?
-- What is the smallest honest primary type?
-- What subtype describes the fictional shape?
-- What closure conditions are known?
-- What failure conditions are known?
-- Call `/create`.
-
-After each resolved scene:
-
-- Did the scene advance an active arc? List every advanced arc in `arc_progressed_ids` on the orchestrator payload — backend records progress and updates envelope status automatically.
-- Read `arc_envelope_status` in the response: `hard_cap_reached` requires `/transition`; `phase_shift_candidate` requires evaluation against Phase Change Indicators and possibly `/spawn`; `soft_cap_approaching` is closure-time guidance.
-
-When scope changes:
-
-- Did location, faction, subtype, or stake structure change materially?
-- Can this branch succeed or fail independently?
-- Is it now a distinct operation?
-- Call `/spawn` if yes.
-
-At closure:
-
-- Are closure conditions satisfied?
-- Call `/transition` to `ready_to_close`.
-- Enumerate every reward channel.
-- Call `/settle`.
-- Narrate the backend-approved result.
-
----
-
-## When the Narrator Has No Choice
-
-These are mandatory procedures:
-
-- Arc-shaped event happens → call `/arc/{session_id}/create`
-- Resolved scene advances an active arc → call `/progress`
-- Arc state changes → call `/transition`
-- Arc closes or fails → call `/settle`
-- Arc scope changes meaningfully → call `/spawn`
-
-When in doubt, prefer creating a bounded arc over untracked mission drift.
-
-When scope expands, prefer spawning children over pushing one arc past its envelope.
-
-When reward settlement occurs, enumerate every channel.
 
 ---
 
