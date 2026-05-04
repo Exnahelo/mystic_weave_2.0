@@ -80,6 +80,35 @@ After every resolved scene, check `arc_envelope_status` in the response. For eac
 
 ---
 
+## Settlement Enumeration Template
+
+When settling any arc, fill in every line below before calling `/settle`. Every channel gets an explicit value. Zero is allowed but only when written explicitly.
+
+```text
+Arc settlement adjudication:
+- Outcome: complete | failed | abandoned
+- Awarded AP: <number> (must be 0 if outcome=failed or arc not formal)
+- Reputation changes:
+  - <faction>: <delta>
+  - (or "none")
+- Coin awarded: <CD amount> (or 0)
+- Coin forfeited: <CD amount> (or 0)
+- Items awarded: <list> (or "none")
+- Leverage / evidence / access / secrets gained:
+  - <description> (or "none")
+- Obligations created or cleared:
+  - <description> (or "none")
+- World-state consequences:
+  - <description> (must not be "none" for any arc that materially
+    interacted with factions, locations, or NPCs)
+```
+
+Only after every line is filled in: call `/settle`.
+
+If a channel is "none," write "none" — do not omit the line. Omitting a line means the GPT did not consider that channel.
+
+---
+
 ## Backend Authority
 
 Arc envelope tracking — scenes used, locations visited, soft/hard cap conditions, phase-shift candidacy for emergent arcs — is computed by the backend and surfaced in `arc_envelope_status` on every scene-resolved response. The narrator does not count scenes, locations, or contributions manually. The orchestrator routes scene contributions to active arcs via `arc_progressed_ids`.
