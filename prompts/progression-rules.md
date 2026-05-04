@@ -40,6 +40,14 @@ Maximum one tag advance per resolved scene; the backend enforces this via the sc
 
 ---
 
+## Tag advancement boundaries
+
+- One tag advance per resolved scene, across all layers combined (backend-enforced).
+- The narrator proposes the tag most central to the scene's resolution. If multiple tags qualify equally, the player chooses.
+- New tags may be proposed at T1 if the character demonstrates repeated meaningful use of a skill not covered by an existing tag. **Newly proposed tags require player confirmation before submitting via the orchestrator.**
+
+---
+
 ## Track 1 — Tag Advancement
 
 Tags are narrative and use-based. They do not consume AP. Tag tier cap is **T5**.
@@ -75,12 +83,6 @@ A bystander overhearing a fact does not qualify. A character working through it 
 ### Field — magical understanding
 
 Magical fields advance under the same trigger structure as knowledge groups, applied to magical material: studying a working, observing a master cast, reading a treatise, reflecting on a resolved magical encounter. Field tiers remain gated by domain score per `magic-rules.md`.
-
-### Tag advancement boundaries
-
-- One tag advance per resolved scene, across all layers combined (backend-enforced).
-- The narrator proposes the tag most central to the scene's resolution. If multiple tags qualify equally, the player chooses.
-- New tags may be proposed at T1 if the character demonstrates repeated meaningful use of a skill not covered by an existing tag. **Newly proposed tags require player confirmation before submitting via the orchestrator.**
 
 ---
 
