@@ -274,19 +274,67 @@ If a broader investigation becomes a raid, spawn a seizure child arc rather than
 
 ---
 
-## Origin Types
+## Origin vs Phase
 
-An arc may be formal, emergent, derived, or otherwise categorized by backend-supported origin values.
+An arc has both an origin and a phase.
 
-The important GPT distinction is formal-contract qualification.
+**Origin** is how the arc was first authored. It is set at creation and never changes.
 
-Origin describes how the arc entered play.
+- `formal` — created with explicit patron, objective, and expected return
+- `emergent` — discovered or developed without formal tasking
+- `derived` — spawned from another arc; inherits origin behavior from creation parameters
 
-Formal-contract qualification determines AP eligibility.
+**Phase** is the arc's current operational character. It changes as play develops.
 
-A derived child may still be emergent for AP purposes.
+- *field phase* — the arc is unfolding through immediate action and discovery
+- *institutional phase* — formal organizations, councils, patrons, or named authorities have engaged the matter
+- *closure phase* — settlement, ruling, or conclusion is imminent
 
-A patron-adjacent event is not automatically formal.
+Origin is permanent. Phase is mutable. The two interact:
+
+- A `formal` arc that begins in field phase remains AP-eligible regardless of phase changes
+- An `emergent` arc that shifts to institutional phase is **required** to spawn a formal child arc if the formal-contract conditions are now met (patron, explicit objective, expected return)
+- The parent emergent arc keeps its origin (history doesn't rewrite); the formal child captures the AP-eligible institutional work going forward
+- An `emergent` arc that never reaches institutional phase remains AP-ineligible at settlement
+
+Origin governs AP eligibility for the arc's own settlement. Phase governs whether a formal child should be spawned to own the institutional leg.
+
+A derived child's AP eligibility is determined at the child's own creation, independent of the parent.
+
+A patron-adjacent event is not automatically formal. Trust networks, family connections, social proximity, and noble status do not confer formal status. Formal status requires the three explicit conditions met at the child arc's creation.
+
+---
+
+## Phase Change Indicators
+
+An emergent arc has shifted to institutional phase when one or more of the following structural conditions are met:
+
+1. **Council, court, or formal review body** has accepted the matter under documented authority
+2. **Named patron** (NPC or faction) has issued explicit tasking with declared scope
+3. **Formal organization** (Heartwardens, Greenshields, Druids, Council, House intelligence body, etc.) has formally adopted the matter under their own chain of custody
+4. **Documented mandate** has been issued (sealed letter, council ruling, signed contract, formal evidentiary log entry)
+5. **Multiple formal organizations** have engaged the matter through a recognized handoff or joint review
+
+When any of these conditions are met for an emergent arc, the narrator **must** spawn a formal child arc to own the institutional phase. The parent emergent arc continues to track the field-phase work; the formal child captures the AP-eligible institutional work.
+
+The orchestrator surfaces phase-shift candidacy when an emergent arc crosses its soft cap. This is a *suggestion*, not a forced action — the narrator confirms whether the structural conditions above have actually been met before spawning. An emergent arc can pass its soft cap without triggering a phase change (e.g., long field investigation that hasn't yet reached institutional engagement).
+
+The orchestrator suggestion appears in the `suggestions` list of the scene-resolved response, and the relevant arc's `arc_envelope_status` entry has `phase_shift_candidate: true`.
+
+When spawning a formal child:
+
+- The child must be created with `formal_contract_qualified: true`
+- All three formal qualification fields must be present and accurate: `patron_npc_id` or `patron_faction`, `explicit_objective`, `expected_return`
+- The child's AP envelope is determined at child creation per the formal arc rules
+- `ap_ownership='child'` (the parent emergent has no AP envelope to partition)
+- The child's `parent_arc_id` references the emergent parent
+
+When **not** to spawn a formal child:
+
+- The institutional engagement is incidental (a single formal NPC appearing in a scene without the matter being adopted)
+- The matter is being delivered into authority for closure, not for ongoing institutional work (use settlement instead)
+- The narrator has not yet confirmed the structural conditions in this section
+- The arc has already settled
 
 ---
 
@@ -329,11 +377,15 @@ Emergent arcs can still earn:
 - world-state changes
 - tag advancement through resolved scenes
 
-To convert an emergent thread into a formal-contract arc, the player must return to a patron and receive explicit tasking.
+An emergent arc cannot be converted in place. Origin is permanent.
 
-The conversion should usually create a new formal arc or a successor arc.
+When an emergent arc reaches institutional phase (see Phase Change Indicators), spawn a formal child arc rather than re-authoring the parent.
 
-Do not retroactively mark already-completed emergent work as formal.
+The formal child captures AP-eligible institutional work going forward. The parent emergent arc continues tracking field-phase work and settles per emergent rules.
+
+Do not retroactively mark already-completed emergent work as formal. Closed arcs are immutable.
+
+If the institutional phase has fully resolved by the time the narrator recognizes the shift (e.g., council ruling already issued), the formal child may be created and immediately settled — but the AP-eligible work must have actually occurred during the formal child's existence, not before its creation.
 
 ---
 

@@ -305,6 +305,16 @@ class ArcEnvelopeStatus(BaseModel):
     hard_cap_reached: bool = Field(
         description="True if at hard cap; transition to ready_to_close suggested"
     )
+    phase_shift_candidate: bool = Field(
+        default=False,
+        description=(
+            "True when this arc is emergent origin AND has crossed its soft cap. "
+            "Indicates the narrator should evaluate whether institutional phase "
+            "has begun and whether a formal child arc should be spawned. See "
+            "arc-rules.md 'Phase Change Indicators' for the structural conditions "
+            "warranting spawn."
+        ),
+    )
 
 
 class DeclareSceneResolutionResponse(BaseModel):

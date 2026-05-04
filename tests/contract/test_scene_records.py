@@ -234,10 +234,17 @@ def _world(location: str = "feywood-river-bend", turn: int = 4) -> dict[str, Any
     }
 
 
-def _arc_data(title: str, *, soft: int = 4, hard: int = 6) -> dict[str, Any]:
+def _arc_data(
+    title: str,
+    *,
+    soft: int = 4,
+    hard: int = 6,
+    origin_type: str = "emergent",
+) -> dict[str, Any]:
     return {
         "title": title,
         "state": "in_progress",
+        "origin_type": origin_type,
         "budget": {
             "resolved_scene_soft_cap": soft,
             "resolved_scene_hard_cap": hard,
@@ -549,3 +556,137 @@ def test_list_scene_records_empty_session() -> None:
     assert body["records"] == []
     assert body["has_more"] is False
     assert body["next_cursor"] is None
+
+
+# ---------------------------------------------------------------------------
+# Brief 21: phase_shift_candidate detection + suggestion firing
+# ---------------------------------------------------------------------------
+
+def _drive_scene_count(conn: SceneConn, *, arc_id: str, count: int) -> None:
+    """Pre-seed `count` resolved scenes against the given arc for cap testing."""
+    for i in range(count):
+        conn.add_record(
+            scene_id=f"prior-{arc_id}-{i}",
+            session_id="sess1",
+            arc_progressed_ids=[arc_id],
+            location_id=f"loc-{i}",
+        )
+
+
+@pytest.mark.contract
+def test_envelope_status_marks_emergent_arc_at_soft_cap_as_phase_shift_candidate() -> None:
+    """Emergent arc at soft cap -> phase_shift_candidate=True; phase-shift suggestion fires."""
+    conn = SceneConn()
+    conn.add_session("sess1", _world())
+    conn.add_arc(
+        "arc-emergent",
+        "sess1",
+        "in_progress",
+        _arc_data("Willowglass thread", soft=2, hard=4, origin_type="emergent"),
+    )
+    # Pre-seed 1 scene; the declare adds the second to put us at soft_cap=2.
+    _drive_scene_count(conn, arc_id="arc-emergent", count=1)
+    app = _make_app(conn)
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/scene/declare_resolution",
+            json={"session_id": "sess1", "arc_progressed_ids": ["arc-emergent"]},
+        )
+
+    assert r.status_code == 200
+    body = r.json()
+    arc_status = next(s for s in body["arc_envelope_status"] if s["arc_id"] == "arc-emergent")
+    assert arc_status["phase_shift_candidate"] is True
+    assert arc_status["soft_cap_approaching"] is True
+    assert arc_status["hard_cap_reached"] is False
+    # The phase-shift suggestion fired (preempted the generic soft-cap one).
+    phase_shift_suggestions = [s for s in body["suggestions"] if "Phase Change Indicators" in s]
+    assert len(phase_shift_suggestions) >= 1
+    assert all("consider closure path" not in s for s in body["suggestions"])
+
+
+@pytest.mark.contract
+def test_formal_arc_at_soft_cap_gets_generic_suggestion_not_phase_shift() -> None:
+    """Formal arc at soft cap -> phase_shift_candidate=False; standard closure suggestion."""
+    conn = SceneConn()
+    conn.add_session("sess1", _world())
+    conn.add_arc(
+        "arc-formal",
+        "sess1",
+        "in_progress",
+        _arc_data("Sealed contract", soft=2, hard=4, origin_type="formal"),
+    )
+    _drive_scene_count(conn, arc_id="arc-formal", count=1)
+    app = _make_app(conn)
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/scene/declare_resolution",
+            json={"session_id": "sess1", "arc_progressed_ids": ["arc-formal"]},
+        )
+
+    body = r.json()
+    arc_status = next(s for s in body["arc_envelope_status"] if s["arc_id"] == "arc-formal")
+    assert arc_status["phase_shift_candidate"] is False
+    assert arc_status["soft_cap_approaching"] is True
+    soft_cap_msgs = [s for s in body["suggestions"] if "consider closure path" in s]
+    assert len(soft_cap_msgs) >= 1
+    phase_shift_msgs = [s for s in body["suggestions"] if "Phase Change Indicators" in s]
+    assert phase_shift_msgs == []
+
+
+@pytest.mark.contract
+def test_emergent_arc_under_soft_cap_no_phase_shift() -> None:
+    """Emergent arc under soft cap -> phase_shift_candidate=False, no suggestions."""
+    conn = SceneConn()
+    conn.add_session("sess1", _world())
+    conn.add_arc(
+        "arc-emergent",
+        "sess1",
+        "in_progress",
+        _arc_data("Willowglass thread", soft=4, hard=6, origin_type="emergent"),
+    )
+    app = _make_app(conn)
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/scene/declare_resolution",
+            json={"session_id": "sess1", "arc_progressed_ids": ["arc-emergent"]},
+        )
+
+    body = r.json()
+    arc_status = next(s for s in body["arc_envelope_status"] if s["arc_id"] == "arc-emergent")
+    assert arc_status["phase_shift_candidate"] is False
+    assert body["suggestions"] == []
+
+
+@pytest.mark.contract
+def test_emergent_arc_at_hard_cap_phase_shift_yields_to_settle_suggestion() -> None:
+    """At hard cap -> phase_shift_candidate=False (hard cap supersedes); settle suggestion fires."""
+    conn = SceneConn()
+    conn.add_session("sess1", _world())
+    conn.add_arc(
+        "arc-emergent",
+        "sess1",
+        "in_progress",
+        _arc_data("Willowglass thread", soft=2, hard=4, origin_type="emergent"),
+    )
+    # 3 prior + 1 just-declared = 4 scenes, at hard_cap=4.
+    _drive_scene_count(conn, arc_id="arc-emergent", count=3)
+    app = _make_app(conn)
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/scene/declare_resolution",
+            json={"session_id": "sess1", "arc_progressed_ids": ["arc-emergent"]},
+        )
+
+    body = r.json()
+    arc_status = next(s for s in body["arc_envelope_status"] if s["arc_id"] == "arc-emergent")
+    assert arc_status["hard_cap_reached"] is True
+    assert arc_status["phase_shift_candidate"] is False
+    settle_msgs = [s for s in body["suggestions"] if "ready_to_close or settle" in s]
+    assert len(settle_msgs) >= 1
+    phase_shift_msgs = [s for s in body["suggestions"] if "Phase Change Indicators" in s]
+    assert phase_shift_msgs == []

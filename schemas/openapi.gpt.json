@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave (GPT Actions)",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "5.4.0"
+    "version": "5.4.1"
   },
   "servers": [
     {
@@ -2334,6 +2334,12 @@
             "type": "boolean",
             "title": "Hard Cap Reached",
             "description": "True if at hard cap; transition to ready_to_close suggested"
+          },
+          "phase_shift_candidate": {
+            "type": "boolean",
+            "title": "Phase Shift Candidate",
+            "description": "True when this arc is emergent origin AND has crossed its soft cap. Indicates the narrator should evaluate whether institutional phase has begun and whether a formal child arc should be spawned. See arc-rules.md 'Phase Change Indicators' for the structural conditions warranting spawn.",
+            "default": false
           }
         },
         "additionalProperties": false,

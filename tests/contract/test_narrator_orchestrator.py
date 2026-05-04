@@ -699,3 +699,61 @@ def test_orchestrator_no_commit_skips_state_save_when_no_other_changes() -> None
     # Character and world are bit-identical to before the call.
     assert conn.character == starting_character
     assert conn.world == starting_world
+
+
+@pytest.mark.contract
+def test_orchestrator_surfaces_phase_shift_for_emergent_arc_at_soft_cap() -> None:
+    """Brief 21: orchestrator passes phase_shift_candidate + suggestion through.
+
+    Emergent arc with soft_cap=2; pre-seed 1 scene; the orchestrator's
+    declare adds the second, hitting soft cap. arc_envelope_status entry
+    should be phase_shift_candidate=True; suggestions should include the
+    phase-shift entry.
+    """
+    conn = _new_conn()
+    conn.add_arc(
+        "arc-willowglass",
+        data={
+            "title": "Willowglass thread",
+            "state": "in_progress",
+            "origin_type": "emergent",
+            "budget": {
+                "resolved_scene_soft_cap": 2,
+                "resolved_scene_hard_cap": 4,
+                "location_soft_cap": 3,
+                "location_hard_cap": 5,
+            },
+        },
+    )
+    # Pre-seed one prior scene contributing to arc-willowglass.
+    conn.scene_records["prior-1"] = {
+        "scene_id": "prior-1",
+        "session_id": "sess-narr",
+        "scene_summary": None,
+        "scene_actions": [],
+        "arc_progressed_ids": ["arc-willowglass"],
+        "location_id": "feywood-river-bend",
+        "turn_at_resolution": 4,
+        "time_at_resolution": None,
+        "tag_advance_committed": None,
+        "resolved_at": conn._next_ts(),
+    }
+    app = _make_app(conn)
+
+    with TestClient(app) as client:
+        r = client.post(
+            "/narrator/scene_resolved",
+            json={
+                "session_id": "sess-narr",
+                "arc_progressed_ids": ["arc-willowglass"],
+            },
+        )
+
+    assert r.status_code == 200
+    body = r.json()
+    arc_status = next(
+        s for s in body["arc_envelope_status"] if s["arc_id"] == "arc-willowglass"
+    )
+    assert arc_status["phase_shift_candidate"] is True
+    phase_shift_suggestions = [s for s in body["suggestions"] if "Phase Change Indicators" in s]
+    assert len(phase_shift_suggestions) >= 1

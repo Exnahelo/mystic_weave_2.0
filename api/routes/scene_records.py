@@ -99,6 +99,14 @@ async def _gather_arc_envelope_status(
         soft_approaching = scene_count >= scene_soft if scene_soft > 0 else False
         hard_reached = scene_count >= scene_hard if scene_hard > 0 else False
 
+        # Brief 21: an emergent arc that has crossed its soft cap is a
+        # phase-shift candidate. Settled / hard-cap arcs are settle territory,
+        # not phase-shift territory.
+        origin_type = arc_data.get("origin_type")
+        phase_shift_candidate = (
+            origin_type == "emergent" and soft_approaching and not hard_reached
+        )
+
         status_list.append(ArcEnvelopeStatus(
             arc_id=arc_id,
             title=arc_data.get("title", ""),
@@ -111,13 +119,20 @@ async def _gather_arc_envelope_status(
             location_hard_cap=loc_hard,
             soft_cap_approaching=soft_approaching,
             hard_cap_reached=hard_reached,
+            phase_shift_candidate=phase_shift_candidate,
         ))
 
     return status_list
 
 
 def _build_suggestions(envelope_status: list[ArcEnvelopeStatus]) -> list[str]:
-    """Generate suggest-level guidance based on envelope status."""
+    """Generate suggest-level guidance based on envelope status.
+
+    Ordering: hard cap > phase shift candidate > soft cap. An emergent arc
+    at soft cap gets the phase-shift suggestion (more actionable than the
+    generic soft-cap closure prompt); a formal arc at the same threshold
+    gets the standard closure suggestion.
+    """
     suggestions: list[str] = []
     for status in envelope_status:
         if status.hard_cap_reached:
@@ -125,6 +140,14 @@ def _build_suggestions(envelope_status: list[ArcEnvelopeStatus]) -> list[str]:
                 f"arc {status.arc_id} ({status.title}) at hard cap "
                 f"({status.resolved_scenes_used}/{status.resolved_scene_hard_cap} scenes); "
                 f"transition to ready_to_close or settle"
+            )
+        elif status.phase_shift_candidate:
+            suggestions.append(
+                f"arc {status.arc_id} ({status.title}) is emergent and at soft cap "
+                f"({status.resolved_scenes_used}/{status.resolved_scene_soft_cap} scenes). "
+                f"If institutional phase has begun (council adopted, named patron, "
+                f"formal organization handoff), spawn a formal child arc to capture "
+                f"AP-eligible work. See arc-rules.md 'Phase Change Indicators'."
             )
         elif status.soft_cap_approaching:
             suggestions.append(
