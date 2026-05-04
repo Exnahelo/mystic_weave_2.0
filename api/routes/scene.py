@@ -52,15 +52,22 @@ async def get_scene_context(
         )
 
     if location_row is None:
-        raise HTTPException(status_code=404, detail=f"current location not found: {world.location}")
-
-    try:
-        location = LocationData.model_validate(location_row["data"])
-    except ValidationError as e:
-        raise HTTPException(
-            status_code=500,
-            detail={"message": "stored location is invalid", "errors": e.errors()},
+        # Fresh sessions and any state where world.location has no matching
+        # locations row return a degraded context rather than 404 — the
+        # narrator can detect the synthetic name and prompt for a starting
+        # location in prose.
+        location = LocationData(
+            id=world.location or "unknown",
+            name="No location set",
         )
+    else:
+        try:
+            location = LocationData.model_validate(location_row["data"])
+        except ValidationError as e:
+            raise HTTPException(
+                status_code=500,
+                detail={"message": "stored location is invalid", "errors": e.errors()},
+            )
 
     return build_scene_context(
         session_id=state.session_id,

@@ -197,6 +197,42 @@ def test_scene_context_shape_and_log_truncation() -> None:
 
 
 @pytest.mark.regression
+def test_scene_context_unknown_location_returns_degraded_context() -> None:
+    """Fresh session with location='unknown' returns 200 with synthetic
+    location data, not 404. Lets the narrator detect the unset state and
+    prompt the player to choose a starting location."""
+    world = _world()
+    world["location"] = "unknown"
+    # Fresh-session shape: no companions, no obligations, no active tensions —
+    # so the scene has no visible entities or opportunities to surface.
+    world["companions"] = []
+    world["politics"]["active_obligations"] = []
+    world["politics"]["active_tensions"] = []
+    world["politics"]["known_leverage"] = []
+    conn = SceneConn(
+        state_row={
+            "session_id": "fresh1234",
+            "character": _character(),
+            "world": world,
+            "log": [],
+            "updated_at": datetime.now(),
+        },
+        location_row=None,  # no locations row matches "unknown"
+    )
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        r = client.get("/scene/fresh1234")
+
+    assert r.status_code == 200
+    payload = r.json()
+    assert payload["location_summary"]["id"] == "unknown"
+    assert payload["location_summary"]["name"] == "No location set"
+    assert payload["visible_entities"] == []
+    assert payload["available_opportunities"] == []
+
+
+@pytest.mark.regression
 def test_scene_context_omits_full_world_payload() -> None:
     conn = SceneConn(
         state_row={
