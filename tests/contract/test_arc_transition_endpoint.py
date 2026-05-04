@@ -58,19 +58,19 @@ class ArcTransitionConn:
                     "reason": args[4],
                     "transitioned_at": args[5],
                     "resolved_scenes_at_transition": args[6],
-                    "locations_visited_at_transition": json.loads(args[7]),
+                    "locations_visited_at_transition": (args[7] if isinstance(args[7], (dict, list)) else json.loads(args[7])),
                     "triggering_event": args[8],
                 }
             )
         elif "UPDATE game_states SET character" in query:
-            self.character = json.loads(args[0])
+            self.character = (args[0] if isinstance(args[0], (dict, list)) else json.loads(args[0]))
         elif "UPDATE game_states SET world" in query:
-            self.world = json.loads(args[0])
+            self.world = (args[0] if isinstance(args[0], (dict, list)) else json.loads(args[0]))
         elif "UPDATE game_states SET log" in query:
             # StateRepository.append_log_entry issues:
             # UPDATE game_states SET log = log || $1::jsonb, updated_at = now() WHERE session_id = $2
             # args[0] is a JSON-encoded list containing one entry to append.
-            appended = json.loads(args[0])
+            appended = (args[0] if isinstance(args[0], (dict, list)) else json.loads(args[0]))
             self.log.extend(appended)
         return "OK"
 

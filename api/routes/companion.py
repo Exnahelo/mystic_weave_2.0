@@ -68,7 +68,7 @@ async def _persist_world_update(
     world: WorldModel,
     log_entry: TypedLogEntry,
 ) -> None:
-    log_entry_json = json.dumps([log_entry.model_dump()])
+    log_entry_payload = [log_entry.model_dump()]
     await conn.fetchrow(
         """
         INSERT INTO game_states (session_id, character, world, log, updated_at)
@@ -81,10 +81,10 @@ async def _persist_world_update(
         RETURNING session_id
         """,
         session_id,
-        json.dumps(character.model_dump(by_alias=True)),
-        json.dumps(world.model_dump()),
-        log_entry_json,
-        log_entry_json,
+        character.model_dump(by_alias=True),
+        world.model_dump(),
+        log_entry_payload,
+        log_entry_payload,
     )
 
 

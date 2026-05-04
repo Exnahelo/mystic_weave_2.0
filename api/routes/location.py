@@ -92,7 +92,7 @@ async def upsert_location(
             """,
             body.id,
             body.name,
-            json.dumps(data_dict),
+            data_dict,
         )
 
         # Treat the saved connections array as authoritative for this source.

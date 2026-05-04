@@ -625,8 +625,8 @@ async def commit_advance_in_transaction(
         "UPDATE game_states "
         "SET character = $1::jsonb, log = $2::jsonb, updated_at = NOW() "
         "WHERE session_id = $3",
-        json.dumps(updated_character),
-        json.dumps(new_log),
+        updated_character,
+        new_log,
         session_id,
     )
 

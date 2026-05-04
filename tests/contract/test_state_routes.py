@@ -48,12 +48,12 @@ class StateRouteConn:
 
         if "RETURNING session_id, character, world, log, updated_at" in query:
             self.session_id = args[0]
-            self.character = json.loads(args[1])
-            self.world = json.loads(args[2])
+            self.character = (args[1] if isinstance(args[1], (dict, list)) else json.loads(args[1]))
+            self.world = (args[2] if isinstance(args[2], (dict, list)) else json.loads(args[2]))
             if len(args) > 4:
-                self.log.extend(json.loads(args[4]))
+                self.log.extend((args[4] if isinstance(args[4], (dict, list)) else json.loads(args[4])))
             elif "log         = game_states.log" not in query:
-                self.log = json.loads(args[3])
+                self.log = (args[3] if isinstance(args[3], (dict, list)) else json.loads(args[3]))
             self.updated_at = datetime.now()
             return {
                 "session_id": self.session_id,
@@ -67,7 +67,7 @@ class StateRouteConn:
             # GAME_STATE_LOG_APPEND_ONLY — annotation endpoint.
             if self.session_id is None or args[0] != self.session_id:
                 return None
-            self.log.extend(json.loads(args[1]))
+            self.log.extend((args[1] if isinstance(args[1], (dict, list)) else json.loads(args[1])))
             self.updated_at = datetime.now()
             return {
                 "session_id": self.session_id,

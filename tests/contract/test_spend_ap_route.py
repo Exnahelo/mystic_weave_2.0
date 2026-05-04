@@ -53,7 +53,7 @@ class SpendConn:
         return None
 
     async def execute(self, query, *args):
-        self.character = json.loads(args[0])
+        self.character = (args[0] if isinstance(args[0], (dict, list)) else json.loads(args[0]))
         self.updated_at = datetime.now()
         return "UPDATE 1"
 

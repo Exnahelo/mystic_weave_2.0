@@ -62,7 +62,7 @@ class StateRepository:
         async with self._pool.acquire() as conn:
             await conn.execute(
                 "UPDATE game_states SET character = $1::jsonb, updated_at = now() WHERE session_id = $2",
-                character.model_dump_json(),
+                character.model_dump(mode="json"),
                 session_id,
             )
 
@@ -70,7 +70,7 @@ class StateRepository:
         async with self._pool.acquire() as conn:
             await conn.execute(
                 "UPDATE game_states SET world = $1::jsonb, updated_at = now() WHERE session_id = $2",
-                world.model_dump_json(),
+                world.model_dump(mode="json"),
                 session_id,
             )
 
@@ -80,11 +80,11 @@ class StateRepository:
         Used by backend-driven log writes (e.g., arc closure summaries).
         Atomic single-statement append; preserves all existing entries.
         """
-        entry_json = json.dumps([entry.model_dump(exclude_none=True)])
+        entry_payload = [entry.model_dump(exclude_none=True)]
         async with self._pool.acquire() as conn:
             await conn.execute(
                 "UPDATE game_states SET log = log || $1::jsonb, updated_at = now() WHERE session_id = $2",
-                entry_json,
+                entry_payload,
                 session_id,
             )
 
@@ -177,7 +177,7 @@ class TransactionalStateRepository:
         await self._conn.execute(
             "UPDATE game_states SET character = $1::jsonb, log = $2::jsonb, "
             "updated_at = NOW() WHERE session_id = $3",
-            json.dumps(character),
-            json.dumps(new_log),
+            character,
+            new_log,
             session_id,
         )

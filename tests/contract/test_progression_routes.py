@@ -108,8 +108,8 @@ class ProgressionConn:
 
     async def execute(self, query: str, *args):
         if "UPDATE game_states" in query and "SET character" in query and "log = $2::jsonb" in query:
-            self.character = json.loads(args[0])
-            self.log = json.loads(args[1])
+            self.character = (args[0] if isinstance(args[0], (dict, list)) else json.loads(args[0]))
+            self.log = (args[1] if isinstance(args[1], (dict, list)) else json.loads(args[1]))
             self.updated_at = datetime.now()
             return "UPDATE 1"
         if "UPDATE scene_records SET tag_advance_committed" in query:

@@ -86,8 +86,8 @@ async def new_session(
             VALUES ($1, $2::jsonb, $3::jsonb, '[]'::jsonb, now())
             """,
             session_id,
-            json.dumps(character_json),
-            json.dumps(world_json),
+            character_json,
+            world_json,
         )
 
     return NewSessionResponse(

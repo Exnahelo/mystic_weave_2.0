@@ -64,9 +64,9 @@ class MultiTurnFakeConn:
             # 2 world json
             # 3 initial log for insert (unused in conflict case)
             # 4 update log append json
-            self.character = json.loads(args[1])
-            self.world = json.loads(args[2])
-            append_entries = json.loads(args[4])
+            self.character = (args[1] if isinstance(args[1], (dict, list)) else json.loads(args[1]))
+            self.world = (args[2] if isinstance(args[2], (dict, list)) else json.loads(args[2]))
+            append_entries = (args[4] if isinstance(args[4], (dict, list)) else json.loads(args[4]))
             self.log.extend(append_entries)
             self.updated_at = datetime.now()
             return {

@@ -91,7 +91,7 @@ async def _gather_arc_envelope_status(
                AND arc_progressed_ids @> $2::jsonb
             """,
             session_id,
-            json.dumps([arc_id]),
+            [arc_id],
         )
         scene_count = (scene_count_row["scene_count"] or 0) if scene_count_row else 0
         loc_count = (scene_count_row["loc_count"] or 0) if scene_count_row else 0
@@ -222,11 +222,11 @@ async def declare_scene_in_transaction(
         scene_id,
         session_id,
         scene_summary,
-        json.dumps(scene_actions),
-        json.dumps(arc_progressed_ids),
+        scene_actions,
+        arc_progressed_ids,
         resolved_location,
         turn,
-        json.dumps(time_state) if time_state else None,
+        time_state if time_state else None,
     )
 
     ts_row = await conn.fetchrow(

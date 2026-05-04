@@ -101,7 +101,7 @@ async def spend_ap(
 
             await conn.execute(
                 "UPDATE game_states SET character = $1::jsonb, updated_at = now() WHERE session_id = $2",
-                json.dumps(character),
+                character,
                 session_id,
             )
 

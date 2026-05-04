@@ -110,7 +110,7 @@ class SceneConn:
 
         if "SELECT COUNT(*)" in query and "arc_progressed_ids @>" in query:
             session_id = args[0]
-            target_arc_ids = json.loads(args[1])  # always a single-id list
+            target_arc_ids = (args[1] if isinstance(args[1], (dict, list)) else json.loads(args[1]))  # always a single-id list
             scene_count = 0
             distinct_locs: set[str] = set()
             for r in self.records.values():
@@ -172,12 +172,12 @@ class SceneConn:
                 "scene_id": args[0],
                 "session_id": args[1],
                 "scene_summary": args[2],
-                "scene_actions": json.loads(args[3]) if isinstance(args[3], str) else args[3],
-                "arc_progressed_ids": json.loads(args[4]) if isinstance(args[4], str) else args[4],
+                "scene_actions": (args[3] if isinstance(args[3], (dict, list)) else json.loads(args[3])) if isinstance(args[3], str) else args[3],
+                "arc_progressed_ids": (args[4] if isinstance(args[4], (dict, list)) else json.loads(args[4])) if isinstance(args[4], str) else args[4],
                 "location_id": args[5],
                 "turn_at_resolution": args[6],
                 "time_at_resolution": (
-                    json.loads(args[7]) if isinstance(args[7], str) and args[7] else None
+                    (args[7] if isinstance(args[7], (dict, list)) else json.loads(args[7])) if isinstance(args[7], str) and args[7] else None
                 ),
                 "tag_advance_committed": None,
                 "resolved_at": self._next_ts(),

@@ -159,7 +159,7 @@ class NarratorConn:
         # Envelope status: scene + location count for one arc_id
         if "SELECT COUNT(*)" in query and "arc_progressed_ids @>" in query:
             session_id = args[0]
-            target_arc_ids = json.loads(args[1])
+            target_arc_ids = (args[1] if isinstance(args[1], (dict, list)) else json.loads(args[1]))
             scene_count = 0
             distinct_locs: set[str] = set()
             for r in self.scene_records.values():
@@ -196,11 +196,11 @@ class NarratorConn:
                 "scene_id": args[0],
                 "session_id": args[1],
                 "scene_summary": args[2],
-                "scene_actions": json.loads(args[3]),
-                "arc_progressed_ids": json.loads(args[4]),
+                "scene_actions": (args[3] if isinstance(args[3], (dict, list)) else json.loads(args[3])),
+                "arc_progressed_ids": (args[4] if isinstance(args[4], (dict, list)) else json.loads(args[4])),
                 "location_id": args[5],
                 "turn_at_resolution": args[6],
-                "time_at_resolution": (json.loads(args[7]) if args[7] else None),
+                "time_at_resolution": ((args[7] if isinstance(args[7], (dict, list)) else json.loads(args[7])) if args[7] else None),
                 "tag_advance_committed": None,
                 "resolved_at": self._next_ts(),
             }
@@ -208,8 +208,8 @@ class NarratorConn:
 
         # commit's character + log update
         if "UPDATE game_states" in query and "SET character" in query and "log = $2::jsonb" in query:
-            self.character = json.loads(args[0])
-            self.log = json.loads(args[1])
+            self.character = (args[0] if isinstance(args[0], (dict, list)) else json.loads(args[0]))
+            self.log = (args[1] if isinstance(args[1], (dict, list)) else json.loads(args[1]))
             self.updated_at = self._next_ts()
             return "UPDATE 1"
 

@@ -36,8 +36,8 @@ class SessionStateFlowConn:
         if "INSERT INTO game_states (session_id, character, world, log, updated_at)" in query and "'[]'::jsonb" in query:
             self.rows[args[0]] = {
                 "session_id": args[0],
-                "character": json.loads(args[1]),
-                "world": json.loads(args[2]),
+                "character": (args[1] if isinstance(args[1], (dict, list)) else json.loads(args[1])),
+                "world": (args[2] if isinstance(args[2], (dict, list)) else json.loads(args[2])),
                 "log": [],
                 "updated_at": datetime.now().isoformat(),
             }
@@ -71,9 +71,9 @@ class SessionStateFlowConn:
         if "RETURNING session_id, character, world, log, updated_at" in query:
             sid = args[0]
             row = self.rows[sid]
-            row["character"] = json.loads(args[1])
-            row["world"] = json.loads(args[2])
-            row["log"] = row["log"] + json.loads(args[4])
+            row["character"] = (args[1] if isinstance(args[1], (dict, list)) else json.loads(args[1]))
+            row["world"] = (args[2] if isinstance(args[2], (dict, list)) else json.loads(args[2]))
+            row["log"] = row["log"] + (args[4] if isinstance(args[4], (dict, list)) else json.loads(args[4]))
             row["updated_at"] = datetime.now().isoformat()
             return {
                 "session_id": sid,

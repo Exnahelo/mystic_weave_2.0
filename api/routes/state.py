@@ -48,13 +48,13 @@ from api.time_advance import advance_time
 router = APIRouter()
 
 
-def _serialize_log_entry(entry: str | TypedLogEntry | None) -> str | None:
-    """Serialize a log entry into the JSONB array form, or None to skip append."""
+def _serialize_log_entry(entry: str | TypedLogEntry | None) -> list[Any] | None:
+    """Wrap a log entry as a single-element JSONB array, or None to skip append."""
     if entry is None:
         return None
     if isinstance(entry, TypedLogEntry):
-        return json.dumps([entry.model_dump(exclude_none=True)])
-    return json.dumps([entry])
+        return [entry.model_dump(exclude_none=True)]
+    return [entry]
 
 
 def _deep_merge(base: dict[str, Any], incoming: dict[str, Any]) -> dict[str, Any]:
@@ -417,7 +417,7 @@ async def save_state(
     world_json = body.world.model_dump(exclude_unset=True)
     log_payload = _serialize_log_entry(body.log_entry)
     if log_payload is None:
-        insert_log = json.dumps([])
+        insert_log: list[Any] = []
         sql = GAME_STATE_UPSERT_PRESERVE_LOG
     else:
         insert_log = log_payload
@@ -476,10 +476,10 @@ async def save_state(
         merged_character_json = validated_character.model_dump(by_alias=True)
         validated_world_json = validated_world.model_dump()
 
-        params = [
+        params: list[Any] = [
             session_id,
-            json.dumps(merged_character_json),
-            json.dumps(validated_world_json),
+            merged_character_json,
+            validated_world_json,
             insert_log,
         ]
         if log_payload is not None:
@@ -521,7 +521,7 @@ async def save_state_delta(
     """Apply partial typed state updates and persist validated full state."""
     log_payload = _serialize_log_entry(body.log_entry)
     if log_payload is None:
-        insert_log = json.dumps([])
+        insert_log: list[Any] = []
         sql = GAME_STATE_UPSERT_PRESERVE_LOG
     else:
         insert_log = log_payload
@@ -550,10 +550,10 @@ async def save_state_delta(
         except ValidationError as e:
             raise HTTPException(status_code=422, detail=_plain_validation_errors(e))
 
-        params = [
+        params: list[Any] = [
             session_id,
-            json.dumps(applied["character"]),
-            json.dumps(applied["world"]),
+            applied["character"],
+            applied["world"],
             insert_log,
         ]
         if log_payload is not None:
@@ -606,7 +606,7 @@ async def annotate_state(
         type="admin_correction",
         text=f"[{body.category}] {body.annotation}",
     )
-    entry_payload = json.dumps([typed_entry.model_dump(exclude_none=True)])
+    entry_payload = [typed_entry.model_dump(exclude_none=True)]
 
     async with pool.acquire() as conn:
         row = await conn.fetchrow(GAME_STATE_LOG_APPEND_ONLY, session_id, entry_payload)

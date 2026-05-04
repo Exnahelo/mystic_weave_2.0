@@ -68,7 +68,7 @@ async def create_character(
                    updated_at = now()
              WHERE session_id = $2
             """,
-            json.dumps(character_json),
+            character_json,
             body.session_id,
         )
 

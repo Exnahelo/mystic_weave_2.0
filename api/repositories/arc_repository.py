@@ -142,7 +142,7 @@ class ArcRepository:
                 entry.reason,
                 entry.transitioned_at,
                 entry.resolved_scenes_at_transition,
-                json.dumps(entry.locations_visited_at_transition),
+                entry.locations_visited_at_transition,
                 entry.triggering_event,
             )
 
