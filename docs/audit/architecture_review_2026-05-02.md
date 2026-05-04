@@ -97,6 +97,8 @@ Already covered in Q1 — the prompt and the code give different answers to "wha
 ### Notable: knowledge_groups + applications + magic_fields registries split between two directories
 Per `api/game_data.py:28-32`: knowledge_groups and applications live at `data/tags/`. Magic_fields lives at `data/catalog/registries/`. All three are validated in `validate_data_files.py:844-848`. This split is semantically arbitrary — applications are no less catalog than magic fields, and treating them differently means new developers have to look in two places. Cognitive friction; cost to consolidate is moderate (validators and loaders both point at literal paths).
 
+**Resolved (Brief 23, 5.4.3):** `applications.json` and `knowledge_groups.json` consolidated into `data/catalog/registries/`. The three `_template_*.json` files moved alongside. `data/tags/` directory removed. `data/catalog/registries/` is now the single canonical location for registry-style vocabulary files.
+
 ### Notable: AdvancementState recomputation policy contradicts the model's writability
 `api/models.py:743-766` declares `CharacterStateDelta.advancement` accepts `AdvancementState | None` for "round-trip safety," explicitly noting the value is *replaced server-side* (the route layer recomputes counters in `state.py:265`). The narrator looking at the schema sees a writable field; the runtime treats it as read-only. The mismatch is documented in the docstring but not surfaced to the GPT or to any consumer of the OpenAPI schema. Anyone reading the schema will believe they can set `advancement.points_available` directly.
 

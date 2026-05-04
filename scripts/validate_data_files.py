@@ -841,16 +841,16 @@ def main() -> None:
     data_dir = repo_root / "data"
 
     global VALID_KNOWLEDGE_GROUPS, VALID_MAGIC_FIELDS, VALID_APPLICATIONS, VALID_BEAST_NATURAL_ABILITIES
-    VALID_KNOWLEDGE_GROUPS = {g["index"] for g in _load_tag_file(data_dir / "tags" / "knowledge_groups.json")}
+    VALID_KNOWLEDGE_GROUPS = {g["index"] for g in _load_tag_file(data_dir / "catalog" / "registries" / "knowledge_groups.json")}
     magic_fields_registry = _load_json(data_dir / "catalog" / "registries" / "magic_fields.json")
     magic_field_rows = magic_fields_registry.get("magic_fields", []) if isinstance(magic_fields_registry, dict) else []
     VALID_MAGIC_FIELDS = {f["id"] for f in magic_field_rows if isinstance(f, dict)}
-    VALID_APPLICATIONS = {a["index"] for a in _load_tag_file(data_dir / "tags" / "applications.json")}
+    VALID_APPLICATIONS = {a["index"] for a in _load_tag_file(data_dir / "catalog" / "registries" / "applications.json")}
 
     failures: list[str] = []
-    _validate_knowledge_groups(data_dir / "tags" / "knowledge_groups.json", failures)
+    _validate_knowledge_groups(data_dir / "catalog" / "registries" / "knowledge_groups.json", failures)
     _validate_magic_fields(data_dir / "catalog" / "registries" / "magic_fields.json", failures)
-    _validate_applications(data_dir / "tags" / "applications.json", failures)
+    _validate_applications(data_dir / "catalog" / "registries" / "applications.json", failures)
     _validate_ancestries(data_dir / "characters" / "ancestry.json", failures)
     _validate_cultures(data_dir / "characters" / "culture.json", failures)
     _validate_tag_rows(data_dir / "characters" / "focus.json", failures, expected_count=9)

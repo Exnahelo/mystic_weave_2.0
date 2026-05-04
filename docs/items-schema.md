@@ -222,7 +222,7 @@ Rule of thumb: if the same definition could appear in a different campaign with 
 - `data/magic/` — spell field definitions.
 - `data/companions/` — creature catalog.
 - `data/economy/` — top-level economy (currency, prices, regional nodes).
-- `data/tags/` — application/knowledge/magic-field tag vocabularies (legacy parallel to `data/catalog/registries/`; consolidation is a known TODO).
+- `data/catalog/registries/` — applications, knowledge groups, magic fields, and other vocabulary registries (consolidated 2026-05 in Brief 23; previously split between `data/tags/` and `data/catalog/registries/`).
 - `data/npcs/` — NPC archetypes.
 
 These namespaces were established before the `data/catalog/` consolidation and should be considered for migration into `catalog/` or for explicit "stays separate" status as time permits. They are not in scope for catalog stabilization.

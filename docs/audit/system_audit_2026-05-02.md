@@ -18,7 +18,7 @@ Findings ordered by disposition.
 - `schemas/openapi.json` (3 occurrences around 3398, 3505, 3738) and `schemas/openapi.gpt.json` (same) — generated from the models above; will drop once models do.
 
 **Legitimately active — keep:**
-- `data/tags/applications.json:627-640` — `dragon_breath` application tag entry (domain Will/Power). The tag is no longer ancestry-auto-granted; it is a normal application tag any character can pick up.
+- `data/catalog/registries/applications.json:627-640` — `dragon_breath` application tag entry (domain Will/Power). The tag is no longer ancestry-auto-granted; it is a normal application tag any character can pick up. (Path consolidated from `data/tags/` in Brief 23.)
 - `prompts/world-rules.md:332` — rule text for `dragon_breath` application. Aligns with the active tag entry. **DECISION NEEDED:** keep as-is, or rephrase since field-level `draconic_traits` retirement may make the example name confusing.
 
 **Migration / cleanup code — keep:**
@@ -218,7 +218,7 @@ No whole-file legacy test retirements identified.
 
 These look legacy at a glance but are intentional:
 
-- `dragon_breath` application tag in `data/tags/applications.json:627-640` — actively reachable; not ancestry-bound any more.
+- `dragon_breath` application tag in `data/catalog/registries/applications.json:627-640` — actively reachable; not ancestry-bound any more.
 - All `Drakari` ancestry references in README, character templates, tests — Drakari remains a valid ancestry; only the auto-granted breath/scale traits are retired.
 - `migrate_character_v4.py` and `migrate_advancement_v4_2.py` — keep; both are idempotent and parameterized.
 - `seed_locations.py` — keep; runbook-cited and idempotent.

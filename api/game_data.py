@@ -26,9 +26,9 @@ _DATA_FILES = (
     "characters/background.json",
 )
 _TAG_REGISTRY_FILES = (
-    "tags/knowledge_groups.json",
+    "catalog/registries/knowledge_groups.json",
     "catalog/registries/magic_fields.json",
-    "tags/applications.json",
+    "catalog/registries/applications.json",
 )
 _SPELL_DATA_FILES = (
     "magic/alchemy.json",
@@ -423,7 +423,7 @@ def list_backgrounds() -> list[dict[str, Any]]:
 
 def list_knowledge_groups() -> list[dict[str, Any]]:
     """Return all mundane knowledge group entries from the bare-list tags file."""
-    data = _load_json("tags/knowledge_groups.json")
+    data = _load_json("catalog/registries/knowledge_groups.json")
     if isinstance(data, list):
         return [e for e in data if isinstance(e, dict)]
     if isinstance(data, dict):
@@ -477,7 +477,7 @@ def list_spells() -> list[dict[str, Any]]:
 
 def list_applications() -> list[dict[str, Any]]:
     """Return all application entries from the bare-list tags file."""
-    data = _load_json("tags/applications.json")
+    data = _load_json("catalog/registries/applications.json")
     if isinstance(data, list):
         return [e for e in data if isinstance(e, dict)]
     if isinstance(data, dict):
@@ -527,7 +527,7 @@ def get_tag_primary_domain(tag_index: str, tag_kind: str) -> str | None:
                 return primary if isinstance(primary, str) else None
         return None
     if tag_kind == "knowledge":
-        data = _load_json("tags/knowledge_groups.json")
+        data = _load_json("catalog/registries/knowledge_groups.json")
         if isinstance(data, list):
             for entry in data:
                 if isinstance(entry, dict) and entry.get("index") == tag_index:
@@ -539,7 +539,7 @@ def get_tag_primary_domain(tag_index: str, tag_kind: str) -> str | None:
                 return entry.get("primary_domain")
         return None
     elif tag_kind == "application":
-        data = _load_json("tags/applications.json")
+        data = _load_json("catalog/registries/applications.json")
         if isinstance(data, list):
             for entry in data:
                 if isinstance(entry, dict) and entry.get("index") == tag_index:
