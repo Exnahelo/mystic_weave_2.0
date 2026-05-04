@@ -78,17 +78,9 @@ Examples:
 
 Compression is preferred unless a new meaningful decision, threat, discovery, or consequence boundary appears.
 
-### When multiple scenes may still belong to one AP consequence chain
+### Consequence chain across scenes
 
-Multiple scenes may still belong to one AP consequence chain if they are all contributing to the same unresolved higher-stakes outcome.
-Examples:
-- several job legs serving one contract outcome
-- infiltration, negotiation, and extraction all tied to one continuing commissioned objective
-- a pursuit across several locations where the larger stakes are not settled until the final capture, escape, or loss
-
-In these cases:
-- tag advancement may be adjudicated per resolved scene
-- AP waits until the consequence chain resolves
+A consequence chain may span multiple resolved scenes. Tag advancement adjudicates per resolved scene; awarded AP from formal-contract arcs resolves at arc settlement. The orchestrator (`/narrator/scene_resolved`) tracks scene contributions to active arcs via `arc_progressed_ids` in the scene-resolved payload; envelope tracking is automatic.
 
 ---
 
@@ -114,10 +106,11 @@ The `log_entry` is for narrative state, not state already tracked in structured 
 - "state correction" lines that do not change the fiction
 - routine rest, eat, or trance beats unless they matter to pacing
 - blow-by-blow combat unless the fight changes the arc
+- canon corrections (use `POST /state/{session_id}/annotation` instead — preserves the gameplay log for narrative state and routes corrections to a parallel channel)
 
-Per-arc beats belong on the Arc record via `/arc/.../progress` or `/arc/.../transition`, not the global log. The global `log_entry` is for non-arc narrative state and arc-level outcomes (closure summaries, transitions visible to the wider world).
+Per-arc progression contributions are recorded automatically when the narrator submits `arc_progressed_ids` via `POST /narrator/scene_resolved`. Direct calls to `/arc/.../progress` are no longer required during normal play. The global `log_entry` is for non-arc narrative state and arc-level outcomes (closure summaries, transitions visible to the wider world).
 
-Use typed log entries when they apply: `closure_summary` for arc closures (the narrator MAY add a structured payload when archival completeness matters; otherwise omit — the arc record already holds the structured ledger), `compression` for synthesizing prior beats, `narrative_non_arc` for narrative beats outside any active arc, `world_change` for durable world state changes.
+Use typed log entries when they apply: `closure_summary` for arc closures (the narrator MAY add a structured payload when archival completeness matters; otherwise omit — the arc record already holds the structured ledger), `compression` for synthesizing prior beats, `narrative_non_arc` for narrative beats outside any active arc, `world_change` for durable world state changes, `progression` (auto-emitted by the orchestrator's commit step), `admin_correction` (auto-emitted by the annotation endpoint).
 
 When in doubt, ask: would another instance of the narrator, reading this log fresh tomorrow, need this entry to know what is going on in the story? If no — exclude. If the answer is in a structured field — exclude.
 

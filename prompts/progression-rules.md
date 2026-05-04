@@ -1,7 +1,9 @@
 # Mystic Weave — Progression Rules
 
-This document is the sole canonical source for progression adjudication.
-Use it for tag advancement, AP earning, AP spend, and progression-related save timing.
+This document is the canonical narrator-facing source for progression
+adjudication: when tag advances trigger, what counts as an understanding
+event, and what makes an arc AP-eligible. Backend handles validation,
+counter rollover, and spend math.
 
 Scene-boundary vocabulary is canonical in `prompts/scene-structure.md`.
 
@@ -23,13 +25,26 @@ The terms **beat**, **encounter**, **scene**, **job**, and **contract** are not 
 
 ---
 
+## Backend Authority
+
+Progression validation and commit are backend-authoritative. The narrator's role is judgment and proposal:
+
+- **Judgment** — did the trigger fire? Is this scene worth a tag advance? Which tag fits?
+- **Proposal** — submit scene actions and (optionally) one proposed tag advance via `POST /narrator/scene_resolved`.
+
+The backend handles structural validation, parent-cap enforcement, registry classification, counter rollover, AP earning, and atomic commit. The orchestrator returns ranked candidates with explicit/implicit/contextual fit so the narrator can see strongest-fit candidates and self-correct on subsequent scenes if a stronger match was omitted.
+
+Direct calls to `/progression/scan` and `/progression/commit` exist in the full API for testing and admin work but are not the primary narrator path. Use the orchestrator.
+
+Maximum one tag advance per resolved scene; the backend enforces this via the scene-record `tag_advance_committed` flag. Parent-cap (an application's tier may not exceed its parent group; a spell mastery may not exceed its parent field) is structurally enforced at model construction. AP-counter rollover (every 3 advances → +1 AP) and bracket-cost math on domain spend are computed by the backend; the narrator does not author these values.
+
+---
+
 ## Track 1 — Tag Advancement
 
 Tags are narrative and use-based. They do not consume AP. Tag tier cap is **T5**.
 
-A tag may advance by one tier when the corresponding trigger fires in a resolved scene. **Maximum one tag advance per scene** across all layers; if multiple tags qualify, the player chooses.
-
-The three layers have different triggers because they represent different things.
+A tag may advance by one tier when the corresponding trigger fires in a resolved scene. The three layers have different triggers because they represent different things.
 
 ### Application — technique
 
@@ -59,39 +74,24 @@ A bystander overhearing a fact does not qualify. A character working through it 
 
 ### Field — magical understanding
 
-Magical fields advance under the same trigger structure as knowledge groups, applied to magical material. Field knowledge advances through understanding events about magic: studying a working, observing a master cast, reading a treatise, reflecting on a resolved magical encounter. Field tiers remain gated by domain score per `magic-rules.md`.
+Magical fields advance under the same trigger structure as knowledge groups, applied to magical material: studying a working, observing a master cast, reading a treatise, reflecting on a resolved magical encounter. Field tiers remain gated by domain score per `magic-rules.md`.
 
 ### Tag advancement boundaries
 
-- One tag advance per resolved scene, across all layers combined.
-- The GPT proposes the tag most central to the scene's resolution. If multiple tags qualify equally, the player chooses.
-- New tags may be proposed at T1 if the character demonstrates repeated meaningful use of a skill not covered by an existing tag. **Newly proposed tags require player confirmation before saving.**
-- Per-session tag advance caps are removed; the per-tier novelty test in the application trigger replaces that brake.
-
-### Parent-cap rule
-
-An application tag may not exceed the tier of its parent knowledge group, and a spell mastery tier may not exceed the tier of its parent magical field. Both caps are structural in v5: the character record nests applications under their group and spells under their field, and any record where a child tier exceeds its parent fails validation.
-
-The backend enforces this rule at model construction time, so any save or delta that would push a child above its parent rejects with a 422 before persisting. The GPT verifies the cap at adjudication time and either advances the parent first if the scene supports that, or selects a different candidate.
+- One tag advance per resolved scene, across all layers combined (backend-enforced).
+- The narrator proposes the tag most central to the scene's resolution. If multiple tags qualify equally, the player chooses.
+- New tags may be proposed at T1 if the character demonstrates repeated meaningful use of a skill not covered by an existing tag. **Newly proposed tags require player confirmation before submitting via the orchestrator.**
 
 ---
 
-## Track 2 — AP (Fungible Pool)
+## Track 2 — Awarded AP (arc-bound)
 
-AP lives in a single fungible pool — `points_available` on the character's advancement state. AP can be earned in two ways:
-
-### Tag-counter rollover (mechanical)
-
-Every tag tier advance increments a single `tag_counter`. When the counter reaches 3, it resets to 0 and the pool gains 1 AP. Knowledge, application, and field advances all count equally. The backend handles all counter math; the GPT does not compute it.
-
-### Awarded AP (arc-bound)
-
-Awarded AP is arc-bound and reserved for formal-contract-qualified arcs. It resolves through the `/arc/{arc_id}/settle` endpoint when an arc transitions to `complete`. Emergent arcs (those without explicit patron, objective, and expected return at creation) cannot earn AP per the v1 locked policy. See `arc-rules.md` for the full arc system procedure.
+Awarded AP is arc-bound and reserved for formal-contract-qualified arcs. It resolves through `POST /arc/{arc_id}/settle` when an arc transitions to `complete`. Emergent arcs cannot earn AP — see `arc-rules.md` for the full arc system procedure including origin/phase rules.
 
 **Rules:**
 
 - **Pre-declared through arc creation.** AP awards must be within the arc's formal reward envelope before the work. Retroactive AP awards are not permitted.
-- **Failure default.** Failed arcs grant 0 AP in v1. Non-AP consequences still settle through `/arc/{arc_id}/settle`.
+- **Failure default.** Failed arcs grant 0 AP. Non-AP consequences still settle.
 
 **Formal provenance required.** Not every quest-giver can offer AP. AP requires explicit patron, objective, and expected return at arc creation. The patron or stake should be weighty enough to genuinely shape a person:
 
@@ -100,7 +100,7 @@ Awarded AP is arc-bound and reserved for formal-contract-qualified arcs. It reso
 - Oath-bound commitments and binding pacts
 - World-imposed stakes (a god's task, a sworn duty, a binding magical contract)
 
-Mortal-scale errands, emergent discoveries, and routine commercial work pay coin, reputation, access, leverage, or items, not AP. A hedge wizard offering 5 AP for a lost cat is not legitimate; the economy depends on this gate holding.
+Mortal-scale errands, emergent discoveries, and routine commercial work pay coin, reputation, access, leverage, or items, not AP.
 
 **Scale:**
 
@@ -111,7 +111,7 @@ Mortal-scale errands, emergent discoveries, and routine commercial work pay coin
 | Regional-scale undertaking | 3 |
 | Campaign-defining oath, pact, or arc commitment | 4 |
 
-Higher awards are possible in extraordinary cases but should be authored explicitly, not formula-derived.
+Higher awards are possible in extraordinary cases but should be authored explicitly.
 
 **Stacking.** Awarded AP does not replace coin, reputation, favor, items, leverage, or obligations. Arc settlement enumerates each reward channel independently.
 
@@ -119,65 +119,6 @@ Higher awards are possible in extraordinary cases but should be authored explici
 
 ## Track 3 — Domain Spend
 
-Domain points are purchased with AP from the fungible pool. Domain score cap is **80**.
+Domain points are purchased with AP from the fungible pool. Domain score cap is **80**. Bracket-cost math is computed by `POST /character/{session_id}/spend_ap`; narrator does not author cost in payloads.
 
-| Target score bracket | AP cost per point |
-|---|---:|
-| 25–60 | 1 |
-| 61–70 | 2 |
-| 71–80 | 3 |
-
-For multi-point increases that cross brackets, calculate AP point-by-point using the bracket of each resulting score. The backend handles bracket math.
-
-**Spend timing.** The player may spend AP at any time outside an unresolved scene. If the player chooses to spend AP at scene resolution as part of the reward package, that spend is part of the same progression adjudication sequence.
-
----
-
-## Reward Adjudication Boundary
-
-Resolve the full reward package before any progression-related save.
-
-The reward package may include:
-
-- tag advancement
-- newly proposed tags (requires player confirmation)
-- tag-counter increments and AP rollover (mechanical, but reflected in the same save)
-- awarded AP grant (if a formal-contract-qualified arc settles through `/arc/{arc_id}/settle`)
-- AP spend (if the player chooses to spend at resolution)
-
-Progression-related state is **not stable enough to save** until the reward package is settled.
-
----
-
-## Progression Save Gate
-
-No progression-related save occurs until the final reward package is settled.
-
-- Do not save tag advancement before scene-resolution adjudication is finalized.
-- Do not save newly added tags before player confirmation.
-- Do not save AP changes (rollover, awarded, or spent) before the reward package is finalized.
-- If the player disputes any part of the reward interpretation, do not commit disputed elements.
-
-Other unrelated state may be saved only if the save payload does not modify tag tiers, newly proposed tags, AP pool, tag counter, or domain scores, and does not narratively imply that the reward ruling is settled.
-
----
-
-## Operational Adjudication Order
-
-When a scene resolves:
-
-1. Determine whether the **scene** is resolved for tag-adjudication purposes (per `scene-structure.md`).
-2. Evaluate tag advancement triggers in order: application, knowledge, field. At most one fires.
-3. If a formal-contract-qualified arc closes, resolve awarded AP through the arc settlement procedure in `arc-rules.md`.
-4. If the player chooses to spend AP at resolution, resolve that spend in the same sequence.
-5. Ask for player confirmation if a new tag would be added.
-6. If the player disputes any reward element, pause progression-related save.
-7. Save progression-related state only after the reward package is settled.
-
-The backend handles:
-
-- tag-counter increment and rollover to AP (group and child tier advances both count)
-- parent-cap enforcement on application and spell tier writes (structural, at model construction)
-- domain bracket cost math on AP spend
-
-The GPT does not compute these. It announces what triggered, asks any required player choices, and submits the resolved reward package.
+**Spend timing.** The player may spend AP at any time outside an unresolved scene.

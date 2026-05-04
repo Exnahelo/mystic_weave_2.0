@@ -33,23 +33,21 @@ Use this file together with:
 
 ## Core Principle
 
-The backend is authoritative for arc structure.
+The backend is authoritative for arc structure. The narrator proposes; the backend validates and records.
 
-The narrator proposes; the backend validates and records.
+When an event introduces a higher-level objective, the narrator must call `POST /arc/{session_id}/create` before continuing that narrative arc. Continuing without creating the arc is a structural error.
 
-When an event introduces a higher-level objective, the narrator must call `POST /arc/{session_id}/create` before continuing that narrative arc.
+Lifecycle changes (`/transition`, `/spawn`, `/settle`) remain narrator-driven and are required at the moments described later in this document. Scene-level progression (`/progress`) is now handled automatically by the orchestrator when the narrator submits `arc_progressed_ids` via `POST /narrator/scene_resolved`; manual `/progress` calls remain available but are not the primary path.
 
-Continuing without creating the arc is a structural error.
+The narrator does not have discretion to skip the lifecycle calls.
 
-When an active arc advances through a resolved scene, the narrator must call `POST /arc/{session_id}/{arc_id}/progress`.
+---
 
-When an arc changes lifecycle state, the narrator must call `POST /arc/{session_id}/{arc_id}/transition`.
+## Backend Authority
 
-When an arc crosses meaningful structural boundaries, the narrator must call `POST /arc/{session_id}/{arc_id}/spawn`.
+Arc envelope tracking — scenes used, locations visited, soft/hard cap conditions, phase-shift candidacy for emergent arcs — is computed by the backend and surfaced in `arc_envelope_status` on every scene-resolved response. The narrator does not count scenes, locations, or contributions manually. The orchestrator routes scene contributions to active arcs via `arc_progressed_ids`.
 
-When an arc reaches terminal settlement, the narrator must call `POST /arc/{session_id}/{arc_id}/settle`.
-
-The narrator does not have discretion to skip these calls.
+The narrator's role for arcs is judgment and lifecycle decisions: when to create, when to spawn vs replace vs merge, when to transition to closure paths, when to settle. The backend cannot judge whether institutional phase has begun or whether two scenes belong to the same consequence chain — those are creative decisions. The backend can validate that the structural conditions for a given lifecycle action are met.
 
 ---
 
@@ -575,113 +573,33 @@ The following calls are mandatory when their triggers occur.
 
 Failing to use them is a structural error.
 
-### `POST /arc/{session_id}/create`
+The narrator manages arc lifecycle through a handful of explicit calls. Most arc activity during play is now driven by the orchestrator, which tracks scene contributions automatically.
 
-Call when a higher-level objective is introduced.
+### `POST /arc/{session_id}/{arc_id}/create`
 
-The narrator does not begin an arc narratively without first creating it.
+Call when a higher-level objective is introduced. The narrator does not begin an arc narratively without first creating it. Required fields and validation are documented in the OpenAPI spec; the endpoint rejects malformed payloads with structured errors.
 
-Creation payload should include:
-
-- title
-- summary
-- primary_type
-- subtype
-- stake_scale
-- origin_type
-- target_locations when known
-- closure_conditions when known
-- failure_conditions when known
-- formal_contract_qualified
-- explicit_objective when formal
-- expected_return when formal
-- patron_npc_id or patron_faction when formal
-- notes as needed
-
-For emergent arcs, set `formal_contract_qualified: false`.
-
-For formal arcs, include patron, objective, and expected return.
-
-After creation, transition according to play state if needed.
+For emergent arcs: `formal_contract_qualified: false`. For formal arcs: include patron (`patron_npc_id` or `patron_faction`), `explicit_objective`, and `expected_return` — backend validates these at create time.
 
 ### `POST /arc/{session_id}/{arc_id}/progress`
 
-Call after each resolved scene that advances an active arc.
+**No longer required during normal play.** The orchestrator records arc-progression contributions via `arc_progressed_ids` in the `/narrator/scene_resolved` payload. Direct `/progress` calls remain available for legacy flows or admin work but are not the narrator's primary surface.
 
-**Scene resolution criterion.** A resolved scene is one in which something materially changed in the situation through player action. Time passing alone is not a resolved scene. Routine activity that produces no narrative consequence is not a resolved scene. If you are about to call /progress and cannot identify what materially changed, do not call it.
-
-**Time-skip discipline.** When the arc is in a waiting period (waiting for an NPC arrival, waiting for a message reply, waiting for a scheduled event), do not narrate filler scenes to fill the time. State that time passes and wait for the next meaningful trigger. /progress should not fire during these periods.
-
-Progress increments scene count, updates locations visited, and checks caps.
-
-Payload should state whether a resolved scene occurred and include location when relevant.
-
-If `auto_transitioned_to_at_scope_cap: true`, the narrator must call `/transition` next.
-
-Further `/progress` calls are refused until the arc leaves hard-cap handling.
-
-If `soft_cap_reached: true`, closure, spawn, or escalation should be considered soon.
-
-Soft cap is warning, not automatic failure.
+**Time-skip discipline still applies** at the orchestrator level: do not declare scene resolutions for waiting periods (NPC arrival, message reply, scheduled event). State that time passes and wait for the next meaningful trigger. `arc_progressed_ids` should be omitted from waiting-period scenes.
 
 ### `POST /arc/{session_id}/{arc_id}/transition`
 
-Call to move through lifecycle states.
-
-The narrator declares requested transition; backend validates.
-
-Payload should include:
-
-- from_state
-- to_state
-- reason
-- triggering_event when useful
-- world_flags for flag-based closure or failure conditions
-- force only for unforeseen failure modes
-
-For `ready_to_close`, closure conditions must be satisfied.
-
-For `failed`, authored failure conditions are checked.
-
-If authored failure conditions are unmet but failure is still fictionally necessary, pass `force: true`.
-
-Do not use `force` for convenience.
+Call when an arc moves through lifecycle states — typically when the orchestrator surfaces `arc_envelope_status[i].hard_cap_reached: true` (auto-transition to `at_scope_cap`) and the narrator must `/transition` to a closure path before continuing. The backend validates the transition matrix and rejects stale `from_state` values. For `ready_to_close`, closure conditions must be satisfied. For `failed`, authored failure conditions are checked; pass `force: true` only for unforeseen failure modes, not convenience.
 
 ### `POST /arc/{session_id}/{arc_id}/spawn`
 
-Call to spawn a child arc from an active parent.
+Call when a structural boundary requires a child arc — including the emergent → formal phase shift per the Phase Change Indicators above. The orchestrator surfaces `phase_shift_candidate: true` for emergent arcs at soft cap; the narrator confirms the structural conditions before spawning.
 
-Use when scope crosses structural boundaries.
-
-Payload should include child title, summary, type, subtype, stake scale, origin, formal-contract fields if any, closure/failure conditions, AP ownership, and reason.
-
-Spawn children for separable work.
-
-Do not mutate a parent into a different shape simply because play expanded.
+Spawn children for separable work. Do not mutate a parent into a different shape simply because play expanded.
 
 ### `POST /arc/{session_id}/{arc_id}/settle`
 
-Call to settle rewards and consequences on a terminal-bound arc.
-
-Settlement is required when completing or failing an arc.
-
-Payload channels include:
-
-- outcome
-- awarded_ap
-- reputation_changes
-- coin_cd_awarded
-- coin_cd_forfeit
-- obligations_added
-- items_awarded
-- leverage_gained
-- notes
-
-Every reward channel is considered independently.
-
-Empty channels are explicit zero values or empty lists.
-
-Do not silently omit a channel because another reward already occurred.
+Call when an arc resolves. Settlement enumerates all reward channels (outcome, awarded_ap, reputation_changes, coin_cd_awarded, coin_cd_forfeit, obligations_added, items_awarded, leverage_gained, notes); empty channels are explicit zeros or empty lists, not silent omissions. The endpoint enforces formal-contract eligibility for `awarded_ap > 0`.
 
 ---
 
@@ -831,37 +749,17 @@ Do not treat soft cap as permission to sprawl indefinitely.
 
 ## Relationship to Scenes
 
-Scenes are local units of dramatic resolution.
+Each arc has a scene budget (soft cap, hard cap) determined by its `primary_type`. The orchestrator tracks resolved scenes per arc automatically and surfaces envelope status (`resolved_scenes_used`, `soft_cap_approaching`, `hard_cap_reached`, `phase_shift_candidate`) in the scene-resolved response. The narrator does not count scenes manually.
 
-Arcs are higher-level objective structures.
+One resolved scene may advance more than one arc only if it genuinely changes each arc; list every advanced arc in `arc_progressed_ids`. Tag advancement is adjudicated at scene resolution; arc settlement is adjudicated at arc closure. These procedures may share a player-facing moment but remain separate mechanical channels.
 
-One arc may contain many resolved scenes.
-
-One resolved scene may advance more than one arc only if it genuinely changes each arc.
-
-When a resolved scene advances an active arc, call `/progress` for that arc.
-
-Tag advancement is adjudicated at scene resolution.
-
-Arc settlement is adjudicated at arc closure.
-
-These procedures may happen in the same player-facing moment but remain separate mechanical channels.
+When `soft_cap_approaching` becomes true, the orchestrator emits a closure suggestion (or for emergent arcs, a phase-shift suggestion — see Phase Change Indicators). When `hard_cap_reached` becomes true, the arc auto-transitions to `at_scope_cap`; the narrator must `/transition` to a closure path before continuing.
 
 ---
 
 ## Relationship to Pacing
 
-Scene compression still applies.
-
-Routine travel or repeated low-novelty actions should not become extra resolved scenes merely to fill arc budget.
-
-Arc budget is not a quota.
-
-It is a maximum scope envelope.
-
-Do not add filler scenes because an arc has budget remaining.
-
-Do not skip `/progress` because a meaningful resolved scene would bring the arc closer to cap.
+Scene compression still applies. Routine travel or repeated low-novelty actions should not become extra resolved scenes merely to fill arc budget. Arc budget is not a quota; it is a maximum scope envelope. Do not declare scene resolutions for filler; do not omit `arc_progressed_ids` for a genuinely advanced arc just because an envelope is near cap.
 
 ---
 
@@ -882,11 +780,8 @@ At the start of a higher-level objective:
 
 After each resolved scene:
 
-- Did the scene advance an active arc?
-- Which arc or arcs advanced?
-- Call `/progress` for each advanced arc.
-- Check soft and hard cap response flags.
-- If hard cap auto-transitioned, call `/transition` next.
+- Did the scene advance an active arc? List every advanced arc in `arc_progressed_ids` on the orchestrator payload — backend records progress and updates envelope status automatically.
+- Read `arc_envelope_status` in the response: `hard_cap_reached` requires `/transition`; `phase_shift_candidate` requires evaluation against Phase Change Indicators and possibly `/spawn`; `soft_cap_approaching` is closure-time guidance.
 
 When scope changes:
 
