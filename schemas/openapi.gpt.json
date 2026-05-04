@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave (GPT Actions)",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "5.4.3"
+    "version": "5.4.4"
   },
   "servers": [
     {
@@ -15,7 +15,7 @@
     "/state/{session_id}": {
       "get": {
         "summary": "Load State",
-        "description": "Load the full game state for a session. Returns 404 if not found.",
+        "description": "Load the full game state for a session. Returns 404 if not found.\n\nUse log_limit to fetch only the tail of the log when sessions have\naccumulated many entries. The full log remains in storage; this only\naffects the response payload size.",
         "operationId": "load_state_state__session_id__get",
         "parameters": [
           {
@@ -26,6 +26,26 @@
               "type": "string",
               "title": "Session Id"
             }
+          },
+          {
+            "name": "log_limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "maximum": 10000,
+                  "minimum": 1
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "If set, return only the most recent N log entries. log_total_entries always reports the full count. Defaults to None (full log, backward-compatible).",
+              "title": "Log Limit"
+            },
+            "description": "If set, return only the most recent N log entries. log_total_entries always reports the full count. Defaults to None (full log, backward-compatible)."
           }
         ],
         "responses": {
@@ -6744,6 +6764,12 @@
             },
             "type": "array",
             "title": "Log"
+          },
+          "log_total_entries": {
+            "type": "integer",
+            "title": "Log Total Entries",
+            "description": "Total count of log entries in storage. Equals len(log) when no log_limit was applied; otherwise reports the full count even though only the tail is returned.",
+            "default": 0
           },
           "updated_at": {
             "anyOf": [

@@ -17,7 +17,7 @@ from typing import Any
 
 
 import asyncpg
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import ValidationError
 
 from api.database import get_pool
@@ -339,9 +339,24 @@ def apply_delta(current_state: dict[str, Any], delta: ApplyStateDeltaRequest) ->
 @router.get("/state/{session_id}", response_model=GameStateResponse)
 async def load_state(
     session_id: str,
+    log_limit: int | None = Query(
+        default=None,
+        ge=1,
+        le=10000,
+        description=(
+            "If set, return only the most recent N log entries. "
+            "log_total_entries always reports the full count. "
+            "Defaults to None (full log, backward-compatible)."
+        ),
+    ),
     pool: asyncpg.Pool = Depends(get_pool),
 ) -> GameStateResponse:
-    """Load the full game state for a session. Returns 404 if not found."""
+    """Load the full game state for a session. Returns 404 if not found.
+
+    Use log_limit to fetch only the tail of the log when sessions have
+    accumulated many entries. The full log remains in storage; this only
+    affects the response payload size.
+    """
     async with pool.acquire() as conn:
         row = await conn.fetchrow(
             "SELECT session_id, character, world, log, updated_at "
@@ -360,11 +375,16 @@ async def load_state(
     except ValidationError as e:
         raise HTTPException(status_code=500, detail={"message": "stored game state is invalid", "errors": e.errors()})
 
+    full_log = row["log"]
+    log_total_entries = len(full_log)
+    log_to_return = full_log if log_limit is None else full_log[-log_limit:]
+
     return GameStateResponse(
         session_id=row["session_id"],
         character=character,
         world=world,
-        log=row["log"],
+        log=log_to_return,
+        log_total_entries=log_total_entries,
         updated_at=row["updated_at"],
     )
 
@@ -480,6 +500,7 @@ async def save_state(
         character=response_character,
         world=response_world,
         log=row["log"],
+        log_total_entries=len(row["log"]),
         updated_at=row["updated_at"],
     )
 
@@ -553,6 +574,7 @@ async def save_state_delta(
         character=response_character,
         world=response_world,
         log=row["log"],
+        log_total_entries=len(row["log"]),
         updated_at=row["updated_at"],
     )
 

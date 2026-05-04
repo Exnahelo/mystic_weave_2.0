@@ -677,6 +677,14 @@ class GameStateResponse(BaseModel):
     character:  CharacterModel
     world:      WorldModel
     log:        list[str | dict[str, Any]]
+    log_total_entries: int = Field(
+        default=0,
+        description=(
+            "Total count of log entries in storage. Equals len(log) when "
+            "no log_limit was applied; otherwise reports the full count "
+            "even though only the tail is returned."
+        ),
+    )
     updated_at: datetime | None = None
 
     @model_validator(mode="after")

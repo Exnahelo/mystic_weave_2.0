@@ -575,6 +575,117 @@ def test_annotation_rejects_unknown_category() -> None:
     assert response.status_code == 422
 
 
+# --- GET /state/{session_id} log_limit + log_total_entries (Brief 24) -------
+
+@pytest.mark.contract
+def test_load_state_returns_full_log_when_log_limit_unset() -> None:
+    """Without log_limit, response includes the entire log; total matches len."""
+    conn = StateRouteConn("sess1", _character(), _world())
+    conn.log = [f"entry {i}" for i in range(7)]
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.get("/state/sess1")
+
+    assert response.status_code == 200
+    body = response.json()
+    assert len(body["log"]) == 7
+    assert body["log_total_entries"] == 7
+
+
+@pytest.mark.contract
+def test_load_state_truncates_to_log_limit() -> None:
+    """log_limit=N returns only the last N entries; log_total_entries unchanged."""
+    conn = StateRouteConn("sess1", _character(), _world())
+    conn.log = [f"entry {i}" for i in range(7)]
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.get("/state/sess1?log_limit=2")
+
+    assert response.status_code == 200
+    body = response.json()
+    assert len(body["log"]) == 2
+    assert body["log_total_entries"] == 7
+
+
+@pytest.mark.contract
+def test_load_state_log_limit_returns_tail_not_head() -> None:
+    """log_limit returns the *most recent* entries, not the oldest."""
+    conn = StateRouteConn("sess1", _character(), _world())
+    conn.log = [f"entry {i}" for i in range(5)]
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.get("/state/sess1?log_limit=2")
+
+    body = response.json()
+    assert body["log"] == ["entry 3", "entry 4"]
+
+
+@pytest.mark.contract
+def test_load_state_log_limit_larger_than_log_returns_full_log() -> None:
+    """log_limit=10000 with a 5-entry log returns 5 entries; no error."""
+    conn = StateRouteConn("sess1", _character(), _world())
+    conn.log = [f"entry {i}" for i in range(5)]
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.get("/state/sess1?log_limit=10000")
+
+    assert response.status_code == 200
+    body = response.json()
+    assert len(body["log"]) == 5
+    assert body["log_total_entries"] == 5
+
+
+@pytest.mark.contract
+def test_load_state_log_limit_zero_rejected() -> None:
+    """log_limit=0 fails Query validation (ge=1)."""
+    conn = StateRouteConn("sess1", _character(), _world())
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.get("/state/sess1?log_limit=0")
+
+    assert response.status_code == 422
+
+
+@pytest.mark.contract
+def test_load_state_log_limit_above_max_rejected() -> None:
+    """log_limit=10001 fails Query validation (le=10000)."""
+    conn = StateRouteConn("sess1", _character(), _world())
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.get("/state/sess1?log_limit=10001")
+
+    assert response.status_code == 422
+
+
+@pytest.mark.contract
+def test_save_state_response_reports_log_total_entries() -> None:
+    """POST /state/{session_id} response also carries log_total_entries."""
+    conn = StateRouteConn("sess1", _character(), _world(turn=1, time_of_day="morning"))
+    conn.log = ["prior one", "prior two"]
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        response = client.post(
+            "/state/sess1",
+            json={
+                "character": _character(),
+                "world": _world(turn=1, time_of_day="morning"),
+                "log_entry": "third entry",
+            },
+        )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["log_total_entries"] == 3
+    assert len(body["log"]) == 3
+
+
 @pytest.mark.contract
 def test_annotation_does_not_mutate_character_or_world() -> None:
     """Annotation must touch only the log, never character or world JSONB."""
