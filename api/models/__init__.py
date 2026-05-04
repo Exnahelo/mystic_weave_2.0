@@ -993,7 +993,7 @@ class SceneContext(BaseModel):
     visible_entities: list[str] = Field(default_factory=list)
     immediate_stakes: list[str] = Field(default_factory=list)
     relevant_character_state: SceneRelevantCharacterState
-    recent_log: list[str] = Field(default_factory=list)
+    recent_log: list[str | dict[str, Any]] = Field(default_factory=list)
     active_threats: list[str] = Field(default_factory=list)
     available_opportunities: list[str] = Field(default_factory=list)
 

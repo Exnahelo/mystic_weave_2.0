@@ -233,6 +233,42 @@ def test_scene_context_unknown_location_returns_degraded_context() -> None:
 
 
 @pytest.mark.regression
+def test_scene_context_with_typed_log_entries() -> None:
+    """Sessions with typed dict log entries (the current shape from
+    /state/{session_id}/delta and /annotation) return valid SceneContext,
+    not 500. Mixed string-and-dict logs from legacy + current play
+    must both round-trip cleanly through recent_log."""
+    log = [
+        "legacy untyped string entry",
+        {"type": "narrative_non_arc", "text": "current typed entry"},
+        {"type": "compression", "text": "compressed past beats"},
+        {"type": "admin_correction", "text": "[operational_constraint] note"},
+    ]
+    conn = SceneConn(
+        state_row={
+            "session_id": "typed1234",
+            "character": _character(),
+            "world": _world(),
+            "log": log,
+            "updated_at": datetime.now(),
+        },
+        location_row={"data": _location_data()},
+    )
+    app = _make_app(FakePool(conn))
+
+    with TestClient(app) as client:
+        r = client.get("/scene/typed1234")
+
+    assert r.status_code == 200
+    payload = r.json()
+    assert isinstance(payload["recent_log"], list)
+    assert len(payload["recent_log"]) == 4
+    # Mixed shapes preserved
+    assert payload["recent_log"][0] == "legacy untyped string entry"
+    assert payload["recent_log"][1] == {"type": "narrative_non_arc", "text": "current typed entry"}
+
+
+@pytest.mark.regression
 def test_scene_context_omits_full_world_payload() -> None:
     conn = SceneConn(
         state_row={
