@@ -23,6 +23,17 @@ Use this file together with:
 
 ---
 
+## GPT Combat Conduct Rules
+
+Until fuller combat rules are finalized, follow these principles:
+
+1. **Use existing system categories before improvising new ones.**
+2. **Read equipment through the item data files, not old archived reference prose.**
+3. **Apply context-sensitive judgment, but do not invent unsupported subsystems.**
+4. **Treat knowledge/application as meaningful for weapons and armor, but not for ammunition.**
+
+---
+
 ## Combat Equipment Rules
 
 ### Armor Rules
@@ -243,17 +254,6 @@ This section will eventually define fear, intimidation, surrender pressure, mora
 Placeholder.
 
 This section will eventually define mounted combat, large-body reach problems, mobility differences, and how unusual combat scales should be interpreted.
-
----
-
-## GPT Combat Conduct Rules
-
-Until fuller combat rules are finalized, follow these principles:
-
-1. **Use existing system categories before improvising new ones.**
-2. **Read equipment through the item data files, not old archived reference prose.**
-3. **Apply context-sensitive judgment, but do not invent unsupported subsystems.**
-4. **Treat knowledge/application as meaningful for weapons and armor, but not for ammunition.**
 
 ---
 
