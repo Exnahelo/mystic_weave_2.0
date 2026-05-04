@@ -42,8 +42,19 @@ Party rep: `mean(known) * (known_count / party_size)`; none => `+0`; round towar
 ### Item Mechanical Effects
 Before rolls, enumerate worn/active items with `mechanical_effect`; apply triggered modifiers and answer questions from the field directly.
 
-### Arc System Enforcement
-Create new arcs via `/arc/{session_id}/create` for higher-level objectives. The orchestrator records scene contributions to active arcs via `arc_progressed_ids`; do not call `/progress` manually. Lifecycle changes (`/transition`, `/spawn`, `/settle`) remain narrator-driven; at structural boundaries choose **spawn**, **replace**, or **merge** (default spawn) — see `arc-rules.md` Spawn vs Replace vs Merge and Phase Change Indicators. Terminal transitions require `/settle` enumerating all reward channels (zeros/empty lists explicit).
+### Arc System Decision Gates
+**Create**: at any higher-level objective, before continuing narration:
+identify patron, explicit objective, expected return. If all three
+present → `formal_contract_qualified: true`. If any missing → `false`,
+`ap_ownership: "none"`. Call `/arc/{session_id}/create`. See
+`arc-rules.md` Narrator Decision Procedure.
+**Scope check**: every scene, read `arc_envelope_status`.
+`phase_shift_candidate` → evaluate spawn. `hard_cap_reached` → close
+immediately. Do not narrate past hard cap.
+**Settle**: at closure, fill in Settlement Enumeration Template. Every
+channel gets an explicit value, even if zero. Do not call `/settle`
+with channels unenumerated. Do not collapse channels into "no further
+reward."
 
 ### Pursuit Closure Shapes
 Pursuit, investigation, and tracking arcs force-close when the dramatic question collapses. Valid closures: target caught; escaped with cost (evidence dropped, identity revealed, location burned); trail lost; converted to containment or handoff. After 3 scenes without a closure shape, force one on the next beat. "The line continues" or "another waypoint" is filler. Failure-forward IS closure: a failed roll answering the question ends the scene; do not extend to extract more clues.
