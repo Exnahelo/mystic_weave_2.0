@@ -27,7 +27,7 @@ Use this file together with:
 - `engine.md` for turn-loop adjudication procedure
 - `scene-structure.md` for scene-level vocabulary
 - `pacing-rules.md` if present for pacing budget interaction
-- `world-rules.md` for reputation, faction, and consequence propagation
+- `character-rules.md` for reputation, faction, and consequence propagation
 
 ---
 
@@ -621,7 +621,7 @@ Reputation rules:
 
 - deltas must stay within envelope bounds
 - positive, negative, or mixed reputation may be appropriate
-- faction propagation follows `world-rules.md`
+- faction propagation follows `character-rules.md`
 
 Economy rules:
 

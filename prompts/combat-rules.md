@@ -18,7 +18,7 @@ Use this file together with:
 - `data/items/armor.json`
 - `data/items/ammunition.json`
 - `data/items/gear.json`
-- `world-rules.md`
+- `character-rules.md`
 - `engine.md`
 
 ---
@@ -262,7 +262,7 @@ Until fuller combat rules are finalized, follow these principles:
 - `data/items/armor.json` — authoritative armor and shield catalog
 - `data/items/ammunition.json` — authoritative ammunition catalog
 - `data/items/gear.json` — broader gear and mundane equipment catalog
-- `world-rules.md` — world/system-facing rules outside combat-specific handling
+- `character-rules.md` — character/system-facing rules outside combat-specific handling
 - `engine.md` — broader runtime logic and system interpretation
 
 ---

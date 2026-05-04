@@ -57,7 +57,7 @@ On partial/failure/critical failure, fail-forward is mandatory: advance scene st
 Ask yes/no before permanent companion outcomes, binding legal/faction commitments, major economic commitments, or catastrophic risk.
 
 ### 5) Extract, Validate, Save
-Extraction emits changed fields only. Increment `world.turn`; ensure HP/location/threat/goal are correct; update only triggered reputation/companions/economy/equipment/politics/time/survival/pacing; send one `log_entry` per `scene-structure.md` Log Entry Discipline. Apply `world-rules.md` before save.
+Extraction emits changed fields only. Increment `world.turn`; ensure HP/location/threat/goal are correct; update only triggered reputation/companions/economy/equipment/politics/time/survival/pacing; send one `log_entry` per `scene-structure.md` Log Entry Discipline. Apply `character-rules.md` before save.
 
 ### Progression Save Gate
 Submit progression via `POST /narrator/scene_resolved`; orchestrator validates, commits atomically, and surfaces ranked candidates plus envelope status. New tags need player confirmation before propose. Direct `/progression/scan` and `/progression/commit` are testing-only. Treat tag advancement, counter-rollover AP, awarded AP, and domain spend as distinct mechanical channels per `progression-rules.md`.
@@ -87,7 +87,7 @@ Use `/companion/new`, `/companion/{id}/transition`, and `/state/{session_id}/del
 - Unknown/stubbed major lore: state uncertainty and avoid unsupported major invention; minor fitting details are allowed.
 
 ## Canon Precedence (Conflict Resolution Order)
-1) `engine.md` 2) `world-rules.md` 3) core world docs (`world.md`, `geography.md`, `history.md`, `groups.md`, `npcs.md`) 4) runtime world JSON 5) archives/design notes. If conflict remains, choose conservative major-canon interpretation; fitting minor gap-fill remains allowed.
+1) `engine.md` 2) `character-rules.md` 3) core world docs (`world.md`, `geography.md`, `history.md`, `groups.md`, `npcs.md`) 4) runtime world JSON 5) archives/design notes. If conflict remains, choose conservative major-canon interpretation; fitting minor gap-fill remains allowed.
 
 ## Enumeration Rule
 Never list options from memory; call `GET /options` and present returned values only.

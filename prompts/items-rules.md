@@ -23,7 +23,7 @@ Use this file together with:
 * `combat-rules.md`
 * `economy-rules.md`
 * `mechanics-tables.md`
-* `world-rules.md`
+* `character-rules.md`
 * `engine.md`
 
 ---
@@ -460,7 +460,7 @@ This section will eventually define how the GPT should reason about:
 * stowed vs ready items
 * practical inventory burden
 
-Until then, load is tracked by abstract band per `world-rules.md`, not by per-item weight.
+Until then, load is tracked by abstract band per `character-rules.md`, not by per-item weight.
 
 ---
 
@@ -477,7 +477,7 @@ Until then, load is tracked by abstract band per `world-rules.md`, not by per-it
 * `economy-rules.md` — buying, barter, pricing pressure, transaction state rules
 * `magic-rules.md` — magical fields, spell access, casting resolution
 * `mechanics-tables.md` — single-file reference for numerical tables
-* `world-rules.md` — broader world/system-facing rules
+* `character-rules.md` — broader character/system-facing rules
 * `engine.md` — runtime adjudication and system logic
 
 ---

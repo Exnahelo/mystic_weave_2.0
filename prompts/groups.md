@@ -359,7 +359,7 @@ For full doctrine, structure, and present-day operations of all three orders, se
 - `geography.md` — physical structure, terrain regions, and settlement placement
 - `history.md` — chronology, founding, the Discordant War, and major historical consequences
 - `npcs.md` — Council dragons, anchor NPCs, and generative role definitions
-- `world-rules.md` — operational assumptions and system-facing world logic
+- `character-rules.md` — operational assumptions and system-facing world logic
 
 
 ---

@@ -15,8 +15,6 @@ on any rule, follow the pointer to its canonical file.
 
 ## Standard Roll Resolution
 
-Canonical: `prompts/world-rules.md`.
-
 ```
 Target = Domain Score + Knowledge Tier + Application Tier + Difficulty Modifier
 Roll d100 via POST /roll. Success if roll ≤ target.
@@ -225,7 +223,7 @@ Domain cap: 80. Calculate point-by-point when crossing brackets.
 
 ## Reputation
 
-Canonical: `prompts/world-rules.md`.
+Canonical: `prompts/character-rules.md`.
 
 ### Standing Bands
 
@@ -292,7 +290,7 @@ Persistent context, not arithmetic. Update only on material long-term shifts.
 
 ## Survival Bands
 
-Canonical: `prompts/world-rules.md`.
+Canonical: `prompts/character-rules.md`.
 
 ### Hunger
 
@@ -453,7 +451,7 @@ No dedicated reliability_under_stress field.
 
 ## Pacing Fields
 
-Canonical: `prompts/world-rules.md`.
+Canonical: `prompts/character-rules.md`.
 
 | Field | Type | Use |
 |---|---|---|
@@ -468,7 +466,7 @@ Canonical: `prompts/world-rules.md`.
 ## Reference Files
 
 - `prompts/engine.md` — runtime adjudication (instructions)
-- `prompts/world-rules.md` — broader world/system rules
+- `prompts/character-rules.md` — character mechanics, reputation, pacing, world graph, failure handling
 - `prompts/combat-rules.md` — combat resolution
 - `prompts/magic-rules.md` — magic system
 - `prompts/progression-rules.md` — tag advancement, AP, domain spend
