@@ -236,8 +236,8 @@ async def scene_resolved(
                     "UPDATE game_states "
                     "SET character = $1::jsonb, world = $2::jsonb, "
                     "    updated_at = NOW() WHERE session_id = $3",
-                    json.dumps(character),
-                    json.dumps(final_world),
+                    character,
+                    final_world,
                     body.session_id,
                 )
 

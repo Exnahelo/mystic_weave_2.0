@@ -44,7 +44,7 @@ class ArcRouteConn:
                     "primary_type": args[2],
                     "state": args[3],
                     "parent_arc_id": args[4],
-                    "data": json.loads(args[5]),
+                    "data": args[5] if isinstance(args[5], dict) else json.loads(args[5]),
                     "created_at": args[6],
                 }
             )

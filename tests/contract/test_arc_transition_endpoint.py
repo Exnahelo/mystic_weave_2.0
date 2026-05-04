@@ -40,12 +40,13 @@ class ArcTransitionConn:
 
     async def execute(self, query, *args):
         if "INSERT INTO arcs" in query:
-            self.rows.append({"id": args[0], "session_id": args[1], "state": args[3], "parent_arc_id": args[4], "data": json.loads(args[5])})
+            data = args[5] if isinstance(args[5], dict) else json.loads(args[5])
+            self.rows.append({"id": args[0], "session_id": args[1], "state": args[3], "parent_arc_id": args[4], "data": data})
         elif "UPDATE arcs" in query:
             for row in self.rows:
                 if row["id"] == args[3]:
                     row["state"] = args[0]
-                    row["data"] = json.loads(args[1])
+                    row["data"] = args[1] if isinstance(args[1], dict) else json.loads(args[1])
                     break
         elif "INSERT INTO arc_transitions" in query:
             self.transitions.append(

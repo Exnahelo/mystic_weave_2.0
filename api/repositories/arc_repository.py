@@ -48,7 +48,7 @@ class ArcRepository:
                 arc.primary_type,
                 arc.state,
                 arc.parent_arc_id,
-                arc.model_dump_json(),
+                arc.model_dump(mode="json"),
                 arc.timestamps.created_at,
             )
 
@@ -111,11 +111,11 @@ class ArcRepository:
             await conn.execute(
                 """
                 UPDATE arcs
-                SET state = $1, data = $2, updated_at = $3
+                SET state = $1, data = $2::jsonb, updated_at = $3
                 WHERE id = $4
                 """,
                 new_state,
-                arc.model_dump_json(),
+                arc.model_dump(mode="json"),
                 timestamps.last_progressed_at or datetime.now(timezone.utc),
                 arc_id,
             )
