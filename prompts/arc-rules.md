@@ -874,6 +874,58 @@ Total structure: four arc records, each scope-bounded and audit-traceable.
 
 ---
 
+## Worked Example: Vaelaryn-linked Escort to Vaelmere (formal contract)
+
+When the player committed to taking up Caelthir's escort assignment to Vaelmere, the arc-shaped event was: "ride out as recommended escort, deliver the burden, arrive in Vaelmere with road work proven."
+
+Decision procedure:
+
+1. Larger than one scene: yes (multi-leg travel + contact + arrival).
+2. Patron: Caelthir Vaelaryn (House Vaelaryn).
+3. Explicit objective: deliver Vaelaryn-linked escort burden to Vaelmere.
+4. Expected return: arrival at Vaelmere with burden intact, plus sealed assignment payment per escort norms.
+5. All three explicit → formal_contract_qualified: true.
+
+Authoring:
+
+- type: mission_multi_leg
+- subtype: escort
+- patron_faction: "house_vaelaryn"
+- patron_npc_id: "caelthir_vaelaryn"
+- formal_contract_qualified: true
+- ap_ownership: "parent" (no children expected)
+- closure_conditions: arrival at Vaelmere with burden delivered, prisoners (if any) transferred to receiving authority
+- failure_conditions: burden lost, escort routed, narrator-side abandonment
+
+Mid-arc scope change:
+
+When the road ambush became the dominant dramatic question, the narrator considered spawning a child arc for the ambush/counter-ambush phase. Decision: keep within parent envelope because the ambush was a single contact within the escort's planned scope. (A different narrator could justify spawning if the ambush became a multi-scene investigation chain.)
+
+Settlement at arrival:
+
+- Outcome: complete
+- Awarded AP: 1 (formal arc, real escort under real contact, in-envelope for mission_multi_leg)
+- Reputation changes:
+  - house_vaelaryn: +10 (fielded clean delivery under contact)
+- Coin awarded: 800 CD (real escort pay; not zero)
+- Coin forfeited: 0
+- Items awarded: none unique (arrow resupply / consumable refresh acceptable but not unique)
+- Leverage gained: captured ambush survivors and recovered support wagon tied to a deliberate strike on the burden
+- Obligations created: none (Sylvara not yet bound to follow-up inquiry; Rhel made it optional)
+- World-state consequences:
+  - Active tension: targeted interference against Vaelaryn-linked trade movement
+  - Threat at Vaelmere receiving end: low immediate, active investigative concern
+
+What went wrong in the actual session:
+
+- formal_contract_qualified was left implicit at create time → arc was treated as non-formal → AP zeroed at settle.
+- Settlement collapsed all channels into zero rather than enumerating → coin, reputation, and leverage all omitted.
+- Arc scope absorbed family planning, letter prep, and political briefing rather than starting at "accept escort" → arc remained in in_progress far past natural closure.
+
+The fix in this version of the rules: the Narrator Decision Procedure forces the formal-contract decision at create time, and the Settlement Enumeration Template forces channel-by-channel adjudication at close.
+
+---
+
 ## Migration Note
 
 Sylvara's existing play history, including the Heartwater chain and Thinwatch Spring, was completed before this system existed.
