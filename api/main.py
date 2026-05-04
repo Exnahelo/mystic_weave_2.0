@@ -24,7 +24,7 @@ from api.game_data import (
     list_focus,
 )
 from api.models import ArcTransitionLogEntry, HealthResponse, VersionResponse
-from api.routes import advancement, arc, catalog, character, combat, companion, location, npcs, options, progression, registry, roll, scene, scene_records, session, state, tags
+from api.routes import advancement, arc, catalog, character, combat, companion, location, narrator, npcs, options, progression, registry, roll, scene, scene_records, session, state, tags
 
 
 @asynccontextmanager
@@ -42,7 +42,7 @@ app = FastAPI(
         "The GPT is the narrator; this API is the memory. "
         "d100 roll-under resolution with domain scores and competency tiers."
     ),
-    version="5.3.1",
+    version="5.4.0",
     servers=[
         {
             "url": "https://mysticweave-production.up.railway.app",
@@ -100,6 +100,7 @@ app.include_router(npcs.router)
 app.include_router(registry.router)
 app.include_router(progression.router)
 app.include_router(scene_records.router)
+app.include_router(narrator.router)
 
 
 @app.get("/", tags=["health"], response_model=HealthResponse)

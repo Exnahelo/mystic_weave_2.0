@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "5.3.1"
+    "version": "5.4.0"
   },
   "servers": [
     {
@@ -1723,6 +1723,48 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SceneRecordsListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/narrator/scene_resolved": {
+      "post": {
+        "tags": [
+          "narrator"
+        ],
+        "summary": "Scene Resolved",
+        "description": "Single composable endpoint for resolving one scene. Records scene boundary, validates and commits at most one tag advance, applies non-advancement state changes, and advances time — all atomically.",
+        "operationId": "scene_resolved_narrator_scene_resolved_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SceneResolvedRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SceneResolvedResponse"
                 }
               }
             }
@@ -4098,6 +4140,102 @@
           "domains"
         ],
         "title": "CharacterModel"
+      },
+      "CharacterStateChanges": {
+        "properties": {
+          "hp": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hp"
+          },
+          "status_effects": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status Effects"
+          },
+          "equipment": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Equipment"
+          },
+          "domains": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Domains"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "identity": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Identity"
+          },
+          "reputation": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reputation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "CharacterStateChanges",
+        "description": "Non-advancement character changes the orchestrator can apply.\n\nAdvancement is intentionally excluded — it goes through `proposed_advance`\nand lands via the validated progression pipeline. Submitting `knowledge`,\n`magic`, or `advancement` here will be rejected by `extra=\"forbid\"`."
       },
       "CharacterStateDelta": {
         "properties": {
@@ -9687,6 +9825,251 @@
         "title": "SceneRelevantCharacterState",
         "description": "Narration-relevant subset of character/world state."
       },
+      "SceneResolvedRequest": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "scene_summary": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scene Summary"
+          },
+          "scene_actions": {
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/SpellCastAction"
+                },
+                {
+                  "$ref": "#/components/schemas/WeaponAttackAction"
+                },
+                {
+                  "$ref": "#/components/schemas/SocialRollAction"
+                },
+                {
+                  "$ref": "#/components/schemas/PerceptionRollAction"
+                },
+                {
+                  "$ref": "#/components/schemas/MovementAction"
+                },
+                {
+                  "$ref": "#/components/schemas/DefenseAction"
+                },
+                {
+                  "$ref": "#/components/schemas/GenericRollAction"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                  "defense": "#/components/schemas/DefenseAction",
+                  "generic_roll": "#/components/schemas/GenericRollAction",
+                  "movement": "#/components/schemas/MovementAction",
+                  "perception_roll": "#/components/schemas/PerceptionRollAction",
+                  "social_roll": "#/components/schemas/SocialRollAction",
+                  "spell_cast": "#/components/schemas/SpellCastAction",
+                  "weapon_attack": "#/components/schemas/WeaponAttackAction"
+                }
+              }
+            },
+            "type": "array",
+            "maxItems": 20,
+            "title": "Scene Actions"
+          },
+          "location_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location Id",
+            "description": "Where the scene occurred; defaults to world.location."
+          },
+          "arc_progressed_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 10,
+            "title": "Arc Progressed Ids"
+          },
+          "proposed_advance": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProposedAdvance"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "If the narrator wants to advance a tag this scene; the orchestrator validates against scene_actions and commits if eligible. Eligible advances commit even when a stronger candidate is omitted; the proposed_evaluation field surfaces that for narrator awareness."
+          },
+          "character_changes": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CharacterStateChanges"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "world_changes": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WorldStateChanges"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "time_elapsed": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Elapsed",
+            "description": "TimeElapsed payload to advance world.time; same shape as accepted by /state/{id}/delta time_elapsed. Turn auto-increments on advance."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "session_id"
+        ],
+        "title": "SceneResolvedRequest",
+        "description": "Single payload representing one resolved scene.\n\nThe orchestrator processes this transactionally: scene boundary recorded,\nprogression validated, advance committed (if proposed and eligible),\nstate changes applied, time advanced — all-or-nothing."
+      },
+      "SceneResolvedResponse": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "scene_id": {
+            "type": "string",
+            "title": "Scene Id"
+          },
+          "advance_committed": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Advance Committed",
+            "description": "Same shape as ProgressionCommitResponse if a commit happened."
+          },
+          "proposed_evaluation": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Proposed Evaluation",
+            "description": "Same shape as ProgressionScanResponse.proposed_evaluation[0]; present only if proposed_advance was submitted."
+          },
+          "candidates_ranked": {
+            "items": {
+              "$ref": "#/components/schemas/CandidateTag"
+            },
+            "type": "array",
+            "title": "Candidates Ranked",
+            "description": "Strongest-fit candidates derived from scene_actions."
+          },
+          "resolved_at": {
+            "type": "string",
+            "title": "Resolved At"
+          },
+          "location_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location Id"
+          },
+          "turn_at_resolution": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Turn At Resolution"
+          },
+          "arc_envelope_status": {
+            "items": {
+              "$ref": "#/components/schemas/ArcEnvelopeStatus"
+            },
+            "type": "array",
+            "title": "Arc Envelope Status"
+          },
+          "suggestions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Suggestions"
+          },
+          "state_after": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "State After",
+            "description": "Full game state: {character, world, log, updated_at}. Same shape as GET /state/{id}."
+          },
+          "changes_applied": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Changes Applied",
+            "description": "Human-readable list of what landed: e.g., ['scene_recorded', 'advance_committed:seedwake', 'world.location', 'time_advanced']."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "session_id",
+          "scene_id",
+          "resolved_at",
+          "location_id",
+          "turn_at_resolution",
+          "state_after"
+        ],
+        "title": "SceneResolvedResponse",
+        "description": "Composed response: what happened, what state is now, what's pending."
+      },
       "SocialRollAction": {
         "properties": {
           "type": {
@@ -10324,6 +10707,125 @@
           "goal"
         ],
         "title": "WorldModel"
+      },
+      "WorldStateChanges": {
+        "properties": {
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location"
+          },
+          "threat": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Threat"
+          },
+          "goal": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Goal"
+          },
+          "politics": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Politics"
+          },
+          "economy": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Economy"
+          },
+          "survival": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Survival"
+          },
+          "pacing": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pacing"
+          },
+          "companions": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Companions"
+          },
+          "companion_archive": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Companion Archive"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "WorldStateChanges",
+        "description": "Non-time world changes the orchestrator can apply.\n\nTime advancement goes through `time_elapsed`; submitting `time` or `turn`\nhere will be rejected. Turn auto-increments on each time advance."
       },
       "WorldStateDelta": {
         "properties": {

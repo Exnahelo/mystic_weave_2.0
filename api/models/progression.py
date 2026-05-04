@@ -352,3 +352,131 @@ class SceneRecordsListResponse(BaseModel):
         default=None,
         description="Opaque cursor for the next page; None if no more.",
     )
+
+
+# ---------------------------------------------------------------------------
+# Orchestrator models (Brief 20)
+# ---------------------------------------------------------------------------
+
+class CharacterStateChanges(BaseModel):
+    """Non-advancement character changes the orchestrator can apply.
+
+    Advancement is intentionally excluded — it goes through `proposed_advance`
+    and lands via the validated progression pipeline. Submitting `knowledge`,
+    `magic`, or `advancement` here will be rejected by `extra="forbid"`.
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    hp: dict[str, Any] | None = None
+    status_effects: list[str] | None = None
+    equipment: dict[str, Any] | None = None
+    domains: dict[str, Any] | None = None
+    notes: str | None = None
+    identity: dict[str, Any] | None = None
+    reputation: list[dict[str, Any]] | None = None
+
+
+class WorldStateChanges(BaseModel):
+    """Non-time world changes the orchestrator can apply.
+
+    Time advancement goes through `time_elapsed`; submitting `time` or `turn`
+    here will be rejected. Turn auto-increments on each time advance.
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    location: str | None = None
+    threat: str | None = None
+    goal: str | None = None
+    politics: dict[str, Any] | None = None
+    economy: dict[str, Any] | None = None
+    survival: dict[str, Any] | None = None
+    pacing: dict[str, Any] | None = None
+    companions: list[dict[str, Any]] | None = None
+    companion_archive: list[dict[str, Any]] | None = None
+
+
+class SceneResolvedRequest(BaseModel):
+    """Single payload representing one resolved scene.
+
+    The orchestrator processes this transactionally: scene boundary recorded,
+    progression validated, advance committed (if proposed and eligible),
+    state changes applied, time advanced — all-or-nothing.
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    session_id: str
+
+    scene_summary: str | None = Field(default=None, max_length=2000)
+    scene_actions: list[SceneAction] = Field(default_factory=list, max_length=20)
+    location_id: str | None = Field(
+        default=None,
+        description="Where the scene occurred; defaults to world.location.",
+    )
+    arc_progressed_ids: list[str] = Field(default_factory=list, max_length=10)
+
+    proposed_advance: ProposedAdvance | None = Field(
+        default=None,
+        description=(
+            "If the narrator wants to advance a tag this scene; the orchestrator "
+            "validates against scene_actions and commits if eligible. Eligible "
+            "advances commit even when a stronger candidate is omitted; the "
+            "proposed_evaluation field surfaces that for narrator awareness."
+        ),
+    )
+
+    character_changes: CharacterStateChanges | None = None
+    world_changes: WorldStateChanges | None = None
+
+    time_elapsed: dict[str, Any] | None = Field(
+        default=None,
+        description=(
+            "TimeElapsed payload to advance world.time; same shape as accepted "
+            "by /state/{id}/delta time_elapsed. Turn auto-increments on advance."
+        ),
+    )
+
+
+class SceneResolvedResponse(BaseModel):
+    """Composed response: what happened, what state is now, what's pending."""
+    model_config = ConfigDict(extra="forbid")
+
+    session_id: str
+    scene_id: str
+
+    advance_committed: dict[str, Any] | None = Field(
+        default=None,
+        description="Same shape as ProgressionCommitResponse if a commit happened.",
+    )
+    proposed_evaluation: dict[str, Any] | None = Field(
+        default=None,
+        description=(
+            "Same shape as ProgressionScanResponse.proposed_evaluation[0]; "
+            "present only if proposed_advance was submitted."
+        ),
+    )
+    candidates_ranked: list[CandidateTag] = Field(
+        default_factory=list,
+        description="Strongest-fit candidates derived from scene_actions.",
+    )
+
+    resolved_at: str
+    location_id: str | None
+    turn_at_resolution: int | None
+
+    arc_envelope_status: list[ArcEnvelopeStatus] = Field(default_factory=list)
+    suggestions: list[str] = Field(default_factory=list)
+
+    state_after: dict[str, Any] = Field(
+        description=(
+            "Full game state: {character, world, log, updated_at}. Same shape "
+            "as GET /state/{id}."
+        ),
+    )
+
+    changes_applied: list[str] = Field(
+        default_factory=list,
+        description=(
+            "Human-readable list of what landed: e.g., ['scene_recorded', "
+            "'advance_committed:seedwake', 'world.location', 'time_advanced']."
+        ),
+    )

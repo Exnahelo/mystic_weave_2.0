@@ -139,6 +139,98 @@ def _build_suggestions(envelope_status: list[ArcEnvelopeStatus]) -> list[str]:
 # POST /scene/declare_resolution
 # ---------------------------------------------------------------------------
 
+async def declare_scene_in_transaction(
+    conn: asyncpg.Connection,
+    *,
+    session_id: str,
+    scene_summary: str | None,
+    scene_actions: list[dict[str, Any]],
+    location_id: str | None,
+    arc_progressed_ids: list[str],
+) -> dict[str, Any]:
+    """Record a scene boundary using the given (already-open) transactional connection.
+
+    Performs the same scene_records insert, arc_progressed_ids validation,
+    envelope status computation, and suggestion building as the
+    /scene/declare_resolution endpoint, but does not open or close the
+    transaction.
+
+    `scene_actions` is `list[dict]` (not `list[SceneAction]`) so the
+    orchestrator can pass already-dumped action dicts without a re-walk.
+
+    Returns a dict matching DeclareSceneResolutionResponse fields plus
+    `session_id` for caller convenience:
+    {scene_id, session_id, resolved_at, location_id, turn_at_resolution,
+     arc_envelope_status, suggestions}.
+    """
+    row = await conn.fetchrow(
+        "SELECT world FROM game_states WHERE session_id = $1",
+        session_id,
+    )
+    if row is None:
+        raise session_not_found(session_id)
+    world = row["world"] or {}
+
+    unknown = await _validate_arc_ids(conn, session_id, arc_progressed_ids)
+    if unknown:
+        raise HTTPException(
+            status_code=422,
+            detail={
+                "error": "unknown_arc_ids",
+                "message": "One or more arc_progressed_ids do not belong to this session.",
+                "unknown_arc_ids": unknown,
+            },
+        )
+
+    resolved_location = location_id or world.get("location")
+    turn = world.get("turn")
+    time_state = world.get("time")
+
+    scene_id = str(uuid.uuid4())
+
+    await conn.execute(
+        """
+        INSERT INTO scene_records (
+            scene_id, session_id, scene_summary, scene_actions,
+            arc_progressed_ids, location_id, turn_at_resolution,
+            time_at_resolution
+        ) VALUES ($1, $2, $3, $4::jsonb, $5::jsonb, $6, $7, $8::jsonb)
+        """,
+        scene_id,
+        session_id,
+        scene_summary,
+        json.dumps(scene_actions),
+        json.dumps(arc_progressed_ids),
+        resolved_location,
+        turn,
+        json.dumps(time_state) if time_state else None,
+    )
+
+    ts_row = await conn.fetchrow(
+        "SELECT resolved_at FROM scene_records WHERE scene_id = $1",
+        scene_id,
+    )
+    resolved_at_value = ts_row["resolved_at"] if ts_row else None
+    resolved_at = (
+        resolved_at_value.isoformat()
+        if hasattr(resolved_at_value, "isoformat")
+        else str(resolved_at_value)
+    )
+
+    envelope_status = await _gather_arc_envelope_status(conn, session_id)
+    suggestions = _build_suggestions(envelope_status)
+
+    return {
+        "scene_id": scene_id,
+        "session_id": session_id,
+        "resolved_at": resolved_at,
+        "location_id": resolved_location,
+        "turn_at_resolution": turn,
+        "arc_envelope_status": envelope_status,
+        "suggestions": suggestions,
+    }
+
+
 @router.post(
     "/scene/declare_resolution",
     response_model=DeclareSceneResolutionResponse,
@@ -154,74 +246,18 @@ async def declare_scene_resolution(
     pool: asyncpg.Pool = Depends(get_pool),
 ) -> DeclareSceneResolutionResponse:
     """Record a scene boundary and return envelope status."""
+    actions_dicts = [a.model_dump() for a in body.scene_actions]
     async with pool.acquire() as conn:
         async with conn.transaction():
-            row = await conn.fetchrow(
-                "SELECT world FROM game_states WHERE session_id = $1",
-                body.session_id,
+            result = await declare_scene_in_transaction(
+                conn,
+                session_id=body.session_id,
+                scene_summary=body.scene_summary,
+                scene_actions=actions_dicts,
+                location_id=body.location_id,
+                arc_progressed_ids=body.arc_progressed_ids,
             )
-            if row is None:
-                raise session_not_found(body.session_id)
-            world = row["world"] or {}
-
-            unknown = await _validate_arc_ids(conn, body.session_id, body.arc_progressed_ids)
-            if unknown:
-                raise HTTPException(
-                    status_code=422,
-                    detail={
-                        "error": "unknown_arc_ids",
-                        "message": "One or more arc_progressed_ids do not belong to this session.",
-                        "unknown_arc_ids": unknown,
-                    },
-                )
-
-            resolved_location = body.location_id or world.get("location")
-            turn = world.get("turn")
-            time_state = world.get("time")
-
-            scene_id = str(uuid.uuid4())
-
-            await conn.execute(
-                """
-                INSERT INTO scene_records (
-                    scene_id, session_id, scene_summary, scene_actions,
-                    arc_progressed_ids, location_id, turn_at_resolution,
-                    time_at_resolution
-                ) VALUES ($1, $2, $3, $4::jsonb, $5::jsonb, $6, $7, $8::jsonb)
-                """,
-                scene_id,
-                body.session_id,
-                body.scene_summary,
-                json.dumps([a.model_dump() for a in body.scene_actions]),
-                json.dumps(body.arc_progressed_ids),
-                resolved_location,
-                turn,
-                json.dumps(time_state) if time_state else None,
-            )
-
-            ts_row = await conn.fetchrow(
-                "SELECT resolved_at FROM scene_records WHERE scene_id = $1",
-                scene_id,
-            )
-            resolved_at_value = ts_row["resolved_at"] if ts_row else None
-            resolved_at = (
-                resolved_at_value.isoformat()
-                if hasattr(resolved_at_value, "isoformat")
-                else str(resolved_at_value)
-            )
-
-            envelope_status = await _gather_arc_envelope_status(conn, body.session_id)
-            suggestions = _build_suggestions(envelope_status)
-
-    return DeclareSceneResolutionResponse(
-        scene_id=scene_id,
-        session_id=body.session_id,
-        resolved_at=resolved_at,
-        location_id=resolved_location,
-        turn_at_resolution=turn,
-        arc_envelope_status=envelope_status,
-        suggestions=suggestions,
-    )
+    return DeclareSceneResolutionResponse(**result)
 
 
 # ---------------------------------------------------------------------------

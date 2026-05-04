@@ -420,6 +420,239 @@ async def progression_scan(
 # /progression/commit
 # ---------------------------------------------------------------------------
 
+async def commit_advance_in_transaction(
+    conn: asyncpg.Connection,
+    *,
+    session_id: str,
+    tag: str,
+    rationale: str | None,
+    scene_id: str | None,
+) -> dict[str, Any]:
+    """Apply one validated advance using the given (already-open) transactional connection.
+
+    Performs the same validation, mutation, and counter math as the
+    /progression/commit endpoint, but does not open or close the transaction.
+    Caller is responsible for transaction lifecycle.
+
+    Returns a dict matching ProgressionCommitResponse fields:
+    {session_id, tag, kind, new_tier, advancement_after, parent_bumped,
+     parent_tag, log_entry_index}.
+
+    Raises HTTPException on validation errors. Caller should let these
+    propagate; the surrounding transaction will roll back automatically.
+    """
+    # Local import to avoid circular dependency with routes/state.
+    from api.routes.state import _apply_tag_advancement_counters
+
+    row = await conn.fetchrow(
+        "SELECT character, log FROM game_states WHERE session_id = $1 FOR UPDATE",
+        session_id,
+    )
+    if row is None:
+        raise session_not_found()
+
+    character = dict(row["character"])
+    log_arr = list(row["log"])
+
+    # Brief 19: optional scene_id enforces one-tag-per-scene at the DB.
+    # Lock the scene row alongside the game_state row so a concurrent
+    # commit on the same scene loses cleanly.
+    if scene_id:
+        scene_row = await conn.fetchrow(
+            "SELECT tag_advance_committed FROM scene_records "
+            "WHERE scene_id = $1 AND session_id = $2 FOR UPDATE",
+            scene_id,
+            session_id,
+        )
+        if scene_row is None:
+            raise HTTPException(
+                status_code=422,
+                detail={
+                    "error": "unknown_scene_id",
+                    "scene_id": scene_id,
+                    "session_id": session_id,
+                },
+            )
+        if scene_row["tag_advance_committed"] is not None:
+            raise HTTPException(
+                status_code=409,
+                detail={
+                    "error": "scene_already_advanced",
+                    "existing_tag": scene_row["tag_advance_committed"],
+                    "scene_id": scene_id,
+                },
+            )
+
+    lookup = _registry_lookup(tag)
+    if lookup is None:
+        raise HTTPException(
+            status_code=422,
+            detail={
+                "error": "unknown_tag",
+                "message": f"Tag '{tag}' not found in any registry.",
+                "tag": tag,
+            },
+        )
+
+    kind, data = lookup
+    parent_bumped = False
+    parent_tag: str | None = None
+    new_tier = 0
+
+    updated_character = json.loads(json.dumps(character))  # deep copy
+
+    if kind == "application":
+        parent = data.get("group", "")
+        kgroup = updated_character.setdefault("knowledge", {}).get(parent)
+        if not isinstance(kgroup, dict) or "applications" not in kgroup:
+            raise HTTPException(
+                status_code=422,
+                detail={
+                    "error": "parent_group_not_held",
+                    "message": (
+                        f"Character does not hold parent group '{parent}' "
+                        f"for application '{tag}'."
+                    ),
+                },
+            )
+        apps = kgroup["applications"]
+        if tag not in apps:
+            raise tag_not_held(f"Character does not hold application '{tag}'.")
+        current = apps[tag]
+        if current >= 5:
+            raise at_max_tier(current)
+        new_tier = current + 1
+        parent_tier = kgroup.get("tier", 0)
+        if new_tier > parent_tier:
+            kgroup["tier"] = new_tier
+            parent_bumped = True
+            parent_tag = parent
+        apps[tag] = new_tier
+        updated_character["knowledge"][parent] = kgroup
+
+    elif kind == "knowledge_group":
+        kgroup = updated_character.setdefault("knowledge", {}).get(tag)
+        if not isinstance(kgroup, dict) or "tier" not in kgroup:
+            raise HTTPException(
+                status_code=422,
+                detail={
+                    "error": "tag_not_held",
+                    "message": f"Character does not hold knowledge group '{tag}'.",
+                },
+            )
+        current = kgroup["tier"]
+        if current >= 5:
+            raise HTTPException(
+                status_code=422,
+                detail={"error": "at_max_tier", "current_tier": current},
+            )
+        new_tier = current + 1
+        kgroup["tier"] = new_tier
+        updated_character["knowledge"][tag] = kgroup
+
+    elif kind == "spell":
+        parent = data.get("field", "")
+        fblock = updated_character.setdefault("magic", {}).get(parent)
+        if not isinstance(fblock, dict) or "spells" not in fblock:
+            raise HTTPException(
+                status_code=422,
+                detail={
+                    "error": "parent_field_not_held",
+                    "message": (
+                        f"Character does not hold parent field '{parent}' "
+                        f"for spell '{tag}'."
+                    ),
+                },
+            )
+        spells = fblock["spells"]
+        if tag not in spells:
+            raise HTTPException(
+                status_code=422,
+                detail={
+                    "error": "tag_not_held",
+                    "message": f"Character does not hold spell '{tag}'.",
+                },
+            )
+        current = spells[tag]
+        if current >= 5:
+            raise HTTPException(
+                status_code=422,
+                detail={"error": "at_max_tier", "current_tier": current},
+            )
+        new_tier = current + 1
+        field_tier = fblock.get("tier", 0)
+        if new_tier > field_tier:
+            fblock["tier"] = new_tier
+            parent_bumped = True
+            parent_tag = parent
+        spells[tag] = new_tier
+        updated_character["magic"][parent] = fblock
+
+    elif kind == "magic_field":
+        fblock = updated_character.setdefault("magic", {}).get(tag)
+        if not isinstance(fblock, dict) or "tier" not in fblock:
+            raise HTTPException(
+                status_code=422,
+                detail={
+                    "error": "tag_not_held",
+                    "message": f"Character does not hold magic field '{tag}'.",
+                },
+            )
+        current = fblock["tier"]
+        if current >= 5:
+            raise HTTPException(
+                status_code=422,
+                detail={"error": "at_max_tier", "current_tier": current},
+            )
+        new_tier = current + 1
+        fblock["tier"] = new_tier
+        updated_character["magic"][tag] = fblock
+
+    new_advancement = _apply_tag_advancement_counters(character, updated_character)
+    updated_character["advancement"] = new_advancement
+
+    log_text = f"Advancement: {tag} -> tier {new_tier}"
+    if parent_bumped:
+        log_text += f" (parent {parent_tag} bumped to {new_tier})"
+    if rationale:
+        log_text += f". Rationale: {rationale}"
+
+    typed_entry = TypedLogEntry(type="progression", text=log_text)
+    new_log = log_arr + [typed_entry.model_dump(exclude_none=True)]
+    log_entry_index = len(new_log) - 1
+
+    await conn.execute(
+        "UPDATE game_states "
+        "SET character = $1::jsonb, log = $2::jsonb, updated_at = NOW() "
+        "WHERE session_id = $3",
+        json.dumps(updated_character),
+        json.dumps(new_log),
+        session_id,
+    )
+
+    # Brief 19: stamp the scene record with the committed tag inside
+    # the same transaction so the one-tag-per-scene guarantee is
+    # atomic with the character mutation.
+    if scene_id:
+        await conn.execute(
+            "UPDATE scene_records SET tag_advance_committed = $1 "
+            "WHERE scene_id = $2",
+            tag,
+            scene_id,
+        )
+
+    return {
+        "session_id": session_id,
+        "tag": tag,
+        "kind": kind,
+        "new_tier": new_tier,
+        "advancement_after": new_advancement,
+        "parent_bumped": parent_bumped,
+        "parent_tag": parent_tag,
+        "log_entry_index": log_entry_index,
+    }
+
+
 @router.post(
     "/progression/commit",
     response_model=ProgressionCommitResponse,
@@ -435,218 +668,14 @@ async def progression_commit(
     body: ProgressionCommitRequest,
     pool: asyncpg.Pool = Depends(get_pool),
 ) -> ProgressionCommitResponse:
-    """Apply one validated advance atomically. Reuses state.py counter logic."""
-    # Local import to avoid circular dependency between routes/progression and routes/state.
-    from api.routes.state import _apply_tag_advancement_counters
-
+    """Apply one validated advance atomically. Wraps the helper in a transaction."""
     async with pool.acquire() as conn:
         async with conn.transaction():
-            row = await conn.fetchrow(
-                "SELECT character, log FROM game_states WHERE session_id = $1 FOR UPDATE",
-                body.session_id,
+            result = await commit_advance_in_transaction(
+                conn,
+                session_id=body.session_id,
+                tag=body.tag,
+                rationale=body.rationale,
+                scene_id=body.scene_id,
             )
-            if row is None:
-                raise session_not_found()
-
-            character = dict(row["character"])
-            log_arr = list(row["log"])
-
-            # Brief 19: optional scene_id enforces one-tag-per-scene at the DB.
-            # Lock the scene row alongside the game_state row so a concurrent
-            # commit on the same scene loses cleanly.
-            if body.scene_id:
-                scene_row = await conn.fetchrow(
-                    "SELECT tag_advance_committed FROM scene_records "
-                    "WHERE scene_id = $1 AND session_id = $2 FOR UPDATE",
-                    body.scene_id,
-                    body.session_id,
-                )
-                if scene_row is None:
-                    raise HTTPException(
-                        status_code=422,
-                        detail={
-                            "error": "unknown_scene_id",
-                            "scene_id": body.scene_id,
-                            "session_id": body.session_id,
-                        },
-                    )
-                if scene_row["tag_advance_committed"] is not None:
-                    raise HTTPException(
-                        status_code=409,
-                        detail={
-                            "error": "scene_already_advanced",
-                            "existing_tag": scene_row["tag_advance_committed"],
-                            "scene_id": body.scene_id,
-                        },
-                    )
-
-            lookup = _registry_lookup(body.tag)
-            if lookup is None:
-                raise HTTPException(
-                    status_code=422,
-                    detail={
-                        "error": "unknown_tag",
-                        "message": f"Tag '{body.tag}' not found in any registry.",
-                        "tag": body.tag,
-                    },
-                )
-
-            kind, data = lookup
-            parent_bumped = False
-            parent_tag: str | None = None
-            new_tier = 0
-
-            updated_character = json.loads(json.dumps(character))  # deep copy
-
-            if kind == "application":
-                parent = data.get("group", "")
-                kgroup = updated_character.setdefault("knowledge", {}).get(parent)
-                if not isinstance(kgroup, dict) or "applications" not in kgroup:
-                    raise HTTPException(
-                        status_code=422,
-                        detail={
-                            "error": "parent_group_not_held",
-                            "message": (
-                                f"Character does not hold parent group '{parent}' "
-                                f"for application '{body.tag}'."
-                            ),
-                        },
-                    )
-                apps = kgroup["applications"]
-                if body.tag not in apps:
-                    raise tag_not_held(
-                        f"Character does not hold application '{body.tag}'."
-                    )
-                current = apps[body.tag]
-                if current >= 5:
-                    raise at_max_tier(current)
-                new_tier = current + 1
-                parent_tier = kgroup.get("tier", 0)
-                if new_tier > parent_tier:
-                    kgroup["tier"] = new_tier
-                    parent_bumped = True
-                    parent_tag = parent
-                apps[body.tag] = new_tier
-                updated_character["knowledge"][parent] = kgroup
-
-            elif kind == "knowledge_group":
-                kgroup = updated_character.setdefault("knowledge", {}).get(body.tag)
-                if not isinstance(kgroup, dict) or "tier" not in kgroup:
-                    raise HTTPException(
-                        status_code=422,
-                        detail={
-                            "error": "tag_not_held",
-                            "message": f"Character does not hold knowledge group '{body.tag}'.",
-                        },
-                    )
-                current = kgroup["tier"]
-                if current >= 5:
-                    raise HTTPException(
-                        status_code=422,
-                        detail={"error": "at_max_tier", "current_tier": current},
-                    )
-                new_tier = current + 1
-                kgroup["tier"] = new_tier
-                updated_character["knowledge"][body.tag] = kgroup
-
-            elif kind == "spell":
-                parent = data.get("field", "")
-                fblock = updated_character.setdefault("magic", {}).get(parent)
-                if not isinstance(fblock, dict) or "spells" not in fblock:
-                    raise HTTPException(
-                        status_code=422,
-                        detail={
-                            "error": "parent_field_not_held",
-                            "message": (
-                                f"Character does not hold parent field '{parent}' "
-                                f"for spell '{body.tag}'."
-                            ),
-                        },
-                    )
-                spells = fblock["spells"]
-                if body.tag not in spells:
-                    raise HTTPException(
-                        status_code=422,
-                        detail={
-                            "error": "tag_not_held",
-                            "message": f"Character does not hold spell '{body.tag}'.",
-                        },
-                    )
-                current = spells[body.tag]
-                if current >= 5:
-                    raise HTTPException(
-                        status_code=422,
-                        detail={"error": "at_max_tier", "current_tier": current},
-                    )
-                new_tier = current + 1
-                field_tier = fblock.get("tier", 0)
-                if new_tier > field_tier:
-                    fblock["tier"] = new_tier
-                    parent_bumped = True
-                    parent_tag = parent
-                spells[body.tag] = new_tier
-                updated_character["magic"][parent] = fblock
-
-            elif kind == "magic_field":
-                fblock = updated_character.setdefault("magic", {}).get(body.tag)
-                if not isinstance(fblock, dict) or "tier" not in fblock:
-                    raise HTTPException(
-                        status_code=422,
-                        detail={
-                            "error": "tag_not_held",
-                            "message": f"Character does not hold magic field '{body.tag}'.",
-                        },
-                    )
-                current = fblock["tier"]
-                if current >= 5:
-                    raise HTTPException(
-                        status_code=422,
-                        detail={"error": "at_max_tier", "current_tier": current},
-                    )
-                new_tier = current + 1
-                fblock["tier"] = new_tier
-                updated_character["magic"][body.tag] = fblock
-
-            new_advancement = _apply_tag_advancement_counters(character, updated_character)
-            updated_character["advancement"] = new_advancement
-
-            log_text = f"Advancement: {body.tag} -> tier {new_tier}"
-            if parent_bumped:
-                log_text += f" (parent {parent_tag} bumped to {new_tier})"
-            if body.rationale:
-                log_text += f". Rationale: {body.rationale}"
-
-            typed_entry = TypedLogEntry(type="progression", text=log_text)
-            new_log = log_arr + [typed_entry.model_dump(exclude_none=True)]
-            log_entry_index = len(new_log) - 1
-
-            await conn.execute(
-                "UPDATE game_states "
-                "SET character = $1::jsonb, log = $2::jsonb, updated_at = NOW() "
-                "WHERE session_id = $3",
-                json.dumps(updated_character),
-                json.dumps(new_log),
-                body.session_id,
-            )
-
-            # Brief 19: stamp the scene record with the committed tag inside
-            # the same transaction so the one-tag-per-scene guarantee is
-            # atomic with the character mutation.
-            if body.scene_id:
-                await conn.execute(
-                    "UPDATE scene_records SET tag_advance_committed = $1 "
-                    "WHERE scene_id = $2",
-                    body.tag,
-                    body.scene_id,
-                )
-
-    return ProgressionCommitResponse(
-        session_id=body.session_id,
-        tag=body.tag,
-        kind=kind,
-        new_tier=new_tier,
-        advancement_after=new_advancement,
-        parent_bumped=parent_bumped,
-        parent_tag=parent_tag,
-        log_entry_index=log_entry_index,
-    )
+    return ProgressionCommitResponse(**result)

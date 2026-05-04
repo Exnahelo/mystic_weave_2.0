@@ -45,6 +45,13 @@ GPT_SPEC_EXCLUSIONS = [
     # Brief 19 admin reads: orchestrator/operator only.
     ("get", "/scene/record/{session_id}/{scene_id}"),
     ("get", "/scene/records/{session_id}"),
+    # Brief 20 absorbed components: the narrator now calls
+    # POST /narrator/scene_resolved which composes these three internally.
+    # They remain in openapi.json for direct testing, admin tooling, and
+    # the rare edge cases the orchestrator doesn't cover.
+    ("post", "/scene/declare_resolution"),
+    ("post", "/progression/scan"),
+    ("post", "/progression/commit"),
 ]
 
 

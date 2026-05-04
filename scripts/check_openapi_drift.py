@@ -29,6 +29,10 @@ GPT_SPEC_EXCLUSIONS = {
     ("post", "/character/{session_id}/spend_ap"),
     ("get", "/scene/record/{session_id}/{scene_id}"),
     ("get", "/scene/records/{session_id}"),
+    # Brief 20 orchestrator absorbs these three; see regenerate_openapi.py.
+    ("post", "/scene/declare_resolution"),
+    ("post", "/progression/scan"),
+    ("post", "/progression/commit"),
 }
 IGNORED_PATHS = {"/"}
 IGNORED_APP_ONLY_PATHS = {"/version"}
