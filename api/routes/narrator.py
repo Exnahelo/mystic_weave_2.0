@@ -247,6 +247,17 @@ async def scene_resolved(
                 "FROM game_states WHERE session_id = $1",
                 body.session_id,
             )
+            import logging
+            _log = logging.getLogger("narrator.diagnostic")
+            _log.error(
+                "scene_resolved post-update read: char_type=%s world_type=%s log_type=%s "
+                "char_str_head=%r world_str_head=%r",
+                type(final_row["character"]).__name__,
+                type(final_row["world"]).__name__,
+                type(final_row["log"]).__name__,
+                final_row["character"][:80] if isinstance(final_row["character"], str) else None,
+                final_row["world"][:80] if isinstance(final_row["world"], str) else None,
+            )
             state_after = {
                 "character": dict(final_row["character"]),
                 "world": dict(final_row["world"]),
