@@ -4,7 +4,7 @@ Authoritative reference for naming identifiers in this repository.
 
 When a naming question arises, match the identifier's **category**, not the file it appears in.
 
-This file covers naming only. Structural, schema, validation, and content-integrity rules belong in a separate policy document.
+This file primarily covers naming. One section at the end captures restructure / cleanup hygiene that crosses naming boundaries. Other structural, schema, validation, and content-integrity rules belong in separate policy documents.
 
 ---
 
@@ -551,3 +551,9 @@ When naming something:
 4. If the artifact is a maintained mirror of another artifact, apply the mirrored-artifact rule.
 5. If still unclear, choose the most common convention in that language ecosystem.
 6. Document exceptions instead of improvising.
+
+---
+
+## Restructure / cleanup hygiene
+
+When deleting a file or renaming a canonical reference, the "find all references" search must include every directory containing executable code or build configuration, not just the obvious documentation and source tree. In particular: `scripts/`, `alembic/`, `railway.toml`, `pyproject.toml`, `pytest.ini`, `.github/`, and any tool config files at the repo root. The prompt-restructure work in 5.5.0 missed `scripts/validate_prompts.py` because the initial grep scoped only `prompts/ api/ data/ tests/ docs/ schemas/ CLAUDE.md`. The validator broke silently until caught at the next phase's CI lane.
