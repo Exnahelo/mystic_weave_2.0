@@ -1,0 +1,334 @@
+# Mystic Weave — Character & World-State Rules
+
+Canonical narrator-facing source for character mechanics (domains, HP,
+survival), competency taxonomy, reputation, pacing, the world graph,
+and character-level failure handling. Backend state shape and validation
+reference these rules.
+
+For arc lifecycle: see `arc-rules.md`.
+For progression and AP: see `progression-rules.md`.
+For combat: see `combat-rules.md`.
+For magic: see `magic-rules.md`.
+For economy: see `economy-rules.md`.
+For mechanics quick-reference tables: see `mechanics-tables.md`.
+
+---
+
+## Domain Scores
+
+Characters have seven domains scored 25–80:
+
+| Domain | Governs |
+|---|---|
+| Power | Force, mass, leverage, brute physical output |
+| Agility | Coordination, balance, speed, fine motor precision |
+| Perception | Senses, awareness, reading environments and people |
+| Endurance | Stamina, resilience, recovery, physical and pain tolerance |
+| Intellect | Reasoning, memory, patterning, deduction, arcane knowledge |
+| Will | Discipline, self-regulation, mental resilience, concentration under pressure |
+| Presence | Social weight, confidence, expressiveness, influence over others |
+
+Domain scores are set by ancestry base (280 total), culture bonus (10), background bonus (10), and player adjustment (10 points, max +5 per domain). Starting values are usually within ancestry baselines (commonly 25–60 before bonuses), but campaign progression can raise domains to 80 through AP spend.
+
+---
+
+## Hit Points
+
+All characters start at 100 HP. Damage is dealt in whole numbers. 15 damage = 15% of max HP.
+
+- HP cannot go below 0
+- When `hp.current` reaches 0, the character is incapacitated
+
+### HP Recovery
+
+HP can be recovered through:
+- **Short rest** (1 hour in a low-threat location): recover 10–25 HP depending on conditions
+- **Long rest** (full night in a safe location): recover all HP
+
+---
+
+## Survival & Load (Lightweight State)
+
+Survival is tracked as coarse world-state bands in `world.survival`.
+Do not use per-action numeric meters.
+
+### Hunger Bands
+
+| Band | Meaning |
+|---|---|
+| `sated` | Recently fed; no hunger pressure |
+| `hungry` | Missed meaningful nourishment; discomfort and reduced recovery quality |
+| `starving` | Prolonged food deprivation; severe weakness risk |
+
+### Hydration Bands
+
+| Band | Meaning |
+|---|---|
+| `hydrated` | Water needs met |
+| `thirsty` | Noticeable dehydration pressure |
+| `dehydrated` | Severe water deficit; immediate performance risk |
+
+### Fatigue Bands (Primary Exertion Economy)
+
+| Band | Meaning |
+|---|---|
+| `rested` | Fully ready |
+| `tired` | Light wear |
+| `fatigued` | Sustained strain; meaningful action pressure |
+| `exhausted` | Critical overextension |
+
+### Load Bands (Abstract, not weight simulation)
+
+| Band | Meaning |
+|---|---|
+| `light` | Minimal carried burden |
+| `normal` | Standard adventuring load |
+| `burdened` | Heavy but manageable |
+| `overloaded` | Excessive burden; major movement/action pressure |
+
+No exact item weight, container volume, or dimensions are simulated in this pass.
+
+### Deterministic Update Triggers
+
+Update survival bands only at clear checkpoints:
+- end of meaningful travel leg
+- after major exertion/forced march/heavy climb/chase labor
+- after long rest / meaningful recovery stop
+- after explicit deprivation window (food or water missed)
+- after explicit resupply/consumption (food or water secured)
+
+Do not update hunger/hydration/fatigue on routine low-impact actions.
+
+### Canonical State Movement Guidance
+
+- Hunger/hydration usually move one band per deprivation checkpoint; move one band back on clear resupply/recovery.
+- Fatigue is the primary active tracker: exertion raises it; proper rest lowers it.
+- Poor hunger/hydration state can block full fatigue recovery.
+- Load modifies fatigue pressure and physical/travel difficulty:
+  - `light`: can ease travel/exertion difficulty where fitting.
+  - `normal`: baseline.
+  - `burdened`: increase fatigue gain pressure and harder physical/travel checks.
+  - `overloaded`: strong fatigue pressure; strenuous movement may be disallowed until load changes.
+- Keep changes sparse, explicit, and deterministic across turns.
+
+---
+
+## Competency Tags
+
+Competency is layered: knowledge groups are broad understanding, applications are specific trained execution, magical fields are parallel to knowledge groups but additionally gate spell access. Tag advancement triggers and parent-cap mechanics are canonical in `progression-rules.md`. This file is canonical for the taxonomy itself.
+
+Item references remain contextual only: an item's `roll_tag` can justify fit for an action, but never grants an additional numeric modifier beyond normal domain/tag/difficulty assembly.
+
+### Knowledge Groups (broad understanding)
+
+Knowledge groups are the broad competency layer. Tiers 1–5, each tier adds +1 to target number.
+
+| Group | Domain | Summary |
+|---|---|---|
+| Athletics | Power / Endurance | Gross motor effort under load: hauling, climbing, swimming, forced movement |
+| Mobility | Agility | Balance, acrobatics, traversal, evasion, riding balance |
+| Stealth | Agility | Going unseen, unheard, and untracked in the moment |
+| Skulduggery | Agility | Precision illicit technique: sleight of hand, locks, sabotage, forgery |
+| Awareness | Perception | Immediate noticing: danger, tells, tension, crowd shifts |
+| Investigation | Perception / Intellect | Structured inquiry, deduction, evidence reading, interrogation |
+| Tracking | Perception | Following trails, spoor, route inference, counter-tracking |
+| Survival | Endurance | Enduring hostile conditions, shelter, fire, navigation, camp discipline |
+| Nature | Perception | Understanding living systems: animals, plants, agriculture, ecology |
+| Medicine | Intellect | Diagnosis, treatment, surgery, pharmacology, mental care |
+| Combat | Power | The active execution of violence, weapons, armor, shields |
+| Warfare | Will / Intellect | Tactical understanding, battlefield reading, command presence |
+| Craft | Intellect | Making and repairing practical things through trade skill |
+| Engineering | Intellect | Mechanisms, structures, lockworks, siege logic, arcane substrates |
+| Lore | Intellect | History, law, politics, religion, linguistics, genealogy, economics |
+| Influence | Presence | Persuasion, deception, diplomacy, command, pressure, etiquette |
+| Performance | Presence | Singing, instruments, dance, oratory, theater, storytelling |
+| Discipline | Will | Focus, courage, resolve, composure, meditation, oath endurance |
+| Arcana | Intellect | Non-spell magical understanding: theory, wards, rituals, risk |
+
+### Applications (specific trained execution)
+
+Applications sit under a parent knowledge group, recorded as an `applications` map nested inside the group's record on the character. Tiers 1–5, each tier adds +1 to target number. The application's tier is structurally capped by the parent group's tier (parent-cap rule, enforced at model construction). Use one relevant group tier + one relevant application tier for a normal non-spell roll.
+
+Examples:
+- **Athletics** → hauling, climbing, swimming, forced_movement, grappling
+- **Mobility** → acrobatics, balance, evasion, parkour, riding_posture
+- **Influence** → persuasion, deception, diplomacy, command, pressure, seduction, etiquette
+- **Arcana** → theory, ritual_structure, field_recognition, enchantment_analysis, ward_reading, risk_assessment
+
+Applications do not replace groups; they narrow how the character expresses that broader training.
+
+### Magical Fields
+
+Magical fields are parallel to knowledge groups and follow the same tier math (+1 per tier), but they additionally gate spell access. Each field's record on the character holds its tier and a nested `spells` map; per-character spell mastery is structurally capped by the field's tier — the same parent-cap mechanic as knowledge groups and applications.
+
+The canonical Field × Primary Domain × Governs table, the cross-domain rule, the domain-gating threshold table, and access-band/failure mechanics live in `magic-rules.md`. This file does not duplicate them.
+
+### Maximum Competency Contribution
+
+Maximum competency contribution on a standard non-spell roll: Knowledge Group 5 + Application 5 = +10.
+
+---
+
+## Reputation
+
+Reputation represents standing with a specific faction and ranges from **−100 to +100**.
+
+Reputation is its own track. It does not depend on AP rules. It triggers on faction-relevant outcomes regardless of whether those outcomes earned AP or tag advancement.
+
+### What Triggers a Reputation Change
+
+Reputation can change in three ways:
+
+1. **Drift** — small, repeated faction-relevant beats that accumulate over time
+2. **Direct change** — meaningful interactions or completed/failed actions with faction stake
+3. **World-consequence change** — outcomes whose consequence reshapes the faction's situation directly
+
+### Consequence Scale (Reputation Use)
+
+Reputation uses the following consequence vocabulary, defined here for self-contained use. This vocabulary is scoped to reputation in this file; other tracks define their own triggers.
+
+| Scale | One-sentence definition |
+|---|---|
+| Local | The outcome affects only the immediate scene and creates no durable downstream pressure beyond the participants present. |
+| Situational | The outcome creates a meaningful short-term shift for the current objective, encounter, or nearby node. |
+| Regional | The outcome reshapes conditions across multiple locations, factions, or travel paths in the active region. |
+| Campaign | The outcome materially redirects major-arc stakes, long-horizon faction posture, or world-state trajectory. |
+
+### Reputation Change by Action Scale
+
+| Trigger | Standing Change |
+|---|---|
+| Drift (faction-relevant beat without higher-scale stake) | ±1 to ±2 |
+| Local outcome with direct faction relevance | ±2 to ±3 |
+| Situational outcome | ±5 |
+| Regional outcome | ±15 |
+| Campaign outcome | ±30 |
+
+Use **positive** change when the outcome materially aligns with faction interests, and **negative** change when it materially undermines faction interests.
+
+### Drift Cap Rule
+
+Drift (±1 to ±2) and Local-scale changes (±2 to ±3) **cannot cross a band boundary on their own**. They cap at one point inside the current band's nearer boundary. Crossing a band boundary requires an outcome of Situational scale or higher.
+
+This prevents standing from drifting into Respected, Distrusted, or any further band purely through small repeated beats. Band crossings remain meaningful events.
+
+### Standing Bands and Roll Modifiers
+
+| Band | Standing Range | Roll Modifier |
+|---|---|---|
+| Revered | 61 to 100 | +10 |
+| Respected | 21 to 60 | +5 |
+| Neutral | −20 to 20 | +0 |
+| Distrusted | −21 to −60 | −10 |
+| Despised | −61 to −100 | −20 |
+
+Always clamp standing to the valid range: **−100 to +100**.
+
+### Relationship Propagation Rules (Band Crossings)
+
+Reputation propagation is a gameplay consequence layer, not flavor text. When standing crosses into a new band, faction posture and access should update for future scenes.
+
+Apply propagation conservatively and faction-agnostically unless a faction has authored exceptions. Keep effects tied to the specific faction whose standing changed.
+
+### Canonical Band Effects
+
+- **Revered (61 to 100):** privileged access, proactive help, sensitive information access, reduced scrutiny, strong benefit of the doubt.
+- **Respected (21 to 60):** easier introductions, routine cooperation, standard services/opportunities opened, moderate institutional trust.
+- **Neutral (−20 to 20):** baseline access only, no special help, no automatic hostility.
+- **Distrusted (−21 to −60):** guarded interactions, reduced access, higher scrutiny, refusals on sensitive requests.
+- **Despised (−61 to −100):** denied access, active obstruction, and possible reporting/hostility depending on faction and context.
+
+### Propagation Scope and Boundaries
+
+Propagation may affect:
+- service availability
+- information access
+- faction cooperation
+- escort/sanction/authorization likelihood
+- legal/social scrutiny
+- which jobs, requests, or aid offers are available
+
+Propagation does not require separate subsystem math.
+
+---
+
+## Pacing (Lightweight Guidance State)
+
+Pacing is descriptive scene-cadence guidance, not a separate subsystem. It does not override dice, location constraints, faction logic, or established consequences.
+
+### Pacing Fields
+
+- `tension` (0–10): current pressure level for scene intensity.
+- `last_consequence_weight` (`local|situational|regional|campaign`): scale of the most recently resolved consequence.
+- `turns_since_social_beat`: turns since a meaningful social interaction beat.
+- `turns_since_discovery`: turns since a meaningful discovery/lore/reveal beat.
+- `turn_count`: pacing-facing mirror of authoritative `world.turn`.
+
+### Canonical Update Guidance
+
+- Tension rises when outcomes escalate danger, urgency, or strategic pressure.
+- Tension falls when outcomes materially stabilize safety, leverage, or immediate risk.
+- Tension holds when pressure profile is broadly unchanged.
+- Update `last_consequence_weight` at scene resolution using the existing scale vocabulary.
+- Reset `turns_since_social_beat` to 0 when a meaningful social beat occurs; otherwise increment.
+- Reset `turns_since_discovery` to 0 when a meaningful discovery beat occurs; otherwise increment.
+- Synchronize `turn_count` with `world.turn` at save time.
+
+Use pacing conservatively to avoid repetitive scene selection and to modulate cadence, not to force outcomes.
+
+---
+
+## The World Graph
+
+The world is a graph of connected location nodes. Movement is along defined edges only.
+
+- Before describing any location, call `GET /location/{location_id}`
+- Only present connections as movement options
+- New locations require discovery and immediate save via `POST /location`
+- NPCs are persistent — name one, save it to the location record
+
+---
+
+## Failure States
+
+### HP Reaches 0
+
+When `hp.current` reaches 0:
+- The character is incapacitated
+- Narrate the consequence clearly
+- Save state with `hp.current = 0`
+- The session ends or transitions to a recovery scenario
+
+### Character Death
+
+Character death is a valid outcome. It is not reversed. The world reacts to it.
+
+---
+
+## Failure Outcomes
+
+Fail-forward is a mechanical outcome rule, not narration style. Apply it on every partial failure, failure, or critical failure outcome from `POST /roll`. Dice mechanics (formula, degree-of-success bands, roll target assembly) are canonical in `mechanics-tables.md`; difficulty modifiers are canonical in `difficulty-rules.md`. This section is canonical for what happens after a failure resolves.
+
+### Fail-Forward Outcome Rule (Mechanical)
+
+On partial failure, failure, or critical failure, the scene state must advance with consequence. Failure should change the situation by applying one or more of:
+- increased pressure or urgency
+- consumed time/resources/position
+- worsened tactical or social footing
+- new complication, exposure, or escalation
+
+Do not default to null turns or "nothing happens" outcomes unless that result is itself materially consequential.
+
+### Fail-Forward by Failure Band
+
+- **Partial Failure (miss by 1–10):** attempted objective is incomplete, but the scene advances with a concrete cost, constraint, or complication.
+- **Failure (miss by 11+):** attempted objective fails and position worsens materially; pressure and stakes increase.
+- **Critical Failure (roll 100):** severe/catastrophic worsening consistent with existing critical-failure and magic-backlash rules.
+
+Fail-forward does not mean soft failure. Meaningful harm, punishment, and setback still apply by degree.
+
+### Canonical Fail-Forward Examples
+
+- **Physical (climb / forced entry / chase):** the climb fails; the character drops to a lower ledge, loses the quick route, and alert sentries begin converging. The scene advances to a pressured escape or last-stand decision.
+- **Social (persuasion / negotiation / deception):** negotiation fails; terms harden, access narrows, and the faction now demands collateral proof. The scene advances to debt, leverage, or alternate-route play.
+- **Magical (rite / risky casting / dangerous use):** the rite fails; strain or backlash triggers (fatigue, misfire, unwanted attention, or instability), forcing an immediate containment/reposition choice. The scene advances with higher risk and altered stakes.
