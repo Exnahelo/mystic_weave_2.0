@@ -17,12 +17,18 @@ from api.models import (
 
 
 def _validate_condition_set_types(condition_set: ArcConditionSet, field_label: str) -> ArcConditionSet:
-    """Reject any ArcCondition.type not in the registry's condition_types list.
+    """Reject any ArcCondition.type not in the registry's condition_types list,
+    and reject malformed payloads for known types.
 
     Runs at request-model boundary only (create + spawn). Stored arcs with
     retired condition labels remain loadable through the underlying Arc
     model, which intentionally does not gate on type at construction.
+
+    Two sequential passes: type-validity first, payload shape second. If the
+    type pass finds any invalid labels, payload checks are skipped for this
+    set — payload guidance for unknown types is moot.
     """
+    from api.arc_conditions import validate_condition_payload
     from api.game_data import get_arc_condition_types
 
     valid_types = get_arc_condition_types()
@@ -37,6 +43,19 @@ def _validate_condition_set_types(condition_set: ArcConditionSet, field_label: s
             f"Invalid arc condition type(s) in {field_label}: {sorted(set(invalid))}. "
             f"Must be one of the registry condition_types in "
             f"data/catalog/registries/arc_types.json. Valid types: {sorted(valid_types)}"
+        )
+
+    payload_errors: list[str] = []
+    for bucket_name in ("all_of", "any_of", "none_of"):
+        bucket = getattr(condition_set, bucket_name, None) or []
+        for cond in bucket:
+            err = validate_condition_payload(cond.type, cond.payload)
+            if err is not None:
+                payload_errors.append(err)
+    if payload_errors:
+        raise ValueError(
+            f"Malformed condition payload(s) in {field_label}: "
+            + "; ".join(payload_errors)
         )
     return condition_set
 

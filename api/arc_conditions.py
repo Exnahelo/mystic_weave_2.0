@@ -19,6 +19,95 @@ class ConditionEvaluationError(Exception):
     pass
 
 
+_COUNT_PAYLOAD_TYPES: frozenset[str] = frozenset({
+    "resolved_scene_count_at_least",
+    "resolved_scene_count_at_most",
+    "location_count_at_least",
+})
+
+_LOCATION_PAYLOAD_TYPES: frozenset[str] = frozenset({
+    "location_visited",
+})
+
+_WORLD_FLAG_PAYLOAD_TYPES: frozenset[str] = frozenset({
+    "world_flag_present",
+})
+
+_NO_PAYLOAD_TYPES: frozenset[str] = frozenset({
+    "player_declared_completion",
+    "player_declared_abandonment",
+})
+
+_FLAG_ID_PAYLOAD_TYPES: frozenset[str] = frozenset({
+    "npc_contact_made",
+    "faction_contact_made",
+    "evidence_grade_at_least",
+    "target_item_recovered",
+    "target_delivered",
+    "target_destroyed",
+    "target_secured",
+    "target_survived",
+    "time_limit_exceeded",
+    "threat_state_changed",
+    "npc_state_changed",
+    "evidence_chain_complete",
+    "report_delivered",
+    "decision_made",
+    "faction_state_changed",
+    "objective_branch_chosen",
+})
+
+
+def validate_condition_payload(cond_type: str, payload: dict[str, Any]) -> str | None:
+    """Return None if payload satisfies the type's requirements, else an
+    error message. Mirrors the dispatch in evaluate_condition; same module
+    is the single source of truth for payload shape per condition type.
+
+    Unknown types return None — type-validity is checked upstream in
+    api/schemas/arc_schemas.py and is not duplicated here.
+    """
+    if cond_type in _COUNT_PAYLOAD_TYPES:
+        count = payload.get("count")
+        if not isinstance(count, int) or isinstance(count, bool) or count < 0:
+            return (
+                f"Condition '{cond_type}' requires payload.count "
+                f"(non-negative integer); got {count!r}"
+            )
+        return None
+
+    if cond_type in _LOCATION_PAYLOAD_TYPES:
+        location_id = payload.get("location_id")
+        if not isinstance(location_id, str) or not location_id:
+            return (
+                f"Condition '{cond_type}' requires payload.location_id "
+                f"(non-empty string)"
+            )
+        return None
+
+    if cond_type in _WORLD_FLAG_PAYLOAD_TYPES:
+        flag = payload.get("flag")
+        if not isinstance(flag, str) or not flag:
+            return (
+                f"Condition '{cond_type}' requires payload.flag "
+                f"(non-empty string)"
+            )
+        return None
+
+    if cond_type in _NO_PAYLOAD_TYPES:
+        return None
+
+    if cond_type in _FLAG_ID_PAYLOAD_TYPES:
+        flag_id = payload.get("flag_id")
+        if not isinstance(flag_id, str) or not flag_id:
+            return (
+                f"Condition '{cond_type}' requires payload.flag_id "
+                f"(non-empty string)"
+            )
+        return None
+
+    return None
+
+
 def evaluate_condition(
     condition: ArcCondition,
     arc: Arc,
