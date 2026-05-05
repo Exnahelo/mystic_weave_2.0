@@ -1,6 +1,6 @@
 # Mystic Weave — TODO
 
-Last updated: 2026-05-03
+Last updated: 2026-05-05
 
 ## How to read this document
 
@@ -85,6 +85,22 @@ With backend enforcement in place, prompts can shrink dramatically. Catalog and 
 
 ---
 
+## PHASE 9B VALIDATION RESULTS (2026-05-05)
+
+The arc lifecycle orchestrator (Brief 3 / 5.7.0) was validated against a real play session on session 411c1f7de9334a4e on 2026-05-05.
+
+**Criterion 1 — Formal-vs-emergent at create time: PASS.** Arcs were authored with correct formal-contract qualification. The bait operation arc was correctly authored as formal-contract-qualified (named patron Seralyth, explicit objective, expected return). Black-tray and copper-leaf arcs correctly authored as emergent.
+
+**Criterion 2 — Spawn at scope change: MIXED.** The /declare intent=scope_check forcing function fired correctly when phase_shift_candidate: true was returned. The call pattern works. The GPT's judgment inside scope_check was wrong on the copper-leaf arc, which sprawled past natural closure rather than being spawned or merged. This is a judgment-quality issue, not an architectural failure.
+
+**Criterion 3 — Settlement enumeration: PASS.** ArcSettlementEnumeration schema enforcement worked. Channels were always present in close calls. The schema-as-template approach delivered.
+
+**Criterion 4 — No silent collapse: PASS, with new failure mode.** The GPT no longer collapses to "no further reward" prose. Instead it defaults all enumerated channels to zero on emergent arcs without adjudication. Player had to challenge an under-awarded settlement to get House Vaelaryn +3 reputation added retroactively. The schema forces channel completeness, not adjudication quality.
+
+Net: orchestrator architecture is sound. New backend bug (closure condition payload validation gap, see PENDING DESIGN) is the dominant operational issue blocking smooth play.
+
+---
+
 ## ENTITY REGISTRY — REMAINING WORK
 
 PR 1 (consolidation) and PR 2 (companion vocab registry move) are complete. Two future items remain:
@@ -155,13 +171,35 @@ Items waiting on a design pass before implementation. Surfaced from 5.6.x operat
 - [ ] **Arc lineage at create time.** Investigation arc on session `411c1f7de9334a4e` (`arc-570eaeebde0840e4`, "Find the Hand Behind the Vaelmere Ambush") was authored as standalone emergent when it was structurally a child of the formal "Ride West Under Vaelaryn Auspices" parent (`arc-3f107b923c004ba2`, since closed). Brief 3's `scope_check` intent doesn't directly fix this since it triggers post-creation. Consider whether arc creation should evaluate parent-linkage candidates among open formal arcs at create time and prompt the narrator if a structural parent is plausible.
 - [ ] **Legacy `settle_arc` non-atomic write sequence.** The legacy `POST /arc/{id}/settle` endpoint executes its writes (character update, world update, arc update, closure_summary log append, transition log append) across separate `pool.acquire()` connections rather than a single transaction. Mid-call failure can leave the session in a partial state. Latent bug; not exercised in normal play because `/settle` is the last call in the lifecycle and its failure modes today are validation, not transport. Brief 3's `/declare` endpoint (5.7.0) adds a transactional alternative and the prompts will migrate to it as the primary closure path. Address the legacy endpoint when next touched, or as a dedicated cleanup brief.
 
+- [ ] **Closure condition payload validation at create time.** Brief 1 (5.6.0) added validation that `ArcCondition.type` must be a registry-valid label. It did NOT validate that the payload shape matches what the type requires. Conditions like `evidence_chain_complete` and `target_secured` require `payload.flag_id`, but the backend accepts them with empty `payload: {}` at creation and then rejects them at closure evaluation. This causes hard-cap deadlock requiring manual DB intervention. Bit twice on session 411c1f7de9334a4e during 5.7.0 Phase 9b validation (black-tray arc and copper-leaf arc both required manual closure-condition payload patches). Fix: per-condition-type payload schemas validated at creation. Same shape as Brief 1, narrower fix. **Highest-priority backend defect blocking smooth play.**
+
+- [ ] **Settlement adjudication guidance for emergent arcs.** The ArcSettlementEnumeration schema (5.7.0) enforces channel completeness at /declare intent=close. It does not guide the GPT toward correct values. Emergent arcs default to zero on every channel without adjudication, even when the fiction has materially advanced reputation, leverage, or coin. Black-tray arc in session 411c1f7de9334a4e under-awarded; player had to challenge to add House Vaelaryn +3. Fix is prompt-side (arc-rules.md): explicit guidance that emergent arcs can produce non-AP rewards (reputation, leverage, coin, items) based on what materially advanced; zero-on-everything is wrong by default and should require positive justification, not be assumed.
+
+- [ ] **Multi-action decomposition.** Roll-resolution discipline issue, not arc discipline. The narrator GPT compresses multi-vector player input into a single roll when the actions have distinct risks and outcomes. Surfaced explicitly during session 411c1f7de9334a4e: user corrected "Just because they're grouped doesn't mean they're one action." Three distinct intentions (secure far side, pressure figure, return to Pell) got compressed into one social roll. Fix likely a one-line addition to engine.md or scene-structure.md forcing the GPT to enumerate distinct action vectors before resolving rolls. Engine.md byte budget is tight (currently 7872 / 8000); may need scene-structure.md instead.
+
+- [ ] **Paired list mutation conventions.** The fetch-then-merge convention (`docs/conventions.md` "State mutations against list-typed fields") covers list mutations. It does not cover paired removals: when an item moves from `equipment.worn` to a stash entry, both lists need updating; when a letter is delivered, it should be removed from `equipment.carried`. Session 411c1f7de9334a4e ended with House Heartwood signet still in worn (despite being stashed for cover) and Caelthir letter still in carried (despite being delivered to Seralyth). Fix is convention/prompt-side guidance, not backend.
+
+- [ ] **Per-companion location/status fields.** Companion sub-schema has no `location` or `status_modifier` field. Session 411c1f7de9334a4e fiction places Dawn at Lampblack Livery Yard as public collateral while Sylva goes to the work boards in the morning; backend can only represent both Dusk and Dawn as "active companions" globally. Annotation-only workaround currently. Real fix requires a small companion sub-schema addition. Overlaps with evidence/custody schema gap design — same conversation about representing entities held under specific custody/location conditions.
+
+---
+
+## ACTIVE SESSION STATE (411c1f7de9334a4e)
+
+The current play session is in a recoverable but messy state at session end:
+
+- Bait operation arc is active and formal-contract-qualified. Sylva Rowe is at Lampblack Storehouse, Dawn at Lampblack Livery Yard as public collateral with Harl Brennock, with 760 CD on hand, Influence advanced to Tier 3.
+- Old copper-leaf receiver arc (`arc-374f982017074e63`) is hard-capped/in_progress and intentionally bypassed (player instruction). Backend drift; not blocking play but worth eventual cleanup.
+- Inventory drift: signet still in `equipment.worn` despite cover stash; Caelthir letter still in `equipment.carried` despite delivery to Seralyth. Both need /state/{session_id}/delta forward-fix when the closure-condition payload bug is resolved enough to trust /state operations.
+
+Resume play from Sylva at Lampblack Storehouse on day 3 dawn, choosing morning approach (work boards, livery visit, gambling follow-up, or yard gossip).
+
 ---
 
 ## DEFERRED WORK
 
 Items considered and parked, with the rationale to revisit.
 
-- [ ] **Brief 4 — Compact state endpoint.** Deferred, not abandoned. Wrapper ClientResponseError under load; Brief 2 Step 5 reconstruction demonstrated `scene_records` can route around the issue. Workaround sufficient until wrapper issue worsens.
+- [ ] **Brief 4 — Compact state endpoint.** Status: deferred but worsening. The `/state/{session_id}` ClientResponseError is no longer transient — reproduced reliably during the 2026-05-05 Phase 9b play session, blocking both the mid-session audit and the end-of-session debrief workflows. Workaround (scene_records reconstruction, `/scene/{session_id}` for context) still works but is friction. Likely candidate for next-up after the closure condition payload bug is fixed. The brief design from prior session (compact endpoint omitting heavy fields like full equipment/log) is still appropriate; size-correlated wrapper failure hypothesis remains the leading theory.
 
 ---
 
