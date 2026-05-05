@@ -64,7 +64,7 @@ Before continuing narration, answer in writing (in the scene_summary or in your 
 
 After every resolved scene, check `arc_envelope_status` in the response. For each active arc:
 
-1. Did `phase_shift_candidate` fire? If yes, evaluate against Phase Change Indicators. If institutional phase has begun, spawn a formal child arc via `/spawn` before continuing.
+1. Did `phase_shift_candidate` fire? If yes, call `/declare` with `intent: "scope_check"` before continuing narration. The orchestrator returns envelope status and recommended next intent (`spawn_child` with a default child shape, typically). Evaluate the recommendation against Phase Change Indicators, then act — `spawn_child` for institutional phase, continue parent otherwise. **Skipping the call requires a `/state/{session_id}/annotation` with category `narrator_correction` naming the arc and the reason** (e.g., "scope_check skipped: deferred to next scene because player declined to acknowledge the shift"). There is no silent path past `phase_shift_candidate`.
 2. Did `hard_cap_reached` fire? If yes, transition to closure path immediately — do not narrate past hard cap.
 3. Did `soft_cap_approaching` fire? Plan closure within next 1–2 scenes.
 4. Did the principal patron, primary objective, or stake structure change materially? If yes, spawn rather than extending the parent.
@@ -82,30 +82,23 @@ After every resolved scene, check `arc_envelope_status` in the response. For eac
 
 ## Settlement Enumeration Template
 
-When settling any arc, fill in every line below before calling `/settle`. Every channel gets an explicit value. Zero is allowed but only when written explicitly.
+The template **is** the `ArcSettlementEnumeration` schema (`api/schemas/arc_schemas.py`). Filling in the request body for `/declare` with `intent: "close"` or `intent: "fail"` satisfies the template — there is no separate "fill in the template, then construct the request" step. The schema enforces the forcing function: every channel must be present, empty list is the explicit no-change marker, and omission returns a 422 naming the missing field.
 
-```text
-Arc settlement adjudication:
-- Outcome: complete | failed | abandoned
-- Awarded AP: <number> (must be 0 if outcome=failed or arc not formal)
-- Reputation changes:
-  - <faction>: <delta>
-  - (or "none")
-- Coin awarded: <CD amount> (or 0)
-- Coin forfeited: <CD amount> (or 0)
-- Items awarded: <list> (or "none")
-- Leverage / evidence / access / secrets gained:
-  - <description> (or "none")
-- Obligations created or cleared:
-  - <description> (or "none")
-- World-state consequences:
-  - <description> (must not be "none" for any arc that materially
-    interacted with factions, locations, or NPCs)
-```
+Required fields on every settlement request:
 
-Only after every line is filled in: call `/settle`.
+- `awarded_ap` — integer ≥ 0. Must be 0 when `intent: "fail"` or when the arc is not `formal_contract_qualified`.
+- `reputation_changes` — list of `{faction, delta, note}`. Empty list `[]` is the explicit no-change marker.
+- `coin_awarded` — integer CD ≥ 0.
+- `coin_forfeited` — integer CD ≥ 0.
+- `items_awarded` — list of `{id, name, description}`. Empty list `[]` is the explicit no-items marker.
+- `leverage_gained` — list of strings. Empty list `[]` is the explicit no-leverage marker.
+- `obligations` — list of `{description, action, note}`, where `action ∈ {created, cleared, worsened}`. Empty list `[]` is the explicit no-obligation marker.
+- `world_state_consequences` — list of strings. Must not be `[]` for any arc that materially interacted with factions, locations, or NPCs.
+- `notes` — optional free text.
 
-If a channel is "none," write "none" — do not omit the line. Omitting a line means the GPT did not consider that channel.
+Empty list **is** consideration. Omitting a key is not. The schema is what enforces the discipline that prose templates could not.
+
+Edge cases (`replaced_by_successor`, `merged_into_parent` without a parallel spawn intent) still go through `/transition` directly; those paths predate the orchestrator and are out of scope for the declare contract.
 
 ---
 

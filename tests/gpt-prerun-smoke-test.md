@@ -113,7 +113,7 @@ PHASE 4 — CORE GAMEPLAY LOOP
 
 PHASE 5 — ARCS
 
-The arc lifecycle is: `proposed → available → in_progress → ready_to_close → settle`. New arcs start in `proposed`. Each transition is a separate /transition call.
+The arc lifecycle is: `proposed → available → in_progress → (ready_to_close →) complete | failed | abandoned`. New arcs start in `proposed`. Routine lifecycle goes through `/declare` with intents (`activate`, `close`, `fail`, `abandon`, `spawn_child`, `scope_check`); `/transition` is reserved for edge cases (e.g., `replaced_by_successor`, `merged_into_parent`).
 
 5.1 GET /arc/{session_id}
     PASS: 2xx, returns list (likely empty for a fresh session).
@@ -136,40 +136,52 @@ The arc lifecycle is: `proposed → available → in_progress → ready_to_close
 5.4 GET /arc/{session_id}/active
     PASS: 2xx. Empty list expected (arc is "proposed", not yet active).
 
-5.5 POST /arc/{session_id}/{arc_id}/transition — proposed → available:
-    {"from_state": "proposed", "to_state": "available", "reason": "smoke_test: ready for player acceptance"}
-    PASS: 2xx, arc state becomes "available".
+5.5 POST /arc/{session_id}/{arc_id}/declare — intent=activate (replaces the proposed → available → in_progress two-step):
+    {"intent": "activate", "reason": "smoke_test: activate arc through declare orchestrator"}
+    PASS: 2xx, arc state becomes "in_progress" in a single call. actions_taken includes the two underlying transitions.
 
-5.6 POST /arc/{session_id}/{arc_id}/transition — available → in_progress:
-    {"from_state": "available", "to_state": "in_progress", "reason": "smoke_test: player accepted"}
-    PASS: 2xx, arc state becomes "in_progress".
-
-5.7 GET /arc/{session_id}/active
+5.6 GET /arc/{session_id}/active
     PASS: 2xx, list now includes the arc.
 
-5.8 POST /arc/{session_id}/{arc_id}/progress
+5.7 POST /arc/{session_id}/{arc_id}/progress
     {"resolved_scene_occurred": true, "notes": "smoke_test progress"}
     PASS: 2xx.
 
-5.9 POST /arc/{session_id}/{arc_id}/spawn — spawn a child arc:
+5.8 POST /arc/{session_id}/{arc_id}/declare — intent=spawn_child (replaces /spawn):
     {
-      "child_title": "smoke_test child arc",
-      "child_summary": "smoke_test child for spawn verification",
-      "child_primary_type": "task_local",
-      "child_subtype": "investigation",
-      "child_stake_scale": "local",
-      "ap_ownership": "child",
-      "reason": "smoke_test spawn"
+      "intent": "spawn_child",
+      "reason": "smoke_test: spawn child via declare",
+      "child_arc": {
+        "child_title": "smoke_test child arc",
+        "child_summary": "smoke_test child for spawn verification",
+        "child_primary_type": "task_local",
+        "child_subtype": "investigation",
+        "child_stake_scale": "local",
+        "ap_ownership": "child",
+        "reason": "smoke_test spawn"
+      },
+      "parent_action_after_spawn": "continue"
     }
-    PASS: 2xx, new child arc returned.
+    PASS: 2xx, child_arc field on response is populated. Parent arc state preserved.
 
-5.10 POST /arc/{session_id}/{arc_id}/transition — in_progress → ready_to_close:
-    {"from_state": "in_progress", "to_state": "ready_to_close", "reason": "smoke_test: closure"}
-    PASS: 2xx, arc state becomes "ready_to_close".
-
-5.11 POST /arc/{session_id}/{arc_id}/settle
-    {"outcome": "complete", "notes": "smoke_test settle"}
-    PASS: 2xx, arc state becomes "complete" or terminal equivalent.
+5.9 POST /arc/{session_id}/{arc_id}/declare — intent=close with ArcSettlementEnumeration body (replaces the transition + settle pair):
+    {
+      "intent": "close",
+      "reason": "smoke_test: close arc through declare orchestrator",
+      "settlement": {
+        "awarded_ap": 0,
+        "reputation_changes": [],
+        "coin_awarded": 0,
+        "coin_forfeited": 0,
+        "items_awarded": [],
+        "leverage_gained": [],
+        "obligations": [],
+        "world_state_consequences": ["smoke_test arc closed; no material world impact"],
+        "notes": "smoke_test settle"
+      }
+    }
+    PASS: 2xx, arc state becomes "complete". actions_taken includes the closure transition and settlement application.
+    Note: every settlement channel must be present in the request body; omitting a channel returns 422 naming the missing field. Empty list is the explicit no-change marker.
 
 PHASE 6 — COMBAT
 
