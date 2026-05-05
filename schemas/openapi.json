@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "5.6.0"
+    "version": "5.6.1"
   },
   "servers": [
     {
@@ -2638,7 +2638,7 @@
           "type"
         ],
         "title": "ArcCondition",
-        "description": "A single condition in an arc condition set."
+        "description": "A single condition in an arc condition set.\n\nThe `type` field is intentionally permissive at construction so legacy\nstored arcs with retired condition labels remain loadable. Type-label\nvalidation against the registry happens at the request boundary\n(ArcCreateRequest / ArcSpawnRequest), not here."
       },
       "ArcConditionSet": {
         "properties": {

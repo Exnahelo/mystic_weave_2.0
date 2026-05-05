@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from api.models import (
     Arc,
@@ -14,6 +14,31 @@ from api.models import (
     ArcState,
     ArcStakeScale,
 )
+
+
+def _validate_condition_set_types(condition_set: ArcConditionSet, field_label: str) -> ArcConditionSet:
+    """Reject any ArcCondition.type not in the registry's condition_types list.
+
+    Runs at request-model boundary only (create + spawn). Stored arcs with
+    retired condition labels remain loadable through the underlying Arc
+    model, which intentionally does not gate on type at construction.
+    """
+    from api.game_data import get_arc_condition_types
+
+    valid_types = get_arc_condition_types()
+    invalid: list[str] = []
+    for bucket_name in ("all_of", "any_of", "none_of"):
+        bucket = getattr(condition_set, bucket_name, None) or []
+        for cond in bucket:
+            if cond.type not in valid_types:
+                invalid.append(cond.type)
+    if invalid:
+        raise ValueError(
+            f"Invalid arc condition type(s) in {field_label}: {sorted(set(invalid))}. "
+            f"Must be one of the registry condition_types in "
+            f"data/catalog/registries/arc_types.json. Valid types: {sorted(valid_types)}"
+        )
+    return condition_set
 
 
 class ArcCreateRequest(BaseModel):
@@ -37,6 +62,16 @@ class ArcCreateRequest(BaseModel):
     explicit_objective: str | None = None
     expected_return: str | None = None
     notes: list[str] = Field(default_factory=list)
+
+    @field_validator("closure_conditions")
+    @classmethod
+    def _validate_closure_conditions(cls, v: ArcConditionSet) -> ArcConditionSet:
+        return _validate_condition_set_types(v, "closure_conditions")
+
+    @field_validator("failure_conditions")
+    @classmethod
+    def _validate_failure_conditions(cls, v: ArcConditionSet) -> ArcConditionSet:
+        return _validate_condition_set_types(v, "failure_conditions")
 
 
 class ArcTransitionRequest(BaseModel):
@@ -72,6 +107,16 @@ class ArcSpawnRequest(BaseModel):
     child_expected_return: str | None = None
     ap_ownership: ArcAPOwnership = "parent"
     reason: str = Field(min_length=1, max_length=500)
+
+    @field_validator("child_closure_conditions")
+    @classmethod
+    def _validate_child_closure(cls, v: ArcConditionSet) -> ArcConditionSet:
+        return _validate_condition_set_types(v, "child_closure_conditions")
+
+    @field_validator("child_failure_conditions")
+    @classmethod
+    def _validate_child_failure(cls, v: ArcConditionSet) -> ArcConditionSet:
+        return _validate_condition_set_types(v, "child_failure_conditions")
 
 
 class ArcSettleRequest(BaseModel):

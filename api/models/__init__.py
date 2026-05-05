@@ -92,24 +92,17 @@ ArcFailureSettlementPolicy = Literal["default", "no_rewards", "non_ap_only"]
 
 
 class ArcCondition(BaseModel):
-    """A single condition in an arc condition set."""
+    """A single condition in an arc condition set.
+
+    The `type` field is intentionally permissive at construction so legacy
+    stored arcs with retired condition labels remain loadable. Type-label
+    validation against the registry happens at the request boundary
+    (ArcCreateRequest / ArcSpawnRequest), not here.
+    """
     model_config = ConfigDict(extra="forbid")
 
     type: str = Field(description="Condition type from the registry condition_types list.")
     payload: dict[str, Any] = Field(default_factory=dict)
-
-    @field_validator("type")
-    @classmethod
-    def type_must_be_in_registry(cls, v: str) -> str:
-        from api.game_data import get_arc_condition_types
-
-        valid_types = get_arc_condition_types()
-        if v not in valid_types:
-            raise ValueError(
-                f"Invalid arc condition type {v!r}. Must be one of the registry condition_types "
-                f"in data/catalog/registries/arc_types.json. Valid types: {sorted(valid_types)}"
-            )
-        return v
 
 
 class ArcConditionSet(BaseModel):
