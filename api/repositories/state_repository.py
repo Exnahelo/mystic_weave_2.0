@@ -181,3 +181,28 @@ class TransactionalStateRepository:
             new_log,
             session_id,
         )
+
+    async def update_character(self, session_id: str, character: CharacterModel) -> None:
+        """Update character within the open transaction."""
+        await self._conn.execute(
+            "UPDATE game_states SET character = $1::jsonb, updated_at = now() WHERE session_id = $2",
+            character.model_dump(mode="json"),
+            session_id,
+        )
+
+    async def update_world(self, session_id: str, world: WorldModel) -> None:
+        """Update world within the open transaction."""
+        await self._conn.execute(
+            "UPDATE game_states SET world = $1::jsonb, updated_at = now() WHERE session_id = $2",
+            world.model_dump(mode="json"),
+            session_id,
+        )
+
+    async def append_log_entry(self, session_id: str, entry: TypedLogEntry) -> None:
+        """Append a typed log entry to game_states.log within the open transaction."""
+        entry_payload = [entry.model_dump(exclude_none=True)]
+        await self._conn.execute(
+            "UPDATE game_states SET log = log || $1::jsonb, updated_at = now() WHERE session_id = $2",
+            entry_payload,
+            session_id,
+        )

@@ -36,6 +36,8 @@ from api.repositories.arc_repository import ArcRepository
 from api.repositories.state_repository import StateRepository
 from api.schemas.arc_schemas import (
     ArcCreateRequest,
+    ArcDeclareRequest,
+    ArcDeclareResponse,
     ArcForceCloseRequest,
     ArcProgressRequest,
     ArcProgressResponse,
@@ -44,6 +46,7 @@ from api.schemas.arc_schemas import (
     ArcSpawnRequest,
     ArcTransitionRequest,
 )
+from api.services.arc_orchestrator import compose_intent
 from api.services.arc_settlement import apply_arc_settlement
 
 router = APIRouter(prefix="/arc", tags=["arc"])
@@ -1057,6 +1060,24 @@ async def force_close_arc(
         consequence_events=consequence_events,
         character_updated=character_updated,
         world_updated=world_updated,
+    )
+
+
+@router.post("/{session_id}/{arc_id}/declare", response_model=ArcDeclareResponse)
+async def declare_arc(
+    session_id: str,
+    arc_id: str,
+    req: ArcDeclareRequest,
+    pool: asyncpg.Pool = Depends(get_pool),
+    repo: ArcRepository = Depends(get_arc_repository),
+) -> ArcDeclareResponse:
+    """Declarative arc lifecycle endpoint. Composes /transition + /settle + /spawn behind one call. The narrator submits intent and required structured data; the backend executes the state machine atomically. Replaces routine paths through the legacy endpoints; edge cases still go through /transition."""
+    return await compose_intent(
+        pool=pool,
+        arc_repo=repo,
+        session_id=session_id,
+        arc_id=arc_id,
+        request=req,
     )
 
 

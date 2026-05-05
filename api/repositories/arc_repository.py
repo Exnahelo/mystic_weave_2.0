@@ -120,6 +120,86 @@ class ArcRepository:
                 arc_id,
             )
 
+    async def update_arc_in_transaction(
+        self,
+        conn: asyncpg.Connection,
+        arc_id: str,
+        new_state: ArcState,
+        consumption: ArcConsumption,
+        timestamps: ArcTimestamps,
+        full_arc: Arc,
+    ) -> None:
+        """Same as update_arc, but operates on an existing connection so the
+        caller can compose multiple writes inside a single transaction.
+
+        Requires full_arc — unlike update_arc, this variant does not refetch.
+        Brief 3 (arc orchestrator) needs single-transaction atomicity across
+        state transitions, settlement, and log writes.
+        """
+        full_arc.state = new_state
+        full_arc.consumption = consumption
+        full_arc.timestamps = timestamps
+        await conn.execute(
+            """
+            UPDATE arcs
+            SET state = $1, data = $2::jsonb, updated_at = $3
+            WHERE id = $4
+            """,
+            new_state,
+            full_arc.model_dump(mode="json"),
+            timestamps.last_progressed_at or datetime.now(timezone.utc),
+            arc_id,
+        )
+
+    async def create_in_transaction(
+        self,
+        conn: asyncpg.Connection,
+        arc: Arc,
+    ) -> None:
+        """Same as create, but operates on an existing connection."""
+        await conn.execute(
+            """
+            INSERT INTO arcs (
+                id, session_id, primary_type, state, parent_arc_id, data,
+                created_at, updated_at
+            )
+            VALUES ($1, $2, $3, $4, $5, $6::jsonb, $7, $7)
+            """,
+            arc.id,
+            arc.session_id,
+            arc.primary_type,
+            arc.state,
+            arc.parent_arc_id,
+            arc.model_dump(mode="json"),
+            arc.timestamps.created_at,
+        )
+
+    async def append_transition_log_in_transaction(
+        self,
+        conn: asyncpg.Connection,
+        entry: ArcTransitionLogEntry,
+    ) -> None:
+        """Same as append_transition_log, but operates on an existing connection."""
+        await conn.execute(
+            """
+            INSERT INTO arc_transitions (
+                arc_id, session_id, from_state, to_state, reason,
+                transitioned_at, resolved_scenes_at_transition,
+                locations_visited_at_transition, triggering_event
+            )
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+            """,
+            entry.arc_id,
+            entry.session_id,
+            entry.from_state,
+            entry.to_state,
+            entry.reason,
+            entry.transitioned_at,
+            entry.resolved_scenes_at_transition,
+            entry.locations_visited_at_transition,
+            entry.triggering_event,
+        )
+
     async def append_transition_log(
         self,
         entry: ArcTransitionLogEntry,

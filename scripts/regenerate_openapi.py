@@ -58,6 +58,12 @@ GPT_SPEC_EXCLUSIONS = [
     # creative decision and the standard /transition + /settle flow is
     # the supported surface.
     ("post", "/arc/{session_id}/{arc_id}/force_close"),
+    # Brief 3 Phase A: arc orchestrator endpoint added to the full spec
+    # but withheld from the GPT spec until Phase C, when prompts have
+    # been migrated to use it. Shipping declare to the GPT before the
+    # prompts know about it would create instructionless surface area.
+    # Phase C will remove this exclusion as part of the 5.7.0 release.
+    ("post", "/arc/{session_id}/{arc_id}/declare"),
 ]
 
 

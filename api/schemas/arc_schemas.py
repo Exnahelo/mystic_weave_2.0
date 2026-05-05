@@ -167,6 +167,144 @@ class ArcSettleResponse(BaseModel):
     world_updated: bool = True
 
 
+class ReputationDelta(BaseModel):
+    """One reputation channel entry inside ArcSettlementEnumeration.
+
+    Empty list (`reputation_changes: []`) is the explicit no-change marker.
+    Non-empty list requires every entry to name the faction and the delta.
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    faction: str = Field(min_length=1)
+    delta: int
+    note: str = ""
+
+
+class ItemAward(BaseModel):
+    """One item channel entry inside ArcSettlementEnumeration.
+
+    Empty list is the explicit no-items marker. Items go into the
+    settlement audit trail; physical inventory mutation is a separate
+    concern (see `world.politics.known_leverage` and the
+    evidence/custody schema gap in todo.md).
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    id: str = Field(min_length=1)
+    name: str = Field(min_length=1)
+    description: str = ""
+
+
+class ObligationChange(BaseModel):
+    """One obligation channel entry inside ArcSettlementEnumeration."""
+    model_config = ConfigDict(extra="forbid")
+
+    description: str = Field(min_length=1)
+    action: Literal["created", "cleared", "worsened"]
+    note: str = ""
+
+
+class ArcSettlementEnumeration(BaseModel):
+    """Required body for declare intent='close' or 'fail'.
+
+    Every channel must be present in the request. Empty list is the
+    explicit no-change marker. The forcing function from arc-rules.md's
+    Settlement Enumeration Template is enforced here at the schema level:
+    a narrator that omits a channel from the request gets a 422 naming
+    the missing field. Compare to the legacy /settle endpoint, where
+    every channel had a default and silent omission was possible.
+
+    Per-channel rules (mirrors ArcSettleRequest where existing):
+      - awarded_ap must be 0 if outcome is 'fail' (enforced at the
+        intent-handling layer).
+      - awarded_ap must be 0 if the arc is not formal-contract-qualified
+        (enforced at the intent-handling layer).
+      - reputation, coin, item, obligation envelope checks are performed
+        against the arc's reward envelope, same as /settle.
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    awarded_ap: int = Field(ge=0)
+    reputation_changes: list[ReputationDelta]
+    coin_awarded: int = Field(ge=0)
+    coin_forfeited: int = Field(ge=0)
+    items_awarded: list[ItemAward]
+    leverage_gained: list[str]
+    obligations: list[ObligationChange]
+    world_state_consequences: list[str]
+    notes: str | None = None
+
+
+ArcDeclareIntent = Literal[
+    "activate",        # proposed → available → in_progress
+    "close",           # → ready_to_close → complete (settlement required)
+    "fail",            # → ready_to_close → failed (settlement required)
+    "abandon",         # → abandoned (no settlement)
+    "spawn_child",     # spawn child arc; parent action configurable
+    "scope_check",     # read-only; reports envelope + recommendations
+]
+
+
+ParentActionAfterSpawn = Literal["continue", "merge_into_child", "transition_to"]
+
+
+class ArcDeclareRequest(BaseModel):
+    """Single declarative arc lifecycle endpoint.
+
+    The narrator submits intent + the data required for that intent.
+    The backend executes the state machine atomically — all transitions
+    and settlement writes succeed together or roll back together.
+
+    Replaces the routine paths through /transition + /settle + (some)
+    /spawn for arc lifecycle. Edge cases (e.g., replaced_by_successor,
+    merged_into_parent without a parallel intent) still go through
+    /transition directly.
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    intent: ArcDeclareIntent
+    reason: str = Field(min_length=10, max_length=500)
+
+    # Required for intent='close' or 'fail':
+    settlement: ArcSettlementEnumeration | None = None
+
+    # Required for intent='spawn_child':
+    child_arc: ArcSpawnRequest | None = None
+    parent_action_after_spawn: ParentActionAfterSpawn | None = None
+    parent_target_state: str | None = None  # required if parent_action_after_spawn='transition_to'
+
+    # Optional:
+    notes: str | None = None
+    triggering_event: str | None = None
+    world_flags: dict[str, Any] | None = None
+
+
+class ArcSuggestion(BaseModel):
+    """A recommended next action for the narrator, from scope_check.
+
+    Minimal — names the suggested intent and the reason it was raised.
+    Heuristics over arc history are deliberately out of scope; the value
+    of scope_check is the audit trail of the call itself, not the
+    quality of the recommendation. See Brief 3 §Q3.
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    suggested_intent: ArcDeclareIntent
+    reason: str
+    suggested_payload: dict[str, Any] | None = None
+
+
+class ArcDeclareResponse(BaseModel):
+    """Response from /arc/{session_id}/{arc_id}/declare."""
+    model_config = ConfigDict(extra="forbid")
+
+    arc: Arc
+    child_arc: Arc | None = None
+    actions_taken: list[str]
+    envelope_status: dict[str, Any] | None = None
+    suggestions: list[ArcSuggestion] = Field(default_factory=list)
+
+
 class ArcForceCloseRequest(BaseModel):
     """Payload for force-closing an arc that cannot transition through the
     normal closure path (e.g., authored with invalid closure conditions,

@@ -22,6 +22,21 @@ class _AcquireCtx:
         return None
 
 
+class _TxCtx:
+    """No-op transaction context. Brief 3 declare orchestrator opens
+    `async with conn.transaction():`; legacy endpoint tests don't use it,
+    but a no-op pass-through keeps both code paths exercised on the shared
+    fake. Rollback is not simulated — tests focus on happy paths and
+    request validation; mid-call failure scenarios are covered by the
+    real DB integration suite."""
+
+    async def __aenter__(self):
+        return None
+
+    async def __aexit__(self, exc_type, exc, tb):
+        return False
+
+
 class FakePool:
     def __init__(self, conn):
         self._conn = conn
@@ -37,6 +52,9 @@ class ArcTransitionConn:
         self.character: dict | None = _character_state()
         self.world: dict | None = _world_state()
         self.log: list[dict] = []
+
+    def transaction(self):
+        return _TxCtx()
 
     async def execute(self, query, *args):
         if "INSERT INTO arcs" in query:
