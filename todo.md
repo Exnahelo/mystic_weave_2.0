@@ -157,6 +157,14 @@ Items waiting on a design pass before implementation. Surfaced from 5.6.x operat
 
 ---
 
+## DEFERRED WORK
+
+Items considered and parked, with the rationale to revisit.
+
+- [ ] **Brief 4 — Compact state endpoint.** Deferred, not abandoned. Wrapper ClientResponseError under load; Brief 2 Step 5 reconstruction demonstrated `scene_records` can route around the issue. Workaround sufficient until wrapper issue worsens.
+
+---
+
 ## REFACTORING (INCREMENTAL)
 
 - [ ] **`api/models.py` incremental split.** 1400-line kitchen sink. Per project policy: when any model in `models.py` next needs significant changes, that model moves to a new file as part of the same change. Concrete trigger: arc model edits → pull into `api/models/arc.py`. Same for character / world / item / advancement when each is next touched. Do not propose a single brief that splits the whole file at once. **Brief 13 (2026-05-02) extracted `character.py`; remaining models still in `__init__.py`.**
