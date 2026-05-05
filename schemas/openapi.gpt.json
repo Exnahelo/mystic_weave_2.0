@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave (GPT Actions)",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "5.5.1"
+    "version": "5.6.0"
   },
   "servers": [
     {
@@ -2456,6 +2456,51 @@
         "type": "object",
         "title": "ArcFlags",
         "description": "Boolean flags governing arc behavior."
+      },
+      "ArcForceCloseRequest": {
+        "properties": {
+          "reason": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 10,
+            "title": "Reason",
+            "description": "Required free-text explanation of why force_close was needed. Recorded in the session log as an audit annotation."
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "complete",
+              "failed",
+              "abandoned"
+            ],
+            "title": "Outcome"
+          },
+          "awarded_ap": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Awarded Ap",
+            "default": 0
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "reason",
+          "outcome"
+        ],
+        "title": "ArcForceCloseRequest",
+        "description": "Payload for force-closing an arc that cannot transition through the\nnormal closure path (e.g., authored with invalid closure conditions,\nstuck at hard cap with no escape, or otherwise in need of an admin-\nstyle escape hatch).\n\nBypasses closure-condition evaluation and the state-machine transition\nmatrix. Records an admin_correction log entry with the reason text so\nfuture maintainers can audit when and why force_close was used."
       },
       "ArcItemAccessEnvelope": {
         "properties": {

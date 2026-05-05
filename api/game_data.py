@@ -303,6 +303,11 @@ def list_arc_condition_types() -> list[str]:
     return list(load_arc_types()["condition_types"])
 
 
+def get_arc_condition_types() -> set[str]:
+    """Return valid arc condition types as a set."""
+    return set(list_arc_condition_types())
+
+
 # ---------------------------------------------------------------------------
 # Ancestries
 # ---------------------------------------------------------------------------

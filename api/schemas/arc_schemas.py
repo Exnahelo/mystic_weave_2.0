@@ -120,3 +120,26 @@ class ArcSettleResponse(BaseModel):
     consequence_events: list[str]
     character_updated: bool = True
     world_updated: bool = True
+
+
+class ArcForceCloseRequest(BaseModel):
+    """Payload for force-closing an arc that cannot transition through the
+    normal closure path (e.g., authored with invalid closure conditions,
+    stuck at hard cap with no escape, or otherwise in need of an admin-
+    style escape hatch).
+
+    Bypasses closure-condition evaluation and the state-machine transition
+    matrix. Records an admin_correction log entry with the reason text so
+    future maintainers can audit when and why force_close was used.
+    """
+    model_config = ConfigDict(extra="forbid")
+
+    reason: str = Field(
+        min_length=10,
+        max_length=500,
+        description="Required free-text explanation of why force_close was needed. "
+        "Recorded in the session log as an audit annotation.",
+    )
+    outcome: Literal["complete", "failed", "abandoned"]
+    awarded_ap: int = Field(default=0, ge=0)
+    notes: str | None = None

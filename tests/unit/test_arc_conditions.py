@@ -78,9 +78,14 @@ def test_report_delivered_requires_flag_id() -> None:
 
 
 @pytest.mark.unit
-def test_unknown_condition_type_raises() -> None:
-    with pytest.raises(ConditionEvaluationError):
-        evaluate_condition(ArcCondition(type="made_up"), _arc())
+def test_unknown_condition_type_rejected_at_construction() -> None:
+    """As of 5.6.0, unknown condition types are rejected at model construction
+    rather than at evaluation time. The evaluator never sees an unknown type
+    because Pydantic validates against the registry first."""
+    from pydantic import ValidationError
+
+    with pytest.raises(ValidationError):
+        ArcCondition(type="made_up")
 
 
 @pytest.mark.unit

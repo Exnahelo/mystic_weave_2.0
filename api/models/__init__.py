@@ -98,6 +98,19 @@ class ArcCondition(BaseModel):
     type: str = Field(description="Condition type from the registry condition_types list.")
     payload: dict[str, Any] = Field(default_factory=dict)
 
+    @field_validator("type")
+    @classmethod
+    def type_must_be_in_registry(cls, v: str) -> str:
+        from api.game_data import get_arc_condition_types
+
+        valid_types = get_arc_condition_types()
+        if v not in valid_types:
+            raise ValueError(
+                f"Invalid arc condition type {v!r}. Must be one of the registry condition_types "
+                f"in data/catalog/registries/arc_types.json. Valid types: {sorted(valid_types)}"
+            )
+        return v
+
 
 class ArcConditionSet(BaseModel):
     """Logical grouping of arc conditions for closure or failure evaluation."""

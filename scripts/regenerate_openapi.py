@@ -52,6 +52,12 @@ GPT_SPEC_EXCLUSIONS = [
     ("post", "/scene/declare_resolution"),
     ("post", "/progression/scan"),
     ("post", "/progression/commit"),
+    # Admin-style escape hatch for arcs stuck in non-terminal states
+    # (typically authored with invalid closure-condition labels). The
+    # narrator should not call this as a routine path — closure is a
+    # creative decision and the standard /transition + /settle flow is
+    # the supported surface.
+    ("post", "/arc/{session_id}/{arc_id}/force_close"),
 ]
 
 

@@ -36,6 +36,7 @@ from api.repositories.arc_repository import ArcRepository
 from api.repositories.state_repository import StateRepository
 from api.schemas.arc_schemas import (
     ArcCreateRequest,
+    ArcForceCloseRequest,
     ArcProgressRequest,
     ArcProgressResponse,
     ArcSettleRequest,
@@ -882,6 +883,180 @@ async def settle_arc(
         consequence_events=consequence_events,
         character_updated=True,
         world_updated=True,
+    )
+
+
+@router.post("/{session_id}/{arc_id}/force_close", response_model=ArcSettleResponse)
+async def force_close_arc(
+    session_id: str,
+    arc_id: str,
+    req: ArcForceCloseRequest,
+    repo: ArcRepository = Depends(get_arc_repository),
+) -> ArcSettleResponse:
+    """Admin escape hatch for an arc stuck in a non-terminal state. Bypasses closure-condition evaluation and the transition matrix. Settlement runs for outcome=complete|failed; abandoned skips it. Records an admin_correction log entry with the reason."""
+    arc = await repo.get_by_id(session_id, arc_id)
+    if arc is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Arc {arc_id} not found in session {session_id}",
+        )
+
+    if is_terminal(arc.state):
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={
+                "error": "arc_already_terminal",
+                "message": f"Arc is already in terminal state '{arc.state}' and cannot be force-closed.",
+                "current_state": arc.state,
+            },
+        )
+
+    if req.outcome == "failed" and req.awarded_ap > 0:
+        raise HTTPException(
+            status_code=HTTP_422_UNPROCESSABLE_CONTENT,
+            detail={
+                "error": "ap_on_failure_not_allowed",
+                "message": "Failed arcs cannot award AP per the v1 locked policy.",
+            },
+        )
+    if req.outcome == "abandoned" and req.awarded_ap > 0:
+        raise HTTPException(
+            status_code=HTTP_422_UNPROCESSABLE_CONTENT,
+            detail={
+                "error": "ap_on_abandoned_not_allowed",
+                "message": "Abandoned arcs cannot award AP.",
+            },
+        )
+
+    if req.awarded_ap > 0:
+        if not arc.flags.formal_contract_qualified:
+            raise HTTPException(
+                status_code=HTTP_422_UNPROCESSABLE_CONTENT,
+                detail={
+                    "error": "emergent_arc_no_ap",
+                    "message": "Emergent arcs cannot award AP.",
+                },
+            )
+        if arc.flags.ap_ownership == "none":
+            raise HTTPException(
+                status_code=HTTP_422_UNPROCESSABLE_CONTENT,
+                detail={"error": "no_ap_ownership", "message": "Arc has ap_ownership='none' and cannot award AP."},
+            )
+        if req.awarded_ap < arc.rewards.ap_award.min or req.awarded_ap > arc.rewards.ap_award.max:
+            raise HTTPException(
+                status_code=HTTP_422_UNPROCESSABLE_CONTENT,
+                detail={
+                    "error": "ap_outside_envelope",
+                    "envelope_min": arc.rewards.ap_award.min,
+                    "envelope_max": arc.rewards.ap_award.max,
+                },
+            )
+
+    now = datetime.now(timezone.utc)
+    from_state = arc.state
+    new_state = req.outcome  # "complete" | "failed" | "abandoned" — all terminal
+
+    new_timestamps = arc.timestamps.model_copy()
+    new_timestamps.last_progressed_at = now
+    new_timestamps.closed_at = now
+
+    state_repo = StateRepository(repo._pool)
+
+    consequence_events: list[str] = []
+    character_updated = False
+    world_updated = False
+
+    if req.outcome != "abandoned":
+        settlement = ArcSettlementResult(
+            arc_id=arc_id,
+            outcome=req.outcome,  # type: ignore[arg-type]
+            awarded_ap=req.awarded_ap,
+            reputation_changes=[],
+            coin_cd_awarded=0,
+            coin_cd_forfeit=0,
+            obligations_added=[],
+            items_awarded=[],
+            leverage_gained=[],
+            settled_at=now,
+            notes=req.notes,
+        )
+        arc.settlement = settlement
+
+        character = await state_repo.get_character(session_id)
+        world = await state_repo.get_world(session_id)
+        if character is None or world is None:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Session state not found for {session_id}",
+            )
+        updated_character, updated_world, consequence_events = await apply_arc_settlement(
+            arc=arc,
+            character=character,
+            world=world,
+        )
+        await state_repo.update_character(session_id, updated_character)
+        await state_repo.update_world(session_id, updated_world)
+        arc.consequence_events_emitted = consequence_events
+        character_updated = True
+        world_updated = True
+
+    await repo.update_arc(
+        arc_id=arc_id,
+        new_state=new_state,
+        consumption=arc.consumption,
+        timestamps=new_timestamps,
+        full_arc=arc,
+    )
+
+    annotation_entry = TypedLogEntry(
+        type="admin_correction",
+        text=f"[operational_constraint] force_close arc {arc_id} ({from_state} → {new_state}): {req.reason}",
+    )
+    await state_repo.append_log_entry(session_id, annotation_entry)
+
+    if req.outcome != "abandoned":
+        closure_entry = TypedLogEntry(
+            type="closure_summary",
+            text=f"Arc '{arc.title}' force-closed as {req.outcome}",
+            payload={
+                "arc_id": arc_id,
+                "arc_title": arc.title,
+                "outcome": req.outcome,
+                "settled_at": now.isoformat(),
+                "awarded_ap": req.awarded_ap,
+                "force_close": True,
+                "reason": req.reason,
+                "resolved_scenes_used": arc.consumption.resolved_scenes_used,
+                "locations_visited": list(arc.consumption.locations_visited),
+            },
+        )
+        await state_repo.append_log_entry(session_id, closure_entry)
+
+    await repo.append_transition_log(
+        ArcTransitionLogEntry(
+            arc_id=arc_id,
+            session_id=session_id,
+            from_state=from_state,
+            to_state=new_state,
+            reason=f"force_close: {req.reason}",
+            transitioned_at=now,
+            resolved_scenes_at_transition=arc.consumption.resolved_scenes_used,
+            locations_visited_at_transition=list(arc.consumption.locations_visited),
+            triggering_event="force_close",
+        )
+    )
+
+    updated = await repo.get_by_id(session_id, arc_id)
+    if updated is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Arc {arc_id} not found in session {session_id}",
+        )
+    return ArcSettleResponse(
+        arc=updated,
+        consequence_events=consequence_events,
+        character_updated=character_updated,
+        world_updated=world_updated,
     )
 
 
