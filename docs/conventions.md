@@ -557,3 +557,9 @@ When naming something:
 ## Restructure / cleanup hygiene
 
 When deleting a file or renaming a canonical reference, the "find all references" search must include every directory containing executable code or build configuration, not just the obvious documentation and source tree. In particular: `scripts/`, `alembic/`, `railway.toml`, `pyproject.toml`, `pytest.ini`, `.github/`, and any tool config files at the repo root. The prompt-restructure work in 5.5.0 missed `scripts/validate_prompts.py` because the initial grep scoped only `prompts/ api/ data/ tests/ docs/ schemas/ CLAUDE.md`. The validator broke silently until caught at the next phase's CI lane.
+
+---
+
+## State mutations against list-typed fields
+
+State mutations against list-typed fields require fetch-then-merge. Delta endpoints have replace semantics on dict and list fields by default; only the ones explicitly documented as appending (such as `log_entry`) are safe to write without merging the existing value first. When in doubt, fetch the current value, append/merge in code, post the full updated value back. This applies to `world.politics.known_leverage`, `character.equipment.carried`, location `known_npcs`, companion lists, and anything similar. The 5.6.0 Brief 2 cleanup operation lost 11 leverage entries to a replace-semantics delta; recovery required reconstructing from `scene_records`. Treat the brief's mention of merge-vs-replace as a contract requirement on the first attempt, not a fallback after a probe.

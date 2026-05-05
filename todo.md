@@ -146,6 +146,16 @@ Items from `docs/audit/architecture_review_2026-05-02.md` not addressed in Brief
 
 ---
 
+## PENDING DESIGN
+
+Items waiting on a design pass before implementation. Surfaced from 5.6.x operational work.
+
+- [ ] **Evidence/custody schema gap.** The `world.politics.known_leverage` field is currently absorbing both leverage and physical-evidence-under-custody concerns. Items held under another character's authority (e.g., the Vaelmere ambush-relay tube held by Captain Rhel) don't fit `character.equipment.carried` — `EquipmentItem` has no `category` field and `EquipmentTag` has no `evidence` value. Likely needs a dedicated `world.evidence` structure or `character.evidence_carried` with `held_by`, `chain_of_custody` fields. Overlaps with Brief 3's `ArcSettlementEnumeration.items_awarded` shape — design together. Surfaced as Step 3 stop in Brief 2 on session 411c1f7de9334a4e (5.6.x cleanup).
+- [ ] **List-replace delta semantics.** `/state/{session_id}/delta` replaces list-typed fields rather than appending. The conventions update (`docs/conventions.md` "State mutations against list-typed fields") mitigates the operator-side risk; structural fix is a `merge_strategy` parameter on the delta endpoint, or dedicated append endpoints (e.g., `/state/{id}/leverage/append`). Lower priority than Brief 3 but worth a brief eventually. Loss event on session 411c1f7de9334a4e (5.6.x): a leverage-list delta clobbered 11 entries before the convention was written down.
+- [ ] **Arc lineage at create time.** Investigation arc on session `411c1f7de9334a4e` (`arc-570eaeebde0840e4`, "Find the Hand Behind the Vaelmere Ambush") was authored as standalone emergent when it was structurally a child of the formal "Ride West Under Vaelaryn Auspices" parent (`arc-3f107b923c004ba2`, since closed). Brief 3's `scope_check` intent doesn't directly fix this since it triggers post-creation. Consider whether arc creation should evaluate parent-linkage candidates among open formal arcs at create time and prompt the narrator if a structural parent is plausible.
+
+---
+
 ## REFACTORING (INCREMENTAL)
 
 - [ ] **`api/models.py` incremental split.** 1400-line kitchen sink. Per project policy: when any model in `models.py` next needs significant changes, that model moves to a new file as part of the same change. Concrete trigger: arc model edits → pull into `api/models/arc.py`. Same for character / world / item / advancement when each is next touched. Do not propose a single brief that splits the whole file at once. **Brief 13 (2026-05-02) extracted `character.py`; remaining models still in `__init__.py`.**
