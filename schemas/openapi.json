@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "5.6.1"
+    "version": "5.7.0"
   },
   "servers": [
     {
@@ -555,6 +555,7 @@
         "summary": "Transition Arc",
         "description": "Request an arc state transition.\n\nEnforces the Arc System v1 transition matrix and rejects stale\nfrom_state values. Closure and authored failure conditions are evaluated\nbefore persistence for ready_to_close and failed transitions.",
         "operationId": "transition_arc_arc__session_id___arc_id__transition_post",
+        "deprecated": true,
         "parameters": [
           {
             "name": "session_id",
@@ -679,6 +680,7 @@
         "summary": "Settle Arc",
         "description": "Settle rewards for an arc and transition it to complete or failed.",
         "operationId": "settle_arc_arc__session_id___arc_id__settle_post",
+        "deprecated": true,
         "parameters": [
           {
             "name": "session_id",

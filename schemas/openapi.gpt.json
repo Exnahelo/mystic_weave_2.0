@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave (GPT Actions)",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "5.6.1"
+    "version": "5.7.0"
   },
   "servers": [
     {
@@ -449,68 +449,6 @@
         }
       }
     },
-    "/arc/{session_id}/{arc_id}/transition": {
-      "post": {
-        "tags": [
-          "arc"
-        ],
-        "summary": "Transition Arc",
-        "description": "Request an arc state transition.\n\nEnforces the Arc System v1 transition matrix and rejects stale\nfrom_state values. Closure and authored failure conditions are evaluated\nbefore persistence for ready_to_close and failed transitions.",
-        "operationId": "transition_arc_arc__session_id___arc_id__transition_post",
-        "parameters": [
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Session Id"
-            }
-          },
-          {
-            "name": "arc_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Arc Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ArcTransitionRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Arc"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/arc/{session_id}/{arc_id}/spawn": {
       "post": {
         "tags": [
@@ -573,14 +511,14 @@
         }
       }
     },
-    "/arc/{session_id}/{arc_id}/settle": {
+    "/arc/{session_id}/{arc_id}/declare": {
       "post": {
         "tags": [
           "arc"
         ],
-        "summary": "Settle Arc",
-        "description": "Settle rewards for an arc and transition it to complete or failed.",
-        "operationId": "settle_arc_arc__session_id___arc_id__settle_post",
+        "summary": "Declare Arc",
+        "description": "Declarative arc lifecycle endpoint. Composes /transition + /settle + /spawn behind one call. The narrator submits intent and required structured data; the backend executes the state machine atomically. Replaces routine paths through the legacy endpoints; edge cases still go through /transition.",
+        "operationId": "declare_arc_arc__session_id___arc_id__declare_post",
         "parameters": [
           {
             "name": "session_id",
@@ -606,7 +544,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ArcSettleRequest"
+                "$ref": "#/components/schemas/ArcDeclareRequest"
               }
             }
           }
@@ -617,7 +555,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArcSettleResponse"
+                  "$ref": "#/components/schemas/ArcDeclareResponse"
                 }
               }
             }

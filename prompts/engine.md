@@ -43,18 +43,16 @@ Party rep: `mean(known) * (known_count / party_size)`; none => `+0`; round towar
 Before rolls, enumerate worn/active items with `mechanical_effect`; apply triggered modifiers and answer questions from the field directly.
 
 ### Arc System Decision Gates
-**Create**: at any higher-level objective, before continuing narration:
-identify patron, explicit objective, expected return. If all three
-present → `formal_contract_qualified: true`. If any missing → `false`,
-`ap_ownership: "none"`. Call `/arc/{session_id}/create`. See
-`arc-rules.md` Narrator Decision Procedure.
-**Scope check**: every scene, read `arc_envelope_status`.
-`phase_shift_candidate` → evaluate spawn. `hard_cap_reached` → close
-immediately. Do not narrate past hard cap.
-**Settle**: at closure, fill in Settlement Enumeration Template. Every
-channel gets an explicit value, even if zero. Do not call `/settle`
-with channels unenumerated. Do not collapse channels into "no further
-reward."
+**Create**: at any higher-level objective: identify patron, explicit
+objective, expected return. All three present → `formal_contract_qualified: true`. Any missing → `false`, `ap_ownership: "none"`. Call
+`/arc/{session_id}/create`. See `arc-rules.md` Decision Procedure.
+**Scope check**: every scene, read `arc_envelope_status`. When
+`phase_shift_candidate` fires, call `/declare` intent=`scope_check`
+before continuing — required, not advisory. `hard_cap_reached` →
+close immediately.
+**Settle**: at closure, call `/declare` intent=`close` (or `fail`)
+with `ArcSettlementEnumeration` body. Schema requires every channel;
+omission returns 422. No "no further reward" collapses.
 
 ### Pursuit Closure Shapes
 Pursuit, investigation, and tracking arcs force-close when the dramatic question collapses. Valid closures: target caught; escaped with cost (evidence dropped, identity revealed, location burned); trail lost; converted to containment or handoff. After 3 scenes without a closure shape, force one on the next beat. "The line continues" or "another waypoint" is filler. Failure-forward IS closure: a failed roll answering the question ends the scene; do not extend to extract more clues.
@@ -104,4 +102,4 @@ Use `/companion/new`, `/companion/{id}/transition`, and `/state/{session_id}/del
 Never list options from memory; call `GET /options` and present returned values only.
 
 ## API Reference
-GET `/options`,`/catalog/items`,`/catalog/creatures`,`/catalog/vocab`, `/state/{session_id}`, `/scene/{session_id}`, `/location/{location_id}`, `/location/{location_id}/connections`, `/arc/{session_id}`, `/registry/{name}`. POST `/narrator/scene_resolved`, `/state/{session_id}/delta`, `/state/{session_id}/annotation`, `/roll`, `/location`, `/session/new`, `/character/create`, `/arc/{session_id}/create`, `/arc/{session_id}/{arc_id}/transition`, `/arc/{session_id}/{arc_id}/spawn`, `/arc/{session_id}/{arc_id}/settle`.
+GET `/options`,`/catalog/items`,`/catalog/creatures`,`/catalog/vocab`, `/state/{session_id}`, `/scene/{session_id}`, `/location/{location_id}`, `/location/{location_id}/connections`, `/arc/{session_id}`, `/registry/{name}`. POST `/narrator/scene_resolved`, `/state/{session_id}/delta`, `/state/{session_id}/annotation`, `/roll`, `/location`, `/session/new`, `/character/create`, `/arc/{session_id}/create`, `/arc/{session_id}/{arc_id}/declare`.

@@ -55,15 +55,17 @@ GPT_SPEC_EXCLUSIONS = [
     # Admin-style escape hatch for arcs stuck in non-terminal states
     # (typically authored with invalid closure-condition labels). The
     # narrator should not call this as a routine path — closure is a
-    # creative decision and the standard /transition + /settle flow is
-    # the supported surface.
+    # creative decision and the orchestrator's /declare flow is the
+    # supported surface.
     ("post", "/arc/{session_id}/{arc_id}/force_close"),
-    # Brief 3 Phase A: arc orchestrator endpoint added to the full spec
-    # but withheld from the GPT spec until Phase C, when prompts have
-    # been migrated to use it. Shipping declare to the GPT before the
-    # prompts know about it would create instructionless surface area.
-    # Phase C will remove this exclusion as part of the 5.7.0 release.
-    ("post", "/arc/{session_id}/{arc_id}/declare"),
+    # Phase 3 Phase C (5.7.0): /transition and /settle remain in the
+    # full spec as deprecated edge-case fallbacks but are hidden from
+    # the GPT subset. The narrator's routine arc lifecycle goes through
+    # /declare with intent. /spawn stays in the GPT subset since
+    # /declare intent=spawn_child is the orchestrated surface but
+    # /spawn is a legitimate direct call for non-orchestrated spawns.
+    ("post", "/arc/{session_id}/{arc_id}/transition"),
+    ("post", "/arc/{session_id}/{arc_id}/settle"),
 ]
 
 

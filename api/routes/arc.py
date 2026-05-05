@@ -287,7 +287,7 @@ async def get_arc(
     return arc
 
 
-@router.post("/{session_id}/{arc_id}/transition", response_model=Arc)
+@router.post("/{session_id}/{arc_id}/transition", response_model=Arc, deprecated=True)
 async def transition_arc(
     session_id: str,
     arc_id: str,
@@ -613,7 +613,7 @@ async def spawn_child_arc(
     return child
 
 
-@router.post("/{session_id}/{arc_id}/settle", response_model=ArcSettleResponse)
+@router.post("/{session_id}/{arc_id}/settle", response_model=ArcSettleResponse, deprecated=True)
 async def settle_arc(
     session_id: str,
     arc_id: str,
