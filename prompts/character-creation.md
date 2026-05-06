@@ -8,13 +8,12 @@ This document is the authoritative, step-by-step reference for character creatio
 
 ## Character Creation Flow
 
-### Stage 1 — Name and Ancestry
+### Stage 1 — Ancestry
 
-1. Ask the player for a character name.
-2. Call `GET /options` to retrieve all valid ancestries.
-3. Present the ancestry list with their primary domain, domain score spread, and ancestry traits.
-4. Player chooses an ancestry.
-5. If ancestry is drakari, establish their inherited magical field at creation. The drakari player picks one of the nine canonical fields (`Sacred`, `Warding`, `Binding`, `Elemental`, `Druidry`, `Illusion`, `Runecraft`, `Alchemy`, `Necromancy`) and gains it at knowledge tier 1, plus two tier-1 spells of their choice from that field. This is the drakari magical inheritance — a free starting endowment from their draconic descent — and is in addition to any field expertise gained from focus archetype, background, or culture.
+1. Call `GET /options` to retrieve all valid ancestries.
+2. Present the ancestry list with their primary domain, domain score spread, and ancestry traits.
+3. Player chooses an ancestry.
+4. If ancestry is drakari, establish their inherited magical field at creation. The drakari player picks one of the nine canonical fields (`Sacred`, `Warding`, `Binding`, `Elemental`, `Druidry`, `Illusion`, `Runecraft`, `Alchemy`, `Necromancy`) and gains it at knowledge tier 1, plus two tier-1 spells of their choice from that field. This is the drakari magical inheritance — a free starting endowment from their draconic descent — and is in addition to any field expertise gained from focus archetype, background, or culture.
 
 ### Stage 2 — Culture
 
@@ -31,7 +30,7 @@ This document is the authoritative, step-by-step reference for character creatio
 1. Present the focus archetype list from `GET /options` with descriptions and starting tags.
 2. Player chooses a focus. Any ancestry can choose any focus.
 3. Magical fields use the same tier math/progression rules as knowledge groups. Canonical fields: `Sacred`, `Warding`, `Binding`, `Elemental`, `Druidry`, `Illusion`, `Runecraft`, `Alchemy`, `Necromancy`. Each field is recorded on the character with its tier and a `spells` map; per-character spell mastery is capped by the field's tier (parent-cap rule, structural). Field knowledge tiers are gated by the field's primary domain score — see `prompts/magic-rules.md`.
-4. If ancestry is drakari, confirm the inherited magical field and the two T1 spells were established at Stage 1 step 5. Drakari magical inheritance is fixed at creation; it is not deferred to play.
+4. If ancestry is drakari, confirm the inherited magical field and the two T1 spells were established at Stage 1 step 4. Drakari magical inheritance is fixed at creation; it is not deferred to play.
 
 ### Stage 5 — Adjustment Points
 
@@ -164,7 +163,16 @@ for social or political actions with that faction.
 5. If they mention debts or obligations, add them to `economy.obligations`.
 6. Do not prompt exhaustively for every item. Let the player volunteer what matters.
 
-### Stage 9 — Confirm and Create
+### Stage 9 — Name
+
+1. With the character fully built, ask the player for a name. The
+   player has shaped a person — ancestry, culture, background, focus,
+   identity, companions, gear. Naming last lets the name reflect who
+   the character actually is, not who the player thought they'd be at
+   the start.
+2. Store as `character_name`.
+
+### Stage 10 — Confirm and Create
 
 1. Show the player a full summary:
    - Name, ancestry, culture, background, focus
@@ -243,7 +251,7 @@ The backend is the sole source of truth for valid ancestry, culture, focus, and 
 
 | API Field | Stage Collected | Notes |
 |---|---|---|
-| `character_name` | 1 | |
+| `character_name` | 9 | Collected last so the name reflects the fully-built character |
 | `ancestry` | 1 | Index from GET /options only |
 | `culture` | 2 | Index from GET /options only |
 | `background` | 3 | Index from GET /options only |
@@ -261,8 +269,8 @@ The backend is the sole source of truth for valid ancestry, culture, focus, and 
 | `starting_economy.coin` | 8 | Default: 0 |
 | `equipment.worn` / `equipment.carried` | 8 | From player description |
 | `companions` | 7 | Sapient only at creation; list of CompanionEnvelope; optional on `POST /session/new` |
-| `equipment` | 9 | Optional on `POST /session/new` |
+| `equipment` | 10 | Optional on `POST /session/new` |
 | `economy.obligations` | 8 | Debts, favors, sworn duties |
-| `starting_location` | 9 | Set by GPT from world context |
-| `goal` | 9 | Ask player or set narratively |
-| `threat` | 9 | Set by GPT from world context |
+| `starting_location` | 10 | Set by GPT from world context |
+| `goal` | 10 | Ask player or set narratively |
+| `threat` | 10 | Set by GPT from world context |
