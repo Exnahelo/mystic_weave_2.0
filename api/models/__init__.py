@@ -256,6 +256,9 @@ class ArcTimestamps(BaseModel):
     closed_at: datetime | None = None
 
 
+ARC_BEAT_LOG_VALID_SOURCES: tuple[str, ...] = ("progress", "transition")
+
+
 class ArcBeatLogEntry(BaseModel):
     """A single beat recorded on an arc's per-arc log.
 

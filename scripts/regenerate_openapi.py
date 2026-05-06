@@ -34,6 +34,13 @@ GPT_SPEC_EXCLUSIONS = [
     # play so that field-level merge semantics apply; full overwrite would
     # let the GPT clobber state. Excluded from the GPT subset only.
     ("post", "/state/{session_id}"),
+    # Brief A (5.7.3): GET /state/{session_id} is retired from the GPT
+    # surface. The full-state response (~44 KB observed in 5.7.2 traffic)
+    # fails reliably through the OpenAI Actions wrapper despite a healthy
+    # 11 ms backend. The narrator now reads via GET /scene/{session_id}
+    # and the per-domain endpoints. Direct API access keeps the endpoint
+    # in openapi.json for tooling and audit.
+    ("get", "/state/{session_id}"),
     # GET /companion/{companion_id} is GPT-redundant: companions are
     # already returned in world.companions on every state load. Excluded
     # from the GPT subset to free a slot.

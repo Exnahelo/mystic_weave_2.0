@@ -12,7 +12,6 @@ the previous save rather than wiped. Only fields explicitly sent are updated.
 from __future__ import annotations
 
 import json
-import time
 import uuid
 from typing import Any
 
@@ -359,24 +358,20 @@ async def load_state(
     affects the response payload size.
     """
     async with pool.acquire() as conn:
-        query_start = time.perf_counter()
         row = await conn.fetchrow(
             "SELECT session_id, character, world, log, updated_at "
             "FROM game_states WHERE session_id = $1",
             session_id,
         )
-        query_ms = (time.perf_counter() - query_start) * 1000.0
 
     if row is None:
         raise HTTPException(status_code=404, detail="session not found")
 
     try:
-        serialize_start = time.perf_counter()
         character = CharacterModel.model_validate(
             _normalize_character_state(row["character"])
         )
         world = WorldModel.model_validate(row["world"])
-        serialize_ms = (time.perf_counter() - serialize_start) * 1000.0
     except ValidationError as e:
         raise HTTPException(status_code=500, detail={"message": "stored game state is invalid", "errors": e.errors()})
 
@@ -384,7 +379,7 @@ async def load_state(
     log_total_entries = len(full_log)
     log_to_return = full_log if log_limit is None else full_log[-log_limit:]
 
-    response = GameStateResponse(
+    return GameStateResponse(
         session_id=row["session_id"],
         character=character,
         world=world,
@@ -392,22 +387,6 @@ async def load_state(
         log_total_entries=log_total_entries,
         updated_at=row["updated_at"],
     )
-
-    # [STATE_DIAG] Temporary observability for Brief 4 root-cause analysis.
-    # Remove together with Brief 4 proper.
-    try:
-        body_bytes = len(response.model_dump_json().encode("utf-8"))
-    except Exception:
-        body_bytes = -1
-    print(
-        f"[STATE_DIAG] session={session_id} "
-        f"log_limit={log_limit} log_total={log_total_entries} "
-        f"query_ms={query_ms:.1f} serialize_ms={serialize_ms:.1f} "
-        f"body_bytes={body_bytes}",
-        flush=True,
-    )
-
-    return response
 
 
 @router.post(

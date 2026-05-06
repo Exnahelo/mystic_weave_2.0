@@ -167,6 +167,47 @@ def test_get_list_multiple_arcs() -> None:
 
 
 @pytest.mark.contract
+def test_get_list_returns_arcs_with_valid_log_entries() -> None:
+    """GET /arc/{session_id} returns 200 for arcs whose log[] contains
+    entries with all valid source values ('progress' and 'transition').
+
+    Brief A regression guard: a manual JSON patch in the 2026-05-05 Phase 9b
+    session injected source='settlement_correction' into one arc, causing
+    GET /arc/{session_id} to 500 on Arc model validation. The schema's
+    literal union is the contract; this test pins the happy path.
+    """
+    conn = ArcRouteConn()
+    app = _make_app(conn)
+    with TestClient(app) as client:
+        created = _create(client, session_id="sess-log", title="Logged Arc")
+        for row in conn.rows:
+            if row["id"] == created["id"]:
+                data = dict(row["data"])
+                data["log"] = [
+                    {
+                        "text": "first beat",
+                        "timestamp": datetime(2026, 5, 5, 12, 0, tzinfo=timezone.utc).isoformat(),
+                        "source": "progress",
+                    },
+                    {
+                        "text": "state moved to in_progress",
+                        "timestamp": datetime(2026, 5, 5, 12, 5, tzinfo=timezone.utc).isoformat(),
+                        "source": "transition",
+                    },
+                ]
+                row["data"] = Arc.model_validate(data).model_dump(mode="json")
+                break
+
+        response = client.get("/arc/sess-log")
+
+    assert response.status_code == 200, response.text
+    body = response.json()
+    assert len(body) == 1
+    log = body[0]["log"]
+    assert [entry["source"] for entry in log] == ["progress", "transition"]
+
+
+@pytest.mark.contract
 def test_get_active_filters_correctly() -> None:
     conn = ArcRouteConn()
     app = _make_app(conn)

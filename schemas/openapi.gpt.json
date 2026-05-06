@@ -3,7 +3,7 @@
   "info": {
     "title": "Mystic Weave (GPT Actions)",
     "description": "Persistent game state backend for a text-based RPG powered by a custom GPT. The GPT is the narrator; this API is the memory. d100 roll-under resolution with domain scores and competency tiers.",
-    "version": "5.7.2"
+    "version": "5.7.3"
   },
   "servers": [
     {
@@ -12,66 +12,6 @@
     }
   ],
   "paths": {
-    "/state/{session_id}": {
-      "get": {
-        "summary": "Load State",
-        "description": "Load the full game state for a session. Returns 404 if not found.\n\nUse log_limit to fetch only the tail of the log when sessions have\naccumulated many entries. The full log remains in storage; this only\naffects the response payload size.",
-        "operationId": "load_state_state__session_id__get",
-        "parameters": [
-          {
-            "name": "session_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Session Id"
-            }
-          },
-          {
-            "name": "log_limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "integer",
-                  "maximum": 10000,
-                  "minimum": 1
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "If set, return only the most recent N log entries. log_total_entries always reports the full count. Defaults to None (full log, backward-compatible).",
-              "title": "Log Limit"
-            },
-            "description": "If set, return only the most recent N log entries. log_total_entries always reports the full count. Defaults to None (full log, backward-compatible)."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GameStateResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/state/{session_id}/delta": {
       "post": {
         "summary": "Save State Delta",
