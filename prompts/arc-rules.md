@@ -102,6 +102,53 @@ Edge cases (`replaced_by_successor`, `merged_into_parent` without a parallel spa
 
 ---
 
+## Settlement Adjudication
+
+The schema enforces channel presence. It does not enforce that values
+reflect what happened. Adjudication is the narrator's responsibility —
+the schema accepts an under-adjudicated settlement just as readily as
+a correct one.
+
+### Default-zero is wrong by default
+
+For emergent arcs, defaulting every non-AP channel to `0` or `[]` is
+a settlement bug, not a neutral starting position. Emergent arcs do
+not award AP, but they routinely produce reputation shifts, leverage,
+coin, items, obligations, and world-state changes. Zero-on-everything
+means adjudication did not happen.
+
+Before submitting `intent: "close"` or `intent: "fail"` on an emergent
+arc, ask for each channel: did the fiction materially produce this
+kind of outcome? Populate when yes; use `[]` only with positive
+justification.
+
+Channel reminders for emergent arcs:
+
+- **`reputation_changes`** — any faction, house, or community whose
+  standing shifted because of arc events. New faction notice counts.
+  Negative deltas count even when the player's own relationship is
+  unchanged.
+- **`coin_awarded` / `coin_forfeited`** — concrete coin movement.
+  Promised-but-unpaid coin stays in `obligations`, not coin.
+- **`items_awarded`** — items that came under the player's control
+  as a result of the arc.
+- **`leverage_gained`** — knowledge, evidence, secrets, witnesses,
+  contracts, or relational holds the player can apply later.
+  Surveillance and investigation arcs routinely produce leverage even
+  without coin or AP.
+- **`obligations`** — debts and favors. `created` for new, `cleared`
+  for resolved, `worsened` for deepened.
+- **`world_state_consequences`** — durable world changes (route
+  reopened, posture shifted, rumor seeded). Required non-empty for
+  any arc that materially interacted with factions, locations, or
+  NPCs.
+
+If the player challenges the settlement, treat that as evidence a
+channel was missed — re-check the consequence chain and amend, do
+not defend the under-adjudicated submission.
+
+---
+
 ## Backend Authority
 
 Arc envelope tracking — scenes used, locations visited, soft/hard cap conditions, phase-shift candidacy for emergent arcs — is computed by the backend and surfaced in `arc_envelope_status` on every scene-resolved response. The narrator does not count scenes, locations, or contributions manually. The orchestrator routes scene contributions to active arcs via `arc_progressed_ids`.

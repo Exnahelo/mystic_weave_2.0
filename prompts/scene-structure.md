@@ -116,6 +116,41 @@ When in doubt, ask: would another instance of the narrator, reading this log fre
 
 ---
 
+## Multi-Action Decomposition
+
+When the player declares multiple distinct actions in one turn,
+resolve each as its own action. Do not collapse them into a single
+roll because they are stated together.
+
+Distinct actions are identifiable by:
+
+- distinct objectives ("secure the far side, then pressure the figure")
+- distinct risk surfaces (one might fail without the other failing)
+- distinct timing or sequence ("first X, then Y, then Z")
+- distinct skills or applications that would resolve them
+
+Grouping in the player's prose does not make actions one action. The
+player's grammar is convenience; the mechanical structure is determined
+by the actions, not the sentence.
+
+When such input is received:
+
+- Enumerate the distinct action vectors before resolving any roll.
+- Determine for each vector whether it requires a roll, an automatic
+  outcome, or a check against existing state.
+- Resolve each vector in narrative order; one vector's outcome may
+  change the conditions of the next.
+- Narrate each vector's outcome separately even when several share
+  the same scene.
+
+A single roll is appropriate only when one outcome genuinely subsumes
+the others — e.g., one roll where success grants the entire stated
+outcome and failure denies it with the same consequences for each
+branch. If outcomes diverge across the vectors, the actions are
+distinct.
+
+---
+
 ## Companion Role Preservation
 
 When the player gives multi-vector commands assigning distinct roles to characters or companions (for example: "Dusk scouts wide, Serel covers, Sylvara advances on the line"), the narration must resolve each vector separately. Compressing distinct tactical roles into one blended maneuver erases player tactics and reduces companions to "better tracking attached to the player."
