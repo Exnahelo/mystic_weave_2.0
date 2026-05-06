@@ -16,20 +16,35 @@ If you walk in cold and only read one section, read **Current Focus**.
 
 ## CURRENT FOCUS
 
-**Backend Authority Arc (structurally complete, 2026-05-03).** Briefs 16–24 (with 19.5 as the transitional cleanup) all landed. The narrator GPT now has a single primary scene-resolution endpoint (`/narrator/scene_resolved`), structurally enforced progression validation, automatic arc-envelope tracking with phase-shift suggestions, codified origin/phase rules, a unified registry layout, shrunken authoritative prompts, and a defensible log management posture. The arc plan section below is preserved for forensic context; live work moves to the next initiative when the user defines one.
+**2.0 maintenance + bridge concept tests; 3.0 design captured.** As of
+2026-05-05 the strategic posture is dual-track:
 
-The strategic problem this arc addressed: the May 2 session debrief surfaced that the narrator GPT cannot reliably handle the volume of rule-following currently asked of it — progression workflow drifted, arc structure decisions slipped, parent-cap and registry classification leaned on memory rather than authority, and admin-correction-only updates couldn't be expressed against the existing `/delta` endpoint. The strategic response was to move enforcement and rules-application from the narrator GPT into the backend so the narrator's job collapses to prose, dialogue, and pacing.
+- **2.0** is in maintenance mode for the next ~month while hardware
+  upgrade and 3.0 implementation timing resolve. Bug fixes land as
+  needed; small concept tests (mostly prompt-side) validate or refute
+  3.0 design decisions through real play. No new architectural work in
+  2.0.
+- **3.0** design is captured in
+  `/mnt/user-data/outputs/3.0_baseline.md` (~2,000 lines, 15 sections,
+  open-questions index). It is a destination reference, not active
+  implementation. Specifics will refine as concept-test data
+  accumulates and hardware decisions resolve.
+- **Bridge tactical plan** lives in
+  `/mnt/user-data/outputs/2.0_bridge_work.md` and is the working plan
+  for what to do in 2.0 right now. Each item there is labeled FIX
+  (operational), TEST (informs 3.0), or SKIP (3.0 absorbs it).
 
-**Pending follow-ons inside the arc:**
-
-- Brief 22.5 — mixed-content prompts (combat-rules, mechanics-tables, items, economy, magic, difficulty, character-creation, calendar, world-rules) need per-section judgment about which content the backend has actually displaced. Awaiting live-play feedback before scoping.
-
-If a future brief changes plan, retire that brief's section here rather than letting the arc plan rot.
+The Backend Authority Arc (Briefs 16–24) is structurally complete;
+Phase 9b play and the 5.7.x bug-fix series followed. Brief A
+(stabilization, 5.7.3) closed out the operational debts from Phase 9b.
+The todo sections below preserve forensic detail; live work moves
+through the bridge document.
 
 ---
 
 ## RECENTLY COMPLETED
 
+- **Brief A — Stabilization Pass (2026-05-05, 5.7.2 → 5.7.3, SHA `94bc33a`).** Three coordinated fixes after Phase 9b operational debts surfaced. (1) `ArcBeatLogEntry.source` literal union kept strict at `("progress", "transition")`; new module-level constant `ARC_BEAT_LOG_VALID_SOURCES` documents the canonical set. (2) New Alembic migration `20260505_0005_arc_log_source_integrity.py` is read-only and fails loudly on any value outside the union, naming offending arc IDs in the error message — manual JSON patches that introduced `settlement_correction` (or any other operational-meaning value) into the DB are now caught at deploy time. (3) New `scripts/repair_arc_log_source.py` is the interactive operator tool for repair when the migration fires; `docs/operations/arc-log-source-integrity.md` is the runbook. (4) `[STATE_DIAG]` removed from `api/routes/state.py`; `import time` dropped (diagnostic from 5.7.2 served its purpose, /state failure is in OpenAI Actions wrapper not backend, no further data needed). (5) `GET /state/{session_id}` excluded from `schemas/openapi.gpt.json` — the wrapper failure makes the endpoint unreliable from the narrator surface; admin/curl access via `openapi.json` retained. GPT spec 27/30 → 26/30; one slot freed. (6) New contract test pins GET-arc-with-log happy path. 598 → 599 tests passing. Operator deploy: black-tray arc `arc-94f73453e294498e` had to be repaired manually before migration would pass (single bad row with `source: "settlement_correction"` introduced during 5.7.0 Phase 9b unstick; repaired via direct SQL `UPDATE` against `progress`). Brief B (operational cleanup of session 411c1f7de9334a4e inventory drift) followed as no-code curl-only work; old copper-leaf arc `arc-374f982017074e63` discovered already abandoned via prior cleanup, no force-close needed.
 - **Brief 24 — Log management strategy (2026-05-03, 5.4.3 → 5.4.4).** Closes the Backend Authority Arc. Smallest defensible response to the May 2 log-bloat concern. `GET /state/{session_id}` accepts an optional `log_limit` query parameter (1–10000) that returns only the most recent N log entries; `GameStateResponse` gains `log_total_entries: int` so callers know the full count even when reading a tail. Default behavior unchanged: unset `log_limit` returns the full log. New `docs/operations/log-management.md` captures the strategy — authority/durability principle (no auto-prune, no retention windows, no background jobs), available tools (`log_limit`, compression-typed log entries via `/delta`, the `/annotation` endpoint), and measurement guidance for future briefs. 553 → 560 tests passing (7 new contract tests covering full-log default, tail truncation, ordering, oversize log_limit, zero rejection, max-bound rejection, save-state response field). GPT spec unchanged at 28/30. Patch bump because the change is purely additive: one new query parameter, one new response field with safe default, no schema or behavior change for existing callers. Brief 22.5 (mixed-content prompts) remains pending; future arcs (combat orchestrator, crafting, NPC persistence) follow with their own scope.
 - **Brief 23 — Registry / catalog unification (2026-05-03, 5.4.2 → 5.4.3).** Pure file relocation; no schema, no API surface, no behavior change. `data/tags/applications.json` and `data/tags/knowledge_groups.json` moved to `data/catalog/registries/` (file content unchanged; preserved via `git mv`). The three `_template_*.json` files moved alongside; `data/tags/` directory removed. `data/catalog/registries/` is now the single canonical location for registry-style vocabulary files. Updated 6 path references in `api/game_data.py` (the `_TAG_REGISTRY_FILES` tuple plus 4 inline `_load_json` calls), 4 references in `scripts/validate_data_files.py`, and 3 doc references (`docs/items-schema.md`, `docs/audit/architecture_review_2026-05-02.md` got a resolution note appended, `docs/audit/system_audit_2026-05-02.md` paths updated). Original brief scope was reduced after investigation: `data/economy/` ↔ `data/catalog/economy/` is not a real parallel (the catalog version doesn't exist); `data/magic/`, `data/companions/`, `data/characters/`, `data/npcs/` are organized at the top level by domain and have no catalog parallels. 553 tests still passing — no code logic changes. GPT spec unchanged at 28/30.
 - **Brief 22 — Prompt content audit and shrink (2026-05-03, 5.4.1 → 5.4.2).** Prose-only retirement of procedural content the backend now serves authoritatively. Four files touched: `progression-rules.md` 182 → 124 lines (AP earning math, spend math, save timing details, validation procedure, parent-cap procedural detail retired; new "Backend Authority" section added near top); `scene-structure.md` 143 → 136 lines (consequence-chain section reduced; Log Entry Discipline updated to reference annotation endpoint and orchestrator); `arc-rules.md` 978 → 873 lines (Required Backend Calls reduced from ~115 lines to ~30; Relationship to Scenes / Pacing rewritten to reference automatic envelope tracking; Narrator Checklist updated; new "Backend Authority" section after Core Principle; Brief 21's Origin vs Phase + Phase Change Indicators sections preserved exactly); `engine.md` 7998 → 7790 bytes (Progression Save Gate, Arc System Enforcement, Progression Runtime Checkpoint replaced with shorter orchestrator-aware versions; API Reference updated — `/narrator/scene_resolved`, `/registry/{name}`, `/state/{session_id}/annotation` in; `/progress`, `/transition`/`/spawn`/`/settle` retained; absorbed `/scene/declare_resolution` and `/progression/*` left out of the narrator's surface). 208-byte headroom preserved on `engine.md`. The 9 mixed-content prompts (`mechanics-tables.md`, `combat-rules.md`, etc.) and 6 narrative prompts deferred to future Brief 22.5 / 23a per the per-section judgment they require. 553 tests still passing — no code changes. GPT spec unchanged at 28/30.
@@ -54,7 +69,12 @@ If a future brief changes plan, retire that brief's section here rather than let
 
 ---
 
-## BACKEND AUTHORITY ARC (active)
+## BACKEND AUTHORITY ARC (complete)
+
+Structurally complete 2026-05-03 (Brief 24, 5.4.4). All eight briefs
+(16–24, with 19.5 as transitional) landed. The plan and per-brief
+descriptions are preserved here for forensic context. Phase 9b play
+and the 5.7.x operational debt cleanup followed.
 
 The May 2 debrief made it clear: the narrator cannot reliably enforce structure across 17+ prompt files. The fix is structural — move enforcement into the backend so the narrator focuses on prose. Three phases, eight briefs (16–23).
 
@@ -98,6 +118,49 @@ The arc lifecycle orchestrator (Brief 3 / 5.7.0) was validated against a real pl
 **Criterion 4 — No silent collapse: PASS, with new failure mode.** The GPT no longer collapses to "no further reward" prose. Instead it defaults all enumerated channels to zero on emergent arcs without adjudication. Player had to challenge an under-awarded settlement to get House Vaelaryn +3 reputation added retroactively. The schema forces channel completeness, not adjudication quality.
 
 Net: orchestrator architecture is sound. New backend bug (closure condition payload validation gap, see PENDING DESIGN) is the dominant operational issue blocking smooth play.
+
+---
+
+## BRIDGE WORK PLAN (active, 2026-05-05)
+
+The working tactical plan lives in
+`/mnt/user-data/outputs/2.0_bridge_work.md`. Summary of immediate
+queue:
+
+**Done:**
+- Brief A — Stabilization Pass (5.7.3, see RECENTLY COMPLETED).
+- Brief B Part 1 — Inventory drift forward-fix on session
+  411c1f7de9334a4e (operational, no code; signet stash-location
+  corrected, Caelthir letter removed from carried).
+
+**Pending operator-side, before next play session:**
+- Brief B Part 2 — Test prompt library updates: `mw_smoke_test`,
+  `mw_midsession_audit`, `mw_session_debrief` swap
+  `/state/{session_id}` → `/scene/{session_id}` and drop
+  `log_limit` query (confirmed unsupported on `/scene/`). Files
+  live outside the repo in the GPT builder configuration.
+
+**Next briefs queued (no urgency):**
+- Concept Test 3.1 — Settlement adjudication guidance for emergent
+  arcs. Prompt-only edit to `prompts/arc-rules.md`. Tests whether
+  prompt guidance alone moves GPT default from zero-on-everything
+  to plausible non-zero settlement values. 2-3 sessions to validate.
+  Maps to 3.0 baseline §5.4 (cost vocabularies).
+- Concept Test 3.2 — Multi-action decomposition. Prompt-only edit to
+  `prompts/scene-structure.md` (engine.md at byte ceiling 7872/8000,
+  cannot absorb). Forces GPT to enumerate distinct action vectors
+  before resolving rolls. Maps to 3.0 baseline §13.3.
+
+Could combine 3.1 and 3.2 into one brief.
+
+**Mid-term concept tests:**
+- Concept Test 3.4 — Per-companion location/status fields. Small
+  backend schema change. Maps to 3.0 baseline §2.4 (modular entity
+  composition).
+- Concept Test 3.9 — Settlement_correction as official correction
+  endpoint. Open question: GPT-facing or admin-only.
+
+See bridge work doc for full FIX/TEST/SKIP labeling and sequencing.
 
 ---
 
@@ -171,7 +234,7 @@ Items waiting on a design pass before implementation. Surfaced from 5.6.x operat
 - [ ] **Arc lineage at create time.** Investigation arc on session `411c1f7de9334a4e` (`arc-570eaeebde0840e4`, "Find the Hand Behind the Vaelmere Ambush") was authored as standalone emergent when it was structurally a child of the formal "Ride West Under Vaelaryn Auspices" parent (`arc-3f107b923c004ba2`, since closed). Brief 3's `scope_check` intent doesn't directly fix this since it triggers post-creation. Consider whether arc creation should evaluate parent-linkage candidates among open formal arcs at create time and prompt the narrator if a structural parent is plausible.
 - [ ] **Legacy `settle_arc` non-atomic write sequence.** The legacy `POST /arc/{id}/settle` endpoint executes its writes (character update, world update, arc update, closure_summary log append, transition log append) across separate `pool.acquire()` connections rather than a single transaction. Mid-call failure can leave the session in a partial state. Latent bug; not exercised in normal play because `/settle` is the last call in the lifecycle and its failure modes today are validation, not transport. Brief 3's `/declare` endpoint (5.7.0) adds a transactional alternative and the prompts will migrate to it as the primary closure path. Address the legacy endpoint when next touched, or as a dedicated cleanup brief.
 
-- [ ] **Closure condition payload validation at create time.** Brief 1 (5.6.0) added validation that `ArcCondition.type` must be a registry-valid label. It did NOT validate that the payload shape matches what the type requires. Conditions like `evidence_chain_complete` and `target_secured` require `payload.flag_id`, but the backend accepts them with empty `payload: {}` at creation and then rejects them at closure evaluation. This causes hard-cap deadlock requiring manual DB intervention. Bit twice on session 411c1f7de9334a4e during 5.7.0 Phase 9b validation (black-tray arc and copper-leaf arc both required manual closure-condition payload patches). Fix: per-condition-type payload schemas validated at creation. Same shape as Brief 1, narrower fix. **Highest-priority backend defect blocking smooth play.**
+- [x] **Closure condition payload validation at create time.** Brief 1 (5.6.0) added validation that `ArcCondition.type` must be a registry-valid label. It did NOT validate that the payload shape matches what the type requires. Conditions like `evidence_chain_complete` and `target_secured` require `payload.flag_id`, but the backend accepts them with empty `payload: {}` at creation and then rejects them at closure evaluation. This causes hard-cap deadlock requiring manual DB intervention. Bit twice on session 411c1f7de9334a4e during 5.7.0 Phase 9b validation (black-tray arc and copper-leaf arc both required manual closure-condition payload patches). Fix: per-condition-type payload schemas validated at creation. Same shape as Brief 1, narrower fix. **Resolved**: Landed 2026-05-05 as commit 7c6a24f (5.7.0 → 5.7.1). Per-condition-type payload schemas validated at create time; ArcCondition write paths reject malformed conditions before they enter state.
 
 - [ ] **Settlement adjudication guidance for emergent arcs.** The ArcSettlementEnumeration schema (5.7.0) enforces channel completeness at /declare intent=close. It does not guide the GPT toward correct values. Emergent arcs default to zero on every channel without adjudication, even when the fiction has materially advanced reputation, leverage, or coin. Black-tray arc in session 411c1f7de9334a4e under-awarded; player had to challenge to add House Vaelaryn +3. Fix is prompt-side (arc-rules.md): explicit guidance that emergent arcs can produce non-AP rewards (reputation, leverage, coin, items) based on what materially advanced; zero-on-everything is wrong by default and should require positive justification, not be assumed.
 
@@ -199,7 +262,16 @@ Resume play from Sylva at Lampblack Storehouse on day 3 dawn, choosing morning a
 
 Items considered and parked, with the rationale to revisit.
 
-- [ ] **Brief 4 — Compact state endpoint.** Status: deferred but worsening. The `/state/{session_id}` ClientResponseError is no longer transient — reproduced reliably during the 2026-05-05 Phase 9b play session, blocking both the mid-session audit and the end-of-session debrief workflows. Workaround (scene_records reconstruction, `/scene/{session_id}` for context) still works but is friction. Likely candidate for next-up after the closure condition payload bug is fixed. The brief design from prior session (compact endpoint omitting heavy fields like full equipment/log) is still appropriate; size-correlated wrapper failure hypothesis remains the leading theory.
+- [x] **Brief 4 — Compact state endpoint (skipped, 2026-05-05).**
+  Original framing wrong. `/state` failure was in the OpenAI Actions
+  wrapper, not in response size; building a compact endpoint as a
+  workaround would have consumed a GPT spec slot, required new
+  narrator workflows, and not necessarily fixed the wrapper failure.
+  Resolution: `/state/{session_id}` retired from GPT surface (Brief A,
+  5.7.3); narrator uses `/scene/{session_id}` for context. 3.0's BFF
+  design replaces the entire concept of "raw state read from
+  narrator" with curated context queries. See bridge work doc §4.1
+  for full reasoning.
 
 ---
 
