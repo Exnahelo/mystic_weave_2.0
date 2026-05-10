@@ -869,6 +869,36 @@ Scene compression still applies. Routine travel or repeated low-novelty actions 
 
 ---
 
+## Field Writs
+
+The standardized work-finding mechanism for posted assignments. A writ is a filed work request — issuer, scope summary, completion criteria, optional reward, optional minimum reputation for visibility. Writs feed the arc system but are not arcs themselves: a writ may produce an arc on acceptance when scope meets formal-contract criteria (see `## Formal-Contract-Only AP`), or resolve as ordinary scene work that does not.
+
+**Filing is universal; posting is conditional.** Every writ is filed at the central civic institution of a settlement. The institution that discharges this function varies by settlement — a main civic hall in a capital, an elder hall in a small community, a ranger post if that is the only authority present. The writ desk is a function, not a named place.
+
+**Visibility is reputation-gated per writ.** Public writs are posted openly at the writ desk and visible to anyone present. Restricted writs are filed but only displayed to characters meeting the writ's reputation threshold with the issuing organization (see `character-rules.md` standing bands). A writ may use a pointer pattern ("[Issuer] has work, see [contact]") instead of full disclosure; the central record satisfies the filing requirement while the brief is held offline.
+
+**Issuer does not determine AP eligibility.** The issuer indicates who is requesting the work. AP eligibility follows the existing consequence scale at resolution per `progression-rules.md`. A Heartwarden errand can be Local scope (zero AP); a civic recovery contract with named patron, explicit goal, and expected return can be a formal-contract arc. Same scope rule applies regardless of issuer.
+
+### Issuance Categories (Feywood)
+
+Each category has a default visibility threshold. Per-writ overrides allow an issuer to set a higher threshold than the category default for any specific writ.
+
+- **Civic.** Issued by the Council of Elders or settlement civic authority. Default: public. Covers missing persons, public hazards, road trouble, minor disputes, witness needs, recovery tasks, animal threats, settlement needs.
+- **Ranger.** Issued by the Rangers. Default: public for routine outer-range work; Respected+ for sensitive border or liminal-route matters. Covers patrol support, lost travelers, liminal-route issues, trail signs, hostile beasts, border anomalies.
+- **Greenshield.** Issued by the Greenshield Commander or designated officers. Default: Neutral+ for routine duty; Respected+ for sensitive containment, suspect movement, or guarded transfer.
+- **Heartwarden.** Issued by the Heartwarden Captain or sworn members. Default: Respected+ minimum; Revered+ common for relic custody and sacred-site disturbance. Pointer pattern is the norm. Covers corruption, sacred-site disturbance, relic custody, root-taint, ritual protection.
+- **House.** Issued by a noble house. Default: variable. Public if the work crosses public roads, public law, or another house's interests, in which case the writ is countersigned by the relevant civic authority. Restricted (house-reputation gated) for purely private work.
+- **Trade.** Issued by the Hall of Trade. Default: public for standard contracts at trade-counter venues — Vaelmere's Trade Hall, Thornveil trade-staging, bonded warehouses. Trade work does not route through the civic writ desk by default.
+
+### Settlement Instances (Feywood)
+
+- **Thornveil.** Writ desk function discharged through the city's central civic hall (Council records side). Greenshield and Heartwarden restricted channels operate adjacent.
+- **Vaelmere.** Writ desk function discharged through the Warden's Hall. Trade work routes through the Trade Hall directly, not through the civic writ desk.
+- **Silent Grove.** No public writ desk. Heartwarden writs only, through internal order channels.
+- **Outer settlements.** Writ desk function discharged through whatever central authority the settlement has — elder hall, ranger post, trade-house desk, or equivalent. Issuance categories at a given outer settlement are limited to organizations with presence there.
+
+---
+
 ## Worked Example: Sylvara's Heartwater Investigation
 
 Under the arc system, the Heartwater chain would be represented as one parent plus children.
